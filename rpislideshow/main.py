@@ -35,9 +35,12 @@ def main():
 
     # add picture here
     pic_layout = QtWidgets.QHBoxLayout()
-    pic_widget = QtGui.QPixmap()
+    pic_pixmap = QtGui.QPixmap()
+    pic_pixmap.load('assets/images/0pZiNmy.jpg')
+    pic_wrapper = QtWidgets.QLabel()
+    pic_wrapper.setPixmap(pic_pixmap)
     # resize pic_widget to be 16:9 size
-    # pic_layout.addItem(pic_widget)
+    pic_layout.addWidget(pic_wrapper)
     pic_layout.addLayout(weather_col_layout)
 
     window.setLayout(pic_layout)
