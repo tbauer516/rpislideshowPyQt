@@ -1,0 +1,647 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Scribble Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scribble Example</a><ul>
+<li><a class="reference internal" href="#scribblearea-class-definition">ScribbleArea Class Definition</a></li>
+<li><a class="reference internal" href="#scribblearea-class-implementation">ScribbleArea Class Implementation</a></li>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#scribblearea-cpp-example-file">scribblearea.cpp Example File</a></li>
+<li><a class="reference internal" href="#scribblearea-h-example-file">scribblearea.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#scribble-pro-example-file">scribble.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scribble-example">
+<span id="id1"></span><h1>Scribble Example<a class="headerlink" href="#scribble-example" title="Permalink to this headline">¶</a></h1>
+<p>Scribble example shows how to reimplement some of QWidget’s event handlers to receive the events generated for the application’s widgets</p>
+<blockquote>
+<div><p>The Scribble example shows how to reimplement some of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s event handlers to receive the events generated for the application’s widgets.</p>
+<p>We reimplement the mouse event handlers to implement drawing, the paint event handler to update the application and the resize event handler to optimize the application’s appearance. In addition we reimplement the close event handler to intercept the close events before terminating the application.</p>
+<p>The example also demonstrates how to use <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> to draw an image in real time, as well as to repaint widgets.</p>
+<p>With the Scribble application the users can draw an image. The File menu gives the users the possibility to open and edit an existing image file, save an image and exit the application. While drawing, the Options menu allows the users to choose the pen color and pen width, as well as clear the screen. In addition the Help menu provides the users with information about the Scribble example in particular, and about Qt in general.</p>
+<p>The example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ScribbleArea</span></code> is a custom widget that displays a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> and allows to the user to draw on it.</li>
+<li><code class="docutils literal"><span class="pre">MainWindow</span></code> provides a menu above the <code class="docutils literal"><span class="pre">ScribbleArea</span></code>.</li>
+</ul>
+<p>We will start by reviewing the <code class="docutils literal"><span class="pre">ScribbleArea</span></code> class. Then we will review the <code class="docutils literal"><span class="pre">MainWindow</span></code> class, which uses <code class="docutils literal"><span class="pre">ScribbleArea</span></code> .</p>
+</div></blockquote>
+<div class="section" id="scribblearea-class-definition">
+<span id="id2"></span><h2>ScribbleArea Class Definition<a class="headerlink" href="#scribblearea-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ScribbleArea</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ScribbleArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="nb">bool</span> <span class="n">openImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">);</span>
+    <span class="nb">bool</span> <span class="n">saveImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">fileFormat</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setPenColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">newColor</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setPenWidth</span><span class="p">(</span><span class="nb">int</span> <span class="n">newWidth</span><span class="p">);</span>
+
+    <span class="nb">bool</span> <span class="n">isModified</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">modified</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">QColor</span> <span class="n">penColor</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">myPenColor</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nb">int</span> <span class="n">penWidth</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">myPenWidth</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">clearImage</span><span class="p">();</span>
+    <span class="n">void</span> <span class="nb">print</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">drawLineTo</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">endPoint</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">resizeImage</span><span class="p">(</span><span class="n">QImage</span> <span class="o">*</span><span class="n">image</span><span class="p">,</span> <span class="n">const</span> <span class="n">QSize</span> <span class="o">&amp;</span><span class="n">newSize</span><span class="p">);</span>
+
+    <span class="nb">bool</span> <span class="n">modified</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">scribbling</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">myPenWidth</span><span class="p">;</span>
+    <span class="n">QColor</span> <span class="n">myPenColor</span><span class="p">;</span>
+    <span class="n">QImage</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">lastPoint</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ScribbleArea</span></code> class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . We reimplement the <code class="docutils literal"><span class="pre">mousePressEvent()</span></code> , <code class="docutils literal"><span class="pre">mouseMoveEvent()</span></code> and <code class="docutils literal"><span class="pre">mouseReleaseEvent()</span></code> functions to implement the drawing. We reimplement the <code class="docutils literal"><span class="pre">paintEvent()</span></code> function to update the scribble area, and the <code class="docutils literal"><span class="pre">resizeEvent()</span></code> function to ensure that the <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> on which we draw is at least as large as the widget at any time.</p>
+<p>We need several public functions: <code class="docutils literal"><span class="pre">openImage()</span></code> loads an image from a file into the scribble area, allowing the user to edit the image; <code class="docutils literal"><span class="pre">save()</span></code> writes the currently displayed image to file; <code class="docutils literal"><span class="pre">clearImage()</span></code> slot clears the image displayed in the scribble area. We need the private <code class="docutils literal"><span class="pre">drawLineTo()</span></code> function to actually do the drawing, and <code class="docutils literal"><span class="pre">resizeImage()</span></code> to change the size of a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . The <code class="docutils literal"><span class="pre">print()</span></code> slot handles printing.</p>
+<p>We also need the following private variables:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">modified</span></code> is <code class="docutils literal"><span class="pre">true</span></code> if there are unsaved changes to the image displayed in the scribble area.</li>
+<li><code class="docutils literal"><span class="pre">scribbling</span></code> is <code class="docutils literal"><span class="pre">true</span></code> while the user is pressing the left mouse button within the scribble area.</li>
+<li><code class="docutils literal"><span class="pre">penWidth</span></code> and <code class="docutils literal"><span class="pre">penColor</span></code> hold the currently set width and color for the pen used in the application.</li>
+<li><code class="docutils literal"><span class="pre">image</span></code> stores the image drawn by the user.</li>
+<li><code class="docutils literal"><span class="pre">lastPoint</span></code> holds the position of the cursor at the last mouse press or mouse move event.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="scribblearea-class-implementation">
+<span id="id3"></span><h2>ScribbleArea Class Implementation<a class="headerlink" href="#scribblearea-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ScribbleArea</span><span class="p">::</span><span class="n">ScribbleArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_StaticContents</span><span class="p">);</span>
+    <span class="n">modified</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">scribbling</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">myPenWidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">myPenColor</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_StaticContents</span></code> attribute for the widget, indicating that the widget contents are rooted to the top-left corner and don’t change when the widget is resized. Qt uses this attribute to optimize paint events on resizes. This is purely an optimization and should only be used for widgets whose contents are static and rooted to the top-left corner.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>bool ScribbleArea::openImage(const QString &amp;fileName)
+{
+    QImage loadedImage;
+    if (!loadedImage.load(fileName))
+        return false;
+
+    QSize newSize = loadedImage.size().expandedTo(size());
+    resizeImage(&amp;loadedImage, newSize);
+    image = loadedImage;
+    modified = false;
+    update();
+    return true;
+}
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">openImage()</span></code> function, we load the given image. Then we resize the loaded <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> to be at least as large as the widget in both directions using the private <code class="docutils literal"><span class="pre">resizeImage()</span></code> function and we set the <code class="docutils literal"><span class="pre">image</span></code> member variable to be the loaded image. At the end, we call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to schedule a repaint.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">saveImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">fileFormat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QImage</span> <span class="n">visibleImage</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">resizeImage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">visibleImage</span><span class="p">,</span> <span class="n">size</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">visibleImage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">fileFormat</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">modified</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">saveImage()</span></code> function creates a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> object that covers only the visible section of the actual <code class="docutils literal"><span class="pre">image</span></code> and saves it using <code class="xref py py-func docutils literal"><span class="pre">QImage.save()</span></code> . If the image is successfully saved, we set the scribble area’s <code class="docutils literal"><span class="pre">modified</span></code> variable to <code class="docutils literal"><span class="pre">false</span></code> , because there is no unsaved data.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">setPenColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">newColor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myPenColor</span> <span class="o">=</span> <span class="n">newColor</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">setPenWidth</span><span class="p">(</span><span class="nb">int</span> <span class="n">newWidth</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myPenWidth</span> <span class="o">=</span> <span class="n">newWidth</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setPenColor()</span></code> and <code class="docutils literal"><span class="pre">setPenWidth()</span></code> functions set the current pen color and width. These values will be used for future drawing operations.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">clearImage</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">qRgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+    <span class="n">modified</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The public <code class="docutils literal"><span class="pre">clearImage()</span></code> slot clears the image displayed in the scribble area. We simply fill the entire image with white, which corresponds to RGB value (255, 255, 255). As usual when we modify the image, we set <code class="docutils literal"><span class="pre">modified</span></code> to <code class="docutils literal"><span class="pre">true</span></code> and schedule a repaint.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastPoint</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+        <span class="n">scribbling</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">scribbling</span><span class="p">)</span>
+        <span class="n">drawLineTo</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span> <span class="o">&amp;&amp;</span> <span class="n">scribbling</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">drawLineTo</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+        <span class="n">scribbling</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For mouse press and mouse release events, we use the <code class="xref py py-func docutils literal"><span class="pre">QMouseEvent.button()</span></code> function to find out which button caused the event. For mose move events, we use <code class="xref py py-func docutils literal"><span class="pre">QMouseEvent.buttons()</span></code> to find which buttons are currently held down (as an OR-combination).</p>
+<p>If the users press the left mouse button, we store the position of the mouse cursor in <code class="docutils literal"><span class="pre">lastPoint</span></code> . We also make a note that the user is currently scribbling. (The <code class="docutils literal"><span class="pre">scribbling</span></code> variable is necessary because we can’t assume that a mouse move and mouse release event is always preceded by a mouse press event on the same widget.)</p>
+<p>If the user moves the mouse with the left button pressed down or releases the button, we call the private <code class="docutils literal"><span class="pre">drawLineTo()</span></code> function to draw.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">QRect</span> <span class="n">dirtyRect</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">();</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="n">dirtyRect</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">dirtyRect</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the reimplementation of the <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> function, we simply create a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> for the scribble area, and draw the image.</p>
+<p>At this point, you might wonder why we don’t just draw directly onto the widget instead of drawing in a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> and copying the <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> onto screen in <code class="docutils literal"><span class="pre">paintEvent()</span></code> . There are at least three good reasons for this:</p>
+<ul class="simple">
+<li>The window system requires us to be able to redraw the widget <em>at any time</em>. For example, if the window is minimized and restored, the window system might have forgotten the contents of the widget and send us a paint event. In other words, we can’t rely on the window system to remember our image.</li>
+<li>Qt normally doesn’t allow us to paint outside of <code class="docutils literal"><span class="pre">paintEvent()</span></code>. In particular, we can’t paint from the mouse event handlers. (This behavior can be changed using the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_PaintOnScreen</span></code> widget attribute, though.)</li>
+<li>If initialized properly, a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> is guaranteed to use 8-bit for each color channel (red, green, blue, and alpha), whereas a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> might have a lower color depth, depending on the monitor configuration. This means that if we load a 24-bit or 32-bit image and paint it onto a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , then copy the <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> into a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> again, we might lose some information.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">||</span> <span class="n">height</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">newWidth</span> <span class="o">=</span> <span class="n">qMax</span><span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">128</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">());</span>
+        <span class="nb">int</span> <span class="n">newHeight</span> <span class="o">=</span> <span class="n">qMax</span><span class="p">(</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">128</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">());</span>
+        <span class="n">resizeImage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">image</span><span class="p">,</span> <span class="n">QSize</span><span class="p">(</span><span class="n">newWidth</span><span class="p">,</span> <span class="n">newHeight</span><span class="p">));</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">QWidget</span><span class="p">::</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user starts the Scribble application, a resize event is generated and an image is created and displayed in the scribble area. We make this initial image slightly larger than the application’s main window and scribble area, to avoid always resizing the image when the user resizes the main window (which would be very inefficient). But when the main window becomes larger than this initial size, the image needs to be resized.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">drawLineTo</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">endPoint</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">image</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">myPenColor</span><span class="p">,</span> <span class="n">myPenWidth</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SolidLine</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RoundCap</span><span class="p">,</span>
+                        <span class="n">Qt</span><span class="p">::</span><span class="n">RoundJoin</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">lastPoint</span><span class="p">,</span> <span class="n">endPoint</span><span class="p">);</span>
+    <span class="n">modified</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+
+    <span class="nb">int</span> <span class="n">rad</span> <span class="o">=</span> <span class="p">(</span><span class="n">myPenWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">lastPoint</span><span class="p">,</span> <span class="n">endPoint</span><span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+                                     <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="n">rad</span><span class="p">,</span> <span class="o">-</span><span class="n">rad</span><span class="p">,</span> <span class="o">+</span><span class="n">rad</span><span class="p">,</span> <span class="o">+</span><span class="n">rad</span><span class="p">));</span>
+    <span class="n">lastPoint</span> <span class="o">=</span> <span class="n">endPoint</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">drawLineTo()</span></code> , we draw a line from the point where the mouse was located when the last mouse press or mouse move occurred, we set <code class="docutils literal"><span class="pre">modified</span></code> to true, we generate a repaint event, and we update <code class="docutils literal"><span class="pre">lastPoint</span></code> so that next time <code class="docutils literal"><span class="pre">drawLineTo()</span></code> is called, we continue drawing from where we left.</p>
+<p>We could call the <code class="docutils literal"><span class="pre">update()</span></code> function with no parameter, but as an easy optimization we pass a <a class="reference internal" href="../PySide2/QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> that specifies the rectangle inside the scribble are needs updating, to avoid a complete repaint of the widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="n">resizeImage</span><span class="p">(</span><span class="n">QImage</span> <span class="o">*</span><span class="n">image</span><span class="p">,</span> <span class="n">const</span> <span class="n">QSize</span> <span class="o">&amp;</span><span class="n">newSize</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">image</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">newSize</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">QImage</span> <span class="n">newImage</span><span class="p">(</span><span class="n">newSize</span><span class="p">,</span> <span class="n">QImage</span><span class="p">::</span><span class="n">Format_RGB32</span><span class="p">);</span>
+    <span class="n">newImage</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">qRgb</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">newImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">*</span><span class="n">image</span><span class="p">);</span>
+    <span class="o">*</span><span class="n">image</span> <span class="o">=</span> <span class="n">newImage</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> has no nice API for resizing an image. There’s a <code class="xref py py-func docutils literal"><span class="pre">QImage.copy()</span></code> function that could do the trick, but when used to expand an image, it fills the new areas with black, whereas we want white.</p>
+<p>So the trick is to create a brand new <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> with the right size, to fill it with white, and to draw the old image onto it using <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> . The new image is given the <code class="xref py py-attr docutils literal"><span class="pre">QImage.Format_RGB32</span></code> format, which means that each pixel is stored as 0xffRRGGBB (where RR, GG, and BB are the red, green and blue color channels, ff is the hexadecimal value 255).</p>
+<p>Printing is handled by the <code class="docutils literal"><span class="pre">print()</span></code> slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ScribbleArea</span><span class="p">::</span><span class="nb">print</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="c1">#if QT_CONFIG(printdialog)</span>
+    <span class="n">QPrinter</span> <span class="n">printer</span><span class="p">(</span><span class="n">QPrinter</span><span class="p">::</span><span class="n">HighResolution</span><span class="p">);</span>
+
+    <span class="n">QPrintDialog</span> <span class="n">printDialog</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We construct a high resolution <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> object for the required output format, using a <a class="reference internal" href="../PySide2/QtPrintSupport/QPrintDialog.html#PySide2.QtPrintSupport.QPrintDialog" title="PySide2.QtPrintSupport.QPrintDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrintDialog</span></code></a> to ask the user to specify a page size and indicate how the output should be formatted on the page.</p>
+<p>If the dialog is accepted, we perform the task of printing to the paint device:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="p">(</span><span class="n">printDialog</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span> <span class="o">==</span> <span class="n">QDialog</span><span class="p">::</span><span class="n">Accepted</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">);</span>
+        <span class="n">QRect</span> <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">viewport</span><span class="p">();</span>
+        <span class="n">QSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">size</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">KeepAspectRatio</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setViewport</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setWindow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">rect</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="c1">#endif // QT_CONFIG(printdialog)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Printing an image to a file in this way is simply a matter of painting onto the <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> . We scale the image to fit within the available space on the page before painting it onto the paint device.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-definition">
+<span id="id4"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">closeEvent</span><span class="p">(</span><span class="n">QCloseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">open</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">save</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">penColor</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">penWidth</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createMenus</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">maybeSave</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">saveFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">fileFormat</span><span class="p">);</span>
+
+    <span class="n">ScribbleArea</span> <span class="o">*</span><span class="n">scribbleArea</span><span class="p">;</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">saveAsMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">optionMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span><span class="p">;</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">openAct</span><span class="p">;</span>
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">QAction</span> <span class="o">*&gt;</span> <span class="n">saveAsActs</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">penColorAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">penWidthAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">printAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">clearScreenAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutQtAct</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> . We reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.closeEvent()</span></code> handler from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . The <code class="docutils literal"><span class="pre">open()</span></code> , <code class="docutils literal"><span class="pre">save()</span></code> , <code class="docutils literal"><span class="pre">penColor()</span></code> and <code class="docutils literal"><span class="pre">penWidth()</span></code> slots correspond to menu entries. In addition we create four private functions.</p>
+<p>We use the boolean <code class="docutils literal"><span class="pre">maybeSave()</span></code> function to check if there are any unsaved changes. If there are unsaved changes, we give the user the opportunity to save these changes. The function returns <code class="docutils literal"><span class="pre">false</span></code> if the user clicks Cancel. We use the <code class="docutils literal"><span class="pre">saveFile()</span></code> function to let the user save the image currently displayed in the scribble area.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id5"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scribbleArea</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ScribbleArea</span><span class="p">;</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">scribbleArea</span><span class="p">);</span>
+
+    <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">createMenus</span><span class="p">();</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Scribble&quot;</span><span class="p">));</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we create a scribble area which we make the central widget of the <code class="docutils literal"><span class="pre">MainWindow</span></code> widget. Then we create the associated actions and menus.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">closeEvent</span><span class="p">(</span><span class="n">QCloseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">maybeSave</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">ignore</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Close events are sent to widgets that the users want to close, usually by clicking File|Exit or by clicking the X title bar button. By reimplementing the event handler, we can intercept attempts to close the application.</p>
+<p>In this example, we use the close event to ask the user to save any unsaved changes. The logic for that is located in the <code class="docutils literal"><span class="pre">maybeSave()</span></code> function. If <code class="docutils literal"><span class="pre">maybeSave()</span></code> returns true, there are no modifications or the users successfully saved them, and we accept the event. The application can then terminate normally. If <code class="docutils literal"><span class="pre">maybeSave()</span></code> returns false, the user clicked Cancel, so we “ignore” the event, leaving the application unaffected by it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::open()
+{
+    if (maybeSave()) {
+        QString fileName = QFileDialog::getOpenFileName(this,
+                                   tr(&quot;Open File&quot;), QDir::currentPath());
+        if (!fileName.isEmpty())
+            scribbleArea-&gt;openImage(fileName);
+    }
+}
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">open()</span></code> slot we first give the user the opportunity to save any modifications to the currently displayed image, before a new image is loaded into the scribble area. Then we ask the user to choose a file and we load the file in the <code class="docutils literal"><span class="pre">ScribbleArea</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">save</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">action</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QAction</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">sender</span><span class="p">());</span>
+    <span class="n">QByteArray</span> <span class="n">fileFormat</span> <span class="o">=</span> <span class="n">action</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">toByteArray</span><span class="p">();</span>
+    <span class="n">saveFile</span><span class="p">(</span><span class="n">fileFormat</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">save()</span></code> slot is called when the users choose the Save As menu entry, and then choose an entry from the format menu. The first thing we need to do is to find out which action sent the signal using <code class="xref py py-func docutils literal"><span class="pre">QObject.sender()</span></code> . This function returns the sender as a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> pointer. Since we know that the sender is an action object, we can safely cast the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . We could have used a C-style cast or a C++ <code class="docutils literal"><span class="pre">static_cast&lt;&gt;()</span></code> , but as a defensive programming technique we use a <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> . The advantage is that if the object has the wrong type, a null pointer is returned. Crashes due to null pointers are much easier to diagnose than crashes due to unsafe casts.</p>
+<p>Once we have the action, we extract the chosen format using <code class="xref py py-func docutils literal"><span class="pre">QAction.data()</span></code> . (When the actions are created, we use <code class="xref py py-func docutils literal"><span class="pre">QAction.setData()</span></code> to set our own custom data attached to the action, as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> . More on this when we review <code class="docutils literal"><span class="pre">createActions()</span></code> .)</p>
+<p>Now that we know the format, we call the private <code class="docutils literal"><span class="pre">saveFile()</span></code> function to save the currently displayed image.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">penColor</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QColor</span> <span class="n">newColor</span> <span class="o">=</span> <span class="n">QColorDialog</span><span class="p">::</span><span class="n">getColor</span><span class="p">(</span><span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">penColor</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">newColor</span><span class="o">.</span><span class="n">isValid</span><span class="p">())</span>
+        <span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">setPenColor</span><span class="p">(</span><span class="n">newColor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use the <code class="docutils literal"><span class="pre">penColor()</span></code> slot to retrieve a new color from the user with a <a class="reference internal" href="../PySide2/QtWidgets/QColorDialog.html#PySide2.QtWidgets.QColorDialog" title="PySide2.QtWidgets.QColorDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QColorDialog</span></code></a> . If the user chooses a new color, we make it the scribble area’s color.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">penWidth</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">bool</span> <span class="n">ok</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">newWidth</span> <span class="o">=</span> <span class="n">QInputDialog</span><span class="p">::</span><span class="n">getInt</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Scribble&quot;</span><span class="p">),</span>
+                                        <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Select pen width:&quot;</span><span class="p">),</span>
+                                        <span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">penWidth</span><span class="p">(),</span>
+                                        <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ok</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ok</span><span class="p">)</span>
+        <span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">setPenWidth</span><span class="p">(</span><span class="n">newWidth</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To retrieve a new pen width in the <code class="docutils literal"><span class="pre">penWidth()</span></code> slot, we use <a class="reference internal" href="../PySide2/QtWidgets/QInputDialog.html#PySide2.QtWidgets.QInputDialog" title="PySide2.QtWidgets.QInputDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QInputDialog</span></code></a> . The <a class="reference internal" href="../PySide2/QtWidgets/QInputDialog.html#PySide2.QtWidgets.QInputDialog" title="PySide2.QtWidgets.QInputDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QInputDialog</span></code></a> class provides a simple convenience dialog to get a single value from the user. We use the static <code class="xref py py-func docutils literal"><span class="pre">QInputDialog.getInt()</span></code> function, which combines a <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> and a <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> . The <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> is initialized with the scribble area’s pen width, allows a range from 1 to 50, a step of 1 (meaning that the up and down arrow increment or decrement the value by 1).</p>
+<p>The boolean <code class="docutils literal"><span class="pre">ok</span></code> variable will be set to <code class="docutils literal"><span class="pre">true</span></code> if the user clicked OK and to <code class="docutils literal"><span class="pre">false</span></code> if the user pressed Cancel.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">about</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About Scribble&quot;</span><span class="p">),</span>
+            <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;The &lt;b&gt;Scribble&lt;/b&gt; example shows how to use QMainWindow as the &quot;</span>
+               <span class="s2">&quot;base widget for an application, and how to reimplement some of &quot;</span>
+               <span class="s2">&quot;QWidget&#39;s event handlers to receive the events generated for &quot;</span>
+               <span class="s2">&quot;the application&#39;s widgets:&lt;/p&gt;&lt;p&gt; We reimplement the mouse event &quot;</span>
+               <span class="s2">&quot;handlers to facilitate drawing, the paint event handler to &quot;</span>
+               <span class="s2">&quot;update the application and the resize event handler to optimize &quot;</span>
+               <span class="s2">&quot;the application&#39;s appearance. In addition we reimplement the &quot;</span>
+               <span class="s2">&quot;close event handler to intercept the close events before &quot;</span>
+               <span class="s2">&quot;terminating the application.&lt;/p&gt;&lt;p&gt; The example also demonstrates &quot;</span>
+               <span class="s2">&quot;how to use QPainter to draw an image in real time, as well as &quot;</span>
+               <span class="s2">&quot;to repaint widgets.&lt;/p&gt;&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We implement the <code class="docutils literal"><span class="pre">about()</span></code> slot to create a message box describing what the example is designed to show.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createActions</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">openAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Open...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">openAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Open</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">openAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="nb">open</span><span class="p">()));</span>
+
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">QByteArray</span> <span class="nb">format</span><span class="p">,</span> <span class="n">QImageWriter</span><span class="p">::</span><span class="n">supportedImageFormats</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QString</span> <span class="n">text</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span><span class="o">.</span><span class="n">toUpper</span><span class="p">());</span>
+
+        <span class="n">QAction</span> <span class="o">*</span><span class="n">action</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+        <span class="n">action</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span>
+        <span class="n">connect</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">save</span><span class="p">()));</span>
+        <span class="n">saveAsActs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Print...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">printAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">scribbleArea</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="nb">print</span><span class="p">()));</span>
+
+    <span class="n">exitAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">exitAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Quit</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">exitAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">close</span><span class="p">()));</span>
+
+    <span class="n">penColorAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Pen Color...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">penColorAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penColor</span><span class="p">()));</span>
+
+    <span class="n">penWidthAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pen &amp;Width...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">penWidthAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penWidth</span><span class="p">()));</span>
+
+    <span class="n">clearScreenAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Clear Screen&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">clearScreenAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+L&quot;</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">clearScreenAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span>
+            <span class="n">scribbleArea</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">clearImage</span><span class="p">()));</span>
+
+    <span class="n">aboutAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">aboutAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">about</span><span class="p">()));</span>
+
+    <span class="n">aboutQtAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">qApp</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">aboutQt</span><span class="p">()));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">createAction()</span></code> function we create the actions representing the menu entries and connect them to the appropriate slots. In particular we create the actions found in the Save As sub-menu. We use <code class="xref py py-func docutils literal"><span class="pre">QImageWriter.supportedImageFormats()</span></code> to get a list of the supported formats (as a <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> &lt; <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> &gt;).</p>
+<p>Then we iterate through the list, creating an action for each format. We call <code class="xref py py-func docutils literal"><span class="pre">QAction.setData()</span></code> with the file format, so we can retrieve it later as <code class="xref py py-func docutils literal"><span class="pre">QAction.data()</span></code> . We could also have deduced the file format from the action’s text, by truncating the “…”, but that would have been inelegant.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createMenus</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">saveAsMenu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Save As&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">QAction</span> <span class="o">*</span><span class="n">action</span><span class="p">,</span> <span class="n">saveAsActs</span><span class="p">)</span>
+        <span class="n">saveAsMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+
+    <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">openAct</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">saveAsMenu</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">printAct</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">exitAct</span><span class="p">);</span>
+
+    <span class="n">optionMenu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Options&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">optionMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">penColorAct</span><span class="p">);</span>
+    <span class="n">optionMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">penWidthAct</span><span class="p">);</span>
+    <span class="n">optionMenu</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+    <span class="n">optionMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">clearScreenAct</span><span class="p">);</span>
+
+    <span class="n">helpMenu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutAct</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">);</span>
+
+    <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">fileMenu</span><span class="p">);</span>
+    <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">optionMenu</span><span class="p">);</span>
+    <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">helpMenu</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">createMenu()</span></code> function, we add the previously created format actions to the <code class="docutils literal"><span class="pre">saveAsMenu</span></code> . Then we add the rest of the actions as well as the <code class="docutils literal"><span class="pre">saveAsMenu</span></code> sub-menu to the File, Options and Help menus.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> class provides a menu widget for use in menu bars, context menus, and other popup menus. The <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> class provides a horizontal menu bar with a list of pull-down <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> s. At the end we put the File and Options menus in the <code class="docutils literal"><span class="pre">MainWindow</span></code> ‘s menu bar, which we retrieve using the <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.menuBar()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">maybeSave</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">isModified</span><span class="p">())</span> <span class="p">{</span>
+       <span class="n">QMessageBox</span><span class="p">::</span><span class="n">StandardButton</span> <span class="n">ret</span><span class="p">;</span>
+       <span class="n">ret</span> <span class="o">=</span> <span class="n">QMessageBox</span><span class="p">::</span><span class="n">warning</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Scribble&quot;</span><span class="p">),</span>
+                          <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The image has been modified.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="s2">&quot;Do you want to save your changes?&quot;</span><span class="p">),</span>
+                          <span class="n">QMessageBox</span><span class="p">::</span><span class="n">Save</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="p">::</span><span class="n">Discard</span>
+                          <span class="o">|</span> <span class="n">QMessageBox</span><span class="p">::</span><span class="n">Cancel</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="p">::</span><span class="n">Save</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">saveFile</span><span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="p">::</span><span class="n">Cancel</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">mayBeSave()</span></code> , we check if there are any unsaved changes. If there are any, we use <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> to give the user a warning that the image has been modified and the opportunity to save the modifications.</p>
+<p>As with <a class="reference internal" href="../PySide2/QtWidgets/QColorDialog.html#PySide2.QtWidgets.QColorDialog" title="PySide2.QtWidgets.QColorDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QColorDialog</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QFileDialog.html#PySide2.QtWidgets.QFileDialog" title="PySide2.QtWidgets.QFileDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileDialog</span></code></a> , the easiest way to create a <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> is to use its static functions. <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> provides a range of different messages arranged along two axes: severity (question, information, warning and critical) and complexity (the number of necessary response buttons). Here we use the <code class="docutils literal"><span class="pre">warning()</span></code> function sice the message is rather important.</p>
+<p>If the user chooses to save, we call the private <code class="docutils literal"><span class="pre">saveFile()</span></code> function. For simplicitly, we use PNG as the file format; the user can always press Cancel and save the file using another format.</p>
+<p>The <code class="docutils literal"><span class="pre">maybeSave()</span></code> function returns <code class="docutils literal"><span class="pre">false</span></code> if the user clicks Cancel; otherwise it returns <code class="docutils literal"><span class="pre">true</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">saveFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">fileFormat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QString</span> <span class="n">initialPath</span> <span class="o">=</span> <span class="n">QDir</span><span class="p">::</span><span class="n">currentPath</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/untitled.&quot;</span> <span class="o">+</span> <span class="n">fileFormat</span><span class="p">;</span>
+
+    <span class="n">QString</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="p">::</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Save As&quot;</span><span class="p">),</span>
+                               <span class="n">initialPath</span><span class="p">,</span>
+                               <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1 Files (*.%2);;All Files (*)&quot;</span><span class="p">)</span>
+                               <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">fileFormat</span><span class="o">.</span><span class="n">toUpper</span><span class="p">()))</span>
+                               <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">fileFormat</span><span class="p">)));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fileName</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">scribbleArea</span><span class="o">-&gt;</span><span class="n">saveImage</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">fileFormat</span><span class="o">.</span><span class="n">constData</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">saveFile()</span></code> , we pop up a file dialog with a file name suggestion. The static <code class="xref py py-func docutils literal"><span class="pre">QFileDialog.getSaveFileName()</span></code> function returns a file name selected by the user. The file does not have to exist.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scribblearea-cpp-example-file">
+<h1>scribblearea.cpp Example File<a class="headerlink" href="#scribblearea-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scribblearea-h-example-file">
+<h1>scribblearea.h Example File<a class="headerlink" href="#scribblearea-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scribble-pro-example-file">
+<h1>scribble.pro Example File<a class="headerlink" href="#scribble-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,357 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Camera Overview &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Camera Overview</a><ul>
+<li><a class="reference internal" href="#camera-features">Camera Features</a></li>
+<li><a class="reference internal" href="#the-lens-assembly">The Lens Assembly</a></li>
+<li><a class="reference internal" href="#the-sensor">The Sensor</a></li>
+<li><a class="reference internal" href="#image-processing">Image Processing</a></li>
+<li><a class="reference internal" href="#recording-for-posterity">Recording for Posterity</a></li>
+<li><a class="reference internal" href="#camera-implementation-details">Camera Implementation Details</a></li>
+<li><a class="reference internal" href="#detecting-and-selecting-camera">Detecting and Selecting Camera</a></li>
+<li><a class="reference internal" href="#viewfinder">Viewfinder</a></li>
+<li><a class="reference internal" href="#still-images">Still Images</a></li>
+<li><a class="reference internal" href="#movies">Movies</a></li>
+<li><a class="reference internal" href="#controlling-the-imaging-pipeline">Controlling the Imaging Pipeline</a></li>
+<li><a class="reference internal" href="#focus-and-zoom">Focus and Zoom</a></li>
+<li><a class="reference internal" href="#exposure-aperture-shutter-speed-and-flash">Exposure, Aperture, Shutter Speed and Flash</a></li>
+<li><a class="reference internal" href="#id17">Image Processing</a></li>
+<li><a class="reference internal" href="#canceling-asynchronous-operations">Canceling Asynchronous Operations</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#c-examples">C++ Examples</a></li>
+<li><a class="reference internal" href="#qml-examples">QML Examples</a></li>
+<li><a class="reference internal" href="#reference-documentation">Reference Documentation</a></li>
+<li><a class="reference internal" href="#c-classes">C++ Classes</a></li>
+<li><a class="reference internal" href="#qml-types">QML Types</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="camera-overview">
+<span id="id1"></span><h1>Camera Overview<a class="headerlink" href="#camera-overview" title="Permalink to this headline">¶</a></h1>
+<p>Camera viewfinder, still image capture, and video recording</p>
+<blockquote>
+<div><p id="camera-image-processing"><span id="camera-tldr"></span>Camera viewfinder, still image capture, and video recording.</p>
+<p>The Qt Multimedia API provides a number of camera related classes, so you can access images and videos from mobile device cameras or webcameras. There are both C++ and QML APIs for common tasks.</p>
+</div></blockquote>
+<div class="section" id="camera-features">
+<span id="id2"></span><h2>Camera Features<a class="headerlink" href="#camera-features" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>In order to use the camera classes a quick overview of the way a camera works is needed. If you’re already familiar with this, you can skip ahead to <a class="reference internal" href="#camera-overview"><span class="std std-ref">Camera implementation details</span></a> .</div></blockquote>
+</div>
+<div class="section" id="the-lens-assembly">
+<span id="id3"></span><h2>The Lens Assembly<a class="headerlink" href="#the-lens-assembly" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>At one end of the camera assembly is the lens assembly (one or more lenses, arranged to focus light onto the sensor). The lenses themselves can sometimes be moved to adjust things like focus and zoom, or they might be fixed in an arrangement to give a good balance between objects in focus, and cost.</p>
+<p>Some lens assemblies can automatically be adjusted so that an object at different distances from the camera can be kept in focus. This is usually done by measuring how sharp a particular area of the frame is, and by adjusting the lens assembly until it is maximally sharp. In some cases the camera will always use the center of the frame for this. Other cameras may also allow the region to focus to be specified (for “touch to zoom”, or “face zoom” features).</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-sensor">
+<span id="id4"></span><h2>The Sensor<a class="headerlink" href="#the-sensor" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Once light arrives at the sensor, it gets converted into digital pixels. This process can depend on a number of things but ultimately comes down to two things - how long the conversion is allowed to take, and how bright the light is. The longer a conversion can take, the better the quality. Using a flash can assist with letting more light hit the sensor, allowing it to convert pixels faster, giving better quality for the same amount of time. Conversely, allowing a longer conversion time can let you take photos in darker environments, as long as the camera is steady.</div></blockquote>
+</div>
+<div class="section" id="image-processing">
+<span id="id5"></span><h2>Image Processing<a class="headerlink" href="#image-processing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>After the image has been captured by the sensor, the camera firmware performs various image processing tasks on it to compensate for various sensor characteristics, current lighting, and desired image properties. Faster sensor pixel conversion times tend to introduce digital noise, so some amount of image processing can be done to remove this based on the camera sensor settings.</p>
+<p>The color of the image can also be adjusted at this stage to compensate for different light sources - fluorescent lights and sunlight give very different appearances to the same object, so the image can be adjusted based on the white balance of the picture (due to the different color temperatures of the light sources).</p>
+<p>Some forms of “special effects” can also be performed at this stage. Black and white, sepia, or “negative” style images can be produced.</p>
+</div></blockquote>
+</div>
+<div class="section" id="recording-for-posterity">
+<span id="id6"></span><h2>Recording for Posterity<a class="headerlink" href="#recording-for-posterity" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Finally, once a perfectly focused, exposed and processed image has been created, it can be put to good use. Camera images can be further processed by application code (for example, to detect barcodes, or to stitch together a panoramic image), or saved to a common format like JPEG, or used to create a movie. Many of these tasks have classes to assist them.</div></blockquote>
+</div>
+<div class="section" id="camera-implementation-details">
+<span id="id7"></span><span id="id8"></span><h2>Camera Implementation Details<a class="headerlink" href="#camera-implementation-details" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="detecting-and-selecting-camera">
+<span id="id9"></span><h2>Detecting and Selecting Camera<a class="headerlink" href="#detecting-and-selecting-camera" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Before using the camera APIs, you should check that a camera is available at runtime. If there is none, you could for example disable camera related features in your application. To perform this check in C++, use the <code class="xref py py-func docutils literal"><span class="pre">QCameraInfo.availableCameras()</span></code> function, as shown in the example below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">checkCameraAvailability</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QCameraInfo</span><span class="p">::</span><span class="n">availableCameras</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In QML, use the <span class="xref std std-ref">QtMultimedia.availableCameras</span> property:</p>
+<p>After determining whether a camera is available, access it using the <a class="reference internal" href="../PySide2/QtMultimedia/QCamera.html#PySide2.QtMultimedia.QCamera" title="PySide2.QtMultimedia.QCamera"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QCamera</span></code></a> class in C++ or the <a class="reference internal" href="qml-multimedia.html#qt-multimedia-qml-api"><span class="std std-ref">Camera</span></a> type in QML.</p>
+<p>When multiple cameras are available, you can specify which one to use.</p>
+<p>In C++:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QList</span><span class="o">&lt;</span><span class="n">QCameraInfo</span><span class="o">&gt;</span> <span class="n">cameras</span> <span class="o">=</span> <span class="n">QCameraInfo</span><span class="p">::</span><span class="n">availableCameras</span><span class="p">();</span>
+<span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QCameraInfo</span> <span class="o">&amp;</span><span class="n">cameraInfo</span><span class="p">,</span> <span class="n">cameras</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cameraInfo</span><span class="o">.</span><span class="n">deviceName</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mycamera&quot;</span><span class="p">)</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCamera</span><span class="p">(</span><span class="n">cameraInfo</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In QML, you can set the <code class="docutils literal"><span class="pre">Camera</span></code> <span class="xref std std-ref">deviceId</span> property. All available IDs can be retrieved from <span class="xref std std-ref">QtMultimedia.availableCameras</span> :</p>
+<p>You can also select the camera by its physical position on the system rather than its device ID. This is useful on mobile devices, which often have a front-facing and a back-facing camera.</p>
+<p>In C++:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCamera</span><span class="p">(</span><span class="n">QCamera</span><span class="p">::</span><span class="n">FrontFace</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In QML:</p>
+<p>If neither device ID nor position is specified, the default camera will be used. On desktop platforms, the default camera is set by the user in the system settings. On a mobile device, the back-facing camera is usually the default camera. You can get information about the default camera using <code class="xref py py-func docutils literal"><span class="pre">QCameraInfo.defaultCamera()</span></code> in C++ or <span class="xref std std-ref">QtMultimedia.defaultCamera</span> in QML.</p>
+</div></blockquote>
+</div>
+<div class="section" id="viewfinder">
+<span id="id10"></span><h2>Viewfinder<a class="headerlink" href="#viewfinder" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>While not strictly necessary, it’s often useful to be able to see what the camera is pointing at. Most digital cameras allow an image feed from the camera sensor at a lower resolution (usually up to the size of the display of the camera) so you can compose a photo or video, and then switch to a slower but higher resolution mode for capturing the image.</p>
+<p>Depending on whether you’re using QML or C++, you can do this in multiple ways. In QML, you can use <a class="reference internal" href="qml-multimedia.html#qt-multimedia-qml-api"><span class="std std-ref">Camera</span></a> and <span class="xref std std-ref">VideoOutput</span> together to show a simple viewfinder:</p>
+<p>In C++, your choice depends on whether you are using widgets, or <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> . The <a class="reference internal" href="../PySide2/QtMultimediaWidgets/QCameraViewfinder.html#PySide2.QtMultimediaWidgets.QCameraViewfinder" title="PySide2.QtMultimediaWidgets.QCameraViewfinder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimediaWidgets.QCameraViewfinder</span></code></a> class is used in the widgets case, and <code class="xref py py-class docutils literal"><span class="pre">QGraphicsVideoItem</span></code> is useful for <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCamera</span><span class="p">;</span>
+<span class="n">viewfinder</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCameraViewfinder</span><span class="p">;</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">setViewfinder</span><span class="p">(</span><span class="n">viewfinder</span><span class="p">);</span>
+<span class="n">viewfinder</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span> <span class="o">//</span> <span class="n">to</span> <span class="n">start</span> <span class="n">the</span> <span class="n">viewfinder</span>
+</pre></div>
+</div>
+<p>For advanced usage (like processing viewfinder frames as they come, to detect objects or patterns), you can also derive from <a class="reference internal" href="../PySide2/QtMultimedia/QAbstractVideoSurface.html#PySide2.QtMultimedia.QAbstractVideoSurface" title="PySide2.QtMultimedia.QAbstractVideoSurface"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QAbstractVideoSurface</span></code></a> and set that as the viewfinder for the <a class="reference internal" href="../PySide2/QtMultimedia/QCamera.html#PySide2.QtMultimedia.QCamera" title="PySide2.QtMultimedia.QCamera"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QCamera</span></code></a> object. In this case you will need to render the viewfinder image yourself.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCamera</span><span class="p">;</span>
+<span class="n">mySurface</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyVideoSurface</span><span class="p">;</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">setViewfinder</span><span class="p">(</span><span class="n">mySurface</span><span class="p">);</span>
+
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+<span class="o">//</span> <span class="n">MyVideoSurface</span><span class="p">::</span><span class="n">present</span><span class="p">(</span><span class="o">..</span><span class="p">)</span> <span class="n">will</span> <span class="n">be</span> <span class="n">called</span> <span class="k">with</span> <span class="n">viewfinder</span> <span class="n">frames</span>
+</pre></div>
+</div>
+<p>On mobile devices, the viewfinder image might not always be in the orientation you would expect. The camera sensors on these devices are often mounted in landscape while the natural orientation of the screen is portrait. This results in the image appearing sideways or inverted depending on the device orientation. In order to reflect on screen what the user actually sees, you should make sure the viewfinder frames are always rotated to the correct orientation, taking into account the camera sensor orientation and the current display orientation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Assuming</span> <span class="n">a</span> <span class="n">QImage</span> <span class="n">has</span> <span class="n">been</span> <span class="n">created</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">QVideoFrame</span> <span class="n">that</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">presented</span>
+<span class="n">QImage</span> <span class="n">videoFrame</span><span class="p">;</span>
+<span class="n">QCameraInfo</span> <span class="n">cameraInfo</span><span class="p">(</span><span class="n">camera</span><span class="p">);</span> <span class="o">//</span> <span class="n">needed</span> <span class="n">to</span> <span class="n">get</span> <span class="n">the</span> <span class="n">camera</span> <span class="n">sensor</span> <span class="n">position</span> <span class="ow">and</span> <span class="n">orientation</span>
+
+<span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">current</span> <span class="n">display</span> <span class="n">orientation</span>
+<span class="n">const</span> <span class="n">QScreen</span> <span class="o">*</span><span class="n">screen</span> <span class="o">=</span> <span class="n">QGuiApplication</span><span class="p">::</span><span class="n">primaryScreen</span><span class="p">();</span>
+<span class="n">const</span> <span class="nb">int</span> <span class="n">screenAngle</span> <span class="o">=</span> <span class="n">screen</span><span class="o">-&gt;</span><span class="n">angleBetween</span><span class="p">(</span><span class="n">screen</span><span class="o">-&gt;</span><span class="n">nativeOrientation</span><span class="p">(),</span> <span class="n">screen</span><span class="o">-&gt;</span><span class="n">orientation</span><span class="p">());</span>
+
+<span class="nb">int</span> <span class="n">rotation</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">cameraInfo</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">==</span> <span class="n">QCamera</span><span class="p">::</span><span class="n">BackFace</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rotation</span> <span class="o">=</span> <span class="p">(</span><span class="n">cameraInfo</span><span class="o">.</span><span class="n">orientation</span><span class="p">()</span> <span class="o">-</span> <span class="n">screenAngle</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Front</span> <span class="n">position</span><span class="p">,</span> <span class="n">compensate</span> <span class="n">the</span> <span class="n">mirror</span>
+    <span class="n">rotation</span> <span class="o">=</span> <span class="p">(</span><span class="mi">360</span> <span class="o">-</span> <span class="n">cameraInfo</span><span class="o">.</span><span class="n">orientation</span><span class="p">()</span> <span class="o">+</span> <span class="n">screenAngle</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">Rotate</span> <span class="n">the</span> <span class="n">frame</span> <span class="n">so</span> <span class="n">it</span> <span class="n">always</span> <span class="n">shows</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">orientation</span>
+<span class="n">videoFrame</span> <span class="o">=</span> <span class="n">videoFrame</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="n">QTransform</span><span class="p">()</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotation</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="still-images">
+<span id="id11"></span><h2>Still Images<a class="headerlink" href="#still-images" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>After setting up a viewfinder and finding something photogenic, to capture an image we need to initialize a new <a class="reference internal" href="../PySide2/QtMultimedia/QCameraImageCapture.html#PySide2.QtMultimedia.QCameraImageCapture" title="PySide2.QtMultimedia.QCameraImageCapture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QCameraImageCapture</span></code></a> object. All that is then needed is to start the camera, lock it so that things are in focus and the settings are not different from the viewfinder while the image capture occurs, capture the image, and finally unlock the camera ready for the next photo.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">imageCapture</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCameraImageCapture</span><span class="p">(</span><span class="n">camera</span><span class="p">);</span>
+
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">setCaptureMode</span><span class="p">(</span><span class="n">QCamera</span><span class="p">::</span><span class="n">CaptureStillImage</span><span class="p">);</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span> <span class="o">//</span> <span class="n">Viewfinder</span> <span class="n">frames</span> <span class="n">start</span> <span class="n">flowing</span>
+
+<span class="o">//</span><span class="n">on</span> <span class="n">half</span> <span class="n">pressed</span> <span class="n">shutter</span> <span class="n">button</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">searchAndLock</span><span class="p">();</span>
+
+<span class="o">//</span><span class="n">on</span> <span class="n">shutter</span> <span class="n">button</span> <span class="n">pressed</span>
+<span class="n">imageCapture</span><span class="o">-&gt;</span><span class="n">capture</span><span class="p">();</span>
+
+<span class="o">//</span><span class="n">on</span> <span class="n">shutter</span> <span class="n">button</span> <span class="n">released</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="movies">
+<span id="id12"></span><h2>Movies<a class="headerlink" href="#movies" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Previously we saw code that allowed the capture of a still image. Recording video requires the use of a <a class="reference internal" href="../PySide2/QtMultimedia/QMediaRecorder.html#PySide2.QtMultimedia.QMediaRecorder" title="PySide2.QtMultimedia.QMediaRecorder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QMediaRecorder</span></code></a> object.</p>
+<p>To record video we need to create a camera object as before but this time as well as creating a viewfinder, we will also initialize a media recorder object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCamera</span><span class="p">;</span>
+<span class="n">recorder</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMediaRecorder</span><span class="p">(</span><span class="n">camera</span><span class="p">);</span>
+
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">setCaptureMode</span><span class="p">(</span><span class="n">QCamera</span><span class="p">::</span><span class="n">CaptureVideo</span><span class="p">);</span>
+<span class="n">camera</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+
+<span class="o">//</span><span class="n">on</span> <span class="n">shutter</span> <span class="n">button</span> <span class="n">pressed</span>
+<span class="n">recorder</span><span class="o">-&gt;</span><span class="n">record</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">sometime</span> <span class="n">later</span><span class="p">,</span> <span class="ow">or</span> <span class="n">on</span> <span class="n">another</span> <span class="n">press</span>
+<span class="n">recorder</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Signals from the <em>mediaRecorder</em> can be connected to slots to react to changes in the state of the recorder or error events. Recording itself starts with the <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.record()</span></code> function of mediaRecorder being called, this causes the signal <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.stateChanged()</span></code> to be emitted. The recording process can be changed with the <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.record()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.stop()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.setMuted()</span></code> slots in <a class="reference internal" href="../PySide2/QtMultimedia/QMediaRecorder.html#PySide2.QtMultimedia.QMediaRecorder" title="PySide2.QtMultimedia.QMediaRecorder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QMediaRecorder</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="controlling-the-imaging-pipeline">
+<span id="id13"></span><h2>Controlling the Imaging Pipeline<a class="headerlink" href="#controlling-the-imaging-pipeline" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Now that the basics of capturing images or movies are covered, there are a number of ways to control the imaging pipeline to implement some interesting techniques. As explained earlier, several physical and electronic elements combine to determine the final images, and you can control them with different classes.</div></blockquote>
+</div>
+<div class="section" id="focus-and-zoom">
+<span id="id14"></span><h2>Focus and Zoom<a class="headerlink" href="#focus-and-zoom" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Focusing (and zoom) is managed primarily by the <code class="xref py py-class docutils literal"><span class="pre">QCameraFocus</span></code> class. <code class="xref py py-class docutils literal"><span class="pre">QCameraFocus</span></code> allows the developer to set the general policy by means of the enums for the <code class="xref py py-attr docutils literal"><span class="pre">QCameraFocus.FocusMode</span></code> and the <code class="xref py py-attr docutils literal"><span class="pre">QCameraFocus.FocusPointMode</span></code> . <code class="xref py py-attr docutils literal"><span class="pre">QCameraFocus.FocusMode</span></code> deals with settings such as <code class="xref py py-attr docutils literal"><span class="pre">AutoFocus</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">ContinuousFocus</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">InfinityFocus</span></code> , whereas <code class="xref py py-attr docutils literal"><span class="pre">FocusPointMode</span></code> deals with the various focus zones within the view that are used for autofocus modes. <code class="xref py py-attr docutils literal"><span class="pre">FocusPointMode</span></code> has support for face recognition (where the camera supports it), center focus and a custom focus where the focus point can be specified.</p>
+<p>For camera hardware that supports it, <code class="xref py py-attr docutils literal"><span class="pre">Macro</span> <span class="pre">focus</span></code> allows imaging of things that are close to the sensor. This is useful in applications like barcode recognition, or business card scanning.</p>
+<p>In addition to focus, <code class="xref py py-class docutils literal"><span class="pre">QCameraFocus</span></code> allows you to control any available optical or digital zoom. In general, optical zoom is higher quality, but more expensive to manufacture, so the available zoom range might be limited (or fixed to unity).</p>
+</div></blockquote>
+</div>
+<div class="section" id="exposure-aperture-shutter-speed-and-flash">
+<span id="id15"></span><h2>Exposure, Aperture, Shutter Speed and Flash<a class="headerlink" href="#exposure-aperture-shutter-speed-and-flash" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>There are a number of settings that affect the amount of light that hits the camera sensor, and hence the quality of the resulting image. The <code class="xref py py-class docutils literal"><span class="pre">QCameraExposure</span></code> class allows you to adjust these settings. You can use this class to implement some techniques like High Dynamic Range (HDR) photos by locking the exposure parameters (with <code class="xref py py-func docutils literal"><span class="pre">QCamera.searchAndLock()</span></code> ), or motion blur by setting slow shutter speeds with small apertures.</p>
+<p>The main settings for automatic image taking are the <code class="xref py py-attr docutils literal"><span class="pre">exposure</span> <span class="pre">mode</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">flash</span> <span class="pre">mode</span></code> . Several other settings (aperture, ISO setting, shutter speed) are usually managed automatically but can also be overridden if desired.</p>
+<p>You can also adjust the <code class="xref py py-func docutils literal"><span class="pre">QCameraExposure.meteringMode()</span></code> to control which parts of the camera frame to measure exposure at. Some camera implementations also allow you to specify a specific point that should be used for exposure metering - this is useful if you can let the user touch or click on an interesting part of the viewfinder, and then use this point so that the image exposure is best at that point.</p>
+<p>Finally, you can control the flash hardware (if present) using this class. In some cases the hardware may also double as a torch (typically when the flash is LED based, rather than a xenon or other bulb). See also <span class="xref std std-ref">Torch</span> for an easy to use API for torch functionality.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id17">
+<span id="id18"></span><h2>Image Processing<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="xref py py-class docutils literal"><span class="pre">QCameraImageProcessing</span></code> class lets you adjust the image processing part of the pipeline. This includes the <code class="xref py py-attr docutils literal"><span class="pre">white</span> <span class="pre">balance</span></code> (or color temperature), <code class="xref py py-func docutils literal"><span class="pre">QCameraImageProcessing.contrast()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QCameraImageProcessing.saturation()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">sharpening</span></code> and <code class="xref py py-func docutils literal"><span class="pre">denoising</span></code> . Most cameras support automatic settings for all of these, so you shouldn’t need to adjust them unless the user wants a specific setting.</p>
+<p>If you’re taking a series of images (for example, to stitch them together for a panoramic image), you should lock the image processing settings so that all the images taken appear similar with <em>QCamera::lock(</em> <code class="xref py py-attr docutils literal"><span class="pre">QCamera.LockWhiteBalance</span></code> <em>)</em> /</p>
+</div></blockquote>
+</div>
+<div class="section" id="canceling-asynchronous-operations">
+<span id="id19"></span><h2>Canceling Asynchronous Operations<a class="headerlink" href="#canceling-asynchronous-operations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Various operations such as image capture and auto focusing occur asynchrously. These operations can often be canceled by the start of a new operation as long as this is supported by the camera. For image capture, the operation can be canceled by calling <code class="xref py py-func docutils literal"><span class="pre">QCameraImageCapture.cancelCapture()</span></code> . For AutoFocus, autoexposure or white balance cancellation can be done by calling ** <code class="xref py py-func docutils literal"><span class="pre">QCamera.unlock()</span></code> <em>(</em> <code class="xref py py-attr docutils literal"><span class="pre">QCamera.LockFocus</span></code> <em>)</em> .</div></blockquote>
+</div>
+<div class="section" id="examples">
+<span id="id20"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>There are both C++ and QML examples available.</div></blockquote>
+</div>
+<div class="section" id="c-examples">
+<span id="id21"></span><h2>C++ Examples<a class="headerlink" href="#c-examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="qml-examples">
+<span id="id22"></span><h2>QML Examples<a class="headerlink" href="#qml-examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="reference-documentation">
+<span id="id23"></span><h2>Reference Documentation<a class="headerlink" href="#reference-documentation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="c-classes">
+<span id="id24"></span><h2>C++ Classes<a class="headerlink" href="#c-classes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="qml-types">
+<span id="id25"></span><h2>QML Types<a class="headerlink" href="#qml-types" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

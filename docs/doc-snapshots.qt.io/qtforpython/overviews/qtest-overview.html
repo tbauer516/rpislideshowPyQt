@@ -1,0 +1,379 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Test Overview &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Test Overview</a><ul>
+<li><a class="reference internal" href="#creating-a-test">Creating a Test</a></li>
+<li><a class="reference internal" href="#building-a-test">Building a Test</a></li>
+<li><a class="reference internal" href="#qt-test-command-line-arguments">Qt Test Command Line Arguments</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#logging-options">Logging Options</a></li>
+<li><a class="reference internal" href="#test-log-detail-options">Test Log Detail Options</a></li>
+<li><a class="reference internal" href="#testing-options">Testing Options</a></li>
+<li><a class="reference internal" href="#benchmarking-options">Benchmarking Options</a></li>
+<li><a class="reference internal" href="#miscellaneous-options">Miscellaneous Options</a></li>
+<li><a class="reference internal" href="#creating-a-benchmark">Creating a Benchmark</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-test-overview">
+<span id="id1"></span><h1>Qt Test Overview<a class="headerlink" href="#qt-test-overview" title="Permalink to this headline">¶</a></h1>
+<p>Overview of the Qt unit testing framework</p>
+<blockquote>
+<div><p id="testlib-benchmarking-measurement">Overview of the Qt unit testing framework.</p>
+<p>Qt Test is a framework for unit testing Qt based applications and libraries. Qt Test provides all the functionality commonly found in unit testing frameworks as well as extensions for testing graphical user interfaces.</p>
+<p>Qt Test is designed to ease the writing of unit tests for Qt based applications and libraries:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Feature</td>
+<td>Details</td>
+</tr>
+<tr class="row-even"><td><strong>Lightweight</strong></td>
+<td>Qt Test consists of about 6000 lines of code and 60 exported symbols.</td>
+</tr>
+<tr class="row-odd"><td><strong>Self-contained</strong></td>
+<td>Qt Test requires only a few symbols from the Qt Core module for non-gui testing.</td>
+</tr>
+<tr class="row-even"><td><strong>Rapid testing</strong></td>
+<td>Qt Test needs no special test-runners; no special registration for tests.</td>
+</tr>
+<tr class="row-odd"><td><strong>Data-driven testing</strong></td>
+<td>A test can be executed multiple times with different test data.</td>
+</tr>
+<tr class="row-even"><td><strong>Basic GUI testing</strong></td>
+<td>Qt Test offers functionality for mouse and keyboard simulation.</td>
+</tr>
+<tr class="row-odd"><td><strong>Benchmarking</strong></td>
+<td>Qt Test supports benchmarking and provides several measurement back-ends.</td>
+</tr>
+<tr class="row-even"><td><strong>IDE friendly</strong></td>
+<td>Qt Test outputs messages that can be interpreted by Visual Studio and KDevelop.</td>
+</tr>
+<tr class="row-odd"><td><strong>Thread-safety</strong></td>
+<td>The error reporting is thread safe and atomic.</td>
+</tr>
+<tr class="row-even"><td><strong>Type-safety</strong></td>
+<td>Extensive use of templates prevent errors introduced by implicit type casting.</td>
+</tr>
+<tr class="row-odd"><td><strong>Easily extendable</strong></td>
+<td>Custom types can easily be added to the test data and test output.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="creating-a-test">
+<span id="id2"></span><h2>Creating a Test<a class="headerlink" href="#creating-a-test" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To create a test, subclass <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> and add one or more private slots to it. Each private slot is a test function in your test. <code class="xref py py-func docutils literal"><span class="pre">QTest.qExec()</span></code> can be used to execute all test functions in the test object.</p>
+<p>In addition, there are four private slots that are <em>not</em> treated as test functions. They will be executed by the testing framework and can be used to initialize and clean up either the entire test or the current test function.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">initTestCase()</span></code> will be called before the first test function is executed.</li>
+<li><code class="docutils literal"><span class="pre">cleanupTestCase()</span></code> will be called after the last test function was executed.</li>
+<li><code class="docutils literal"><span class="pre">init()</span></code> will be called before each test function is executed.</li>
+<li><code class="docutils literal"><span class="pre">cleanup()</span></code> will be called after every test function.</li>
+</ul>
+<p>If <code class="docutils literal"><span class="pre">initTestCase()</span></code> fails, no test function will be executed. If <code class="docutils literal"><span class="pre">init()</span></code> fails, the following test function will not be executed, the test will proceed to the next test function.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyFirstTest</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">initTestCase</span><span class="p">()</span>
+    <span class="p">{</span> <span class="n">qDebug</span><span class="p">(</span><span class="s2">&quot;called before everything else&quot;</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">myFirstTest</span><span class="p">()</span>
+    <span class="p">{</span> <span class="n">QVERIFY</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">mySecondTest</span><span class="p">()</span>
+    <span class="p">{</span> <span class="n">QVERIFY</span><span class="p">(</span><span class="mi">1</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">cleanupTestCase</span><span class="p">()</span>
+    <span class="p">{</span> <span class="n">qDebug</span><span class="p">(</span><span class="s2">&quot;called after myFirstTest and mySecondTest&quot;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>For more examples, refer to the <a class="reference internal" href="qtest-tutorial.html#qt-test-tutorial"><span class="std std-ref">Qt Test Tutorial</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="building-a-test">
+<span id="id3"></span><h2>Building a Test<a class="headerlink" href="#building-a-test" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If you are using <code class="docutils literal"><span class="pre">qmake</span></code> as your build tool, just add the following to your project file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;code/doc_src_qtestlib.pro:1&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If you would like to run the test via <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code> , add the additional line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;code/doc_src_qtestlib.pro:2&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>See the qmake manual for more information about <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code> .</p>
+<p>If you are using other build tools, make sure that you add the location of the Qt Test header files to your include path (usually <code class="docutils literal"><span class="pre">include/QtTest</span></code> under your Qt installation directory). If you are using a release build of Qt, link your test to the <code class="docutils literal"><span class="pre">QtTest</span></code> library. For debug builds, use <code class="docutils literal"><span class="pre">QtTest_debug</span></code> .</p>
+<p>See <a class="reference internal" href="qttestlib-tutorial1-example.html#chapter-1-writing-a-unit-test"><span class="std std-ref">Writing a Unit Test</span></a> for a step by step explanation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="qt-test-command-line-arguments">
+<span id="id4"></span><h2>Qt Test Command Line Arguments<a class="headerlink" href="#qt-test-command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="syntax">
+<span id="id5"></span><h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The syntax to execute an autotest takes the following simple form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">testname</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="p">[</span><span class="n">testfunctions</span><span class="p">[:</span><span class="n">testdata</span><span class="p">]]</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Substitute <code class="docutils literal"><span class="pre">testname</span></code> with the name of your executable. <code class="docutils literal"><span class="pre">testfunctions</span></code> can contain names of test functions to be executed. If no <code class="docutils literal"><span class="pre">testfunctions</span></code> are passed, all tests are run. If you append the name of an entry in <code class="docutils literal"><span class="pre">testdata</span></code> , the test function will be run only with that test data.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/myTestDirectory$ testQString toUpper
+</pre></div>
+</div>
+<p>Runs the test function called <code class="docutils literal"><span class="pre">toUpper</span></code> with all available test data.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/myTestDirectory$ testQString toUpper toInt:zero
+</pre></div>
+</div>
+<p>Runs the <code class="docutils literal"><span class="pre">toUpper</span></code> test function with all available test data, and the <code class="docutils literal"><span class="pre">toInt</span></code> test function with the test data called <code class="docutils literal"><span class="pre">zero</span></code> (if the specified test data doesn’t exist, the associated test will fail).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/myTestDirectory$ testMyWidget -vs -eventdelay 500
+</pre></div>
+</div>
+<p>Runs the <code class="docutils literal"><span class="pre">testMyWidget</span></code> function test, outputs every signal emission and waits 500 milliseconds after each simulated mouse/keyboard event.</p>
+</div></blockquote>
+</div>
+<div class="section" id="options">
+<span id="id6"></span><h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="logging-options">
+<span id="id7"></span><h2>Logging Options<a class="headerlink" href="#logging-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following command line options determine how test results are reported:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-o</span></code> <em>filename,format</em> Writes output to the specified file, in the specified format (one of <code class="docutils literal"><span class="pre">txt</span></code>, <code class="docutils literal"><span class="pre">xml</span></code>, <code class="docutils literal"><span class="pre">lightxml</span></code> or <code class="docutils literal"><span class="pre">xunitxml</span></code>). The special filename <code class="docutils literal"><span class="pre">-</span></code> may be used to log to standard output.</li>
+<li><code class="docutils literal"><span class="pre">-o</span></code> <em>filename</em> Writes output to the specified file.</li>
+<li><code class="docutils literal"><span class="pre">-txt</span></code> Outputs results in plain text.</li>
+<li><code class="docutils literal"><span class="pre">-xml</span></code> Outputs results as an XML document.</li>
+<li><code class="docutils literal"><span class="pre">-lightxml</span></code> Outputs results as a stream of XML tags.</li>
+<li><code class="docutils literal"><span class="pre">-xunitxml</span></code> Outputs results as an Xunit XML document.</li>
+<li><code class="docutils literal"><span class="pre">-csv</span></code> Outputs results as comma-separated values (CSV). This mode is only suitable for benchmarks, since it suppresses normal pass/fail messages.</li>
+<li><code class="docutils literal"><span class="pre">-teamcity</span></code> Outputs results in TeamCity format.</li>
+</ul>
+<p>The first version of the <code class="docutils literal"><span class="pre">-o</span></code> option may be repeated in order to log test results in multiple formats, but no more than one instance of this option can log test results to standard output.</p>
+<p>If the first version of the <code class="docutils literal"><span class="pre">-o</span></code> option is used, neither the second version of the <code class="docutils literal"><span class="pre">-o</span></code> option nor the <code class="docutils literal"><span class="pre">-txt</span></code> , <code class="docutils literal"><span class="pre">-xml</span></code> , <code class="docutils literal"><span class="pre">-lightxml</span></code> , <code class="docutils literal"><span class="pre">-teamcity</span></code> or <code class="docutils literal"><span class="pre">-xunitxml</span></code> options should be used.</p>
+<p>If neither version of the <code class="docutils literal"><span class="pre">-o</span></code> option is used, test results will be logged to standard output. If no format option is used, test results will be logged in plain text.</p>
+</div></blockquote>
+</div>
+<div class="section" id="test-log-detail-options">
+<span id="id8"></span><h2>Test Log Detail Options<a class="headerlink" href="#test-log-detail-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following command line options control how much detail is reported in test logs:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-silent</span></code> Silent output; only shows fatal errors, test failures and minimal status messages.</li>
+<li><code class="docutils literal"><span class="pre">-v1</span></code> Verbose output; shows when each test function is entered. (This option only affects plain text output.)</li>
+<li><code class="docutils literal"><span class="pre">-v2</span></code> Extended verbose output; shows each <code class="xref py py-func docutils literal"><span class="pre">QCOMPARE()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QVERIFY()</span></code> . (This option affects all output formats and implies <code class="docutils literal"><span class="pre">-v1</span></code> for plain text output.)</li>
+<li><code class="docutils literal"><span class="pre">-vs</span></code> Shows all signals that get emitted and the slot invocations resulting from those signals. (This option affects all output formats.)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="testing-options">
+<span id="id9"></span><h2>Testing Options<a class="headerlink" href="#testing-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following command-line options influence how tests are run:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-functions</span></code> Outputs all test functions available in the test, then quits.</li>
+<li><code class="docutils literal"><span class="pre">-datatags</span></code> Outputs all data tags available in the test. A global data tag is preceded by ‘ __global__ ‘.</li>
+<li><code class="docutils literal"><span class="pre">-eventdelay</span></code> <em>ms</em> If no delay is specified for keyboard or mouse simulation ( <code class="xref py py-func docutils literal"><span class="pre">QTest.keyClick()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QTest.mouseClick()</span></code> etc.), the value from this parameter (in milliseconds) is substituted.</li>
+<li><code class="docutils literal"><span class="pre">-keydelay</span></code> <em>ms</em> Like -eventdelay, but only influences keyboard simulation and not mouse simulation.</li>
+<li><code class="docutils literal"><span class="pre">-mousedelay</span></code> <em>ms</em> Like -eventdelay, but only influences mouse simulation and not keyboard simulation.</li>
+<li><code class="docutils literal"><span class="pre">-maxwarnings</span></code> <em>number</em> Sets the maximum number of warnings to output. 0 for unlimited, defaults to 2000.</li>
+<li><code class="docutils literal"><span class="pre">-nocrashhandler</span></code> Disables the crash handler on Unix platforms. On Windows, it re-enables the Windows Error Reporting dialog, which is turned off by default. This is useful for debugging crashes.</li>
+<li><code class="docutils literal"><span class="pre">-platform</span></code> <em>name</em> This command line argument applies to all Qt applications, but might be especially useful in the context of auto-testing. By using the “offscreen” platform plugin (-platform offscreen) it’s possible to have tests that use <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> or <a class="reference internal" href="../PySide2/QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> run without showing anything on the screen. Currently the offscreen platform plugin is only fully supported on X11.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="benchmarking-options">
+<span id="id10"></span><h2>Benchmarking Options<a class="headerlink" href="#benchmarking-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following command line options control benchmark testing:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-callgrind</span></code> Uses Callgrind to time benchmarks (Linux only).</li>
+<li><code class="docutils literal"><span class="pre">-tickcounter</span></code> Uses CPU tick counters to time benchmarks.</li>
+<li><code class="docutils literal"><span class="pre">-eventcounter</span></code> Counts events received during benchmarks.</li>
+<li><code class="docutils literal"><span class="pre">-minimumvalue</span></code> <em>n</em> Sets the minimum acceptable measurement value.</li>
+<li><code class="docutils literal"><span class="pre">-minimumtotal</span></code> <em>n</em> Sets the minimum acceptable total for repeated executions of a test function.</li>
+<li><code class="docutils literal"><span class="pre">-iterations</span></code> <em>n</em> Sets the number of accumulation iterations.</li>
+<li><code class="docutils literal"><span class="pre">-median</span></code> <em>n</em> Sets the number of median iterations.</li>
+<li><code class="docutils literal"><span class="pre">-vb</span></code> Outputs verbose benchmarking information.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="miscellaneous-options">
+<span id="id11"></span><h2>Miscellaneous Options<a class="headerlink" href="#miscellaneous-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-help</span></code> Outputs the possible command line arguments and gives some useful help.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="creating-a-benchmark">
+<span id="id12"></span><h2>Creating a Benchmark<a class="headerlink" href="#creating-a-benchmark" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To create a benchmark, follow the instructions for creating a test and then add a QBENCHMARK macro to the test function that you want to benchmark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyFirstBenchmark</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">myFirstBenchmark</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">QString</span> <span class="n">string1</span><span class="p">;</span>
+        <span class="n">QString</span> <span class="n">string2</span><span class="p">;</span>
+        <span class="n">QBENCHMARK</span> <span class="p">{</span>
+            <span class="n">string1</span><span class="o">.</span><span class="n">localeAwareCompare</span><span class="p">(</span><span class="n">string2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The code inside the QBENCHMARK macro will be measured, and possibly also repeated several times in order to get an accurate measurement. This depends on the selected measurement back-end. Several back-ends are available. They can be selected on the command line:</p>
+<table border="1" class="docutils" id="id13">
+<colgroup>
+<col width="15%" />
+<col width="17%" />
+<col width="68%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Name</td>
+<td>Command-line Argument</td>
+<td>Availability</td>
+</tr>
+<tr class="row-even"><td>Walltime</td>
+<td>(default)</td>
+<td>All platforms</td>
+</tr>
+<tr class="row-odd"><td>CPU tick counter</td>
+<td>-tickcounter</td>
+<td>Windows, <span class="xref std std-ref">macOS</span> , Linux, many UNIX-like systems.</td>
+</tr>
+<tr class="row-even"><td>Event Counter</td>
+<td>-eventcounter</td>
+<td>All platforms</td>
+</tr>
+<tr class="row-odd"><td>Valgrind Callgrind</td>
+<td>-callgrind</td>
+<td>Linux (if installed)</td>
+</tr>
+<tr class="row-even"><td>Linux Perf</td>
+<td>-perf</td>
+<td>Linux</td>
+</tr>
+</tbody>
+</table>
+<p>In short, walltime is always available but requires many repetitions to get a useful result. Tick counters are usually available and can provide results with fewer repetitions, but can be susceptible to CPU frequency scaling issues. Valgrind provides exact results, but does not take I/O waits into account, and is only available on a limited number of platforms. Event counting is available on all platforms and it provides the number of events that were received by the event loop before they are sent to their corresponding targets (this might include non-Qt events).</p>
+<p>The Linux Performance Monitoring solution is available only on Linux and provides many different counters, which can be selected by passing an additional option <code class="docutils literal"><span class="pre">-perfcounter</span> <span class="pre">countername</span></code> , such as <code class="docutils literal"><span class="pre">-perfcounter</span> <span class="pre">cache-misses</span></code> , <code class="docutils literal"><span class="pre">-perfcounter</span> <span class="pre">branch-misses</span></code> , or <code class="docutils literal"><span class="pre">-perfcounter</span> <span class="pre">l1d-load-misses</span></code> . The default counter is <code class="docutils literal"><span class="pre">cpu-cycles</span></code> . The full list of counters can be obtained by running any benchmark executable with the option <code class="docutils literal"><span class="pre">-perfcounterlist</span></code> .</p>
+<p>See <a class="reference internal" href="qttestlib-tutorial5-example.html#chapter-5-writing-a-benchmark"><span class="std std-ref">Writing a Benchmark</span></a> in the Qt Test Tutorial for more benchmarking examples.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Audio Recorder Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Audio Recorder Example</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#displaying-the-window-and-audio-settings">Displaying the Window and Audio Settings</a></li>
+<li><a class="reference internal" href="#recording-audio">Recording Audio</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#audiolevel-cpp-example-file">audiolevel.cpp Example File</a></li>
+<li><a class="reference internal" href="#audiolevel-h-example-file">audiolevel.h Example File</a></li>
+<li><a class="reference internal" href="#audiorecorder-cpp-example-file">audiorecorder.cpp Example File</a></li>
+<li><a class="reference internal" href="#audiorecorder-h-example-file">audiorecorder.h Example File</a></li>
+<li><a class="reference internal" href="#audiorecorder-ui-example-file">audiorecorder.ui Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#audiorecorder-pro-example-file">audiorecorder.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="audio-recorder-example">
+<span id="id1"></span><h1>Audio Recorder Example<a class="headerlink" href="#audio-recorder-example" title="Permalink to this headline">¶</a></h1>
+<p>Discovering the available devices and supported codecs</p>
+<blockquote>
+<div><p>Discovering the available devices and supported codecs.</p>
+<p><em>Audio Recorder</em> demonstrates how to identify the available devices and supported codecs, and the use of <a class="reference internal" href="../PySide2/QtMultimedia/QAudioRecorder.html#PySide2.QtMultimedia.QAudioRecorder" title="PySide2.QtMultimedia.QAudioRecorder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QAudioRecorder</span></code></a> class.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="displaying-the-window-and-audio-settings">
+<span id="id3"></span><h2>Displaying the Window and Audio Settings<a class="headerlink" href="#displaying-the-window-and-audio-settings" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We display a window for the user to select the appropriate audio input, codec, container, and sample rate. Allow a setting of either quality or bitrate. Finally, the output file can be selected and recording can be started.</p>
+<p>The lists are setup using the <code class="xref py py-func docutils literal"><span class="pre">QAudioRecorder.audioInputs()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QAudioRecorder.supportedAudioCodecs()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QAudioRecorder.supportedContainers()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QAudioRecorder.supportedContainers()</span></code> , and <code class="xref py py-func docutils literal"><span class="pre">QAudioRecorder.supportedAudioSampleRates()</span></code> methods. The quality slider is setup from 0 (zero) to <code class="xref py py-attr docutils literal"><span class="pre">QMultimedia.VeryHighQuality</span></code> with a default value of <code class="xref py py-attr docutils literal"><span class="pre">QMultimedia.NormalQuality</span></code> , while the bitrates are hardcoded into the list.</p>
+</div></blockquote>
+</div>
+<div class="section" id="recording-audio">
+<span id="id4"></span><h2>Recording Audio<a class="headerlink" href="#recording-audio" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To record audio we simply create a <a class="reference internal" href="../PySide2/QtMultimedia/QAudioRecorder.html#PySide2.QtMultimedia.QAudioRecorder" title="PySide2.QtMultimedia.QAudioRecorder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QAudioRecorder</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">audioRecorder</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAudioRecorder</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And setup the lists as described above. The text on the record and pause buttons are toggled depending on the <code class="xref py py-attr docutils literal"><span class="pre">state</span></code> of the <code class="docutils literal"><span class="pre">audioRecorder</span></code> object. This means that if the state is <code class="xref py py-attr docutils literal"><span class="pre">QMediaRecorder.StoppedState</span></code> then the button text will be “Record” and “Pause”. In <code class="xref py py-attr docutils literal"><span class="pre">QMediaRecorder.RecordingState</span></code> the record button will have the text “Stop”, and in <code class="xref py py-attr docutils literal"><span class="pre">QMediaRecorder.PausedState</span></code> the pause button will have the text “Resume”.</p>
+<p>Pressing the buttons will also result in a toggle based on the state. If recording is stopped, then pressing the record button will setup the <a class="reference internal" href="../PySide2/QtMultimedia/QAudioEncoderSettings.html#PySide2.QtMultimedia.QAudioEncoderSettings" title="PySide2.QtMultimedia.QAudioEncoderSettings"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QAudioEncoderSettings</span></code></a> based on the values of the selection lists, will set the encoding settings and container on the <code class="docutils literal"><span class="pre">audioRecorder</span></code> object, and start recording using the <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.record()</span></code> method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QAudioEncoderSettings settings;
+settings.setCodec(boxValue(ui-&gt;audioCodecBox).toString());
+settings.setSampleRate(boxValue(ui-&gt;sampleRateBox).toInt());
+settings.setBitRate(boxValue(ui-&gt;bitrateBox).toInt());
+settings.setQuality(QMultimedia::EncodingQuality(ui-&gt;qualitySlider-&gt;value()));
+settings.setEncodingMode(ui-&gt;constantQualityRadioButton-&gt;isChecked() ?
+                         QMultimedia::ConstantQualityEncoding :
+                         QMultimedia::ConstantBitRateEncoding);
+
+QString container = boxValue(ui-&gt;containerBox).toString();
+
+audioRecorder-&gt;setEncodingSettings(settings, QVideoEncoderSettings(), container);
+audioRecorder-&gt;record();
+</pre></div>
+</div>
+<p>While recording, the status bar of the application is updated with duration information from the <code class="xref py py-func docutils literal"><span class="pre">QMediaRecorder.durationChanged()</span></code> signal from the <code class="docutils literal"><span class="pre">audioRecorder</span></code> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">statusbar</span><span class="o">-&gt;</span><span class="n">showMessage</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Recorded %1 sec&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">duration</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="audiolevel-cpp-example-file">
+<h1>audiolevel.cpp Example File<a class="headerlink" href="#audiolevel-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audiolevel-h-example-file">
+<h1>audiolevel.h Example File<a class="headerlink" href="#audiolevel-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audiorecorder-cpp-example-file">
+<h1>audiorecorder.cpp Example File<a class="headerlink" href="#audiorecorder-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audiorecorder-h-example-file">
+<h1>audiorecorder.h Example File<a class="headerlink" href="#audiorecorder-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audiorecorder-ui-example-file">
+<h1>audiorecorder.ui Example File<a class="headerlink" href="#audiorecorder-ui-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audiorecorder-pro-example-file">
+<h1>audiorecorder.pro Example File<a class="headerlink" href="#audiorecorder-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

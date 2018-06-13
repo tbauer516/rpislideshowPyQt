@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>GeoFlickr (QML) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GeoFlickr (QML)</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#retrieving-the-current-position">Retrieving the Current Position</a></li>
+<li><a class="reference internal" href="#using-the-current-position">Using the Current Position</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flickr-90-qml-example-file">flickr-90.qml Example File</a></li>
+<li><a class="reference internal" href="#flickr-qml-example-file">flickr.qml Example File</a></li>
+<li><a class="reference internal" href="#qmllocationflickr-cpp-example-file">qmllocationflickr.cpp Example File</a></li>
+<li><a class="reference internal" href="#progress-qml-example-file">Progress.qml Example File</a></li>
+<li><a class="reference internal" href="#restmodel-qml-example-file">RestModel.qml Example File</a></li>
+<li><a class="reference internal" href="#scrollbar-qml-example-file">ScrollBar.qml Example File</a></li>
+<li><a class="reference internal" href="#slider-qml-example-file">Slider.qml Example File</a></li>
+<li><a class="reference internal" href="#button-qml-example-file">Button.qml Example File</a></li>
+<li><a class="reference internal" href="#geotab-qml-example-file">GeoTab.qml Example File</a></li>
+<li><a class="reference internal" href="#griddelegate-qml-example-file">GridDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#imagedetails-qml-example-file">ImageDetails.qml Example File</a></li>
+<li><a class="reference internal" href="#listdelegate-qml-example-file">ListDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#titlebar-qml-example-file">TitleBar.qml Example File</a></li>
+<li><a class="reference internal" href="#toolbar-qml-example-file">ToolBar.qml Example File</a></li>
+<li><a class="reference internal" href="#flickr-qrc-example-file">flickr.qrc Example File</a></li>
+<li><a class="reference internal" href="#geoflickr-pro-example-file">geoflickr.pro Example File</a></li>
+<li><a class="reference internal" href="#geoflickr-qmlproject-example-file">geoflickr.qmlproject Example File</a></li>
+<li><a class="reference internal" href="#gloss-png-image-file">gloss.png Image File</a></li>
+<li><a class="reference internal" href="#lineedit-png-image-file">lineedit.png Image File</a></li>
+<li><a class="reference internal" href="#moon-png-image-file">moon.png Image File</a></li>
+<li><a class="reference internal" href="#quit-png-image-file">quit.png Image File</a></li>
+<li><a class="reference internal" href="#star-png-image-file">star.png Image File</a></li>
+<li><a class="reference internal" href="#stripes-png-image-file">stripes.png Image File</a></li>
+<li><a class="reference internal" href="#sun-png-image-file">sun.png Image File</a></li>
+<li><a class="reference internal" href="#titlebar-png-image-file">titlebar.png Image File</a></li>
+<li><a class="reference internal" href="#toolbutton-png-image-file">toolbutton.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geoflickr-qml">
+<span id="id1"></span><h1>GeoFlickr (QML)<a class="headerlink" href="#geoflickr-qml" title="Permalink to this headline">¶</a></h1>
+<p>GeoFlickr example shows how to use the user’s current position to fetch local content from a web service</p>
+<blockquote>
+<div><p>The GeoFlickr example shows how to use the user’s current position to fetch local content from a web service.</p>
+<p>This is a small example, illustrating one of the very core parts of the <span class="xref std std-ref">Qt Positioning</span> API: the ability to retrieve and use the user’s current geographic position.</p>
+<p>Key QML types shown in this example:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">PositionSource</span></li>
+<li><span class="xref std std-ref">XmlListModel</span></li>
+</ul>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="retrieving-the-current-position">
+<span id="id3"></span><h2>Retrieving the Current Position<a class="headerlink" href="#retrieving-the-current-position" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Retrieving the user’s current position is achieved using the <span class="xref std std-ref">PositionSource</span> type. In this example, we instantiate the <span class="xref std std-ref">PositionSource</span> as part of the GeoTab component (the floating “window” describing current position and status).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PositionSource</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">positionSource</span>
+    <span class="n">onPositionChanged</span><span class="p">:</span> <span class="p">{</span> <span class="n">planet</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;images/sun.png&quot;</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">onSourceErrorChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sourceError</span> <span class="o">==</span> <span class="n">PositionSource</span><span class="o">.</span><span class="n">NoError</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Source error: &quot;</span> <span class="o">+</span> <span class="n">sourceError</span><span class="p">)</span>
+        <span class="n">activityText</span><span class="o">.</span><span class="n">fadeOut</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">stop</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="n">onUpdateTimeout</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">activityText</span><span class="o">.</span><span class="n">fadeOut</span> <span class="o">=</span> <span class="n">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the “Locate and update” button is pressed, we first interrogate the <span class="xref std std-ref">PositionSource</span> to check if it has an available backend for positioning data. If it does not, we fall back to using a pre-recorded NMEA log for demonstration. We then instruct the <span class="xref std std-ref">PositionSource</span> to update.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Button</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">locateButton</span>
+    <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Locate &amp; update&quot;</span>
+    <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">positionSource</span><span class="o">.</span><span class="n">supportedPositioningMethods</span> <span class="o">===</span>
+                <span class="n">PositionSource</span><span class="o">.</span><span class="n">NoPositioningMethods</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">positionSource</span><span class="o">.</span><span class="n">nmeaSource</span> <span class="o">=</span> <span class="s2">&quot;nmealog.txt&quot;</span><span class="p">;</span>
+            <span class="n">sourceText</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;(filesource): &quot;</span> <span class="o">+</span> <span class="n">printableMethod</span><span class="p">(</span><span class="n">positionSource</span><span class="o">.</span><span class="n">supportedPositioningMethods</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">positionSource</span><span class="o">.</span><span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To share the new position data with the rest of the application, we use properties that we have created on the GeoTab component:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">property</span> <span class="n">variant</span> <span class="n">coordinate</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-the-current-position">
+<span id="id4"></span><h2>Using the Current Position<a class="headerlink" href="#using-the-current-position" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The longitude and latitude values retrieved here are eventually set on in properties on the RestModel component. The RestModel is an <span class="xref std std-ref">XmlListModel</span> , which retrieves XML data from a URL and creates a data model by performing XPath queries on it.</p>
+<p>In this case, it retrieves data from the Flickr REST API online, based on our current position</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">XmlListModel</span> <span class="p">{</span>
+    <span class="nb">property</span> <span class="n">variant</span> <span class="n">coordinate</span>
+
+    <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;https://api.flickr.com/services/rest/?&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;min_taken_date=2000-01-01+0:00:00&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;extras=date_taken&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;method=flickr.photos.search&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;per_page=30&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;sort=date-taken-desc&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;api_key=e36784df8a03fea04c22ed93318b291c&amp;&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;lat=&quot;</span> <span class="o">+</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span> <span class="o">+</span> <span class="s2">&quot;&amp;lon=&quot;</span> <span class="o">+</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span><span class="p">;</span>
+    <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;/rsp/photos/photo&quot;</span>
+
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;title&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@title/string()&quot;</span> <span class="p">}</span>
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;datetaken&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@datetaken/string()&quot;</span> <span class="p">}</span>
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;farm&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@farm/string()&quot;</span> <span class="p">}</span>
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@server/string()&quot;</span> <span class="p">}</span>
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@id/string()&quot;</span> <span class="p">}</span>
+    <span class="n">XmlRole</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;secret&quot;</span><span class="p">;</span> <span class="n">query</span><span class="p">:</span> <span class="s2">&quot;@secret/string()&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This model data is then shown in a variety of Qt Quick views to produce the example application.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="flickr-90-qml-example-file">
+<h1>flickr-90.qml Example File<a class="headerlink" href="#flickr-90-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="flickr-qml-example-file">
+<h1>flickr.qml Example File<a class="headerlink" href="#flickr-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmllocationflickr-cpp-example-file">
+<h1>qmllocationflickr.cpp Example File<a class="headerlink" href="#qmllocationflickr-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="progress-qml-example-file">
+<h1>Progress.qml Example File<a class="headerlink" href="#progress-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="restmodel-qml-example-file">
+<h1>RestModel.qml Example File<a class="headerlink" href="#restmodel-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scrollbar-qml-example-file">
+<h1>ScrollBar.qml Example File<a class="headerlink" href="#scrollbar-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="slider-qml-example-file">
+<h1>Slider.qml Example File<a class="headerlink" href="#slider-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="button-qml-example-file">
+<h1>Button.qml Example File<a class="headerlink" href="#button-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="geotab-qml-example-file">
+<h1>GeoTab.qml Example File<a class="headerlink" href="#geotab-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="griddelegate-qml-example-file">
+<h1>GridDelegate.qml Example File<a class="headerlink" href="#griddelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagedetails-qml-example-file">
+<h1>ImageDetails.qml Example File<a class="headerlink" href="#imagedetails-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="listdelegate-qml-example-file">
+<h1>ListDelegate.qml Example File<a class="headerlink" href="#listdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="titlebar-qml-example-file">
+<h1>TitleBar.qml Example File<a class="headerlink" href="#titlebar-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="toolbar-qml-example-file">
+<h1>ToolBar.qml Example File<a class="headerlink" href="#toolbar-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="flickr-qrc-example-file">
+<h1>flickr.qrc Example File<a class="headerlink" href="#flickr-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="geoflickr-pro-example-file">
+<h1>geoflickr.pro Example File<a class="headerlink" href="#geoflickr-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="geoflickr-qmlproject-example-file">
+<h1>geoflickr.qmlproject Example File<a class="headerlink" href="#geoflickr-qmlproject-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gloss-png-image-file">
+<h1>gloss.png Image File<a class="headerlink" href="#gloss-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="lineedit-png-image-file">
+<h1>lineedit.png Image File<a class="headerlink" href="#lineedit-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="moon-png-image-file">
+<h1>moon.png Image File<a class="headerlink" href="#moon-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="quit-png-image-file">
+<h1>quit.png Image File<a class="headerlink" href="#quit-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="star-png-image-file">
+<h1>star.png Image File<a class="headerlink" href="#star-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="stripes-png-image-file">
+<h1>stripes.png Image File<a class="headerlink" href="#stripes-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sun-png-image-file">
+<h1>sun.png Image File<a class="headerlink" href="#sun-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="titlebar-png-image-file">
+<h1>titlebar.png Image File<a class="headerlink" href="#titlebar-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="toolbutton-png-image-file">
+<h1>toolbutton.png Image File<a class="headerlink" href="#toolbutton-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Scene Graph &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Scene Graph</a><ul>
+<li><a class="reference internal" href="#the-scene-graph-in-qt-quick">The Scene Graph in Qt Quick</a></li>
+<li><a class="reference internal" href="#qt-quick-scene-graph-structure">Qt Quick Scene Graph Structure</a></li>
+<li><a class="reference internal" href="#nodes">Nodes</a></li>
+<li><a class="reference internal" href="#preprocessing">Preprocessing</a></li>
+<li><a class="reference internal" href="#node-ownership">Node Ownership</a></li>
+<li><a class="reference internal" href="#materials">Materials</a></li>
+<li><a class="reference internal" href="#convenience-nodes">Convenience Nodes</a></li>
+<li><a class="reference internal" href="#scene-graph-and-rendering">Scene Graph and Rendering</a></li>
+<li><a class="reference internal" href="#threaded-render-loop-threaded">Threaded Render Loop (“threaded”)</a></li>
+<li><a class="reference internal" href="#non-threaded-render-loops-basic-and-windows">Non-threaded Render Loops (“basic” and “windows”)</a></li>
+<li><a class="reference internal" href="#custom-control-over-rendering-with-qquickrendercontrol">Custom control over rendering with QQuickRenderControl</a></li>
+<li><a class="reference internal" href="#mixing-scene-graph-and-opengl">Mixing Scene Graph and OpenGL</a></li>
+<li><a class="reference internal" href="#custom-items-using-qpainter">Custom Items using QPainter</a></li>
+<li><a class="reference internal" href="#logging-support">Logging Support</a></li>
+<li><a class="reference internal" href="#scene-graph-backend">Scene Graph Backend</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-scene-graph">
+<span id="id1"></span><h1>Qt Quick Scene Graph<a class="headerlink" href="#qt-quick-scene-graph" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="the-scene-graph-in-qt-quick">
+<span id="id2"></span><h2>The Scene Graph in Qt Quick<a class="headerlink" href="#the-scene-graph-in-qt-quick" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Qt Quick 2 makes use of a dedicated scene graph based and a series of adaptations of which the default uses OpenGL ES 2.0 or OpenGL 2.0 for its rendering. Using a scene graph for graphics rather than the traditional imperative painting systems ( <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> and similar), means the scene to be rendered can be retained between frames and the complete set of primitives to render is known before rendering starts. This opens up for a number of optimizations, such as batch rendering to minimize state changes and discarding obscured primitives.</p>
+<p>For example, say a user-interface contains a list of ten items where each item has a background color, an icon and a text. Using the traditional drawing techniques, this would result in 30 draw calls and a similar amount of state changes. A scene graph, on the other hand, could reorganize the primitives to render such that all backgrounds are drawn in one call, then all icons, then all the text, reducing the total amount of draw calls to only 3. Batching and state change reduction like this can greatly improve performance on some hardware.</p>
+<p>The scene graph is closely tied to Qt Quick 2.0 and can not be used stand-alone. The scene graph is managed and rendered by the <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> class and custom Item types can add their graphical primitives into the scene graph through a call to <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> .</p>
+<p>The scene graph is a graphical representation of the Item scene, an independent structure that contains enough information to render all the items. Once it has been set up, it can be manipulated and rendered independently of the state of the items. On many platforms, the scene graph will even be rendered on a dedicated render thread while the GUI thread is preparing the next frame’s state.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Much of the information listed on this page is specific to the default OpenGL adaptation of the Qt Quick Scene graph. For more information about the different scene graph adaptations see <a class="reference internal" href="qtquick-visualcanvas-adaptations.html#scene-graph-adaptations"><span class="std std-ref">Scene Graph Adaptations</span></a> .</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="qt-quick-scene-graph-structure">
+<span id="id3"></span><h2>Qt Quick Scene Graph Structure<a class="headerlink" href="#qt-quick-scene-graph-structure" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The scene graph is composed of a number of predefined node types, each serving a dedicated purpose. Although we refer to it as a scene graph, a more precise definition is node tree. The tree is built from <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> types in the QML scene and internally the scene is then processed by a renderer which draws the scene. The nodes themselves do <strong>not</strong> contain any active drawing code nor virtual <code class="docutils literal"><span class="pre">paint()</span></code> function.</p>
+<p>Even though the node tree is mostly built internally by the existing Qt Quick QML types, it is possible for users to also add complete subtrees with their own content, including subtrees that represent 3D models.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nodes">
+<span id="id4"></span><h2>Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The most important node for users is the <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> . It is used to define custom graphics by defining its geometry and material. The geometry is defined using <a class="reference internal" href="../PySide2/QtQuick/QSGGeometry.html#PySide2.QtQuick.QSGGeometry" title="PySide2.QtQuick.QSGGeometry"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometry</span></code></a> and describes the shape or mesh of the graphical primitive. It can be a line, a rectangle, a polygon, many disconnected rectangles, or complex 3D mesh. The material defines how the pixels in this shape are filled.</p>
+<p>A node can have any number of children and geometry nodes will be rendered so they appear in child-order with parents behind their children.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This does not say anything about the actual rendering order in the renderer. Only the visual output is guaranteed.</p>
+</div>
+<p>The available nodes are:</p>
+<p>Custom nodes are added to the scene graph by subclassing <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> and setting the <code class="xref py py-attr docutils literal"><span class="pre">QQuickItem.ItemHasContents</span></code> flag.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is crucial that OpenGL operations and interaction with the scene graph happens exclusively on the render thread, primarily during the updatePaintNode() call. The rule of thumb is to only use classes with the “QSG” prefix inside the <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> function.</p>
+</div>
+<p>For more details, see the <a class="reference internal" href="qtquick-scenegraph-customgeometry-example.html#scene-graph-custom-geometry"><span class="std std-ref">Scene Graph - Custom Geometry</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="preprocessing">
+<span id="id5"></span><h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Nodes have a virtual <code class="xref py py-func docutils literal"><span class="pre">QSGNode.preprocess()</span></code> function, which will be called before the scene graph is rendered. Node subclasses can set the flag <code class="xref py py-attr docutils literal"><span class="pre">QSGNode.UsePreprocess</span></code> and override the <code class="xref py py-func docutils literal"><span class="pre">QSGNode.preprocess()</span></code> function to do final preparation of their node. For example, dividing a bezier curve into the correct level of detail for the current scale factor or updating a section of a texture.</div></blockquote>
+</div>
+<div class="section" id="node-ownership">
+<span id="id6"></span><h2>Node Ownership<a class="headerlink" href="#node-ownership" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Ownership of the nodes is either done explicitly by the creator or by the scene graph by setting the flag <code class="xref py py-attr docutils literal"><span class="pre">QSGNode.OwnedByParent</span></code> . Assigning ownership to the scene graph is often preferable as it simplifies cleanup when the scene graph lives outside the GUI thread.</div></blockquote>
+</div>
+<div class="section" id="materials">
+<span id="id7"></span><h2>Materials<a class="headerlink" href="#materials" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The material describes how the interior of a geometry in a <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> is filled. It encapsulates an OpenGL shader program and provides ample flexibility in what can be achieved, though most of the Qt Quick items themselves only use very basic materials, such as solid color and texture fills.</p>
+<p>For users who just want to apply custom shading to a QML Item type, it is possible to do this directly in QML using the <span class="xref std std-ref">ShaderEffect</span> type.</p>
+<p>Below is a complete list of material classes:</p>
+<p>For more details, see the <a class="reference internal" href="qtquick-scenegraph-simplematerial-example.html#scene-graph-simple-material"><span class="std std-ref">Scene Graph - Simple Material</span></a></p>
+</div></blockquote>
+</div>
+<div class="section" id="convenience-nodes">
+<span id="id8"></span><h2>Convenience Nodes<a class="headerlink" href="#convenience-nodes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The scene graph API is very low-level and focuses on performance rather than convenience. Writing custom geometries and materials from scratch, even the most basic ones, requires a non-trivial amount of code. For this reason, the API includes a few convenience classes to make the most common custom nodes readily available.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../PySide2/QtQuick/QSGSimpleRectNode.html#PySide2.QtQuick.QSGSimpleRectNode" title="PySide2.QtQuick.QSGSimpleRectNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGSimpleRectNode</span></code></a> - a <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> subclass which defines a rectangular geometry with a solid color material.</li>
+<li><a class="reference internal" href="../PySide2/QtQuick/QSGSimpleTextureNode.html#PySide2.QtQuick.QSGSimpleTextureNode" title="PySide2.QtQuick.QSGSimpleTextureNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGSimpleTextureNode</span></code></a> - a <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> subclass which defines a rectangular geometry with a texture material.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="scene-graph-and-rendering">
+<span id="id9"></span><h2>Scene Graph and Rendering<a class="headerlink" href="#scene-graph-and-rendering" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The rendering of the scene graph happens internally in the <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> class, and there is no public API to access it. There are, however, a few places in the rendering pipeline where the user can attach application code. This can be used to add custom scene graph content or render raw OpenGL content. The integration points are defined by the render loop.</p>
+<p>For detailed description of how the scene graph renderer for OpenGL works, see <a class="reference internal" href="qtquick-visualcanvas-scenegraph-renderer.html#qt-quick-scene-graph-opengl-renderer"><span class="std std-ref">Qt Quick Scene Graph OpenGL Renderer</span></a> .</p>
+<p>There are three render loop variants available: <code class="docutils literal"><span class="pre">basic</span></code> , <code class="docutils literal"><span class="pre">windows</span></code> , and <code class="docutils literal"><span class="pre">threaded</span></code> . Out of these, <code class="docutils literal"><span class="pre">basic</span></code> and <code class="docutils literal"><span class="pre">windows</span></code> are single-threaded, while <code class="docutils literal"><span class="pre">threaded</span></code> performs scene graph rendering on a dedicated thread. Qt attempts to choose a suitable loop based on the platform and possibly the graphics drivers in use. When this is not satisfactory, or for testing purposes, the environment variable <code class="docutils literal"><span class="pre">QSG_RENDER_LOOP</span></code> can be used to force the usage of a given loop. To verify which render loop is in use, enable the <code class="docutils literal"><span class="pre">qt.scenegraph.general</span></code> <code class="xref py py-class docutils literal"><span class="pre">logging</span> <span class="pre">category</span></code> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">threaded</span></code> and <code class="docutils literal"><span class="pre">windows</span></code> render loops rely on the OpenGL implementation for throttling by requesting a swap interval of 1. Some graphics drivers allow users to override this setting and turn it off, ignoring Qt’s request. Without blocking in the swap buffers operation (or elsewhere), the render loop will run animations too fast and spin the CPU at 100%. If a system is known to be unable to provide vsync-based throttling, use the <code class="docutils literal"><span class="pre">basic</span></code> render loop instead by setting <code class="docutils literal"><span class="pre">QSG_RENDER_LOOP=basic</span></code> in the environment.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="threaded-render-loop-threaded">
+<span id="id10"></span><h2>Threaded Render Loop (“threaded”)<a class="headerlink" href="#threaded-render-loop-threaded" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>On many configurations, the scene graph rendering will happen on a dedicated render thread. This is done to increase parallelism of multi-core processors and make better use of stall times such as waiting for a blocking swap buffer call. This offers significant performance improvements, but imposes certain restrictions on where and when interaction with the scene graph can happen.</p>
+<p>The following is a simple outline of how a frame gets composed with the threaded render loop.</p>
+<ol class="arabic simple">
+<li>While the render thread is rendering, the GUI is free to advance animations, process events, etc.</li>
+</ol>
+<p>The threaded renderer is currently used by default on Windows with opengl32.dll, Linux with non-Mesa based drivers, <span class="xref std std-ref">macOS</span> , mobile platforms, and Embedded Linux with EGLFS but this is subject to change. It is possible to force use of the threaded renderer by setting <code class="docutils literal"><span class="pre">QSG_RENDER_LOOP=threaded</span></code> in the environment.</p>
+</div></blockquote>
+</div>
+<div class="section" id="non-threaded-render-loops-basic-and-windows">
+<span id="id11"></span><h2>Non-threaded Render Loops (“basic” and “windows”)<a class="headerlink" href="#non-threaded-render-loops-basic-and-windows" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The non-threaded render loop is currently used by default on Windows with ANGLE or a non-default opengl32 implementation and Linux with Mesa drivers. For the latter this is mostly a precautionary measure, as not all combinations of OpenGL drivers and windowing systems have been tested. At the same time implementations like ANGLE or Mesa llvmpipe are not able to function properly with threaded rendering at all so not using threaded rendering is essential for these.</p>
+<p>By default <code class="docutils literal"><span class="pre">windows</span></code> is used for non-threaded rendering on Windows with ANGLE, while <code class="docutils literal"><span class="pre">basic</span></code> is used for all other platforms when non-threaded rendering is needed.</p>
+<p>Even when using the non-threaded render loop, you should write your code as if you are using the threaded renderer, as failing to do so will make the code non-portable.</p>
+<p>The following is a simplified illustration of the frame rendering sequence in the non-threaded renderer.</p>
+</div></blockquote>
+</div>
+<div class="section" id="custom-control-over-rendering-with-qquickrendercontrol">
+<span id="id12"></span><h2>Custom control over rendering with QQuickRenderControl<a class="headerlink" href="#custom-control-over-rendering-with-qquickrendercontrol" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>When using <a class="reference internal" href="../PySide2/QtQuick/QQuickRenderControl.html#PySide2.QtQuick.QQuickRenderControl" title="PySide2.QtQuick.QQuickRenderControl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickRenderControl</span></code></a> , the responsibility for driving the rendering loop is transferred to the application. In this case no built-in render loop is used. Instead, it is up to the application to invoke the polish, synchronize and rendering steps at the appropriate time. It is possible to implement either a threaded or non-threaded behavior similar to the ones shown above.</div></blockquote>
+</div>
+<div class="section" id="mixing-scene-graph-and-opengl">
+<span id="id13"></span><h2>Mixing Scene Graph and OpenGL<a class="headerlink" href="#mixing-scene-graph-and-opengl" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The scene graph offers two methods for integrating OpenGL content: by calling OpenGL commands directly and by creating a textured node in the scene graph.</p>
+<p>By connecting to the <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.beforeRendering()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.afterRendering()</span></code> signals, applications can make OpenGL calls directly into the same context as the scene graph is rendering to. As the signal names indicate, the user can then render OpenGL content either under a Qt Quick scene or over it. The benefit of integrating in this manner is that no extra framebuffer nor memory is needed to perform the rendering. The downside is that Qt Quick decides when to call the signals and this is the only time the OpenGL application is allowed to draw.</p>
+<p>The <a class="reference internal" href="qtquick-scenegraph-openglunderqml-example.html#scene-graph-opengl-under-qml"><span class="std std-ref">Scene Graph - OpenGL Under QML</span></a> example gives an example on how to use these signals.</p>
+<p>The other alternative is to create a <a class="reference internal" href="../PySide2/QtQuick/QQuickFramebufferObject.html#PySide2.QtQuick.QQuickFramebufferObject" title="PySide2.QtQuick.QQuickFramebufferObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickFramebufferObject</span></code></a> , render into it, and let it be displayed in the scene graph as a texture. The <span class="xref std std-ref">Scene Graph - Rendering FBOs</span> example shows how this can be done. It is also possible to combine multiple rendering contexts and multiple threads to create content to be displayed in the scene graph. The <span class="xref std std-ref">Scene Graph - Rendering FBOs in a thread</span> examples show how this can be done.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When mixing OpenGL content with scene graph rendering, it is important the application does not leave the OpenGL context in a state with buffers bound, attributes enabled, special values in the z-buffer or stencil-buffer or similar. Doing so can result in unpredictable behavior.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The OpenGL rendering code must be thread aware, as the rendering might be happening outside the GUI thread.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="custom-items-using-qpainter">
+<span id="id14"></span><h2>Custom Items using QPainter<a class="headerlink" href="#custom-items-using-qpainter" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> provides a subclass, <a class="reference internal" href="../PySide2/QtQuick/QQuickPaintedItem.html#PySide2.QtQuick.QQuickPaintedItem" title="PySide2.QtQuick.QQuickPaintedItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickPaintedItem</span></code></a> , which allows the users to render content using <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> .</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Using <a class="reference internal" href="../PySide2/QtQuick/QQuickPaintedItem.html#PySide2.QtQuick.QQuickPaintedItem" title="PySide2.QtQuick.QQuickPaintedItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickPaintedItem</span></code></a> uses an indirect 2D surface to render its content, either using software rasterization or using an OpenGL framebuffer object (FBO), so the rendering is a two-step operation. First rasterize the surface, then draw the surface. Using scene graph API directly is always significantly faster.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="logging-support">
+<span id="id15"></span><h2>Logging Support<a class="headerlink" href="#logging-support" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The scene graph has support for a number of logging categories. These can be useful in tracking down both performance issues and bugs in addition to being helpful to Qt contributors.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.time.texture</span></code> - logs the time spent doing texture uploads</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.time.compilation</span></code> - logs the time spent doing shader compilation</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.time.renderer</span></code> - logs the time spent in the various steps of the renderer</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.time.renderloop</span></code> - logs the time spent in the various steps of the render loop</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.time.glyph</span></code> - logs the time spent preparing distance field glyphs</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.general</span></code> - logs general information about various parts of the scene graph and the graphics stack</li>
+<li><code class="docutils literal"><span class="pre">qt.scenegraph.renderloop</span></code> - creates a detailed log of the various stages involved in rendering. This log mode is primarily useful for developers working on Qt.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="scene-graph-backend">
+<span id="id16"></span><h2>Scene Graph Backend<a class="headerlink" href="#scene-graph-backend" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In addition to the public API, the scene graph has an adaptation layer which opens up the implementation to do hardware specific adaptations. This is an undocumented, internal and private plugin API, which lets hardware adaptation teams make the most of their hardware. It includes:</p>
+<ul class="simple">
+<li>Custom textures; specifically the implementation of <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.createTextureFromImage()</span></code> and the internal representation of the texture used by <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> and <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">BorderImage</span></a> types.</li>
+<li>Custom renderer; the adaptation layer lets the plugin decide how the scene graph is traversed and rendered, making it possible to optimize the rendering algorithm for a specific hardware or to make use of extensions which improve performance.</li>
+<li>Custom scene graph implementation of many of the default QML types, including its text and font rendering.</li>
+<li>Custom animation driver; allows the animation system to hook into the low-level display vertical refresh to get smooth rendering.</li>
+<li>Custom render loop; allows better control over how QML deals with multiple windows.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

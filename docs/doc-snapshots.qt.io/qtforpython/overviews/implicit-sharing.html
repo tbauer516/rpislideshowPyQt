@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Implicit Sharing &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Implicit Sharing</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#implicit-sharing-in-detail">Implicit Sharing in Detail</a></li>
+<li><a class="reference internal" href="#list-of-classes">List of Classes</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="implicit-sharing">
+<span id="id1"></span><h1>Implicit Sharing<a class="headerlink" href="#implicit-sharing" title="Permalink to this headline">¶</a></h1>
+<p>Reference counting for fast copying</p>
+<blockquote>
+<div><p id="implicitly-shared-classes"><span id="shallow-copy"></span><span id="deep-copy"></span>Reference counting for fast copying.</p>
+<p>Many C++ classes in Qt use implicit data sharing to maximize resource usage and minimize copying. Implicitly shared classes are both safe and efficient when passed as arguments, because only a pointer to the data is passed around, and the data is copied only if and when a function writes to it, i.e., <em>copy-on-write</em> .</p>
+</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A shared class consists of a pointer to a shared data block that contains a reference count and the data.</p>
+<p>When a shared object is created, it sets the reference count to 1. The reference count is incremented whenever a new object references the shared data, and decremented when the object dereferences the shared data. The shared data is deleted when the reference count becomes zero.</p>
+<p id="id4">When dealing with shared objects, there are two ways of copying an object. We usually speak about <em>deep</em> and <em>shallow</em> copies. A deep copy implies duplicating an object. A shallow copy is a reference copy, i.e. just a pointer to a shared data block. Making a deep copy can be expensive in terms of memory and CPU. Making a shallow copy is very fast, because it only involves setting a pointer and incrementing the reference count.</p>
+<p>Object assignment (with operator=()) for implicitly shared objects is implemented using shallow copies.</p>
+<p>The benefit of sharing is that a program does not need to duplicate data unnecessarily, which results in lower memory use and less copying of data. Objects can easily be assigned, sent as function arguments, and returned from functions.</p>
+<p>Implicit sharing mostly takes place behind the scenes; the programmer rarely needs to worry about it. However, Qt’s container iterators have different behavior than those from the STL. Read <span class="xref std std-ref">Implicit sharing iterator problem</span> .</p>
+<p>In multithreaded applications, implicit sharing takes place, as explained in Threads and Implicitly Shared Classes.</p>
+<p>When implementing your own implicitly shared classes, use the <code class="xref py py-class docutils literal"><span class="pre">QSharedData</span></code> and <code class="xref py py-class docutils literal"><span class="pre">QSharedDataPointer</span></code> classes.</p>
+</div></blockquote>
+</div>
+<div class="section" id="implicit-sharing-in-detail">
+<span id="id5"></span><h2>Implicit Sharing in Detail<a class="headerlink" href="#implicit-sharing-in-detail" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Implicit sharing automatically detaches the object from a shared block if the object is about to change and the reference count is greater than one. (This is often called <em>copy-on-write</em> or <em>value semantics</em> .)</p>
+<p>An implicitly shared class has control of its internal data. In any member functions that modify its data, it automatically detaches before modifying the data. Notice, however, the special case with container iterators; see <span class="xref std std-ref">Implicit sharing iterator problem</span> .</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> class, which uses implicit sharing, detaches from the shared data in all member functions that change the internal data.</p>
+<p>Code fragment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">QPen</span><span class="p">::</span><span class="n">setStyle</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PenStyle</span> <span class="n">style</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">detach</span><span class="p">();</span>           <span class="o">//</span> <span class="n">detach</span> <span class="kn">from</span> <span class="nn">common</span> <span class="n">data</span>
+    <span class="n">d</span><span class="o">-&gt;</span><span class="n">style</span> <span class="o">=</span> <span class="n">style</span><span class="p">;</span>   <span class="o">//</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">style</span> <span class="n">member</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">QPen</span><span class="p">::</span><span class="n">detach</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">-&gt;</span><span class="n">ref</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">...</span>             <span class="o">//</span> <span class="n">perform</span> <span class="n">a</span> <span class="n">deep</span> <span class="n">copy</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="list-of-classes">
+<span id="id6"></span><h2>List of Classes<a class="headerlink" href="#list-of-classes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The classes listed below automatically detach from common data if an object is about to be changed. The programmer will not even notice that the objects are shared. Thus you should treat separate instances of them as separate objects. They will always behave as separate objects but with the added benefit of sharing data whenever possible. For this reason, you can pass instances of these classes as arguments to functions by value without concern for the copying overhead.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPixmap</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">;</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;image.bmp&quot;</span><span class="p">);</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>                        <span class="o">//</span> <span class="n">p1</span> <span class="ow">and</span> <span class="n">p2</span> <span class="n">share</span> <span class="n">data</span>
+
+<span class="n">QPainter</span> <span class="n">paint</span><span class="p">;</span>
+<span class="n">paint</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p2</span><span class="p">);</span>               <span class="o">//</span> <span class="n">cuts</span> <span class="n">p2</span> <span class="n">loose</span> <span class="kn">from</span> <span class="nn">p1</span>
+<span class="n">paint</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;Hi&quot;</span><span class="p">);</span>
+<span class="n">paint</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal"><span class="pre">p1</span></code> and <code class="docutils literal"><span class="pre">p2</span></code> share data until <code class="xref py py-func docutils literal"><span class="pre">QPainter.begin()</span></code> is called for <code class="docutils literal"><span class="pre">p2</span></code> , because painting a pixmap will modify it.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be careful with copying an implicitly shared container ( <code class="xref py py-class docutils literal"><span class="pre">QMap</span></code> , <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> , etc.) while you use <span class="xref std std-ref">STL-style iterator</span> . See <span class="xref std std-ref">Implicit sharing iterator problem</span> .</p>
+</div>
+<span class="target" id="id7"></span></div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

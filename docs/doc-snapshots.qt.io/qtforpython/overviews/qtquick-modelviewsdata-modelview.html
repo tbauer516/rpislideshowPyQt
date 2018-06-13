@@ -1,0 +1,536 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Models and Views in Qt Quick &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Models and Views in Qt Quick</a><ul>
+<li><a class="reference internal" href="#displaying-data-with-views">Displaying Data with Views</a></li>
+<li><a class="reference internal" href="#decorating-views">Decorating Views</a></li>
+<li><a class="reference internal" href="#mouse-and-touch-handling">Mouse and Touch Handling</a></li>
+<li><a class="reference internal" href="#listview-sections">ListView Sections</a></li>
+<li><a class="reference internal" href="#view-delegates">View Delegates</a></li>
+<li><a class="reference internal" href="#accessing-views-and-models-from-delegates">Accessing Views and Models from Delegates</a></li>
+<li><a class="reference internal" href="#models">Models</a></li>
+<li><a class="reference internal" href="#list-model">List Model</a></li>
+<li><a class="reference internal" href="#xml-model">XML Model</a></li>
+<li><a class="reference internal" href="#object-model">Object Model</a></li>
+<li><a class="reference internal" href="#integers-as-models">Integers as Models</a></li>
+<li><a class="reference internal" href="#object-instances-as-models">Object Instances as Models</a></li>
+<li><a class="reference internal" href="#c-data-models">C++ Data Models</a></li>
+<li><a class="reference internal" href="#repeaters">Repeaters</a></li>
+<li><a class="reference internal" href="#using-transitions">Using Transitions</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="models-and-views-in-qt-quick">
+<span id="id1"></span><h1>Models and Views in Qt Quick<a class="headerlink" href="#models-and-views-in-qt-quick" title="Permalink to this headline">¶</a></h1>
+<p>How to display and form data in Qt Quick</p>
+<blockquote>
+<div><p id="qml-c-models"><span id="qml-data-models"></span><span id="qml-view-delegate"></span><span id="qtquick-views"></span>how to display and form data in Qt Quick</p>
+<p>Simply put, applications need to form data and display the data. Qt Quick has the notion of <em>models</em> , <em>views</em> , and <em>delegates</em> to display data. They modularize the visualization of data in order to give the developer or designer control over the different aspects of the data. A developer can swap a list view with a grid view with little changes to the data. Similarly, encapsulating an instance of the data in a delegate allows the developer to dictate how to present or handle the data.</p>
+<ul class="simple">
+<li><strong>Model</strong> - contains the data and its structure. There are several QML types for creating models.</li>
+<li><strong>View</strong> - a container that displays the data. The view might display the data in a list or a grid.</li>
+<li><strong>Delegate</strong> - dictates how the data should appear in the view. The delegate takes each data in the model and encapsulates it. The data is accessible through the delegate.</li>
+</ul>
+<p>To visualize data, bind the view’s <code class="docutils literal"><span class="pre">model</span></code> property to a model and the <code class="docutils literal"><span class="pre">delegate</span></code> property to a component or another compatible type.</p>
+</div></blockquote>
+<div class="section" id="displaying-data-with-views">
+<span id="id2"></span><h2>Displaying Data with Views<a class="headerlink" href="#displaying-data-with-views" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Views are containers for collections of items. They are feature-rich and can be customizable to meet style or behavior requirements.</p>
+<p id="id3">A set of standard views are provided in the basic set of Qt Quick graphical types:</p>
+<ul class="simple">
+<li><span class="xref std std-ref">ListView</span> - arranges items in a horizontal or vertical list</li>
+<li><span class="xref std std-ref">GridView</span> - arranges items in a grid within the available space</li>
+<li><span class="xref std std-ref">PathView</span> - arranges items on a path</li>
+</ul>
+<p>These types have properties and behaviors exclusive to each type. Visit their respective documentation for more information.</p>
+</div></blockquote>
+</div>
+<div class="section" id="decorating-views">
+<span id="id4"></span><h2>Decorating Views<a class="headerlink" href="#decorating-views" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Views allow visual customization through <em>decoration</em> properties such as the <code class="docutils literal"><span class="pre">header</span></code> , <code class="docutils literal"><span class="pre">footer</span></code> , and <code class="docutils literal"><span class="pre">section</span></code> properties. By binding an object, usually another visual object, to these properties, the views are decoratable. A footer may include a <span class="xref std std-ref">Rectangle</span> type showcasing borders or a header that displays a logo on top of the list.</p>
+<p>Suppose that a specific club wants to decorate its members list with its brand colors. A member list is in a <code class="docutils literal"><span class="pre">model</span></code> and the <code class="docutils literal"><span class="pre">delegate</span></code> will display the model’s content.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">nameModel</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Jane&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Harry&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Wendy&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">nameDelegate</span>
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">name</span><span class="p">;</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">24</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The club may decorate the members list by binding visual objects to the <code class="docutils literal"><span class="pre">header</span></code> and <code class="docutils literal"><span class="pre">footer</span></code> properties. The visual object may be defined inline, in another file, or in a Component type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">clip</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">nameModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">nameDelegate</span>
+    <span class="n">header</span><span class="p">:</span> <span class="n">bannercomponent</span>
+    <span class="n">footer</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">30</span><span class="p">;</span>
+        <span class="n">gradient</span><span class="p">:</span> <span class="n">clubcolors</span>
+    <span class="p">}</span>
+    <span class="n">highlight</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightgray&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Component</span> <span class="p">{</span>     <span class="o">//</span><span class="n">instantiated</span> <span class="n">when</span> <span class="n">header</span> <span class="ow">is</span> <span class="n">processed</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">bannercomponent</span>
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">banner</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">50</span>
+        <span class="n">gradient</span><span class="p">:</span> <span class="n">clubcolors</span>
+        <span class="n">border</span> <span class="p">{</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#9EDDF2&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+        <span class="n">Text</span> <span class="p">{</span>
+            <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+            <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Club Members&quot;</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">32</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">Gradient</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">clubcolors</span>
+    <span class="n">GradientStop</span> <span class="p">{</span> <span class="n">position</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#8EE2FE&quot;</span><span class="p">}</span>
+    <span class="n">GradientStop</span> <span class="p">{</span> <span class="n">position</span><span class="p">:</span> <span class="mf">0.66</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#7ED2EE&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mouse-and-touch-handling">
+<span id="id5"></span><h2>Mouse and Touch Handling<a class="headerlink" href="#mouse-and-touch-handling" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The views handle dragging and flicking of their content, however they do not handle touch interaction with the individual delegates. In order for the delegates to react to touch input, e.g. to set the <code class="docutils literal"><span class="pre">currentIndex</span></code> , a <span class="xref std std-ref">MouseArea</span> with the appropriate touch handling logic must be provided by the delegate.</p>
+<p>Note that if <code class="docutils literal"><span class="pre">highlightRangeMode</span></code> is set to <code class="docutils literal"><span class="pre">StrictlyEnforceRange</span></code> the currentIndex will be affected by dragging/flicking the view, since the view will always ensure that the <code class="docutils literal"><span class="pre">currentIndex</span></code> is within the highlight range specified.</p>
+</div></blockquote>
+</div>
+<div class="section" id="listview-sections">
+<span id="id6"></span><h2>ListView Sections<a class="headerlink" href="#listview-sections" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><span class="xref std std-ref">ListView</span> contents may be grouped into <em>sections</em> , where related list items are labeled according to their sections. Further, the sections may be decorated with <a class="reference internal" href="#models-and-views-in-qt-quick"><span class="std std-ref">delegates</span></a> .</p>
+<p>A list may contain a list indicating people’s names and the team on which team the person belongs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">nameModel</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">;</span> <span class="n">team</span><span class="p">:</span> <span class="s2">&quot;Crypto&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">;</span> <span class="n">team</span><span class="p">:</span> <span class="s2">&quot;Crypto&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Jane&quot;</span><span class="p">;</span> <span class="n">team</span><span class="p">:</span> <span class="s2">&quot;QA&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Victor&quot;</span><span class="p">;</span> <span class="n">team</span><span class="p">:</span> <span class="s2">&quot;QA&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Wendy&quot;</span><span class="p">;</span> <span class="n">team</span><span class="p">:</span> <span class="s2">&quot;Graphics&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">nameDelegate</span>
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">name</span><span class="p">;</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">24</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">left</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">leftMargin</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <span class="xref std std-ref">ListView</span> type has the <code class="docutils literal"><span class="pre">section</span></code> attached property that can combine adjacent and related types into a section. The <code class="docutils literal"><span class="pre">section.property</span></code> determines which list type property to use as sections. The <code class="docutils literal"><span class="pre">section.criteria</span></code> can dictate how the section names are displayed and the <code class="docutils literal"><span class="pre">section.delegate</span></code> is similar to the views’ <a class="reference internal" href="#models-and-views-in-qt-quick"><span class="std std-ref">delegate</span></a> property.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">nameModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">nameDelegate</span>
+    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">highlight</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="p">}</span>
+    <span class="n">section</span> <span class="p">{</span>
+        <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;team&quot;</span>
+        <span class="n">criteria</span><span class="p">:</span> <span class="n">ViewSection</span><span class="o">.</span><span class="n">FullString</span>
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#b0dfb0&quot;</span>
+            <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+            <span class="n">height</span><span class="p">:</span> <span class="n">childrenRect</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="mi">4</span>
+            <span class="n">Text</span> <span class="p">{</span> <span class="n">anchors</span><span class="o">.</span><span class="n">horizontalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">horizontalCenter</span>
+                <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">16</span>
+                <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span>
+                <span class="n">text</span><span class="p">:</span> <span class="n">section</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="view-delegates">
+<span id="id7"></span><span id="id8"></span><h2>View Delegates<a class="headerlink" href="#view-delegates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Views need a <em>delegate</em> to visually represent an item in a list. A view will visualize each item list according to the template defined by the delegate. Items in a model are accessible through the <code class="docutils literal"><span class="pre">index</span></code> property as well as the item’s properties.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">petdelegate</span>
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">label</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">24</span>
+        <span class="n">text</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot; (default)&quot;</span>
+        <span class="k">else</span>
+            <span class="n">text</span><span class="p">:</span> <span class="nb">type</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="accessing-views-and-models-from-delegates">
+<span id="id9"></span><h2>Accessing Views and Models from Delegates<a class="headerlink" href="#accessing-views-and-models-from-delegates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The list view to which the delegate is bound is accessible from the delegate through the <code class="docutils literal"><span class="pre">ListView.view</span></code> property. Likewise, the <span class="xref std std-ref">GridView</span> <code class="docutils literal"><span class="pre">GridView.view</span></code> is available to delegates. The corresponding model and its properties, therefore, are available through <code class="docutils literal"><span class="pre">ListView.view.model</span></code> . In addition, any defined signals or methods in the model are also accessible.</p>
+<p>This mechanism is useful when you want to use the same delegate for a number of views, for example, but you want decorations or other features to be different for each view, and you would like these different settings to be properties of each of the views. Similarly, it might be of interest to access or show some properties of the model.</p>
+<p>In the following example, the delegate shows the property <em>language</em> of the model, and the color of one of the fields depends on the property <em>fruit_color</em> of the view.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+     <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+
+    <span class="n">ListModel</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">fruitModel</span>
+        <span class="nb">property</span> <span class="n">string</span> <span class="n">language</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span>
+        <span class="n">ListElement</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Apple&quot;</span>
+            <span class="n">cost</span><span class="p">:</span> <span class="mf">2.45</span>
+        <span class="p">}</span>
+        <span class="n">ListElement</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Orange&quot;</span>
+            <span class="n">cost</span><span class="p">:</span> <span class="mf">3.25</span>
+        <span class="p">}</span>
+        <span class="n">ListElement</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Banana&quot;</span>
+            <span class="n">cost</span><span class="p">:</span> <span class="mf">1.95</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Component</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">fruitDelegate</span>
+        <span class="n">Row</span> <span class="p">{</span>
+                <span class="nb">id</span><span class="p">:</span> <span class="n">fruit</span>
+                <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot; Fruit: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="n">fruit</span><span class="o">.</span><span class="n">ListView</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">fruit_color</span> <span class="p">}</span>
+                <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot; Cost: $&quot;</span> <span class="o">+</span> <span class="n">cost</span> <span class="p">}</span>
+                <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot; Language: &quot;</span> <span class="o">+</span> <span class="n">fruit</span><span class="o">.</span><span class="n">ListView</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">language</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">ListView</span> <span class="p">{</span>
+        <span class="nb">property</span> <span class="n">color</span> <span class="n">fruit_color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">fruitModel</span>
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">fruitDelegate</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="models">
+<span id="id10"></span><span id="id11"></span><h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Data is provided to the delegate via named data roles which the delegate may bind to. Here is a ListModel with two roles, <em>type</em> and <em>age</em> , and a <span class="xref std std-ref">ListView</span> with a delegate that binds to these roles to display their values:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Item</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">250</span>
+
+    <span class="n">ListModel</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">myModel</span>
+        <span class="n">ListElement</span> <span class="p">{</span> <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Dog&quot;</span><span class="p">;</span> <span class="n">age</span><span class="p">:</span> <span class="mi">8</span> <span class="p">}</span>
+        <span class="n">ListElement</span> <span class="p">{</span> <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;Cat&quot;</span><span class="p">;</span> <span class="n">age</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Component</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">myDelegate</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">age</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">ListView</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">myModel</span>
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">myDelegate</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If there is a naming clash between the model’s properties and the delegate’s properties, the roles can be accessed with the qualified <em>model</em> name instead. For example, if a <span class="xref std std-ref">Text</span> type had <em>type</em> or <em>age</em> properties, the text in the above example would display those property values instead of the <em>type</em> and <em>age</em> values from the model item. In this case, the properties could have been referenced as <code class="docutils literal"><span class="pre">model.type</span></code> and <code class="docutils literal"><span class="pre">model.age</span></code> instead to ensure the delegate displays the property values from the model item.</p>
+<p>A special <em>index</em> role containing the index of the item in the model is also available to the delegate. Note this index is set to -1 if the item is removed from the model. If you bind to the index role, be sure that the logic accounts for the possibility of index being -1, i.e. that the item is no longer valid. (Usually the item will shortly be destroyed, but it is possible to delay delegate destruction in some views via a <code class="docutils literal"><span class="pre">delayRemove</span></code> attached property.)</p>
+<p>Models that do not have named roles (such as the ListModel shown below) will have the data provided via the <em>modelData</em> role. The <em>modelData</em> role is also provided for models that have only one role. In this case the <em>modelData</em> role contains the same data as the named role.</p>
+<p>QML provides several types of data models among the built-in set of QML types. In addition, models can be created with Qt C++ and then made available to QQmlEngine for use by QML components. For information about creating these models, visit the <a class="reference internal" href="qtquick-modelviewsdata-cppmodels.html#using-c-models-with-qt-quick-views"><span class="std std-ref">Using C++ Models with Qt Quick Views</span></a> and creating QML types articles.</p>
+<p>Positioning of items from a model can be achieved using a <span class="xref std std-ref">Repeater</span> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="list-model">
+<span id="id12"></span><h2>List Model<a class="headerlink" href="#list-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>ListModel is a simple hierarchy of types specified in QML. The available roles are specified by the ListElement properties.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">fruitModel</span>
+
+    <span class="n">ListElement</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Apple&quot;</span>
+        <span class="n">cost</span><span class="p">:</span> <span class="mf">2.45</span>
+    <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Orange&quot;</span>
+        <span class="n">cost</span><span class="p">:</span> <span class="mf">3.25</span>
+    <span class="p">}</span>
+    <span class="n">ListElement</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Banana&quot;</span>
+        <span class="n">cost</span><span class="p">:</span> <span class="mf">1.95</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above model has two roles, <em>name</em> and <em>cost</em> . These can be bound to by a <span class="xref std std-ref">ListView</span> delegate, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">fruitModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Row</span> <span class="p">{</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Fruit: &quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="p">}</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Cost: $&quot;</span> <span class="o">+</span> <span class="n">cost</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>ListModel provides methods to manipulate the ListModel directly via JavaScript. In this case, the first item inserted determines the roles available to any views that are using the model. For example, if an empty ListModel is created and populated via JavaScript, the roles provided by the first insertion are the only roles that will be shown in the view:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">fruitModel</span> <span class="p">}</span>
+<span class="o">...</span>
+<span class="n">MouseArea</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">onClicked</span><span class="p">:</span> <span class="n">fruitModel</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="mf">5.95</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Pizza&quot;</span><span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the <span class="xref std std-ref">MouseArea</span> is clicked, <code class="docutils literal"><span class="pre">fruitModel</span></code> will have two roles, <em>cost</em> and <em>name</em> . Even if subsequent roles are added, only the first two will be handled by views using the model. To reset the roles available in the model, call ListModel::clear().</p>
+</div></blockquote>
+</div>
+<div class="section" id="xml-model">
+<span id="id13"></span><h2>XML Model<a class="headerlink" href="#xml-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><span class="xref std std-ref">XmlListModel</span> allows construction of a model from an XML data source. The roles are specified via the <span class="xref std std-ref">XmlRole</span> type. The type needs to be imported.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick.XmlListModel</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>The following model has three roles, <em>title</em> , <em>link</em> and <em>description</em> :</p>
+<p>The <code class="docutils literal"><span class="pre">query</span></code> property specifies that the <span class="xref std std-ref">XmlListModel</span> generates a model item for each <code class="docutils literal"><span class="pre">&lt;item&gt;</span></code> in the XML document.</p>
+<p>The <a class="reference internal" href="qtquick-demos-rssnews-example.html#qt-quick-demo-rss-news"><span class="std std-ref">RSS News demo</span></a> shows how <span class="xref std std-ref">XmlListModel</span> can be used to display an RSS feed.</p>
+</div></blockquote>
+</div>
+<div class="section" id="object-model">
+<span id="id14"></span><h2>Object Model<a class="headerlink" href="#object-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="qtquick-views-example.html#qt-quick-examples-views"><span class="std std-ref">ObjectModel</span></a> contains the visual items to be used in a view. When an <a class="reference internal" href="qtquick-views-example.html#qt-quick-examples-views"><span class="std std-ref">ObjectModel</span></a> is used in a view, the view does not require a delegate because the <a class="reference internal" href="qtquick-views-example.html#qt-quick-examples-views"><span class="std std-ref">ObjectModel</span></a> already contains the visual delegate (items).</p>
+<p>The example below places three colored rectangles in a <span class="xref std std-ref">ListView</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+<span class="kn">import</span> <span class="nn">QtQml.Models</span> <span class="mf">2.1</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">ObjectModel</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">itemModel</span>
+        <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">height</span><span class="p">:</span> <span class="mi">30</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span> <span class="p">}</span>
+        <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">height</span><span class="p">:</span> <span class="mi">30</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span> <span class="p">}</span>
+        <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">height</span><span class="p">:</span> <span class="mi">30</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">ListView</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">itemModel</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">VisualItemModel can also be used, but it is only provided for compatibility reasons. VisualItemModel allows a QML item to be provided as a model. This model contains both the data and delegate; the child items of a VisualItemModel provide the contents of the delegate. The model does not provide any roles.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="integers-as-models">
+<span id="id15"></span><h2>Integers as Models<a class="headerlink" href="#integers-as-models" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An integer can be used as a model that contains a certain number of types. In this case, the model does not have any data roles.</p>
+<p>The following example creates a <span class="xref std std-ref">ListView</span> with five elements:</p>
+</div></blockquote>
+</div>
+<div class="section" id="object-instances-as-models">
+<span id="id16"></span><h2>Object Instances as Models<a class="headerlink" href="#object-instances-as-models" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An object instance can be used to specify a model with a single object type. The properties of the object are provided as roles.</p>
+<p>The example below creates a list with one item, showing the color of the <em>myText</em> text. Note the use of the fully qualified <em>model.color</em> property to avoid clashing with <em>color</em> property of the Text type in the delegate.</p>
+</div></blockquote>
+</div>
+<div class="section" id="c-data-models">
+<span id="id17"></span><span id="id18"></span><h2>C++ Data Models<a class="headerlink" href="#c-data-models" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Models can be defined in C++ and then made available to QML. This mechanism is useful for exposing existing C++ data models or otherwise complex datasets to QML.</p>
+<p>For information, visit the <a class="reference internal" href="qtquick-modelviewsdata-cppmodels.html#using-c-models-with-qt-quick-views"><span class="std std-ref">Using C++ Models with Qt Quick Views</span></a> article.</p>
+</div></blockquote>
+</div>
+<div class="section" id="repeaters">
+<span id="id19"></span><h2>Repeaters<a class="headerlink" href="#repeaters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Repeaters create items from a template for use with positioners, using data from a model. Combining repeaters and positioners is an easy way to lay out lots of items. A <span class="xref std std-ref">Repeater</span> item is placed inside a positioner, and generates items that the enclosing positioner arranges.</p>
+<p>Each Repeater creates a number of items by combining each element of data from a model, specified using the <span class="xref std std-ref">model</span> property, with the template item, defined as a child item within the Repeater. The total number of items is determined by the amount of data in the model.</p>
+<p>The following example shows a repeater used with a Grid item to arrange a set of Rectangle items. The Repeater item creates a series of 24 rectangles for the Grid item to position in a 5 by 5 arrangement.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">400</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">400</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span>
+
+    <span class="n">Grid</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="p">;</span> <span class="n">y</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="n">rows</span><span class="p">:</span> <span class="mi">5</span><span class="p">;</span> <span class="n">columns</span><span class="p">:</span> <span class="mi">5</span><span class="p">;</span> <span class="n">spacing</span><span class="p">:</span> <span class="mi">10</span>
+
+        <span class="n">Repeater</span> <span class="p">{</span> <span class="n">model</span><span class="p">:</span> <span class="mi">24</span>
+                   <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">70</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">70</span>
+                               <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightgreen&quot;</span>
+
+                               <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="n">index</span>
+                                      <span class="n">font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">:</span> <span class="mi">30</span>
+                                      <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The number of items created by a Repeater is held by its <span class="xref std std-ref">count</span> property. It is not possible to set this property to determine the number of items to be created. Instead, as in the above example, we use an integer as the model.</p>
+<p>For more details, see the <a class="reference internal" href="#models-and-views-in-qt-quick"><span class="std std-ref">QML Data Models</span></a> document.</p>
+<p>If the model is a string list, the delegate is also exposed to a read-only <code class="docutils literal"><span class="pre">modelData</span></code> property that holds the string. For example:</p>
+<p>+—————————————————–++
+<a href="#id21"><span class="problematic" id="id22">|::                                                   ||</span></a>
+|                                                     ||
+|        Column {                                     ||
+|            Repeater {                               ||
+|                model: [“apples”, “oranges”, “pears”]||
+|                Text { text: “Data: ” + modelData }  ||
+|            }                                        ||
+|        }                                            ||
++—————————————————–++</p>
+<p>It is also possible to use a delegate as the template for the items created by a Repeater. This is specified using the <span class="xref std std-ref">delegate</span> property.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-transitions">
+<span id="id20"></span><h2>Using Transitions<a class="headerlink" href="#using-transitions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Transitions can be used to animate items that are added to, moved within, or removed from a positioner.</p>
+<p>Transitions for adding items apply to items that are created as part of a positioner, as well as those that are reparented to become children of a positioner.</p>
+<p>Transitions for removing items apply to items within a positioner that are deleted, as well as those that are removed from a positioner and given new parents in a document.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Changing the opacity of items to zero will not cause them to disappear from the positioner. They can be removed and re-added by changing the visible property.</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

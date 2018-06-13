@@ -1,0 +1,298 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Plane Spotter (QML) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plane Spotter (QML)</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#steering-the-planes">Steering the Planes</a></li>
+<li><a class="reference internal" href="#the-c-pilot">The C++ Pilot</a></li>
+<li><a class="reference internal" href="#the-qml-pilot">The QML Pilot</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plane-qml-example-file">Plane.qml Example File</a></li>
+<li><a class="reference internal" href="#planespotter-qml-example-file">planespotter.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#planespotter-pro-example-file">planespotter.pro Example File</a></li>
+<li><a class="reference internal" href="#qml-qrc-example-file">qml.qrc Example File</a></li>
+<li><a class="reference internal" href="#airplane-png-image-file">airplane.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plane-spotter-qml">
+<span id="id1"></span><h1>Plane Spotter (QML)<a class="headerlink" href="#plane-spotter-qml" title="Permalink to this headline">¶</a></h1>
+<p>Plane Spotter example demonstrates the tight integration of location and positioning data types into QML</p>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Plane</span> <span class="pre">Spotter</span></code> example demonstrates the tight integration of location and positioning data types into QML</p>
+<p>The <code class="docutils literal"><span class="pre">Plane</span> <span class="pre">Spotter</span></code> example demonstrates how to integrate location and positioning related C++ data types into QML and vice versa. This is useful when it is desirable to run CPU intensive position calculations in native environments but the results are supposed to be displayed using QML.</p>
+<p>The example shows a map of Europe and airplanes on two routes across Europe. The first airplane commutes between Oslo and Berlin and the second airplane commutes between London and Berlin. The position tracking of each airplane is implemented in C++. The Oslo-Berlin plane is piloted in QML and the London-Berlin plane is commanded by a C++ pilot.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="overview">
+<span id="id3"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>This example makes use of the <code class="xref py py-func docutils literal"><span class="pre">Q_GADGET()</span></code> feature as part of its position controller implementation. It permits <a class="reference internal" href="positioning-cpp-qml.html#interfaces-between-c-and-qml-code-in-qt-positioning"><span class="std std-ref">direct integration</span></a> of non- <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> based C++ value types into QML.</p>
+<p>The main purpose of the <code class="docutils literal"><span class="pre">PlaneController</span></code> class is to track the current coordinates of the plane at a given time. It exposes the position via its position property.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PlaneController</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QGeoCoordinate</span> <span class="n">position</span> <span class="n">READ</span> <span class="n">position</span> <span class="n">WRITE</span> <span class="n">setPosition</span> <span class="n">NOTIFY</span> <span class="n">positionChanged</span><span class="p">)</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The example’s <code class="docutils literal"><span class="pre">main()</span></code> function is responsible for the binding of the <code class="docutils literal"><span class="pre">PlaneController</span></code> class instances into the QML context:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">PlaneController</span> <span class="n">oslo2berlin</span><span class="p">;</span>
+    <span class="n">PlaneController</span> <span class="n">berlin2london</span><span class="p">;</span>
+
+    <span class="n">QQmlApplicationEngine</span> <span class="n">engine</span><span class="p">;</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">rootContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s2">&quot;oslo2Berlin&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">oslo2berlin</span><span class="p">);</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">rootContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s2">&quot;berlin2London&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">berlin2london</span><span class="p">);</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;qrc:/planespotter.qml&quot;</span><span class="p">)));</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Similar to <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> derived classes, <a class="reference internal" href="../PySide2/QtPositioning/QGeoCoordinate.html#PySide2.QtPositioning.QGeoCoordinate" title="PySide2.QtPositioning.QGeoCoordinate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPositioning.QGeoCoordinate</span></code></a> can be integrated without an additional QML wrapper.</p>
+</div></blockquote>
+</div>
+<div class="section" id="steering-the-planes">
+<span id="id4"></span><h2>Steering the Planes<a class="headerlink" href="#steering-the-planes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As mentioned above, the primary purpose of <code class="docutils literal"><span class="pre">PlaneController</span></code> class is to track the current positions of the two planes (Oslo-Berlin and London-Berlin) and advertise them as a property to the QML layer. Its secondary purpose is to set and progress a plane along a given flight path. In a sense it can act as a pilot. This is very much like <span class="xref std std-ref">CoordinateAnimation</span> which can animate the transition from one geo coordinate to another. This example demonstrates how the <code class="docutils literal"><span class="pre">PlaneController</span></code> ‘s position property is modified by C++ code using the PlaneController’s own piloting abilities and by QML code using <span class="xref std std-ref">CoordinateAnimation</span> as pilot. The Oslo-Berlin plane is animated using QML code and the London-Berlin plane is animated using C++ code.</p>
+<p>No matter which pilot is used, the results to the pilot’s actions are visible in C++ and QML and thus the example demonstrates unhindered and direct exchange of position data through the C++/QML boundary.</p>
+<p>The visual representation of each <code class="docutils literal"><span class="pre">Plane</span></code> is done using the <span class="xref std std-ref">MapQuickItem</span> type which permits the embedding of arbitrary <span class="xref std std-ref">QtQuick</span> items into a map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Plane</span><span class="o">.</span><span class="n">qml</span>
+<span class="n">MapQuickItem</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">plane</span>
+    <span class="nb">property</span> <span class="n">string</span> <span class="n">pilotName</span><span class="p">;</span>
+    <span class="nb">property</span> <span class="nb">int</span> <span class="n">bearing</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">anchorPoint</span><span class="o">.</span><span class="n">x</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">anchorPoint</span><span class="o">.</span><span class="n">y</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="n">sourceItem</span><span class="p">:</span> <span class="n">Grid</span> <span class="p">{</span>
+        <span class="o">//...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-c-pilot">
+<span id="id5"></span><h2>The C++ Pilot<a class="headerlink" href="#the-c-pilot" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The C++ plane is steered by C++. The <code class="docutils literal"><span class="pre">from</span></code> and <code class="docutils literal"><span class="pre">to</span></code> property of the controller class set the origin and destination which the pilot uses to calculate the bearing for the plane:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;planespotter/main.cpp:C++Pilot1&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The pilot employs a <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> and <a class="reference internal" href="../PySide2/QtCore/QTimerEvent.html#PySide2.QtCore.QTimerEvent" title="PySide2.QtCore.QTimerEvent"><code class="xref py py-class docutils literal"><span class="pre">QTimerEvents</span></code></a> to constantly update the position. During each timer iteration <code class="docutils literal"><span class="pre">PlaneController::updatePosition()</span></code> is called and a new position calculated.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;planespotter/main.cpp:C++Pilot3&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Once the new position is calculated, <code class="docutils literal"><span class="pre">setPosition()</span></code> is called and the subsequent change notification of the property pushes the new position to the QML layer.</p>
+<p>The C++ plane is started by clicking on the plane:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Plane</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">cppPlane</span>
+    <span class="n">pilotName</span><span class="p">:</span> <span class="s2">&quot;C++&quot;</span>
+    <span class="n">coordinate</span><span class="p">:</span> <span class="n">berlin2London</span><span class="o">.</span><span class="n">position</span>
+
+    <span class="n">MouseArea</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cppPlaneAnimation</span><span class="o">.</span><span class="n">running</span> <span class="o">||</span> <span class="n">berlin2London</span><span class="o">.</span><span class="n">isFlying</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Plane still in the air.&quot;</span><span class="p">);</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="n">berlin2London</span><span class="o">.</span><span class="n">swapDestinations</span><span class="p">();</span>
+            <span class="n">cppPlaneAnimation</span><span class="o">.</span><span class="n">rotationDirection</span> <span class="o">=</span> <span class="n">berlin2London</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">azimuthTo</span><span class="p">(</span><span class="n">berlin2London</span><span class="o">.</span><span class="n">to</span><span class="p">)</span>
+            <span class="n">cppPlaneAnimation</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+            <span class="n">cppPlane</span><span class="o">.</span><span class="n">departed</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><span class="xref std std-ref">azimuthTo</span> () calculates the bearing in degrees from one coordinate to another. Note that the above code utilizes a QML animation to tie the rotation and the position change into a single animation flow:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SequentialAnimation</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">cppPlaneAnimation</span>
+    <span class="nb">property</span> <span class="n">real</span> <span class="n">rotationDirection</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">NumberAnimation</span> <span class="p">{</span>
+        <span class="n">target</span><span class="p">:</span> <span class="n">cppPlane</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;bearing&quot;</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">1000</span>
+        <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span>
+        <span class="n">to</span><span class="p">:</span> <span class="n">cppPlaneAnimation</span><span class="o">.</span><span class="n">rotationDirection</span>
+    <span class="p">}</span>
+    <span class="n">ScriptAction</span> <span class="p">{</span> <span class="n">script</span><span class="p">:</span> <span class="n">berlin2London</span><span class="o">.</span><span class="n">startFlight</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, <span class="xref std std-ref">NumberAnimation</span> rotates the plane into the correct direction and once that is done the <code class="docutils literal"><span class="pre">startFlight()</span></code> function takes care of starting the plane’s position change.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;planespotter/main.cpp:C++Pilot2&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-qml-pilot">
+<span id="id6"></span><h2>The QML Pilot<a class="headerlink" href="#the-qml-pilot" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">CoordinateAnimation</span> type is used to control the flight from Oslo to Berlin and vice versa. It replaces the above <span class="xref std std-ref">ScriptAction</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CoordinateAnimation</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">coordinateAnimation</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">5000</span>
+    <span class="n">target</span><span class="p">:</span> <span class="n">oslo2Berlin</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;position&quot;</span>
+    <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <span class="xref std std-ref">MouseArea</span> of the QML plane implements the logic for the course setting and starts the animation when required.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MouseArea</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">qmlPlaneAnimation</span><span class="o">.</span><span class="n">running</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Plane still in the air.&quot;</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">oslo2Berlin</span><span class="o">.</span><span class="n">position</span> <span class="o">===</span> <span class="n">berlin</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">coordinateAnimation</span><span class="o">.</span><span class="kn">from</span> <span class="o">=</span> <span class="n">berlin</span><span class="p">;</span>
+            <span class="n">coordinateAnimation</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">oslo</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">oslo2Berlin</span><span class="o">.</span><span class="n">position</span> <span class="o">===</span> <span class="n">oslo</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">coordinateAnimation</span><span class="o">.</span><span class="kn">from</span> <span class="o">=</span> <span class="n">oslo</span><span class="p">;</span>
+            <span class="n">coordinateAnimation</span><span class="o">.</span><span class="n">to</span> <span class="o">=</span> <span class="n">berlin</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">qmlPlaneAnimation</span><span class="o">.</span><span class="n">rotationDirection</span> <span class="o">=</span> <span class="n">oslo2Berlin</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">azimuthTo</span><span class="p">(</span><span class="n">coordinateAnimation</span><span class="o">.</span><span class="n">to</span><span class="p">)</span>
+        <span class="n">qmlPlaneAnimation</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="plane-qml-example-file">
+<h1>Plane.qml Example File<a class="headerlink" href="#plane-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="planespotter-qml-example-file">
+<h1>planespotter.qml Example File<a class="headerlink" href="#planespotter-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="planespotter-pro-example-file">
+<h1>planespotter.pro Example File<a class="headerlink" href="#planespotter-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qml-qrc-example-file">
+<h1>qml.qrc Example File<a class="headerlink" href="#qml-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="airplane-png-image-file">
+<h1>airplane.png Image File<a class="headerlink" href="#airplane-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

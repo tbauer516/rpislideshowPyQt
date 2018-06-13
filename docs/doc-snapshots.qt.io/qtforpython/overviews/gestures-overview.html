@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gestures in Widgets and Graphics View &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Gestures in Widgets and Graphics View</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#using-standard-gestures-with-widgets">Using Standard Gestures with Widgets</a></li>
+<li><a class="reference internal" href="#handling-events">Handling Events</a></li>
+<li><a class="reference internal" href="#standard-procedure-for-event-handling">Standard Procedure for Event Handling</a></li>
+<li><a class="reference internal" href="#example-event-handling">Example Event Handling</a></li>
+<li><a class="reference internal" href="#creating-your-own-gesture-recognizer">Creating Your Own Gesture Recognizer</a></li>
+<li><a class="reference internal" href="#filtering-input-events">Filtering Input Events</a></li>
+<li><a class="reference internal" href="#custom-gestures">Custom Gestures</a></li>
+<li><a class="reference internal" href="#resetting-gestures">Resetting Gestures</a></li>
+<li><a class="reference internal" href="#using-a-new-gesture-recognizer">Using a New Gesture Recognizer</a></li>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+<li><a class="reference internal" href="#gestures-in-qt-quick">Gestures in Qt Quick</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gestures-in-widgets-and-graphics-view">
+<span id="id1"></span><h1>Gestures in Widgets and Graphics View<a class="headerlink" href="#gestures-in-widgets-and-graphics-view" title="Permalink to this headline">¶</a></h1>
+<p>An overview of Qt support for Gesture programming</p>
+<blockquote>
+<div><p>An overview of Qt support for Gesture programming</p>
+<p>Qt includes a framework for gesture programming that has the ability to form gestures from a series of events, independently of the input methods used. A gesture could be a particular movement of a mouse, a touch screen action, or a series of events from some other source. The nature of the input, the interpretation of the gesture and the action taken are the choice of the developer.</p>
+</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> is the central class in Qt’s gesture framework, providing a container for information about gestures performed by the user. <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> exposes properties that give general information that is common to all gestures, and these can be extended to provide additional gesture-specific information. Common panning, pinching and swiping gestures are represented by specialized classes: <a class="reference internal" href="../PySide2/QtWidgets/QPanGesture.html#PySide2.QtWidgets.QPanGesture" title="PySide2.QtWidgets.QPanGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPanGesture</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QPinchGesture.html#PySide2.QtWidgets.QPinchGesture" title="PySide2.QtWidgets.QPinchGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPinchGesture</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QSwipeGesture.html#PySide2.QtWidgets.QSwipeGesture" title="PySide2.QtWidgets.QSwipeGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSwipeGesture</span></code></a> .</p>
+<p>Developers can also implement new gestures by subclassing and extending the <a class="reference internal" href="../PySide2/QtWidgets/QGestureRecognizer.html#PySide2.QtWidgets.QGestureRecognizer" title="PySide2.QtWidgets.QGestureRecognizer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureRecognizer</span></code></a> class. Adding support for a new gesture involves implementing code to recognize the gesture from input events. This is described in the <a class="reference internal" href="#gestures-in-widgets-and-graphics-view"><span class="std std-ref">Creating Your Own Gesture Recognizer</span></a> section.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-standard-gestures-with-widgets">
+<span id="id3"></span><h2>Using Standard Gestures with Widgets<a class="headerlink" href="#using-standard-gestures-with-widgets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Gestures can be enabled for instances of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> subclasses. An object that accepts gesture input is referred to throughout the documentation as a <em>target object</em> .</p>
+<p>To enable a gesture for a target object, call its <code class="xref py py-func docutils literal"><span class="pre">QWidget.grabGesture()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QGraphicsObject.grabGesture()</span></code> function with an argument describing the required gesture type. The standard types are defined by the <code class="xref py py-attr docutils literal"><span class="pre">Qt.GestureType</span></code> enum and include many commonly used gestures.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">foreach</span> <span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">GestureType</span> <span class="n">gesture</span><span class="p">,</span> <span class="n">gestures</span><span class="p">)</span>
+    <span class="n">grabGesture</span><span class="p">(</span><span class="n">gesture</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the above code, the gestures are set up in the constructor of the target object itself.</p>
+</div></blockquote>
+</div>
+<div class="section" id="handling-events">
+<span id="id4"></span><h2>Handling Events<a class="headerlink" href="#handling-events" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When the user performs a gesture, <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> events will be delivered to the target object, and these can be handled by reimplementing the <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> handler function for widgets or <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.sceneEvent()</span></code> for graphics objects.</p>
+<p>As one target object can subscribe to more than one gesture type, the <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> can contain more than one <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> , indicating several possible gestures are active at the same time. It is then up to the widget to determine how to handle those multiple gestures and choose if some should be canceled in favor of others.</p>
+<p>Each <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> contained within a <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> object can be accepted() or ignored() individually, or all together. Additionally, you can query the individual <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> data objects (the state) using several getters.</p>
+</div></blockquote>
+</div>
+<div class="section" id="standard-procedure-for-event-handling">
+<span id="id5"></span><h2>Standard Procedure for Event Handling<a class="headerlink" href="#standard-procedure-for-event-handling" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> is by default accepted when it arrives at your widget. However, it is good practice to always explicitly accept or reject a gesture. The general rule is that, if you accept a gesture, you are using it. If you are ignoring it you are not interested in it. Ignoring a gesture may mean it gets offered to another target object, or it will get canceled.</p>
+<p>Each <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> has several states it goes through; there is a well defined way to change the state, typically the user input is the cause of state changes (by starting and stopping interaction, for instance) but the widget can also cause state changes.</p>
+<p>The first time a particular <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> is delivered to a widget or graphics item, it will be in the <code class="xref py py-attr docutils literal"><span class="pre">Qt.GestureStarted</span></code> state. The way you handle the gesture at this point influences whether you can interact with it later.</p>
+<ul class="simple">
+<li>Accepting the gesture means the widget acts on the gesture and there will follow gestures with the Qt::GestureUpdatedstate.</li>
+<li>Ignoring the gesture will mean the gesture will never be offered to you again. It will be offered to a parent widget or item as well.</li>
+<li>Calling setGestureCancelPolicy() on the gesture when it is in its starting state, and is also accepted can cause other gestures to be canceled.</li>
+</ul>
+<p>Using <code class="xref py py-attr docutils literal"><span class="pre">QGesture.CancelAllInContext</span></code> to cancel a gesture will cause all gestures, in any state, to be canceled unless they are explicitly accepted. This means that active gestures on children will get canceled. It also means that gestures delivered in the same <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> will get canceled if the widget ignores them. This can be a useful way to filter out all gestures except the one you are interested in.</p>
+</div></blockquote>
+</div>
+<div class="section" id="example-event-handling">
+<span id="id6"></span><h2>Example Event Handling<a class="headerlink" href="#example-event-handling" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For convenience, the <a class="reference internal" href="qtwidgets-gestures-imagegestures-example.html#image-gestures-example"><span class="std std-ref">Image Gestures Example</span></a> reimplements the general <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> handler function and delegates gesture events to a specialized gestureEvent() function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">Gesture</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gestureEvent</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QGestureEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">QWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The gesture events delivered to the target object can be examined individually and dealt with appropriately:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">gestureEvent</span><span class="p">(</span><span class="n">QGestureEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;gestureEvent():&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">event</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">swipe</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">SwipeGesture</span><span class="p">))</span>
+        <span class="n">swipeTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QSwipeGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">swipe</span><span class="p">));</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pan</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PanGesture</span><span class="p">))</span>
+        <span class="n">panTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QPanGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pan</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pinch</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PinchGesture</span><span class="p">))</span>
+        <span class="n">pinchTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QPinchGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinch</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Responding to a gesture is simply a matter of obtaining the <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> object delivered in the <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> sent to the target object and examining the information it contains.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">swipeTriggered</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">gesture</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">GestureFinished</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span><span class="o">-&gt;</span><span class="n">horizontalDirection</span><span class="p">()</span> <span class="o">==</span> <span class="n">QSwipeGesture</span><span class="p">::</span><span class="n">Left</span>
+            <span class="o">||</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">verticalDirection</span><span class="p">()</span> <span class="o">==</span> <span class="n">QSwipeGesture</span><span class="p">::</span><span class="n">Up</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;swipeTriggered(): swipe to previous&quot;</span><span class="p">;</span>
+            <span class="n">goPrevImage</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;swipeTriggered(): swipe to next&quot;</span><span class="p">;</span>
+            <span class="n">goNextImage</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we examine the direction in which the user swiped the widget and modify its contents accordingly.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-your-own-gesture-recognizer">
+<span id="id7"></span><h2>Creating Your Own Gesture Recognizer<a class="headerlink" href="#creating-your-own-gesture-recognizer" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Adding support for a new gesture involves creating and registering a new gesture recognizer. Depending on the recognition process for the gesture, it may also involve creating a new gesture object.</p>
+<p>To create a new recognizer, you need to subclass <a class="reference internal" href="../PySide2/QtWidgets/QGestureRecognizer.html#PySide2.QtWidgets.QGestureRecognizer" title="PySide2.QtWidgets.QGestureRecognizer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureRecognizer</span></code></a> to create a custom recognizer class. There is one virtual function that you must reimplement and two others that can be reimplemented as required.</p>
+</div></blockquote>
+</div>
+<div class="section" id="filtering-input-events">
+<span id="id8"></span><h2>Filtering Input Events<a class="headerlink" href="#filtering-input-events" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.recognize()</span></code> function must be reimplemented. This function handles and filters the incoming input events for the target objects and determines whether or not they correspond to the gesture the recognizer is looking for.</p>
+<p>Although the logic for gesture recognition is implemented in this function, possibly using a state machine based on the <code class="xref py py-attr docutils literal"><span class="pre">Qt.GestureState</span></code> enums, you can store persistent information about the state of the recognition process in the <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> object supplied.</p>
+<p>Your <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.recognize()</span></code> function must return a value of <code class="xref py py-class docutils literal"><span class="pre">QGestureRecognizer.Result</span></code> that indicates the state of recognition for a given gesture and target object. This determines whether or not a gesture event will be delivered to a target object.</p>
+</div></blockquote>
+</div>
+<div class="section" id="custom-gestures">
+<span id="id9"></span><h2>Custom Gestures<a class="headerlink" href="#custom-gestures" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>If you choose to represent a gesture by a custom <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> subclass, you will need to reimplement the <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.create()</span></code> function to construct instances of your gesture class instead of standard <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> instances. Alternatively, you may want to use standard <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> instances, but add additional dynamic properties to them to express specific details of the gesture you want to handle.</div></blockquote>
+</div>
+<div class="section" id="resetting-gestures">
+<span id="id10"></span><h2>Resetting Gestures<a class="headerlink" href="#resetting-gestures" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If you use custom gesture objects that need to be reset or otherwise specially handled when a gesture is canceled, you need to reimplement the <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.reset()</span></code> function to perform these special tasks.</p>
+<p>Note that <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> objects are only created once for each combination of target object and gesture type, and they might be reused every time the user attempts to perform the same gesture type on the target object. As a result, it can be useful to reimplement the <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.reset()</span></code> function to clean up after each previous attempt at recognizing a gesture.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-a-new-gesture-recognizer">
+<span id="id11"></span><h2>Using a New Gesture Recognizer<a class="headerlink" href="#using-a-new-gesture-recognizer" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To use a gesture recognizer, construct an instance of your <a class="reference internal" href="../PySide2/QtWidgets/QGestureRecognizer.html#PySide2.QtWidgets.QGestureRecognizer" title="PySide2.QtWidgets.QGestureRecognizer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureRecognizer</span></code></a> subclass, and register it with the application with <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.registerRecognizer()</span></code> . A recognizer for a given type of gesture can be removed with <code class="xref py py-func docutils literal"><span class="pre">QGestureRecognizer.unregisterRecognizer()</span></code> .</div></blockquote>
+</div>
+<div class="section" id="further-reading">
+<span id="id12"></span><h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The <a class="reference internal" href="qtwidgets-gestures-imagegestures-example.html#image-gestures-example"><span class="std std-ref">Image Gestures Example</span></a> shows how to enable gestures for a widget in a simple image viewer application.</div></blockquote>
+</div>
+<div class="section" id="gestures-in-qt-quick">
+<span id="id13"></span><h2>Gestures in Qt Quick<a class="headerlink" href="#gestures-in-qt-quick" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Qt Quick does not have a generic global gesture recognizer; rather, individual components can respond to touch events in their own ways. For example the <span class="xref std std-ref">PinchArea</span> handles two-finger gestures, <span class="xref std std-ref">Flickable</span> is for flicking content with a single finger, and <span class="xref std std-ref">MultiPointTouchArea</span> can handle an arbitrary number of touch points and allow the application developer to write custom gesture recognition code.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,459 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Fridge Magnets Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fridge Magnets Example</a><ul>
+<li><a class="reference internal" href="#draglabel-class-definition">DragLabel Class Definition</a></li>
+<li><a class="reference internal" href="#draglabel-class-implementation">DragLabel Class Implementation</a></li>
+<li><a class="reference internal" href="#dragwidget-class-definition">DragWidget Class Definition</a></li>
+<li><a class="reference internal" href="#dragwidget-class-implementation">DragWidget Class Implementation</a></li>
+<li><a class="reference internal" href="#dragging">Dragging</a></li>
+<li><a class="reference internal" href="#dropping">Dropping</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#draglabel-cpp-example-file">draglabel.cpp Example File</a></li>
+<li><a class="reference internal" href="#draglabel-h-example-file">draglabel.h Example File</a></li>
+<li><a class="reference internal" href="#dragwidget-cpp-example-file">dragwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#dragwidget-h-example-file">dragwidget.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#fridgemagnets-pro-example-file">fridgemagnets.pro Example File</a></li>
+<li><a class="reference internal" href="#fridgemagnets-qrc-example-file">fridgemagnets.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fridge-magnets-example">
+<span id="id1"></span><h1>Fridge Magnets Example<a class="headerlink" href="#fridge-magnets-example" title="Permalink to this headline">¶</a></h1>
+<p>Fridge Magnets example illustrates how to move around several types of MIME-encoded data with drag and drop</p>
+<blockquote>
+<div><p id="drop">The Fridge Magnets example illustrates how to move around several types of MIME-encoded data with drag and drop.</p>
+<p>The Fridge Magnets example shows how to supply more than one type of MIME-encoded data with a drag and drop operation.</p>
+<p>With this application the user can play around with a collection of fridge magnets, using drag and drop to form new sentences from the words on the magnets. The example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">DragLabel</span></code> is a custom widget representing one single fridge magnet.</li>
+<li><code class="docutils literal"><span class="pre">DragWidget</span></code> provides the main application window.</li>
+</ul>
+<p>We will first take a look at the <code class="docutils literal"><span class="pre">DragLabel</span></code> class, then we will examine the <code class="docutils literal"><span class="pre">DragWidget</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="draglabel-class-definition">
+<span id="id2"></span><h2>DragLabel Class Definition<a class="headerlink" href="#draglabel-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Each fridge magnet is represented by an instance of the <code class="docutils literal"><span class="pre">DragLabel</span></code> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DragLabel</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QLabel</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">DragLabel</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">);</span>
+    <span class="n">QString</span> <span class="n">labelText</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">m_labelText</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Each instance of this <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> subclass will be used to display an pixmap generated from a text string. Since we cannot store both text and a pixmap in a standard label, we declare a private variable to hold the original text, and we define an additional member function to allow it to be accessed.</p>
+</div></blockquote>
+</div>
+<div class="section" id="draglabel-class-implementation">
+<span id="id3"></span><h2>DragLabel Class Implementation<a class="headerlink" href="#draglabel-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the <code class="docutils literal"><span class="pre">DragLabel</span></code> constructor, we first create a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> object on which we will draw the fridge magnet’s text and frame:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DragLabel</span><span class="p">::</span><span class="n">DragLabel</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QFontMetrics</span> <span class="n">metric</span><span class="p">(</span><span class="n">font</span><span class="p">());</span>
+    <span class="n">QSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">TextSingleLine</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span>
+
+    <span class="n">QImage</span> <span class="n">image</span><span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">12</span><span class="p">,</span> <span class="n">QImage</span><span class="p">::</span><span class="n">Format_ARGB32_Premultiplied</span><span class="p">);</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">qRgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+
+    <span class="n">QFont</span> <span class="n">font</span><span class="p">;</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setStyleStrategy</span><span class="p">(</span><span class="n">QFont</span><span class="p">::</span><span class="n">ForceOutline</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Its size depends on the current font size, and its format is <code class="xref py py-attr docutils literal"><span class="pre">QImage.Format_ARGB32_Premultiplied</span></code> ; i.e., the image is stored using a premultiplied 32-bit ARGB format (0xAARRGGBB).</p>
+<p>We then construct a font object that uses the application’s default font, and set its style strategy. The style strategy tells the font matching algorithm what type of fonts should be used to find an appropriate default family. The <code class="xref py py-attr docutils literal"><span class="pre">QFont.ForceOutline</span></code> forces the use of outline fonts.</p>
+<p>To draw the text and frame onto the image, we use the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> class. <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> provides highly optimized methods to do most of the drawing GUI programs require. It can draw everything from simple lines to complex shapes like pies and chords. It can also draw aligned text and pixmaps.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLinearGradient</span> <span class="n">gradient</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">255</span><span class="p">));</span>
+<span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">200</span><span class="p">));</span>
+
+<span class="n">QPainter</span> <span class="n">painter</span><span class="p">;</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">image</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">gradient</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span><span class="n">QRectF</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                        <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RelativeSize</span><span class="p">);</span>
+
+<span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">size</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">text</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>A painter can be activated by passing a paint device to the constructor, or by using the <code class="xref py py-func docutils literal"><span class="pre">QPainter.begin()</span></code> method as we do in this example. The <code class="xref py py-func docutils literal"><span class="pre">QPainter.end()</span></code> method deactivates it. Note that the latter function is called automatically upon destruction when the painter is actived by its constructor. The <code class="xref py py-attr docutils literal"><span class="pre">QPainter.Antialiasing</span></code> render hint ensures that the paint engine will antialias the edges of primitives if possible.</p>
+<p>When the painting is done, we convert our image to a pixmap using <a class="reference internal" href="../PySide2/QtGui/QPixmap.html#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QPixmap.fromImage()</span></code> method. This method also takes an optional flags argument, and converts the given image to a pixmap using the specified flags to control the conversion (the flags argument is a bitwise-OR of the <code class="xref py py-class docutils literal"><span class="pre">Qt.ImageConversionFlags</span></code> ; passing 0 for flags sets all the default options).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">::</span><span class="n">fromImage</span><span class="p">(</span><span class="n">image</span><span class="p">));</span>
+    <span class="n">m_labelText</span> <span class="o">=</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we set the label’s <code class="xref py py-func docutils literal"><span class="pre">pixmap</span> <span class="pre">property</span></code> and store the label’s text for later use.</p>
+<p><em>Note that setting the pixmap clears any previous content, including any text previously set using</em> <code class="xref py py-func docutils literal"><span class="pre">QLabel.setText()</span></code> <em>, and disables the label widget’s buddy shortcut, if any.</em></p>
+</div></blockquote>
+</div>
+<div class="section" id="dragwidget-class-definition">
+<span id="id4"></span><h2>DragWidget Class Definition<a class="headerlink" href="#dragwidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">DragWidget</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , providing support for drag and drop operations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DragWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">DragWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QDragEnterEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dragMoveEvent</span><span class="p">(</span><span class="n">QDragMoveEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dropEvent</span><span class="p">(</span><span class="n">QDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>To make the widget responsive to drag and drop operations, we simply reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragEnterEvent()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragMoveEvent()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.dropEvent()</span></code> event handlers inherited from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> .</p>
+<p>We also reimplement <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> to make the widget responsive to mouse clicks. This is where we will write code to start drag and drop operations.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dragwidget-class-implementation">
+<span id="id5"></span><h2>DragWidget Class Implementation<a class="headerlink" href="#dragwidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor, we first open the file containing the words on our fridge magnets:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DragWidget</span><span class="p">::</span><span class="n">DragWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QFile</span> <span class="n">dictionaryFile</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;:/dictionary/words.txt&quot;</span><span class="p">));</span>
+    <span class="n">dictionaryFile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QFile</span><span class="p">::</span><span class="n">ReadOnly</span><span class="p">);</span>
+    <span class="n">QTextStream</span> <span class="n">inputStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dictionaryFile</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> is an I/O device for reading and writing text and binary files and resources, and may be used by itself or in combination with <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> or <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> . We have chosen to read the contents of the file using the <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> class that provides a convenient interface for reading and writing text.</p>
+<p>We then create the fridge magnets. As long as there is data (the <code class="xref py py-func docutils literal"><span class="pre">QTextStream.atEnd()</span></code> method returns true if there is no more data to be read from the stream), we read one line at a time using <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QTextStream.readLine()</span></code> method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>int x = 5;
+int y = 5;
+
+while (!inputStream.atEnd()) {
+    QString word;
+    inputStream &gt;&gt; word;
+    if (!word.isEmpty()) {
+        DragLabel *wordLabel = new DragLabel(word, this);
+        wordLabel-&gt;move(x, y);
+        wordLabel-&gt;show();
+        wordLabel-&gt;setAttribute(Qt::WA_DeleteOnClose);
+        x += wordLabel-&gt;width() + 2;
+        if (x &gt;= 245) {
+            x = 5;
+            y += wordLabel-&gt;height() + 2;
+        }
+    }
+}
+</pre></div>
+</div>
+<p>For each line, we create a <code class="docutils literal"><span class="pre">DragLabel</span></code> object using the read line as text, we calculate its position and ensure that it is visible by calling the <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> method. We set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_DeleteOnClose</span></code> attribute on each label to ensure that any unused labels will be deleted; we will need to create new labels and delete old ones when they are dragged around, and this ensures that the example does not leak memory.</p>
+<p>We also set the <code class="docutils literal"><span class="pre">FridgeMagnets</span></code> widget’s palette, minimum size and window title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPalette</span> <span class="n">newPalette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">();</span>
+<span class="n">newPalette</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Window</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+<span class="n">setPalette</span><span class="p">(</span><span class="n">newPalette</span><span class="p">);</span>
+
+<span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">qMax</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+<span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Fridge Magnets&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Finally, to enable our user to move the fridge magnets around, we must also set the <code class="docutils literal"><span class="pre">FridgeMagnets</span></code> widget’s <code class="xref py py-func docutils literal"><span class="pre">QWidget.acceptDrops()</span></code> property.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">setAcceptDrops</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Setting this property to true announces to the system that this widget <em>may</em> be able to accept drop events (events that are sent when drag and drop actions are completed). Later, we will implement the functions that ensure that the widget accepts the drop events it is interested in.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dragging">
+<span id="id6"></span><h2>Dragging<a class="headerlink" href="#dragging" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s take a look at the <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> event handler, where drag and drop operations begin:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void DragWidget::mousePressEvent(QMouseEvent *event)
+{
+    DragLabel *child = static_cast&lt;DragLabel*&gt;(childAt(event-&gt;pos()));
+    if (!child)
+        return;
+
+    QPoint hotSpot = event-&gt;pos() - child-&gt;pos();
+
+    QByteArray itemData;
+    QDataStream dataStream(&amp;itemData, QIODevice::WriteOnly);
+    dataStream &lt;&lt; child-&gt;labelText() &lt;&lt; QPoint(hotSpot);
+</pre></div>
+</div>
+<p>Mouse events occur when a mouse button is pressed or released inside a widget, or when the mouse cursor is moved. By reimplementing the <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> method we ensure that we will receive mouse press events for the widget containing the fridge magnets.</p>
+<p>Whenever we receive such an event, we first check to see if the position of the click coincides with one of the labels. If not, we simply return.</p>
+<p>If the user clicked a label, we determine the position of the <em>hot spot</em> (the position of the click relative to the top-left corner of the label). We create a byte array to store the label’s text and the hot spot, and we use a <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> object to stream the data into the byte array.</p>
+<p>With all the information in place, we create a new <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> object. As mentioned above, <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> objects associate the data that they hold with the corresponding MIME types to ensure that information can be safely transferred between applications. The <code class="xref py py-func docutils literal"><span class="pre">QMimeData.setData()</span></code> method sets the data associated with a given MIME type. In our case, we associate our item data with the custom <code class="docutils literal"><span class="pre">application/x-fridgemagnet</span></code> type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMimeData</span> <span class="o">*</span><span class="n">mimeData</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMimeData</span><span class="p">;</span>
+<span class="n">mimeData</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">fridgetMagnetsMimeType</span><span class="p">(),</span> <span class="n">itemData</span><span class="p">);</span>
+<span class="n">mimeData</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">child</span><span class="o">-&gt;</span><span class="n">labelText</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Note that we also associate the magnet’s text with the <code class="docutils literal"><span class="pre">text/plain</span></code> MIME type using <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QMimeData.setText()</span></code> method. Below, we will see how our widget detects both these MIME types with its event handlers.</p>
+<p>Finally, we create a <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> object. It is the <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> class that handles most of the details of a drag and drop operation, providing support for MIME-based drag and drop data transfer. The data to be transferred by the drag and drop operation is contained in a <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> object. When we call <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QDrag.setMimeData()</span></code> method the ownership of our item data is transferred to the <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> object.</p>
+<p>We call the <code class="xref py py-func docutils literal"><span class="pre">QDrag.setPixmap()</span></code> function to set the pixmap used to represent the data during the drag and drop operation. Typically, this pixmap shows an icon that represents the MIME type of the data being transferred, but any pixmap can be used. In this example, we simply use the pixmap used by the label itself to make it look like the fridge magnet itself is being moved.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QDrag</span> <span class="o">*</span><span class="n">drag</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDrag</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setMimeData</span><span class="p">(</span><span class="n">mimeData</span><span class="p">);</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="o">*</span><span class="n">child</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">());</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setHotSpot</span><span class="p">(</span><span class="n">hotSpot</span><span class="p">);</span>
+
+<span class="n">child</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We also specify the cursor’s hot spot, its position relative to the top-level corner of the drag pixmap, to be the point we calculated above. This makes the process of dragging the label feel more natural because the cursor always points to the same place on the label during the drag operation.</p>
+<p>We start the drag operation using <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QDrag.exec()</span></code> function, requesting that the magnet is copied when the drag is completed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="p">(</span><span class="n">drag</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">MoveAction</span> <span class="o">|</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CopyAction</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CopyAction</span><span class="p">)</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">MoveAction</span><span class="p">)</span>
+        <span class="n">child</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span>
+    <span class="k">else</span>
+        <span class="n">child</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The function returns the drop action actually performed by the user (this can be either a copy or a move action in this case); if this action is equal to <code class="xref py py-attr docutils literal"><span class="pre">Qt.MoveAction</span></code> we will close the activated fridge magnet widget because we will create a new one to replace it (see the <a class="reference internal" href="#fridge-magnets-example"><span class="std std-ref">dropEvent()</span></a> implementation). Otherwise, if the drop is outside our main widget, we simply show the widget in its original position.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dropping">
+<span id="id7"></span><h2>Dropping<a class="headerlink" href="#dropping" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When a a drag and drop action enters our widget, we will receive a drag enter <em>event</em> . <a class="reference internal" href="../PySide2/QtGui/QDragEnterEvent.html#PySide2.QtGui.QDragEnterEvent" title="PySide2.QtGui.QDragEnterEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDragEnterEvent</span></code></a> inherits most of its functionality from <a class="reference internal" href="../PySide2/QtGui/QDragMoveEvent.html#PySide2.QtGui.QDragMoveEvent" title="PySide2.QtGui.QDragMoveEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDragMoveEvent</span></code></a> , which in turn inherits most of its functionality from <a class="reference internal" href="../PySide2/QtGui/QDropEvent.html#PySide2.QtGui.QDropEvent" title="PySide2.QtGui.QDropEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDropEvent</span></code></a> . Note that we must accept this event in order to receive the drag move events that are sent while the drag and drop action is in progress. The drag enter event is always immediately followed by a drag move event.</p>
+<p>In our <code class="docutils literal"><span class="pre">dragEnterEvent()</span></code> implementation, we first determine whether we support the event’s MIME type or not:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">DragWidget</span><span class="p">::</span><span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QDragEnterEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasFormat</span><span class="p">(</span><span class="n">fridgetMagnetsMimeType</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">children</span><span class="p">()</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">source</span><span class="p">()))</span> <span class="p">{</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">setDropAction</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">MoveAction</span><span class="p">);</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the type is <code class="docutils literal"><span class="pre">application/x-fridgemagnet</span></code> and the event origins from any of this application’s fridge magnet widgets, we first set the event’s drop action using the <code class="xref py py-func docutils literal"><span class="pre">QDropEvent.setDropAction()</span></code> method. An event’s drop action is the action to be performed on the data by the target. <code class="xref py py-attr docutils literal"><span class="pre">Qt.MoveAction</span></code> indicates that the data is moved from the source to the target.</p>
+<p>Then we call the event’s <code class="xref py py-func docutils literal"><span class="pre">QDragMoveEvent.accept()</span></code> method to indicate that we have handled the event. In general, unaccepted events might be propagated to the parent widget. If the event origins from any other widget, we simply accept the proposed action.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasText</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">ignore</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We also accept the proposed action if the event’s MIME type is <code class="docutils literal"><span class="pre">text/plain</span></code> , i.e., if <code class="xref py py-func docutils literal"><span class="pre">QMimeData.hasText()</span></code> returns true. If the event has any other type, on the other hand, we call the event’s <code class="xref py py-func docutils literal"><span class="pre">QDragMoveEvent.ignore()</span></code> method allowing the event to be propagated further.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">DragWidget</span><span class="p">::</span><span class="n">dragMoveEvent</span><span class="p">(</span><span class="n">QDragMoveEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasFormat</span><span class="p">(</span><span class="n">fridgetMagnetsMimeType</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">children</span><span class="p">()</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">source</span><span class="p">()))</span> <span class="p">{</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">setDropAction</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">MoveAction</span><span class="p">);</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasText</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">ignore</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Drag move events occur when the cursor enters a widget, when it moves within the widget, and when a modifier key is pressed on the keyboard while the widget has focus. Our widget will receive drag move events repeatedly while a drag is within its boundaries. We reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragMoveEvent()</span></code> method, and examine the event in the exact same way as we did with drag enter events.</p>
+<p>Note that the <code class="xref py py-func docutils literal"><span class="pre">QWidget.dropEvent()</span></code> event handler behaves slightly differently: We first get hold of the event’s MIME data.</p>
+<div class="highlight-default" id="id8"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">DragWidget</span><span class="p">::</span><span class="n">dropEvent</span><span class="p">(</span><span class="n">QDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasFormat</span><span class="p">(</span><span class="n">fridgetMagnetsMimeType</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">QMimeData</span> <span class="o">*</span><span class="n">mime</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> class provides a container for data that records information about its MIME type. <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> objects associate the data that they hold with the corresponding MIME types to ensure that information can be safely transferred between applications, and copied around within the same application.</p>
+<p>We retrieve the data associated with the <code class="docutils literal"><span class="pre">application/x-fridgemagnet</span></code> MIME type using a data stream in order to create a new <code class="docutils literal"><span class="pre">DragLabel</span></code> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QByteArray</span> <span class="n">itemData</span> <span class="o">=</span> <span class="n">mime</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(</span><span class="n">fridgetMagnetsMimeType</span><span class="p">());</span>
+<span class="n">QDataStream</span> <span class="n">dataStream</span><span class="p">(</span><span class="o">&amp;</span><span class="n">itemData</span><span class="p">,</span> <span class="n">QIODevice</span><span class="p">::</span><span class="n">ReadOnly</span><span class="p">);</span>
+
+<span class="n">QString</span> <span class="n">text</span><span class="p">;</span>
+<span class="n">QPoint</span> <span class="n">offset</span><span class="p">;</span>
+<span class="n">dataStream</span> <span class="o">&gt;&gt;</span> <span class="n">text</span> <span class="o">&gt;&gt;</span> <span class="n">offset</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> class provides serialization of binary data to a <a class="reference internal" href="../PySide2/QtCore/QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> (a data stream is a binary stream of encoded information which is completely independent of the host computer’s operating system, CPU or byte order).</p>
+<p>Finally, we create a label and move it to the event’s position:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DragLabel</span> <span class="o">*</span><span class="n">newLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DragLabel</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+<span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="n">offset</span><span class="p">);</span>
+<span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+<span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_DeleteOnClose</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">source</span><span class="p">()</span> <span class="o">==</span> <span class="n">this</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">event</span><span class="o">-&gt;</span><span class="n">setDropAction</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">MoveAction</span><span class="p">);</span>
+    <span class="n">event</span><span class="o">-&gt;</span><span class="n">accept</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the source of the event is also the widget receiving the drop event, we set the event’s drop action to <code class="xref py py-attr docutils literal"><span class="pre">Qt.MoveAction</span></code> and call the event’s <code class="xref py py-func docutils literal"><span class="pre">QDragMoveEvent.accept()</span></code> method. Otherwise, we simply accept the proposed action. This means that labels are moved rather than copied in the same window. However, if we drag a label to a second instance of the Fridge Magnets example, the default action is to copy it, leaving the original in the first instance.</p>
+<p>If the event’s MIME type is <code class="docutils literal"><span class="pre">text/plain</span></code> (i.e., if <code class="xref py py-func docutils literal"><span class="pre">QMimeData.hasText()</span></code> returns true) we retrieve its text and split it into words. For each word we create a new <code class="docutils literal"><span class="pre">DragLabel</span></code> action, and show it at the event’s position plus an offset depending on the number of words in the text. In the end we accept the proposed action. This lets the user drop selected text from a text editor or Web browser onto the widget to add more fridge magnets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasText</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QStringList</span> <span class="n">pieces</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">QRegularExpression</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">s+&quot;</span><span class="p">)),</span>
+                             <span class="n">QString</span><span class="p">::</span><span class="n">SkipEmptyParts</span><span class="p">);</span>
+        <span class="n">QPoint</span> <span class="n">position</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">piece</span> <span class="p">:</span> <span class="n">pieces</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">DragLabel</span> <span class="o">*</span><span class="n">newLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DragLabel</span><span class="p">(</span><span class="n">piece</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+            <span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="n">position</span><span class="p">);</span>
+            <span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+            <span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_DeleteOnClose</span><span class="p">);</span>
+
+            <span class="n">position</span> <span class="o">+=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">newLabel</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">acceptProposedAction</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">ignore</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the event has any other type, we call the event’s <code class="xref py py-func docutils literal"><span class="pre">QDragMoveEvent.ignore()</span></code> method allowing the event to be propagated further.</p>
+</div></blockquote>
+</div>
+<div class="section" id="summary">
+<span id="id9"></span><h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We set our main widget’s <code class="xref py py-func docutils literal"><span class="pre">QWidget.acceptDrops()</span></code> property and reimplemented <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragEnterEvent()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragMoveEvent()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.dropEvent()</span></code> event handlers to support content dropped on our widget.</p>
+<p>In addition, we reimplemented the <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> function to let the user pick up fridge magnets in the first place.</p>
+<p>Because data is communicated using drag and drop operations and encoded using MIME types, you can run more than one instance of this example, and transfer magnets between them.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="draglabel-cpp-example-file">
+<h1>draglabel.cpp Example File<a class="headerlink" href="#draglabel-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="draglabel-h-example-file">
+<h1>draglabel.h Example File<a class="headerlink" href="#draglabel-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dragwidget-cpp-example-file">
+<h1>dragwidget.cpp Example File<a class="headerlink" href="#dragwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dragwidget-h-example-file">
+<h1>dragwidget.h Example File<a class="headerlink" href="#dragwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fridgemagnets-pro-example-file">
+<h1>fridgemagnets.pro Example File<a class="headerlink" href="#fridgemagnets-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fridgemagnets-qrc-example-file">
+<h1>fridgemagnets.qrc Example File<a class="headerlink" href="#fridgemagnets-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Concepts - Visual Parent in Qt Quick &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Concepts - Visual Parent in Qt Quick</a><ul>
+<li><a class="reference internal" href="#visual-parent">Visual Parent</a></li>
+<li><a class="reference internal" href="#item-coordinates">Item Coordinates</a></li>
+<li><a class="reference internal" href="#stacking-order">Stacking Order</a></li>
+<li><a class="reference internal" href="#canvas-ownership">Canvas Ownership</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="concepts-visual-parent-in-qt-quick">
+<span id="id1"></span><h1>Concepts - Visual Parent in Qt Quick<a class="headerlink" href="#concepts-visual-parent-in-qt-quick" title="Permalink to this headline">¶</a></h1>
+<p>Description of the concept of visual parent in Qt Quick</p>
+<blockquote>
+<div>Description of the concept of visual parent in Qt Quick</div></blockquote>
+<div class="section" id="visual-parent">
+<span id="id2"></span><h2>Visual Parent<a class="headerlink" href="#visual-parent" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When creating visual scenes with Qt Quick, it is important to understand the concept of the <em>visual parent</em> .</p>
+<p>The concept of the visual parent in Qt Quick is separate from, but related to, the concept of the <em>object parent</em> within the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> parent hierarchy. All QML objects have an <em>object parent</em> , which is determined by the object hierarchy in which the object is declared. When working with the <code class="docutils literal"><span class="pre">QtQuick</span></code> module, the <span class="xref std std-ref">Item</span> type is the base type for all visual items provided by this module, and it provides the concept of an additional <em>visual parent</em> , as defined by an item’s <span class="xref std std-ref">parent</span> property. Every item has a visual parent; if an item’s <span class="xref std std-ref">parent</span> property value is <code class="docutils literal"><span class="pre">null</span></code> , the item will not be rendered in the scene.</p>
+<p>Any object assigned to an item’s <span class="xref std std-ref">data</span> property becomes a child of the item within its <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> hierarchy, for memory management purposes. Additionally, if an object added to the data property is of the <span class="xref std std-ref">Item</span> type, it is also assigned to the <span class="xref std std-ref">Item::children</span> property and becomes a child of the item within the visual scene hierarchy. (Most Qt Quick hierarchy crawling algorithms, especially the rendering algorithms, only consider the visual parent hierarchy.)</p>
+<p>For convenience, the Item <span class="xref std std-ref">data</span> property is its default property. This means that any child item declared within an <span class="xref std std-ref">Item</span> object without being assigned to a specific property is automatically assigned to the <span class="xref std std-ref">data</span> property and becomes a child of the item as described above. So, the two code blocks below produce the same result, and you will almost always see the form shown below left, rather than the explicit <code class="docutils literal"><span class="pre">data</span></code> assignment shown below right:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Item</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>
+                <span class="n">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>
+                <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Item</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+
+    <span class="n">data</span><span class="p">:</span> <span class="p">[</span>
+        <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>
+                    <span class="n">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span>
+                    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span> <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>An item’s visual parent can be changed at any time by setting its <span class="xref std std-ref">parent</span> property. Thus, an item’s visual parent may not necessarily be the same as its object parent.</p>
+<p>When an item becomes the child of another item:</p>
+<ul class="simple">
+<li>The child’s <span class="xref std std-ref">parent</span> refers to its parent item</li>
+<li>The parent’s <span class="xref std std-ref">children</span> and <span class="xref std std-ref">childrenRect</span> properties takes that child into account</li>
+</ul>
+<p>Declaring an item as a child of another does not automatically mean that the child item will be appropriately positioned or sized to fit within its parent. Some QML types may have in-built behaviors that affect the positioning of child items — for example, a <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Row</span></a> object automatically re-positions its children into a horizontal formation — but these are behaviors enforced by the types’ own specific implementations. Additionally, a parent item will not automatically clip its children to visually contain them within the parent’s visual bounds, unless its <span class="xref std std-ref">clip</span> property is set to true.</p>
+<p>The visual parent of an item may come under consideration in particular circumstances, as described in the sections below.</p>
+</div></blockquote>
+</div>
+<div class="section" id="item-coordinates">
+<span id="id3"></span><h2>Item Coordinates<a class="headerlink" href="#item-coordinates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>As item coordinates are relative to the visual parent, they can be affected by changes to the visual hierarchy. See the <a class="reference internal" href="qtquick-visualcanvas-coordinates.html#concepts-visual-coordinates-in-qt-quick"><span class="std std-ref">Visual Coordinates</span></a> concept page for more detail.</div></blockquote>
+</div>
+<div class="section" id="stacking-order">
+<span id="id4"></span><h2>Stacking Order<a class="headerlink" href="#stacking-order" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Qt Quick items use a recursive drawing algorithm for determining which items are drawn on top in case of collisions. In general items are drawn on top of their parent items, in the order they were created (or specified in the QML file). So in the following example, the blue rectangle will be drawn on top of the green rectangle:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#272822&quot;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">320</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">480</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">64</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">64</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">172</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because the algorithm recurses through the visual item hierarchy, any children of the green rectangle will also be drawn beneath the blue rectangle and beneath any of the blue rectangle’s children.</p>
+<p>Stacking order can be influenced with the <span class="xref std std-ref">Item::z</span> property. Z values below 0 will stack below the parent, and if z values are assigned then siblings will stack in z-order (with creation order used to break ties). Z values only affect stacking compared to siblings and the parent item. If you have an item which is obscured by a subtree rooted above its parent item, no z value on that item will increase its stacking order to stack above that subtree. To stack that item above the other subtree you’ll have to alter z values farther up in the hierarchy, or re-arrange the visual item hierarchy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#272822&quot;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">320</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">480</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">64</span>
+        <span class="n">z</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span>
+
+        <span class="n">Rectangle</span> <span class="p">{</span>
+            <span class="n">x</span><span class="p">:</span> <span class="mi">192</span>
+            <span class="n">y</span><span class="p">:</span> <span class="mi">64</span>
+            <span class="n">z</span><span class="p">:</span> <span class="mi">2000</span>
+            <span class="n">width</span><span class="p">:</span> <span class="mi">128</span>
+            <span class="n">height</span><span class="p">:</span> <span class="mi">128</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">64</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">192</span>
+        <span class="n">z</span><span class="p">:</span> <span class="mi">2</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">256</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above example, the red rectangle has a high z value, but is still stacked below the blue rectangle. This is because it is a child of the green rectangle, and the green rectangle is a sibling of the blue rectangle. The z value of the green rectangle is lower than that of the blue rectangle, so the green rectangle and all children will be stacked beneath the blue rectangle.</p>
+</div></blockquote>
+</div>
+<div class="section" id="canvas-ownership">
+<span id="id5"></span><h2>Canvas Ownership<a class="headerlink" href="#canvas-ownership" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The definition of what is rendered in a Qt Quick scene is the visual item tree rooted at <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.contentItem()</span></code> . Therefore to add an Item to a specific Qt Quick scene for rendering it needs to become a visual hierarchy child of an Item already in the visual item hierarchy, such as <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.contentItem()</span></code> .</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

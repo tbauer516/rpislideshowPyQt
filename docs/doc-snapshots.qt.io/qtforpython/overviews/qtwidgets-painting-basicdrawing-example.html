@@ -1,0 +1,682 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Basic Drawing Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic Drawing Example</a><ul>
+<li><a class="reference internal" href="#window-class-definition">Window Class Definition</a></li>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+<li><a class="reference internal" href="#renderarea-class-definition">RenderArea Class Definition</a></li>
+<li><a class="reference internal" href="#renderarea-class-implementation">RenderArea Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#renderarea-cpp-example-file">renderarea.cpp Example File</a></li>
+<li><a class="reference internal" href="#renderarea-h-example-file">renderarea.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#basicdrawing-pro-example-file">basicdrawing.pro Example File</a></li>
+<li><a class="reference internal" href="#basicdrawing-qrc-example-file">basicdrawing.qrc Example File</a></li>
+<li><a class="reference internal" href="#brick-png-image-file">brick.png Image File</a></li>
+<li><a class="reference internal" href="#qt-logo-png-image-file">qt-logo.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-drawing-example">
+<span id="id1"></span><h1>Basic Drawing Example<a class="headerlink" href="#basic-drawing-example" title="Permalink to this headline">¶</a></h1>
+<p>Basic Drawing example shows how to display basic graphics primitives in a variety of styles using the QPainter class</p>
+<blockquote>
+<div><p>The Basic Drawing example shows how to display basic graphics primitives in a variety of styles using the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> class.</p>
+<p>The Basic Drawing example shows how to display basic graphics primitives in a variety of styles using the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> class.</p>
+<p><a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> performs low-level painting on widgets and other paint devices. The class can draw everything from simple lines to complex shapes like pies and chords. It can also draw aligned text and pixmaps. Normally, it draws in a “natural” coordinate system, but it can in addition do view and world transformation.</p>
+<p>The example provides a render area, displaying the currently active shape, and lets the user manipulate the rendered shape and its appearance using the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> parameters: The user can change the active shape (Shape), and modify the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s pen (Pen Width, Pen Style, Pen Cap, Pen Join), brush (Brush Style) and render hints (Antialiasing). In addition the user can rotate a shape (Transformations); behind the scenes we use <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s ability to manipulate the coordinate system to perform the rotation.</p>
+<p>The Basic Drawing example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">RenderArea</span></code> is a custom widget that renders multiple copies of the currently active shape.</li>
+<li><code class="docutils literal"><span class="pre">Window</span></code> is the application’s main window displaying a <code class="docutils literal"><span class="pre">RenderArea</span></code> widget in addition to several parameter widgets.</li>
+</ul>
+<p>First we will review the <code class="docutils literal"><span class="pre">Window</span></code> class, then we will take a look at the <code class="docutils literal"><span class="pre">RenderArea</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="window-class-definition">
+<span id="id2"></span><h2>Window Class Definition<a class="headerlink" href="#window-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Window class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , and is the application’s main window displaying a <code class="docutils literal"><span class="pre">RenderArea</span></code> widget in addition to several parameter widgets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Window</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">shapeChanged</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">penChanged</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">brushChanged</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">RenderArea</span> <span class="o">*</span><span class="n">renderArea</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">shapeLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">penWidthLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">penStyleLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">penCapLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">penJoinLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">brushStyleLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">otherOptionsLabel</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">shapeComboBox</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">penWidthSpinBox</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">penStyleComboBox</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">penCapComboBox</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">penJoinComboBox</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">brushStyleComboBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">antialiasingCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">transformationsCheckBox</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We declare the various widgets, and three private slots updating the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget: The <code class="docutils literal"><span class="pre">shapeChanged()</span></code> slot updates the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget when the user changes the currently active shape. We call the <code class="docutils literal"><span class="pre">penChanged()</span></code> slot when either of the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s pen parameters changes. And the <code class="docutils literal"><span class="pre">brushChanged()</span></code> slot updates the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget when the user changes the painter’s brush style.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-implementation">
+<span id="id3"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor we create and initialize the various widgets appearing in the main application window.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Window</span><span class="p">::</span><span class="n">Window</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">renderArea</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RenderArea</span><span class="p">;</span>
+
+    <span class="n">shapeComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Polygon&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Polygon</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Rectangle&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Rect</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Rounded Rectangle&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">RoundedRect</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ellipse&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Ellipse</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pie&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Pie</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Chord&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Chord</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Path&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Path</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Line&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Line</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Polyline&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Polyline</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Arc&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Arc</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Points&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Points</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Text&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Text</span><span class="p">);</span>
+    <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pixmap&quot;</span><span class="p">),</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Pixmap</span><span class="p">);</span>
+
+    <span class="n">shapeLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Shape:&quot;</span><span class="p">));</span>
+    <span class="n">shapeLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">shapeComboBox</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>First we create the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget that will render the currently active shape. Then we create the Shape combobox, and add the associated items (i.e. the different shapes a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> can draw).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">penWidthSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">penWidthSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="n">penWidthSpinBox</span><span class="o">-&gt;</span><span class="n">setSpecialValueText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;0 (cosmetic pen)&quot;</span><span class="p">));</span>
+
+<span class="n">penWidthLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pen &amp;Width:&quot;</span><span class="p">));</span>
+<span class="n">penWidthLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">penWidthSpinBox</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s pen is a <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> object; the <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> class defines how a painter should draw lines and outlines of shapes. A pen has several properties: Width, style, cap and join.</p>
+<p>A pen’s width can be <em>zero</em> or greater, but the most common width is zero. Note that this doesn’t mean 0 pixels, but implies that the shape is drawn as smoothly as possible although perhaps not mathematically correct.</p>
+<p>We create a <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> for the Pen Width parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">penStyleComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Solid&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">SolidLine</span><span class="p">));</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dash&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DashLine</span><span class="p">));</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dot&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DotLine</span><span class="p">));</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dash Dot&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DashDotLine</span><span class="p">));</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dash Dot Dot&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DashDotDotLine</span><span class="p">));</span>
+<span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">));</span>
+
+<span class="n">penStyleLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Pen Style:&quot;</span><span class="p">));</span>
+<span class="n">penStyleLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">penStyleComboBox</span><span class="p">);</span>
+
+<span class="n">penCapComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+<span class="n">penCapComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Flat&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">FlatCap</span><span class="p">);</span>
+<span class="n">penCapComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Square&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SquareCap</span><span class="p">);</span>
+<span class="n">penCapComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Round&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RoundCap</span><span class="p">);</span>
+
+<span class="n">penCapLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pen &amp;Cap:&quot;</span><span class="p">));</span>
+<span class="n">penCapLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">penCapComboBox</span><span class="p">);</span>
+
+<span class="n">penJoinComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+<span class="n">penJoinComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Miter&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">MiterJoin</span><span class="p">);</span>
+<span class="n">penJoinComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Bevel&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">BevelJoin</span><span class="p">);</span>
+<span class="n">penJoinComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Round&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RoundJoin</span><span class="p">);</span>
+
+<span class="n">penJoinLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pen &amp;Join:&quot;</span><span class="p">));</span>
+<span class="n">penJoinLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">penJoinComboBox</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The pen style defines the line type. The default style is solid ( <code class="xref py py-attr docutils literal"><span class="pre">Qt.SolidLine</span></code> ). Setting the style to none ( <code class="xref py py-attr docutils literal"><span class="pre">Qt.NoPen</span></code> ) tells the painter to not draw lines or outlines. The pen cap defines how the end points of lines are drawn. And the pen join defines how two lines join when multiple connected lines are drawn. The cap and join only apply to lines with a width of 1 pixel or greater.</p>
+<p>We create <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> es for each of the Pen Style, Pen Cap and Pen Join parameters, and adds the associated items (i.e the values of the <code class="xref py py-attr docutils literal"><span class="pre">Qt.PenStyle</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">Qt.PenCapStyle</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">Qt.PenJoinStyle</span></code> enums respectively).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">brushStyleComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Linear Gradient&quot;</span><span class="p">),</span>
+        <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">LinearGradientPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Radial Gradient&quot;</span><span class="p">),</span>
+        <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">RadialGradientPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Conical Gradient&quot;</span><span class="p">),</span>
+        <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">ConicalGradientPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Texture&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">TexturePattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Solid&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">SolidPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Horizontal&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">HorPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Vertical&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">VerPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Cross&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">CrossPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Backward Diagonal&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">BDiagPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Forward Diagonal&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">FDiagPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Diagonal Cross&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DiagCrossPattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 1&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense1Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 2&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense2Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 3&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense3Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 4&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense4Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 5&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense5Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 6&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense6Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dense 7&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Dense7Pattern</span><span class="p">));</span>
+<span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">),</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoBrush</span><span class="p">));</span>
+
+<span class="n">brushStyleLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Brush:&quot;</span><span class="p">));</span>
+<span class="n">brushStyleLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">brushStyleComboBox</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> class defines the fill pattern of shapes drawn by a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> . The default brush style is <code class="xref py py-attr docutils literal"><span class="pre">Qt.NoBrush</span></code> . This style tells the painter to not fill shapes. The standard style for filling is <code class="xref py py-attr docutils literal"><span class="pre">Qt.SolidPattern</span></code> .</p>
+<p>We create a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> for the Brush Style parameter, and add the associated items (i.e. the values of the <code class="xref py py-attr docutils literal"><span class="pre">Qt.BrushStyle</span></code> enum).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">otherOptionsLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Options:&quot;</span><span class="p">));</span>
+<span class="n">antialiasingCheckBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Antialiasing&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Antialiasing is a feature that “smoothes” the pixels to create more even and less jagged lines, and can be applied using <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s render hints. <code class="xref py py-class docutils literal"><span class="pre">QPainter.RenderHints</span></code> are used to specify flags to <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> that may or may not be respected by any given engine.</p>
+<p>We simply create a <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> for the Antialiasing option.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">transformationsCheckBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Transformations&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The Transformations option implies a manipulation of the coordinate system that will appear as if the rendered shape is rotated in three dimensions.</p>
+<p>We use the <code class="xref py py-func docutils literal"><span class="pre">QPainter.translate()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QPainter.rotate()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QPainter.scale()</span></code> functions to implement this feature represented in the main application window by a simple <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">shapeComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">shapeChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">penWidthSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">penStyleComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">penCapComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">penJoinComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">penChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">brushStyleComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">brushChanged</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">antialiasingCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">renderArea</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setAntialiased</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">transformationsCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">renderArea</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setTransformed</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>Then we connect the parameter widgets with their associated slots using the static <code class="xref py py-func docutils literal"><span class="pre">QObject.connect()</span></code> function, ensuring that the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget is updated whenever the user changes the shape, or any of the other parameters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">renderArea</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">shapeLabel</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">shapeComboBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penWidthLabel</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penWidthSpinBox</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penStyleLabel</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penStyleComboBox</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penCapLabel</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penCapComboBox</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penJoinLabel</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">penJoinComboBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">brushStyleLabel</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">brushStyleComboBox</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">otherOptionsLabel</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">antialiasingCheckBox</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">transformationsCheckBox</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignRight</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">shapeChanged</span><span class="p">();</span>
+    <span class="n">penChanged</span><span class="p">();</span>
+    <span class="n">brushChanged</span><span class="p">();</span>
+    <span class="n">antialiasingCheckBox</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Basic Drawing&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we add the various widgets to a layout, and call the <code class="docutils literal"><span class="pre">shapeChanged()</span></code> , <code class="docutils literal"><span class="pre">penChanged()</span></code> , and <code class="docutils literal"><span class="pre">brushChanged()</span></code> slots to initialize the application. We also turn on antialiasing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">shapeChanged</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">RenderArea</span><span class="p">::</span><span class="n">Shape</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">Shape</span><span class="p">(</span><span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span>
+            <span class="n">shapeComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">(),</span> <span class="n">IdRole</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setShape</span><span class="p">(</span><span class="n">shape</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">shapeChanged()</span></code> slot is called whenever the user changes the currently active shape.</p>
+<p>First we retrieve the shape the user has chosen using the <code class="xref py py-func docutils literal"><span class="pre">QComboBox.itemData()</span></code> function. This function returns the data for the given role in the given index in the combobox. We use <code class="xref py py-func docutils literal"><span class="pre">QComboBox.currentIndex()</span></code> to retrieve the index of the shape, and the role is defined by the <code class="xref py py-attr docutils literal"><span class="pre">Qt.ItemDataRole</span></code> enum; <code class="docutils literal"><span class="pre">IdRole</span></code> is an alias for <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> .</p>
+<p>Note that <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> is only the first role that can be used for application-specific purposes. If you need to store different data in the same index, you can use different roles by simply incrementing the value of <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> , for example: ‘ <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> + 1’ and ‘ <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> + 2’. However, it is a good programming practice to give each role their own name: ‘myFirstRole = <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> + 1’ and ‘mySecondRole = <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> + 2’. Even though we only need a single role in this particular example, we add the following line of code to the beginning of the <code class="docutils literal"><span class="pre">window.cpp</span></code> file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="nb">int</span> <span class="n">IdRole</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">UserRole</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QComboBox.itemData()</span></code> function returns the data as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> , so we need to cast the data to <code class="docutils literal"><span class="pre">RenderArea::Shape</span></code> . If there is no data for the given role, the function returns <code class="xref py py-attr docutils literal"><span class="pre">QVariant.Invalid</span></code> .</p>
+<p>In the end we call the <code class="docutils literal"><span class="pre">RenderArea::setShape()</span></code> slot to update the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">penChanged</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">penWidthSpinBox</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">();</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">PenStyle</span> <span class="n">style</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">PenStyle</span><span class="p">(</span><span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span>
+            <span class="n">penStyleComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">(),</span> <span class="n">IdRole</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">PenCapStyle</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">PenCapStyle</span><span class="p">(</span><span class="n">penCapComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span>
+            <span class="n">penCapComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">(),</span> <span class="n">IdRole</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">PenJoinStyle</span> <span class="n">join</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">PenJoinStyle</span><span class="p">(</span><span class="n">penJoinComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span>
+            <span class="n">penJoinComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">(),</span> <span class="n">IdRole</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">blue</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="n">join</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We call the <code class="docutils literal"><span class="pre">penChanged()</span></code> slot whenever the user changes any of the pen parameters. Again we use the <code class="xref py py-func docutils literal"><span class="pre">QComboBox.itemData()</span></code> function to retrieve the parameters, and then we call the <code class="docutils literal"><span class="pre">RenderArea::setPen()</span></code> slot to update the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">brushChanged</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">BrushStyle</span> <span class="n">style</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">BrushStyle</span><span class="p">(</span><span class="n">brushStyleComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span>
+</pre></div>
+</div>
+<p>The brushChanged() slot is called whenever the user changes the brush parameter which we retrieve using the <code class="xref py py-func docutils literal"><span class="pre">QComboBox.itemData()</span></code> function as before.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LinearGradientPattern</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QLinearGradient</span> <span class="n">linearGradient</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">linearGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">linearGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">green</span><span class="p">);</span>
+    <span class="n">linearGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">linearGradient</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the brush parameter is a gradient fill, special actions are required.</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QGradient.html#PySide2.QtGui.QGradient" title="PySide2.QtGui.QGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QGradient</span></code></a> class is used in combination with <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> to specify gradient fills. Qt currently supports three types of gradient fills: linear, radial and conical. Each of these is represented by a subclass of <a class="reference internal" href="../PySide2/QtGui/QGradient.html#PySide2.QtGui.QGradient" title="PySide2.QtGui.QGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QGradient</span></code></a> : <a class="reference internal" href="../PySide2/QtGui/QLinearGradient.html#PySide2.QtGui.QLinearGradient" title="PySide2.QtGui.QLinearGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QLinearGradient</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QRadialGradient.html#PySide2.QtGui.QRadialGradient" title="PySide2.QtGui.QRadialGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRadialGradient</span></code></a> and <a class="reference internal" href="../PySide2/QtGui/QConicalGradient.html#PySide2.QtGui.QConicalGradient" title="PySide2.QtGui.QConicalGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QConicalGradient</span></code></a> .</p>
+<p>So if the brush style is <code class="xref py py-attr docutils literal"><span class="pre">Qt.LinearGradientPattern</span></code> , we first create a <a class="reference internal" href="../PySide2/QtGui/QLinearGradient.html#PySide2.QtGui.QLinearGradient" title="PySide2.QtGui.QLinearGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QLinearGradient</span></code></a> object with interpolation area between the coordinates passed as arguments to the constructor. The positions are specified using logical coordinates. Then we set the gradient’s colors using the <code class="xref py py-func docutils literal"><span class="pre">QGradient.setColorAt()</span></code> function. The colors is defined using stop points which are composed by a position (between 0 and 1) and a <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> . The set of stop points describes how the gradient area should be filled. A gradient can have an arbitrary number of stop points.</p>
+<p>In the end we call <code class="docutils literal"><span class="pre">RenderArea::setBrush()</span></code> slot to update the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget’s brush with the <a class="reference internal" href="../PySide2/QtGui/QLinearGradient.html#PySide2.QtGui.QLinearGradient" title="PySide2.QtGui.QLinearGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QLinearGradient</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RadialGradientPattern</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QRadialGradient</span> <span class="n">radialGradient</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+    <span class="n">radialGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">radialGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">green</span><span class="p">);</span>
+    <span class="n">radialGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">radialGradient</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">ConicalGradientPattern</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QConicalGradient</span> <span class="n">conicalGradient</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+    <span class="n">conicalGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">conicalGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">green</span><span class="p">);</span>
+    <span class="n">conicalGradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">conicalGradient</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A similar pattern of actions, as the one used for <a class="reference internal" href="../PySide2/QtGui/QLinearGradient.html#PySide2.QtGui.QLinearGradient" title="PySide2.QtGui.QLinearGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QLinearGradient</span></code></a> , is used in the cases of <code class="xref py py-attr docutils literal"><span class="pre">Qt.RadialGradientPattern</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">Qt.ConicalGradientPattern</span></code> .</p>
+<p>The only difference is the arguments passed to the constructor: Regarding the <a class="reference internal" href="../PySide2/QtGui/QRadialGradient.html#PySide2.QtGui.QRadialGradient" title="PySide2.QtGui.QRadialGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRadialGradient</span></code></a> constructor the first argument is the center, and the second the radial gradient’s radius. The third argument is optional, but can be used to define the focal point of the gradient inside the circle (the default focal point is the circle center). Regarding the <a class="reference internal" href="../PySide2/QtGui/QConicalGradient.html#PySide2.QtGui.QConicalGradient" title="PySide2.QtGui.QConicalGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QConicalGradient</span></code></a> constructor, the first argument specifies the center of the conical, and the second specifies the start angle of the interpolation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">style</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">TexturePattern</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/brick.png&quot;</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>If the brush style is <code class="xref py py-attr docutils literal"><span class="pre">Qt.TexturePattern</span></code> we create a <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> from a <a class="reference internal" href="../PySide2/QtGui/QPixmap.html#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> . Then we call <code class="docutils literal"><span class="pre">RenderArea::setBrush()</span></code> slot to update the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget with the newly created brush.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">renderArea</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">green</span><span class="p">,</span> <span class="n">style</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Otherwise we simply create a brush with the given style and a green color, and then call <code class="docutils literal"><span class="pre">RenderArea::setBrush()</span></code> slot to update the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget with the newly created brush.</p>
+</div></blockquote>
+</div>
+<div class="section" id="renderarea-class-definition">
+<span id="id4"></span><h2>RenderArea Class Definition<a class="headerlink" href="#renderarea-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">RenderArea</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , and renders multiple copies of the currently active shape using a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RenderArea</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">Shape</span> <span class="p">{</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Points</span><span class="p">,</span> <span class="n">Polyline</span><span class="p">,</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">RoundedRect</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">Arc</span><span class="p">,</span>
+                 <span class="n">Chord</span><span class="p">,</span> <span class="n">Pie</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Pixmap</span> <span class="p">};</span>
+
+    <span class="n">RenderArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QSize</span> <span class="n">minimumSizeHint</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setShape</span><span class="p">(</span><span class="n">Shape</span> <span class="n">shape</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setPen</span><span class="p">(</span><span class="n">const</span> <span class="n">QPen</span> <span class="o">&amp;</span><span class="n">pen</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setBrush</span><span class="p">(</span><span class="n">const</span> <span class="n">QBrush</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setAntialiased</span><span class="p">(</span><span class="nb">bool</span> <span class="n">antialiased</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setTransformed</span><span class="p">(</span><span class="nb">bool</span> <span class="n">transformed</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">Shape</span> <span class="n">shape</span><span class="p">;</span>
+    <span class="n">QPen</span> <span class="n">pen</span><span class="p">;</span>
+    <span class="n">QBrush</span> <span class="n">brush</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">antialiased</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">transformed</span><span class="p">;</span>
+    <span class="n">QPixmap</span> <span class="n">pixmap</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>First we define a public <code class="docutils literal"><span class="pre">Shape</span></code> enum to hold the different shapes that can be rendered by the widget (i.e the shapes that can be rendered by a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ). Then we reimplement the constructor as well as two of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s public functions: <code class="xref py py-func docutils literal"><span class="pre">QWidget.minimumSizeHint()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.sizeHint()</span></code> .</p>
+<p>We also reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> function to be able to draw the currently active shape according to the specified parameters.</p>
+<p>We declare several private slots: The <code class="docutils literal"><span class="pre">setShape()</span></code> slot changes the <code class="docutils literal"><span class="pre">RenderArea</span></code> ‘s shape, the <code class="docutils literal"><span class="pre">setPen()</span></code> and <code class="docutils literal"><span class="pre">setBrush()</span></code> slots modify the widget’s pen and brush, and the <code class="docutils literal"><span class="pre">setAntialiased()</span></code> and <code class="docutils literal"><span class="pre">setTransformed()</span></code> slots modify the widget’s respective properties.</p>
+</div></blockquote>
+</div>
+<div class="section" id="renderarea-class-implementation">
+<span id="id5"></span><h2>RenderArea Class Implementation<a class="headerlink" href="#renderarea-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor we initialize some of the widget’s variables.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RenderArea</span><span class="p">::</span><span class="n">RenderArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">;</span>
+    <span class="n">antialiased</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">transformed</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;:/images/qt-logo.png&quot;</span><span class="p">);</span>
+
+    <span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">);</span>
+    <span class="n">setAutoFillBackground</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We set its shape to be a Polygon, its antialiased property to be false and we load an image into the widget’s pixmap variable. In the end we set the widget’s background role, defining the brush from the widget’s <code class="xref py py-func docutils literal"><span class="pre">QWidget.palette()</span></code> that will be used to render the background. <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Base</span></code> is typically white.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSize</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QSize</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">RenderArea</span></code> inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.sizeHint()</span></code> property holding the recommended size for the widget. If the value of this property is an invalid size, no size is recommended.</p>
+<p>The default implementation of the <code class="xref py py-func docutils literal"><span class="pre">QWidget.sizeHint()</span></code> function returns an invalid size if there is no layout for the widget, and returns the layout’s preferred size otherwise.</p>
+<p>Our reimplementation of the function returns a <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> with a 400 pixels width and a 200 pixels height.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSize</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">minimumSizeHint</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QSize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">RenderArea</span></code> also inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.minimumSizeHint()</span></code> property holding the recommended minimum size for the widget. Again, if the value of this property is an invalid size, no size is recommended.</p>
+<p>The default implementation of <code class="xref py py-func docutils literal"><span class="pre">QWidget.minimumSizeHint()</span></code> returns an invalid size if there is no layout for the widget, and returns the layout’s minimum size otherwise.</p>
+<p>Our reimplementation of the function returns a <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> with a 100 pixels width and a 100 pixels height.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">setShape</span><span class="p">(</span><span class="n">Shape</span> <span class="n">shape</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">setPen</span><span class="p">(</span><span class="n">const</span> <span class="n">QPen</span> <span class="o">&amp;</span><span class="n">pen</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">pen</span> <span class="o">=</span> <span class="n">pen</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">setBrush</span><span class="p">(</span><span class="n">const</span> <span class="n">QBrush</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">brush</span> <span class="o">=</span> <span class="n">brush</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The public <code class="docutils literal"><span class="pre">setShape()</span></code> , <code class="docutils literal"><span class="pre">setPen()</span></code> and <code class="docutils literal"><span class="pre">setBrush()</span></code> slots are called whenever we want to modify a <code class="docutils literal"><span class="pre">RenderArea</span></code> widget’s shape, pen or brush. We set the shape, pen or brush according to the slot parameter, and call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to make the changes visible in the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> slot does not cause an immediate repaint; instead it schedules a paint event for processing when Qt returns to the main event loop.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">setAntialiased</span><span class="p">(</span><span class="nb">bool</span> <span class="n">antialiased</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">antialiased</span> <span class="o">=</span> <span class="n">antialiased</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">setTransformed</span><span class="p">(</span><span class="nb">bool</span> <span class="n">transformed</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">transformed</span> <span class="o">=</span> <span class="n">transformed</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal"><span class="pre">setAntialiased()</span></code> and <code class="docutils literal"><span class="pre">setTransformed()</span></code> slots we change the state of the properties according to the slot parameter, and call the <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> slot to make the changes visible in the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RenderArea</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">QPoint</span> <span class="n">points</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">QPoint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+        <span class="n">QPoint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">QPoint</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+        <span class="n">QPoint</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="p">};</span>
+
+    <span class="n">QRect</span> <span class="n">rect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+
+    <span class="n">QPainterPath</span> <span class="n">path</span><span class="p">;</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">cubicTo</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">startAngle</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">arcLength</span> <span class="o">=</span> <span class="mi">120</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then we reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> function. The first thing we do is to create the graphical objects we will need to draw the various shapes.</p>
+<p>We create a vector of four <a class="reference internal" href="../PySide2/QtCore/QPoint.html#PySide2.QtCore.QPoint" title="PySide2.QtCore.QPoint"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPoint</span></code></a> s. We use this vector to render the Points, Polyline and Polygon shapes. Then we create a <a class="reference internal" href="../PySide2/QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> , defining a rectangle in the plane, which we use as the bounding rectangle for all the shapes excluding the Path and the Pixmap.</p>
+<p>We also create a <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> . The <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> class provides a container for painting operations, enabling graphical shapes to be constructed and reused. A painter path is an object composed of a number of graphical building blocks, such as rectangles, ellipses, lines, and curves. For more information about the <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> class, see the <a class="reference internal" href="qtwidgets-painting-painterpaths-example.html#painter-paths-example"><span class="std std-ref">Painter Paths</span></a> example. In this example, we create a painter path composed of one straight line and a Bezier curve.</p>
+<p>In addition we define a start angle and an arc length that we will use when drawing the Arc, Chord and Pie shapes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">brush</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">antialiased</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We create a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> for the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget, and set the painters pen and brush according to the <code class="docutils literal"><span class="pre">RenderArea</span></code> ‘s pen and brush. If the Antialiasing parameter option is checked, we also set the painter’s render hints. <code class="xref py py-attr docutils literal"><span class="pre">QPainter.Antialiasing</span></code> indicates that the engine should antialias edges of primitives if possible.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">();</span> <span class="n">x</span> <span class="o">+=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">();</span> <span class="n">y</span> <span class="o">+=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">();</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, we render the multiple copies of the <code class="docutils literal"><span class="pre">RenderArea</span></code> ‘s shape. The number of copies is depending on the size of the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget, and we calculate their positions using two <code class="docutils literal"><span class="pre">for</span></code> loops and the widgets height and width.</p>
+<p>For each copy we first save the current painter state (pushes the state onto a stack). Then we translate the coordinate system, using the <code class="xref py py-func docutils literal"><span class="pre">QPainter.translate()</span></code> function, to the position determined by the variables of the <code class="docutils literal"><span class="pre">for</span></code> loops. If we omit this translation of the coordinate system all the copies of the shape will be rendered on top of each other in the top left cormer of the <code class="docutils literal"><span class="pre">RenderArea</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">transformed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mf">60.0</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the Transformations parameter option is checked, we do an additional translation of the coordinate system before we rotate the coordinate system 60 degrees clockwise using the <code class="xref py py-func docutils literal"><span class="pre">QPainter.rotate()</span></code> function and scale it down in size using the <code class="xref py py-func docutils literal"><span class="pre">QPainter.scale()</span></code> function. In the end we translate the coordinate system back to where it was before we rotated and scaled it.</p>
+<p>Now, when rendering the shape, it will appear as if it was rotated in three dimensions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">switch</span> <span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">case</span> <span class="n">Line</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">bottomLeft</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">topRight</span><span class="p">());</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Points</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPoints</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Polyline</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPolyline</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Polygon</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Rect</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">rect</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">RoundedRect</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RelativeSize</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Ellipse</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Arc</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawArc</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">startAngle</span><span class="p">,</span> <span class="n">arcLength</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Chord</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawChord</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">startAngle</span><span class="p">,</span> <span class="n">arcLength</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Pie</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPie</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">startAngle</span><span class="p">,</span> <span class="n">arcLength</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Text</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span>
+                     <span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">,</span>
+                     <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Qt by</span><span class="se">\n</span><span class="s2">The Qt Company&quot;</span><span class="p">));</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="n">case</span> <span class="n">Pixmap</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we identify the <code class="docutils literal"><span class="pre">RenderArea</span></code> ‘s shape, and render it using the associated <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> drawing function:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawLine()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPoints()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPolyline()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPolygon()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawRect()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawRoundedRect()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawEllipse()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawArc()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawChord()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPie()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPath()</span></code> ,</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawText()</span></code> or</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPixmap()</span></code></li>
+</ul>
+<p>Before we started rendering, we saved the current painter state (pushes the state onto a stack). The rationale for this is that we calculate each shape copy’s position relative to the same point in the coordinate system. When translating the coordinate system, we lose the knowledge of this point unless we save the current painter state <em>before</em> we start the translating process.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>            <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">dark</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">());</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoBrush</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, when we are finished rendering a copy of the shape we can restore the original painter state, with its associated coordinate system, using the <code class="xref py py-func docutils literal"><span class="pre">QPainter.restore()</span></code> function. In this way we ensure that the next shape copy will be rendered in the correct position.</p>
+<p>We could translate the coordinate system back using <code class="xref py py-func docutils literal"><span class="pre">QPainter.translate()</span></code> instead of saving the painter state. But since we in addition to translating the coordinate system (when the Transformation parameter option is checked) both rotate and scale the coordinate system, the easiest solution is to save the current painter state.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="renderarea-cpp-example-file">
+<h1>renderarea.cpp Example File<a class="headerlink" href="#renderarea-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="renderarea-h-example-file">
+<h1>renderarea.h Example File<a class="headerlink" href="#renderarea-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="basicdrawing-pro-example-file">
+<h1>basicdrawing.pro Example File<a class="headerlink" href="#basicdrawing-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="basicdrawing-qrc-example-file">
+<h1>basicdrawing.qrc Example File<a class="headerlink" href="#basicdrawing-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="brick-png-image-file">
+<h1>brick.png Image File<a class="headerlink" href="#brick-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-logo-png-image-file">
+<h1>qt-logo.png Image File<a class="headerlink" href="#qt-logo-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

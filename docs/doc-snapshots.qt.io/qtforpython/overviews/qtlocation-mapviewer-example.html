@@ -1,0 +1,469 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Map Viewer (QML) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Map Viewer (QML)</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#displaying-a-map">Displaying a Map</a></li>
+<li><a class="reference internal" href="#finding-an-address-geocoding">Finding an Address (Geocoding)</a></li>
+<li><a class="reference internal" href="#directions-and-travel-routes">Directions and Travel Routes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helper-js-example-file">helper.js Example File</a></li>
+<li><a class="reference internal" href="#mapviewer-qml-example-file">mapviewer.qml Example File</a></li>
+<li><a class="reference internal" href="#geocode-qml-example-file">Geocode.qml Example File</a></li>
+<li><a class="reference internal" href="#geocodeform-ui-qml-example-file">GeocodeForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#locale-qml-example-file">Locale.qml Example File</a></li>
+<li><a class="reference internal" href="#localeform-ui-qml-example-file">LocaleForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#message-qml-example-file">Message.qml Example File</a></li>
+<li><a class="reference internal" href="#messageform-ui-qml-example-file">MessageForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#reversegeocode-qml-example-file">ReverseGeocode.qml Example File</a></li>
+<li><a class="reference internal" href="#reversegeocodeform-ui-qml-example-file">ReverseGeocodeForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#routeaddress-qml-example-file">RouteAddress.qml Example File</a></li>
+<li><a class="reference internal" href="#routeaddressform-ui-qml-example-file">RouteAddressForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#routecoordinate-qml-example-file">RouteCoordinate.qml Example File</a></li>
+<li><a class="reference internal" href="#routecoordinateform-ui-qml-example-file">RouteCoordinateForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#routelist-qml-example-file">RouteList.qml Example File</a></li>
+<li><a class="reference internal" href="#routelistdelegate-qml-example-file">RouteListDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#routelistheader-qml-example-file">RouteListHeader.qml Example File</a></li>
+<li><a class="reference internal" href="#circleitem-qml-example-file">CircleItem.qml Example File</a></li>
+<li><a class="reference internal" href="#imageitem-qml-example-file">ImageItem.qml Example File</a></li>
+<li><a class="reference internal" href="#mapcomponent-qml-example-file">MapComponent.qml Example File</a></li>
+<li><a class="reference internal" href="#mapsliders-qml-example-file">MapSliders.qml Example File</a></li>
+<li><a class="reference internal" href="#marker-qml-example-file">Marker.qml Example File</a></li>
+<li><a class="reference internal" href="#minimap-qml-example-file">MiniMap.qml Example File</a></li>
+<li><a class="reference internal" href="#polygonitem-qml-example-file">PolygonItem.qml Example File</a></li>
+<li><a class="reference internal" href="#polylineitem-qml-example-file">PolylineItem.qml Example File</a></li>
+<li><a class="reference internal" href="#rectangleitem-qml-example-file">RectangleItem.qml Example File</a></li>
+<li><a class="reference internal" href="#itempopupmenu-qml-example-file">ItemPopupMenu.qml Example File</a></li>
+<li><a class="reference internal" href="#mainmenu-qml-example-file">MainMenu.qml Example File</a></li>
+<li><a class="reference internal" href="#mappopupmenu-qml-example-file">MapPopupMenu.qml Example File</a></li>
+<li><a class="reference internal" href="#markerpopupmenu-qml-example-file">MarkerPopupMenu.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#mapviewer-pro-example-file">mapviewer.pro Example File</a></li>
+<li><a class="reference internal" href="#mapviewer-qrc-example-file">mapviewer.qrc Example File</a></li>
+<li><a class="reference internal" href="#icon-png-image-file">icon.png Image File</a></li>
+<li><a class="reference internal" href="#marker-png-image-file">marker.png Image File</a></li>
+<li><a class="reference internal" href="#scale-png-image-file">scale.png Image File</a></li>
+<li><a class="reference internal" href="#scale-end-png-image-file">scale_end.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="map-viewer-qml">
+<span id="id1"></span><h1>Map Viewer (QML)<a class="headerlink" href="#map-viewer-qml" title="Permalink to this headline">¶</a></h1>
+<p>Map Viewer example shows how to display and interact with a map, search for an address, and find driving directions</p>
+<blockquote>
+<div><p>The Map Viewer example shows how to display and interact with a map, search for an address, and find driving directions.</p>
+<p>This is a large example covering many basic uses of maps, positioning, and navigation services in Qt Location. This page is divided into sections covering each of these areas of functionality with snippets from the code.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</p>
+<p>The example can work with any of the available geo services plugins. However, some plugins may require additional <span class="xref std std-ref">plugin parameters</span> in order to function correctly. <span class="xref std std-ref">Plugin parameters</span> can be passed on the command line using the <code class="docutils literal"><span class="pre">--plugin</span></code> argument, which takes the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">plugin</span><span class="o">.&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Refer to the documentation for each of the geo services plugins for details on what plugin parameters they support. The default plugin used by this example is <a class="reference internal" href="location-plugin-osm.html#qt-location-open-street-map-plugin"><span class="std std-ref">Qt Location Open Street Map Plugin</span></a> , which does not require any parameters.</p>
+</div></blockquote>
+</div>
+<div class="section" id="overview">
+<span id="id3"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>QML types shown in this example:</div></blockquote>
+</div>
+<div class="section" id="displaying-a-map">
+<span id="id4"></span><h2>Displaying a Map<a class="headerlink" href="#displaying-a-map" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Drawing a map on-screen is accomplished using the Map type, as shown below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Map</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">map</span>
+    <span class="n">zoomLevel</span><span class="p">:</span> <span class="p">(</span><span class="n">maximumZoomLevel</span> <span class="o">-</span> <span class="n">minimumZoomLevel</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">center</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">The</span> <span class="n">Qt</span> <span class="n">Company</span> <span class="ow">in</span> <span class="n">Oslo</span>
+        <span class="n">latitude</span><span class="p">:</span> <span class="mf">59.9485</span>
+        <span class="n">longitude</span><span class="p">:</span> <span class="mf">10.7686</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, we give the map an initial center <span class="xref std std-ref">coordinate</span> with a set latitude and longitude. We also set the initial zoom level to 50% (halfway between the maximum and minimum).</p>
+</div></blockquote>
+</div>
+<div class="section" id="finding-an-address-geocoding">
+<span id="id5"></span><h2>Finding an Address (Geocoding)<a class="headerlink" href="#finding-an-address-geocoding" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To locate a certain address or place on the map uses a process called geocoding. In order to perform a geocode operation, we first need to adjust our Map object to be able to receive the result.</p>
+<p>Receiving results of geocoding is done through a <span class="xref std std-ref">GeocodeModel</span> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GeocodeModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">geocodeModel</span>
+    <span class="n">plugin</span><span class="p">:</span> <span class="nb">map</span><span class="o">.</span><span class="n">plugin</span>
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">status</span> <span class="o">==</span> <span class="n">GeocodeModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">GeocodeModel</span><span class="o">.</span><span class="n">Error</span><span class="p">))</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">geocodeFinished</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">onLocationsChanged</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To display the contents of the <span class="xref std std-ref">GeocodeModel</span> we use a <span class="xref std std-ref">MapItemView</span> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MapItemView</span> <span class="p">{</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">geocodeModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">pointDelegate</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><span class="xref std std-ref">MapItemView</span> uses an object called a “delegate” to act as a template for the items it creates. This can contain any map object desired, but in this case we show a <span class="xref std std-ref">MapCircle</span> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">pointDelegate</span>
+
+    <span class="n">MapCircle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">point</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="mi">1000</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#46a2da&quot;</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#190a33&quot;</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">width</span><span class="p">:</span> <span class="mi">2</span>
+        <span class="n">smooth</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">opacity</span><span class="p">:</span> <span class="mf">0.25</span>
+        <span class="n">center</span><span class="p">:</span> <span class="n">locationData</span><span class="o">.</span><span class="n">coordinate</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With these three objects, we have enough to receive Geocode responses and display them on our Map. The final piece is to send the actual Geocode request.</p>
+<p>To send a geocode request, first we create an <span class="xref std std-ref">Address</span> object, and fill it in with the desired parameters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Address</span> <span class="p">{</span>
+    <span class="nb">id</span> <span class="p">:</span><span class="n">fromAddress</span>
+    <span class="n">street</span><span class="p">:</span> <span class="s2">&quot;Sandakerveien 116&quot;</span>
+    <span class="n">city</span><span class="p">:</span> <span class="s2">&quot;Oslo&quot;</span>
+    <span class="n">country</span><span class="p">:</span> <span class="s2">&quot;Norway&quot;</span>
+    <span class="n">state</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">postalCode</span><span class="p">:</span> <span class="s2">&quot;0484&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we set “geocodeModel.query” to the filled in <span class="xref std std-ref">Address</span> , and call update() on the <span class="xref std std-ref">GeocodeModel</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">send</span> <span class="n">the</span> <span class="n">geocode</span> <span class="n">request</span>
+<span class="n">geocodeModel</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">fromAddress</span>
+<span class="n">geocodeModel</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="directions-and-travel-routes">
+<span id="id6"></span><h2>Directions and Travel Routes<a class="headerlink" href="#directions-and-travel-routes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Similar to the <span class="xref std std-ref">GeocodeModel</span> , Qt Location also features the <span class="xref std std-ref">RouteModel</span> type, which allows information about routes (for example driving directions) between two or more points, to be received and used with a Map.</p>
+<p>Here again, we instantiate the <span class="xref std std-ref">RouteModel</span> as a property of our Map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RouteModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">routeModel</span>
+    <span class="n">plugin</span> <span class="p">:</span> <span class="nb">map</span><span class="o">.</span><span class="n">plugin</span>
+    <span class="n">query</span><span class="p">:</span>  <span class="n">RouteQuery</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">routeQuery</span>
+    <span class="p">}</span>
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">RouteModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">switch</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">case</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="o">//</span> <span class="n">technically</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">error</span>
+                <span class="nb">map</span><span class="o">.</span><span class="n">routeError</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">map</span><span class="o">.</span><span class="n">showRouteList</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">RouteModel</span><span class="o">.</span><span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">routeError</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To display the contents of a model to the user, we need a view. Once again we will use a <span class="xref std std-ref">MapItemView</span> , to display the Routes as objects on the Map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MapItemView</span> <span class="p">{</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">routeModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">routeDelegate</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To act as a template for the objects we wish the view to create, we create a delegate component:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">routeDelegate</span>
+
+    <span class="n">MapRoute</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">route</span>
+        <span class="n">route</span><span class="p">:</span> <span class="n">routeData</span>
+        <span class="n">line</span><span class="o">.</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#46a2da&quot;</span>
+        <span class="n">line</span><span class="o">.</span><span class="n">width</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="n">smooth</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">opacity</span><span class="p">:</span> <span class="mf">0.8</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the model, view and delegate now complete, the only missing component is some kind of control over the model to begin the Route request process. In the simplest case, we can fill out a Route request using two already available <span class="xref std std-ref">coordinates</span> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">property</span> <span class="n">variant</span> <span class="n">fromCoordinate</span><span class="p">:</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="mf">59.9483</span><span class="p">,</span> <span class="mf">10.7695</span><span class="p">)</span>
+<span class="nb">property</span> <span class="n">variant</span> <span class="n">toCoordinate</span><span class="p">:</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">coordinate</span><span class="p">(</span><span class="mf">59.9645</span><span class="p">,</span> <span class="mf">10.671</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the next snippet, we show how to set up the request object and instruct the model to update. We also instruct the map to center on the start coordinate for our routing request.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">clear</span> <span class="n">away</span> <span class="nb">any</span> <span class="n">old</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">query</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">clearWaypoints</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span> <span class="n">coords</span> <span class="k">as</span> <span class="n">waypoints</span> <span class="n">on</span> <span class="n">the</span> <span class="n">route</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">addWaypoint</span><span class="p">(</span><span class="n">startCoordinate</span><span class="p">)</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">addWaypoint</span><span class="p">(</span><span class="n">endCoordinate</span><span class="p">)</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">travelModes</span> <span class="o">=</span> <span class="n">RouteQuery</span><span class="o">.</span><span class="n">CarTravel</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">routeOptimizations</span> <span class="o">=</span> <span class="n">RouteQuery</span><span class="o">.</span><span class="n">FastestRoute</span>
+
+<span class="n">routeModel</span><span class="o">.</span><span class="n">update</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">center</span> <span class="n">the</span> <span class="nb">map</span> <span class="n">on</span> <span class="n">the</span> <span class="n">start</span> <span class="n">coord</span>
+<span class="nb">map</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">startCoordinate</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This is all that is required to display a Route on the Map. However, it is also useful to be able to retrieve the written directions and explanation of the travel route. In the example, these are displayed in a <span class="xref std std-ref">ListView</span> element. To create this content, we use a standard <a class="reference internal" href="qtquick-modelviewsdata-modelview.html#models-and-views-in-qt-quick"><span class="std std-ref">ListModel</span></a> and <span class="xref std std-ref">ListView</span> pair. The data in the <a class="reference internal" href="qtquick-modelviewsdata-modelview.html#models-and-views-in-qt-quick"><span class="std std-ref">ListModel</span></a> is built from the routeModel’s output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">interactive</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">ListModel</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">routeInfoModel</span> <span class="p">}</span>
+    <span class="n">header</span><span class="p">:</span> <span class="n">RouteListHeader</span> <span class="p">{}</span>
+    <span class="n">delegate</span><span class="p">:</span>  <span class="n">RouteListDelegate</span><span class="p">{</span>
+        <span class="n">routeIndex</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">routeInstruction</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">instruction</span>
+        <span class="n">routeDistance</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">distance</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Inside the <span class="xref std std-ref">RouteModel</span> , as you can see above, we add an <span class="xref std std-ref">onStatusChanged</span> handler, which calls the <code class="docutils literal"><span class="pre">showRouteList()</span></code> which updates the <code class="docutils literal"><span class="pre">routeInfoModel</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">routeInfoModel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">routeModel</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">routeInfoModel</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;instruction&quot;</span><span class="p">:</span> <span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">maneuver</span><span class="o">.</span><span class="n">instructionText</span><span class="p">,</span>
+             <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="n">Helper</span><span class="o">.</span><span class="n">formatDistance</span><span class="p">(</span><span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">maneuver</span><span class="o">.</span><span class="n">distanceToNextInstruction</span><span class="p">)</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="helper-js-example-file">
+<h1>helper.js Example File<a class="headerlink" href="#helper-js-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapviewer-qml-example-file">
+<h1>mapviewer.qml Example File<a class="headerlink" href="#mapviewer-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="geocode-qml-example-file">
+<h1>Geocode.qml Example File<a class="headerlink" href="#geocode-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="geocodeform-ui-qml-example-file">
+<h1>GeocodeForm.ui.qml Example File<a class="headerlink" href="#geocodeform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="locale-qml-example-file">
+<h1>Locale.qml Example File<a class="headerlink" href="#locale-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="localeform-ui-qml-example-file">
+<h1>LocaleForm.ui.qml Example File<a class="headerlink" href="#localeform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="message-qml-example-file">
+<h1>Message.qml Example File<a class="headerlink" href="#message-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="messageform-ui-qml-example-file">
+<h1>MessageForm.ui.qml Example File<a class="headerlink" href="#messageform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="reversegeocode-qml-example-file">
+<h1>ReverseGeocode.qml Example File<a class="headerlink" href="#reversegeocode-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="reversegeocodeform-ui-qml-example-file">
+<h1>ReverseGeocodeForm.ui.qml Example File<a class="headerlink" href="#reversegeocodeform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routeaddress-qml-example-file">
+<h1>RouteAddress.qml Example File<a class="headerlink" href="#routeaddress-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routeaddressform-ui-qml-example-file">
+<h1>RouteAddressForm.ui.qml Example File<a class="headerlink" href="#routeaddressform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routecoordinate-qml-example-file">
+<h1>RouteCoordinate.qml Example File<a class="headerlink" href="#routecoordinate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routecoordinateform-ui-qml-example-file">
+<h1>RouteCoordinateForm.ui.qml Example File<a class="headerlink" href="#routecoordinateform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routelist-qml-example-file">
+<h1>RouteList.qml Example File<a class="headerlink" href="#routelist-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routelistdelegate-qml-example-file">
+<h1>RouteListDelegate.qml Example File<a class="headerlink" href="#routelistdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="routelistheader-qml-example-file">
+<h1>RouteListHeader.qml Example File<a class="headerlink" href="#routelistheader-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="circleitem-qml-example-file">
+<h1>CircleItem.qml Example File<a class="headerlink" href="#circleitem-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageitem-qml-example-file">
+<h1>ImageItem.qml Example File<a class="headerlink" href="#imageitem-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapcomponent-qml-example-file">
+<h1>MapComponent.qml Example File<a class="headerlink" href="#mapcomponent-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapsliders-qml-example-file">
+<h1>MapSliders.qml Example File<a class="headerlink" href="#mapsliders-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="marker-qml-example-file">
+<h1>Marker.qml Example File<a class="headerlink" href="#marker-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="minimap-qml-example-file">
+<h1>MiniMap.qml Example File<a class="headerlink" href="#minimap-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="polygonitem-qml-example-file">
+<h1>PolygonItem.qml Example File<a class="headerlink" href="#polygonitem-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="polylineitem-qml-example-file">
+<h1>PolylineItem.qml Example File<a class="headerlink" href="#polylineitem-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="rectangleitem-qml-example-file">
+<h1>RectangleItem.qml Example File<a class="headerlink" href="#rectangleitem-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="itempopupmenu-qml-example-file">
+<h1>ItemPopupMenu.qml Example File<a class="headerlink" href="#itempopupmenu-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainmenu-qml-example-file">
+<h1>MainMenu.qml Example File<a class="headerlink" href="#mainmenu-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mappopupmenu-qml-example-file">
+<h1>MapPopupMenu.qml Example File<a class="headerlink" href="#mappopupmenu-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="markerpopupmenu-qml-example-file">
+<h1>MarkerPopupMenu.qml Example File<a class="headerlink" href="#markerpopupmenu-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapviewer-pro-example-file">
+<h1>mapviewer.pro Example File<a class="headerlink" href="#mapviewer-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapviewer-qrc-example-file">
+<h1>mapviewer.qrc Example File<a class="headerlink" href="#mapviewer-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="icon-png-image-file">
+<h1>icon.png Image File<a class="headerlink" href="#icon-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="marker-png-image-file">
+<h1>marker.png Image File<a class="headerlink" href="#marker-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scale-png-image-file">
+<h1>scale.png Image File<a class="headerlink" href="#scale-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scale-end-png-image-file">
+<h1>scale_end.png Image File<a class="headerlink" href="#scale-end-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

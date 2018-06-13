@@ -1,0 +1,388 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Plug &amp; Paint Basic Tools Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plug &amp; Paint Basic Tools Example</a><ul>
+<li><a class="reference internal" href="#declaration-of-the-plugin-class">Declaration of the Plugin Class</a></li>
+<li><a class="reference internal" href="#implementation-of-the-brush-interface">Implementation of the Brush Interface</a></li>
+<li><a class="reference internal" href="#implementation-of-the-shape-interface">Implementation of the Shape Interface</a></li>
+<li><a class="reference internal" href="#implementation-of-the-filter-interface">Implementation of the Filter Interface</a></li>
+<li><a class="reference internal" href="#exporting-the-plugin">Exporting the Plugin</a></li>
+<li><a class="reference internal" href="#the-pro-file">The .pro File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basictoolsplugin-cpp-example-file">basictoolsplugin.cpp Example File</a></li>
+<li><a class="reference internal" href="#basictoolsplugin-h-example-file">basictoolsplugin.h Example File</a></li>
+<li><a class="reference internal" href="#basictools-pro-example-file">basictools.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plug-paint-basic-tools-example">
+<span id="id1"></span><h1>Plug &amp; Paint Basic Tools Example<a class="headerlink" href="#plug-paint-basic-tools-example" title="Permalink to this headline">¶</a></h1>
+<p>A plugin providing the basic tools for painting functionality</p>
+<blockquote>
+<div><p>A plugin providing the basic tools for painting functionality.</p>
+<p>The Basic Tools example is a static plugin for the <a class="reference internal" href="qtwidgets-tools-plugandpaint-app-example.html#plug-paint-example"><span class="std std-ref">Plug &amp; Paint</span></a> example. It provides a set of basic brushes, shapes, and filters. Through the Basic Tools example, we will review the four steps involved in writing a Qt plugin:</p>
+<ol class="arabic simple">
+<li>Declare a plugin class.</li>
+<li>Implement the interfaces provided by the plugin.</li>
+<li>Export the plugin using the <code class="xref py py-func docutils literal"><span class="pre">Q_PLUGIN_METADATA()</span></code> macro.</li>
+<li>Build the plugin using an adequate <code class="docutils literal"><span class="pre">.pro</span></code> file.</li>
+</ol>
+</div></blockquote>
+<div class="section" id="declaration-of-the-plugin-class">
+<span id="id2"></span><h2>Declaration of the Plugin Class<a class="headerlink" href="#declaration-of-the-plugin-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;interfaces.h&gt;</span>
+
+<span class="c1">#include &lt;QRect&gt;</span>
+<span class="c1">#include &lt;QObject&gt;</span>
+<span class="c1">#include &lt;QtPlugin&gt;</span>
+<span class="c1">#include &lt;QStringList&gt;</span>
+<span class="c1">#include &lt;QPainterPath&gt;</span>
+<span class="c1">#include &lt;QImage&gt;</span>
+
+
+<span class="k">class</span> <span class="nc">BasicToolsPlugin</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span><span class="p">,</span>
+                         <span class="n">public</span> <span class="n">BrushInterface</span><span class="p">,</span>
+                         <span class="n">public</span> <span class="n">ShapeInterface</span><span class="p">,</span>
+                         <span class="n">public</span> <span class="n">FilterInterface</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s2">&quot;org.qt-project.Qt.Examples.PlugAndPaint.BrushInterface&quot;</span> <span class="n">FILE</span> <span class="s2">&quot;basictools.json&quot;</span><span class="p">)</span>
+
+    <span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">BrushInterface</span> <span class="n">ShapeInterface</span> <span class="n">FilterInterface</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We start by including <code class="docutils literal"><span class="pre">interfaces.h</span></code> , which defines the plugin interfaces for the <a class="reference internal" href="qtwidgets-tools-plugandpaint-app-example.html#plug-paint-example"><span class="std std-ref">Plug &amp; Paint</span></a> application. For the <code class="docutils literal"><span class="pre">#include</span></code> to work, we need to add an <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> entry to the <code class="docutils literal"><span class="pre">.pro</span></code> file with the path to the header file.</p>
+<p>The <code class="docutils literal"><span class="pre">BasicToolsPlugin</span></code> class is a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass that implements the <code class="docutils literal"><span class="pre">BrushInterface</span></code> , the <code class="docutils literal"><span class="pre">ShapeInterface</span></code> , and the <code class="docutils literal"><span class="pre">FilterInterface</span></code> . This is done through multiple inheritance. The <code class="docutils literal"><span class="pre">Q_INTERFACES()</span></code> macro is necessary to tell moc, Qt’s meta-object compiler, that the base classes are plugin interfaces. Without the <code class="docutils literal"><span class="pre">Q_INTERFACES()</span></code> macro, we couldn’t use <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> in the <a class="reference internal" href="qtwidgets-tools-plugandpaint-app-example.html#plug-paint-example"><span class="std std-ref">Plug &amp; Paint</span></a> application to detect interfaces. For an explanation for the <code class="docutils literal"><span class="pre">Q_PLUGIN_METADATA()</span></code> macro see <a class="reference internal" href="#plug-paint-basic-tools-example"><span class="std std-ref">Exporting the Plugin</span></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">public</span><span class="p">:</span>
+
+    <span class="o">//</span> <span class="n">BrushInterface</span>
+    <span class="n">QStringList</span> <span class="n">brushes</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QRect</span> <span class="n">mousePress</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">,</span> <span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                     <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QRect</span> <span class="n">mouseMove</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">,</span> <span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                    <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">oldPos</span><span class="p">,</span> <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">newPos</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QRect</span> <span class="n">mouseRelease</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">,</span> <span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                       <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">ShapeInterface</span>
+    <span class="n">QStringList</span> <span class="n">shapes</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">generateShape</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">shape</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">FilterInterface</span>
+    <span class="n">QStringList</span> <span class="n">filters</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QImage</span> <span class="n">filterImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="nb">filter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">,</span>
+                       <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">public</span></code> section of the class, we declare all the functions from the three interfaces.</p>
+</div></blockquote>
+</div>
+<div class="section" id="implementation-of-the-brush-interface">
+<span id="id3"></span><h2>Implementation of the Brush Interface<a class="headerlink" href="#implementation-of-the-brush-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s now review the implementation of the <code class="docutils literal"><span class="pre">BasicToolsPlugin</span></code> member functions inherited from <code class="docutils literal"><span class="pre">BrushInterface</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">brushes</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pencil&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Air Brush&quot;</span><span class="p">)</span>
+                         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Random Letters&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">brushes()</span></code> function returns a list of brushes provided by this plugin. We provide three brushes: Pencil, Air Brush, and Random Letters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRect</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">mousePress</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">,</span> <span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                                   <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">mouseMove</span><span class="p">(</span><span class="n">brush</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">pos</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>On a mouse press event, we just call <code class="docutils literal"><span class="pre">mouseMove()</span></code> to draw the spot where the event occurred.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRect</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">mouseMove</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">brush</span><span class="p">,</span> <span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                                  <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">oldPos</span><span class="p">,</span> <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">newPos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">();</span>
+
+    <span class="nb">int</span> <span class="n">rad</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">pen</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">QRect</span> <span class="n">boundingRect</span> <span class="o">=</span> <span class="n">QRect</span><span class="p">(</span><span class="n">oldPos</span><span class="p">,</span> <span class="n">newPos</span><span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+                                              <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="n">rad</span><span class="p">,</span> <span class="o">-</span><span class="n">rad</span><span class="p">,</span> <span class="o">+</span><span class="n">rad</span><span class="p">,</span> <span class="o">+</span><span class="n">rad</span><span class="p">);</span>
+    <span class="n">QColor</span> <span class="n">color</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">pen</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">thickness</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">pen</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="n">QColor</span> <span class="n">transparentColor</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="n">color</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">mouseMove()</span></code> , we start by saving the state of the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> and we compute a few variables that we’ll need later.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="p">(</span><span class="n">brush</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pencil&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">oldPos</span><span class="p">,</span> <span class="n">newPos</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">brush</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Air Brush&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">numSteps</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">newPos</span> <span class="o">-</span> <span class="n">oldPos</span><span class="p">)</span><span class="o">.</span><span class="n">manhattanLength</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Dense6Pattern</span><span class="p">));</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numSteps</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">oldPos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">newPos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="n">oldPos</span><span class="o">.</span><span class="n">x</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">numSteps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">oldPos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">newPos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">oldPos</span><span class="o">.</span><span class="n">y</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">numSteps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">thickness</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">thickness</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                                <span class="n">thickness</span><span class="p">,</span> <span class="n">thickness</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">brush</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Random Letters&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">QChar</span> <span class="n">ch</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+
+        <span class="n">QFont</span> <span class="n">biggerFont</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">();</span>
+        <span class="n">biggerFont</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+        <span class="n">biggerFont</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">biggerFont</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span> <span class="o">+</span> <span class="n">thickness</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">biggerFont</span><span class="p">);</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">newPos</span><span class="p">,</span> <span class="n">QString</span><span class="p">(</span><span class="n">ch</span><span class="p">));</span>
+
+        <span class="n">QFontMetrics</span> <span class="n">metrics</span><span class="p">(</span><span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">());</span>
+        <span class="n">boundingRect</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">boundingRect</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+        <span class="n">boundingRect</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">newPos</span><span class="p">);</span>
+        <span class="n">boundingRect</span><span class="o">.</span><span class="n">adjust</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="o">+</span><span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">boundingRect</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then comes the brush-dependent part of the code:</p>
+<ul class="simple">
+<li>If the brush is Pencil, we just call <code class="xref py py-func docutils literal"><span class="pre">QPainter.drawLine()</span></code> with the current <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> .</li>
+<li>If the brush is Air Brush, we start by setting the painter’s <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> to <code class="xref py py-attr docutils literal"><span class="pre">Qt.Dense6Pattern</span></code> to obtain a dotted pattern. Then we draw a circle filled with that <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> several times, resulting in a thick line.</li>
+<li>If the brush is Random Letters, we draw a random letter at the new cursor position. Most of the code is for setting the font to be bold and larger than the default font and for computing an appropriate bounding rect.</li>
+</ul>
+<p>At the end, we restore the painter state to what it was upon entering the function and we return the bounding rectangle.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRect</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">mouseRelease</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">brush</span> <span class="o">*/</span><span class="p">,</span>
+                                     <span class="n">QPainter</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">painter</span> <span class="o">*/</span><span class="p">,</span>
+                                     <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">pos</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user releases the mouse, we do nothing and return an empty <a class="reference internal" href="../PySide2/QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="implementation-of-the-shape-interface">
+<span id="id4"></span><h2>Implementation of the Shape Interface<a class="headerlink" href="#implementation-of-the-shape-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">shapes</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Circle&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Star&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Text...&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The plugin provides three shapes: Circle, Star, and Text…. The three dots after Text are there because the shape pops up a dialog asking for more information. We know that the shape names will end up in a menu, so we include the three dots in the shape name.</p>
+<p>A cleaner but more complicated design would have been to distinguish between the internal shape name and the name used in the user interface.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QPainterPath BasicToolsPlugin::generateShape(const QString &amp;shape,
+                                             QWidget *parent)
+{
+    QPainterPath path;
+
+    if (shape == tr(&quot;Circle&quot;)) {
+        path.addEllipse(0, 0, 50, 50);
+    } else if (shape == tr(&quot;Star&quot;)) {
+        path.moveTo(90, 50);
+        for (int i = 1; i &lt; 5; ++i) {
+            path.lineTo(50 + 40 * std::cos(0.8 * i * M_PI),
+                        50 + 40 * std::sin(0.8 * i * M_PI));
+        }
+        path.closeSubpath();
+    } else if (shape == tr(&quot;Text...&quot;)) {
+        QString text = QInputDialog::getText(parent, tr(&quot;Text Shape&quot;),
+                                             tr(&quot;Enter text:&quot;),
+                                             QLineEdit::Normal, tr(&quot;Qt&quot;));
+        if (!text.isEmpty()) {
+            QFont timesFont(&quot;Times&quot;, 50);
+            timesFont.setStyleStrategy(QFont::ForceOutline);
+            path.addText(0, 0, timesFont, text);
+        }
+    }
+
+    return path;
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">generateShape()</span></code> creates a <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> for the specified shape. If the shape is Text, we pop up a <a class="reference internal" href="../PySide2/QtWidgets/QInputDialog.html#PySide2.QtWidgets.QInputDialog" title="PySide2.QtWidgets.QInputDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QInputDialog</span></code></a> to let the user enter some text.</p>
+</div></blockquote>
+</div>
+<div class="section" id="implementation-of-the-filter-interface">
+<span id="id5"></span><h2>Implementation of the Filter Interface<a class="headerlink" href="#implementation-of-the-filter-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">filters</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Invert Pixels&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Swap RGB&quot;</span><span class="p">)</span>
+                         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Grayscale&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The plugin provides three filters: Invert Pixels, Swap RGB, and Grayscale.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QImage</span> <span class="n">BasicToolsPlugin</span><span class="p">::</span><span class="n">filterImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="nb">filter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">,</span>
+                                     <span class="n">QWidget</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">parent</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QImage</span> <span class="n">result</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convertToFormat</span><span class="p">(</span><span class="n">QImage</span><span class="p">::</span><span class="n">Format_RGB32</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">filter</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Invert Pixels&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">invertPixels</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">filter</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Swap RGB&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">rgbSwapped</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">filter</span> <span class="o">==</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Grayscale&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">height</span><span class="p">();</span> <span class="o">++</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">width</span><span class="p">();</span> <span class="o">++</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nb">int</span> <span class="n">pixel</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+                <span class="nb">int</span> <span class="n">gray</span> <span class="o">=</span> <span class="n">qGray</span><span class="p">(</span><span class="n">pixel</span><span class="p">);</span>
+                <span class="nb">int</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">qAlpha</span><span class="p">(</span><span class="n">pixel</span><span class="p">);</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">setPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">qRgba</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">gray</span><span class="p">,</span> <span class="n">gray</span><span class="p">,</span> <span class="n">alpha</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">filterImage()</span></code> function takes a filter name and a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> as parameters and returns an altered <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . The first thing we do is to convert the image to a 32-bit RGB format, to ensure that the algorithms will work as expected. For example, <code class="xref py py-func docutils literal"><span class="pre">QImage.invertPixels()</span></code> , which is used to implement the Invert Pixels filter, gives counterintuitive results for 8-bit images, because they invert the indices into the color table instead of inverting the color table’s entries.</p>
+</div></blockquote>
+</div>
+<div class="section" id="exporting-the-plugin">
+<span id="id6"></span><h2>Exporting the Plugin<a class="headerlink" href="#exporting-the-plugin" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To finally export your plugin you just have to add the <code class="docutils literal"><span class="pre">Q_PLUGIN_METADATA()</span></code> macro right next to the <code class="docutils literal"><span class="pre">Q_OBJECT()</span></code> macro into the header file of the plugin. It must contain the plugins IID and optionally a filename pointing to a json file containing the metadata for the plugin.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s2">&quot;org.qt-project.Qt.Examples.PlugAndPaint.BrushInterface&quot;</span> <span class="n">FILE</span> <span class="s2">&quot;basictools.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Within this example the json file does not need to export any metadata, so it just contains an empty json object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-pro-file">
+<span id="id7"></span><h2>The .pro File<a class="headerlink" href="#the-pro-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here’s the project file for building the Basic Tools plugin:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;tools/plugandpaint/plugins/basictools/basictools.pro:0&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.pro</span></code> file differs from typical <code class="docutils literal"><span class="pre">.pro</span></code> files in many respects. First, it starts with a <code class="docutils literal"><span class="pre">TEMPLATE</span></code> entry specifying <code class="docutils literal"><span class="pre">lib</span></code> . (The default template is <code class="docutils literal"><span class="pre">app</span></code> .) It also adds <code class="docutils literal"><span class="pre">plugin</span></code> to the <code class="docutils literal"><span class="pre">CONFIG</span></code> variable. This is necessary on some platforms to avoid generating symbolic links with version numbers in the file name, which is appropriate for most dynamic libraries but not for plugins.</p>
+<p>To make the plugin a static plugin, all that is required is to specify <code class="docutils literal"><span class="pre">static</span></code> in addition to <code class="docutils literal"><span class="pre">plugin</span></code> . The <a class="reference internal" href="qtwidgets-tools-plugandpaint-plugins-extrafilters-example.html#plug-paint-extra-filters-example"><span class="std std-ref">Extra Filters</span></a> plugin, which is compiled as a dynamic plugin, doesn’t specify <code class="docutils literal"><span class="pre">static</span></code> in its <code class="docutils literal"><span class="pre">.pro</span></code> file.</p>
+<p>The <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> variable sets the search paths for global headers (i.e., header files included using <code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;...&gt;</span></code> ). We add <code class="docutils literal"><span class="pre">../../app</span></code> to the list, so that we can include <code class="docutils literal"><span class="pre">&lt;interfaces.h&gt;</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">TARGET</span></code> variable specifies which name we want to give the target library. We use <code class="docutils literal"><span class="pre">pnp_</span></code> as the prefix to show that the plugin is designed to work with Plug &amp; Paint. On Unix, <code class="docutils literal"><span class="pre">lib</span></code> is also prepended to that name. On all platforms, a platform-specific suffix is appended (e.g., <code class="docutils literal"><span class="pre">.dll</span></code> on Windows, <code class="docutils literal"><span class="pre">.a</span></code> on Linux).</p>
+<p>The <code class="docutils literal"><span class="pre">CONFIG()</span></code> code at the end is necessary for this example because the example is part of the Qt distribution and Qt can be configured to be built simultaneously in debug and in release modes. You don’t need to for your own plugins.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="basictoolsplugin-cpp-example-file">
+<h1>basictoolsplugin.cpp Example File<a class="headerlink" href="#basictoolsplugin-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="basictoolsplugin-h-example-file">
+<h1>basictoolsplugin.h Example File<a class="headerlink" href="#basictoolsplugin-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="basictools-pro-example-file">
+<h1>basictools.pro Example File<a class="headerlink" href="#basictools-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

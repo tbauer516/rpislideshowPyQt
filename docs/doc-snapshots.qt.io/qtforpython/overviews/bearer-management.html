@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Bearer Management &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Bearer Management</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#the-api-in-detail">The API in Detail</a></li>
+<li><a class="reference internal" href="#service-networks">Service networks</a></li>
+<li><a class="reference internal" href="#managing-network-sessions">Managing network sessions</a></li>
+<li><a class="reference internal" href="#roaming">Roaming</a></li>
+<li><a class="reference internal" href="#platform-capabilities">Platform capabilities</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bearer-management">
+<span id="id1"></span><h1>Bearer Management<a class="headerlink" href="#bearer-management" title="Permalink to this headline">¶</a></h1>
+<p>An API to control the system’s connectivity state</p>
+<blockquote>
+<div><p>An API to control the system’s connectivity state.</p>
+<p>Bearer Management controls the connectivity state of the system so that the user can start or stop interfaces or roam transparently between access points.</p>
+</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Bearer Management API controls the system’s connectivity state. This incorporates simple information such as whether the device is online and how many interfaces there are as well as enables the application developer to start, stop network interfaces and influences other connection specific details. Depending on the platform’s capabilities it may even provide session management so that a network interface remains up for as long as clients have a registered interest in them while at the same time optimizes the interface’s uptime.</p>
+<p>This API does not provide support for management of network configurations themselves. It is up to the platform to provide infrastructure which enables to user to create, edit or delete network configurations.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-api-in-detail">
+<span id="id3"></span><h2>The API in Detail<a class="headerlink" href="#the-api-in-detail" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Computer systems manage their network interfaces via a set of configurations. Each configuration describes a set of parameters which instruct the system how a particular network interface is started. One of the most simplistic examples might be an Ethernet configuration that links a network card to a DHCP server. A more complex example might be a Wireless LAN configuration which may comprise of hardware details such as the WLAN card address, WLAN access point details (e.g ESSID, encryption details) and user specific information (for example username and password). Once the network interface was configured and started according to the configuration blue print, multiple applications are free to use this link layer connection/session for their own socket operations. Note that the <a class="reference internal" href="../PySide2/QtNetwork/QNetworkConfiguration.html#PySide2.QtNetwork.QNetworkConfiguration" title="PySide2.QtNetwork.QNetworkConfiguration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkConfiguration</span></code></a> object only provides limited information about the configuration details themselves. It’s main purpose is to act as a configuration identifier through which link layer connections can be created, destroyed and monitored.</p>
+<p><a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> provides two types of use cases. It enables the monitoring of physical network interfaces and management of network sessions. Network sessions are a common feature on mobile devices where multiple applications can request network sessions as they see fit. The system consolidates and tracks active network sessions for the same network interface by maintaining the link layer connections until the last session has been closed. The subsequent table lists the major <a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> functions and how they fit into the session and hardware management categories:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Interface management</td>
+<td>Session management</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.stop()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.open()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.interface()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.close()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.state()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.isOpen()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.bytesWritten()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.migrate()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.bytesReceived()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.ignore()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.activeTime()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.accept()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.stateChanged()</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.reject()</span></code></td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.opened()</span></code></td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td><code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.closed()</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>The state of the session represents the state of the underlying access point whereas the session’s openness implies the networking/connectivity state available to the current process.</p>
+<p>Possible use cases for interface management are network management related applications which intend to monitor the connectivity state but do not engage in network communication themselves. Any application wanting to open a socket to a remote address will typically use session management related functionality.</p>
+</div></blockquote>
+</div>
+<div class="section" id="service-networks">
+<span id="id4"></span><h2>Service networks<a class="headerlink" href="#service-networks" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Some mobile platforms use the concept of grouped access points (also called SNAP or Service Network Access Point). In principle multiple configurations are grouped together and possibly even prioritized when compared to each other. This is useful for use cases where all configurations serve a similar purpose or context. A common context could be that they provide access to the public Internet or possibly only to the office Intranet. By providing a pool of configurations the system can make a decision based on given priorities which usually map to factors such as speed, availability and cost. Furthermore the system can automatically roam from one access point to the next one while ensuring minimal impact on the user experience.</p>
+<p>The <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfiguration.Type</span></code> flag specifies to what category a configuration belongs. The <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfiguration.InternetAccessPoint</span></code> type is the most common example. It represents a configuration that can be used to create a session. The above mentioned grouping behavior is provided by <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfiguration.ServiceNetwork</span></code> configurations. Service networks are place holders until such time when the user attempts to <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.open()</span></code> a new session. At that point in time the system determines which of the configurations <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfiguration.children()</span></code> is best to use. The selection algorithm is provided by the platform and is usually managed by network settings applications. A service network can only have one level of indirection which implies children can only be of type <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfiguration.InternetAccessPoint</span></code> .</p>
+<p>Most systems allow the user to define the systems default configuration. Usually the default behavior is either a service network, a particular Internet access point or the user instructs the platform to ask the user once an application requests the network. User interaction is generally implemented by some sort of system dialog which shows up at the appropriate point in time. The application does not have to handle the user input. This API provides the <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfigurationManager.defaultConfiguration()</span></code> call which serves a similar purpose. The subsequent code snippet provides a quick way how an application can quickly create a new network session without (or only minimal) user interaction:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>// Set Internet Access Point
+QNetworkConfigurationManager manager;
+const bool canStartIAP = (manager.capabilities()
+                          &amp; QNetworkConfigurationManager::CanStartAndStopInterfaces);
+// Is there default access point, use it
+QNetworkConfiguration cfg = manager.defaultConfiguration();
+if (!cfg.isValid() || (!canStartIAP &amp;&amp; cfg.state() != QNetworkConfiguration::Active)) {
+    QMessageBox::information(this, tr(&quot;Network&quot;), tr(
+                                 &quot;No Access Point found.&quot;));
+    return;
+}
+
+session = new QNetworkSession(cfg, this);
+session-&gt;open();
+session-&gt;waitForOpened(-1);
+</pre></div>
+</div>
+<p>To accommodate the “Ask user” use case the default configuration can be of type <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfiguration.UserChoice</span></code> . A user choice configuration is resolved as part of the <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.open()</span></code> call. Note that a <code class="xref py py-attr docutils literal"><span class="pre">UserChoice</span></code> configuration is only ever returned via <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfigurationManager.defaultConfiguration()</span></code> and not <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfigurationManager.allConfigurations()</span></code> .</p>
+<p>On systems which do not maintain a list of <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfigurationManager.defaultConfiguration()</span></code> an invalid configuration is returned. A possible workaround could be to implement a custom dialog which is populated based on what <code class="xref py py-func docutils literal"><span class="pre">QNetworkConfigurationManager.allConfigurations()</span></code> returns.</p>
+</div></blockquote>
+</div>
+<div class="section" id="managing-network-sessions">
+<span id="id5"></span><h2>Managing network sessions<a class="headerlink" href="#managing-network-sessions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> object separates a <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.state()</span></code> and an <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.isOpen()</span></code> condition.</p>
+<p>The state() attribute enables developers to detect whether the system currently maintains a global network session for the given <a class="reference internal" href="../PySide2/QtNetwork/QNetworkConfiguration.html#PySide2.QtNetwork.QNetworkConfiguration" title="PySide2.QtNetwork.QNetworkConfiguration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkConfiguration</span></code></a> . If <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.isOpen()</span></code> returns <code class="docutils literal"><span class="pre">true</span></code> the <a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> instance at hand was at least one of the entities requesting the global network session. This distinction is required to support the notion of session registrations. For as long as there are one or more open <a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> instances the underlying network interface is not shut down. Therefore the session <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.state()</span></code> can be used to monitor the state of network interfaces.</p>
+<p>An open session is created by calling <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.open()</span></code> and closed via <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.close()</span></code> , respectively. If the session is <code class="xref py py-attr docutils literal"><span class="pre">disconnected</span></code> at the time of the <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.open()</span></code> call the underlying interface is started; otherwise only the reference counter against the global session is incremented. The opposite behavior can be observed when using <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.close()</span></code> .</p>
+<p>In some use cases it may be necessary to turn the interface off despite of open sessions. This can be achieved by calling <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.stop()</span></code> . An example use case could be a network manager type of application allowing the user to control the overall state of the devices connectivity.</p>
+<p>Global (inter-process) session support is platform dependent and can be detected via <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfigurationManager.SystemSessionSupport</span></code> . If the system does not support global session calling <code class="xref py py-func docutils literal"><span class="pre">QNetworkSession.close()</span></code> never stops the interface.</p>
+</div></blockquote>
+</div>
+<div class="section" id="roaming">
+<span id="id6"></span><h2>Roaming<a class="headerlink" href="#roaming" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Roaming is the process of reconnecting a device from one network to another while minimizing the impact on the application. The system notifies the application about link layer changes so that the required preparation can be taken. The most common reaction would be to reinitialize sockets and to renegotiate stateful connections with other parties. In the most extreme cases applications may even prevent the roaming altogether.</p>
+<p>Roaming is initiated when the system determines that a more appropriate access point becomes available to the user. In general such a decision is based on cost, network speed or network type (access to certain private networks may only be provided via certain access points). Almost all devices providing roaming support have some form of global configuration application enabling the user to define such groups of access points (service networks) and priorities.</p>
+<p>This API supports two types of roaming. Application level roaming (ALR) provides the most control over the process. Applications will be notified about upcoming link layer changes and get the opportunity to test the new access point. Eventually they can reject or accept the link layer change. The second form of roaming is referred to as Forced Roaming. The system simply changes the link layer without consulting the application. It is up to the application to detect that some of its internal socket may have become invalid. As a consequence it has to reinitialize those sockets and reestablish the previous user session without any interruption. Forced roaming has the advantage that applications don’t have to manage the entire roaming process by themselves.</p>
+<p><a class="reference internal" href="../PySide2/QtNetwork/QNetworkSession.html#PySide2.QtNetwork.QNetworkSession" title="PySide2.QtNetwork.QNetworkSession"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkSession</span></code></a> is the central class for managing roaming related issues.</p>
+</div></blockquote>
+</div>
+<div class="section" id="platform-capabilities">
+<span id="id7"></span><h2>Platform capabilities<a class="headerlink" href="#platform-capabilities" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Some API features are not available on all platforms. The <code class="xref py py-attr docutils literal"><span class="pre">QNetworkConfigurationManager.Capability</span></code> should be used to detect platform features at runtime.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

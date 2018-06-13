@@ -1,0 +1,342 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>System Tray Icon Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">System Tray Icon Example</a><ul>
+<li><a class="reference internal" href="#window-class-definition">Window Class Definition</a></li>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#systray-pro-example-file">systray.pro Example File</a></li>
+<li><a class="reference internal" href="#systray-qrc-example-file">systray.qrc Example File</a></li>
+<li><a class="reference internal" href="#bad-png-image-file">bad.png Image File</a></li>
+<li><a class="reference internal" href="#heart-png-image-file">heart.png Image File</a></li>
+<li><a class="reference internal" href="#trash-png-image-file">trash.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="system-tray-icon-example">
+<span id="id1"></span><h1>System Tray Icon Example<a class="headerlink" href="#system-tray-icon-example" title="Permalink to this headline">¶</a></h1>
+<p>System Tray Icon example shows how to add an icon with a menu and popup messages to a desktop environment’s system tray</p>
+<blockquote>
+<div><p>The System Tray Icon example shows how to add an icon with a menu and popup messages to a desktop environment’s system tray.</p>
+<p>Modern operating systems usually provide a special area on the desktop, called the system tray or notification area, where long-running applications can display icons and short messages.</p>
+<p>This example consists of one single class, <code class="docutils literal"><span class="pre">Window</span></code> , providing the main application window (i.e., an editor for the system tray icon) and the associated icon.</p>
+<p>The editor allows the user to choose the preferred icon as well as set the balloon message’s type and duration. The user can also edit the message’s title and body. Finally, the editor provides a checkbox controlling whether the icon is actually shown in the system tray, or not.</p>
+</div></blockquote>
+<div class="section" id="window-class-definition">
+<span id="id2"></span><h2>Window Class Definition<a class="headerlink" href="#window-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Window</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Window</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span> <span class="n">visible</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">closeEvent</span><span class="p">(</span><span class="n">QCloseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setIcon</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">iconActivated</span><span class="p">(</span><span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">ActivationReason</span> <span class="n">reason</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">showMessage</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">messageClicked</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createIconGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createMessageGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createTrayIcon</span><span class="p">();</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">iconGroupBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">iconLabel</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">iconComboBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">showIconCheckBox</span><span class="p">;</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">messageGroupBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">typeLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">durationLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">durationWarningLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">titleLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">bodyLabel</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">typeComboBox</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">durationSpinBox</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">titleEdit</span><span class="p">;</span>
+    <span class="n">QTextEdit</span> <span class="o">*</span><span class="n">bodyEdit</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">showMessageButton</span><span class="p">;</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">minimizeAction</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">maximizeAction</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">restoreAction</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">quitAction</span><span class="p">;</span>
+
+    <span class="n">QSystemTrayIcon</span> <span class="o">*</span><span class="n">trayIcon</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">trayIconMenu</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We implement several private slots to respond to user interaction. The other private functions are only convenience functions provided to simplify the constructor.</p>
+<p>The tray icon is an instance of the <a class="reference internal" href="../PySide2/QtWidgets/QSystemTrayIcon.html#PySide2.QtWidgets.QSystemTrayIcon" title="PySide2.QtWidgets.QSystemTrayIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSystemTrayIcon</span></code></a> class. To check whether a system tray is present on the user’s desktop, call the static <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.isSystemTrayAvailable()</span></code> function. Associated with the icon, we provide a menu containing the typical minimize, maximize, restore and quit actions. We reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setVisible()</span></code> function to update the tray icon’s menu whenever the editor’s appearance changes, e.g., when maximizing or minimizing the main application window.</p>
+<p>Finally, we reimplement <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.closeEvent()</span></code> function to be able to inform the user (when closing the editor window) that the program will keep running in the system tray until the user chooses the Quit entry in the icon’s context menu.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-implementation">
+<span id="id3"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When constructing the editor widget, we first create the various editor elements before we create the actual system tray icon:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Window</span><span class="p">::</span><span class="n">Window</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">createIconGroupBox</span><span class="p">();</span>
+    <span class="n">createMessageGroupBox</span><span class="p">();</span>
+
+    <span class="n">iconLabel</span><span class="o">-&gt;</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">durationLabel</span><span class="o">-&gt;</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">());</span>
+
+    <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">createTrayIcon</span><span class="p">();</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">showMessageButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">showMessage</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">showIconCheckBox</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractButton</span><span class="p">::</span><span class="n">toggled</span><span class="p">,</span> <span class="n">trayIcon</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">setVisible</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">iconComboBox</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">currentIndexChanged</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">setIcon</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">trayIcon</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">messageClicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">messageClicked</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">trayIcon</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">activated</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">iconActivated</span><span class="p">);</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">iconGroupBox</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">messageGroupBox</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">trayIcon</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Systray&quot;</span><span class="p">));</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We ensure that the application responds to user input by connecting most of the editor’s input widgets (including the system tray icon) to the application’s private slots. But note the visibility checkbox; its <code class="xref py py-func docutils literal"><span class="pre">QCheckBox.toggled()</span></code> signal is connected to the <em>icon</em> ‘s <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.setVisible()</span></code> function instead.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">setIcon</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QIcon</span> <span class="n">icon</span> <span class="o">=</span> <span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">itemIcon</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="n">trayIcon</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">);</span>
+    <span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">);</span>
+
+    <span class="n">trayIcon</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">itemText</span><span class="p">(</span><span class="n">index</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setIcon()</span></code> slot is triggered whenever the current index in the icon combobox changes, i.e., whenever the user chooses another icon in the editor. Note that it is also called when the user activates the tray icon with the left mouse button, triggering the icon’s <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.activated()</span></code> signal. We will come back to this signal shortly.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.setIcon()</span></code> function sets the <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.icon()</span></code> property that holds the actual system tray icon. On Windows, the system tray icon size is 16x16; on X11, the preferred size is 22x22. The icon will be scaled to the appropriate size as necessary.</p>
+<p>Note that on X11, due to a limitation in the system tray specification, mouse clicks on transparent areas in the icon are propagated to the system tray. If this behavior is unacceptable, we suggest using an icon with no transparency.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">iconActivated</span><span class="p">(</span><span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">ActivationReason</span> <span class="n">reason</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">reason</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">Trigger</span><span class="p">:</span>
+    <span class="n">case</span> <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">DoubleClick</span><span class="p">:</span>
+        <span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">((</span><span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">());</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">MiddleClick</span><span class="p">:</span>
+        <span class="n">showMessage</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whenever the user activates the system tray icon, it emits its <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.activated()</span></code> signal passing the triggering reason as parameter. <a class="reference internal" href="../PySide2/QtWidgets/QSystemTrayIcon.html#PySide2.QtWidgets.QSystemTrayIcon" title="PySide2.QtWidgets.QSystemTrayIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSystemTrayIcon</span></code></a> provides the <code class="xref py py-attr docutils literal"><span class="pre">QSystemTrayIcon.ActivationReason</span></code> enum to describe how the icon was activated.</p>
+<p>In the constructor, we connected our icon’s <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.activated()</span></code> signal to our custom <code class="docutils literal"><span class="pre">iconActivated()</span></code> slot: If the user has clicked the icon using the left mouse button, this function changes the icon image by incrementing the icon combobox’s current index, triggering the <code class="docutils literal"><span class="pre">setIcon()</span></code> slot as mentioned above. If the user activates the icon using the middle mouse button, it calls the custom <code class="docutils literal"><span class="pre">showMessage()</span></code> slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">showMessage</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">showIconCheckBox</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">MessageIcon</span> <span class="n">msgIcon</span> <span class="o">=</span> <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">MessageIcon</span><span class="p">(</span>
+            <span class="n">typeComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span><span class="n">typeComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">())</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">msgIcon</span> <span class="o">==</span> <span class="n">QSystemTrayIcon</span><span class="p">::</span><span class="n">NoIcon</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QIcon</span> <span class="n">icon</span><span class="p">(</span><span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">itemIcon</span><span class="p">(</span><span class="n">iconComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">()));</span>
+        <span class="n">trayIcon</span><span class="o">-&gt;</span><span class="n">showMessage</span><span class="p">(</span><span class="n">titleEdit</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">(),</span> <span class="n">bodyEdit</span><span class="o">-&gt;</span><span class="n">toPlainText</span><span class="p">(),</span> <span class="n">icon</span><span class="p">,</span>
+                          <span class="n">durationSpinBox</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">trayIcon</span><span class="o">-&gt;</span><span class="n">showMessage</span><span class="p">(</span><span class="n">titleEdit</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">(),</span> <span class="n">bodyEdit</span><span class="o">-&gt;</span><span class="n">toPlainText</span><span class="p">(),</span> <span class="n">msgIcon</span><span class="p">,</span>
+                          <span class="n">durationSpinBox</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the <em>showMessage()</em> slot is triggered, we first retrieve the message icon depending on the currently chosen message type. The <code class="xref py py-attr docutils literal"><span class="pre">QSystemTrayIcon.MessageIcon</span></code> enum describes the icon that is shown when a balloon message is displayed. Then we call <a class="reference internal" href="../PySide2/QtWidgets/QSystemTrayIcon.html#PySide2.QtWidgets.QSystemTrayIcon" title="PySide2.QtWidgets.QSystemTrayIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSystemTrayIcon</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.showMessage()</span></code> function to show the message with the title, body, and icon for the time specified in milliseconds.</p>
+<p><span class="xref std std-ref">macOS</span> users note: The Growl notification system must be installed for <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.showMessage()</span></code> to display messages.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QSystemTrayIcon.html#PySide2.QtWidgets.QSystemTrayIcon" title="PySide2.QtWidgets.QSystemTrayIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSystemTrayIcon</span></code></a> also has the corresponding, <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.messageClicked()</span></code> signal, which is emitted when the user clicks a message displayed by <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.showMessage()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">messageClicked</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">information</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Systray&quot;</span><span class="p">),</span>
+                             <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Sorry, I already gave what help I could.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="s2">&quot;Maybe you should try asking a human?&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we connected the <code class="xref py py-func docutils literal"><span class="pre">QSystemTrayIcon.messageClicked()</span></code> signal to our custom <code class="docutils literal"><span class="pre">messageClicked()</span></code> slot that simply displays a message using the <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> class.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> provides a modal dialog with a short message, an icon, and buttons laid out depending on the current style. It supports four severity levels: “Question”, “Information”, “Warning” and “Critical”. The easiest way to pop up a message box in Qt is to call one of the associated static functions, e.g., <code class="xref py py-func docutils literal"><span class="pre">QMessageBox.information()</span></code> .</p>
+<p>As we mentioned earlier, we reimplement a couple of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s virtual functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Window::setVisible(bool visible)
+{
+    minimizeAction-&gt;setEnabled(visible);
+    maximizeAction-&gt;setEnabled(!isMaximized());
+    restoreAction-&gt;setEnabled(isMaximized() || !visible);
+    QDialog::setVisible(visible);
+}
+</pre></div>
+</div>
+<p>Our reimplementation of the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setVisible()</span></code> function updates the tray icon’s menu whenever the editor’s appearance changes, e.g., when maximizing or minimizing the main application window, before calling the base class implementation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Window::closeEvent(QCloseEvent *event)
+{
+#ifdef Q_OS_OSX
+    if (!event-&gt;spontaneous() || !isVisible()) {
+        return;
+    }
+#endif
+    if (trayIcon-&gt;isVisible()) {
+        QMessageBox::information(this, tr(&quot;Systray&quot;),
+                                 tr(&quot;The program will keep running in the &quot;
+                                    &quot;system tray. To terminate the program, &quot;
+                                    &quot;choose &lt;b&gt;Quit&lt;/b&gt; in the context menu &quot;
+                                    &quot;of the system tray entry.&quot;));
+        hide();
+        event-&gt;ignore();
+    }
+}
+</pre></div>
+</div>
+<p>We have reimplemented the <code class="xref py py-func docutils literal"><span class="pre">QWidget.closeEvent()</span></code> event handler to receive widget close events, showing the above message to the users when they are closing the editor window. On <span class="xref std std-ref">macOS</span> we need to avoid showing the message and accepting the close event when the user really intends to quit the application, that is, when the user has triggered “Quit” in the menu bar or pressed the Command+Q shortcut.</p>
+<p>In addition to the functions and slots discussed above, we have also implemented several convenience functions to simplify the constructor: <code class="docutils literal"><span class="pre">createIconGroupBox()</span></code> , <code class="docutils literal"><span class="pre">createMessageGroupBox()</span></code> , <code class="docutils literal"><span class="pre">createActions()</span></code> and <code class="docutils literal"><span class="pre">createTrayIcon()</span></code> . See the <span class="xref std std-ref">window.cpp</span> file for details.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="systray-pro-example-file">
+<h1>systray.pro Example File<a class="headerlink" href="#systray-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="systray-qrc-example-file">
+<h1>systray.qrc Example File<a class="headerlink" href="#systray-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="bad-png-image-file">
+<h1>bad.png Image File<a class="headerlink" href="#bad-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="heart-png-image-file">
+<h1>heart.png Image File<a class="headerlink" href="#heart-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="trash-png-image-file">
+<h1>trash.png Image File<a class="headerlink" href="#trash-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

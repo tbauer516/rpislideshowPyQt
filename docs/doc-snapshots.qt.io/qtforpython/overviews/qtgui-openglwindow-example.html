@@ -1,0 +1,408 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>OpenGL Window Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OpenGL Window Example</a><ul>
+<li><a class="reference internal" href="#openglwindow-super-class">OpenGLWindow Super Class</a></li>
+<li><a class="reference internal" href="#example-opengl-rendering-sub-class">Example OpenGL Rendering Sub Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#openglwindow-cpp-example-file">openglwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#openglwindow-h-example-file">openglwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#openglwindow-pro-example-file">openglwindow.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="opengl-window-example">
+<span id="id1"></span><h1>OpenGL Window Example<a class="headerlink" href="#opengl-window-example" title="Permalink to this headline">¶</a></h1>
+<p>This example shows how to create a minimal QWindow based application for the purpose of using OpenGL</p>
+<blockquote>
+<div><p>This example shows how to create a minimal <a class="reference internal" href="../PySide2/QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> based application for the purpose of using OpenGL.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a low level example of how to use <a class="reference internal" href="../PySide2/QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> with OpenGL. In practice you should consider using the higher level <a class="reference internal" href="../PySide2/QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> class.</p>
+</div>
+</div></blockquote>
+<div class="section" id="openglwindow-super-class">
+<span id="id2"></span><h2>OpenGLWindow Super Class<a class="headerlink" href="#openglwindow-super-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Our OpenGLWindow class acts as an API which is then subclassed to do the actual rendering. It has functions to make a request for render() to be called, either immediately with renderNow() or as soon as the event loop has finished processing the current batch of events with renderLater(). The OpenGLWindow subclass can either reimplement render() for OpenGL based rendering, or render( <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> *) for rendering with a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> . Use OpenGLWindow::setAnimating(true) for render() to be called at the vertical refresh rate, assuming vertical sync is enabled in the underlying OpenGL drivers.</p>
+<p>In the class that does the OpenGL rendering you will typically want to inherit from <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> , as our OpenGLWindow does, in order to get platform independent access to OpenGL ES 2.0 functions. By inheriting from <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> the OpenGL functions it contains will get precedence, and you will not have to worry about resolving those functions if you want your application to work with OpenGL as well as OpenGL ES 2.0.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OpenGLWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWindow</span><span class="p">,</span> <span class="n">protected</span> <span class="n">QOpenGLFunctions</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">OpenGLWindow</span><span class="p">(</span><span class="n">QWindow</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">OpenGLWindow</span><span class="p">();</span>
+
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">render</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">);</span>
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">render</span><span class="p">();</span>
+
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">initialize</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">setAnimating</span><span class="p">(</span><span class="nb">bool</span> <span class="n">animating</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">renderLater</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">renderNow</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">exposeEvent</span><span class="p">(</span><span class="n">QExposeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">m_animating</span><span class="p">;</span>
+
+    <span class="n">QOpenGLContext</span> <span class="o">*</span><span class="n">m_context</span><span class="p">;</span>
+    <span class="n">QOpenGLPaintDevice</span> <span class="o">*</span><span class="n">m_device</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The window’s surface type must be set to <code class="xref py py-attr docutils literal"><span class="pre">QSurface.OpenGLSurface</span></code> to indicate that the window is to be used for OpenGL rendering and not for rendering raster content with <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> using a <a class="reference internal" href="../PySide2/QtGui/QBackingStore.html#PySide2.QtGui.QBackingStore" title="PySide2.QtGui.QBackingStore"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBackingStore</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">OpenGLWindow</span><span class="p">::</span><span class="n">OpenGLWindow</span><span class="p">(</span><span class="n">QWindow</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_animating</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_context</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_device</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setSurfaceType</span><span class="p">(</span><span class="n">QWindow</span><span class="p">::</span><span class="n">OpenGLSurface</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Any OpenGL initialization needed can be done by overriding the initialize() function, which is called once before the first call to render(), with a valid current <a class="reference internal" href="../PySide2/QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> . As can be seen in the following code snippet, the default render( <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> *) and initialize() implementations are empty, whereas the default render() implementation initializes a <code class="xref py py-class docutils literal"><span class="pre">QOpenGLPaintDevice</span></code> and then calls into render( <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> *).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void OpenGLWindow::render(QPainter *painter)
+{
+    Q_UNUSED(painter);
+}
+
+void OpenGLWindow::initialize()
+{
+}
+
+void OpenGLWindow::render()
+{
+    if (!m_device)
+        m_device = new QOpenGLPaintDevice;
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    m_device-&gt;setSize(size());
+
+    QPainter painter(m_device);
+    render(&amp;painter);
+}
+</pre></div>
+</div>
+<p>The renderLater() function simply calls <code class="xref py py-func docutils literal"><span class="pre">QWindow.requestUpdate()</span></code> to schedule an update for when the system is ready to repaint.</p>
+<p>We also call renderNow() when we get an expose event. The exposeEvent() is the notification to the window that its exposure, meaning visibility, on the screen has changed. When the expose event is received you can query <code class="xref py py-func docutils literal"><span class="pre">QWindow.isExposed()</span></code> to find out whether or not the window is currently exposed. Do not render to or call <code class="xref py py-func docutils literal"><span class="pre">QOpenGLContext.swapBuffers()</span></code> on a window before it has received its first expose event, as before then its final size might be unknown, and in addition what is rendered might not even end up on the screen.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">OpenGLWindow</span><span class="p">::</span><span class="n">renderLater</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">requestUpdate</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nb">bool</span> <span class="n">OpenGLWindow</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">UpdateRequest</span><span class="p">:</span>
+        <span class="n">renderNow</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QWindow</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">OpenGLWindow</span><span class="p">::</span><span class="n">exposeEvent</span><span class="p">(</span><span class="n">QExposeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">isExposed</span><span class="p">())</span>
+        <span class="n">renderNow</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In renderNow() we return if we are not currently exposed, in which case rendering is delayed until we actually get an expose event. If we have not yet done so, we create the <a class="reference internal" href="../PySide2/QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> with the same <a class="reference internal" href="../PySide2/QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> as was set on the OpenGLWindow, and call initialize() for the sake of the sub class, and initializeOpenGLFunctions() in order for the <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> super class to be associated with the correct <a class="reference internal" href="../PySide2/QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> . In any case we make the context current by calling <code class="xref py py-func docutils literal"><span class="pre">QOpenGLContext.makeCurrent()</span></code> , call render() to do the actual rendering, and finally we schedule for the rendered contents to be made visible by calling <code class="xref py py-func docutils literal"><span class="pre">QOpenGLContext.swapBuffers()</span></code> with the OpenGLWindow as parameter.</p>
+<p>Once the rendering of a frame using an OpenGL context is initiated by calling <code class="xref py py-func docutils literal"><span class="pre">QOpenGLContext.makeCurrent()</span></code> , giving the surface on which to render as a parameter, OpenGL commands can be issued. The commands can be issued either directly by including &lt;qopengl.h&gt;, which also includes the system’s OpenGL headers, or as by using <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> , which can either be inherited from for convenience, or accessed using <code class="xref py py-func docutils literal"><span class="pre">QOpenGLContext.functions()</span></code> . <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> gives access to all the OpenGL ES 2.0 level OpenGL calls that are not already standard in both OpenGL ES 2.0 and desktop OpenGL. For more information about the OpenGL and OpenGL ES APIs, refer to the official OpenGL Registry and Khronos OpenGL ES API Registry.</p>
+<p>If animation has been enabled with OpenGLWindow::setAnimating(true), we call renderLater() to schedule another update request.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void OpenGLWindow::renderNow()
+{
+    if (!isExposed())
+        return;
+
+    bool needsInitialize = false;
+
+    if (!m_context) {
+        m_context = new QOpenGLContext(this);
+        m_context-&gt;setFormat(requestedFormat());
+        m_context-&gt;create();
+
+        needsInitialize = true;
+    }
+
+    m_context-&gt;makeCurrent(this);
+
+    if (needsInitialize) {
+        initializeOpenGLFunctions();
+        initialize();
+    }
+
+    render();
+
+    m_context-&gt;swapBuffers(this);
+
+    if (m_animating)
+        renderLater();
+}
+</pre></div>
+</div>
+<p>Enabling animation also schedules an update request as shown in the following code snippet.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">OpenGLWindow</span><span class="p">::</span><span class="n">setAnimating</span><span class="p">(</span><span class="nb">bool</span> <span class="n">animating</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">m_animating</span> <span class="o">=</span> <span class="n">animating</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">animating</span><span class="p">)</span>
+        <span class="n">renderLater</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="example-opengl-rendering-sub-class">
+<span id="id3"></span><h2>Example OpenGL Rendering Sub Class<a class="headerlink" href="#example-opengl-rendering-sub-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here we sub class OpenGLWindow to show how to do OpenGL to render a rotating triangle. By indirectly sub classing <a class="reference internal" href="../PySide2/QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> we gain access to all OpenGL ES 2.0 level functionality.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TriangleWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">OpenGLWindow</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">TriangleWindow</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">initialize</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">render</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">GLuint</span> <span class="n">m_posAttr</span><span class="p">;</span>
+    <span class="n">GLuint</span> <span class="n">m_colAttr</span><span class="p">;</span>
+    <span class="n">GLuint</span> <span class="n">m_matrixUniform</span><span class="p">;</span>
+
+    <span class="n">QOpenGLShaderProgram</span> <span class="o">*</span><span class="n">m_program</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">m_frame</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">TriangleWindow</span><span class="p">::</span><span class="n">TriangleWindow</span><span class="p">()</span>
+    <span class="p">:</span> <span class="n">m_program</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_frame</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In our main function we initialize <a class="reference internal" href="../PySide2/QtGui/QGuiApplication.html#PySide2.QtGui.QGuiApplication" title="PySide2.QtGui.QGuiApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QGuiApplication</span></code></a> and instantiate our TriangleOpenGLWindow. We give it a <a class="reference internal" href="../PySide2/QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> specifying that we want four samples of multisample antialiasing, as well as a default geometry. Since we want to have animation we call the above mentioned setAnimating() function with an argument of true.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">QSurfaceFormat</span> <span class="nb">format</span><span class="p">;</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setSamples</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+
+    <span class="n">TriangleWindow</span> <span class="n">window</span><span class="p">;</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="n">window</span><span class="o">.</span><span class="n">setAnimating</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code snippet shows the OpenGL shader program used in this example. The vertex and fragment shaders are relatively simple, doing vertex transformation and interpolated vertex coloring.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">vertexShaderSource</span> <span class="o">=</span>
+    <span class="s2">&quot;attribute highp vec4 posAttr;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;attribute lowp vec4 colAttr;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;varying lowp vec4 col;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;uniform highp mat4 matrix;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;void main() {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;   col = colAttr;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;   gl_Position = matrix * posAttr;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="n">static</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">fragmentShaderSource</span> <span class="o">=</span>
+    <span class="s2">&quot;varying lowp vec4 col;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;void main() {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;   gl_FragColor = col;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here is the code that loads the shaders and initializes the shader program By using <a class="reference internal" href="../PySide2/QtGui/QOpenGLShaderProgram.html#PySide2.QtGui.QOpenGLShaderProgram" title="PySide2.QtGui.QOpenGLShaderProgram"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLShaderProgram</span></code></a> instead of raw OpenGL we get the convenience that strips out the highp, mediump, and lowp qualifiers on desktop OpenGL, where they are not part of the standard. We store the attribute and uniform locations in member variables to avoid having to do the location lookup each frame.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TriangleWindow</span><span class="p">::</span><span class="n">initialize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">m_program</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLShaderProgram</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">addShaderFromSourceCode</span><span class="p">(</span><span class="n">QOpenGLShader</span><span class="p">::</span><span class="n">Vertex</span><span class="p">,</span> <span class="n">vertexShaderSource</span><span class="p">);</span>
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">addShaderFromSourceCode</span><span class="p">(</span><span class="n">QOpenGLShader</span><span class="p">::</span><span class="n">Fragment</span><span class="p">,</span> <span class="n">fragmentShaderSource</span><span class="p">);</span>
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">link</span><span class="p">();</span>
+    <span class="n">m_posAttr</span> <span class="o">=</span> <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">attributeLocation</span><span class="p">(</span><span class="s2">&quot;posAttr&quot;</span><span class="p">);</span>
+    <span class="n">m_colAttr</span> <span class="o">=</span> <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">attributeLocation</span><span class="p">(</span><span class="s2">&quot;colAttr&quot;</span><span class="p">);</span>
+    <span class="n">m_matrixUniform</span> <span class="o">=</span> <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">uniformLocation</span><span class="p">(</span><span class="s2">&quot;matrix&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, here is our render() function, where we use OpenGL to set up the viewport, clear the background, and render a rotating triangle.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TriangleWindow</span><span class="p">::</span><span class="n">render</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">const</span> <span class="n">qreal</span> <span class="n">retinaScale</span> <span class="o">=</span> <span class="n">devicePixelRatio</span><span class="p">();</span>
+    <span class="n">glViewport</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">()</span> <span class="o">*</span> <span class="n">retinaScale</span><span class="p">,</span> <span class="n">height</span><span class="p">()</span> <span class="o">*</span> <span class="n">retinaScale</span><span class="p">);</span>
+
+    <span class="n">glClear</span><span class="p">(</span><span class="n">GL_COLOR_BUFFER_BIT</span><span class="p">);</span>
+
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">bind</span><span class="p">();</span>
+
+    <span class="n">QMatrix4x4</span> <span class="n">matrix</span><span class="p">;</span>
+    <span class="n">matrix</span><span class="o">.</span><span class="n">perspective</span><span class="p">(</span><span class="mf">60.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">4.0</span><span class="n">f</span><span class="o">/</span><span class="mf">3.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.1</span><span class="n">f</span><span class="p">,</span> <span class="mf">100.0</span><span class="n">f</span><span class="p">);</span>
+    <span class="n">matrix</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">matrix</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mf">100.0</span><span class="n">f</span> <span class="o">*</span> <span class="n">m_frame</span> <span class="o">/</span> <span class="n">screen</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">refreshRate</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">setUniformValue</span><span class="p">(</span><span class="n">m_matrixUniform</span><span class="p">,</span> <span class="n">matrix</span><span class="p">);</span>
+
+    <span class="n">GLfloat</span> <span class="n">vertices</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.707</span><span class="n">f</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">0.5</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="n">f</span><span class="p">,</span>
+        <span class="mf">0.5</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="n">f</span>
+    <span class="p">};</span>
+
+    <span class="n">GLfloat</span> <span class="n">colors</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span>
+        <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span>
+        <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">f</span>
+    <span class="p">};</span>
+
+    <span class="n">glVertexAttribPointer</span><span class="p">(</span><span class="n">m_posAttr</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">GL_FLOAT</span><span class="p">,</span> <span class="n">GL_FALSE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vertices</span><span class="p">);</span>
+    <span class="n">glVertexAttribPointer</span><span class="p">(</span><span class="n">m_colAttr</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">GL_FLOAT</span><span class="p">,</span> <span class="n">GL_FALSE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">colors</span><span class="p">);</span>
+
+    <span class="n">glEnableVertexAttribArray</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">glEnableVertexAttribArray</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">glDrawArrays</span><span class="p">(</span><span class="n">GL_TRIANGLES</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+    <span class="n">glDisableVertexAttribArray</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">glDisableVertexAttribArray</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">m_program</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+
+    <span class="o">++</span><span class="n">m_frame</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="openglwindow-cpp-example-file">
+<h1>openglwindow.cpp Example File<a class="headerlink" href="#openglwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="openglwindow-h-example-file">
+<h1>openglwindow.h Example File<a class="headerlink" href="#openglwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="openglwindow-pro-example-file">
+<h1>openglwindow.pro Example File<a class="headerlink" href="#openglwindow-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

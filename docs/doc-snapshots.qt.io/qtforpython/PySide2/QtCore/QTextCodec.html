@@ -1,0 +1,739 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QTextCodec &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QTextCodec.ConverterState" href="QTextCodec.ConverterState.html" />
+    <link rel="prev" title="QTextEncoder" href="QTextEncoder.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QTextCodec</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#virtual-functions">Virtual functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#creating-your-own-codec-class">Creating Your Own Codec Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QTextEncoder.html"
+                        title="previous chapter">QTextEncoder</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QTextCodec.ConverterState.html"
+                        title="next chapter">QTextCodec.ConverterState</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qtextcodec">
+<span id="id1"></span><h1>QTextCodec<a class="headerlink" href="#qtextcodec" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-fcd7d509a4a6667a1c7a7fbef2bbcfaf33597944.png" alt="Inheritance diagram of PySide2.QtCore.QTextCodec" usemap="#inheritance0d1097336e" class="inheritance"/>
+<map id="inheritance0d1097336e" name="inheritance0d1097336e">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QTextCodec" title="QtCore.QTextCodec" alt="" coords="5,5,152,31"/>
+</map>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode"><code class="xref py py-meth docutils literal"><span class="pre">canEncode</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode"><code class="xref py py-meth docutils literal"><span class="pre">canEncode</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.fromUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.fromUnicode"><code class="xref py py-meth docutils literal"><span class="pre">fromUnicode</span></code></a> (uc)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.makeDecoder" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.makeDecoder"><code class="xref py py-meth docutils literal"><span class="pre">makeDecoder</span></code></a> ([flags=QTextCodec.DefaultConversion])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.makeEncoder" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.makeEncoder"><code class="xref py py-meth docutils literal"><span class="pre">makeEncoder</span></code></a> ([flags=QTextCodec.DefaultConversion])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode"><code class="xref py py-meth docutils literal"><span class="pre">toUnicode</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode"><code class="xref py py-meth docutils literal"><span class="pre">toUnicode</span></code></a> (chars)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode"><code class="xref py py-meth docutils literal"><span class="pre">toUnicode</span></code></a> (in, length[, state=nullptr])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="virtual-functions">
+<h3>Virtual functions<a class="headerlink" href="#virtual-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases"><code class="xref py py-meth docutils literal"><span class="pre">aliases</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode"><code class="xref py py-meth docutils literal"><span class="pre">convertToUnicode</span></code></a> (in, length, state)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum"><code class="xref py py-meth docutils literal"><span class="pre">mibEnum</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.name" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.name"><code class="xref py py-meth docutils literal"><span class="pre">name</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs"><code class="xref py py-meth docutils literal"><span class="pre">availableCodecs</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs"><code class="xref py py-meth docutils literal"><span class="pre">availableMibs</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml"><code class="xref py py-meth docutils literal"><span class="pre">codecForHtml</span></code></a> (ba)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml"><code class="xref py py-meth docutils literal"><span class="pre">codecForHtml</span></code></a> (ba, defaultCodec)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale"><code class="xref py py-meth docutils literal"><span class="pre">codecForLocale</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib"><code class="xref py py-meth docutils literal"><span class="pre">codecForMib</span></code></a> (mib)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName"><code class="xref py py-meth docutils literal"><span class="pre">codecForName</span></code></a> (name)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName"><code class="xref py py-meth docutils literal"><span class="pre">codecForName</span></code></a> (name)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText"><code class="xref py py-meth docutils literal"><span class="pre">codecForUtfText</span></code></a> (ba)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText"><code class="xref py py-meth docutils literal"><span class="pre">codecForUtfText</span></code></a> (ba, defaultCodec)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale"><code class="xref py py-meth docutils literal"><span class="pre">setCodecForLocale</span></code></a> (c)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> class provides conversions between text encodings.</p>
+<p>Qt uses Unicode to store, draw and manipulate strings. In many situations you may wish to deal with data that uses a different encoding. For example, most Japanese documents are still stored in Shift-JIS or ISO 2022-JP, while Russian users often have their documents in KOI8-R or Windows-1251.</p>
+<p>Qt provides a set of <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> classes to help with converting non-Unicode formats to and from Unicode. You can also create your own codec classes.</p>
+<p>The supported encodings are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../overviews/codec-big5.html#big5-text-codec"><span class="std std-ref">Big5</span></a></li>
+<li><a class="reference internal" href="../../overviews/codec-big5hkscs.html#big5-hkscs-text-codec"><span class="std std-ref">Big5-HKSCS</span></a></li>
+<li>CP949</li>
+<li><a class="reference internal" href="../../overviews/codec-eucjp.html#euc-jp-text-codec"><span class="std std-ref">EUC-JP</span></a></li>
+<li><a class="reference internal" href="../../overviews/codec-euckr.html#euc-kr-text-codec"><span class="std std-ref">EUC-KR</span></a></li>
+<li><a class="reference internal" href="../../overviews/codec-gbk.html#gbk-text-codec"><span class="std std-ref">GB18030</span></a></li>
+<li>HP-ROMAN8</li>
+<li>IBM 850</li>
+<li>IBM 866</li>
+<li>IBM 874</li>
+<li><a class="reference internal" href="../../overviews/codecs-jis.html#iso-2022-jp-jis-text-codec"><span class="std std-ref">ISO 2022-JP</span></a></li>
+<li>ISO 8859-1 to 10</li>
+<li>ISO 8859-13 to 16</li>
+<li>Iscii-Bng, Dev, Gjr, Knd, Mlm, Ori, Pnj, Tlg, and Tml</li>
+<li>KOI8-R</li>
+<li>KOI8-U</li>
+<li>Macintosh</li>
+<li><a class="reference internal" href="../../overviews/codec-sjis.html#shift-jis-text-codec"><span class="std std-ref">Shift-JIS</span></a></li>
+<li>TIS-620</li>
+<li><a class="reference internal" href="../../overviews/codec-tscii.html#tscii-text-codec"><span class="std std-ref">TSCII</span></a></li>
+<li>UTF-8</li>
+<li>UTF-16</li>
+<li>UTF-16BE</li>
+<li>UTF-16LE</li>
+<li>UTF-32</li>
+<li>UTF-32BE</li>
+<li>UTF-32LE</li>
+<li>Windows-1250 to 1258</li>
+</ul>
+<p>If Qt is compiled with ICU support enabled, most codecs supported by ICU will also be available to the application.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> s can be used as follows to convert some locally encoded string to Unicode. Suppose you have some string encoded in Russian KOI8-R encoding, and want to convert it to Unicode. The simple way to do it is like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">encodedString</span> <span class="o">=</span> <span class="n">QByteArray</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="n">codec</span> <span class="o">=</span> <span class="n">QTextCodec</span><span class="o">.</span><span class="n">codecForName</span><span class="p">(</span><span class="s2">&quot;KOI8-R&quot;</span><span class="p">)</span>
+<span class="n">string</span> <span class="o">=</span> <span class="n">codec</span><span class="o">.</span><span class="n">toUnicode</span><span class="p">(</span><span class="n">encodedString</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After this, <code class="docutils literal"><span class="pre">string</span></code> holds the text converted to Unicode. Converting a string from Unicode to the local encoding is just as easy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;...&quot;</span>
+<span class="n">codec</span> <span class="o">=</span> <span class="n">QTextCodec</span><span class="o">.</span><span class="n">codecForName</span><span class="p">(</span><span class="s2">&quot;KOI8-R&quot;</span><span class="p">)</span>
+<span class="n">encodedString</span> <span class="o">=</span> <span class="n">codec</span><span class="o">.</span><span class="n">fromUnicode</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To read or write files in various encodings, use <a class="reference internal" href="QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> and its <a class="reference internal" href="QTextStream.html#PySide2.QtCore.PySide2.QtCore.QTextStream.setCodec" title="PySide2.QtCore.PySide2.QtCore.QTextStream.setCodec"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextStream.setCodec()</span></code></a> function. See the <a class="reference internal" href="../../overviews/qtwidgets-tools-codecs-example.html#text-codecs-example"><span class="std std-ref">Codecs</span></a> example for an application of <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> to file I/O.</p>
+<p>Some care must be taken when trying to convert the data in chunks, for example, when receiving it over a network. In such cases it is possible that a multi-byte character will be split over two chunks. At best this might result in the loss of a character and at worst cause the entire conversion to fail.</p>
+<p>The approach to use in these situations is to create a <a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a> object for the codec and use this <a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a> for the whole decoding process, as shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">codec</span> <span class="o">=</span> <span class="n">QTextCodec</span><span class="o">.</span><span class="n">codecForName</span><span class="p">(</span><span class="s2">&quot;Shift-JIS&quot;</span><span class="p">)</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">codec</span><span class="o">.</span><span class="n">makeDecoder</span><span class="p">()</span>
+
+<span class="n">string</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&#39;</span>
+<span class="k">while</span> <span class="n">new_data_available</span><span class="p">():</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="n">get_new_data</span><span class="p">()</span>
+    <span class="n">string</span> <span class="o">+=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">toUnicode</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a> object maintains state between chunks and therefore works correctly even if a multi-byte character is split between chunks.</p>
+</div></blockquote>
+<div class="section" id="creating-your-own-codec-class">
+<span id="pyside2-qtcore-qtextcodec-creating-your-own-codec-class"></span><h3>Creating Your Own Codec Class<a class="headerlink" href="#creating-your-own-codec-class" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Support for new text encodings can be added to Qt by creating <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> subclasses.</p>
+<p>The pure virtual functions describe the encoder to the system and the coder is used as required in the different text file formats supported by <a class="reference internal" href="QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> , and under X11, for the locale-specific character input and output.</p>
+<p>To add support for another encoding to Qt, make a subclass of <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> and implement the functions listed in the table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Function</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.name" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.name()</span></code></a></td>
+<td>Returns the official name for the encoding. If the encoding is listed in the <span class="xref std std-ref">IANA character-sets encoding file</span> , the name should be the preferred MIME name for the encoding.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.aliases()</span></code></a></td>
+<td>Returns a list of alternative names for the encoding. <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> provides a default implementation that returns an empty list. For example, “ISO-8859-1” has “latin1”, “CP819”, “IBM819”, and “iso-ir-100” as aliases.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.mibEnum()</span></code></a></td>
+<td>Return the MIB enum for the encoding if it is listed in the <span class="xref std std-ref">IANA character-sets encoding file</span> .</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.convertToUnicode()</span></code></a></td>
+<td>Converts an 8-bit character string to Unicode.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.convertFromUnicode()</span></code></td>
+<td>Converts a Unicode string to an 8-bit character string.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a>  <a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a>  <a class="reference internal" href="QTextEncoder.html#PySide2.QtCore.QTextEncoder" title="PySide2.QtCore.QTextEncoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextEncoder</span></code></a>  <a class="reference internal" href="../../overviews/qtwidgets-tools-codecs-example.html#text-codecs-example"><span class="std std-ref">Text Codecs Example</span></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QTextCodec">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTextCodec</code><a class="headerlink" href="#PySide2.QtCore.QTextCodec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> , and gives it the highest precedence. The <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> should always be constructed on the heap (i.e. with <code class="docutils literal"><span class="pre">new</span></code> ). Qt takes ownership and will delete it when the application terminates.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.ConversionFlag">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">ConversionFlag</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.ConversionFlag" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QTextCodec.DefaultConversion</td>
+<td>No flag is set.</td>
+</tr>
+<tr class="row-odd"><td>QTextCodec.ConvertInvalidToNull</td>
+<td>If this flag is set, each invalid input character is output as a null character.</td>
+</tr>
+<tr class="row-even"><td>QTextCodec.IgnoreHeader</td>
+<td>Ignore any Unicode byte-order mark and don’t generate any.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">aliases</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Subclasses can return a number of aliases for the codec in question.</p>
+<p>Standard aliases for codecs can be found in the <span class="xref std std-ref">IANA character-sets encoding file</span> .</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">availableCodecs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the list of all available codecs, by name. Call <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName"><code class="xref py py-meth docutils literal"><span class="pre">QTextCodec.codecForName()</span></code></a> to obtain the <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> for the name.</p>
+<p>The list may contain many mentions of the same codec if the codec has aliases.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.availableMibs()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.name" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.name()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.aliases"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.aliases()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">availableMibs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableMibs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the list of MIBs for all available codecs. Call <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib"><code class="xref py py-meth docutils literal"><span class="pre">QTextCodec.codecForMib()</span></code></a> to obtain the <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> for the MIB.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.availableCodecs"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.availableCodecs()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.mibEnum()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">canEncode</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.canEncode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – unicode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p><code class="docutils literal"><span class="pre">s</span></code> contains the string being tested for encode-ability.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">canEncode</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the Unicode character <code class="docutils literal"><span class="pre">ch</span></code> can be fully encoded with this codec; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForHtml</code><span class="sig-paren">(</span><em>ba</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ba</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Tries to detect the encoding of the provided snippet of HTML in the given byte array, <code class="docutils literal"><span class="pre">ba</span></code> , by checking the BOM (Byte Order Mark) and the content-type meta header and returns a <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> instance that is capable of decoding the html to unicode. If the codec cannot be detected, this overload returns a Latin-1 <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> .</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForHtml</code><span class="sig-paren">(</span><em>ba</em>, <em>defaultCodec</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ba</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>defaultCodec</strong> – <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Tries to detect the encoding of the provided snippet of HTML in the given byte array, <code class="docutils literal"><span class="pre">ba</span></code> , by checking the BOM (Byte Order Mark) and the content-type meta header and returns a <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> instance that is capable of decoding the html to unicode. If the codec cannot be detected from the content provided, <code class="docutils literal"><span class="pre">defaultCodec</span></code> is returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.codecForUtfText()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForLocale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a pointer to the codec most suitable for this locale.</p>
+<p>On Windows, the codec will be based on a system locale. On Unix systems, the codec will might fall back to using the <em>iconv</em> library if no builtin codec for the locale can be found.</p>
+<p>Note that in these cases the codec’s name will be “System”.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.setCodecForLocale()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForMib</code><span class="sig-paren">(</span><em>mib</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForMib" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mib</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> which matches the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum"><code class="xref py py-meth docutils literal"><span class="pre">MIBenum</span></code></a> <code class="docutils literal"><span class="pre">mib</span></code> .</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForName</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Searches all installed <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> objects and returns the one which best matches <code class="docutils literal"><span class="pre">name</span></code> ; the match is case-insensitive. Returns 0 if no codec matching the name <code class="docutils literal"><span class="pre">name</span></code> could be found.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForName</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Searches all installed <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> objects and returns the one which best matches <code class="docutils literal"><span class="pre">name</span></code> ; the match is case-insensitive. Returns 0 if no codec matching the name <code class="docutils literal"><span class="pre">name</span></code> could be found.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForUtfText</code><span class="sig-paren">(</span><em>ba</em>, <em>defaultCodec</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForUtfText" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ba</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>defaultCodec</strong> – <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Tries to detect the encoding of the provided snippet <code class="docutils literal"><span class="pre">ba</span></code> by using the BOM (Byte Order Mark) and returns a <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> instance that is capable of decoding the text to unicode. If the codec cannot be detected from the content provided, <code class="docutils literal"><span class="pre">defaultCodec</span></code> is returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.codecForHtml()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">codecForUtfText</code><span class="sig-paren">(</span><em>ba</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ba</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Tries to detect the encoding of the provided snippet <code class="docutils literal"><span class="pre">ba</span></code> by using the BOM (Byte Order Mark) and returns a <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> instance that is capable of decoding the text to unicode. If the codec cannot be detected, this overload returns a Latin-1 <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForHtml"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.codecForHtml()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">convertToUnicode</code><span class="sig-paren">(</span><em>in</em>, <em>length</em>, <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.convertToUnicode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in</strong> – str</li>
+<li><strong>length</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>state</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec::ConverterState</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> subclasses must reimplement this function.</p>
+<p>Converts the first <code class="docutils literal"><span class="pre">len</span></code> characters of <code class="docutils literal"><span class="pre">chars</span></code> from the encoding of the subclass to Unicode, and returns the result in a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> .</p>
+<p><code class="docutils literal"><span class="pre">state</span></code> can be 0, in which case the conversion is stateless and default conversion rules should be used. If state is not 0, the codec should save the state after the conversion in <code class="docutils literal"><span class="pre">state</span></code> , and adjust the <code class="docutils literal"><span class="pre">remainingChars</span></code> and <code class="docutils literal"><span class="pre">invalidChars</span></code> members of the struct.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.fromUnicode">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">fromUnicode</code><span class="sig-paren">(</span><em>uc</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.fromUnicode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uc</strong> – unicode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Converts <code class="docutils literal"><span class="pre">str</span></code> from Unicode to the encoding of this codec, and returns the result in a <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.makeDecoder">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">makeDecoder</code><span class="sig-paren">(</span><span class="optional">[</span><em>flags=QTextCodec.DefaultConversion</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.makeDecoder" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.ConversionFlags</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Creates a <a class="reference internal" href="QTextDecoder.html#PySide2.QtCore.QTextDecoder" title="PySide2.QtCore.QTextDecoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextDecoder</span></code></a> with a specified <code class="docutils literal"><span class="pre">flags</span></code> to decode chunks of <code class="docutils literal"><span class="pre">char</span> <span class="pre">*</span></code> data to create chunks of Unicode data.</p>
+<p>The caller is responsible for deleting the returned object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.makeEncoder">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">makeEncoder</code><span class="sig-paren">(</span><span class="optional">[</span><em>flags=QTextCodec.DefaultConversion</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.makeEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.ConversionFlags</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QTextEncoder.html#PySide2.QtCore.QTextEncoder" title="PySide2.QtCore.QTextEncoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextEncoder</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Creates a <a class="reference internal" href="QTextEncoder.html#PySide2.QtCore.QTextEncoder" title="PySide2.QtCore.QTextEncoder"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextEncoder</span></code></a> with a specified <code class="docutils literal"><span class="pre">flags</span></code> to encode chunks of Unicode data as <code class="docutils literal"><span class="pre">char</span> <span class="pre">*</span></code> data.</p>
+<p>The caller is responsible for deleting the returned object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">mibEnum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.mibEnum" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Subclasses of <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> must reimplement this function. It returns the MIBenum (see <span class="xref std std-ref">IANA character-sets encoding file</span> for more information). It is important that each <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> subclass returns the correct unique value for this function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.name">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a> subclasses must reimplement this function. It returns the name of the encoding supported by the subclass.</p>
+<p>If the codec is registered as a character set in the <span class="xref std std-ref">IANA character-sets encoding file</span> this method should return the preferred mime name for the codec if defined, otherwise its name.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">setCodecForLocale</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.setCodecForLocale" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>c</strong> – <a class="reference internal" href="#PySide2.QtCore.QTextCodec" title="PySide2.QtCore.QTextCodec"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Set the codec to <code class="docutils literal"><span class="pre">c</span></code> ; this will be returned by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.codecForLocale()</span></code></a> . If <code class="docutils literal"><span class="pre">c</span></code> is a null pointer, the codec is reset to the default.</p>
+<p>This might be needed for some applications that want to use their own mechanism for setting the locale.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale" title="PySide2.QtCore.PySide2.QtCore.QTextCodec.codecForLocale"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTextCodec.codecForLocale()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode">
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">toUnicode</code><span class="sig-paren">(</span><em>chars</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTextCodec.toUnicode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>chars</strong> – str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p><code class="docutils literal"><span class="pre">chars</span></code> contains the source characters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">toUnicode</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Converts <code class="docutils literal"><span class="pre">a</span></code> from the encoding of this codec to Unicode, and returns the result in a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QTextCodec.</code><code class="descname">toUnicode</code><span class="sig-paren">(</span><em>in</em>, <em>length</em><span class="optional">[</span>, <em>state=nullptr</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in</strong> – str</li>
+<li><strong>length</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>state</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextCodec::ConverterState</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Converts the first <code class="docutils literal"><span class="pre">size</span></code> characters from the <code class="docutils literal"><span class="pre">input</span></code> from the encoding of this codec to Unicode, and returns the result in a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">state</span></code> of the convertor used is updated.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

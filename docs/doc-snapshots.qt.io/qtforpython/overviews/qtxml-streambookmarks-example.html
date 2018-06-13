@@ -1,0 +1,543 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QXmlStream Bookmarks Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QXmlStream Bookmarks Example</a><ul>
+<li><a class="reference internal" href="#xbelwriter-class-definition">XbelWriter Class Definition</a></li>
+<li><a class="reference internal" href="#xbelwriter-class-implementation">XbelWriter Class Implementation</a></li>
+<li><a class="reference internal" href="#xbelreader-class-definition">XbelReader Class Definition</a></li>
+<li><a class="reference internal" href="#xbelreader-class-implementation">XbelReader Class Implementation</a></li>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#function">Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#xbelreader-cpp-example-file">xbelreader.cpp Example File</a></li>
+<li><a class="reference internal" href="#xbelreader-h-example-file">xbelreader.h Example File</a></li>
+<li><a class="reference internal" href="#xbelwriter-cpp-example-file">xbelwriter.cpp Example File</a></li>
+<li><a class="reference internal" href="#xbelwriter-h-example-file">xbelwriter.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#streambookmarks-pro-example-file">streambookmarks.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qxmlstream-bookmarks-example">
+<span id="id1"></span><h1>QXmlStream Bookmarks Example<a class="headerlink" href="#qxmlstream-bookmarks-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates how to read and write to XBEL files</p>
+<blockquote>
+<div><p>Demonstrates how to read and write to XBEL files</p>
+<p>The QXmlStream Bookmarks example provides a reader for XML Bookmark Exchange Language (XBEL) files using Qt’s <a class="reference internal" href="../PySide2/QtCore/QXmlStreamReader.html#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> class for reading, and <a class="reference internal" href="../PySide2/QtCore/QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> class for writing the files.</p>
+</div></blockquote>
+<div class="section" id="xbelwriter-class-definition">
+<span id="id2"></span><h2>XbelWriter Class Definition<a class="headerlink" href="#xbelwriter-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">XbelWriter</span></code> class contains a private instance of <a class="reference internal" href="../PySide2/QtCore/QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> , which provides an XML writer with a streaming API. <code class="docutils literal"><span class="pre">XbelWriter</span></code> also has a reference to the <a class="reference internal" href="../PySide2/QtWidgets/QTreeWidget.html#PySide2.QtWidgets.QTreeWidget" title="PySide2.QtWidgets.QTreeWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeWidget</span></code></a> instance where the bookmark hierarchy is stored.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">XbelWriter</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">XbelWriter</span><span class="p">(</span><span class="n">const</span> <span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">);</span>
+    <span class="nb">bool</span> <span class="n">writeFile</span><span class="p">(</span><span class="n">QIODevice</span> <span class="o">*</span><span class="n">device</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">writeItem</span><span class="p">(</span><span class="n">const</span> <span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+    <span class="n">QXmlStreamWriter</span> <span class="n">xml</span><span class="p">;</span>
+    <span class="n">const</span> <span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xbelwriter-class-implementation">
+<span id="id3"></span><h2>XbelWriter Class Implementation<a class="headerlink" href="#xbelwriter-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">XbelWriter</span></code> constructor accepts a <code class="docutils literal"><span class="pre">treeWidget</span></code> to initialize within its definition. We enable <a class="reference internal" href="../PySide2/QtCore/QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> ‘s auto-formatting property to ensure line-breaks and indentations are added automatically to empty sections between elements, increasing readability as the data is split into several lines.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">XbelWriter</span><span class="p">::</span><span class="n">XbelWriter</span><span class="p">(</span><span class="n">const</span> <span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">treeWidget</span><span class="p">(</span><span class="n">treeWidget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">setAutoFormatting</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">writeFile()</span></code> function accepts a <a class="reference internal" href="../PySide2/QtCore/QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> object and sets it using <code class="docutils literal"><span class="pre">setDevice()</span></code> . This function then writes the document type definition(DTD), the start element, the version, and <code class="docutils literal"><span class="pre">treeWidget</span></code> ‘s top-level items.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">XbelWriter</span><span class="p">::</span><span class="n">writeFile</span><span class="p">(</span><span class="n">QIODevice</span> <span class="o">*</span><span class="n">device</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">setDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+
+    <span class="n">xml</span><span class="o">.</span><span class="n">writeStartDocument</span><span class="p">();</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">writeDTD</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;&lt;!DOCTYPE xbel&gt;&quot;</span><span class="p">));</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">writeStartElement</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;xbel&quot;</span><span class="p">));</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">writeAttribute</span><span class="p">(</span><span class="n">XbelReader</span><span class="p">::</span><span class="n">versionAttribute</span><span class="p">(),</span> <span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">topLevelItemCount</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">writeItem</span><span class="p">(</span><span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">topLevelItem</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+
+    <span class="n">xml</span><span class="o">.</span><span class="n">writeEndDocument</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">writeItem()</span></code> function accepts a <a class="reference internal" href="../PySide2/QtWidgets/QTreeWidgetItem.html#PySide2.QtWidgets.QTreeWidgetItem" title="PySide2.QtWidgets.QTreeWidgetItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeWidgetItem</span></code></a> object and writes it to the stream, depending on its <code class="docutils literal"><span class="pre">tagName</span></code> , which can either be a “folder”, “bookmark”, or “separator”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void XbelWriter::writeItem(const QTreeWidgetItem *item)
+{
+    QString tagName = item-&gt;data(0, Qt::UserRole).toString();
+    if (tagName == QLatin1String(&quot;folder&quot;)) {
+        bool folded = !treeWidget-&gt;isItemExpanded(item);
+        xml.writeStartElement(tagName);
+        xml.writeAttribute(XbelReader::foldedAttribute(), folded ? yesValue() : noValue());
+        xml.writeTextElement(titleElement(), item-&gt;text(0));
+        for (int i = 0; i &lt; item-&gt;childCount(); ++i)
+            writeItem(item-&gt;child(i));
+        xml.writeEndElement();
+    } else if (tagName == QLatin1String(&quot;bookmark&quot;)) {
+        xml.writeStartElement(tagName);
+        if (!item-&gt;text(1).isEmpty())
+            xml.writeAttribute(XbelReader::hrefAttribute(), item-&gt;text(1));
+        xml.writeTextElement(titleElement(), item-&gt;text(0));
+        xml.writeEndElement();
+    } else if (tagName == QLatin1String(&quot;separator&quot;)) {
+        xml.writeEmptyElement(tagName);
+    }
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xbelreader-class-definition">
+<span id="id4"></span><h2>XbelReader Class Definition<a class="headerlink" href="#xbelreader-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">XbelReader</span></code> contains a private instance of <a class="reference internal" href="../PySide2/QtCore/QXmlStreamReader.html#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> , the companion class to <a class="reference internal" href="../PySide2/QtCore/QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> . <code class="docutils literal"><span class="pre">XbelReader</span></code> also contains a reference to the <a class="reference internal" href="../PySide2/QtWidgets/QTreeWidget.html#PySide2.QtWidgets.QTreeWidget" title="PySide2.QtWidgets.QTreeWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeWidget</span></code></a> that is used to group the bookmarks according to their hierarchy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">XbelReader</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+
+    <span class="n">XbelReader</span><span class="p">(</span><span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">);</span>
+
+
+    <span class="nb">bool</span> <span class="n">read</span><span class="p">(</span><span class="n">QIODevice</span> <span class="o">*</span><span class="n">device</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">errorString</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">static</span> <span class="n">inline</span> <span class="n">QString</span> <span class="n">versionAttribute</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">static</span> <span class="n">inline</span> <span class="n">QString</span> <span class="n">hrefAttribute</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">static</span> <span class="n">inline</span> <span class="n">QString</span> <span class="n">foldedAttribute</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;folded&quot;</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="n">private</span><span class="p">:</span>
+
+    <span class="n">void</span> <span class="n">readXBEL</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">readTitle</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">readSeparator</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">readFolder</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">readBookmark</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+
+    <span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">createChildItem</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">);</span>
+
+    <span class="n">QXmlStreamReader</span> <span class="n">xml</span><span class="p">;</span>
+    <span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">;</span>
+
+
+    <span class="n">QIcon</span> <span class="n">folderIcon</span><span class="p">;</span>
+    <span class="n">QIcon</span> <span class="n">bookmarkIcon</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xbelreader-class-implementation">
+<span id="id5"></span><h2>XbelReader Class Implementation<a class="headerlink" href="#xbelreader-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">XbelReader</span></code> constructor accepts a <a class="reference internal" href="../PySide2/QtWidgets/QTreeWidget.html#PySide2.QtWidgets.QTreeWidget" title="PySide2.QtWidgets.QTreeWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeWidget</span></code></a> to initialize the <code class="docutils literal"><span class="pre">treeWidget</span></code> within its definition. A <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> object is used to set <code class="docutils literal"><span class="pre">treeWidget</span></code> ‘s style property. The <code class="docutils literal"><span class="pre">folderIcon</span></code> is set to <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Normal</span></code> mode where the pixmap is only displayed when the user is not interacting with the icon. The <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SP_DirClosedIcon</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SP_DirOpenIcon</span></code> , and <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SP_FileIcon</span></code> correspond to standard pixmaps that follow the style of your GUI.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">XbelReader</span><span class="p">::</span><span class="n">XbelReader</span><span class="p">(</span><span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">treeWidget</span><span class="p">(</span><span class="n">treeWidget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QStyle</span> <span class="o">*</span><span class="n">style</span> <span class="o">=</span> <span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">style</span><span class="p">();</span>
+
+    <span class="n">folderIcon</span><span class="o">.</span><span class="n">addPixmap</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">standardPixmap</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">SP_DirClosedIcon</span><span class="p">),</span>
+                         <span class="n">QIcon</span><span class="p">::</span><span class="n">Normal</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Off</span><span class="p">);</span>
+    <span class="n">folderIcon</span><span class="o">.</span><span class="n">addPixmap</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">standardPixmap</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">SP_DirOpenIcon</span><span class="p">),</span>
+                         <span class="n">QIcon</span><span class="p">::</span><span class="n">Normal</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">On</span><span class="p">);</span>
+    <span class="n">bookmarkIcon</span><span class="o">.</span><span class="n">addPixmap</span><span class="p">(</span><span class="n">style</span><span class="o">-&gt;</span><span class="n">standardPixmap</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">SP_FileIcon</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">read()</span></code> function accepts a <a class="reference internal" href="../PySide2/QtCore/QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> and sets it using <code class="xref py py-func docutils literal"><span class="pre">QXmlStreamReader.setDevice()</span></code> . The actual process of reading only takes place if the file is a valid XBEL 1.0 file. Note that the XML input needs to be well-formed to be accepted by <a class="reference internal" href="../PySide2/QtCore/QXmlStreamReader.html#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> . Otherwise, the <code class="xref py py-func docutils literal"><span class="pre">QXmlStreamReader.raiseError()</span></code> function is used to display an error message. Since the XBEL reader is only concerned with reading XML elements, it makes extensive use of the <code class="xref py py-func docutils literal"><span class="pre">QXmlStreamReader.readNextStartElement()</span></code> convenience function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>bool XbelReader::read(QIODevice *device)
+{
+    xml.setDevice(device);
+
+    if (xml.readNextStartElement()) {
+        if (xml.name() == QLatin1String(&quot;xbel&quot;)
+            &amp;&amp; xml.attributes().value(versionAttribute()) == QLatin1String(&quot;1.0&quot;)) {
+            readXBEL();
+        } else {
+            xml.raiseError(QObject::tr(&quot;The file is not an XBEL version 1.0 file.&quot;));
+        }
+    }
+
+    return !xml.error();
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">errorString()</span></code> function is used if an error occurred, in order to obtain a description of the error complete with line and column number information.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">XbelReader</span><span class="p">::</span><span class="n">errorString</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QObject</span><span class="p">::</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1</span><span class="se">\n</span><span class="s2">Line %2, column %3&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">errorString</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">lineNumber</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">columnNumber</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">readXBEL()</span></code> function reads the name of a startElement and calls the appropriate function to read it, depending on whether if its a “folder”, “bookmark” or “separator”. Otherwise, it calls <code class="xref py py-func docutils literal"><span class="pre">QXmlStreamReader.skipCurrentElement()</span></code> . The <code class="xref py py-func docutils literal"><span class="pre">Q_ASSERT()</span></code> macro is used to provide a pre-condition for the function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">XbelReader</span><span class="p">::</span><span class="n">readXBEL</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">isStartElement</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;xbel&quot;</span><span class="p">));</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">readNextStartElement</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;folder&quot;</span><span class="p">))</span>
+            <span class="n">readFolder</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;bookmark&quot;</span><span class="p">))</span>
+            <span class="n">readBookmark</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">))</span>
+            <span class="n">readSeparator</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">else</span>
+            <span class="n">xml</span><span class="o">.</span><span class="n">skipCurrentElement</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">readTitle()</span></code> function reads the bookmark’s title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">XbelReader</span><span class="p">::</span><span class="n">readTitle</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">isStartElement</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">));</span>
+
+    <span class="n">QString</span> <span class="n">title</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">readElementText</span><span class="p">();</span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">title</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">readSeparator()</span></code> function creates a separator and sets its flags. The text is set to 30 “0xB7”, the HEX equivalent for period. The element is then skipped using <code class="xref py py-func docutils literal"><span class="pre">QXmlStreamReader.skipCurrentElement()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">XbelReader</span><span class="p">::</span><span class="n">readSeparator</span><span class="p">(</span><span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">isStartElement</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">xml</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">));</span>
+
+    <span class="n">QTreeWidgetItem</span> <span class="o">*</span><span class="n">separator</span> <span class="o">=</span> <span class="n">createChildItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+    <span class="n">separator</span><span class="o">-&gt;</span><span class="n">setFlags</span><span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">Qt</span><span class="p">::</span><span class="n">ItemIsSelectable</span><span class="p">);</span>
+    <span class="n">separator</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QString</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mh">0xB7</span><span class="p">));</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">skipCurrentElement</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-definition">
+<span id="id6"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> , with a <code class="docutils literal"><span class="pre">File</span></code> menu and a <code class="docutils literal"><span class="pre">Help</span></code> menu.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">open</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">saveAs</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+<span class="c1">#if !defined(QT_NO_CONTEXTMENU) &amp;&amp; !defined(QT_NO_CLIPBOARD)</span>
+    <span class="n">void</span> <span class="n">onCustomContextMenuRequested</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">);</span>
+<span class="c1">#endif</span>
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createMenus</span><span class="p">();</span>
+
+    <span class="n">QTreeWidget</span> <span class="o">*</span><span class="n">treeWidget</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id7"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> constructor instantiates the <a class="reference internal" href="../PySide2/QtWidgets/QTreeWidget.html#PySide2.QtWidgets.QTreeWidget" title="PySide2.QtWidgets.QTreeWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeWidget</span></code></a> object, <code class="docutils literal"><span class="pre">treeWidget</span></code> and sets its header with a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> object, <code class="docutils literal"><span class="pre">labels</span></code> . The constructor also invokes <code class="docutils literal"><span class="pre">createActions()</span></code> and <code class="docutils literal"><span class="pre">createMenus()</span></code> to set up the menus and their corresponding actions. The <code class="docutils literal"><span class="pre">statusBar()</span></code> is used to display the message “Ready” and the window’s size is fixed to 480x320 pixels.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QStringList</span> <span class="n">labels</span><span class="p">;</span>
+    <span class="n">labels</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Location&quot;</span><span class="p">);</span>
+
+    <span class="n">treeWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTreeWidget</span><span class="p">;</span>
+    <span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QHeaderView</span><span class="p">::</span><span class="n">Stretch</span><span class="p">);</span>
+    <span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">setHeaderLabels</span><span class="p">(</span><span class="n">labels</span><span class="p">);</span>
+<span class="c1">#if !defined(QT_NO_CONTEXTMENU) &amp;&amp; !defined(QT_NO_CLIPBOARD)</span>
+    <span class="n">treeWidget</span><span class="o">-&gt;</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">CustomContextMenu</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">treeWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">customContextMenuRequested</span><span class="p">,</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">onCustomContextMenuRequested</span><span class="p">);</span>
+<span class="c1">#endif</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">treeWidget</span><span class="p">);</span>
+
+    <span class="n">createMenus</span><span class="p">();</span>
+
+    <span class="n">statusBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">showMessage</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ready&quot;</span><span class="p">));</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;QXmlStream Bookmarks&quot;</span><span class="p">));</span>
+    <span class="n">const</span> <span class="n">QSize</span> <span class="n">availableSize</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">desktop</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">availableGeometry</span><span class="p">(</span><span class="n">this</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">resize</span><span class="p">(</span><span class="n">availableSize</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">availableSize</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">open()</span></code> function enables the user to open an XBEL file using <code class="xref py py-func docutils literal"><span class="pre">QFileDialog.getOpenFileName()</span></code> . A warning message is displayed along with the <code class="docutils literal"><span class="pre">fileName</span></code> and <code class="docutils literal"><span class="pre">errorString</span></code> if the file cannot be read or if there is a parse error.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::open()
+{
+    QString fileName =
+            QFileDialog::getOpenFileName(this, tr(&quot;Open Bookmark File&quot;),
+                                         QDir::currentPath(),
+                                         tr(&quot;XBEL Files (*.xbel *.xml)&quot;));
+    if (fileName.isEmpty())
+        return;
+
+    treeWidget-&gt;clear();
+
+
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        QMessageBox::warning(this, tr(&quot;QXmlStream Bookmarks&quot;),
+                             tr(&quot;Cannot read file %1:\n%2.&quot;)
+                             .arg(QDir::toNativeSeparators(fileName),
+                                  file.errorString()));
+        return;
+    }
+
+    XbelReader reader(treeWidget);
+    if (!reader.read(&amp;file)) {
+        QMessageBox::warning(this, tr(&quot;QXmlStream Bookmarks&quot;),
+                             tr(&quot;Parse error in file %1:\n\n%2&quot;)
+                             .arg(QDir::toNativeSeparators(fileName),
+                                  reader.errorString()));
+    } else {
+        statusBar()-&gt;showMessage(tr(&quot;File loaded&quot;), 2000);
+    }
+
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">saveAs()</span></code> function displays a <a class="reference internal" href="../PySide2/QtWidgets/QFileDialog.html#PySide2.QtWidgets.QFileDialog" title="PySide2.QtWidgets.QFileDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileDialog</span></code></a> , prompting the user for a <code class="docutils literal"><span class="pre">fileName</span></code> using <code class="xref py py-func docutils literal"><span class="pre">QFileDialog.getSaveFileName()</span></code> . Similar to the <code class="docutils literal"><span class="pre">open()</span></code> function, this function also displays a warning message if the file cannot be written to.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::saveAs()
+{
+    QString fileName =
+            QFileDialog::getSaveFileName(this, tr(&quot;Save Bookmark File&quot;),
+                                         QDir::currentPath(),
+                                         tr(&quot;XBEL Files (*.xbel *.xml)&quot;));
+    if (fileName.isEmpty())
+        return;
+
+    QFile file(fileName);
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, tr(&quot;QXmlStream Bookmarks&quot;),
+                             tr(&quot;Cannot write file %1:\n%2.&quot;)
+                             .arg(QDir::toNativeSeparators(fileName),
+                                  file.errorString()));
+        return;
+    }
+
+    XbelWriter writer(treeWidget);
+    if (writer.writeFile(&amp;file))
+        statusBar()-&gt;showMessage(tr(&quot;File saved&quot;), 2000);
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">about()</span></code> function displays a <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> with a brief description of the example.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">()</span>
+<span class="p">{</span>
+   <span class="n">QMessageBox</span><span class="p">::</span><span class="n">about</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About QXmlStream Bookmarks&quot;</span><span class="p">),</span>
+            <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The &lt;b&gt;QXmlStream Bookmarks&lt;/b&gt; example demonstrates how to use Qt&#39;s &quot;</span>
+               <span class="s2">&quot;QXmlStream classes to read and write XML documents.&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to implement the <code class="docutils literal"><span class="pre">open()</span></code> , <code class="docutils literal"><span class="pre">saveAs()</span></code> , <code class="docutils literal"><span class="pre">exit()</span></code> , <code class="docutils literal"><span class="pre">about()</span></code> and <code class="docutils literal"><span class="pre">aboutQt()</span></code> functions, we connect them to <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> objects and add them to the <code class="docutils literal"><span class="pre">fileMenu</span></code> and <code class="docutils literal"><span class="pre">helpMenu</span></code> . The connections are as shown below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createMenus</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">));</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">openAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Open...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="nb">open</span><span class="p">);</span>
+    <span class="n">openAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Open</span><span class="p">);</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">saveAsAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Save As...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">saveAs</span><span class="p">);</span>
+    <span class="n">saveAsAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">SaveAs</span><span class="p">);</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+    <span class="n">exitAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Quit</span><span class="p">);</span>
+
+    <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">));</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="n">qApp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QCoreApplication</span><span class="p">::</span><span class="n">quit</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createMenus()</span></code> function creates the <code class="docutils literal"><span class="pre">fileMenu</span></code> and <code class="docutils literal"><span class="pre">helpMenu</span></code> and adds the <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> objects to them in order to create the menu shown in the screenshot below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createMenus</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">));</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">openAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Open...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="nb">open</span><span class="p">);</span>
+    <span class="n">openAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Open</span><span class="p">);</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">saveAsAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Save As...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">saveAs</span><span class="p">);</span>
+    <span class="n">saveAsAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">SaveAs</span><span class="p">);</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+    <span class="n">exitAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Quit</span><span class="p">);</span>
+
+    <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">));</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="n">qApp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QCoreApplication</span><span class="p">::</span><span class="n">quit</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p id="main-function"><code class="docutils literal"><span class="pre">main()</span></code></p>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">main()</span></code> function instantiates <code class="docutils literal"><span class="pre">MainWindow</span></code> and invokes the <code class="docutils literal"><span class="pre">show()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">MainWindow</span> <span class="n">mainWin</span><span class="p">;</span>
+    <span class="n">mainWin</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">mainWin</span><span class="o">.</span><span class="n">open</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See the XML Bookmark Exchange Language Resource Page for more information about XBEL files.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="xbelreader-cpp-example-file">
+<h1>xbelreader.cpp Example File<a class="headerlink" href="#xbelreader-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="xbelreader-h-example-file">
+<h1>xbelreader.h Example File<a class="headerlink" href="#xbelreader-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="xbelwriter-cpp-example-file">
+<h1>xbelwriter.cpp Example File<a class="headerlink" href="#xbelwriter-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="xbelwriter-h-example-file">
+<h1>xbelwriter.h Example File<a class="headerlink" href="#xbelwriter-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="streambookmarks-pro-example-file">
+<h1>streambookmarks.pro Example File<a class="headerlink" href="#streambookmarks-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

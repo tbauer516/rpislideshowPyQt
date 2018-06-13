@@ -1,0 +1,137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Plug &amp; Paint Extra Filters Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plug &amp; Paint Extra Filters Example</a></li>
+<li><a class="reference internal" href="#extrafiltersplugin-cpp-example-file">extrafiltersplugin.cpp Example File</a></li>
+<li><a class="reference internal" href="#extrafiltersplugin-h-example-file">extrafiltersplugin.h Example File</a></li>
+<li><a class="reference internal" href="#extrafilters-pro-example-file">extrafilters.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plug-paint-extra-filters-example">
+<span id="id1"></span><h1>Plug &amp; Paint Extra Filters Example<a class="headerlink" href="#plug-paint-extra-filters-example" title="Permalink to this headline">¶</a></h1>
+<p>A plugin providing the extra filters</p>
+<blockquote>
+<div><p>A plugin providing the extra filters.</p>
+<p>The Extra Filters example is a plugin for the <a class="reference internal" href="qtwidgets-tools-plugandpaint-app-example.html#plug-paint-example"><span class="std std-ref">Plug &amp; Paint</span></a> example. It provides a set of filters in addition to those provided by the <a class="reference internal" href="qtwidgets-tools-plugandpaint-plugins-basictools-example.html#plug-paint-basic-tools-example"><span class="std std-ref">Basic Tools</span></a> plugin.</p>
+<p>Since the approach is identical to <a class="reference internal" href="qtwidgets-tools-plugandpaint-plugins-basictools-example.html#plug-paint-basic-tools-example"><span class="std std-ref">Basic Tools</span></a> , we won’t review the code here. The only part of interest is the <code class="docutils literal"><span class="pre">.pro</span></code> file, since Extra Filters is a dynamic plugin ( <a class="reference internal" href="qtwidgets-tools-plugandpaint-plugins-basictools-example.html#plug-paint-basic-tools-example"><span class="std std-ref">Basic Tools</span></a> is linked statically into the Plug &amp; Paint executable).</p>
+<p>Here’s the project file for building the Extra Filters plugin:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;tools/plugandpaint/plugins/extrafilters/extrafilters.pro:0&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.pro</span></code> file differs from typical <code class="docutils literal"><span class="pre">.pro</span></code> files in many respects. First, it starts with a <code class="docutils literal"><span class="pre">TEMPLATE</span></code> entry specifying <code class="docutils literal"><span class="pre">lib</span></code> . (The default template is <code class="docutils literal"><span class="pre">app</span></code> .) It also adds <code class="docutils literal"><span class="pre">plugin</span></code> to the <code class="docutils literal"><span class="pre">CONFIG</span></code> variable. This is necessary on some platforms to avoid generating symbolic links with version numbers in the file name, which is appropriate for most dynamic libraries but not for plugins.</p>
+<p>The <code class="docutils literal"><span class="pre">INCLUDEPATH</span></code> variable sets the search paths for global headers (i.e., header files included using <code class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;...&gt;</span></code> ). We add <code class="docutils literal"><span class="pre">../../app</span></code> to the list, so that we can include <code class="docutils literal"><span class="pre">&lt;interfaces.h&gt;</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">TARGET</span></code> variable specifies which name we want to give the target library. We use <code class="docutils literal"><span class="pre">pnp_</span></code> as the prefix to show that the plugin is designed to work with Plug &amp; Paint. On Unix, <code class="docutils literal"><span class="pre">lib</span></code> is also prepended to that name. On all platforms, a platform-specific suffix is appended (e.g., <code class="docutils literal"><span class="pre">.dll</span></code> on Windows, <code class="docutils literal"><span class="pre">.so</span></code> on Linux).</p>
+<p>The <code class="docutils literal"><span class="pre">DESTDIR</span></code> variable specifies where we want to install the plugin. We put it in Plug &amp; Paint’s <code class="docutils literal"><span class="pre">plugins</span></code> subdirectory, since that’s where the application looks for dynamic plugins.</p>
+<p>The <code class="docutils literal"><span class="pre">CONFIG()</span></code> code at the end is necessary for this example because the example is part of the Qt distribution and Qt can be configured to be built simultaneously in debug and in release modes. You don’t need to for your own plugins.</p>
+</div></blockquote>
+</div>
+<div class="section" id="extrafiltersplugin-cpp-example-file">
+<h1>extrafiltersplugin.cpp Example File<a class="headerlink" href="#extrafiltersplugin-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="extrafiltersplugin-h-example-file">
+<h1>extrafiltersplugin.h Example File<a class="headerlink" href="#extrafiltersplugin-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="extrafilters-pro-example-file">
+<h1>extrafilters.pro Example File<a class="headerlink" href="#extrafilters-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

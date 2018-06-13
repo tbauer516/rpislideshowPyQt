@@ -1,0 +1,461 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Advanced Tutorial 4 - Finishing Touches &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PySide2 API" href="../../pysideapi2.html" />
+    <link rel="prev" title="QML Advanced Tutorial 3 - Implementing the Game Logic" href="samegame3.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" >PySide examples and tutorials</a></li>
+                            <li><a href="index.html" accesskey="U">QML Advanced Tutorial</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Advanced Tutorial 4 - Finishing Touches</a><ul>
+<li><a class="reference internal" href="#adding-some-flair">Adding some flair</a><ul>
+<li><a class="reference internal" href="#animating-block-movement">Animating block movement</a></li>
+<li><a class="reference internal" href="#animating-block-opacity-changes">Animating block opacity changes</a></li>
+<li><a class="reference internal" href="#adding-particle-effects">Adding particle effects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keeping-a-high-scores-table">Keeping a high scores table</a><ul>
+<li><a class="reference internal" href="#storing-high-scores-offline">Storing high scores offline</a></li>
+<li><a class="reference internal" href="#storing-high-scores-online">Storing high scores online</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#that-s-it">That’s it!</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="samegame3.html"
+                        title="previous chapter">QML Advanced Tutorial 3 - Implementing the Game Logic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../pysideapi2.html"
+                        title="next chapter">PySide2 API</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-advanced-tutorial-4-finishing-touches">
+<span id="samegame4"></span><h1>QML Advanced Tutorial 4 - Finishing Touches<a class="headerlink" href="#qml-advanced-tutorial-4-finishing-touches" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="adding-some-flair">
+<h2>Adding some flair<a class="headerlink" href="#adding-some-flair" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, you are going to do two things to enhance the game
+experience: animate the blocks and add a High Score system.</p>
+<p>You should clean up the directory structure, now that there are a
+lot of files. Move all the JavaScript and QML files outside of <code class="docutils literal"><span class="pre">samegame.qml</span></code>
+into a new sub-directory named “content”.</p>
+<p>In anticipation of the new block animations, <code class="docutils literal"><span class="pre">Block.qml</span></code> file is now renamed
+to <code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>.</p>
+<div class="section" id="animating-block-movement">
+<h3>Animating block movement<a class="headerlink" href="#animating-block-movement" title="Permalink to this headline">¶</a></h3>
+<p>First, you will animate the blocks so that they move in a fluid manner. QML has
+a number of methods for adding fluid movement, and in this case you are going to
+use the Behavior type to add a SpringAnimation. In <code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>, apply a
+SpringAnimation behavior to the <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> properties so that the
+block follows and animate its movement in a spring-like fashion towards the
+specified position (whose values are set by <code class="docutils literal"><span class="pre">samegame.js</span></code>). Here is the code
+added to <code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="nb">property</span> <span class="nb">bool</span> <span class="n">spawned</span><span class="p">:</span> <span class="n">false</span>
+
+    <span class="n">Behavior</span> <span class="n">on</span> <span class="n">x</span> <span class="p">{</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="n">spawned</span><span class="p">;</span>
+        <span class="n">SpringAnimation</span><span class="p">{</span> <span class="n">spring</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="n">damping</span><span class="p">:</span> <span class="mf">0.2</span> <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">Behavior</span> <span class="n">on</span> <span class="n">y</span> <span class="p">{</span>
+        <span class="n">SpringAnimation</span><span class="p">{</span> <span class="n">spring</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="n">damping</span><span class="p">:</span> <span class="mf">0.2</span> <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">spring</span></code> and <code class="docutils literal"><span class="pre">damping</span></code> values can be changed to modify the spring-like
+effect of the animation.</p>
+<p>The <code class="docutils literal"><span class="pre">enabled:</span> <span class="pre">spawned</span></code> setting refers to the <code class="docutils literal"><span class="pre">spawned</span></code> value that comes from
+the <code class="docutils literal"><span class="pre">createBlock()</span></code> function in <code class="docutils literal"><span class="pre">samegame.js</span></code>. This ensures that the
+SpringAnimation on <code class="docutils literal"><span class="pre">x</span></code> is only enabled after <code class="docutils literal"><span class="pre">createBlock()</span></code> has set the
+block to the correct position. Otherwise, the blocks will slide out of the
+corner (0,0) when a game begins, instead of falling from the top in rows.
+Try commenting out the line, <code class="docutils literal"><span class="pre">enabled:</span> <span class="pre">spawned</span></code>, and see the effect for
+yourself.</p>
+</div>
+<div class="section" id="animating-block-opacity-changes">
+<h3>Animating block opacity changes<a class="headerlink" href="#animating-block-opacity-changes" title="Permalink to this headline">¶</a></h3>
+<p>Next, add a smooth exit animation. For this, use a Behavior type, which
+allows us to specify a default animation when a property change occurs. In this
+case, when the <code class="docutils literal"><span class="pre">opacity</span></code> of a Block changes, animate the opacity value so that
+it gradually fades in and out, instead of abruptly changing between fully
+visible and invisible. To do this, apply a Behavior on the <code class="docutils literal"><span class="pre">opacity</span></code> property
+of the <code class="docutils literal"><span class="pre">Image</span></code> item in <code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Image</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">img</span>
+
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">source</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/redStone.png&quot;</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/blueStone.png&quot;</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/greenStone.png&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">opacity</span><span class="p">:</span> <span class="mi">0</span>
+
+        <span class="n">Behavior</span> <span class="n">on</span> <span class="n">opacity</span> <span class="p">{</span>
+            <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">properties</span><span class="p">:</span><span class="s2">&quot;opacity&quot;</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">200</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal"><span class="pre">opacity:</span> <span class="pre">0</span></code>, which means the block is transparent when it is first
+created. You could set the opacity in <code class="docutils literal"><span class="pre">samegame.js</span></code> when we create and
+destroy the blocks, but use states instead, as this is useful for the next
+animation you are going to add. Initially, add these States to the root
+item of <code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">property</span> <span class="nb">bool</span> <span class="n">dying</span><span class="p">:</span> <span class="n">false</span>
+<span class="n">states</span><span class="p">:</span> <span class="p">[</span>
+    <span class="n">State</span><span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;AliveState&quot;</span><span class="p">;</span> <span class="n">when</span><span class="p">:</span> <span class="n">spawned</span> <span class="o">==</span> <span class="n">true</span> <span class="o">&amp;&amp;</span> <span class="n">dying</span> <span class="o">==</span> <span class="n">false</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">img</span><span class="p">;</span> <span class="n">opacity</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">State</span><span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;DeathState&quot;</span><span class="p">;</span> <span class="n">when</span><span class="p">:</span> <span class="n">dying</span> <span class="o">==</span> <span class="n">true</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">img</span><span class="p">;</span> <span class="n">opacity</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Now blocks will automatically fade in, as <code class="docutils literal"><span class="pre">spawned</span></code> is set to true when
+you implemented the block animations. To fade out, set <code class="docutils literal"><span class="pre">dying</span></code> to true
+instead of setting opacity to 0 when a block is destroyed (in the
+<code class="docutils literal"><span class="pre">floodFill()</span></code> function).</p>
+</div>
+<div class="section" id="adding-particle-effects">
+<h3>Adding particle effects<a class="headerlink" href="#adding-particle-effects" title="Permalink to this headline">¶</a></h3>
+<p>Finally, add a cool-looking particle effect to the blocks when they are
+destroyed. To do this, first add a Particles item in
+<code class="docutils literal"><span class="pre">BoomBlock.qml</span></code>, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Particles</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">particles</span>
+
+        <span class="n">width</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+
+        <span class="n">emissionRate</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="n">lifeSpan</span><span class="p">:</span> <span class="mi">700</span><span class="p">;</span> <span class="n">lifeSpanDeviation</span><span class="p">:</span> <span class="mi">600</span>
+        <span class="n">angle</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="n">angleDeviation</span><span class="p">:</span> <span class="mi">360</span><span class="p">;</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">velocityDeviation</span><span class="p">:</span> <span class="mi">30</span>
+        <span class="n">source</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/redStar.png&quot;</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> 
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/blueStar.png&quot;</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="s2">&quot;../../shared/pics/greenStar.png&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>To fully understand this you should read the Particles documentation,
+but it’s important to note that <code class="docutils literal"><span class="pre">emissionRate</span></code> is set to zero so that
+particles are not emitted normally. Also, extend the <code class="docutils literal"><span class="pre">dying</span></code> State,
+which creates a burst of particles by calling the <code class="docutils literal"><span class="pre">burst()</span></code> method on the
+particles item. The code for the states now look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">states</span><span class="p">:</span> <span class="p">[</span>
+        <span class="n">State</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;AliveState&quot;</span>
+            <span class="n">when</span><span class="p">:</span> <span class="n">spawned</span> <span class="o">==</span> <span class="n">true</span> <span class="o">&amp;&amp;</span> <span class="n">dying</span> <span class="o">==</span> <span class="n">false</span>
+            <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">img</span><span class="p">;</span> <span class="n">opacity</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="n">State</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;DeathState&quot;</span>
+            <span class="n">when</span><span class="p">:</span> <span class="n">dying</span> <span class="o">==</span> <span class="n">true</span>
+            <span class="n">StateChangeScript</span> <span class="p">{</span> <span class="n">script</span><span class="p">:</span> <span class="n">particles</span><span class="o">.</span><span class="n">burst</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="p">}</span>
+            <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">img</span><span class="p">;</span> <span class="n">opacity</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+            <span class="n">StateChangeScript</span> <span class="p">{</span> <span class="n">script</span><span class="p">:</span> <span class="n">block</span><span class="o">.</span><span class="n">destroy</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>Now the gaming experience is pleasing with these animations. With a few
+more simple animations for all of the player’s actions, it will look even better.
+The end result is shown below, with a different set of images to demonstrate
+the basic theme:</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-adv-tutorial4.gif" src="../../_images/declarative-adv-tutorial4.gif" />
+</div>
+<p>The theme change here is produced simply by replacing the block images. This
+can be done at runtime by changing the <code class="docutils literal"><span class="pre">source</span></code> property of the Image. You
+could go a step further and add a button that toggles between themes with
+different images.</p>
+</div>
+</div>
+<div class="section" id="keeping-a-high-scores-table">
+<h2>Keeping a high scores table<a class="headerlink" href="#keeping-a-high-scores-table" title="Permalink to this headline">¶</a></h2>
+<p>Another feature you might want to add to the game is a method of storing and
+retrieving high scores.</p>
+<p>To do this, show a dialog when the game is over to request the player’s name
+and add it to a High Scores table. This requires a few changes to
+<code class="docutils literal"><span class="pre">Dialog.qml</span></code>. In addition to a <code class="docutils literal"><span class="pre">Text</span></code> item, it now has a <code class="docutils literal"><span class="pre">TextInput</span></code>
+child item for receiving keyboard text input:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+<span class="o">...</span>
+    <span class="n">TextInput</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">textInput</span>
+        <span class="n">anchors</span> <span class="p">{</span> <span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="n">dialogText</span><span class="o">.</span><span class="n">right</span> <span class="p">}</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">80</span>
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">onAccepted</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>    <span class="o">//</span> <span class="n">close</span> <span class="n">dialog</span> <span class="n">when</span> <span class="n">Enter</span> <span class="ow">is</span> <span class="n">pressed</span>
+    <span class="p">}</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also, add a <code class="docutils literal"><span class="pre">showWithInput()</span></code> function. The text input will only be visible if
+this function is called instead of <code class="docutils literal"><span class="pre">show()</span></code>. When the dialog is closed, it
+emits a <code class="docutils literal"><span class="pre">closed()</span></code> signal, and other items can retrieve the text entered by
+the user through the <code class="docutils literal"><span class="pre">inputText</span></code> property:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+<span class="o">...</span>
+    <span class="nb">property</span> <span class="n">string</span> <span class="n">inputText</span><span class="p">:</span> <span class="n">textInput</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">signal</span> <span class="n">closed</span>
+
+    <span class="n">function</span> <span class="n">show</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dialogText</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">;</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">textInput</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">function</span> <span class="n">showWithInput</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">show</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+        <span class="n">textInput</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">textInput</span><span class="o">.</span><span class="n">focus</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+        <span class="n">textInput</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">function</span> <span class="n">hide</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">textInput</span><span class="o">.</span><span class="n">focus</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">opacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">closed</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now the dialog can be used in <code class="docutils literal"><span class="pre">samegame.qml</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Dialog</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">nameInputDialog</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">z</span><span class="p">:</span> <span class="mi">100</span>
+
+        <span class="n">onClosed</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nameInputDialog</span><span class="o">.</span><span class="n">inputText</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">SameGame</span><span class="o">.</span><span class="n">saveHighScore</span><span class="p">(</span><span class="n">nameInputDialog</span><span class="o">.</span><span class="n">inputText</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>When the dialog emits the <code class="docutils literal"><span class="pre">closed</span></code> signal, we call the new <code class="docutils literal"><span class="pre">saveHighScore()</span></code>
+function in <code class="docutils literal"><span class="pre">samegame.js</span></code>, to store the high score locally in an SQL database
+and also send the score to an online database if possible.</p>
+<p>The <code class="docutils literal"><span class="pre">nameInputDialog</span></code> is activated in the <code class="docutils literal"><span class="pre">victoryCheck()</span></code> function in
+<code class="docutils literal"><span class="pre">samegame.js</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>function vitoryCheck() {
+...
+    //Check whether game has finished
+    if (deservesBonus || !(floodMoveCheck(0, maxRow - 1, -1))) {
+        gameDuration = new Date() - gameDuration;
+        nameInputDialog.showWithInput(&quot;You won! Please enter your name: &quot;);
+    }
+}
+</pre></div>
+</div>
+<div class="section" id="storing-high-scores-offline">
+<h3>Storing high scores offline<a class="headerlink" href="#storing-high-scores-offline" title="Permalink to this headline">¶</a></h3>
+<p>Now, you need to implement the functionality to actually save the High Scores table.</p>
+<p>Here is the <code class="docutils literal"><span class="pre">saveHighScore()</span></code> function in <code class="docutils literal"><span class="pre">samegame.js</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">saveHighScore</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">scoresURL</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">sendHighScore</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+    <span class="n">var</span> <span class="n">db</span> <span class="o">=</span> <span class="n">openDatabaseSync</span><span class="p">(</span><span class="s2">&quot;SameGameScores&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;Local SameGame High Scores&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">dataStr</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO Scores VALUES(?, ?, ?, ?)&quot;</span><span class="p">;</span>
+    <span class="n">var</span> <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="n">gameCanvas</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="n">maxColumn</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span> <span class="o">+</span> <span class="n">maxRow</span><span class="p">,</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">gameDuration</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)];</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">tx</span><span class="o">.</span><span class="n">executeSql</span><span class="p">(</span><span class="s1">&#39;CREATE TABLE IF NOT EXISTS Scores(name TEXT, score NUMBER, gridSize TEXT, time NUMBER)&#39;</span><span class="p">);</span>
+        <span class="n">tx</span><span class="o">.</span><span class="n">executeSql</span><span class="p">(</span><span class="n">dataStr</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+
+        <span class="n">var</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">tx</span><span class="o">.</span><span class="n">executeSql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM Scores WHERE gridSize = &quot;12x17&quot; ORDER BY score desc LIMIT 10&#39;</span><span class="p">);</span>
+        <span class="n">var</span> <span class="n">r</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HIGH SCORES for a standard sized grid</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">rs</span><span class="o">.</span><span class="n">rows</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">r</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="n">rows</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; got &#39;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="n">rows</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">score</span> <span class="o">+</span> <span class="s1">&#39; points in &#39;</span> <span class="o">+</span> <span class="n">rs</span><span class="o">.</span><span class="n">rows</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">time</span> <span class="o">+</span> <span class="s1">&#39; seconds.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, call <code class="docutils literal"><span class="pre">sendHighScore()</span></code> to send the high scores to an online database.</p>
+<p>Then, use the Offline Storage API to maintain a persistent SQL database, unique
+to this application. Create an offline storage database for the high scores
+using <code class="docutils literal"><span class="pre">openDatabase()</span></code>, then prepare the data and SQL query that we want to use
+to save it. The offline storage API uses SQL queries for data manipulation and
+retrieval. The <code class="docutils literal"><span class="pre">db.transaction()</span></code> uses three SQL queries:</p>
+<blockquote>
+<div><ul class="simple">
+<li>To initialize the database, if necessary.</li>
+<li>To add high scores to the database.</li>
+<li>To retrieve the high score records.</li>
+</ul>
+</div></blockquote>
+<p>To use the returned records, turn it into a string with one line per row, and show
+a dialog containing that string.</p>
+<p>This is one way of storing and displaying high scores locally, but certainly
+not the only way. A more complex alternative would be to create a high score
+dialog component, and pass it the results for processing and display (instead
+of reusing the <code class="docutils literal"><span class="pre">Dialog</span></code>). This allows for a more themeable dialog that could
+present the high scores in a better way. If you are using QML-based UI for a
+Python application, you can also pass the score to a function that stores it
+locally in a variety of ways. This can be a simple format without SQL, or in
+another SQL database.</p>
+</div>
+<div class="section" id="storing-high-scores-online">
+<h3>Storing high scores online<a class="headerlink" href="#storing-high-scores-online" title="Permalink to this headline">¶</a></h3>
+<p>You’ve seen how you can store high scores locally, but it is also easy to
+integrate a web-enabled high score storage into your application. The
+implementation we’ve done here is very simple: the high score data is posted to
+a php script running on a server somewhere, and that server then stores it and
+displays it to visitors. You could also request an XML or QML file, which
+contains and displays the scores, but that’s beyond the scope of this tutorial.
+The php script used here is available in the <code class="docutils literal"><span class="pre">examples</span></code> directory.</p>
+<p>If the player entered their name, you can send the data to an online database
+service. The following code snippet from <code class="docutils literal"><span class="pre">samegame.js</span></code> demonstrates this well:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">sendHighScore</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">postman</span> <span class="o">=</span> <span class="n">new</span> <span class="n">XMLHttpRequest</span><span class="p">()</span>
+        <span class="n">var</span> <span class="n">postData</span> <span class="o">=</span> <span class="s2">&quot;name=&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;&amp;score=&quot;</span> <span class="o">+</span> <span class="n">gameCanvas</span><span class="o">.</span><span class="n">score</span> <span class="o">+</span> <span class="s2">&quot;&amp;gridSize=&quot;</span> <span class="o">+</span> <span class="n">maxColumn</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span> <span class="o">+</span> <span class="n">maxRow</span> <span class="o">+</span> <span class="s2">&quot;&amp;time=&quot;</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">gameDuration</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="n">postman</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">scoresURL</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+    <span class="n">postman</span><span class="o">.</span><span class="n">setRequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">);</span>
+    <span class="n">postman</span><span class="o">.</span><span class="n">onreadystatechange</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">postman</span><span class="o">.</span><span class="n">readyState</span> <span class="o">==</span> <span class="n">postman</span><span class="o">.</span><span class="n">DONE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;Your score has been uploaded.&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">postman</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">postData</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The XMLHttpRequest in this code is the same as the <code class="docutils literal"><span class="pre">XMLHttpRequest()</span></code> as you’ll
+find in standard browser JavaScript, and can be used in the same way to
+dynamically get XML or QML from the web service to display the high scores. We don’t worry about the response in this case - we just post the high
+score data to the web server. If it had returned a QML file (or a URL to a QML file) you could instantiate it in much the same
+way as you did with the blocks.</p>
+<p>An alternate way to access and submit web-based data would be to use QML items designed for this purpose. XmlListModel
+makes it very easy to fetch and display XML based data such as RSS in a QML application (see the Flickr demo for an example).</p>
+</div>
+</div>
+<div class="section" id="that-s-it">
+<h2>That’s it!<a class="headerlink" href="#that-s-it" title="Permalink to this headline">¶</a></h2>
+<p>By following this tutorial you’ve seen how you can write a fully functional application in QML:</p>
+<ul class="simple">
+<li>Build your application with QML items.</li>
+<li>Add application logic with JavaScript code.</li>
+<li>Add animations with Behaviors and states.</li>
+<li>Store persistent application data using, for example, the Offline Storage API or XMLHttpRequest.</li>
+</ul>
+<p>There is so much more to learn about QML that we haven’t been able to cover in this tutorial. Check out all the
+demos and examples and the documentation to see all the things you can do with QML!</p>
+<p>[Previous <a class="reference internal" href="samegame3.html#samegame3"><span class="std std-ref">QML Advanced Tutorial 3 - Implementing the Game Logic</span></a>]</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

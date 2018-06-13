@@ -1,0 +1,330 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Blocking Fortune Client Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Blocking Fortune Client Example</a></li>
+<li><a class="reference internal" href="#blockingclient-cpp-example-file">blockingclient.cpp Example File</a></li>
+<li><a class="reference internal" href="#blockingclient-h-example-file">blockingclient.h Example File</a></li>
+<li><a class="reference internal" href="#fortunethread-cpp-example-file">fortunethread.cpp Example File</a></li>
+<li><a class="reference internal" href="#fortunethread-h-example-file">fortunethread.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#blockingfortuneclient-pro-example-file">blockingfortuneclient.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="blocking-fortune-client-example">
+<span id="id1"></span><h1>Blocking Fortune Client Example<a class="headerlink" href="#blocking-fortune-client-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates how to create a client for a network service</p>
+<blockquote>
+<div><p>Demonstrates how to create a client for a network service</p>
+<p><a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> supports two general approaches to network programming:</p>
+<ul class="simple">
+<li><em>The asynchronous (non-blocking) approach.</em> Operations are scheduled and performed when control returns to Qt’s event loop. When the operation is finished, <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> emits a signal. For example, <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.connectToHost()</span></code> returns immediately, and when the connection has been established, <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> emits <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.connected()</span></code> .</li>
+<li><em>The synchronous (blocking) approach.</em> In non-GUI and multithreaded applications, you can call the <code class="docutils literal"><span class="pre">waitFor...()</span></code> functions (e.g., <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.waitForConnected()</span></code> ) to suspend the calling thread until the operation has completed, instead of connecting to signals.</li>
+</ul>
+<p>The implementation is very similar to the <a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client</span></a> example, but instead of having <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> as a member of the main class, doing asynchronous networking in the main thread, we will do all network operations in a separate thread and use <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> ‘s blocking API.</p>
+<p>The purpose of this example is to demonstrate a pattern that you can use to simplify your networking code, without losing responsiveness in your user interface. Use of Qt’s blocking network API often leads to simpler code, but because of its blocking behavior, it should only be used in non-GUI threads to prevent the user interface from freezing. But contrary to what many think, using threads with <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> does not necessarily add unmanagable complexity to your application.</p>
+<p>We will start with the FortuneThread class, which handles the network code.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FortuneThread</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QThread</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">FortuneThread</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">FortuneThread</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">requestNewFortune</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">hostName</span><span class="p">,</span> <span class="n">quint16</span> <span class="n">port</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">run</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">newFortune</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fortune</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">error</span><span class="p">(</span><span class="nb">int</span> <span class="n">socketError</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">message</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">hostName</span><span class="p">;</span>
+    <span class="n">quint16</span> <span class="n">port</span><span class="p">;</span>
+    <span class="n">QMutex</span> <span class="n">mutex</span><span class="p">;</span>
+    <span class="n">QWaitCondition</span> <span class="n">cond</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">quit</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>FortuneThread is a <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> subclass that provides an API for scheduling requests for fortunes, and it has signals for delivering fortunes and reporting errors. You can call requestNewFortune() to request a new fortune, and the result is delivered by the newFortune() signal. If any error occurs, the error() signal is emitted.</p>
+<p>It’s important to notice that requestNewFortune() is called from the main, GUI thread, but the host name and port values it stores will be accessed from FortuneThread’s thread. Because we will be reading and writing FortuneThread’s data members from different threads concurrently, we use <a class="reference internal" href="../PySide2/QtCore/QMutex.html#PySide2.QtCore.QMutex" title="PySide2.QtCore.QMutex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMutex</span></code></a> to synchronize access.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void FortuneThread::requestNewFortune(const QString &amp;hostName, quint16 port)
+{
+
+    QMutexLocker locker(&amp;mutex);
+    this-&gt;hostName = hostName;
+    this-&gt;port = port;
+
+    if (!isRunning())
+        start();
+    else
+        cond.wakeOne();
+}
+</pre></div>
+</div>
+<p>The requestNewFortune() function stores the host name and port of the fortune server as member data, and we lock the mutex with <a class="reference internal" href="../PySide2/QtCore/QMutexLocker.html#PySide2.QtCore.QMutexLocker" title="PySide2.QtCore.QMutexLocker"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMutexLocker</span></code></a> to protect this data. We then start the thread, unless it is already running. We will come back to the <code class="xref py py-func docutils literal"><span class="pre">QWaitCondition.wakeOne()</span></code> call later.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">FortuneThread</span><span class="p">::</span><span class="n">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">serverName</span> <span class="o">=</span> <span class="n">hostName</span><span class="p">;</span>
+    <span class="n">quint16</span> <span class="n">serverPort</span> <span class="o">=</span> <span class="n">port</span><span class="p">;</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In the run() function, we start by acquiring the mutex lock, fetching the host name and port from the member data, and then releasing the lock again. The case that we are protecting ourselves against is that <code class="docutils literal"><span class="pre">requestNewFortune()</span></code> could be called at the same time as we are fetching this data. <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> is reentrant but <em>not</em> thread-safe, and we must also avoid the unlikely risk of reading the host name from one request, and port of another. And as you might have guessed, FortuneThread can only handle one request at a time.</p>
+<p>The run() function now enters a loop:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>while (!quit) {
+
+    const int Timeout = 5 * 1000;
+
+    QTcpSocket socket;
+    socket.connectToHost(serverName, serverPort);
+</pre></div>
+</div>
+<p>The loop will continue requesting fortunes for as long as <em>quit</em> is false. We start our first request by creating a <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> on the stack, and then we call <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.connectToHost()</span></code> . This starts an asynchronous operation which, after control returns to Qt’s event loop, will cause <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> to emit <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.connected()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.error()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!socket.waitForConnected(Timeout)) {
+    emit error(socket.error(), socket.errorString());
+    return;
+}
+</pre></div>
+</div>
+<p>But since we are running in a non-GUI thread, we do not have to worry about blocking the user interface. So instead of entering an event loop, we simply call <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.waitForConnected()</span></code> . This function will wait, blocking the calling thread, until <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> emits connected() or an error occurs. If connected() is emitted, the function returns true; if the connection failed or timed out (which in this example happens after 5 seconds), false is returned. <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.waitForConnected()</span></code> , like the other <code class="docutils literal"><span class="pre">waitFor...()</span></code> functions, is part of <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> ‘s <em>blocking API</em> .</p>
+<p>After this statement, we have a connected socket to work with.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QDataStream</span> <span class="ow">in</span><span class="p">(</span><span class="o">&amp;</span><span class="n">socket</span><span class="p">);</span>
+<span class="ow">in</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="n">QDataStream</span><span class="p">::</span><span class="n">Qt_4_0</span><span class="p">);</span>
+<span class="n">QString</span> <span class="n">fortune</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now we can create a <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> object, passing the socket to <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> ‘s constructor, and as in the other client examples we set the stream protocol version to <code class="xref py py-attr docutils literal"><span class="pre">QDataStream.Qt_4_0</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>do {
+    if (!socket.waitForReadyRead(Timeout)) {
+        emit error(socket.error(), socket.errorString());
+        return;
+    }
+
+    in.startTransaction();
+    in &gt;&gt; fortune;
+} while (!in.commitTransaction());
+</pre></div>
+</div>
+<p>We proceed by initiating a loop that waits for the fortune string data by calling <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.waitForReadyRead()</span></code> . If it returns false, we abort the operation. After this statement, we start a stream read transaction. We exit the loop when <code class="xref py py-func docutils literal"><span class="pre">QDataStream.commitTransaction()</span></code> returns true, which means successful fortune string loading. The resulting fortune is delivered by emitting newFortune():</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">mutex</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+    <span class="n">emit</span> <span class="n">newFortune</span><span class="p">(</span><span class="n">fortune</span><span class="p">);</span>
+
+
+    <span class="n">cond</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutex</span><span class="p">);</span>
+    <span class="n">serverName</span> <span class="o">=</span> <span class="n">hostName</span><span class="p">;</span>
+    <span class="n">serverPort</span> <span class="o">=</span> <span class="n">port</span><span class="p">;</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The final part of our loop is that we acquire the mutex so that we can safely read from our member data. We then let the thread go to sleep by calling <code class="xref py py-func docutils literal"><span class="pre">QWaitCondition.wait()</span></code> . At this point, we can go back to requestNewFortune() and look closed at the call to wakeOne():</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void FortuneThread::requestNewFortune(const QString &amp;hostName, quint16 port)
+{
+    ...
+    if (!isRunning())
+        start();
+    else
+        cond.wakeOne();
+}
+</pre></div>
+</div>
+<p>What happened here was that because the thread falls asleep waiting for a new request, we needed to wake it up again when a new request arrives. <a class="reference internal" href="../PySide2/QtCore/QWaitCondition.html#PySide2.QtCore.QWaitCondition" title="PySide2.QtCore.QWaitCondition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QWaitCondition</span></code></a> is often used in threads to signal a wakeup call like this.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FortuneThread</span><span class="p">::</span><span class="o">~</span><span class="n">FortuneThread</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+    <span class="n">quit</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="n">cond</span><span class="o">.</span><span class="n">wakeOne</span><span class="p">();</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+    <span class="n">wait</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finishing off the FortuneThread walkthrough, this is the destructor that sets <em>quit</em> to true, wakes up the thread and waits for the thread to exit before returning. This lets the <code class="docutils literal"><span class="pre">while</span></code> loop in run() will finish its current iteration. When run() returns, the thread will terminate and be destroyed.</p>
+<p>Now for the BlockingClient class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BlockingClient</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">BlockingClient</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">requestNewFortune</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">showFortune</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fortune</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">displayError</span><span class="p">(</span><span class="nb">int</span> <span class="n">socketError</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">message</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">enableGetFortuneButton</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">hostLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">portLabel</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">hostLineEdit</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">portLineEdit</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">statusLabel</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">getFortuneButton</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">quitButton</span><span class="p">;</span>
+    <span class="n">QDialogButtonBox</span> <span class="o">*</span><span class="n">buttonBox</span><span class="p">;</span>
+
+    <span class="n">FortuneThread</span> <span class="n">thread</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">currentFortune</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>BlockingClient is very similar to the Client class in the <a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client</span></a> example, but in this class we store a FortuneThread member instead of a pointer to a <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> . When the user clicks the “Get Fortune” button, the same slot is called, but its implementation is slightly different:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">newFortune</span><span class="p">(</span><span class="n">QString</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">showFortune</span><span class="p">(</span><span class="n">QString</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">error</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">QString</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">displayError</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">QString</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>We connect our FortuneThread’s two signals newFortune() and error() (which are somewhat similar to <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.readyRead()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.error()</span></code> in the previous example) to requestNewFortune() and displayError().</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">BlockingClient</span><span class="p">::</span><span class="n">requestNewFortune</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">getFortuneButton</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">requestNewFortune</span><span class="p">(</span><span class="n">hostLineEdit</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">(),</span>
+                             <span class="n">portLineEdit</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The requestNewFortune() slot calls FortuneThread::requestNewFortune(), which <em>shedules</em> the request. When the thread has received a new fortune and emits newFortune(), our showFortune() slot is called:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">BlockingClient</span><span class="p">::</span><span class="n">showFortune</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">nextFortune</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nextFortune</span> <span class="o">==</span> <span class="n">currentFortune</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">requestNewFortune</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">currentFortune</span> <span class="o">=</span> <span class="n">nextFortune</span><span class="p">;</span>
+    <span class="n">statusLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">currentFortune</span><span class="p">);</span>
+    <span class="n">getFortuneButton</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we simply display the fortune we received as the argument.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client Example</span></a>  <a class="reference internal" href="qtnetwork-fortuneserver-example.html#fortune-server-example"><span class="std std-ref">Fortune Server Example</span></a></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="blockingclient-cpp-example-file">
+<h1>blockingclient.cpp Example File<a class="headerlink" href="#blockingclient-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="blockingclient-h-example-file">
+<h1>blockingclient.h Example File<a class="headerlink" href="#blockingclient-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortunethread-cpp-example-file">
+<h1>fortunethread.cpp Example File<a class="headerlink" href="#fortunethread-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortunethread-h-example-file">
+<h1>fortunethread.h Example File<a class="headerlink" href="#fortunethread-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="blockingfortuneclient-pro-example-file">
+<h1>blockingfortuneclient.pro Example File<a class="headerlink" href="#blockingfortuneclient-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

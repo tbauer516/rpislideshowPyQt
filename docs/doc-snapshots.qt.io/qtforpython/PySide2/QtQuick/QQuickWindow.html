@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QQuickWindow &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QQuickView" href="QQuickView.html" />
+    <link rel="prev" title="QQuickTextDocument" href="QQuickTextDocument.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtQuick</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QQuickWindow</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#slots">Slots</a></li>
+<li><a class="reference internal" href="#signals">Signals</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#rendering">Rendering</a></li>
+<li><a class="reference internal" href="#integration-with-opengl">Integration with OpenGL</a></li>
+<li><a class="reference internal" href="#exposure-and-visibility">Exposure and Visibility</a></li>
+<li><a class="reference internal" href="#resource-management">Resource Management</a></li>
+<li><a class="reference internal" href="#context-and-surface-formats">Context and Surface Formats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QQuickTextDocument.html"
+                        title="previous chapter">QQuickTextDocument</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QQuickView.html"
+                        title="next chapter">QQuickView</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtQuick"></span><div class="section" id="qquickwindow">
+<span id="id1"></span><h1>QQuickWindow<a class="headerlink" href="#qquickwindow" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-98b36c16a8558fe3c583e96fe2f845a15a9f7e59.png" alt="Inheritance diagram of PySide2.QtQuick.QQuickWindow" usemap="#inheritance1516896a21" class="inheritance"/>
+<map id="inheritance1516896a21" name="inheritance1516896a21">
+<area shape="rect" id="node1" href="#PySide2.QtQuick.QQuickWindow" title="QtQuick.QQuickWindow" alt="" coords="343,31,511,56"/>
+<area shape="rect" id="node2" href="../QtGui/QWindow.html#PySide2.QtGui.QWindow" title="QtGui.QWindow" alt="" coords="176,31,295,56"/>
+<area shape="rect" id="node3" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="QtCore.QObject" alt="" coords="5,5,128,31"/>
+<area shape="rect" id="node4" href="../QtGui/QSurface.html#PySide2.QtGui.QSurface" title="QtGui.QSurface" alt="" coords="6,55,127,80"/>
+</map>
+<p><strong>Inherited by:</strong> <a class="reference internal" href="QQuickView.html#qquickview"><span class="std std-ref">QQuickView</span></a></p>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItem" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItem"><code class="xref py py-meth docutils literal"><span class="pre">activeFocusItem</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">clearBeforeRendering</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color"><code class="xref py py-meth docutils literal"><span class="pre">color</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.contentItem" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.contentItem"><code class="xref py py-meth docutils literal"><span class="pre">contentItem</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromId" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromId"><code class="xref py py-meth docutils literal"><span class="pre">createTextureFromId</span></code></a> (id, size[, options=QQuickWindow.CreateTextureOption()])</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage"><code class="xref py py-meth docutils literal"><span class="pre">createTextureFromImage</span></code></a> (image)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage"><code class="xref py py-meth docutils literal"><span class="pre">createTextureFromImage</span></code></a> (image, options)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.effectiveDevicePixelRatio" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.effectiveDevicePixelRatio"><code class="xref py py-meth docutils literal"><span class="pre">effectiveDevicePixelRatio</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.grabWindow" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.grabWindow"><code class="xref py py-meth docutils literal"><span class="pre">grabWindow</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.incubationController" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.incubationController"><code class="xref py py-meth docutils literal"><span class="pre">incubationController</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">isPersistentOpenGLContext</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">isPersistentSceneGraph</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isSceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isSceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">isSceneGraphInitialized</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.mouseGrabberItem" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.mouseGrabberItem"><code class="xref py py-meth docutils literal"><span class="pre">mouseGrabberItem</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext"><code class="xref py py-meth docutils literal"><span class="pre">openglContext</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget"><code class="xref py py-meth docutils literal"><span class="pre">renderTarget</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetId" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetId"><code class="xref py py-meth docutils literal"><span class="pre">renderTargetId</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetSize" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetSize"><code class="xref py py-meth docutils literal"><span class="pre">renderTargetSize</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.resetOpenGLState" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.resetOpenGLState"><code class="xref py py-meth docutils literal"><span class="pre">resetOpenGLState</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.scheduleRenderJob" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.scheduleRenderJob"><code class="xref py py-meth docutils literal"><span class="pre">scheduleRenderJob</span></code></a> (job, schedule)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sendEvent" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sendEvent"><code class="xref py py-meth docutils literal"><span class="pre">sendEvent</span></code></a> (arg__1, arg__2)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">setClearBeforeRendering</span></code></a> (enabled)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor"><code class="xref py py-meth docutils literal"><span class="pre">setColor</span></code></a> (color)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">setPersistentOpenGLContext</span></code></a> (persistent)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">setPersistentSceneGraph</span></code></a> (persistent)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget"><code class="xref py py-meth docutils literal"><span class="pre">setRenderTarget</span></code></a> (fbo)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget"><code class="xref py py-meth docutils literal"><span class="pre">setRenderTarget</span></code></a> (fboId, size)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="slots">
+<h3>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources"><code class="xref py py-meth docutils literal"><span class="pre">releaseResources</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update"><code class="xref py py-meth docutils literal"><span class="pre">update</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="signals">
+<h3>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItemChanged" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItemChanged"><code class="xref py py-meth docutils literal"><span class="pre">activeFocusItemChanged</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterAnimating" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterAnimating"><code class="xref py py-meth docutils literal"><span class="pre">afterAnimating</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering"><code class="xref py py-meth docutils literal"><span class="pre">afterRendering</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing"><code class="xref py py-meth docutils literal"><span class="pre">afterSynchronizing</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">beforeRendering</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing"><code class="xref py py-meth docutils literal"><span class="pre">beforeSynchronizing</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.colorChanged" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.colorChanged"><code class="xref py py-meth docutils literal"><span class="pre">colorChanged</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped"><code class="xref py py-meth docutils literal"><span class="pre">frameSwapped</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContextCreated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContextCreated"><code class="xref py py-meth docutils literal"><span class="pre">openglContextCreated</span></code></a> (context)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphAboutToStop" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphAboutToStop"><code class="xref py py-meth docutils literal"><span class="pre">sceneGraphAboutToStop</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError"><code class="xref py py-meth docutils literal"><span class="pre">sceneGraphError</span></code></a> (error, message)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">sceneGraphInitialized</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">sceneGraphInvalidated</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer"><code class="xref py py-meth docutils literal"><span class="pre">hasDefaultAlphaBuffer</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphBackend" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphBackend"><code class="xref py py-meth docutils literal"><span class="pre">sceneGraphBackend</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer"><code class="xref py py-meth docutils literal"><span class="pre">setDefaultAlphaBuffer</span></code></a> (useAlpha)</li>
+<li>def <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend"><code class="xref py py-meth docutils literal"><span class="pre">setSceneGraphBackend</span></code></a> (backend)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> class provides the window for displaying a graphical QML scene</p>
+<p><a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> provides the graphical scene management needed to interact with and display a scene of QQuickItems.</p>
+<p>A <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> always has a single invisible root item. To add items to this window, reparent the items to the root item or to an existing item in the scene.</p>
+<p>For easily displaying a scene from a QML file, see <a class="reference internal" href="QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> .</p>
+</div></blockquote>
+<div class="section" id="rendering">
+<span id="pyside2-qtquick-qquickwindow-rendering"></span><h3>Rendering<a class="headerlink" href="#rendering" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> uses a scene graph to represent what needs to be rendered. This scene graph is disconnected from the QML scene and potentially lives in another thread, depending on the platform implementation. Since the rendering scene graph lives independently from the QML scene, it can also be completely released without affecting the state of the QML scene.</p>
+<p>The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a> signal is emitted on the rendering thread before the QML scene is rendered to the screen for the first time. If the rendering scene graph has been released, the signal will be emitted again before the next frame is rendered.</p>
+</div></blockquote>
+</div>
+<div class="section" id="integration-with-opengl">
+<span id="pyside2-qtquick-qquickwindow-integration-with-opengl"></span><h3>Integration with OpenGL<a class="headerlink" href="#integration-with-opengl" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When using the default OpenGL adaptation, it is possible to integrate OpenGL calls directly into the <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> using the same OpenGL context as the Qt Quick Scene Graph. This is done by connecting to the <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.beforeRendering()</span></code></a> or <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.afterRendering()</span></code></a> signal.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.beforeRendering()</span></code></a> , make sure to disable clearing before rendering with <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.setClearBeforeRendering()</span></code></a> .</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="exposure-and-visibility">
+<span id="pyside2-qtquick-qquickwindow-exposure-and-visibility"></span><h3>Exposure and Visibility<a class="headerlink" href="#exposure-and-visibility" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When a <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> instance is deliberately hidden with <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QWindow.hide()</span></code> or <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QWindow.setVisible()</span></code> (false), it will stop rendering and its scene graph and graphics context might be released. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a> signal will be emitted when this happens.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is crucial that graphics operations and interaction with the scene graph happens exclusively on the rendering thread, primarily during the updatePaintNode() phase.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As signals related to rendering might be emitted from the rendering thread, connections should be made using <code class="xref py py-attr docutils literal"><span class="pre">Qt.DirectConnection</span></code> .</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="resource-management">
+<span id="pyside2-qtquick-qquickwindow-resource-management"></span><h3>Resource Management<a class="headerlink" href="#resource-management" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>QML will try to cache images and scene graph nodes to improve performance, but in some low-memory scenarios it might be required to aggressively release these resources. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.releaseResources()</span></code></a> can be used to force the clean up of certain resources. Calling <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.releaseResources()</span></code></a> may result in the entire scene graph and in the case of the OpenGL adaptation the associated context will be deleted. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a> signal will be emitted when this happens.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All classes with QSG prefix should be used solely on the scene graph’s rendering thread. See <a class="reference internal" href="../../overviews/qtquick-visualcanvas-scenegraph.html#qt-quick-scene-graph"><span class="std std-ref">Scene Graph and Rendering</span></a> for more information.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="context-and-surface-formats">
+<span id="pyside2-qtquick-qquickwindow-context-and-surface-formats"></span><h3>Context and Surface Formats<a class="headerlink" href="#context-and-surface-formats" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>While it is possible to specify a <a class="reference internal" href="../QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> for every <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> by calling the member function <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QWindow.setFormat()</span></code> , windows may also be created from QML by using the Window and ApplicationWindow elements. In this case there is no C++ code involved in the creation of the window instance, yet applications may still wish to set certain surface format values, for example to request a given OpenGL version or profile. Such applications can call the static function <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> at startup. The specified format will be used for all Quick windows created afterwards.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../overviews/qtquick-scenegraph-openglunderqml-example.html#scene-graph-opengl-under-qml"><span class="std std-ref">Scene Graph - OpenGL Under QML</span></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtQuick.QQuickWindow">
+<em class="property">class </em><code class="descclassname">PySide2.QtQuick.</code><code class="descname">QQuickWindow</code><span class="sig-paren">(</span><em>renderControl</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.QQuickWindow" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtQuick.</code><code class="descname">QQuickWindow</code><span class="sig-paren">(</span><span class="optional">[</span><em>parent=nullptr</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>renderControl</strong> – <a class="reference internal" href="QQuickRenderControl.html#PySide2.QtQuick.QQuickRenderControl" title="PySide2.QtQuick.QQuickRenderControl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickRenderControl</span></code></a></li>
+<li><strong>parent</strong> – <a class="reference internal" href="../QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a window for displaying a QML scene with parent window <code class="docutils literal"><span class="pre">parent</span></code> .</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.CreateTextureOption">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">CreateTextureOption</code><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.CreateTextureOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>The enums are used to customize a texture is wrapped.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QQuickWindow.TextureHasAlphaChannel</td>
+<td>The texture has an alpha channel and should be drawn using blending.</td>
+</tr>
+<tr class="row-odd"><td>QQuickWindow.TextureHasMipmaps</td>
+<td>The texture has mipmaps and can be drawn with mipmapping enabled.</td>
+</tr>
+<tr class="row-even"><td>QQuickWindow.TextureOwnsGLTexture</td>
+<td>The texture object owns the texture id and will delete the OpenGL texture when the texture object is deleted.</td>
+</tr>
+<tr class="row-odd"><td>QQuickWindow.TextureCanUseAtlas</td>
+<td>The image can be uploaded into a texture atlas.</td>
+</tr>
+<tr class="row-even"><td>QQuickWindow.TextureIsOpaque</td>
+<td>The texture will return false for <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.PySide2.QtQuick.QSGTexture.hasAlphaChannel" title="PySide2.QtQuick.PySide2.QtQuick.QSGTexture.hasAlphaChannel"><code class="xref py py-meth docutils literal"><span class="pre">QSGTexture.hasAlphaChannel()</span></code></a> and will not be blended. This flag was added in Qt 5.6.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.RenderStage">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">RenderStage</code><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.RenderStage" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QQuickWindow.BeforeSynchronizingStage</td>
+<td>Before synchronization.</td>
+</tr>
+<tr class="row-odd"><td>QQuickWindow.AfterSynchronizingStage</td>
+<td>After synchronization.</td>
+</tr>
+<tr class="row-even"><td>QQuickWindow.BeforeRenderingStage</td>
+<td>Before rendering.</td>
+</tr>
+<tr class="row-odd"><td>QQuickWindow.AfterRenderingStage</td>
+<td>After rendering.</td>
+</tr>
+<tr class="row-even"><td>QQuickWindow.AfterSwapStage</td>
+<td>After the frame is swapped.</td>
+</tr>
+<tr class="row-odd"><td>QQuickWindow.NoStage</td>
+<td>As soon as possible. This value was added in Qt 5.6.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../../overviews/qtquick-visualcanvas-scenegraph.html#qt-quick-scene-graph"><span class="std std-ref">Scene Graph and Rendering</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.SceneGraphError">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">SceneGraphError</code><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.SceneGraphError" title="Permalink to this definition">¶</a></dt>
+<dd><p>This enum describes the error in a <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphError()</span></code></a> signal.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QQuickWindow.ContextNotAvailable</td>
+<td>graphics context creation failed. This typically means that no suitable OpenGL implementation was found, for example because no graphics drivers are installed and so no OpenGL 2 support is present. On mobile and embedded boards that use OpenGL ES such an error is likely to indicate issues in the windowing system integration and possibly an incorrect configuration of Qt.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItem">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">activeFocusItem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItemChanged">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">activeFocusItemChanged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.activeFocusItemChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterAnimating">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">afterAnimating</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterAnimating" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">afterRendering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">afterSynchronizing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">beforeRendering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">beforeSynchronizing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">clearBeforeRendering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns whether clearing of the color buffer is done before rendering or not.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setClearBeforeRendering()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setColor()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.colorChanged">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">colorChanged</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.colorChanged" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – <a class="reference internal" href="../QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.contentItem">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">contentItem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.contentItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromId">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">createTextureFromId</code><span class="sig-paren">(</span><em>id</em>, <em>size</em><span class="optional">[</span>, <em>options=QQuickWindow.CreateTextureOption()</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>id</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.uint</span></code></li>
+<li><strong>size</strong> – <a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a></li>
+<li><strong>options</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.CreateTextureOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates a new <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a> object from an existing OpenGL texture <code class="docutils literal"><span class="pre">id</span></code> and <code class="docutils literal"><span class="pre">size</span></code> .</p>
+<p>The caller of the function is responsible for deleting the returned texture.</p>
+<p>The returned texture will be using <code class="docutils literal"><span class="pre">GL_TEXTURE_2D</span></code> as texture target and assumes that internal format is <code class="docutils literal"><span class="pre">GL_RGBA</span></code> . Reimplement <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a> to create textures with different parameters.</p>
+<p>Use <code class="docutils literal"><span class="pre">options</span></code> to customize the texture attributes. The TextureUsesAtlas option is ignored.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function will return null if the scenegraph has not yet been initialized or OpenGL is not in use.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function only has an effect when using the default OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a>  <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">createTextureFromImage</code><span class="sig-paren">(</span><em>image</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.createTextureFromImage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – <a class="reference internal" href="../QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>options</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.CreateTextureOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates a new <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a> from the supplied <code class="docutils literal"><span class="pre">image</span></code> . If the image has an alpha channel, the corresponding texture will have an alpha channel.</p>
+<p>The caller of the function is responsible for deleting the returned texture. For example whe using the OpenGL adaptation the actual OpenGL texture will be deleted when the texture object is deleted.</p>
+<p>When <code class="docutils literal"><span class="pre">options</span></code> contains <code class="xref py py-attr docutils literal"><span class="pre">TextureCanUseAtlas</span></code> , the engine may put the image into a texture atlas. Textures in an atlas need to rely on <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.PySide2.QtQuick.QSGTexture.normalizedTextureSubRect" title="PySide2.QtQuick.PySide2.QtQuick.QSGTexture.normalizedTextureSubRect"><code class="xref py py-meth docutils literal"><span class="pre">QSGTexture.normalizedTextureSubRect()</span></code></a> for their geometry and will not support <code class="xref py py-attr docutils literal"><span class="pre">QSGTexture.Repeat</span></code> . Other values from <code class="xref py py-attr docutils literal"><span class="pre">QQuickWindow.CreateTextureOption</span></code> are ignored.</p>
+<p>When <code class="docutils literal"><span class="pre">options</span></code> contains <code class="xref py py-attr docutils literal"><span class="pre">TextureIsOpaque</span></code> , the engine will create an RGB texture which returns false for <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.PySide2.QtQuick.QSGTexture.hasAlphaChannel" title="PySide2.QtQuick.PySide2.QtQuick.QSGTexture.hasAlphaChannel"><code class="xref py py-meth docutils literal"><span class="pre">QSGTexture.hasAlphaChannel()</span></code></a> . Opaque textures will in most cases be faster to render. When this flag is not set, the texture will have an alpha channel based on the image’s format.</p>
+<p>When <code class="docutils literal"><span class="pre">options</span></code> contains <code class="xref py py-attr docutils literal"><span class="pre">TextureHasMipmaps</span></code> , the engine will create a texture which can use mipmap filtering. Mipmapped textures can not be in an atlas.</p>
+<p>When using the OpenGL adaptation, the returned texture will be using <code class="docutils literal"><span class="pre">GL_TEXTURE_2D</span></code> as texture target and <code class="docutils literal"><span class="pre">GL_RGBA</span></code> as internal format. Reimplement <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a> to create textures with different parameters.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function will return 0 if the scene graph has not yet been initialized.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The returned texture is not memory managed by the scene graph and must be explicitly deleted by the caller on the rendering thread. This is achieved by deleting the texture from a <a class="reference internal" href="QSGNode.html#PySide2.QtQuick.QSGNode" title="PySide2.QtQuick.QSGNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGNode</span></code></a> destructor or by using <code class="xref py py-meth docutils literal"><span class="pre">deleteLater()</span></code> in the case where the texture already has affinity to the rendering thread.</p>
+</div>
+<p>This function can be called from any thread.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a>  <a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">createTextureFromImage</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>image</strong> – <a class="reference internal" href="../QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QSGTexture.html#PySide2.QtQuick.QSGTexture" title="PySide2.QtQuick.QSGTexture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGTexture</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.effectiveDevicePixelRatio">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">effectiveDevicePixelRatio</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.effectiveDevicePixelRatio" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qreal</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the device pixel ratio for this window.</p>
+<p>This is different from <code class="xref py py-meth docutils literal"><span class="pre">QWindow.devicePixelRatio()</span></code> in that it supports redirected rendering via <a class="reference internal" href="QQuickRenderControl.html#PySide2.QtQuick.QQuickRenderControl" title="PySide2.QtQuick.QQuickRenderControl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickRenderControl</span></code></a> . When using a <a class="reference internal" href="QQuickRenderControl.html#PySide2.QtQuick.QQuickRenderControl" title="PySide2.QtQuick.QQuickRenderControl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickRenderControl</span></code></a> , the <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> is often not created, meaning it is never shown and there is no underlying native window created in the windowing system. As a result, querying properties like the device pixel ratio cannot give correct results. Use this function instead.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">QWindow.devicePixelRatio()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">frameSwapped</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.grabWindow">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">grabWindow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.grabWindow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Grabs the contents of the window and returns it as an image.</p>
+<p>It is possible to call the function when the window is not visible. This requires that the window is <code class="xref py py-meth docutils literal"><span class="pre">created</span></code> and has a valid size and that no other <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> instances are rendering in the same process.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Calling this function will cause performance problems.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function can only be called from the GUI thread.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer">
+<em class="property">static </em><code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">hasDefaultAlphaBuffer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns whether to use alpha transparency on newly created windows.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.incubationController">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">incubationController</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.incubationController" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtQml/QQmlIncubationController.html#PySide2.QtQml.QQmlIncubationController" title="PySide2.QtQml.QQmlIncubationController"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQml.QQmlIncubationController</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns an incubation controller that splices incubation between frames for this window. <a class="reference internal" href="QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> automatically installs this controller for you, otherwise you will need to install it yourself using QQmlEngine::setIncubationController().</p>
+<p>The controller is owned by the window and will be destroyed when the window is deleted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">isPersistentOpenGLContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns whether the OpenGL context can be released during the lifetime of the <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a hint. When and how this happens is implementation specific. It also only has an effect when using the default OpenGL scene graph adaptation</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">isPersistentSceneGraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns whether the scene graph nodes and resources can be released during the lifetime of this <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a hint. When and how this happens is implementation specific.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isSceneGraphInitialized">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">isSceneGraphInitialized</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isSceneGraphInitialized" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns true if the scene graph has been initialized; otherwise returns false.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.mouseGrabberItem">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">mouseGrabberItem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.mouseGrabberItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the item which currently has the mouse grab.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">openglContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the OpenGL context used for rendering.</p>
+<p>If the scene graph is not ready, or the scene graph is not using OpenGL, this function will return null.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If using a scene graph adaptation other than OpenGL this function will return nullptr.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContextCreated">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">openglContextCreated</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContextCreated" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> – <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">releaseResources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.releaseResources" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function tries to release redundant resources currently held by the QML scene.</p>
+<p>Calling this function might result in the scene graph and the OpenGL context used for rendering being released to release graphics memory. If this happens, the <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a> signal will be called, allowing users to clean up their own graphics resources. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext()</span></code></a> and <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph()</span></code></a> functions can be used to prevent this from happening, if handling the cleanup is not feasible in the application, at the cost of higher memory usage.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">renderTarget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QOpenGLFramebufferObject.html#PySide2.QtGui.QOpenGLFramebufferObject" title="PySide2.QtGui.QOpenGLFramebufferObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFramebufferObject</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the render target for this window.</p>
+<p>The default is to render to the surface of the window, in which case the render target is 0.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function will return nullptr when not using the OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setRenderTarget()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetId">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">renderTargetId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.uint</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the FBO id of the render target when set; otherwise returns 0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetSize">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">renderTargetSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTargetSize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the size of the currently set render target; otherwise returns an empty size.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.resetOpenGLState">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">resetOpenGLState</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.resetOpenGLState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call this function to reset the OpenGL context its default state.</p>
+<p>The scene graph uses the OpenGL context and will both rely on and clobber its state. When mixing raw OpenGL commands with scene graph rendering, this function provides a convenient way of resetting the OpenGL context state back to its default values.</p>
+<p>This function does not touch state in the fixed-function pipeline.</p>
+<p>This function does not clear the color, depth and stencil buffers. Use <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.setClearBeforeRendering</span></code></a> to control clearing of the color buffer. The depth and stencil buffer might be clobbered by the scene graph renderer. Clear these manually on demand.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function only has an effect when using the default OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.beforeRendering()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphAboutToStop">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sceneGraphAboutToStop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphAboutToStop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphBackend">
+<em class="property">static </em><code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sceneGraphBackend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphBackend" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the requested Qt Quick scenegraph backend.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The return value of this function may still be outdated by subsequent calls to <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setSceneGraphBackend()</span></code></a> until the first <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> in the application has been constructed.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setSceneGraphBackend()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sceneGraphError</code><span class="sig-paren">(</span><em>error</em>, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphError" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>error</strong> – <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.SceneGraphError" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.SceneGraphError"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.SceneGraphError</span></code></a></li>
+<li><strong>message</strong> – unicode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sceneGraphInitialized</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sceneGraphInvalidated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.scheduleRenderJob">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">scheduleRenderJob</code><span class="sig-paren">(</span><em>job</em>, <em>schedule</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.scheduleRenderJob" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>job</strong> – <a class="reference internal" href="../QtCore/QRunnable.html#PySide2.QtCore.QRunnable" title="PySide2.QtCore.QRunnable"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRunnable</span></code></a></li>
+<li><strong>schedule</strong> – <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.RenderStage" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.RenderStage"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.RenderStage</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Schedules <code class="docutils literal"><span class="pre">job</span></code> to run when the rendering of this window reaches the given <code class="docutils literal"><span class="pre">stage</span></code> .</p>
+<p>This is a convenience to the equivalent signals in <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> for “one shot” tasks.</p>
+<p>The window takes ownership over <code class="docutils literal"><span class="pre">job</span></code> and will delete it when the job is completed.</p>
+<p>If rendering is shut down before <code class="docutils literal"><span class="pre">job</span></code> has a chance to run, the job will be run and then deleted as part of the scene graph cleanup. If the window is never shown and no rendering happens before the <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> is destroyed, all pending jobs will be destroyed without their run() method being called.</p>
+<p>If the rendering is happening on a different thread, then the job will happen on the rendering thread.</p>
+<p>If <code class="docutils literal"><span class="pre">stage</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">NoStage</span></code> , <code class="docutils literal"><span class="pre">job</span></code> will be run at the earliest opportunity whenever the render thread is not busy rendering a frame. If there is no OpenGL context available or the window is not exposed at the time the job is either posted or handled, it is deleted without executing the run() method. If a non-threaded renderer is in use, the run() method of the job is executed synchronously. The OpenGL context is changed to the renderer context before executing a <code class="xref py py-attr docutils literal"><span class="pre">NoStage</span></code> job.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function does not trigger rendering; the jobs targeting any other stage than <code class="xref py py-attr docutils literal"><span class="pre">NoStage</span></code> will be stored run until rendering is triggered elsewhere. To force the job to run earlier, call <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.update()</span></code></a> ;</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.beforeRendering()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterRendering"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.afterRendering()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeSynchronizing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.beforeSynchronizing()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.afterSynchronizing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.afterSynchronizing()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.frameSwapped"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.frameSwapped()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sendEvent">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">sendEvent</code><span class="sig-paren">(</span><em>arg__1</em>, <em>arg__2</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sendEvent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arg__1</strong> – <a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a></li>
+<li><strong>arg__2</strong> – <a class="reference internal" href="../QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Propagates an event <code class="docutils literal"><span class="pre">e</span></code> to a <a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> <code class="docutils literal"><span class="pre">item</span></code> on the window.</p>
+<p>Use <code class="xref py py-meth docutils literal"><span class="pre">QCoreApplication.sendEvent()</span></code> directly instead.</p>
+<p>The return value is currently not used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setClearBeforeRendering</code><span class="sig-paren">(</span><em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setClearBeforeRendering" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enabled</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets whether the scene graph rendering of QML should clear the color buffer before it starts rendering to <code class="docutils literal"><span class="pre">enabled</span></code> .</p>
+<p>By disabling clearing of the color buffer, it is possible to render OpengGL content under the scene graph.</p>
+<p>The color buffer is cleared by default.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.clearBeforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.clearBeforeRendering()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.beforeRendering"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.beforeRendering()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setColor</code><span class="sig-paren">(</span><em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setColor" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>color</strong> – <a class="reference internal" href="../QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.color"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.color()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer">
+<em class="property">static </em><code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setDefaultAlphaBuffer</code><span class="sig-paren">(</span><em>useAlpha</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setDefaultAlphaBuffer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>useAlpha</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal"><span class="pre">useAlpha</span></code> specifies whether to use alpha transparency on newly created windows.</p>
+<p>In any application which expects to create translucent windows, it’s necessary to set this to true before creating the first <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> . The default value is false.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.hasDefaultAlphaBuffer()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setPersistentOpenGLContext</code><span class="sig-paren">(</span><em>persistent</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>persistent</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets whether the OpenGL context should be preserved, and cannot be released until the last window is deleted, to <code class="docutils literal"><span class="pre">persistent</span></code> . The default value is true.</p>
+<p>The OpenGL context can be released to free up graphics resources when the window is obscured, hidden or not rendering. When this happens is implementation specific.</p>
+<p>The <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.aboutToBeDestroyed()</span></code> signal is emitted from the <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.openglContext"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.openglContext()</span></code></a> when the OpenGL context is about to be released. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.sceneGraphInitialized()</span></code></a> signal is emitted when a new OpenGL context is created for this window. Make a <code class="xref py py-attr docutils literal"><span class="pre">Qt.DirectConnection</span></code> to these signals to be notified.</p>
+<p>The OpenGL context is still released when the last <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> is deleted.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This only has an effect when using the default OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.isPersistentOpenGLContext()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph()</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.aboutToBeDestroyed()</span></code>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setPersistentSceneGraph</code><span class="sig-paren">(</span><em>persistent</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentSceneGraph" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>persistent</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets whether the scene graph nodes and resources can be released to <code class="docutils literal"><span class="pre">persistent</span></code> . The default value is true.</p>
+<p>The scene graph nodes and resources can be released to free up graphics resources when the window is obscured, hidden or not rendering. When this happens is implementation specific.</p>
+<p>The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.sceneGraphInvalidated()</span></code></a> signal is emitted when cleanup occurs. The <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">QQuickWindow.sceneGraphInitialized()</span></code></a> signal is emitted when a new scene graph is recreated for this window. Make a <code class="xref py py-attr docutils literal"><span class="pre">Qt.DirectConnection</span></code> to these signals to be notified.</p>
+<p>The scene graph nodes and resources are still released when the last <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> is deleted.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.isPersistentSceneGraph()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.setPersistentOpenGLContext()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInvalidated()</span></code></a>  <a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.sceneGraphInitialized"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.sceneGraphInitialized()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setRenderTarget</code><span class="sig-paren">(</span><em>fbo</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setRenderTarget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fbo</strong> – <a class="reference internal" href="../QtGui/QOpenGLFramebufferObject.html#PySide2.QtGui.QOpenGLFramebufferObject" title="PySide2.QtGui.QOpenGLFramebufferObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFramebufferObject</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Sets the render target for this window to be <code class="docutils literal"><span class="pre">fbo</span></code> .</p>
+<p>The specified fbo must be created in the context of the window or one that shares with it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function only has an effect when using the default OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function can only be called from the thread doing the rendering.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget" title="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.renderTarget"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow.renderTarget()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setRenderTarget</code><span class="sig-paren">(</span><em>fboId</em>, <em>size</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fboId</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.uint</span></code></li>
+<li><strong>size</strong> – <a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Sets the render target for this window to be an FBO with <code class="docutils literal"><span class="pre">fboId</span></code> and <code class="docutils literal"><span class="pre">size</span></code> .</p>
+<p>The specified FBO must be created in the context of the window or one that shares with it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">fboId</span></code> can also be set to 0. In this case rendering will target the default framebuffer of whichever surface is current when the scenegraph renders. <code class="docutils literal"><span class="pre">size</span></code> must still be valid, specifying the dimensions of the surface.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function only has an effect when using the default OpenGL scene graph adaptation.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function can only be called from the thread doing the rendering.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend">
+<em class="property">static </em><code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">setSceneGraphBackend</code><span class="sig-paren">(</span><em>backend</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.setSceneGraphBackend" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>backend</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Requests the specified Qt Quick scenegraph <code class="docutils literal"><span class="pre">backend</span></code> . Backends can either be built-in or be installed in form of dynamically loaded plugins.</p>
+<p>This is an overloaded function.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The call to the function must happen before constructing the first <a class="reference internal" href="#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> in the application. It cannot be changed afterwards.</p>
+</div>
+<p>If <code class="docutils literal"><span class="pre">backend</span></code> is invalid or an error occurs, the default backend (OpenGL or software, depending on the Qt configuration) is used.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling this function is equivalent to setting the <code class="docutils literal"><span class="pre">QT_QUICK_BACKEND</span></code> or <code class="docutils literal"><span class="pre">QMLSCENE_DEVICE</span></code> environment variables. However, this API is safer to use in applications that spawn other processes as there is no need to worry about environment inheritance.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update">
+<code class="descclassname">PySide2.QtQuick.QQuickWindow.</code><code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtQuick.PySide2.QtQuick.QQuickWindow.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules the window to render another frame.</p>
+<p>Calling differs from <a class="reference internal" href="QQuickItem.html#PySide2.QtQuick.PySide2.QtQuick.QQuickItem.update" title="PySide2.QtQuick.PySide2.QtQuick.QQuickItem.update"><code class="xref py py-meth docutils literal"><span class="pre">QQuickItem.update()</span></code></a> in that it always triggers a repaint, regardless of changes in the underlying scene graph or not.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

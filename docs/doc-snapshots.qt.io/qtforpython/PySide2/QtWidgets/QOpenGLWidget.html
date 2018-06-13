@@ -1,0 +1,824 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QOpenGLWidget &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QOpenGLWidget</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#virtual-functions">Virtual functions</a></li>
+<li><a class="reference internal" href="#signals">Signals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#painting-techniques">Painting Techniques</a></li>
+<li><a class="reference internal" href="#opengl-function-calls-headers-and-qopenglfunctions">OpenGL Function Calls, Headers and QOpenGLFunctions</a></li>
+<li><a class="reference internal" href="#code-examples">Code Examples</a></li>
+<li><a class="reference internal" href="#relation-to-qglwidget">Relation to QGLWidget</a></li>
+<li><a class="reference internal" href="#differences-to-qglwidget">Differences to QGLWidget</a></li>
+<li><a class="reference internal" href="#multisampling">Multisampling</a></li>
+<li><a class="reference internal" href="#threading">Threading</a></li>
+<li><a class="reference internal" href="#context-sharing">Context Sharing</a></li>
+<li><a class="reference internal" href="#resource-initialization-and-cleanup">Resource Initialization and Cleanup</a></li>
+<li><a class="reference internal" href="#limitations">Limitations</a></li>
+<li><a class="reference internal" href="#alternatives">Alternatives</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtWidgets"></span><div class="section" id="qopenglwidget">
+<span id="id1"></span><h1>QOpenGLWidget<a class="headerlink" href="#qopenglwidget" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-fd860c02a4754779cbecd07aeb6fd705cf143dbc.png" alt="Inheritance diagram of PySide2.QtWidgets.QOpenGLWidget" usemap="#inheritance1e5ec29dc9" class="inheritance"/>
+<map id="inheritance1e5ec29dc9" name="inheritance1e5ec29dc9">
+<area shape="rect" id="node1" href="#PySide2.QtWidgets.QOpenGLWidget" title="QtWidgets.QOpenGLWidget" alt="" coords="392,31,587,56"/>
+<area shape="rect" id="node2" href="QWidget.html#PySide2.QtWidgets.QWidget" title="QtWidgets.QWidget" alt="" coords="200,31,344,56"/>
+<area shape="rect" id="node3" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="QtCore.QObject" alt="" coords="17,5,140,31"/>
+<area shape="rect" id="node4" href="../QtGui/QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="QtGui.QPaintDevice" alt="" coords="5,55,152,80"/>
+</map>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">context</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject"><code class="xref py py-meth docutils literal"><span class="pre">defaultFramebufferObject</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent"><code class="xref py py-meth docutils literal"><span class="pre">doneCurrent</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format"><code class="xref py py-meth docutils literal"><span class="pre">format</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.grabFramebuffer" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.grabFramebuffer"><code class="xref py py-meth docutils literal"><span class="pre">grabFramebuffer</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.isValid" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.isValid"><code class="xref py py-meth docutils literal"><span class="pre">isValid</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">makeCurrent</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">setFormat</span></code></a> (format)</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat"><code class="xref py py-meth docutils literal"><span class="pre">setTextureFormat</span></code></a> (texFormat)</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">setUpdateBehavior</span></code></a> (updateBehavior)</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat"><code class="xref py py-meth docutils literal"><span class="pre">textureFormat</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">updateBehavior</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="virtual-functions">
+<h3>Virtual functions<a class="headerlink" href="#virtual-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">initializeGL</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">paintGL</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">resizeGL</span></code></a> (w, h)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="signals">
+<h3>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose"><code class="xref py py-meth docutils literal"><span class="pre">aboutToCompose</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToResize" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToResize"><code class="xref py py-meth docutils literal"><span class="pre">aboutToResize</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped"><code class="xref py py-meth docutils literal"><span class="pre">frameSwapped</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resized" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resized"><code class="xref py py-meth docutils literal"><span class="pre">resized</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> class is a widget for rendering OpenGL graphics.</p>
+<p><a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> provides functionality for displaying OpenGL graphics integrated into a Qt application. It is very simple to use: Make your class inherit from it and use the subclass like any other <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , except that you have the choice between using <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> and standard OpenGL rendering commands.</p>
+<p><a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> provides three convenient virtual functions that you can reimplement in your subclass to perform the typical OpenGL tasks:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> - Renders the OpenGL scene. Gets called whenever the widget needs to be updated.</li>
+<li><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a> - Sets up the OpenGL viewport, projection, etc. Gets called whenever the widget has been resized (and also when it is shown for the first time because all newly created widgets get a resize event automatically).</li>
+<li><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> - Sets up the OpenGL resources and state. Gets called once before the first time <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a> or <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> is called.</li>
+</ul>
+<p>If you need to trigger a repaint from places other than <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> (a typical example is when using <a class="reference internal" href="../QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">timers</span></code></a> to animate scenes), you should call the widget’s <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.update" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.update"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.update()</span></code></a> function to schedule an update.</p>
+<p>Your widget’s OpenGL rendering context is made current when <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> , <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a> , or <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> is called. If you need to call the standard OpenGL API functions from other places (e.g. in your widget’s constructor or in your own paint functions), you must call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> first.</p>
+<p>All rendering happens into an OpenGL framebuffer object. <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> ensure that it is bound in the context. Keep this in mind when creating and binding additional framebuffer objects in the rendering code in <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> . Never re-bind the framebuffer with ID 0. Instead, call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject()</span></code></a> to get the ID that should be bound.</p>
+<p><a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> allows using different OpenGL versions and profiles when the platform supports it. Just set the requested format via <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> . Keep in mind however that having multiple <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> instances in the same window requires that they all use the same format, or at least formats that do not make the contexts non-sharable. To overcome this issue, prefer using <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> instead of <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> before constructing the <a class="reference internal" href="QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> instance is mandatory on some platforms (for example, <span class="xref std std-ref">macOS</span> ) when an OpenGL core profile context is requested. This is to ensure that resource sharing between contexts stays functional as all internal contexts are created using the correct version and profile.</p>
+</div>
+</div></blockquote>
+<div class="section" id="painting-techniques">
+<span id="pyside2-qtwidgets-qopenglwidget-painting-techniques"></span><h3>Painting Techniques<a class="headerlink" href="#painting-techniques" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>As described above, subclass <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> to render pure 3D content in the following way:</p>
+<ul class="simple">
+<li>Reimplement the <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> and <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a> functions to set up the OpenGL state and provide a perspective transformation.</li>
+<li>Reimplement <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> to paint the 3D scene, calling only OpenGL functions.</li>
+</ul>
+<p>It is also possible to draw 2D graphics onto a <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> subclass using <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> :</p>
+<ul class="simple">
+<li>In <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> , instead of issuing OpenGL commands, construct a <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object for use on the widget.</li>
+<li>Draw primitives using <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s member functions.</li>
+<li>Direct OpenGL commands can still be issued. However, you must make sure these are enclosed by a call to the painter’s beginNativePainting() and endNativePainting().</li>
+</ul>
+<p>When performing drawing using <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> only, it is also possible to perform the painting like it is done for ordinary widgets: by reimplementing <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintEvent()</span></code> .</p>
+<ul class="simple">
+<li>Reimplement the <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintEvent()</span></code> function.</li>
+<li>Construct a <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object targeting the widget. Either pass the widget to the constructor or the <code class="xref py py-meth docutils literal"><span class="pre">QPainter.begin()</span></code> function.</li>
+<li>Draw primitives using <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> ‘s member functions.</li>
+<li>Painting finishes then the <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> instance is destroyed. Alternatively, call <code class="xref py py-meth docutils literal"><span class="pre">QPainter.end()</span></code> explicitly.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="opengl-function-calls-headers-and-qopenglfunctions">
+<span id="pyside2-qtwidgets-qopenglwidget-opengl-function-calls-headers-and-qopenglfunctions"></span><h3>OpenGL Function Calls, Headers and QOpenGLFunctions<a class="headerlink" href="#opengl-function-calls-headers-and-qopenglfunctions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When making OpenGL function calls, it is strongly recommended to avoid calling the functions directly. Instead, prefer using <a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> (when making portable applications) or the versioned variants (for example, <code class="xref py py-class docutils literal"><span class="pre">QOpenGLFunctions_3_2_Core</span></code> and similar, when targeting modern, desktop-only OpenGL). This way the application will work correctly in all Qt build configurations, including the ones that perform dynamic OpenGL implementation loading which means applications are not directly linking to an GL implementation and thus direct function calls are not feasible.</p>
+<p>In <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> the current context is always accessible by caling <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.currentContext()</span></code> . From this context an already initialized, ready-to-be-used <a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> instance is retrievable by calling <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.functions()</span></code> . An alternative to prefixing every GL call is to inherit from <a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> and call <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLFunctions.initializeOpenGLFunctions()</span></code> in <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> .</p>
+<p>As for the OpenGL headers, note that in most cases there will be no need to directly include any headers like GL.h. The OpenGL-related Qt headers will include qopengl.h which will in turn include an appropriate header for the system. This might be an OpenGL ES 3.x or 2.0 header, the highest version that is available, or a system-provided gl.h. In addition, a copy of the extension headers (called glext.h on some systems) is provided as part of Qt both for OpenGL and OpenGL ES. These will get included automatically on platforms where feasible. This means that constants and function pointer typedefs from ARB, EXT, OES extensions are automatically available.</p>
+</div></blockquote>
+</div>
+<div class="section" id="code-examples">
+<span id="pyside2-qtwidgets-qopenglwidget-code-examples"></span><h3>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>To get started, the simplest <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> subclass could like like the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyGLWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QOpenGLWidget</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MyGLWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="p">:</span> <span class="n">QOpenGLWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">initializeGL</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Set</span> <span class="n">up</span> <span class="n">the</span> <span class="n">rendering</span> <span class="n">context</span><span class="p">,</span> <span class="n">load</span> <span class="n">shaders</span> <span class="ow">and</span> <span class="n">other</span> <span class="n">resources</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">:</span>
+        <span class="n">QOpenGLFunctions</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">currentContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">functions</span><span class="p">();</span>
+        <span class="n">f</span><span class="o">-&gt;</span><span class="n">glClearColor</span><span class="p">(</span><span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">);</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="n">void</span> <span class="n">resizeGL</span><span class="p">(</span><span class="nb">int</span> <span class="n">w</span><span class="p">,</span> <span class="nb">int</span> <span class="n">h</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Update</span> <span class="n">projection</span> <span class="n">matrix</span> <span class="ow">and</span> <span class="n">other</span> <span class="n">size</span> <span class="n">related</span> <span class="n">settings</span><span class="p">:</span>
+        <span class="n">m_projection</span><span class="o">.</span><span class="n">setToIdentity</span><span class="p">();</span>
+        <span class="n">m_projection</span><span class="o">.</span><span class="n">perspective</span><span class="p">(</span><span class="mf">45.0</span><span class="n">f</span><span class="p">,</span> <span class="n">w</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="mf">0.01</span><span class="n">f</span><span class="p">,</span> <span class="mf">100.0</span><span class="n">f</span><span class="p">);</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="n">void</span> <span class="n">paintGL</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Draw</span> <span class="n">the</span> <span class="n">scene</span><span class="p">:</span>
+        <span class="n">QOpenGLFunctions</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">currentContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">functions</span><span class="p">();</span>
+        <span class="n">f</span><span class="o">-&gt;</span><span class="n">glClear</span><span class="p">(</span><span class="n">GL_COLOR_BUFFER_BIT</span><span class="p">);</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Alternatively, the prefixing of each and every OpenGL call can be avoided by deriving from <a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> instead:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyGLWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QOpenGLWidget</span><span class="p">,</span> <span class="n">protected</span> <span class="n">QOpenGLFunctions</span>
+<span class="p">{</span>
+    <span class="o">...</span>
+    <span class="n">void</span> <span class="n">initializeGL</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">initializeOpenGLFunctions</span><span class="p">();</span>
+        <span class="n">glClearColor</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>To get a context compatible with a given OpenGL version or profile, or to request depth and stencil buffers, call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QOpenGLWidget</span> <span class="o">*</span><span class="n">widget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
+<span class="n">QSurfaceFormat</span> <span class="nb">format</span><span class="p">;</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setDepthBufferSize</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setStencilBufferSize</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setProfile</span><span class="p">(</span><span class="n">QSurfaceFormat</span><span class="p">::</span><span class="n">CoreProfile</span><span class="p">);</span>
+<span class="n">widget</span><span class="o">-&gt;</span><span class="n">setFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span> <span class="o">//</span> <span class="n">must</span> <span class="n">be</span> <span class="n">called</span> <span class="n">before</span> <span class="n">the</span> <span class="n">widget</span> <span class="ow">or</span> <span class="n">its</span> <span class="n">parent</span> <span class="n">window</span> <span class="n">gets</span> <span class="n">shown</span>
+</pre></div>
+</div>
+<p>With OpenGL 3.0+ contexts, when portability is not important, the versioned <a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a> variants give easy access to all the modern OpenGL functions available in a given version:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">void</span> <span class="n">paintGL</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QOpenGLFunctions_3_2_Core</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">currentContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">versionFunctions</span><span class="o">&lt;</span><span class="n">QOpenGLFunctions_3_2_Core</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="o">...</span>
+    <span class="n">f</span><span class="o">-&gt;</span><span class="n">glDrawArraysInstanced</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>As described above, it is simpler and more robust to set the requested format globally so that it applies to all windows and contexts during the lifetime of the application. Below is an example of this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">QSurfaceFormat</span> <span class="nb">format</span><span class="p">;</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setDepthBufferSize</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setStencilBufferSize</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setProfile</span><span class="p">(</span><span class="n">QSurfaceFormat</span><span class="p">::</span><span class="n">CoreProfile</span><span class="p">);</span>
+    <span class="n">QSurfaceFormat</span><span class="p">::</span><span class="n">setDefaultFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span>
+
+    <span class="n">MyWidget</span> <span class="n">widget</span><span class="p">;</span>
+    <span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="relation-to-qglwidget">
+<span id="pyside2-qtwidgets-qopenglwidget-relation-to-qglwidget"></span><h3>Relation to QGLWidget<a class="headerlink" href="#relation-to-qglwidget" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The legacy <span class="xref std std-ref">QtOpenGL</span> module (classes prefixed with QGL) provides a widget called <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> . <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> is intended to be a modern replacement for it. Therefore, especially in new applications, the general recommendation is to use <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> .</p>
+<p>While the API is very similar, there is an important difference between the two: <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> always renders offscreen, using framebuffer objects. <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> on the other hand uses a native window and surface. The latter causes issues when using it in complex user interfaces since, depending on the platform, such native child widgets may have various limitations, regarding stacking orders for example. <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> avoids this by not creating a separate native window.</p>
+<p>Due to being backed by a framebuffer object, the behavior of <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> is very similar to <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> with the update behavior set to <code class="docutils literal"><span class="pre">PartialUpdateBlit</span></code> or <code class="docutils literal"><span class="pre">PartialUpdateBlend</span></code> . This means that the contents are preserved between <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> calls so that incremental rendering is possible. With <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> (and naturally <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> with the default update behavior) this is usually not the case because swapping the buffers leaves the back buffer with undefined contents.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most applications do not need incremental rendering because they will render everything in the view on every paint call. In this case it is important to call glClear() as early as possible in <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> . This helps mobile GPUs that use a tile-based architecture to recognize that the tile buffer does not need to be reloaded with the framebuffer’s previous contents. Omitting the clear call can lead to significant performance drops on such systems.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Avoid calling <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.winId" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.winId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.winId()</span></code></a> on a <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> . This function triggers the creation of a native window, resulting in reduced performance and possibly rendering glitches.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="differences-to-qglwidget">
+<span id="pyside2-qtwidgets-qopenglwidget-differences-to-qglwidget"></span><h3>Differences to QGLWidget<a class="headerlink" href="#differences-to-qglwidget" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Besides the main conceptual difference of being backed by a framebuffer object, there are a number of smaller, internal differences between <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> and the older <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> :</p>
+<ul class="simple">
+<li>OpenGL state when invoking <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> . <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> sets up the viewport via glViewport(). It does not perform any clearing.</li>
+<li>Clearing when starting to paint via <a class="reference internal" href="../QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> . Unlike regular widgets, <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> defaulted to a value of <code class="docutils literal"><span class="pre">true</span></code> for <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.autoFillBackground()</span></code></a> . It then performed clearing to the palette’s background color every time <code class="xref py py-meth docutils literal"><span class="pre">QPainter.begin()</span></code> was used. <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> does not follow this: <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.autoFillBackground()</span></code></a> defaults to false, like for any other widget. The only exception is when being used as a viewport for other widgets like <a class="reference internal" href="QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> . In such a case <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.autoFillBackground"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.autoFillBackground()</span></code></a> will be automatically set to true to ensure compatibility with <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> -based viewports.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="multisampling">
+<span id="pyside2-qtwidgets-qopenglwidget-multisampling"></span><h3>Multisampling<a class="headerlink" href="#multisampling" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>To enable multisampling, set the number of requested samples on the <a class="reference internal" href="../QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> that is passed to <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> . On systems that do not support it the request may get ignored.</p>
+<p>Multisampling support requires support for multisampled renderbuffers and framebuffer blits. On OpenGL ES 2.0 implementations it is likely that these will not be present. This means that multisampling will not be available. With modern OpenGL versions and OpenGL ES 3.0 and up this is usually not a problem anymore.</p>
+</div></blockquote>
+</div>
+<div class="section" id="threading">
+<span id="pyside2-qtwidgets-qopenglwidget-threading"></span><h3>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Performing offscreen rendering on worker threads, for example to generate textures that are then used in the GUI/main thread in <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> , are supported by exposing the widget’s <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> so that additional contexts sharing with it can be created on each thread.</p>
+<p>Drawing directly to the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s framebuffer outside the GUI/main thread is possible by reimplementing <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintEvent()</span></code> to do nothing. The context’s thread affinity has to be changed via <code class="xref py py-meth docutils literal"><span class="pre">QObject.moveToThread()</span></code> . After that, <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> and <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.doneCurrent()</span></code></a> are usable on the worker thread. Be careful to move the context back to the GUI/main thread afterwards.</p>
+<p>Unlike <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> , triggering a buffer swap just for the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> is not possible since there is no real, onscreen native surface for it. Instead, it is up to the widget stack to manage composition and buffer swaps on the gui thread. When a thread is done updating the framebuffer, call <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.update" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.update"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.update()</span></code></a> <strong>on the GUI/main thread</strong> to schedule composition.</p>
+<p>Extra care has to be taken to avoid using the framebuffer when the GUI/main thread is performing compositing. The signals <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.aboutToCompose()</span></code></a> and <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.frameSwapped()</span></code></a> will be emitted when the composition is starting and ending. They are emitted on the GUI/main thread. This means that by using a direct connection <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.aboutToCompose()</span></code></a> can block the GUI/main thread until the worker thread has finished its rendering. After that, the worker thread must perform no further rendering until the <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.frameSwapped()</span></code></a> signal is emitted. If this is not acceptable, the worker thread has to implement a double buffering mechanism. This involves drawing using an alternative render target, that is fully controlled by the thread, e.g. an additional framebuffer object, and blitting to the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s framebuffer at a suitable time.</p>
+</div></blockquote>
+</div>
+<div class="section" id="context-sharing">
+<span id="pyside2-qtwidgets-qopenglwidget-context-sharing"></span><h3>Context Sharing<a class="headerlink" href="#context-sharing" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When multiple QOpenGLWidgets are added as children to the same top-level widget, their contexts will share with each other. This does not apply for <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> instances that belong to different windows.</p>
+<p>This means that all QOpenGLWidgets in the same window can access each other’s sharable resources, like textures, and there is no need for an extra “global share” context, as was the case with <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> .</p>
+<p>To set up sharing between <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> instances belonging to different windows, set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.AA_ShareOpenGLContexts</span></code> application attribute before instantiating <a class="reference internal" href="QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> . This will trigger sharing between all <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> instances without any further steps.</p>
+<p>Creating extra <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> instances that share resources like textures with the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s context is also possible. Simply pass the pointer returned from <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.context()</span></code></a> to <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.setShareContext()</span></code> before calling <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.create()</span></code> . The resulting context can also be used on a different thread, allowing threaded generation of textures and asynchronous texture uploads.</p>
+<p>Note that <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> expects a standard conformant implementation of resource sharing when it comes to the underlying graphics drivers. For example, some drivers, in particular for mobile and embedded hardware, have issues with setting up sharing between an existing context and others that are created later. Some other drivers may behave in unexpected ways when trying to utilize shared resources between different threads.</p>
+</div></blockquote>
+</div>
+<div class="section" id="resource-initialization-and-cleanup">
+<span id="pyside2-qtwidgets-qopenglwidget-resource-initialization-and-cleanup"></span><h3>Resource Initialization and Cleanup<a class="headerlink" href="#resource-initialization-and-cleanup" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s associated OpenGL context is guaranteed to be current whenever <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> and <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> are invoked. Do not attempt to create OpenGL resources before <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> is called. For example, attempting to compile shaders, initialize vertex buffer objects or upload texture data will fail when done in a subclass’s constructor. These operations must be deferred to <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> . Some of Qt’s OpenGL helper classes, like <a class="reference internal" href="../QtGui/QOpenGLBuffer.html#PySide2.QtGui.QOpenGLBuffer" title="PySide2.QtGui.QOpenGLBuffer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLBuffer</span></code></a> or <a class="reference internal" href="../QtGui/QOpenGLVertexArrayObject.html#PySide2.QtGui.QOpenGLVertexArrayObject" title="PySide2.QtGui.QOpenGLVertexArrayObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLVertexArrayObject</span></code></a> , have a matching deferred behavior: they can be instantiated without a context, but all initialization is deferred until a <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.create" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.create"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.create()</span></code></a> , or similar, call. This means that they can be used as normal (non-pointer) member variables in a <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> subclass, but the <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.create" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.create"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.create()</span></code></a> or similar function can only be called from <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> . Be aware however that not all classes are designed like this. When in doubt, make the member variable a pointer and create and destroy the instance dynamically in <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> and the destructor, respectively.</p>
+<p>Releasing the resources also needs the context to be current. Therefore destructors that perform such cleanup are expected to call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> before moving on to destroy any OpenGL resources or wrappers. Avoid deferred deletion via <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QObject.deleteLater()</span></code> or the parenting mechanism of <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . There is no guarantee the correct context will be current at the time the instance in question is really destroyed.</p>
+<p>A typical subclass will therefore often look like the following when it comes to resource initialization and destruction:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyGLWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QOpenGLWidget</span>
+<span class="p">{</span>
+    <span class="o">...</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QOpenGLVertexArrayObject</span> <span class="n">m_vao</span><span class="p">;</span>
+    <span class="n">QOpenGLBuffer</span> <span class="n">m_vbo</span><span class="p">;</span>
+    <span class="n">QOpenGLShaderProgram</span> <span class="o">*</span><span class="n">m_program</span><span class="p">;</span>
+    <span class="n">QOpenGLShader</span> <span class="o">*</span><span class="n">m_shader</span><span class="p">;</span>
+    <span class="n">QOpenGLTexture</span> <span class="o">*</span><span class="n">m_texture</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">MyGLWidget</span><span class="p">::</span><span class="n">MyGLWidget</span><span class="p">()</span>
+    <span class="p">:</span> <span class="n">m_program</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">m_shader</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">m_texture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="n">No</span> <span class="n">OpenGL</span> <span class="n">resource</span> <span class="n">initialization</span> <span class="ow">is</span> <span class="n">done</span> <span class="n">here</span><span class="o">.</span>
+<span class="p">}</span>
+
+<span class="n">MyGLWidget</span><span class="p">::</span><span class="o">~</span><span class="n">MyGLWidget</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">context</span> <span class="ow">is</span> <span class="n">current</span> <span class="ow">and</span> <span class="n">then</span> <span class="n">explicitly</span>
+    <span class="o">//</span> <span class="n">destroy</span> <span class="nb">all</span> <span class="n">underlying</span> <span class="n">OpenGL</span> <span class="n">resources</span><span class="o">.</span>
+    <span class="n">makeCurrent</span><span class="p">();</span>
+
+    <span class="n">delete</span> <span class="n">m_texture</span><span class="p">;</span>
+    <span class="n">delete</span> <span class="n">m_shader</span><span class="p">;</span>
+    <span class="n">delete</span> <span class="n">m_program</span><span class="p">;</span>
+
+    <span class="n">m_vbo</span><span class="o">.</span><span class="n">destroy</span><span class="p">();</span>
+    <span class="n">m_vao</span><span class="o">.</span><span class="n">destroy</span><span class="p">();</span>
+
+    <span class="n">doneCurrent</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">MyGLWidget</span><span class="p">::</span><span class="n">initializeGL</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">m_vao</span><span class="o">.</span><span class="n">create</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_vao</span><span class="o">.</span><span class="n">isCreated</span><span class="p">())</span>
+        <span class="n">m_vao</span><span class="o">.</span><span class="n">bind</span><span class="p">();</span>
+
+    <span class="n">m_vbo</span><span class="o">.</span><span class="n">create</span><span class="p">();</span>
+    <span class="n">m_vbo</span><span class="o">.</span><span class="n">bind</span><span class="p">();</span>
+    <span class="n">m_vbo</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+
+    <span class="n">m_texture</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLTexture</span><span class="p">(</span><span class="n">QImage</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
+
+    <span class="n">m_shader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLShader</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+    <span class="n">m_program</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLShaderProgram</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is naturally not the only possible solution. One alternative is to use the <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext.aboutToBeDestroyed()</span></code> signal of <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> . By connecting a slot, using direct connection, to this signal, it is possible to perform cleanup whenever the the underlying native context handle, or the entire <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> instance, is going to be released. The following snippet is in principle equivalent to the previous one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MyGLWidget</span><span class="p">::</span><span class="n">initializeGL</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="o">//</span> <span class="n">context</span><span class="p">()</span> <span class="ow">and</span> <span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">currentContext</span><span class="p">()</span> <span class="n">are</span> <span class="n">equivalent</span> <span class="n">when</span> <span class="n">called</span> <span class="kn">from</span> <span class="nn">initializeGL</span> <span class="ow">or</span> <span class="n">paintGL</span><span class="o">.</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">context</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">aboutToBeDestroyed</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MyGLWidget</span><span class="p">::</span><span class="n">cleanup</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">MyGLWidget</span><span class="p">::</span><span class="n">cleanup</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">makeCurrent</span><span class="p">();</span>
+    <span class="n">delete</span> <span class="n">m_texture</span><span class="p">;</span>
+    <span class="n">m_texture</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="o">...</span>
+    <span class="n">doneCurrent</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For widgets that change their associated top-level window multiple times during their lifetime, a combined approach is essential. Whenever the widget or a parent of it gets reparented so that the top-level window becomes different, the widget’s associated context is destroyed and a new one is created. This is then followed by a call to <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a> where all OpenGL resources must get reinitialized. Due to this the only option to perform proper cleanup is to connect to the context’s aboutToBeDestroyed() signal. Note that the context in question may not be the current one when the signal gets emitted. Therefore it is good practice to call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> in the connected slot. Additionally, the same cleanup steps must be performed from the derived class’ destructor, since the slot connected to the signal will not get invoked when the widget is being destroyed.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When <code class="xref py py-attr docutils literal"><span class="pre">Qt.AA_ShareOpenGLContexts</span></code> is set, the widget’s context never changes, not even when reparenting because the widget’s associated texture is guaranteed to be accessible also from the new top-level’s context.</p>
+</div>
+<p>Proper cleanup is especially important due to context sharing. Even though each <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s associated context is destroyed together with the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> , the sharable resources in that context, like textures, will stay valid until the top-level window, in which the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> lived, is destroyed. Additionally, settings like <code class="xref py py-attr docutils literal"><span class="pre">Qt.AA_ShareOpenGLContexts</span></code> and some Qt modules may trigger an even wider scope for sharing contexts, potentially leading to keeping the resources in question alive for the entire lifetime of the application. Therefore the safest and most robust is always to perform explicit cleanup for all resources and resource wrappers used in the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="limitations">
+<span id="pyside2-qtwidgets-qopenglwidget-limitations"></span><h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Putting other widgets underneath and making the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> transparent will not lead to the expected results: The widgets underneath will not be visible. This is because in practice the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> is drawn before all other regular, non-OpenGL widgets, and so see-through type of solutions are not feasible. Other type of layouts, like having widgets on top of the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> , will function as expected.</p>
+<p>When absolutely necessary, this limitation can be overcome by setting the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_AlwaysStackOnTop</span></code> attribute on the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> . Be aware however that this breaks stacking order, for example it will not be possible to have other widgets on top of the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> , so it should only be used in situations where a semi-transparent <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> with other widgets visible underneath is required.</p>
+<p>Note that this does not apply when there are no other widgets underneath and the intention is to have a semi-transparent window. In that case the traditional approach of setting <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_TranslucentBackground</span></code> on the top-level window is sufficient. Note that if the transparent areas are only desired in the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> , then <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_NoSystemBackground</span></code> will need to be turned back to <code class="docutils literal"><span class="pre">false</span></code> after enabling <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_TranslucentBackground</span></code> . Additionally, requesting an alpha channel for the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> ‘s context via <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> may be necessary too, depending on the system.</p>
+<p><a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> supports multiple update behaviors, just like <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> . In preserved mode the rendered content from the previous <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> call is available in the next one, allowing incremental rendering. In non-preserved mode the content is lost and <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> implementations are expected to redraw everything in the view.</p>
+<p>Before Qt 5.5 the default behavior of <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> was to preserve the rendered contents between <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> calls. Since Qt 5.5 the default behavior is non-preserved because this provides better performance and the majority of applications have no need for the previous content. This also resembles the semantics of an OpenGL-based <a class="reference internal" href="../QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> and matches the default behavior of <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> in that the color and ancillary buffers are invalidated for each frame. To restore the preserved behavior, call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior()</span></code></a> with <code class="docutils literal"><span class="pre">PartialUpdate</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="alternatives">
+<span id="pyside2-qtwidgets-qopenglwidget-alternatives"></span><h3>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Adding a <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> into a window turns on OpenGL-based compositing for the entire window. In some special cases this may not be ideal, and the old <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> -style behavior with a separate, native child window is desired. Desktop applications that understand the limitations of this approach (for example when it comes to overlaps, transparency, scroll views and MDI areas), can use <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a> with <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.createWindowContainer" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.createWindowContainer"><code class="xref py py-meth docutils literal"><span class="pre">QWidget.createWindowContainer()</span></code></a> . This is a modern alternative to <a class="reference internal" href="../QtOpenGL/QGLWidget.html#PySide2.QtOpenGL.QGLWidget" title="PySide2.QtOpenGL.QGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></a> and is faster than <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> due to the lack of the additional composition step. It is strongly recommended to limit the usage of this approach to cases where there is no other choice. Note that this option is not suitable for most embedded and mobile platforms, and it is known to have issues on certain desktop platforms (e.g. <span class="xref std std-ref">macOS</span> ) too. The stable, cross-platform solution is always <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> .</p>
+<p><em>OpenGL is a trademark of Silicon Graphics, Inc. in the United States and other countries.</em></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../QtGui/QOpenGLFunctions.html#PySide2.QtGui.QOpenGLFunctions" title="PySide2.QtGui.QOpenGLFunctions"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLFunctions</span></code></a>  <a class="reference internal" href="../QtGui/QOpenGLWindow.html#PySide2.QtGui.QOpenGLWindow" title="PySide2.QtGui.QOpenGLWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLWindow</span></code></a>  <code class="xref py py-attr docutils literal"><span class="pre">Qt.AA_ShareOpenGLContexts</span></code>  <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLWidget.UpdateBehavior</span></code></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtWidgets.QOpenGLWidget">
+<em class="property">class </em><code class="descclassname">PySide2.QtWidgets.</code><code class="descname">QOpenGLWidget</code><span class="sig-paren">(</span><span class="optional">[</span><em>parent=nullptr</em><span class="optional">[</span>, <em>f=Qt.WindowFlags()</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.QOpenGLWidget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>f</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.WindowFlags</span></code></li>
+<li><strong>parent</strong> – <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a widget which is a child of <code class="docutils literal"><span class="pre">parent</span></code> , with widget flags set to <code class="docutils literal"><span class="pre">f</span></code> .</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">UpdateBehavior</code><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior" title="Permalink to this definition">¶</a></dt>
+<dd><p>This enum describes the update semantics of <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> .</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="97%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QOpenGLWidget.NoPartialUpdate</td>
+<td><a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> will discard the contents of the color buffer and the ancillary buffers after the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> is rendered to screen. This is the same behavior that can be expected by calling <code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.swapBuffers</span></code> with a default opengl enabled <a class="reference internal" href="../QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> as the argument. can have some performance benefits on certain hardware architectures common in the mobile and embedded space when a framebuffer object is used as the rendering target. The framebuffer object is invalidated between frames with glDiscardFramebufferEXT if supported or a glClear. Please see the documentation of EXT_discard_framebuffer for more information: <a class="reference external" href="https://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt">https://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt</a></td>
+</tr>
+<tr class="row-odd"><td>QOpenGLWidget.PartialUpdate</td>
+<td>The framebuffer objects color buffer and ancillary buffers are not invalidated between frames.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.updateBehavior()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">aboutToCompose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToCompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToResize">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">aboutToResize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.aboutToResize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns The <a class="reference internal" href="../QtGui/QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> used by this widget or <code class="docutils literal"><span class="pre">0</span></code> if not yet initialized.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The context and the framebuffer object used by the widget changes when reparenting the widget via <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setParent" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setParent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.setParent()</span></code></a> .</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">QOpenGLContext.setShareContext()</span></code>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">defaultFramebufferObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.defaultFramebufferObject" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.GLuint</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns The framebuffer object handle or <code class="docutils literal"><span class="pre">0</span></code> if not yet initialized.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The framebuffer object belongs to the context returned by <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.context()</span></code></a> and may not be accessible from other contexts.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The context and the framebuffer object used by the widget changes when reparenting the widget via <a class="reference internal" href="QWidget.html#PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setParent" title="PySide2.QtWidgets.PySide2.QtWidgets.QWidget.setParent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QWidget.setParent()</span></code></a> . In addition, the framebuffer object changes on each resize.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.context()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">doneCurrent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Releases the context.</p>
+<p>It is not necessary to call this function in most cases, since the widget will make sure the context is bound and released properly when invoking <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the context and surface format used by this widget and its toplevel window.</p>
+<p>After the widget and its toplevel have both been created, resized and shown, this function will return the actual format of the context. This may differ from the requested format if the request could not be fulfilled by the platform. It is also possible to get larger color buffer sizes than requested.</p>
+<p>When the widget’s window and the related OpenGL resources are not yet initialized, the return value is the format that has been set via <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setFormat()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.context()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">frameSwapped</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.frameSwapped" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.grabFramebuffer">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">grabFramebuffer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.grabFramebuffer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Renders and returns a 32-bit RGB image of the framebuffer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a potentially expensive operation because it relies on glReadPixels() to read back the pixels. This may be slow and can stall the GPU pipeline.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">initializeGL</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="Permalink to this definition">¶</a></dt>
+<dd><p>This virtual function is called once before the first call to <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> or <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a> . Reimplement it in a subclass.</p>
+<p>This function should set up any required OpenGL resources and state.</p>
+<p>There is no need to call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> because this has already been done when this function is called. Note however that the framebuffer is not yet available at this stage, so avoid issuing draw calls from here. Defer such calls to <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> instead.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.isValid">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.isValid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <em>true</em> if the widget and OpenGL resources, like the context, have been successfully initialized. Note that the return value is always false until the widget is shown.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">makeCurrent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares for rendering OpenGL content for this widget by making the corresponding context current and binding the framebuffer object in that context.</p>
+<p>It is not necessary to call this function in most cases, because it is called automatically before invoking <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.context"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.context()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.doneCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.doneCurrent()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">paintGL</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="Permalink to this definition">¶</a></dt>
+<dd><p>This virtual function is called whenever the widget needs to be painted. Reimplement it in a subclass.</p>
+<p>There is no need to call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> because this has already been done when this function is called.</p>
+<p>Before invoking this function, the context and the framebuffer are bound, and the viewport is set up by a call to glViewport(). No other state is set and no clearing or drawing is performed by the framework.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.resizeGL()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">resizeGL</code><span class="sig-paren">(</span><em>w</em>, <em>h</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resizeGL" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This virtual function is called whenever the widget has been resized. Reimplement it in a subclass. The new size is passed in <code class="docutils literal"><span class="pre">w</span></code> and <code class="docutils literal"><span class="pre">h</span></code> .</p>
+<p>There is no need to call <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.makeCurrent"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.makeCurrent()</span></code></a> because this has already been done when this function is called. Additionally, the framebuffer is also bound.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.initializeGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.initializeGL()</span></code></a>  <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.paintGL"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.paintGL()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resized">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">resized</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.resized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">setFormat</code><span class="sig-paren">(</span><em>format</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setFormat" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>format</strong> – <a class="reference internal" href="../QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Sets the requested surface <code class="docutils literal"><span class="pre">format</span></code> .</p>
+<p>When the format is not explicitly set via this function, the format returned by <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.defaultFormat()</span></code> will be used. This means that when having multiple OpenGL widgets, individual calls to this function can be replaced by one single call to <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> before creating the first widget.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requesting an alpha buffer via this function will not lead to the desired results when the intention is to make other widgets beneath visible. Instead, use <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_AlwaysStackOnTop</span></code> to enable semi-transparent <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> instances with other widgets visible underneath. Keep in mind however that this breaks the stacking order, so it will no longer be possible to have other widgets on top of the <a class="reference internal" href="#PySide2.QtWidgets.QOpenGLWidget" title="PySide2.QtWidgets.QOpenGLWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget</span></code></a> .</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.format"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.format()</span></code></a>  <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_AlwaysStackOnTop</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">setTextureFormat</code><span class="sig-paren">(</span><em>texFormat</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>texFormat</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.GLenum</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets a custom internal texture format of <code class="docutils literal"><span class="pre">texFormat</span></code> .</p>
+<p>When working with sRGB framebuffers, it will be necessary to specify a format like <code class="docutils literal"><span class="pre">GL_SRGB8_ALPHA8</span></code> . This can be achieved by calling this function.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function has no effect if called after the widget has already been shown and thus it performed initialization.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function will typically have to be used in combination with a <code class="xref py py-meth docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> call that sets the color space to <code class="xref py py-attr docutils literal"><span class="pre">QSurfaceFormat.sRGBColorSpace</span></code> .</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.textureFormat()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">setUpdateBehavior</code><span class="sig-paren">(</span><em>updateBehavior</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>updateBehavior</strong> – <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Sets this widget’s update behavior to <code class="docutils literal"><span class="pre">updateBehavior</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.updateBehavior()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">textureFormat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.textureFormat" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.GLenum</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the active internal texture format if the widget has already initialized, the requested format if one was set but the widget has not yet been made visible, or 0 if <a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setTextureFormat()</span></code></a> was not called and the widget has not yet been made visible.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setTextureFormat"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setTextureFormat()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior">
+<code class="descclassname">PySide2.QtWidgets.QOpenGLWidget.</code><code class="descname">updateBehavior</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.updateBehavior" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.UpdateBehavior</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the update behavior of the widget.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior" title="PySide2.QtWidgets.PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtWidgets.QOpenGLWidget.setUpdateBehavior()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

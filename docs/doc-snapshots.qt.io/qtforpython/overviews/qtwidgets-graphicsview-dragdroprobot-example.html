@@ -1,0 +1,566 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Drag and Drop Robot Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Drag and Drop Robot Example</a><ul>
+<li><a class="reference internal" href="#robot-class-definition">Robot Class Definition</a></li>
+<li><a class="reference internal" href="#coloritem-class-definition">ColorItem Class Definition</a></li>
+<li><a class="reference internal" href="#the-main-function">The main() Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coloritem-cpp-example-file">coloritem.cpp Example File</a></li>
+<li><a class="reference internal" href="#coloritem-h-example-file">coloritem.h Example File</a></li>
+<li><a class="reference internal" href="#robot-cpp-example-file">robot.cpp Example File</a></li>
+<li><a class="reference internal" href="#robot-h-example-file">robot.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#dragdroprobot-pro-example-file">dragdroprobot.pro Example File</a></li>
+<li><a class="reference internal" href="#robot-qrc-example-file">robot.qrc Example File</a></li>
+<li><a class="reference internal" href="#head-png-image-file">head.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drag-and-drop-robot-example">
+<span id="id1"></span><h1>Drag and Drop Robot Example<a class="headerlink" href="#drag-and-drop-robot-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates how to drag and drop items in a graphics view</p>
+<blockquote>
+<div><p>Demonstrates how to drag and drop items in a graphics view</p>
+<p>The Drag and Drop Robot example shows how to implement Drag and Drop in a <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> subclass, as well as how to animate items using Qt’s <span class="xref std std-ref">Animation Framework</span> .</p>
+<p>Graphics View provides the <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsScene.html#PySide2.QtWidgets.QGraphicsScene" title="PySide2.QtWidgets.QGraphicsScene"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsScene</span></code></a> class for managing and interacting with a large number of custom-made 2D graphical items derived from the <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> class, and a <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> widget for visualizing the items, with support for zooming and rotation.</p>
+<p>This example consists of a <code class="docutils literal"><span class="pre">Robot</span></code> class, a <code class="docutils literal"><span class="pre">ColorItem</span></code> class, and a main function: the <code class="docutils literal"><span class="pre">Robot</span></code> class describes a simple robot consisting of several <code class="docutils literal"><span class="pre">RobotPart</span></code> derived limbs, including <code class="docutils literal"><span class="pre">RobotHead</span></code> and <code class="docutils literal"><span class="pre">RobotLimb</span></code> , the <code class="docutils literal"><span class="pre">ColorItem</span></code> class provides a draggable colored ellipse, and the <code class="docutils literal"><span class="pre">main()</span></code> function provides the main application window.</p>
+<p>We will first review the <code class="docutils literal"><span class="pre">Robot</span></code> class to see how to assemble the different parts so that they can be individually rotated and animated using <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> , and we will then review the <code class="docutils literal"><span class="pre">ColorItem</span></code> class to demonstrate how to implement Drag and Drop between items. Finally we will review the main() function to see how we can put all the pieces together, to form the final application.</p>
+</div></blockquote>
+<div class="section" id="robot-class-definition">
+<span id="id2"></span><h2>Robot Class Definition<a class="headerlink" href="#robot-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The robot consists of three main classes: the <code class="docutils literal"><span class="pre">RobotHead</span></code> , the <code class="docutils literal"><span class="pre">RobotTorso</span></code> , and the <code class="docutils literal"><span class="pre">RobotLimb</span></code> , which is used for the upper and lower arms and legs. All parts derive from the <code class="docutils literal"><span class="pre">RobotPart</span></code> class, which in turn inherits <code class="docutils literal"><span class="pre">QGraphicsObject</span></code> . The <code class="docutils literal"><span class="pre">Robot</span></code> class itself has no visual appearance and serves only as a root node for the robot.</p>
+<p>Let’s start with the <code class="docutils literal"><span class="pre">RobotPart</span></code> class declaration.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RobotPart</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGraphicsObject</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">RobotPart</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dragLeaveEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dropEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">dragOver</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This base class inherits <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> . <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> provides signals and slots through inheriting <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , and it also declares <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> ‘s properties using <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> , which makes the properties accessible for <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> .</p>
+<p>RobotPart also implements the three most important event handlers for accepting drop events: <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragEnterEvent()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragLeaveEvent()</span></code> , and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dropEvent()</span></code> .</p>
+<p>The color is stored as a member variable, along with the <code class="docutils literal"><span class="pre">dragOver</span></code> variable, which we will use later to indicate visually that the limb can accept colors that are is dragged onto it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RobotPart</span><span class="p">::</span><span class="n">RobotPart</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QGraphicsObject</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">color</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">lightGray</span><span class="p">),</span> <span class="n">dragOver</span><span class="p">(</span><span class="n">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setAcceptDrops</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">RobotPart</span></code> ‘s constructor initializes the dragOver member and sets the color to <code class="xref py py-attr docutils literal"><span class="pre">Qt.lightGray</span></code> . In the constructor body we enable support for accepting drop events by calling <code class="xref py py-func docutils literal"><span class="pre">setAcceptDrops(true)</span></code> .</p>
+<p>The rest of this class’s implementation is to support Drag and Drop.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RobotPart</span><span class="p">::</span><span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasColor</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">setAccepted</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+        <span class="n">dragOver</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">setAccepted</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragEnterEvent()</span></code> handler is called when a Drag and Drop element is dragged into the robot part’s area.</p>
+<p>The handler implementation determines whether or not this item as a whole can accept the mime data assiciated with the incoming drag object. <code class="docutils literal"><span class="pre">RobotPart</span></code> provides a base behavior for all parts that accepts color drops. So if the incoming drag object contains a color, the event is accepted, we set <code class="docutils literal"><span class="pre">dragOver</span></code> to <code class="docutils literal"><span class="pre">true</span></code> and call update() to help provide positive visual feedback to the user; otherwise the event is ignored, which in turn allows the event to propagate to parent elements.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RobotPart</span><span class="p">::</span><span class="n">dragLeaveEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="n">dragOver</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragLeaveEvent()</span></code> handler is called when a Drag and Drop element is dragged away from the robot part’s area. Our implementation simply resets <em>dragOver</em> to false and calls <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.update()</span></code> to help provide visual feedback that the drag has left this item.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RobotPart</span><span class="p">::</span><span class="n">dropEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">dragOver</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasColor</span><span class="p">())</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">QColor</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">colorData</span><span class="p">());</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dropEvent()</span></code> handler is called when a Drag and Drop element is dropped onto an item (i.e., when the mouse button is released over the item while dragging).</p>
+<p>We reset <code class="docutils literal"><span class="pre">dragOver</span></code> to false, assign the item’s new color, and call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.update()</span></code> .</p>
+<p>The declaration and implementation of <code class="docutils literal"><span class="pre">RobotHead</span></code> , <code class="docutils literal"><span class="pre">RobotTorso</span></code> , and <code class="docutils literal"><span class="pre">RobotLimb</span></code> are practically identical. We will review <code class="docutils literal"><span class="pre">RobotHead</span></code> in detail, as this class has one minor difference, and leave the other classes as an exercise for the reader.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RobotHead</span> <span class="p">:</span> <span class="n">public</span> <span class="n">RobotPart</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">RobotHead</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QRectF</span> <span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dropEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QPixmap</span> <span class="n">pixmap</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">RobotHead</span></code> class inherits <code class="docutils literal"><span class="pre">RobotPart</span></code> and provides the necessary implementations of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> . It also reimplements <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragEnterEvent()</span></code> and dropEvent() to provide special handling of image drops.</p>
+<p>The class contains a private pixmap member that we can use to implement support for accepting image drops.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RobotHead</span><span class="p">::</span><span class="n">RobotHead</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">RobotPart</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">RobotHead</span></code> has a rather plain constructor that simply forwards to <code class="docutils literal"><span class="pre">RobotPart</span></code> ‘s constructor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRectF</span> <span class="n">RobotHead</span><span class="p">::</span><span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QRectF</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> reimplementation returns the extents for the head. Because we want the center of rotation to be the bottom center of the item, we have chosen a bounding rectangle that starts at (-15, -50) and extends to 30 units wide and 50 units tall. When rotating the head, the “neck” will stay still while the top of the head tilts from side to side.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void RobotHead::paint(QPainter *painter,
+           const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+    if (pixmap.isNull()) {
+        painter-&gt;setBrush(dragOver ? color.light(130) : color);
+        painter-&gt;drawRoundedRect(-10, -30, 20, 30, 25, 25, Qt::RelativeSize);
+        painter-&gt;setBrush(Qt::white);
+        painter-&gt;drawEllipse(-7, -3 - 20, 7, 7);
+        painter-&gt;drawEllipse(0, -3 - 20, 7, 7);
+        painter-&gt;setBrush(Qt::black);
+        painter-&gt;drawEllipse(-5, -1 - 20, 2, 2);
+        painter-&gt;drawEllipse(2, -1 - 20, 2, 2);
+        painter-&gt;setPen(QPen(Qt::black, 2));
+        painter-&gt;setBrush(Qt::NoBrush);
+        painter-&gt;drawArc(-6, -2 - 20, 12, 15, 190 * 16, 160 * 16);
+    } else {
+        painter-&gt;scale(.2272, .2824);
+        painter-&gt;drawPixmap(QPointF(-15 * 4.4, -50 * 3.54), pixmap);
+    }
+}
+</pre></div>
+</div>
+<p>In <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> we draw the actual head. The implementation is split into two sections; if an image has been dropped onto the head, we draw the image, otherwise we draw a round rectangular robot head with simple vector graphics.</p>
+<p>For performance reasons, depending on the complexity of what is painted, it can often be faster to draw the head as an image rather than using a sequence of vector operations.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RobotHead</span><span class="p">::</span><span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasImage</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">event</span><span class="o">-&gt;</span><span class="n">setAccepted</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+        <span class="n">dragOver</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">RobotPart</span><span class="p">::</span><span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The robot head can accept image drops. In order to support this, its reimplementation of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dragEnterEvent()</span></code> checks if the drag object contains image data, and if it does, then the event is accepted. Otherwise we fall back to the base <code class="docutils literal"><span class="pre">RobotPart</span></code> implementation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RobotHead</span><span class="p">::</span><span class="n">dropEvent</span><span class="p">(</span><span class="n">QGraphicsSceneDragDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hasImage</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">dragOver</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+        <span class="n">pixmap</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">QPixmap</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">mimeData</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">imageData</span><span class="p">());</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">RobotPart</span><span class="p">::</span><span class="n">dropEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To follow up on image support, we must also implement <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.dropEvent()</span></code> . We check if the drag object contains image data, and if it does, we store this data as a member pixmap and call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.update()</span></code> . This pixmap is used inside the <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> implementation that we reviewed before.</p>
+<p><code class="docutils literal"><span class="pre">RobotTorso</span></code> and <code class="docutils literal"><span class="pre">RobotLimb</span></code> are similar to <code class="docutils literal"><span class="pre">RobotHead</span></code> , so let’s skip directly to the <code class="docutils literal"><span class="pre">Robot</span></code> class.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Robot</span> <span class="p">:</span> <span class="n">public</span> <span class="n">RobotPart</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Robot</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QRectF</span> <span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Robot</span></code> class also inherits <code class="docutils literal"><span class="pre">RobotPart</span></code> , and like the other parts it also implements <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> . It provides a rather special implementation, though:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRectF</span> <span class="n">Robot</span><span class="p">::</span><span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QRectF</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">Robot</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span>
+                  <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">painter</span><span class="p">);</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">widget</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because the <code class="docutils literal"><span class="pre">Robot</span></code> class is only used as a base node for the rest of the robot, it has no visual representation. Its <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> implementation can therefore return a null <a class="reference internal" href="../PySide2/QtCore/QRectF.html#PySide2.QtCore.QRectF" title="PySide2.QtCore.QRectF"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRectF</span></code></a> , and its paint() function does nothing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Robot</span><span class="p">::</span><span class="n">Robot</span><span class="p">(</span><span class="n">QGraphicsItem</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">RobotPart</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setFlag</span><span class="p">(</span><span class="n">ItemHasNoContents</span><span class="p">);</span>
+
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">torsoItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotTorso</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">headItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotHead</span><span class="p">(</span><span class="n">torsoItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">upperLeftArmItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">torsoItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">lowerLeftArmItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">upperLeftArmItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">upperRightArmItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">torsoItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">lowerRightArmItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">upperRightArmItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">upperRightLegItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">torsoItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">lowerRightLegItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">upperRightLegItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">upperLeftLegItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">torsoItem</span><span class="p">);</span>
+    <span class="n">QGraphicsObject</span> <span class="o">*</span><span class="n">lowerLeftLegItem</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RobotLimb</span><span class="p">(</span><span class="n">upperLeftLegItem</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The constructor starts by setting the flag <code class="xref py py-attr docutils literal"><span class="pre">ItemHasNoContents</span></code> , which is a minor optimization for items that have no visual appearance.</p>
+<p>We then construct all the robot parts (head, torso, and upper/lower arms and legs). The stacking order is very important, and we use the parent-child hierarchy to ensure the elements rotate and move properly. We construct the torso first, as this is the root element. We then construct the head and pass the torso to <code class="docutils literal"><span class="pre">HeadItem</span></code> ‘s constructor. This will make the head a child of the torso; if you rotate the torso, the head will follow. The same pattern is applied to the rest of the limbs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">headItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">18</span><span class="p">);</span>
+<span class="n">upperLeftArmItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">lowerLeftArmItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">upperRightArmItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">lowerRightArmItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">upperRightLegItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+<span class="n">lowerRightLegItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">upperLeftLegItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+<span class="n">lowerLeftLegItem</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Each robot part is carefully positioned. For example, the upper left arm is moved precisely to the top-left area of the torso, and the upper right arm is moved to the top-right area.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QParallelAnimationGroup</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QParallelAnimationGroup</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+<span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">headAnimation</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">headItem</span><span class="p">,</span> <span class="s2">&quot;rotation&quot;</span><span class="p">);</span>
+<span class="n">headAnimation</span><span class="o">-&gt;</span><span class="n">setStartValue</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">headAnimation</span><span class="o">-&gt;</span><span class="n">setEndValue</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">headScaleAnimation</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">headItem</span><span class="p">,</span> <span class="s2">&quot;scale&quot;</span><span class="p">);</span>
+<span class="n">headScaleAnimation</span><span class="o">-&gt;</span><span class="n">setEndValue</span><span class="p">(</span><span class="mf">1.1</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">headAnimation</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">headScaleAnimation</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The next section creates all animation objects. This snippet shows the two animations that operate on the head’s scale and rotation. The two <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> instances simply set the object, property, and respective start and end values.</p>
+<p>All animations are controlled by one top-level parallel animation group. The scale and rotation animations are added to this group.</p>
+<p>The rest of the animations are defined in a similar way.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">animation</span><span class="o">-&gt;</span><span class="n">animationCount</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">anim</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QPropertyAnimation</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">animation</span><span class="o">-&gt;</span><span class="n">animationAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+    <span class="n">anim</span><span class="o">-&gt;</span><span class="n">setEasingCurve</span><span class="p">(</span><span class="n">QEasingCurve</span><span class="p">::</span><span class="n">SineCurve</span><span class="p">);</span>
+    <span class="n">anim</span><span class="o">-&gt;</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">animation</span><span class="o">-&gt;</span><span class="n">setLoopCount</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Finally we set an easing curve and duration on each animation, ensure the toplevel animation group loops forever, and start the toplevel animation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="coloritem-class-definition">
+<span id="id3"></span><h2>ColorItem Class Definition<a class="headerlink" href="#coloritem-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">ColorItem</span></code> class represents a circular item that can be pressed to drag colors onto robot parts.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ColorItem</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGraphicsItem</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ColorItem</span><span class="p">();</span>
+
+    <span class="n">QRectF</span> <span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This class is very simple. It does not use animations, and has no need for properties nor signals and slots, so to save resources, it’s most natural that it inherits <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> (as opposed to <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> ).</p>
+<p>It declares the mandatory <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> functions, and adds reimplementations of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mousePressEvent()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mouseMoveEvent()</span></code> , and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mouseReleaseEvent()</span></code> . It contains a single private color member.</p>
+<p>Let’s take a look at its implementation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ColorItem</span><span class="p">::</span><span class="n">ColorItem</span><span class="p">()</span>
+    <span class="p">:</span> <span class="n">color</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">setToolTip</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;QColor(%1, %2, %3)</span><span class="se">\n</span><span class="s2">%4&quot;</span><span class="p">)</span>
+              <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">())</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">green</span><span class="p">())</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">())</span>
+              <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="s2">&quot;Click and drag this color onto the robot!&quot;</span><span class="p">));</span>
+    <span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">OpenHandCursor</span><span class="p">);</span>
+    <span class="n">setAcceptedMouseButtons</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">ColorItem</span></code> ‘s constructor assigns an opaque random color to its color member by making use of <a class="reference internal" href="../PySide2/QtCore/QRandomGenerator.html#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> . For improved usability, it assigns a tooltip that provides a useful hint to the user, and it also sets a suitable cursor. This ensures that the cursor will chance to <code class="xref py py-attr docutils literal"><span class="pre">Qt.OpenHandCursor</span></code> when the mouse pointer hovers over the item.</p>
+<p>Finally, we call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.setAcceptedMouseButtons()</span></code> to ensure that this item can only process <code class="xref py py-attr docutils literal"><span class="pre">Qt.LeftButton</span></code> . This simplifies the mouse event handlers greatly, as we can always assume that only the left mouse button is pressed and released.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRectF</span> <span class="n">ColorItem</span><span class="p">::</span><span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QRectF</span><span class="p">(</span><span class="o">-</span><span class="mf">15.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.5</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The item’s bounding rect is a fixed 30x30 units centered around the item’s origin (0, 0), and adjusted by 0.5 units in all directions to allow a scalable pen to draw its outline. For a final visual touch the bounds also compensate with a few units down and to the right to make room for a simple dropshadow.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorItem</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">widget</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">darkGray</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawEllipse</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">color</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawEllipse</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> implementation draws an ellipse with a 1-unit black outline, a plain color fill, and a dark gray dropshadow.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorItem</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">ClosedHandCursor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mousePressEvent()</span></code> handler is called when you press the mouse button inside the item’s area. Our implementation simply sets the cursor to <code class="xref py py-attr docutils literal"><span class="pre">Qt.ClosedHandCursor</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorItem</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">OpenHandCursor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mouseReleaseEvent()</span></code> handler is called when you release the mouse button after having pressed it inside an item’s area. Our implementation sets the cursor back to <code class="xref py py-attr docutils literal"><span class="pre">Qt.OpenHandCursor</span></code> . The mouse press and release event handlers together provide useful visual feedback to the user: when you move the mouse pointer over a <code class="docutils literal"><span class="pre">CircleItem</span></code> , the cursor changes to an open hand. Pressing the item will show a closed hand cursor. Releasing will restore to an open hand cursor again.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorItem</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QLineF</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">screenPos</span><span class="p">(),</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">buttonDownScreenPos</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">startDragDistance</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">QDrag</span> <span class="o">*</span><span class="n">drag</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDrag</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">widget</span><span class="p">());</span>
+    <span class="n">QMimeData</span> <span class="o">*</span><span class="n">mime</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMimeData</span><span class="p">;</span>
+    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">setMimeData</span><span class="p">(</span><span class="n">mime</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mouseMoveEvent()</span></code> handler is called when you move the mouse around after pressing the mouse button inside the <code class="docutils literal"><span class="pre">ColorItem</span></code> ‘s area. This implementation provides the most important piece of logic for <code class="docutils literal"><span class="pre">CircleItem</span></code> : the code that starts and manages drags.</p>
+<p>The implementation starts by checking if the mouse has been dragged far enough to eliminate mouse jitter noise. We only want to start a drag if the mouse has been dragged farther than the application start drag distance.</p>
+<p>Continuing, we create a <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> object, passing the event <code class="xref py py-func docutils literal"><span class="pre">QGraphicsSceneEvent.widget()</span></code> (i.e., the <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> viewport) to its constructor. Qt will ensure that this object is deleted at the right time. We also create a <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> instance that can contain our color or image data, and assign this to the drag object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">++</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QImage</span> <span class="n">image</span><span class="p">(</span><span class="s2">&quot;:/images/head.png&quot;</span><span class="p">);</span>
+    <span class="n">mime</span><span class="o">-&gt;</span><span class="n">setImageData</span><span class="p">(</span><span class="n">image</span><span class="p">);</span>
+
+    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">::</span><span class="n">fromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">));</span>
+    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">setHotSpot</span><span class="p">(</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This snippet has a somewhat random outcome: once in a while, a special image is assigned to the drag object’s mime data. The pixmap is also assiged as the drag object’s pixmap. This will ensure that you can see the image that is being dragged as a pixmap under the mouse cursor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">mime</span><span class="o">-&gt;</span><span class="n">setColorData</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+    <span class="n">mime</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;#</span><span class="si">%1%</span><span class="s2">2%3&quot;</span><span class="p">)</span>
+                  <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">QLatin1Char</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">))</span>
+                  <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">QLatin1Char</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">))</span>
+                  <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">QLatin1Char</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)));</span>
+
+    <span class="n">QPixmap</span> <span class="n">pixmap</span><span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+    <span class="n">pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pixmap</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+    <span class="n">paint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+
+    <span class="n">pixmap</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">createHeuristicMask</span><span class="p">());</span>
+
+    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">);</span>
+    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">setHotSpot</span><span class="p">(</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Otherwise, and this is the most common outcome, a simple color is assigned to the drag object’s mime data. We render this <code class="docutils literal"><span class="pre">ColorItem</span></code> into a new pixmap to give the user visual feedback that the color is being “dragged”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">drag</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">();</span>
+    <span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">OpenHandCursor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally we execute the drag. <code class="xref py py-func docutils literal"><span class="pre">QDrag.exec()</span></code> will reenter the event loop, and only exit if the drag has either been dropped, or canceled. In any case we reset the cursor to <code class="xref py py-attr docutils literal"><span class="pre">Qt.OpenHandCursor</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id4"></span><h2>The main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Now that the <code class="docutils literal"><span class="pre">Robot</span></code> and <code class="docutils literal"><span class="pre">ColorItem</span></code> classes are complete, we can put all the pieces together inside the main() function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We start off by constructing <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> , and initializing the random number generator. This ensures that the color items have different colors every time the application starts.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QGraphicsScene</span> <span class="n">scene</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ColorItem</span> <span class="o">*</span><span class="n">item</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ColorItem</span><span class="p">;</span>
+    <span class="n">item</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(::</span><span class="n">sin</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mf">6.28</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">150</span><span class="p">,</span>
+                 <span class="p">::</span><span class="n">cos</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mf">6.28</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">150</span><span class="p">);</span>
+
+    <span class="n">scene</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Robot</span> <span class="o">*</span><span class="n">robot</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Robot</span><span class="p">;</span>
+<span class="n">robot</span><span class="o">-&gt;</span><span class="n">setTransform</span><span class="p">(</span><span class="n">QTransform</span><span class="p">::</span><span class="n">fromScale</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">true</span><span class="p">);</span>
+<span class="n">robot</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">scene</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">robot</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We construct a fixed size scene, and create 10 <code class="docutils literal"><span class="pre">ColorItem</span></code> instances arranged in a circle. Each item is added to the scene.</p>
+<p>In the center of this circle we create one <code class="docutils literal"><span class="pre">Robot</span></code> instance. The robot is scaled and moved up a few units. It is then added to the scene.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">GraphicsView</span> <span class="n">view</span><span class="p">(</span><span class="o">&amp;</span><span class="n">scene</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setViewportUpdateMode</span><span class="p">(</span><span class="n">QGraphicsView</span><span class="p">::</span><span class="n">BoundingRectViewportUpdate</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setBackgroundBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">167</span><span class="p">));</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Drag and Drop Robot&quot;</span><span class="p">);</span>
+     <span class="n">view</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally we create a <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> window, and assign the scene to it.</p>
+<p>For increased visual quality, we enable antialiasing. We also choose to use bounding rectangle updates to simplify visual update handling. The view is given a fixed sand-colored background, and a window title.</p>
+<p>We then show the view. The animations start immediately after control enters the event loop.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="coloritem-cpp-example-file">
+<h1>coloritem.cpp Example File<a class="headerlink" href="#coloritem-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="coloritem-h-example-file">
+<h1>coloritem.h Example File<a class="headerlink" href="#coloritem-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="robot-cpp-example-file">
+<h1>robot.cpp Example File<a class="headerlink" href="#robot-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="robot-h-example-file">
+<h1>robot.h Example File<a class="headerlink" href="#robot-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dragdroprobot-pro-example-file">
+<h1>dragdroprobot.pro Example File<a class="headerlink" href="#dragdroprobot-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="robot-qrc-example-file">
+<h1>robot.qrc Example File<a class="headerlink" href="#robot-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="head-png-image-file">
+<h1>head.png Image File<a class="headerlink" href="#head-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,1614 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Styles and Style Aware Widgets &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Styles and Style Aware Widgets</a><ul>
+<li><a class="reference internal" href="#customizing-a-style">Customizing a Style</a></li>
+<li><a class="reference internal" href="#implementing-a-custom-style">Implementing a Custom Style</a></li>
+<li><a class="reference internal" href="#classes-for-widget-styling">Classes for Widget Styling</a></li>
+<li><a class="reference internal" href="#the-qstyle-implementation">The QStyle Implementation</a></li>
+<li><a class="reference internal" href="#the-style-elements">The Style Elements</a></li>
+<li><a class="reference internal" href="#primitive-elements">Primitive Elements</a></li>
+<li><a class="reference internal" href="#control-elements">Control Elements</a></li>
+<li><a class="reference internal" href="#complex-control-elements">Complex Control Elements</a></li>
+<li><a class="reference internal" href="#other-qstyle-tasks">Other QStyle Tasks</a></li>
+<li><a class="reference internal" href="#style-options">Style Options</a></li>
+<li><a class="reference internal" href="#qstyle-functions">QStyle Functions</a></li>
+<li><a class="reference internal" href="#the-palette">The Palette</a></li>
+<li><a class="reference internal" href="#implementation-issues">Implementation Issues</a></li>
+<li><a class="reference internal" href="#java-style">Java Style</a></li>
+<li><a class="reference internal" href="#design-and-implementation">Design and Implementation</a></li>
+<li><a class="reference internal" href="#limitations-and-differences-from-java">Limitations and Differences from Java</a></li>
+<li><a class="reference internal" href="#styling-java-check-boxes">Styling Java Check Boxes</a></li>
+<li><a class="reference internal" href="#widget-walkthrough">Widget Walkthrough</a></li>
+<li><a class="reference internal" href="#common-widget-properties">Common Widget Properties</a></li>
+<li><a class="reference internal" href="#widget-reference">Widget Reference</a></li>
+<li><a class="reference internal" href="#push-buttons">Push Buttons</a></li>
+<li><a class="reference internal" href="#check-and-radio-buttons">Check and Radio Buttons</a></li>
+<li><a class="reference internal" href="#tabs">Tabs</a></li>
+<li><a class="reference internal" href="#scroll-bars">Scroll Bars</a></li>
+<li><a class="reference internal" href="#sliders">Sliders</a></li>
+<li><a class="reference internal" href="#spin-boxes">Spin Boxes</a></li>
+<li><a class="reference internal" href="#title-bar">Title Bar</a></li>
+<li><a class="reference internal" href="#combo-box">Combo Box</a></li>
+<li><a class="reference internal" href="#group-boxes">Group Boxes</a></li>
+<li><a class="reference internal" href="#splitters">Splitters</a></li>
+<li><a class="reference internal" href="#progress-bar">Progress Bar</a></li>
+<li><a class="reference internal" href="#tool-buttons">Tool Buttons</a></li>
+<li><a class="reference internal" href="#toolbars">Toolbars</a></li>
+<li><a class="reference internal" href="#menus">Menus</a></li>
+<li><a class="reference internal" href="#menu-bar">Menu Bar</a></li>
+<li><a class="reference internal" href="#item-view-headers">Item View Headers</a></li>
+<li><a class="reference internal" href="#tree-branch-indicators">Tree Branch Indicators</a></li>
+<li><a class="reference internal" href="#tool-boxes">Tool Boxes</a></li>
+<li><a class="reference internal" href="#size-grip">Size Grip</a></li>
+<li><a class="reference internal" href="#rubber-band">Rubber Band</a></li>
+<li><a class="reference internal" href="#dock-widgets">Dock Widgets</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="styles-and-style-aware-widgets">
+<span id="id1"></span><h1>Styles and Style Aware Widgets<a class="headerlink" href="#styles-and-style-aware-widgets" title="Permalink to this headline">¶</a></h1>
+<p>Styles and the styling of widgets</p>
+<blockquote>
+<div><p>Styles and the styling of widgets.</p>
+<p>Styles (classes that inherit <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> ) draw on behalf of widgets and encapsulate the look and feel of a GUI. The <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> class is an abstract base class that encapsulates the look and feel of a GUI. Qt’s built-in widgets use it to perform nearly all of their drawing, ensuring that they look exactly like the equivalent native widgets.</p>
+<p>Qt comes with a selection of built-in styles. Some styles are only available on specific platforms (such as the Mac and Windows Vista styles). Custom styles are made available as plugins or by creating an instance of a specific style class with <code class="xref py py-func docutils literal"><span class="pre">QStyleFactory.create()</span></code> and setting it with <code class="xref py py-func docutils literal"><span class="pre">QApplication.setStyle()</span></code> .</p>
+</div></blockquote>
+<div class="section" id="customizing-a-style">
+<span id="id2"></span><h2>Customizing a Style<a class="headerlink" href="#customizing-a-style" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>In order to customize an existing style, inherit <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> and reimplement the desired virtual methods. <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> allows one to specify a certain base style, or it will automatically use the application style when the base style is left unspecified. The former gives a full control on the base style and works best if the customization expects a certain style behavior, whereas the latter provides a platform agnostic way to customize the application style that defaults to the native platform style.</div></blockquote>
+</div>
+<div class="section" id="implementing-a-custom-style">
+<span id="id3"></span><h2>Implementing a Custom Style<a class="headerlink" href="#implementing-a-custom-style" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> provides a convenient base for full custom style implementations. The approach is same than with <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> , but inherit <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> instead and reimplement the appropriate virtual methods. Implementing a full custom style is somewhat involved, and we therefore provide this overview. We give a step-by-step walkthrough of how to style individual Qt widgets. We will examine the <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> virtual functions, member variables, and enumerations.</p>
+<p>The part of this document that does not concern the styling of individual widgets is meant to be read sequentially because later sections tend to depend on earlier ones. The description of the widgets can be used for reference while implementing a style. However, you may need to consult the Qt source code in some cases. The sequence in the styling process should become clear after reading this document, which will aid you in locating relevant code.</p>
+<p>To develop style aware widgets (i.e., widgets that conform to the style in which they are drawn), you need to draw them using the current style. This document shows how widgets draw themselves and which possibilities the style gives them.</p>
+</div></blockquote>
+</div>
+<div class="section" id="classes-for-widget-styling">
+<span id="id4"></span><h2>Classes for Widget Styling<a class="headerlink" href="#classes-for-widget-styling" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>These classes are used to customize an application’s appearance and style.</div></blockquote>
+</div>
+<div class="section" id="the-qstyle-implementation">
+<span id="id5"></span><h2>The QStyle Implementation<a class="headerlink" href="#the-qstyle-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The API of <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> contains functions that draw the widgets, static helper functions to do common and difficult tasks (e.g., calculating the position of slider handles) and functions to do the various calculations necessary while drawing (e.g., for the widgets to calculate their size hints). The style also helps some widgets with the layout of their contents. In addition, it creates a <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> that contains <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> es to draw with.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> draws graphical elements; an element is a widget or a widget part like a push button bevel, a window frame, or a scroll bar. Most draw functions now take four arguments:</p>
+<ul class="simple">
+<li>an enum value specifying which graphical element to draw</li>
+<li>a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> specifying how and where to render that element</li>
+<li>a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> that should be used to draw the element</li>
+<li>a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> on which the drawing is performed (optional)</li>
+</ul>
+<p>When a widget asks a style to draw an element, it provides the style with a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> , which is a class that contains the information necessary for drawing. Thanks to <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> , it is possible to make <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> draw widgets without linking in any code for the widget. This makes it possible to use <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> ‘s draw functions on any paint device, i.e., you can draw a combobox on any widget, not just on a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> .</p>
+<p>The widget is passed as the last argument in case the style needs it to perform special effects (such as animated default buttons on <span class="xref std std-ref">macOS</span> ), but it isn’t mandatory.</p>
+<p>In the course of this section, we will look at the style elements, the style options, and the functions of <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> . Finally, we describe how the palette is used.</p>
+<p>Items in item views are drawn by <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">delegates</span></a> in Qt. The item view headers are still drawn by the style. Qt’s default delegate, <a class="reference internal" href="../PySide2/QtWidgets/QStyledItemDelegate.html#PySide2.QtWidgets.QStyledItemDelegate" title="PySide2.QtWidgets.QStyledItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyledItemDelegate</span></code></a> , draws its items partially through the current style; it draws the check box indicators and calculates bounding rectangles for the elements of which the item consists. In this document, we only describe how to implement a <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> subclass. If you wish to add support for other datatypes than those supported by the <a class="reference internal" href="../PySide2/QtWidgets/QStyledItemDelegate.html#PySide2.QtWidgets.QStyledItemDelegate" title="PySide2.QtWidgets.QStyledItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyledItemDelegate</span></code></a> , you need to implement a custom delegate. Note that delegates must be set programmatically for each individual widget (i.e., default delegates cannot be provided as plugins).</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-style-elements">
+<span id="id6"></span><h2>The Style Elements<a class="headerlink" href="#the-style-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A style element is a graphical part of a GUI. A widget consists of a hierarchy (or tree) of style elements. For instance, when a style receives a request to draw a push button (from <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> , for example), it draws a label (text and icon), a button bevel, and a focus frame. The button bevel, in turn, consists of a frame around the bevel and two other elements, which we will look at later. Below is a conceptual illustration of the push button element tree. We will see the actual tree for <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> when we go through the individual widgets.</p>
+<p>Widgets are not necessarily drawn by asking the style to draw only one element. Widgets can make several calls to the style to draw different elements. An example is <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> , which draws its tabs and frame individually.</p>
+<p>There are three element types: primitive elements, control elements, and complex control elements. The elements are defined by the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.ComplexControl</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QStyle.ControlElement</span></code> , and <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PrimitiveElement</span></code> enums. The values of each element enum has a prefix to identify their type: <code class="docutils literal"><span class="pre">CC_</span></code> for complex elements, <code class="docutils literal"><span class="pre">CE_</span></code> for control elements, and <code class="docutils literal"><span class="pre">PE_</span></code> for primitive elements. We will in the following three sections see what defines the different elements and see examples of widgets that use them.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> class description contains a list of these elements and their roles in styling widgets. We will see how they are used when we style individual widgets.</p>
+</div></blockquote>
+</div>
+<div class="section" id="primitive-elements">
+<span id="id7"></span><h2>Primitive Elements<a class="headerlink" href="#primitive-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Primitive elements are GUI elements that are common and often used by several widgets. Examples of these are frames, button bevels, and arrows for spin boxes, scroll bars, and combo boxes. Primitive elements cannot exist on their own: they are always part of a larger construct. They take no part in the interaction with the user, but are passive decorations in the GUI.</div></blockquote>
+</div>
+<div class="section" id="control-elements">
+<span id="id8"></span><h2>Control Elements<a class="headerlink" href="#control-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A control element performs an action or displays information to the user. Examples of control elements are push buttons, check boxes, and header sections in tables and tree views. Control elements are not necessarily complete widgets such as push buttons, but can also be widget parts such as tab bar tabs and scroll bar sliders. They differ from primitive elements in that they are not passive, but fill a function in the interaction with the user. Controls that consist of several elements often use the style to calculate the bounding rectangles of the elements. The available sub elements are defined by the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SubElement</span></code> enum. This enum is only used for calculating bounding rectangles; sub elements are not graphical elements to be drawn like primitive, control, and complex elements.</div></blockquote>
+</div>
+<div class="section" id="complex-control-elements">
+<span id="id9"></span><h2>Complex Control Elements<a class="headerlink" href="#complex-control-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Complex control elements contain sub controls. Complex controls behave differently depending on where the user handles them with the mouse and which keyboard keys are pressed. This is dependent on which sub control (if any) the mouse is over or pressed on. Examples of complex controls are scroll bars and combo boxes. With a scroll bar, you can use the mouse to move the slider and press the line up and line down buttons. The available sub controls are defined by the <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">SubControl</span></code></a> enum.</p>
+<p>In addition to drawing, the style needs to provide the widgets with information on which sub control (if any) a mouse press was made on. For instance, a <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> needs to know if the user pressed the slider, the slider groove, or one of the buttons.</p>
+<p>Note that sub controls are not the same as the control elements described in the previous section. You cannot use the style to draw a sub control; the style will only calculate the bounding rectangle in which the sub control should be drawn. It is common, though, that complex elements use control and primitive elements to draw their sub controls, which is an approach that is frequently used by the built-in styles in Qt and also the Java style. For instance, the Java style uses PE_IndicatorCheckBox to draw the check box in group boxes (which is a sub control of <code class="docutils literal"><span class="pre">CC_GroupBox</span></code> ). Some sub controls have an equivalent control element, e.g., the scroll bar slider (<code class="docutils literal"><span class="pre">SC_SCrollBarSlider</span></code> and <code class="docutils literal"><span class="pre">CE_ScrollBarSlider</span></code> ).</p>
+</div></blockquote>
+</div>
+<div class="section" id="other-qstyle-tasks">
+<span id="id10"></span><h2>Other QStyle Tasks<a class="headerlink" href="#other-qstyle-tasks" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The style elements and widgets, as mentioned, use the style to calculate bounding rectangles of sub elements and sub controls. Pixel metrics, which are style-dependent sizes in screen pixels, are also used for measurements when drawing. The available rectangles and pixel metrics are represented by three enums in <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> : <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SubElement</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SubControl</span></code> , and <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> . Values of the enums can easily by identified as they start with SE_, SC_ and PM_.</p>
+<p>The style also contains a set of style hints, which is represented as values in the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.StyleHint</span></code> enum. All widgets do not have the same functionality and look in the different styles. For instance, when the menu items in a menu do not fit in a single column on the screen, some styles support scrolling while others draw more than one column to fit all items.</p>
+<p>A style usually has a set of standard images (such as a warning, a question, and an error image) for message boxes, file dialogs, etc. <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> provides the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.StandardPixmap</span></code> enum. Its values represent the standard images. Qt’s widgets use these, so when you implement a custom style you should supply the images used by the style that is being implemented.</p>
+<p>The style calculates the spacing between widgets in layouts. There are two ways the style can handle these calculations. You can set the <code class="docutils literal"><span class="pre">PM_LayoutHorizontalSpacing</span></code> and <code class="docutils literal"><span class="pre">PM_LayoutVerticalSpacing</span></code> , which is the way the Java style does it (through <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> ). Alternatively, you can implement <code class="xref py py-func docutils literal"><span class="pre">QStyle.layoutSpacing()</span></code> and QStyle::layoutSpacingImplementation() if you need more control over this part of the layout. In these functions you can calculate the spacing based on control types ( <code class="xref py py-attr docutils literal"><span class="pre">QSizePolicy.ControlType</span></code> ) for different size policies ( <code class="xref py py-attr docutils literal"><span class="pre">QSizePolicy.Policy</span></code> ) and also the style option for the widget in question.</p>
+</div></blockquote>
+</div>
+<div class="section" id="style-options">
+<span id="id11"></span><h2>Style Options<a class="headerlink" href="#style-options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The sub-classes of <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> contain all information necessary to style the individual elements. Style options are instantiated - usually on the stack - and filled out by the caller of the <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> function. Depending on what is drawn the style will expect different a different style option class. For example, the <code class="docutils literal"><span class="pre">QStyle::PE_FrameFocusRect</span></code> element expects a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionFocusRect.html#PySide2.QtWidgets.QStyleOptionFocusRect" title="PySide2.QtWidgets.QStyleOptionFocusRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionFocusRect</span></code></a> argument, and it’s possible to create custom subclasses that a custom style can use. The style options keep public variables for performance reasons.</p>
+<p>The widgets can be in a number of different states, which are defined by the <code class="xref py py-class docutils literal"><span class="pre">QStyle.State</span></code> enum. Some of the state flags have different meanings depending on the widget, but others are common for all widgets like <code class="docutils literal"><span class="pre">State_Disabled</span></code> . It is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> that sets the common states with <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> ; the rest of the states are set by the individual widgets.</p>
+<p>Most notably, the style options contain the palette and bounding rectangles of the widgets to be drawn. Most widgets have specialized style options. <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> , for instance, use <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> as their style option, which contains the text, icon, and the size of their icon. The exact contents of all options are described when we go through the individual widgets.</p>
+<p>When reimplementing <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> functions that take a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> parameter, you often need to cast the <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> to a subclass (e.g., <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionFocusRect.html#PySide2.QtWidgets.QStyleOptionFocusRect" title="PySide2.QtWidgets.QStyleOptionFocusRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionFocusRect</span></code></a> ). For safety, you can use <code class="xref py py-func docutils literal"><span class="pre">qstyleoption_cast()</span></code> to ensure that the pointer type is correct. If the object isn’t of the right type, <code class="xref py py-func docutils literal"><span class="pre">qstyleoption_cast()</span></code> returns 0. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">QStyleOptionFocusRect</span> <span class="o">*</span><span class="n">focusRectOption</span> <span class="o">=</span>
+        <span class="n">qstyleoption_cast</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">QStyleOptionFocusRect</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">focusRectOption</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following code snippet illustrates how to use <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> to draw the focus rectangle from a custom widget’s paintEvent():</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MyWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="o">...</span>
+
+    <span class="n">QStyleOptionFocusRect</span> <span class="n">option</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">option</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">option</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Window</span><span class="p">);</span>
+
+    <span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PE_FrameFocusRect</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span>
+                          <span class="n">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The next example shows how to derive from an existing style to customize the look of a graphical element:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CustomStyle</span><span class="p">(</span><span class="n">QProxyStyle</span><span class="p">):</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">drawPrimitive</span><span class="p">(</span><span class="n">PrimitiveElement</span> <span class="n">element</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                      <span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+        <span class="c1"># element : PrimitiveElement</span>
+        <span class="c1"># option  : QStyleOption</span>
+        <span class="c1"># painter : QPainter</span>
+        <span class="c1"># widget  : QWidget</span>
+        <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">drawPrimitive</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">PE_IndicatorSpinUp</span> <span class="ow">or</span> <span class="n">element</span> <span class="o">==</span> <span class="n">PE_IndicatorSpinDown</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">QPolygon</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">PE_IndicatorSpinUp</span><span class="p">:</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># PE_SpinBoxDown</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">points</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">State_Enabled</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">mid</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">())</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">buttonText</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">buttonText</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">())</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">mid</span><span class="p">())</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">QWindowsStyle</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="qstyle-functions">
+<span id="id12"></span><h2>QStyle Functions<a class="headerlink" href="#qstyle-functions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> class defines three functions for drawing the primitive, control, and complex elements: <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawPrimitive()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawControl()</span></code> , and <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawComplexControl()</span></code> . The functions takes the following parameters:</p>
+<ul class="simple">
+<li>the enum value of the element to draw.</li>
+<li>a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> which contains the information needed to draw the element.</li>
+<li>a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> with which to draw the element.</li>
+<li>a pointer to a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , typically the widget that the element is painted on.</li>
+</ul>
+<p>Not all widgets send a pointer to themselves. If the style option sent to the function does not contain the information you need, you should check the widget implementation to see if it sends a pointer to itself.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> class also provides helper functions that are used when drawing the elements. The <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawItemText()</span></code> function draws text within a specified rectangle, taking a <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> as a parameter. The <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawItemPixmap()</span></code> function helps to align a pixmap within a specified bounding rectangle.</p>
+<p>Other <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> functions do various calculations for the functions that do drawing. The widgets also use these functions for calculating size hints and bounding rectangles if they draw several style elements themselves. As with the functions that draw elements, the helper functions typically take the same arguments.</p>
+<ul class="simple">
+<li>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.subElementRect()</span></code> function takes a <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SubElement</span></code> enum value and calculates a bounding rectangle for a sub element. The style uses this function to know where to draw the different parts of an element. This is mainly done for reuse; if you create a new style, you can use the same location of sub elements as the super class.</li>
+<li>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.subControlRect()</span></code> function is used to calculate bounding rectangles for sub controls in complex controls. When you implement a new style, you reimplement <code class="docutils literal"><span class="pre">subControlRect()</span></code> and calculate the rectangles that are different from the super class.</li>
+<li>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.pixelMetric()</span></code> function returns a pixel metric, which is a style-dependent size given in screen pixels. It takes a value of the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> enum and returns the correct measurement. Note that pixel metrics do not necessarily have to be static measurements, but can be calculated with, for example, the style option.</li>
+<li>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.hitTestComplexControl()</span></code> function returns the sub control that the mouse pointer is over in a complex control. Usually, this is simply a matter of using <code class="xref py py-func docutils literal"><span class="pre">QStyle.subControlRect()</span></code> to get the bounding rectangles of the sub controls, and then seeing which rectangle contains the position of the cursor.</li>
+</ul>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> also has the functions <code class="xref py py-func docutils literal"><span class="pre">QStyle.polish()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QStyle.unpolish()</span></code> . All widgets are sent to the <code class="docutils literal"><span class="pre">polish()</span></code> function before being shown and to <code class="docutils literal"><span class="pre">unpolish()</span></code> when they are hidden. You can use these functions to set attributes on the widgets or do other work that is required by your style. For instance, if you need to know when the mouse is hovering over the widget, you need to set the <code class="xref py py-attr docutils literal"><span class="pre">WA_Hover</span></code> widget attribute. The <code class="docutils literal"><span class="pre">State_MouseOver</span></code> state flag will then be set in the widget’s style options.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> has a few static helper functions that do some common and difficult tasks. They can calculate the position of a slider handle from the value of the slider and transform rectangles and draw text considering reverse layouts; see the <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> class documentation for more details.</p>
+<p>The usual approach when one reimplements <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> virtual functions is to do work on elements that are different from the super class; for all other elements, you can simply use the super class implementation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-palette">
+<span id="id13"></span><h2>The Palette<a class="headerlink" href="#the-palette" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Each style provides a color - that is, <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> - palette that should be used for drawing the widgets. There is one set of colors for the different widget states ( <code class="xref py py-attr docutils literal"><span class="pre">QPalette.ColorGroup</span></code> ): active (widgets in the window that have keyboard focus), inactive (widgets used for other windows), and disabled (widgets that are disabled). The states can be found by querying the <code class="docutils literal"><span class="pre">State_Active</span></code> and <code class="docutils literal"><span class="pre">State_Enabled</span></code> state flags. Each set contains certain color roles given by the <code class="xref py py-attr docutils literal"><span class="pre">QPalette.ColorRole</span></code> enum. The roles describe in which situations the colors should be used (e.g., for painting widget backgrounds, text, or buttons).</p>
+<p>How the color roles are used is up to the style. For instance, if the style uses gradients, one can use a palette color and make it darker or lighter with <code class="xref py py-func docutils literal"><span class="pre">QColor.darker()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QColor.lighter()</span></code> to create the gradient. In general, if you need a brush that is not provided by the palette, you should try to derive it from one.</p>
+<p><a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> , which provides the palette, stores colors for different widget states and color roles. The palette for a style is returned by <code class="xref py py-func docutils literal"><span class="pre">QStyle.standardPalette()</span></code> . The standard palette is not installed automatically when a new style is set on the application ( <code class="xref py py-func docutils literal"><span class="pre">QApplication.setStyle()</span></code> ) or widget ( <code class="xref py py-func docutils literal"><span class="pre">QWidget.setStyle()</span></code> ), so you must set the palette yourself with ( <code class="xref py py-func docutils literal"><span class="pre">QApplication.setPalette()</span></code> ) or ( <code class="xref py py-func docutils literal"><span class="pre">QWidget.setPalette()</span></code> ).</p>
+<p>It is not recommended to hard-code colors, as applications and individual widgets can set their own palette and also use their style’s palette for drawing. Note that none of Qt’s widgets set their own palette. The Java style does hard-code some colors, but only as a decision of the author; it is not advised. Of course, it is not intended that the style should look good with any palette.</p>
+</div></blockquote>
+</div>
+<div class="section" id="implementation-issues">
+<span id="id14"></span><h2>Implementation Issues<a class="headerlink" href="#implementation-issues" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When you implement styles, there are several issues to consider. We will give some hints and advice on implementation here.</p>
+<p>When implementing styles, it is necessary to look through the code of the widgets and code of the base class and its ancestors. This is because the widgets use the style differently, because the implementation in the different styles’ virtual functions can affect the state of the drawing (e.g., by altering the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> state without restoring it and drawing some elements without using the appropriate pixel metrics and sub elements).</p>
+<p>It is recommended that the styles do not alter the proposed size of widgets with the <code class="xref py py-func docutils literal"><span class="pre">QStyle.sizeFromContents()</span></code> function, but let the <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> implementation handle it instead. If changes need to be made, you should try to keep them small; application development may be difficult if the layout of widgets looks considerably different in the various styles.</p>
+</div></blockquote>
+</div>
+<div class="section" id="java-style">
+<span id="id15"></span><h2>Java Style<a class="headerlink" href="#java-style" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We have implemented a style that resembles the Java default look and feel (previously known as Metal). We have done this as it is relatively simple to implement and we wanted to build a style for this overview document. To keep it simple and not too extensive, we have simplified the style somewhat, but Qt is perfectly able to make an exact copy of the style. However, there are no concrete plans to implement the style as a part of Qt.</p>
+<p>In this section we will have a look at some implementation issues. Finally, we will see a complete example on the styling of a Java widget. We will continue to use the Java style throughout the document for examples and widget images. The implementation itself is somewhat involved, and it is not intended that you should read through it.</p>
+</div></blockquote>
+</div>
+<div class="section" id="design-and-implementation">
+<span id="id16"></span><h2>Design and Implementation<a class="headerlink" href="#design-and-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The first step in designing the style was to select the base class. We chose to subclass <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> . This class implements most of the functionality we need, other than performing the actual drawing.</p>
+<p>The style is implemented in one class. We have done this because we find it convenient to keep all code in one file. Also, it is an advantage with regards to optimization as we instantiate less objects. We also keep the number of functions at a minimum by using switches to identify which element to draw in the functions. This results in large functions, but since we divide the code for each element in the switches, the code should still be easy to read.</p>
+</div></blockquote>
+</div>
+<div class="section" id="limitations-and-differences-from-java">
+<span id="id17"></span><h2>Limitations and Differences from Java<a class="headerlink" href="#limitations-and-differences-from-java" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We have not fully implemented every element in the Java style. This way, we have reduced the amount and complexity of the code. In general, the style was intended as a practical example for this style overview document, and not to be a part of Qt itself.</p>
+<p>Not all widgets have every state implemented. This goes for states that are common, e.g., <code class="docutils literal"><span class="pre">State_Disabled</span></code> . Each state is, however, implemented for at least one widget.</p>
+<p>We have only implemented ticks below the slider. Flat push buttons are also left out. We do not handle the case where the title bars and dock window titles grow too small for their contents, but simply draw sub controls over each other.</p>
+<p>We have not tried to emulate the Java fonts. Java and Qt use very different font engines, so we don’t consider it worth the effort as we only use the style as an example for this overview.</p>
+<p>We have hard-coded the colors (we don’t use the <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> ) for the linear gradients, which are used, for example, for button bevels, tool bars, and check boxes. This is because the Java palette cannot produce these colors. Java does not change these colors based on widget color group or role anyway (they are not dependent on the palette), so it does not present a problem in any case.</p>
+<p>It is Qt’s widgets that are styled. Some widgets do not exist at all in Java, e.g., <a class="reference internal" href="../PySide2/QtWidgets/QToolBox.html#PySide2.QtWidgets.QToolBox" title="PySide2.QtWidgets.QToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBox</span></code></a> . Others contain elements that the Java widgets don’t. The tree widget is an example of the latter in which Java’s JTree does not have a header.</p>
+<p>The style does not handle reverse layouts. We assume that the layout direction is left to right. <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> handles reverse widgets; if we implemented reverse layouts, widgets that we change the position of sub elements, or handle text alignment in labels ourselves would need to be updated.</p>
+</div></blockquote>
+</div>
+<div class="section" id="styling-java-check-boxes">
+<span id="id18"></span><h2>Styling Java Check Boxes<a class="headerlink" href="#styling-java-check-boxes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As an example, we will examine the styling of check boxes in the Java style. We describe the complete process and print all code in both the Java style and Qt classes involved. In the rest of this document, we will not examine the source code of the individual widgets. Hopefully, this will give you an idea on how to search through the code if you need to check specific implementation details; most widgets follow the same structure as the check boxes. We have edited the <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> code somewhat to remove code that is not directly relevant for check box styling.</p>
+<p>We start with a look at how <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> builds its style option, which is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> for checkboxes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>opt.initFrom(q);
+    if (down)
+    opt.state |= QStyle::State_Sunken;
+if (tristate &amp;&amp; noChange)
+    opt.state |= QStyle::State_NoChange;
+else
+    opt.state |= checked ? QStyle::State_On :
+    QStyle::State_Off;
+if (q-&gt;testAttribute(Qt::WA_Hover) &amp;&amp;  q-&gt;underMouse()) {
+    if (hovering)
+    opt.state |= QStyle::State_MouseOver;
+    else
+    opt.state &amp;= ~QStyle::State_MouseOver;
+}
+opt.text = text;
+opt.icon = icon;
+opt.iconSize = q-&gt;iconSize();
+</pre></div>
+</div>
+<p>First we let <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> set up the option with the information that is common for all widgets with <code class="docutils literal"><span class="pre">initFrom()</span></code> . We will look at this shortly.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> ‘s <code class="docutils literal"><span class="pre">down</span></code> variable is <code class="docutils literal"><span class="pre">true</span></code> when the user presses the box down; this is true of the checkbox whether the box is checked or not. The <code class="docutils literal"><span class="pre">State_NoChange</span></code> state is set when we have a tri-state checkbox and it is partially checked. It has <code class="docutils literal"><span class="pre">State_On</span></code> if the box is checked and <code class="docutils literal"><span class="pre">State_Off</span></code> if it is unchecked. <code class="docutils literal"><span class="pre">State_MouseOver</span></code> is set if the mouse hovers over the checkbox and the widget has attribute <code class="docutils literal"><span class="pre">Qt::WA_Hover</span></code> set - you set this in <code class="xref py py-func docutils literal"><span class="pre">QStyle.polish()</span></code> . In addition, the style option also contains the text, icon, and icon size of the button.</p>
+<p><code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> sets up the style option with the attributes that are common for all widgets. We print its implementation here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    state = QStyle::State_None;
+    if (widget-&gt;isEnabled())
+        state |= QStyle::State_Enabled;
+    if (widget-&gt;hasFocus())
+        state |= QStyle::State_HasFocus;
+    if (widget-&gt;window()-&gt;testAttribute(Qt::WA_KeyboardFocusChange))
+        state |= QStyle::State_KeyboardFocusChange;
+    if (widget-&gt;underMouse())
+        state |= QStyle::State_MouseOver;
+    if (widget-&gt;window()-&gt;isActiveWindow())
+        state |= QStyle::State_Active;
+#if 0 // Used to be included in Qt4 for Q_WS_MAC
+    extern bool qt_mac_can_clickThrough(const QWidget *w); //qwidget_mac.cpp
+    if (!(state &amp; QStyle::State_Active) &amp;&amp; !qt_mac_can_clickThrough(widget))
+        state &amp;= ~QStyle::State_Enabled;
+#endif
+#ifdef QT_KEYPAD_NAVIGATION
+    if (widget-&gt;hasEditFocus())
+        state |= QStyle::State_HasEditFocus;
+#endif
+
+    direction = widget-&gt;layoutDirection();
+    rect = widget-&gt;rect();
+    palette = widget-&gt;palette();
+    fontMetrics = widget-&gt;fontMetrics();
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">State_Enabled</span></code> is set when the widget is enabled. When the widget has focus the <code class="docutils literal"><span class="pre">State_HasFocus</span></code> flag is set. Equally, the <code class="docutils literal"><span class="pre">State_Active</span></code> flag is set when the widget is a child of the active window. The <code class="docutils literal"><span class="pre">State_MouseOver</span></code> will only be set if the widget has the <code class="docutils literal"><span class="pre">WA_HoverEnabled</span></code> windows flag set. Notice that keypad navigation must be enabled in Qt for the <code class="docutils literal"><span class="pre">State_HasEditFocus</span></code> to be included; it is not included by default.</p>
+<p>In addition to setting state flags the <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> contains other information about the widget: <code class="docutils literal"><span class="pre">direction</span></code> is the layout direction of the layout, <code class="docutils literal"><span class="pre">rect</span></code> is the bounding rectangle of the widget (the area in which to draw), <code class="docutils literal"><span class="pre">palette</span></code> is the <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> that should be used for drawing the widget, and <code class="docutils literal"><span class="pre">fontMetrics</span></code> is the metrics of the font that is used by the widget.</p>
+<p>We give an image of a checkbox and the style option to match it.</p>
+<p>The above checkbox will have the following state flags in its style option:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="91%" />
+<col width="9%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State flag</td>
+<td>Set</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_NoChange</span></code></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_On</span></code></td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Off</span></code></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_MouseOver</span></code></td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Enabled</span></code></td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_HasFocus</span></code></td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_KeyboardFocusChange</span></code></td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Active</span></code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> paints itself in <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> with style option <code class="docutils literal"><span class="pre">opt</span></code> and <a class="reference internal" href="../PySide2/QtWidgets/QStylePainter.html#PySide2.QtWidgets.QStylePainter" title="PySide2.QtWidgets.QStylePainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStylePainter</span></code></a> <code class="docutils literal"><span class="pre">p</span></code> . The <a class="reference internal" href="../PySide2/QtWidgets/QStylePainter.html#PySide2.QtWidgets.QStylePainter" title="PySide2.QtWidgets.QStylePainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStylePainter</span></code></a> class is a convenience class to draw style elements. Most notably, it wraps the methods in <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> used for painting. The <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> draws itself as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStylePainter</span> <span class="n">p</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">QStyleOptionButton</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">d</span><span class="o">-&gt;</span><span class="n">getStyleOption</span><span class="p">();</span>
+<span class="n">p</span><span class="o">.</span><span class="n">drawControl</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">CE_CheckBox</span><span class="p">,</span> <span class="n">opt</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> handles the CE_CheckBox element. The <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> has two sub elements: SE_CheckBoxIndicator (the checked indicator) and SE_CheckBoxContents (the contents, which are used for the checkbox label). <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> also implements these sub element bounding rectangles. Next, we’ll have a look at the <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStyleOptionButton</span> <span class="n">subopt</span> <span class="o">=</span> <span class="o">*</span><span class="n">btn</span><span class="p">;</span>
+<span class="n">subopt</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">subElementRect</span><span class="p">(</span><span class="n">SE_CheckBoxIndicator</span><span class="p">,</span> <span class="n">btn</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+<span class="n">drawPrimitive</span><span class="p">(</span><span class="n">PE_IndicatorCheckBox</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">subopt</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+<span class="n">subopt</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">subElementRect</span><span class="p">(</span><span class="n">SE_CheckBoxContents</span><span class="p">,</span> <span class="n">btn</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+<span class="n">drawControl</span><span class="p">(</span><span class="n">CE_CheckBoxLabel</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">subopt</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">State_HasFocus</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QStyleOptionFocusRect</span> <span class="n">fropt</span><span class="p">;</span>
+    <span class="n">fropt</span><span class="o">.</span><span class="n">QStyleOption</span><span class="p">::</span><span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="o">*</span><span class="n">btn</span><span class="p">);</span>
+    <span class="n">fropt</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">subElementRect</span><span class="p">(</span><span class="n">SE_CheckBoxFocusRect</span><span class="p">,</span> <span class="n">btn</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+    <span class="n">drawPrimitive</span><span class="p">(</span><span class="n">PE_FrameFocusRect</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fropt</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As can be seen from the code extract, the common style gets the bounding rectangles of the two sub elements of CE_CheckBox, and then draws them. If the checkbox has focus, the focus frame is also drawn.</p>
+<p>The Java style draws CE_CheckBoxIndicator, while <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> handles CE_CheckboxLabel. We will examine each implementation and start with CE_CheckBoxLabel:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>const QStyleOptionButton *btn = qstyleoption_cast&lt;const QStyleOptionButton *&gt;(opt);
+uint alignment = visualAlignment(btn-&gt;direction, Qt::AlignLeft | Qt::AlignVCenter);
+
+if (!styleHint(SH_UnderlineShortcut, btn, widget))
+    alignment |= Qt::TextHideMnemonic;
+QPixmap pix;
+QRect textRect = btn-&gt;rect;
+if (!btn-&gt;icon.isNull()) {
+    pix = btn-&gt;icon.pixmap(btn-&gt;iconSize, btn-&gt;state &amp; State_Enabled ? QIcon::Normal : QIcon::Disabled);
+    drawItemPixmap(p, btn-&gt;rect, alignment, pix);
+    if (btn-&gt;direction == Qt::RightToLeft)
+        textRect.setRight(textRect.right() - btn-&gt;iconSize.width() - 4);
+    else
+        textRect.setLeft(textRect.left() + btn-&gt;iconSize.width() + 4);
+}
+if (!btn-&gt;text.isEmpty()){
+    drawItemText(p, textRect, alignment | Qt::TextShowMnemonic,
+        btn-&gt;palette, btn-&gt;state &amp; State_Enabled, btn-&gt;text, QPalette::WindowText);
+}
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">QStyle.visualAlignment()</span></code> adjusts the alignment of text according to the layout direction. We then draw an icon if it exists, and adjust the space left for the text. <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawItemText()</span></code> draws the text, taking alignment, layout direction, and the mnemonic into account. It also uses the palette to draw the text in the right color.</p>
+<p>The drawing of labels often gets somewhat involved. Luckily, it can usually be handled by the base class. The Java style implements its own push button label, since Java centers button contents also when the button has an icon. You can examine that implementation if you need an example of reimplementing label drawing.</p>
+<p>We’ll now take a look at the Java implementation of CE_CheckBoxIndicator in <code class="docutils literal"><span class="pre">drawControl()</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>case PE_IndicatorCheckBox: {
+    painter-&gt;save();
+    drawButtonBackground(option, painter, true);
+
+    if (option-&gt;state &amp; State_Enabled &amp;&amp;
+        option-&gt;state &amp; State_MouseOver &amp;&amp;
+        !(option-&gt;state &amp; State_Sunken)) {
+        painter-&gt;setPen(option-&gt;palette.color(QPalette::Button));
+        QRect rect = option-&gt;rect.adjusted(1, 1, -2, -2);
+        painter-&gt;drawRect(rect);
+        rect = rect.adjusted(1, 1, -1, -1);
+        painter-&gt;drawRect(rect);
+    }
+
+    if (option-&gt;state &amp; State_On) {
+        QImage image(&quot;:/images/checkboxchecked.png&quot;);
+        painter-&gt;drawImage(option-&gt;rect.topLeft(), image);
+    }
+    painter-&gt;restore();
+    break;
+</pre></div>
+</div>
+<p>We first save the state of the painter. This is not always necessary, but in this case the <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> needs the painter in the same state as it was when PE_IndicatorCheckBox was called (We could also set the state with function calls, of course). We then use <code class="docutils literal"><span class="pre">drawButtonBackground()</span></code> to draw the background of the check box indicator. This is a helper function that draws the background and also the frame of push buttons and check boxes. We take a look at that function below. We then check if the mouse is hovering over the checkbox. If it is, we draw the frame that Java checkboxes have when the box is not pressed down and the mouse is over it. You may note that Java does not handle tri-state boxes, so we have not implemented it.</p>
+<p>Here we use a PNG image for our indicator. We could also check if the widget is disabled. We would then have to use another image with the indicator in the disabled color.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void JavaStyle::drawButtonBackground(const QStyleOption *option,
+                                     QPainter *painter, bool isCheckbox) const
+{
+    QBrush buttonBrush = option-&gt;palette.button();
+    bool sunken = option-&gt;state &amp; State_Sunken;
+    bool disabled = !(option-&gt;state &amp; State_Enabled);
+    bool on = option-&gt;state &amp; State_On;
+
+    if (!sunken &amp;&amp; !disabled &amp;&amp; (!on || isCheckbox))
+        buttonBrush = gradientBrush(option-&gt;rect);
+
+        painter-&gt;fillRect(option-&gt;rect, buttonBrush);
+
+        QRect rect = option-&gt;rect.adjusted(0, 0, -1, -1);
+
+        if (disabled)
+            painter-&gt;setPen(option-&gt;palette.color(QPalette::Disabled,
+                                                  QPalette::WindowText));
+        else
+            painter-&gt;setPen(option-&gt;palette.color(QPalette::Mid));
+
+        painter-&gt;drawRect(rect);
+
+        if (sunken &amp;&amp; !disabled) {
+            drawSunkenButtonShadow(painter, rect,
+                   option-&gt;palette.color(QPalette::Mid),
+                   option-&gt;direction == Qt::RightToLeft);
+    }
+}
+</pre></div>
+</div>
+<p>We have seen how check boxes are styled in the Java style from the time the widget gets a paint request to the time the style is finished painting. To learn in detail how each widget is painted, you need to go through the code step-by-step as we have done here. However, it is usually enough to know which style elements the widgets draw. The widget builds a style option and calls on the style one or more times to draw the style elements of which it consists. Usually, it is also sufficient to know the states a widget can be in and the other contents of the style option, i.e., what we list in the next section.</p>
+</div></blockquote>
+</div>
+<div class="section" id="widget-walkthrough">
+<span id="id19"></span><h2>Widget Walkthrough<a class="headerlink" href="#widget-walkthrough" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In this section, we will examine how most of Qt’s widgets are styled. Hopefully, this will save you some time and effort while developing your own styles and widgets. You will not find information here that is not attainable elsewhere (i.e., by examining the source code or the class descriptions for the style related classes).</p>
+<p>We mostly use Java style widgets as examples. The Java style does not draw every element in the element trees. This is because they are not visible for that widget in the Java style. We still make sure that all elements are implemented in a way that conforms with the Java style, as custom widgets might need them (this does not exclude leaving implementations to <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> though).</p>
+<p>The following is given for each widget:</p>
+<ul class="simple">
+<li>A table with the members (variables, etc.) of its style option.</li>
+<li>A table of the state flags ( <code class="xref py py-attr docutils literal"><span class="pre">QStyle.StateFlag</span></code> ) that can be set on the widget and when the states are set.</li>
+<li>Its element tree (see section <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">The Style Elements</span></a> ).</li>
+<li>An image of the widget in which the elements are outlined.</li>
+</ul>
+<p>The element tree contains the primitive, control, and complex style elements. By doing a top-down traversal of the element tree, you get the sequence in which the elements should be drawn. In the nodes, we have written the sub element rectangles, sub control elements, and pixel metrics that should be considered when drawing the element of the node.</p>
+<p>Our approach on styling centers on the drawing of the widgets. The calculations of sub elements rectangles, sub controls, and pixel metrics used <strong>during</strong> drawing is only listed as contents in the element trees. Note that there are rectangles and pixel metrics that are only used by widgets. This leaves these calculations untreated in the walkthrough. For instance, the <code class="xref py py-func docutils literal"><span class="pre">QStyle.subControlRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QStyle.sizeFromContents()</span></code> functions often call <code class="xref py py-func docutils literal"><span class="pre">QStyle.subElementRect()</span></code> to calculate their bounding rectangles. We could draw trees for this as well. However, how these calculations are done is completely up to the individual styles, and they do not have to follow a specific structure (Qt does not impose a specific structure). You should still make sure that you use the appropriate pixel metrics, though. To limit the size of the document, we have therefore chosen not to include trees or describe the calculations made by the Java (or any other) style.</p>
+<p>You may be confused about how the different pixel metrics, sub element rectangles, and sub control rectangles should be used when examining the trees. If you are in doubt after reading the <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> enum descriptions, we suggest that you examine the <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> implementation.</p>
+<p>Some of the bounding rectangles that we outline in the widget images are equal. Reasons for this are that some elements draw backgrounds while others draw frames and labels. If in doubt, check the description of each element in <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> . Also, some elements are there to layout, i.e., decide where to draw, other elements.</p>
+</div></blockquote>
+</div>
+<div class="section" id="common-widget-properties">
+<span id="id20"></span><h2>Common Widget Properties<a class="headerlink" href="#common-widget-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Some states and variables are common for all widgets. These are set with <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> . Not all elements use this function; it is the widgets that create the style options, and for some elements the information from <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> is not necessary.</p>
+<p>A table with the common states follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Enabled</span></code></td>
+<td>Set if the widget is not disabled (see <code class="xref py py-func docutils literal"><span class="pre">QWidget.setEnabled()</span></code> )</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Focus</span></code></td>
+<td>Set if the widget has focus (see <code class="xref py py-func docutils literal"><span class="pre">QWidget.hasFocus()</span></code> )</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_KeyobordFocusChange</span></code></td>
+<td>Set when the user changes focus with the keyboard (see <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_KeyboardFocusChange</span></code> )</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_MouseOver</span></code></td>
+<td>Set if the mouse cursor is over the widget</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Active</span></code></td>
+<td>Set if the widget is a child of the active window.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_HasEditFocus</span></code></td>
+<td>Set if the widget has the edit focus</td>
+</tr>
+</tbody>
+</table>
+<p>The other common members for widgets are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>rect</td>
+<td>The bounding rectangle of the element to draw. This is set to the widget bounding rectangle ( <code class="xref py py-func docutils literal"><span class="pre">QWidget.rect()</span></code> ).</td>
+</tr>
+<tr class="row-odd"><td>direction</td>
+<td>The layout direction; a value of the <code class="xref py py-attr docutils literal"><span class="pre">Qt.LayoutDirection</span></code> enum.</td>
+</tr>
+<tr class="row-even"><td>palette</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> to use when drawing the element. This is set to the widgets palette ( <code class="xref py py-func docutils literal"><span class="pre">QWidget.palette()</span></code> ).</td>
+</tr>
+<tr class="row-odd"><td>fontMetrics</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QFontMetrics.html#PySide2.QtGui.QFontMetrics" title="PySide2.QtGui.QFontMetrics"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QFontMetrics</span></code></a> to use when drawing text on the widget.</td>
+</tr>
+</tbody>
+</table>
+<p>The complex style options (classes that inherit <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionComplex.html#PySide2.QtWidgets.QStyleOptionComplex" title="PySide2.QtWidgets.QStyleOptionComplex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionComplex</span></code></a> ) used for complex style elements share two variables: <span class="xref std std-ref">subControls</span> and <span class="xref std std-ref">activeSubControls</span> . Both variables are an OR’ed combination of <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SubControl</span></code> enum values. They indicate which sub controls the complex control consists of and which of these controls are currently active.</p>
+<p>As mentioned, the style calculates the size of the widget’s contents, which the widgets calculate their size hints from. In addition, complex controls also use the style to test which sub-controls the mouse is over.</p>
+</div></blockquote>
+</div>
+<div class="section" id="widget-reference">
+<span id="id21"></span><h2>Widget Reference<a class="headerlink" href="#widget-reference" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Without further delay, we present the widget walkthrough; each widget has its own sub-section.</div></blockquote>
+</div>
+<div class="section" id="push-buttons">
+<span id="id22"></span><h2>Push Buttons<a class="headerlink" href="#push-buttons" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The style structure for push buttons is shown below. By doing a top-down traversal of the tree, you get the sequence in which the elements should be drawn.</p>
+<p>The layout of the buttons, with regard to element bounds, varies from style to style. This makes it difficult to show conceptual images of this. Also, elements may - even be intended to - have the same bounds; the <code class="docutils literal"><span class="pre">PE_PushButtonBevel</span></code> , for instance, is used in <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> to draw the elements that it contains: <code class="docutils literal"><span class="pre">PE_FrameDefaultButton</span></code> , <code class="docutils literal"><span class="pre">PE_FrameButtonBevel</span></code> , and <code class="docutils literal"><span class="pre">PE_PanelButtonCommand</span></code> , all of which have the same bounds in common style. <code class="docutils literal"><span class="pre">PE_PushButtonBevel</span></code> is also responsible for drawing the menu indicator ( <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> draws <code class="docutils literal"><span class="pre">PE_IndicatorArrowDown</span></code> ).</p>
+<p>An image of a push button in the Java style that shows the bounding rectangles of the elements is given below. Colors are used to separate the bounding rectangles in the image; they do not fill any other purpose. This is also true for similar images for the other widgets.</p>
+<p>The Java style, as well as all other styles implemented in Qt, does not use <code class="docutils literal"><span class="pre">PE_FrameButtonBevel</span></code> . It is usual that a button with a <code class="docutils literal"><span class="pre">PE_DefaultFrame</span></code> adjusts the <code class="docutils literal"><span class="pre">PE_PanelButtonCommand</span></code> ‘s rectangle by <code class="docutils literal"><span class="pre">PM_ButtonDefaultIndicator</span></code> . The <code class="docutils literal"><span class="pre">CE_PushButtonLabel</span></code> is found by adjusting the rect by <code class="docutils literal"><span class="pre">PM_DefaultFrameWidth</span></code> .</p>
+<p>We will now examine the style option for push buttons - <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> . A table for the states that <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> can set on the style option follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>Button is down or menu is pressed shown</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_On</span></code></td>
+<td>Button is checked</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Raised</span></code></td>
+<td>Button is not flat and not pressed down</td>
+</tr>
+</tbody>
+</table>
+<p>Other members of <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> is:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>features</td>
+<td>Flags of the <code class="xref py py-class docutils literal"><span class="pre">QStyleOptionButton.ButtonFeatures</span></code> enum, which describes various button properties (see enum)</td>
+</tr>
+<tr class="row-odd"><td>icon</td>
+<td>The buttons <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> (if any)</td>
+</tr>
+<tr class="row-even"><td>iconSize</td>
+<td>The <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> of the icon</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> with the buttons text</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="check-and-radio-buttons">
+<span id="id23"></span><h2>Check and Radio Buttons<a class="headerlink" href="#check-and-radio-buttons" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The structures for radio and check buttons are identical. We show the structure using <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> element and pixel metric names:</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> is used as the style option for both check and radio buttons. We first give a table of the states that can be set in the option:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_sunken</span></code></td>
+<td>The box is pressed down</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_NoChange</span></code></td>
+<td>The box is partially checked (for tri-state checkboxes.)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_On</span></code></td>
+<td>The box is checked</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Off</span></code></td>
+<td>The box is unchecked</td>
+</tr>
+</tbody>
+</table>
+<p>See <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">Push Buttons</span></a> for a table over other members in the QStyleOptionButtonClass.</p>
+</div></blockquote>
+</div>
+<div class="section" id="tabs">
+<span id="id24"></span><h2>Tabs<a class="headerlink" href="#tabs" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In Qt, <a class="reference internal" href="../PySide2/QtWidgets/QTabBar.html#PySide2.QtWidgets.QTabBar" title="PySide2.QtWidgets.QTabBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabBar</span></code></a> uses the style to draw its tabs. Tabs exist either in a <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> , which contains a <a class="reference internal" href="../PySide2/QtWidgets/QTabBar.html#PySide2.QtWidgets.QTabBar" title="PySide2.QtWidgets.QTabBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabBar</span></code></a> , or as a separate bar. If the bar is not part of a tab widget, it draws its own base.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QTabBar.html#PySide2.QtWidgets.QTabBar" title="PySide2.QtWidgets.QTabBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabBar</span></code></a> lays out the tabs, so the style does not have control over tab placement. However, while laying out its tabs, the bar asks the style for <code class="docutils literal"><span class="pre">PM_TabBarTabHSpace</span></code> and <code class="docutils literal"><span class="pre">PM_TabBarTabVSpace</span></code> , which is extra width and height over the minimum size of the tab bar tab label (icon and text). The style can also further influence the tab size before it is laid out, as the tab bar asks for <code class="docutils literal"><span class="pre">CT_TabBarTab</span></code> . The bounding rectangle of the bar is decided by the tab widget when it is part of the widget (still considering <code class="docutils literal"><span class="pre">CT_TabBarTab</span></code> ).</p>
+<p>The tab bar is responsible for drawing the buttons that appear on the tab bar when all tabs do not fit. Their placement is not controlled by the style, but the buttons are <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> s and are therefore drawn by the style.</p>
+<p>Here is the style structure for <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QTabBar.html#PySide2.QtWidgets.QTabBar" title="PySide2.QtWidgets.QTabBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabBar</span></code></a> :</p>
+<p>The dotted lines indicate that the <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> contains a tab bar, but does not draw it itself. <a class="reference internal" href="../PySide2/QtWidgets/QTabBar.html#PySide2.QtWidgets.QTabBar" title="PySide2.QtWidgets.QTabBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabBar</span></code></a> only draws its base line when not part of a tab widget, and it keeps two tool buttons that scroll the bar when all tabs do not fit; see <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">Tool Buttons</span></a> for their element tree. Also note that since the buttons are children of the tab bar, they are drawn after the bar. The tabs’ bounding rectangles overlap the base by <code class="docutils literal"><span class="pre">PM_TabBarBaseOverlap</span></code> .</p>
+<p>Here is a tab widget in the Java style:</p>
+<p>In the Java style, the tab bar shape and label have the same bounding rectangle as <code class="docutils literal"><span class="pre">CE_TabBarTab</span></code> . Notice that the tabs overlap with the tab widget frame. The base of the tab bar (if drawn) is the area where the tabs and frame overlap.</p>
+<p>The style option for tabs ( <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionTab.html#PySide2.QtWidgets.QStyleOptionTab" title="PySide2.QtWidgets.QStyleOptionTab"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionTab</span></code></a> ) contains the necessary information for drawing tabs. The option contains the position of the tab in the tab bar, the position of the selected tab, the shape of the tab, the text, the icon, and the icon’s size.</p>
+<p>As the Java style tabs don’t overlap, we also present an image of a tab widget in the common style. Note that if you want the tabs to overlap horizontally, you do that when drawing the tabs in <code class="docutils literal"><span class="pre">CE_TabBarTabShape</span></code> ; the tabs bounding rectangles will not be altered by the tab bar. The tabs are drawn from left to right in a north tab bar shape, top to bottom in an east tab bar shape, etc. The selected tab is drawn last, so that it is easy to draw it over the other tabs (if it is to be bigger).</p>
+<p>A table of the states a tab bar can set on its tabs follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>The tab is pressed on with the mouse.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Selected</span></code></td>
+<td>If it is the current tab.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_HasFocus</span></code></td>
+<td>The tab bar has focus and the tab is selected.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that individual tabs may be disabled even if the tab bar is not. The tab will be active if the tab bar is active.</p>
+<p>Here follows a table of <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionTab.html#PySide2.QtWidgets.QStyleOptionTab" title="PySide2.QtWidgets.QStyleOptionTab"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionTab</span></code></a> ‘s members:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>cornerWidgets</td>
+<td>Flags of the CornerWidget enum, which indicate if and which corner widgets the tab bar has.</td>
+</tr>
+<tr class="row-odd"><td>icon</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> of the tab.</td>
+</tr>
+<tr class="row-even"><td>iconSize</td>
+<td>The <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> of the icon.</td>
+</tr>
+<tr class="row-odd"><td>position</td>
+<td>A TabPosition enum value that indicates the tab’s position on the bar relative to the other tabs.</td>
+</tr>
+<tr class="row-even"><td>row</td>
+<td>Holds which row the tab is in.</td>
+</tr>
+<tr class="row-odd"><td>selectedPosition</td>
+<td>A value of the SelectedPosition enum that indicates whether the selected tab is adjacent to or is the tab.</td>
+</tr>
+<tr class="row-even"><td>shape</td>
+<td>A value of the <code class="xref py py-attr docutils literal"><span class="pre">QTabBar.Shape</span></code> enum indicating whether the tab has rounded or triangular corners and the orientation of the tab.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The tab text.</td>
+</tr>
+</tbody>
+</table>
+<p>The frame for tab widgets use <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionTabWidgetFrame.html#PySide2.QtWidgets.QStyleOptionTabWidgetFrame" title="PySide2.QtWidgets.QStyleOptionTabWidgetFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionTabWidgetFrame</span></code></a> as style option. We list its members here. It does not have states set besides the common flags.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>content</td>
+</tr>
+<tr class="row-even"><td>leftCornerWidgetSize</td>
+<td>The <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> of the left corner widget (if any).</td>
+</tr>
+<tr class="row-odd"><td>rightCornerWidgetSize</td>
+<td>The <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> of the right corner widget (if any).</td>
+</tr>
+<tr class="row-even"><td>lineWidth</td>
+<td>Holds the line with for drawing the panel.</td>
+</tr>
+<tr class="row-odd"><td>midLineWith</td>
+<td>This value is currently always 0.</td>
+</tr>
+<tr class="row-even"><td>shape</td>
+<td>The shape of the tabs on the tab bar.</td>
+</tr>
+<tr class="row-odd"><td>tabBarSize</td>
+<td>The <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> of the tab bar.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="scroll-bars">
+<span id="id25"></span><h2>Scroll Bars<a class="headerlink" href="#scroll-bars" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here is the style structure for scrollbars:</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> simply creates its style option and then draws <code class="docutils literal"><span class="pre">CC_ScrollBar</span></code> . Some styles draw the background of add page and sub page with <code class="docutils literal"><span class="pre">PE_PanelButtonBevel</span></code> , and also use indicator arrows to draw the arrows in the next and previous line indicators; we have not included these in the tree as their use is up to the individual style. The style’s <code class="docutils literal"><span class="pre">PM_MaximumDragDistance</span></code> is the maximum distance in pixels the mouse can move from the bounds of the scroll bar and still move the handle.</p>
+<p>Here is an image of a scrollbar in the Java style:</p>
+<p>You may notice that the scrollbar is slightly different from Java’s, as it has two line up indicators. We have done this to show that you can have two separate bounding rectangles for a single sub control. The scroll bar is an example of a widget that is entirely implemented by the Java style - <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> is not involved in the drawing.</p>
+<p>We have a look at the different states a scroll bar can set on the style option:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Horizontal</span></code></td>
+<td>The scroll bar is horizontal.</td>
+</tr>
+</tbody>
+</table>
+<p>The style option of <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionSlider.html#PySide2.QtWidgets.QStyleOptionSlider" title="PySide2.QtWidgets.QStyleOptionSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionSlider</span></code></a> . Its members are listed in the following table. The option is used by all <a class="reference internal" href="../PySide2/QtWidgets/QAbstractSlider.html#PySide2.QtWidgets.QAbstractSlider" title="PySide2.QtWidgets.QAbstractSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractSlider</span></code></a> s; we only describe the members relevant for scroll bars here.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>maximum</td>
+<td>The maximum value of the scroll bar.</td>
+</tr>
+<tr class="row-odd"><td>minimum</td>
+<td>The minimum value of the scroll bar.</td>
+</tr>
+<tr class="row-even"><td>notchTarget</td>
+<td>The number of pixels between notches.</td>
+</tr>
+<tr class="row-odd"><td>orientation</td>
+<td>A value of the <code class="xref py py-attr docutils literal"><span class="pre">Qt.Orientation</span></code> enum that specifies whether the scroll bar is vertical or horizontal.</td>
+</tr>
+<tr class="row-even"><td>pageStep</td>
+<td>The number by which to increase or decrease the slider’s value (relative to the size of the slider and its value range) on page steps.</td>
+</tr>
+<tr class="row-odd"><td>singleStep</td>
+<td>The number by which to increase or decrease the slider’s value on single (or line) steps.</td>
+</tr>
+<tr class="row-even"><td>sliderValue</td>
+<td>The value of the slider.</td>
+</tr>
+<tr class="row-odd"><td>sliderPosition</td>
+<td>The position of the slider handle. This is the same as <code class="docutils literal"><span class="pre">sliderValue</span></code> if the scroll bar is <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.tracking()</span></code> . If not, the scroll bar does not update its value before the mouse releases the handle.</td>
+</tr>
+<tr class="row-even"><td>upsideDown</td>
+<td>Holds the direction in which the scroll bar increases its value. This is used instead of <span class="xref std std-ref">QStyleOption::direction</span> for all abstract sliders.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="sliders">
+<span id="id26"></span><h2>Sliders<a class="headerlink" href="#sliders" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When calculating the slider’s size hint, <code class="docutils literal"><span class="pre">PM_SliderThickness</span></code> and <code class="docutils literal"><span class="pre">PM_SliderLength</span></code> are queried from the style. As with scroll bars, the <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> only lets the user move the handle if the mouse is within <code class="docutils literal"><span class="pre">PM_MaximumDragDistance</span></code> from the slider bounds. When it draws itself, it creates the style option and calls <code class="docutils literal"><span class="pre">drawComplexControl()</span></code> with <code class="docutils literal"><span class="pre">CC_Slider</span></code> :</p>
+<p>We also show a picture of a slider in the Java style. We show the bounding rectangles of the sub elements, as all drawing is done in <code class="docutils literal"><span class="pre">CC_Slider</span></code> .</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> uses <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionSlider.html#PySide2.QtWidgets.QStyleOptionSlider" title="PySide2.QtWidgets.QStyleOptionSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionSlider</span></code></a> as all <a class="reference internal" href="../PySide2/QtWidgets/QAbstractSlider.html#PySide2.QtWidgets.QAbstractSlider" title="PySide2.QtWidgets.QAbstractSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractSlider</span></code></a> s do. We present a table with the members that affect <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>maximum</td>
+<td>The maximum value of the slider.</td>
+</tr>
+<tr class="row-odd"><td>minimum</td>
+<td>The minimum value of the slider.</td>
+</tr>
+<tr class="row-even"><td>notchTarget</td>
+<td>This is the number of pixels between each notch.</td>
+</tr>
+<tr class="row-odd"><td>orientation</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">Qt.Orientation</span></code> enum value that indicates whether the slider is vertical or horizontal.</td>
+</tr>
+<tr class="row-even"><td>pageStep</td>
+<td>The number by which to increase or decrease the slider’s value on page steps.</td>
+</tr>
+<tr class="row-odd"><td>singleStep</td>
+<td>The number by which to increase or decrease the slider’s value on single (or line) steps.</td>
+</tr>
+<tr class="row-even"><td>sliderValue</td>
+<td>The value of the slider.</td>
+</tr>
+<tr class="row-odd"><td>sliderPosition</td>
+<td>The position of the slider given as a slider value. This will be equal to the <code class="docutils literal"><span class="pre">sliderValue</span></code> if the slider is <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.tracking()</span></code> ; if not, the slider’s value will not change until the handle is released with the mouse.</td>
+</tr>
+<tr class="row-even"><td>upsideDown</td>
+<td>This member is used instead of <span class="xref std std-ref">QStyleOption::direction</span> for all abstract sliders.</td>
+</tr>
+</tbody>
+</table>
+<p>You should note that the slider does not use direction for reverse layouts; it uses <code class="docutils literal"><span class="pre">upsideDown</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="spin-boxes">
+<span id="id27"></span><h2>Spin Boxes<a class="headerlink" href="#spin-boxes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> paints itself, it creates a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionSpinBox.html#PySide2.QtWidgets.QStyleOptionSpinBox" title="PySide2.QtWidgets.QStyleOptionSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionSpinBox</span></code></a> and asks the style to draw <code class="docutils literal"><span class="pre">CC_SpinBox</span></code> . The edit field is a line edit that is a child of the spin box. The dimensions of the field are calculated by the style with <code class="docutils literal"><span class="pre">SC_SpinBoxEditField</span></code> .</p>
+<p>Here follows the style tree for spin boxes. It is not required that a style uses the button panel primitive to paint the indicator backgrounds. You can see an image below the tree showing the sub elements in <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> in the Java style.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionSpinBox.html#PySide2.QtWidgets.QStyleOptionSpinBox" title="PySide2.QtWidgets.QStyleOptionSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionSpinBox</span></code></a> , which is the style option for spin boxes. It can set the following states on the spin box:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>State Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>Is set if one of the sub controls <code class="docutils literal"><span class="pre">CC_SpinUp</span></code> or <code class="docutils literal"><span class="pre">CC_SpinDown</span></code> is pressed on with the mouse.</td>
+</tr>
+</tbody>
+</table>
+<p>The rest of the members in the spin box style options are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Property</td>
+<td>Function</td>
+</tr>
+<tr class="row-even"><td>frame</td>
+<td>Boolean that is <code class="docutils literal"><span class="pre">true</span></code> if the spin box is to draw a frame.</td>
+</tr>
+<tr class="row-odd"><td>buttonSymbols</td>
+<td>Value of the ButtonSymbols enum that decides the symbol on the up/down buttons.</td>
+</tr>
+<tr class="row-even"><td>stepEnabled</td>
+<td>A value of the StepEnabled enum, indicating which of the spin box buttons are pressed down.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="title-bar">
+<span id="id28"></span><h2>Title Bar<a class="headerlink" href="#title-bar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The title bar complex control, <code class="docutils literal"><span class="pre">CC_TitleBar</span></code> , is used to draw the title bars of internal windows in <a class="reference internal" href="../PySide2/QtWidgets/QMdiArea.html#PySide2.QtWidgets.QMdiArea" title="PySide2.QtWidgets.QMdiArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMdiArea</span></code></a> . It typically consists of a window title, and close, minimize, system menu, and maximize buttons. Some styles also provide buttons for shading the window, as well as a button for context sensitive help.</p>
+<p>The bar is drawn in <code class="docutils literal"><span class="pre">CC_TitleBar</span></code> without using any sub elements. How the individual styles draw their buttons is up to them, but there are standard pixmaps for the buttons that the style should provide.</p>
+<p>In an image over a title bar in the Java style, we show the bounding rectangles of the sub elements supported by the Java style (all of which are drawn with standard pixmaps). It is usual to draw the button backgrounds using <code class="docutils literal"><span class="pre">PE_PanelButtonTool</span></code> , but it’s not mandatory.</p>
+<p>The style option for title bars is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionTitleBar.html#PySide2.QtWidgets.QStyleOptionTitleBar" title="PySide2.QtWidgets.QStyleOptionTitleBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionTitleBar</span></code></a> . Its members are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>icon</td>
+<td>The title bar’s icon.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The text for the title bar’s label.</td>
+</tr>
+<tr class="row-even"><td>windowFlags</td>
+<td>Flags of the Qt::WindowFlag enum. The window flags used by <a class="reference internal" href="../PySide2/QtWidgets/QMdiArea.html#PySide2.QtWidgets.QMdiArea" title="PySide2.QtWidgets.QMdiArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMdiArea</span></code></a> for window management.</td>
+</tr>
+<tr class="row-odd"><td>titleBarState</td>
+<td>This is the <code class="xref py py-func docutils literal"><span class="pre">QWidget.windowState()</span></code> of the window that contains the title bar.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="combo-box">
+<span id="id29"></span><h2>Combo Box<a class="headerlink" href="#combo-box" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> uses the style to draw the button and label of non-editable boxes with <code class="docutils literal"><span class="pre">CC_ComboBox</span></code> and <code class="docutils literal"><span class="pre">CE_ComboBoxLabel</span></code> .</p>
+<p>The list that pops up when the user clicks on the combo box is drawn by a <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">delegate</span></a> , which we do not cover in this overview. You can, however, use the style to control the list’s size and position with the sub element <code class="docutils literal"><span class="pre">SC_ComboBoxListBoxPopup</span></code> . The style also decides where the edit field for editable boxes should be with <code class="docutils literal"><span class="pre">SC_ComboBoxEditField</span></code> ; the field itself is a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> that is a child of the combo box.</p>
+<p>We show an image over a Java style combo box in which we have outlined its sub elements and sub element rectangles:</p>
+<p>Java combo boxes do not use the focus rect; it changes its background color when it has focus. The <code class="docutils literal"><span class="pre">SC_ComboBoxEdit</span></code> field is used both by <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> to calculate the size of the edit field and the style for calculating the size of the combo box label.</p>
+<p>The style option for combo boxes is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionComboBox.html#PySide2.QtWidgets.QStyleOptionComboBox" title="PySide2.QtWidgets.QStyleOptionComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionComboBox</span></code></a> . It can set the following states:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Selected</span></code></td>
+<td>The box is not editable and has focus.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td><code class="docutils literal"><span class="pre">SC_ComboBoxArrow</span></code> is active.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_on</span></code></td>
+<td>The container (list) of the box is visible.</td>
+</tr>
+</tbody>
+</table>
+<p>The style options other members are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>currentIcon</td>
+<td>The icon of the current (selected) item of the combo box.</td>
+</tr>
+<tr class="row-odd"><td>currentText</td>
+<td>The text of the current item in the box.</td>
+</tr>
+<tr class="row-even"><td>editable</td>
+<td>Holds whether the combo box is editable or not.</td>
+</tr>
+<tr class="row-odd"><td>frame</td>
+<td>Holds whether the combo box has a frame or not.</td>
+</tr>
+<tr class="row-even"><td>iconSize</td>
+<td>The size of the current items icon.</td>
+</tr>
+<tr class="row-odd"><td>popupRect</td>
+<td>The bounding rectangle of the combo box’s popup list.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="group-boxes">
+<span id="id30"></span><h2>Group Boxes<a class="headerlink" href="#group-boxes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When calculating the size hint, <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> fetches three pixel metrics from the style: <code class="docutils literal"><span class="pre">PM_IndicatorWidth</span></code> , <code class="docutils literal"><span class="pre">PM_CheckBoxLabelSpacing</span></code> , and <code class="docutils literal"><span class="pre">PM_IndicatorHeight</span></code> . <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> has the following style element tree:</p>
+<p>Qt does not impose restrictions on how the check box is drawn; the Java style draws it with <code class="docutils literal"><span class="pre">CE_IndicatorCheckBox</span></code> . See <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">Check and Radio Buttons</span></a> for the complete tree.</p>
+<p>We also give an image of the widget with the sub controls and sub control rectangles drawn:</p>
+<p>The style option for group boxes is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionGroupBox.html#PySide2.QtWidgets.QStyleOptionGroupBox" title="PySide2.QtWidgets.QStyleOptionGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionGroupBox</span></code></a> . The following states can be set on it:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_On</span></code></td>
+<td>The check box is checked.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>The check box is pressed down.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Off</span></code></td>
+<td>The check box is unchecked (or there is no check box).</td>
+</tr>
+</tbody>
+</table>
+<p>The remaining members of <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionGroupBox.html#PySide2.QtWidgets.QStyleOptionGroupBox" title="PySide2.QtWidgets.QStyleOptionGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionGroupBox</span></code></a> are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>features</td>
+<td>Flags of the <code class="xref py py-class docutils literal"><span class="pre">QStyleOptionFrame.FrameFeatures</span></code> enum describing the frame of the group box.</td>
+</tr>
+<tr class="row-odd"><td>lineWidth</td>
+<td>The line width with which to draw the panel. This is always 1.</td>
+</tr>
+<tr class="row-even"><td>text</td>
+<td>The text of the group box.</td>
+</tr>
+<tr class="row-odd"><td>textAlignment</td>
+<td>The alignment of the group box title.</td>
+</tr>
+<tr class="row-even"><td>textColor</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> of the text.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="splitters">
+<span id="id31"></span><h2>Splitters<a class="headerlink" href="#splitters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As the structure of splitters are simple and do not contain any sub elements, we do not include any images of splitters. <code class="docutils literal"><span class="pre">CE_Splitter</span></code> does not use any other elements or metrics.</p>
+<p>For its style option, the splitter uses the base class <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> . It can set the following state flags on it:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Horizontal</span></code></td>
+<td>Set if it is a horizontal splitter.</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QSplitter.html#PySide2.QtWidgets.QSplitter" title="PySide2.QtWidgets.QSplitter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSplitter</span></code></a> does not use <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> to set up its option; it sets the <code class="docutils literal"><span class="pre">State_MouseOver</span></code> and <code class="docutils literal"><span class="pre">State_Disabled</span></code> flags itself.</p>
+</div></blockquote>
+</div>
+<div class="section" id="progress-bar">
+<span id="id32"></span><h2>Progress Bar<a class="headerlink" href="#progress-bar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">CE_ProgressBar</span></code> element is used by <a class="reference internal" href="../PySide2/QtWidgets/QProgressBar.html#PySide2.QtWidgets.QProgressBar" title="PySide2.QtWidgets.QProgressBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProgressBar</span></code></a> , and it is the only element used by this widget. We start with the style structure:</p>
+<p>Here is a progress bar in the common style (the Java style bounding rectangles are equal):</p>
+<p>The style option for <a class="reference internal" href="../PySide2/QtWidgets/QProgressBar.html#PySide2.QtWidgets.QProgressBar" title="PySide2.QtWidgets.QProgressBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProgressBar</span></code></a> is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionProgressBar.html#PySide2.QtWidgets.QStyleOptionProgressBar" title="PySide2.QtWidgets.QStyleOptionProgressBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionProgressBar</span></code></a> . The bar does not set any state flags, but the other members of the option are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>minimum</td>
+<td>The minimum value of the bar.</td>
+</tr>
+<tr class="row-odd"><td>maximum</td>
+<td>The maximum value of the bar.</td>
+</tr>
+<tr class="row-even"><td>progress</td>
+<td>The current value of the bar.</td>
+</tr>
+<tr class="row-odd"><td>textAlignment</td>
+<td>How the text is aligned in the label.</td>
+</tr>
+<tr class="row-even"><td>textVisible</td>
+<td>Whether the label is drawn.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The label text.</td>
+</tr>
+<tr class="row-even"><td>orientation</td>
+<td>Progress bars can be vertical or horizontal.</td>
+</tr>
+<tr class="row-odd"><td>invertedAppearance</td>
+<td>The progress is inverted (i.e., right to left in a horizontal bar).</td>
+</tr>
+<tr class="row-even"><td>bottomToTop</td>
+<td>Boolean, that, if <code class="docutils literal"><span class="pre">true</span></code> , turns the label of vertical progress bars 90 degrees.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="tool-buttons">
+<span id="id33"></span><h2>Tool Buttons<a class="headerlink" href="#tool-buttons" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Tool buttons exist either independently or as part of tool bars. They are drawn equally either way. The <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> draws only one style element: <code class="docutils literal"><span class="pre">CC_ToolButton</span></code> .</p>
+<p>Below is a tree of the widget’s style structure:</p>
+<p>Note that <code class="docutils literal"><span class="pre">PE_FrameButtonTool</span></code> and <code class="docutils literal"><span class="pre">PE_IndicatorArrowDown</span></code> are included in the tree as the Java style draws them, but they can safely be omitted if you prefer it. The structure may also be different. <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> , for instance, draws both <code class="docutils literal"><span class="pre">PE_IndicatorButtonDropDown</span></code> and <code class="docutils literal"><span class="pre">PE_IndicatorArrowDown</span></code> in <code class="docutils literal"><span class="pre">CE_ToolButton</span></code> .</p>
+<p>We also have an image of a tool button where we have outlined the sub element bounding rectangles and sub controls.</p>
+<p>Here is the states table for tool buttons:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_AutoRise</span></code></td>
+<td>The tool button has the autoRise property set.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Raised</span></code></td>
+<td>The button is not sunken (i.e., by being checked or pressed on with the mouse).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>The button is down.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_On</span></code></td>
+<td>The button is checkable and checked.</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionToolButton.html#PySide2.QtWidgets.QStyleOptionToolButton" title="PySide2.QtWidgets.QStyleOptionToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionToolButton</span></code></a> also contains the following members:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>arrowType</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">Qt.ArrowType</span></code> enum value, which contains the direction of the buttons arrow (if an arrow is to be used in place of an icon).</td>
+</tr>
+<tr class="row-odd"><td>features</td>
+<td>Flags of the QStyleOptionToolButton::ButtonFeature enum describing if the button has an arrow, a menu, and/or has a popup-delay.</td>
+</tr>
+<tr class="row-even"><td>font</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QFont.html#PySide2.QtGui.QFont" title="PySide2.QtGui.QFont"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QFont</span></code></a> of the buttons label.</td>
+</tr>
+<tr class="row-odd"><td>icon</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> of the tool button.</td>
+</tr>
+<tr class="row-even"><td>iconSize</td>
+<td>The icon size of the button’s icon.</td>
+</tr>
+<tr class="row-odd"><td>pos</td>
+<td>The position of the button, as given by <code class="xref py py-func docutils literal"><span class="pre">QWidget.pos()</span></code></td>
+</tr>
+<tr class="row-even"><td>text</td>
+<td>The text of the button.</td>
+</tr>
+<tr class="row-odd"><td>toolButtonStyle</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">Qt.ToolButtonStyle</span></code> enum value which decides whether the button shows the icon, the text, or both.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="toolbars">
+<span id="id34"></span><h2>Toolbars<a class="headerlink" href="#toolbars" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Toolbars are part of the <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">main</span> <span class="pre">window</span> <span class="pre">framework</span></code></a> , and cooperate with the <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> to which they belong while it builds its style option. A main window has 4 areas that toolbars can be placed in. They are positioned next to the four sides of the window (i.e., north, south, east and west). Within each area there can be more than one line of toolbars; a line consists of toolbars with equal orientation (vertical or horizontal) placed next to each other.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">Toolbars</span></code></a> in Qt consist of three elements: <code class="docutils literal"><span class="pre">CE_ToolBar</span></code> , <code class="docutils literal"><span class="pre">PE_IndicatorToolBarHandle</span></code> , and <code class="docutils literal"><span class="pre">PE_IndicatorToolBarSeparator</span></code> . It is QMainWindowLayout that calculates the bounding rectangles (i.e., position and size of the toolbars and their contents. The main window also uses the <code class="docutils literal"><span class="pre">sizeHint()</span></code> of the items in the toolbars when calculating the size of the bars.</p>
+<p>Here is the element tree for <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> :</p>
+<p>The dotted lines indicate that the <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> keeps an instance of QToolBarLayout and that QToolBarSeparators are kept by QToolBarLayout. When the toolbar is floating (i.e., has its own window) the <code class="docutils literal"><span class="pre">PE_FrameMenu</span></code> element is drawn, else <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> draws <code class="docutils literal"><span class="pre">CE_ToolBar</span></code> .</p>
+<p>Here is an image of a toolbar in the Java style:</p>
+<p>QToolBarSaparator uses <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> for its style option. It sets the <code class="docutils literal"><span class="pre">State_Horizontal</span></code> flag if the toolbar it lives in is horizontal. Other than that, they use <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> .</p>
+<p>The style option for <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionToolBar.html#PySide2.QtWidgets.QStyleOptionToolBar" title="PySide2.QtWidgets.QStyleOptionToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionToolBar</span></code></a> . The only state flag set (besides the common flags) is <code class="docutils literal"><span class="pre">State_Horizontal</span></code> if the bar is horizontal (i.e., in the north or south toolbar area). The member variables of the style option are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>features</td>
+<td>Holds whether the bar is movable in a value of the ToolBarFeature, which is either Movable or None.</td>
+</tr>
+<tr class="row-odd"><td>lineWidth</td>
+<td>The width of the tool bar frame.</td>
+</tr>
+<tr class="row-even"><td>midLineWidth</td>
+<td>This variable is currently not used and is always 0.</td>
+</tr>
+<tr class="row-odd"><td>positionOfLine</td>
+<td>The position of the toolbar line within the toolbar area to which it belongs.</td>
+</tr>
+<tr class="row-even"><td>positionWithinLine</td>
+<td>The position of the toolbar within the toolbar line.</td>
+</tr>
+<tr class="row-odd"><td>toolBarArea</td>
+<td>The toolbar area in which the toolbar lives.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="menus">
+<span id="id35"></span><h2>Menus<a class="headerlink" href="#menus" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Menus in Qt are implemented in <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> . The <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> keeps a list of actions, which it draws as menu items. When <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> receives paint events, it calculates the size of each menu item and draws them individually with <code class="docutils literal"><span class="pre">CE_MenuItem</span></code> . Menu items do not have a separate element for their label (contents), so all drawing is done in <code class="docutils literal"><span class="pre">CE_MenuItem</span></code> . The menu also draws the frame of the menu with <code class="docutils literal"><span class="pre">PE_FrameMenu</span></code> . It also draws <code class="docutils literal"><span class="pre">CE_MenuScroller</span></code> if the style supports scrolling. <code class="docutils literal"><span class="pre">CE_MenuTearOff</span></code> is drawn if the menu is too large for its bounding rectangle.</p>
+<p>In the style structure tree, we also include <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> as it also does styling related work. The bounding rectangles of menu items are calculated for the menu’s size hint and when the menu is displayed or resized.</p>
+<p>The <code class="docutils literal"><span class="pre">CE_MenuScroller</span></code> and <code class="docutils literal"><span class="pre">CE_MenuTearOff</span></code> elements are handled by <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> and are not shown unless the menu is too large to fit on the screen. <code class="docutils literal"><span class="pre">PE_FrameMenu</span></code> is only drawn for pop-up menus.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> calculates rectangles based on its actions and calls <code class="docutils literal"><span class="pre">CE_MenuItem</span></code> and <code class="docutils literal"><span class="pre">CE_MenuScroller</span></code> if the style supports that.</p>
+<p>It is also usual to use <code class="docutils literal"><span class="pre">PE_IndicatorCheckBox</span></code> (instead of using <code class="docutils literal"><span class="pre">PE_IndicatorMenuCheckMark</span></code> ) and <code class="docutils literal"><span class="pre">PE_IndicatorRadioButton</span></code> for drawing checkable menu items; we have not included them in the style tree as this is optional and varies from style to style.</p>
+<p>The style option for menu items is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionMenuItem.html#PySide2.QtWidgets.QStyleOptionMenuItem" title="PySide2.QtWidgets.QStyleOptionMenuItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionMenuItem</span></code></a> . The following tables describe its state flags and other members.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Selected</span></code></td>
+<td>The mouse is over the action and the action is not a separator.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Sunken</span></code></td>
+<td>The mouse is pressed down on the menu item.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_DownArrow</span></code></td>
+<td>Set if the menu item is a menu scroller and it scrolls the menu downwards.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>checkType</td>
+<td>A value of the <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionMenuItem.CheckType</span></code> enum, which is either NotCheckable, Exclusive, or NonExclusive.</td>
+</tr>
+<tr class="row-odd"><td>checked</td>
+<td>Boolean that is <code class="docutils literal"><span class="pre">true</span></code> if the menu item is checked.</td>
+</tr>
+<tr class="row-even"><td>font</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QFont.html#PySide2.QtGui.QFont" title="PySide2.QtGui.QFont"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QFont</span></code></a> to use for the menu item’s text.</td>
+</tr>
+<tr class="row-odd"><td>icon</td>
+<td>The <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> of the menu item.</td>
+</tr>
+<tr class="row-even"><td>maxIconWidth</td>
+<td>The maximum width allowed for the icon.</td>
+</tr>
+<tr class="row-odd"><td>menuHasChecableItem</td>
+<td>Boolean which is <code class="docutils literal"><span class="pre">true</span></code> if at least one item in the menu is checkable.</td>
+</tr>
+<tr class="row-even"><td>menuItemType</td>
+<td>The type of the menu item. This a value of the <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionMenuItem.MenuItemType</span></code> .</td>
+</tr>
+<tr class="row-odd"><td>menuRect</td>
+<td>The bounding rectangle for the <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> that the menu item lives in.</td>
+</tr>
+<tr class="row-even"><td>tabWidth</td>
+<td>This is the distance between the text of the menu item and the shortcut.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The text of the menu item.</td>
+</tr>
+</tbody>
+</table>
+<p>The setup of the style option for <code class="docutils literal"><span class="pre">CE_MenuTearOff</span></code> and <code class="docutils literal"><span class="pre">CE_MenuScroller</span></code> also uses <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionMenuItem.html#PySide2.QtWidgets.QStyleOptionMenuItem" title="PySide2.QtWidgets.QStyleOptionMenuItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionMenuItem</span></code></a> ; they only set the <code class="docutils literal"><span class="pre">menuRect</span></code> variable in addition to the common settings with <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QStyleOption.initFrom()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="menu-bar">
+<span id="id36"></span><h2>Menu Bar<a class="headerlink" href="#menu-bar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> uses the style to draw each menu bar item and the empty area of the menu bar. The pull-down menus themselves are <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> s (see <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">Menus</span></a> ). The style element tree for the menu bar follows:</p>
+<p>The panel and empty area are drawn after the menu items. The <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> that the <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> sends to the style has the bounding rectangles of the items clipped out (i.e., clip region), so you don’t need to worry about drawing over the items. The pixel metrics in <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> are used when the bounding rectangles of the menu bar items are calculated.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionMenuItem.html#PySide2.QtWidgets.QStyleOptionMenuItem" title="PySide2.QtWidgets.QStyleOptionMenuItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionMenuItem</span></code></a> is used for menu bar items. The members that are used by <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> are described in the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>menuRect</td>
+<td>The bounding rectangle of the entire menu bar to which the item belongs.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The text of the item.</td>
+</tr>
+<tr class="row-even"><td>icon</td>
+<td>The icon of the menu item (it is not common that styles draw this icon).</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionMenuItem.html#PySide2.QtWidgets.QStyleOptionMenuItem" title="PySide2.QtWidgets.QStyleOptionMenuItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionMenuItem</span></code></a> is also used for drawing <code class="docutils literal"><span class="pre">CE_EmptyMenuBarArea</span></code> .</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionFrame.html#PySide2.QtWidgets.QStyleOptionFrame" title="PySide2.QtWidgets.QStyleOptionFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionFrame</span></code></a> is used for drawing the panel frame. The <span class="xref std std-ref">lineWidth</span> is set to <code class="docutils literal"><span class="pre">PM_MenuBarPanelWidth</span></code> . The <span class="xref std std-ref">midLineWidth</span> is currently always set to 0.</p>
+</div></blockquote>
+</div>
+<div class="section" id="item-view-headers">
+<span id="id37"></span><h2>Item View Headers<a class="headerlink" href="#item-view-headers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>It is the style that draws the headers of Qt’s item views. The item views keep the dimensions on individual sections. Also note that the delegates may use the style to paint decorations and frames around items. <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> , for instance, draws <code class="docutils literal"><span class="pre">PE_FrameFocusRect</span></code> and <code class="docutils literal"><span class="pre">PE_IndicatorViewItemCheck</span></code> .</p>
+<p>Here is a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> showing the bounding rects of a Java header:</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QHeaderView.html#PySide2.QtWidgets.QHeaderView" title="PySide2.QtWidgets.QHeaderView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHeaderView</span></code></a> uses <code class="docutils literal"><span class="pre">CT_HeaderSection</span></code> , <code class="docutils literal"><span class="pre">PM_HeaderMargin</span></code> and <code class="docutils literal"><span class="pre">PM_HeaderGripMargin</span></code> for size and hit test calculations. The <code class="docutils literal"><span class="pre">PM_HeaderMarkSize</span></code> is currently not used by Qt. <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> draws the button in the top-left corner (i.e., the area where the vertical and horizontal headers intersect) as a <code class="docutils literal"><span class="pre">CE_Header</span></code> .</p>
+<p>The style option for header views is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionHeader.html#PySide2.QtWidgets.QStyleOptionHeader" title="PySide2.QtWidgets.QStyleOptionHeader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionHeader</span></code></a> . The view paints one header section at a time, so the data is for the section being drawn. Its contents are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>icon</td>
+<td>The icon of the header (for section that is being drawn).</td>
+</tr>
+<tr class="row-odd"><td>iconAlignment</td>
+<td>The alignment ( <code class="xref py py-class docutils literal"><span class="pre">Qt.Alignment</span></code> ) of the icon in the header.</td>
+</tr>
+<tr class="row-even"><td>orientation</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">Qt.Orientation</span></code> value deciding whether the header is the horizontal header above the view or the vertical header on the left.</td>
+</tr>
+<tr class="row-odd"><td>position</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionHeader.SectionPosition</span></code> value giving the header section’s position relative to the other sections.</td>
+</tr>
+<tr class="row-even"><td>section</td>
+<td>Holds the section that is being drawn.</td>
+</tr>
+<tr class="row-odd"><td>selectedPosition</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionHeader.SelectedPosition</span></code> value giving the selected section’s position relative to the section that is being painted.</td>
+</tr>
+<tr class="row-even"><td>sortIndicator</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionHeader.SortIndicator</span></code> value that describes the direction in which the section’s sort indicator should be drawn.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The text of the currently drawn section.</td>
+</tr>
+<tr class="row-even"><td>textAlignment</td>
+<td>The <code class="xref py py-class docutils literal"><span class="pre">Qt.Alignment</span></code> of the text within the header section.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="tree-branch-indicators">
+<span id="id38"></span><h2>Tree Branch Indicators<a class="headerlink" href="#tree-branch-indicators" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The branch indicators in a tree view are drawn by the style with <code class="docutils literal"><span class="pre">PE_IndicatorBranch</span></code> . We think of indicators here as the indicators that describe the relationship of the nodes in the tree. The generic <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> is sent to the style for drawing these elements. The various branch types are described by states. Since there is no specific style option, we simply present the states table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>State</td>
+<td>Set When</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Sibling</span></code></td>
+<td>The node in the tree has a sibling (i.e., there is another node in the same column).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Item</span></code></td>
+<td>This branch indicator has an item.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">State_Children</span></code></td>
+<td>The branch has children (i.e., a new sub-tree can be opened at the branch).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">State_Open</span></code></td>
+<td>The branch indicator has an opened sub-tree.</td>
+</tr>
+</tbody>
+</table>
+<p>The tree view (and tree widget) use the style to draw the branches (nodes) of the tree.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> is used as the style for <code class="docutils literal"><span class="pre">PE_IndicatorBranch</span></code> has state flags set depending on what type of branch it is.</p>
+<p>Since there is no tree structure for branch indicators, we only present an image of a tree in the Java style. Each state is marked in the image with a rectangle in a specific color (i.e., the rectangles are not bounding rectangles). All combinations of states you must be aware of are represented in the image.</p>
+</div></blockquote>
+</div>
+<div class="section" id="tool-boxes">
+<span id="id39"></span><h2>Tool Boxes<a class="headerlink" href="#tool-boxes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">PM_SmallIconSize</span></code> for sizeHints.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QToolBox.html#PySide2.QtWidgets.QToolBox" title="PySide2.QtWidgets.QToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBox</span></code></a> is a container that keeps a collection of widgets. It has one tab for each widget and displays one of them at a time. The tool box lays the components it displays (the tool box buttons and selected widget) in a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> . The style tree for tool boxes looks like this:</p>
+<p>We show an image of a tool box in the Plastique style:</p>
+<p>All elements have the same bounding rectangles in the Plastique style as well as the other built-in Qt styles.</p>
+<p>The style option for tool boxes is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionToolBox.html#PySide2.QtWidgets.QStyleOptionToolBox" title="PySide2.QtWidgets.QStyleOptionToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionToolBox</span></code></a> . It contains the text and icon of the tool box contents. The only state set by <a class="reference internal" href="../PySide2/QtWidgets/QToolBox.html#PySide2.QtWidgets.QToolBox" title="PySide2.QtWidgets.QToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBox</span></code></a> is <code class="docutils literal"><span class="pre">State_Sunken</span></code> , which is set when the user presses a tab down with the mouse. The rest of the <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionToolBox.html#PySide2.QtWidgets.QStyleOptionToolBox" title="PySide2.QtWidgets.QStyleOptionToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionToolBox</span></code></a> members are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>icon</td>
+<td>The icon on the toolbox tab.</td>
+</tr>
+<tr class="row-odd"><td>text</td>
+<td>The text on the toolbox tab.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="size-grip">
+<span id="id40"></span><h2>Size Grip<a class="headerlink" href="#size-grip" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The size grip calculates its size hint with <code class="docutils literal"><span class="pre">CT_SizeGrip</span></code> . The pixel metric <code class="docutils literal"><span class="pre">PM_SizeGripSize</span></code> is currently unused by Qt. The element tree for an image in the Plastique style of <a class="reference internal" href="../PySide2/QtWidgets/QSizeGrip.html#PySide2.QtWidgets.QSizeGrip" title="PySide2.QtWidgets.QSizeGrip"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSizeGrip</span></code></a> follows:</p>
+<p>We show the size grip in <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> ‘s bottom right corner.</p>
+<p>The size grip style option, <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionSizeGrip.html#PySide2.QtWidgets.QStyleOptionSizeGrip" title="PySide2.QtWidgets.QStyleOptionSizeGrip"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionSizeGrip</span></code></a> , has one member besides the common members from <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>corner</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">Qt.Corner</span></code> value that describes which corner in a window (or equivalent) the grip is located.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="rubber-band">
+<span id="id41"></span><h2>Rubber Band<a class="headerlink" href="#rubber-band" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtWidgets/QRubberBand.html#PySide2.QtWidgets.QRubberBand" title="PySide2.QtWidgets.QRubberBand"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QRubberBand</span></code></a> ‘s style tree consists of two nodes.</p>
+<p>We present an image of a Java style window being moved in a <a class="reference internal" href="../PySide2/QtWidgets/QMdiArea.html#PySide2.QtWidgets.QMdiArea" title="PySide2.QtWidgets.QMdiArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMdiArea</span></code></a> with a rubber band:</p>
+<p>The style option for rubber bands is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionRubberBand.html#PySide2.QtWidgets.QStyleOptionRubberBand" title="PySide2.QtWidgets.QStyleOptionRubberBand"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionRubberBand</span></code></a> . Its members are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>opaque</td>
+<td>Boolean that is <code class="docutils literal"><span class="pre">true</span></code> if the rubber band must be drawn in an opaque style (i.e., color).</td>
+</tr>
+<tr class="row-odd"><td>shape</td>
+<td>A <code class="xref py py-attr docutils literal"><span class="pre">QRubberBand.Shape</span></code> enum value that holds the shape of the band (which is either a rectangle or a line).</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="dock-widgets">
+<span id="id42"></span><h2>Dock Widgets<a class="headerlink" href="#dock-widgets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When the dock widget lays out its contents it asks the style for these pixel metrics: <code class="docutils literal"><span class="pre">PM_DockWidgetSeparatorExtent</span></code> , <code class="docutils literal"><span class="pre">PM_DockWidgetTitleBarButtonMargin</span></code> , <code class="docutils literal"><span class="pre">PM_DockWidgetFrameWidth</span></code> , and <code class="docutils literal"><span class="pre">PM_DockWidgetTitleMargin</span></code> . It also calculates the bounding rectangles of the float and close buttons with <code class="docutils literal"><span class="pre">SE_DockWidgetCloseButton</span></code> and <code class="docutils literal"><span class="pre">SE_DockWidgetFloatButton</span></code> .</p>
+<p>The dotted lines indicate that the sender keeps instances of the recipient of the arrow (i.e., it is not a style element to draw). The dock widget only draws <code class="docutils literal"><span class="pre">PE_frameDockWidget</span></code> when it is detached from its main window (i.e., it is a top level window). If it is docked it draws the indicator dock widget resize handle. We show a dock widget in both docked and floating state in the plastique style:</p>
+<p>The style option is <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionDockWidget.html#PySide2.QtWidgets.QStyleOptionDockWidget" title="PySide2.QtWidgets.QStyleOptionDockWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionDockWidget</span></code></a> :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Member</td>
+<td>Content</td>
+</tr>
+<tr class="row-even"><td>closeable</td>
+<td>Boolean that holds whether the dock window can be closed.</td>
+</tr>
+<tr class="row-odd"><td>floatable</td>
+<td>Boolean that holds whether the dock window can float (i.e., detach from the main window in which it lives).</td>
+</tr>
+<tr class="row-even"><td>movable</td>
+<td>Boolean that holds whether the window is movable (i.e., can move to other dock widget areas).</td>
+</tr>
+<tr class="row-odd"><td>title</td>
+<td>The title text of the dock window.</td>
+</tr>
+</tbody>
+</table>
+<p>For the buttons, <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> is used (see <a class="reference internal" href="#styles-and-style-aware-widgets"><span class="std std-ref">Tool Buttons</span></a> for content description). The dock widget resize handle has a plain <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> .</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

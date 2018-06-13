@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Using the SQL Model Classes &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using the SQL Model Classes</a><ul>
+<li><a class="reference internal" href="#the-sql-query-model">The SQL Query Model</a></li>
+<li><a class="reference internal" href="#the-sql-table-model">The SQL Table Model</a></li>
+<li><a class="reference internal" href="#the-sql-relational-table-model">The SQL Relational Table Model</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-the-sql-model-classes">
+<span id="id1"></span><h1>Using the SQL Model Classes<a class="headerlink" href="#using-the-sql-model-classes" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>In addition to <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> , Qt offers three higher-level classes for accessing databases. These classes are <a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> , <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> , and <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> .</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a></td>
+<td>A read-only model based on an arbitrary SQL query.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a></td>
+<td>A read-write model that works on a single table.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a></td>
+<td>A <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> subclass with foreign key support.</td>
+</tr>
+</tbody>
+</table>
+<p>These classes derive from <a class="reference internal" href="../PySide2/QtCore/QAbstractTableModel.html#PySide2.QtCore.QAbstractTableModel" title="PySide2.QtCore.QAbstractTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractTableModel</span></code></a> (which in turn inherits from <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> ) and make it easy to present data from a database in an item view class such as <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> . This is explained in detail in the <a class="reference internal" href="sql-presenting.html#presenting-data-in-a-table-view"><span class="std std-ref">Presenting Data in a Table View</span></a> section.</p>
+<p>Another advantage of using these classes is that it can make your code easier to adapt to other data sources. For example, if you use <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> and later decide to use XML files to store data instead of a database, it is essentially just a matter of replacing one data model with another.</p>
+</div></blockquote>
+<div class="section" id="the-sql-query-model">
+<span id="id2"></span><h2>The SQL Query Model<a class="headerlink" href="#the-sql-query-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> offers a read-only model based on an SQL query.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">QSqlQueryModel</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM employee&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()):</span>
+    <span class="n">_id</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="n">_id</span><span class="p">,</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p>After setting the query using <code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.setQuery()</span></code> , you can use <code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.record()</span></code> (int) to access the individual records. You can also use <code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.data()</span></code> and any of the other functions inherited from <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> .</p>
+<p>There’s also a <code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.setQuery()</span></code> overload that takes a <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> object and operates on its result set. This enables you to use any features of <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> to set up the query (e.g., prepared queries).</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-sql-table-model">
+<span id="id3"></span><h2>The SQL Table Model<a class="headerlink" href="#the-sql-table-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> offers a read-write model that works on a single SQL table at a time.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">QSqlTableModel</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setTable</span><span class="p">(</span><span class="s2">&quot;employee&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setFilter</span><span class="p">(</span><span class="s2">&quot;salary &gt; 50000&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setSort</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">DescendingOrder</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">salary</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> is a high-level alternative to <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> for navigating and modifying individual SQL tables. It typically results in less code and requires no knowledge of SQL syntax.</p>
+<p>Use <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.record()</span></code> to retrieve a row in the table, and <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.setRecord()</span></code> to modify the row. For example, the following code will increase every employee’s salary by 10 per cent:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()):</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">)</span>
+    <span class="n">salary</span> <span class="o">*=</span> <span class="mf">1.1</span>
+    <span class="n">record</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;salary&quot;</span><span class="p">,</span> <span class="n">salary</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">setRecord</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">submitAll</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can also use <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.data()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.setData()</span></code> , which are inherited from <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> , to access the data. For example, here’s how to update a record using <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.setData()</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">),</span> <span class="mi">75000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">submitAll</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here’s how to insert a row and populate it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">insertRows</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1013</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Peter Gordon&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">68500</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">submitAll</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here’s how to delete five consecutive rows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">removeRows</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">submitAll</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The first argument to <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.removeRows()</span></code> is the index of the first row to delete.</p>
+<p>When you’re finished changing a record, you should always call <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.submitAll()</span></code> to ensure that the changes are written to the database.</p>
+<p>When and whether you actually <em>need</em> to call submitAll() depends on the table’s <code class="xref py py-func docutils literal"><span class="pre">edit</span> <span class="pre">strategy</span></code> . The default strategy is <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnRowChange</span></code> , which specifies that pending changes are applied to the database when the user selects a different row. Other strategies are <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnManualSubmit</span></code> (where all changes are cached in the model until you call submitAll()) and <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnFieldChange</span></code> (where no changes are cached). These are mostly useful when <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> is used with a view.</p>
+<p><code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnFieldChange</span></code> seems to deliver the promise that you never need to call submitAll() explicitly. There are two pitfalls, though:</p>
+<ul class="simple">
+<li>Without any caching, performance may drop significantly.</li>
+<li>If you modify a primary key, the record might slip through your fingers while you are trying to populate it.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="the-sql-relational-table-model">
+<span id="id4"></span><h2>The SQL Relational Table Model<a class="headerlink" href="#the-sql-relational-table-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> extends <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> to provide support for foreign keys. A foreign key is a 1-to-1 mapping between a field in one table and the primary key field of another table. For example, if a <code class="docutils literal"><span class="pre">book</span></code> table has a field called <code class="docutils literal"><span class="pre">authorid</span></code> that refers to the author table’s <code class="docutils literal"><span class="pre">id</span></code> field, we say that <code class="docutils literal"><span class="pre">authorid</span></code> is a foreign key.</p>
+<p>The screenshot on the left shows a plain <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> in a <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> . Foreign keys (<code class="docutils literal"><span class="pre">city</span></code> and <code class="docutils literal"><span class="pre">country</span></code> ) aren’t resolved to human-readable values. The screenshot on the right shows a <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> , with foreign keys resolved into human-readable text strings.</p>
+<p>The following code snippet shows how the <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> was set up:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">setTable</span><span class="p">(</span><span class="s2">&quot;employee&quot;</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">setRelation</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">QSqlRelation</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setRelation</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">QSqlRelation</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> documentation for details.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

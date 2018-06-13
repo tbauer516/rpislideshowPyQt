@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QXmlStreamReader &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QXmlStreamEntityResolver" href="QXmlStreamEntityResolver.html" />
+    <link rel="prev" title="QXmlStreamWriter" href="QXmlStreamWriter.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QXmlStreamReader</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#namespaces">Namespaces</a></li>
+<li><a class="reference internal" href="#incremental-parsing">Incremental Parsing</a></li>
+<li><a class="reference internal" href="#performance-and-memory-consumption">Performance and Memory Consumption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QXmlStreamWriter.html"
+                        title="previous chapter">QXmlStreamWriter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QXmlStreamEntityResolver.html"
+                        title="next chapter">QXmlStreamEntityResolver</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qxmlstreamreader">
+<span id="id1"></span><h1>QXmlStreamReader<a class="headerlink" href="#qxmlstreamreader" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-92488cffd86b4f2555b57c628d84f378c3c1e047.png" alt="Inheritance diagram of PySide2.QtCore.QXmlStreamReader" usemap="#inheritance16d08f35e4" class="inheritance"/>
+<map id="inheritance16d08f35e4" name="inheritance16d08f35e4">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QXmlStreamReader" title="QtCore.QXmlStreamReader" alt="" coords="5,5,203,31"/>
+</map>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">addData</span></code></a> (data)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">addData</span></code></a> (data)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">addData</span></code></a> (data)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration"><code class="xref py py-meth docutils literal"><span class="pre">addExtraNamespaceDeclaration</span></code></a> (extraNamespaceDeclaraction)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">addExtraNamespaceDeclarations</span></code></a> (extraNamespaceDeclaractions)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd"><code class="xref py py-meth docutils literal"><span class="pre">atEnd</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes"><code class="xref py py-meth docutils literal"><span class="pre">attributes</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset"><code class="xref py py-meth docutils literal"><span class="pre">characterOffset</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">clear</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber"><code class="xref py py-meth docutils literal"><span class="pre">columnNumber</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">device</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding"><code class="xref py py-meth docutils literal"><span class="pre">documentEncoding</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion"><code class="xref py py-meth docutils literal"><span class="pre">documentVersion</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName"><code class="xref py py-meth docutils literal"><span class="pre">dtdName</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId"><code class="xref py py-meth docutils literal"><span class="pre">dtdPublicId</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId"><code class="xref py py-meth docutils literal"><span class="pre">dtdSystemId</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">entityDeclarations</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver"><code class="xref py py-meth docutils literal"><span class="pre">entityResolver</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">error</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">errorString</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError"><code class="xref py py-meth docutils literal"><span class="pre">hasError</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA"><code class="xref py py-meth docutils literal"><span class="pre">isCDATA</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters"><code class="xref py py-meth docutils literal"><span class="pre">isCharacters</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment"><code class="xref py py-meth docutils literal"><span class="pre">isComment</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD"><code class="xref py py-meth docutils literal"><span class="pre">isDTD</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument"><code class="xref py py-meth docutils literal"><span class="pre">isEndDocument</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement"><code class="xref py py-meth docutils literal"><span class="pre">isEndElement</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference"><code class="xref py py-meth docutils literal"><span class="pre">isEntityReference</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction"><code class="xref py py-meth docutils literal"><span class="pre">isProcessingInstruction</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument"><code class="xref py py-meth docutils literal"><span class="pre">isStandaloneDocument</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument"><code class="xref py py-meth docutils literal"><span class="pre">isStartDocument</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement"><code class="xref py py-meth docutils literal"><span class="pre">isStartElement</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace"><code class="xref py py-meth docutils literal"><span class="pre">isWhitespace</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber"><code class="xref py py-meth docutils literal"><span class="pre">lineNumber</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">name</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">namespaceDeclarations</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">namespaceProcessing</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">namespaceUri</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">notationDeclarations</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix"><code class="xref py py-meth docutils literal"><span class="pre">prefix</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData"><code class="xref py py-meth docutils literal"><span class="pre">processingInstructionData</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget"><code class="xref py py-meth docutils literal"><span class="pre">processingInstructionTarget</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">qualifiedName</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError"><code class="xref py py-meth docutils literal"><span class="pre">raiseError</span></code></a> ([message=”“])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText"><code class="xref py py-meth docutils literal"><span class="pre">readElementText</span></code></a> ([behaviour=ErrorOnUnexpectedElement])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">readNext</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNextStartElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNextStartElement"><code class="xref py py-meth docutils literal"><span class="pre">readNextStartElement</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">setDevice</span></code></a> (device)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver"><code class="xref py py-meth docutils literal"><span class="pre">setEntityResolver</span></code></a> (resolver)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">setNamespaceProcessing</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.skipCurrentElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.skipCurrentElement"><code class="xref py py-meth docutils literal"><span class="pre">skipCurrentElement</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">text</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString"><code class="xref py py-meth docutils literal"><span class="pre">tokenString</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">tokenType</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> class provides a fast parser for reading well-formed XML via a simple streaming API.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> is a faster and more convenient replacement for Qt’s own SAX parser (see <a class="reference internal" href="../QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> ). In some cases it might also be a faster and more convenient alternative for use in applications that would otherwise use a DOM tree (see <a class="reference internal" href="../QtXml/QDomDocument.html#PySide2.QtXml.QDomDocument" title="PySide2.QtXml.QDomDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QDomDocument</span></code></a> ). <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> reads data either from a <a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> (see <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a> ), or from a raw <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> (see <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> ).</p>
+<p>Qt provides <a class="reference internal" href="QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> for writing XML.</p>
+<p>The basic concept of a stream reader is to report an XML document as a stream of tokens, similar to SAX. The main difference between <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> and SAX is <em>how</em> these XML tokens are reported. With SAX, the application must provide handlers (callback functions) that receive so-called XML <em>events</em> from the parser at the parser’s convenience. With <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> , the application code itself drives the loop and pulls <em>tokens</em> from the reader, one after another, as it needs them. This is done by calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a> , where the reader reads from the input stream until it completes the next token, at which point it returns the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> . A set of convenient functions including <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isStartElement()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> can then be used to examine the token to obtain information about what has been read. The big advantage of this <em>pulling</em> approach is the possibility to build recursive descent parsers with it, meaning you can split your XML parsing code easily into different methods or classes. This makes it easy to keep track of the application’s own state when parsing XML.</p>
+<p>A typical loop with <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xml</span> <span class="o">=</span> <span class="n">QXmlStreamReader</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">xml</span><span class="o">.</span><span class="n">atEnd</span><span class="p">():</span>
+    <span class="n">xml</span><span class="o">.</span><span class="n">readNext</span><span class="p">();</span>
+    <span class="o">...</span> <span class="c1"># do processing</span>
+
+<span class="k">if</span> <span class="n">xml</span><span class="o">.</span><span class="n">hasError</span><span class="p">():</span>
+    <span class="o">...</span> <span class="c1"># do error handling</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> is a well-formed XML 1.0 parser that does <em>not</em> include external parsed entities. As long as no error occurs, the application code can thus be assured that the data provided by the stream reader satisfies the W3C’s criteria for well-formed XML. For example, you can be certain that all tags are indeed nested and closed properly, that references to internal entities have been replaced with the correct replacement text, and that attributes have been normalized or added according to the internal subset of the DTD.</p>
+<p>If an error occurs while parsing, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.atEnd()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.hasError()</span></code></a> return true, and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> returns the error that occurred. The functions <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.errorString()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.lineNumber()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.columnNumber()</span></code></a> , and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.characterOffset()</span></code></a> are for constructing an appropriate error or warning message. To simplify application code, <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> contains a <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.raiseError()</span></code></a> mechanism that lets you raise custom errors that trigger the same error handling described.</p>
+<p>The <a class="reference internal" href="../../overviews/qtxml-streambookmarks-example.html#qxmlstream-bookmarks-example"><span class="std std-ref">QXmlStream Bookmarks Example</span></a> illustrates how to use the recursive descent technique to read an XML bookmark file (XBEL) with a stream reader.</p>
+</div></blockquote>
+<div class="section" id="namespaces">
+<span id="pyside2-qtcore-qxmlstreamreader-namespaces"></span><h3>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>QXmlStream understands and resolves XML namespaces. E.g. in case of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> returns the namespace the element is in, and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> returns the element’s <em>local</em> name. The combination of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> and name uniquely identifies an element. If a namespace prefix was not declared in the XML entities parsed by the reader, the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> is empty.</p>
+<p>If you parse XML data that does not utilize namespaces according to the XML specification or doesn’t use namespaces at all, you can use the element’s <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.qualifiedName()</span></code></a> instead. A qualified name is the element’s <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.prefix()</span></code></a> followed by colon followed by the element’s local <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> - exactly like the element appears in the raw XML data. Since the mapping <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> to prefix is neither unique nor universal, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.qualifiedName()</span></code></a> should be avoided for namespace-compliant XML data.</p>
+<p>In order to parse standalone documents that do use undeclared namespace prefixes, you can turn off namespace processing completely with the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceProcessing()</span></code></a> property.</p>
+</div></blockquote>
+</div>
+<div class="section" id="incremental-parsing">
+<span id="pyside2-qtcore-qxmlstreamreader-incremental-parsing"></span><h3>Incremental Parsing<a class="headerlink" href="#incremental-parsing" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> is an incremental parser. It can handle the case where the document can’t be parsed all at once because it arrives in chunks (e.g. from multiple files, or over a network connection). When the reader runs out of data before the complete document has been parsed, it reports a <code class="xref py py-attr docutils literal"><span class="pre">PrematureEndOfDocumentError</span></code> . When more data arrives, either because of a call to <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> or because more data is available through the network <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> , the reader recovers from the <code class="xref py py-attr docutils literal"><span class="pre">PrematureEndOfDocumentError</span></code> error and continues parsing the new data with the next call to <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a> .</p>
+<p>For example, if your application reads data from the network using a <a class="reference internal" href="../QtNetwork/QNetworkAccessManager.html#PySide2.QtNetwork.QNetworkAccessManager" title="PySide2.QtNetwork.QNetworkAccessManager"><code class="xref py py-class docutils literal"><span class="pre">network</span> <span class="pre">access</span> <span class="pre">manager</span></code></a> , you would issue a <a class="reference internal" href="../QtNetwork/QNetworkRequest.html#PySide2.QtNetwork.QNetworkRequest" title="PySide2.QtNetwork.QNetworkRequest"><code class="xref py py-class docutils literal"><span class="pre">network</span> <span class="pre">request</span></code></a> to the manager and receive a <a class="reference internal" href="../QtNetwork/QNetworkReply.html#PySide2.QtNetwork.QNetworkReply" title="PySide2.QtNetwork.QNetworkReply"><code class="xref py py-class docutils literal"><span class="pre">network</span> <span class="pre">reply</span></code></a> in return. Since a <a class="reference internal" href="../QtNetwork/QNetworkReply.html#PySide2.QtNetwork.QNetworkReply" title="PySide2.QtNetwork.QNetworkReply"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkReply</span></code></a> is a <a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> , you connect its <a class="reference internal" href="QIODevice.html#PySide2.QtCore.PySide2.QtCore.QIODevice.readyRead" title="PySide2.QtCore.PySide2.QtCore.QIODevice.readyRead"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QIODevice.readyRead()</span></code></a> signal to a custom slot, e.g. <code class="docutils literal"><span class="pre">slotReadyRead()</span></code> in the code snippet shown in the discussion for <a class="reference internal" href="../QtNetwork/QNetworkAccessManager.html#PySide2.QtNetwork.QNetworkAccessManager" title="PySide2.QtNetwork.QNetworkAccessManager"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QNetworkAccessManager</span></code></a> . In this slot, you read all available data with <a class="reference internal" href="QIODevice.html#PySide2.QtCore.PySide2.QtCore.QIODevice.readAll" title="PySide2.QtCore.PySide2.QtCore.QIODevice.readAll"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QIODevice.readAll()</span></code></a> and pass it to the XML stream reader using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> . Then you call your custom parsing function that reads the XML events from the reader.</p>
+</div></blockquote>
+</div>
+<div class="section" id="performance-and-memory-consumption">
+<span id="pyside2-qtcore-qxmlstreamreader-performance-and-memory-consumption"></span><h3>Performance and Memory Consumption<a class="headerlink" href="#performance-and-memory-consumption" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> is memory-conservative by design, since it doesn’t store the entire XML document tree in memory, but only the current token at the time it is reported. In addition, <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> avoids the many small string allocations that it normally takes to map an XML document to a convenient and Qt-ish API. It does this by reporting all string data as <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code> rather than real <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> objects. <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code> is a thin wrapper around <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> substrings that provides a subset of the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> API without the memory allocation and reference-counting overhead. Calling <code class="xref py py-meth docutils literal"><span class="pre">QStringRef.toString()</span></code> on any of those objects returns an equivalent real <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> object.</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QXmlStreamReader">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QXmlStreamReader</code><a class="headerlink" href="#PySide2.QtCore.QXmlStreamReader" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QXmlStreamReader</code><span class="sig-paren">(</span><em>device</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QXmlStreamReader</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QXmlStreamReader</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QXmlStreamReader</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>device</strong> – <a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a stream reader.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a></p>
+</div>
+<p>Creates a new stream reader that reads from <code class="docutils literal"><span class="pre">device</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a></p>
+</div>
+<p>Creates a new stream reader that reads from <code class="docutils literal"><span class="pre">data</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a></p>
+</div>
+<p>Creates a new stream reader that reads from <code class="docutils literal"><span class="pre">data</span></code> .</p>
+<p>This function should only be used if the XML header either says the encoding is “UTF-8” or lacks any encoding information (the latter is the case of <a class="reference internal" href="QXmlStreamWriter.html#PySide2.QtCore.QXmlStreamWriter" title="PySide2.QtCore.QXmlStreamWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamWriter</span></code></a> writing to a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> ). Any other encoding is likely going to cause data corruption (“mojibake”).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a></p>
+</div>
+<p>Creates a new stream reader that reads from <code class="docutils literal"><span class="pre">data</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">TokenType</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType" title="Permalink to this definition">¶</a></dt>
+<dd><p>This enum specifies the type of token the reader just read.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QXmlStreamReader.NoToken</td>
+<td>The reader has not yet read anything.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.Invalid</td>
+<td>An error has occurred, reported in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.errorString()</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.StartDocument</td>
+<td>The reader reports the XML version number in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.documentVersion()</span></code></a> , and the encoding as specified in the XML document in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.documentEncoding()</span></code></a> . If the document is declared standalone, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isStandaloneDocument()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code>; otherwise it returns <code class="docutils literal"><span class="pre">false</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.EndDocument</td>
+<td>The reader reports the end of the document.</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.StartElement</td>
+<td>The reader reports the start of an element with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> . Empty elements are also reported as , followed directly by . The convenience function <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readElementText()</span></code></a> can be called to concatenate all content until the corresponding . Attributes are reported in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.attributes()</span></code></a> , namespace declarations in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceDeclarations()</span></code></a> .</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.EndElement</td>
+<td>The reader reports the end of an element with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.Characters</td>
+<td>The reader reports characters in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> . If the characters are all white-space, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isWhitespace()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code>. If the characters stem from a CDATA section, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isCDATA()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.Comment</td>
+<td>The reader reports a comment in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.DTD</td>
+<td>The reader reports a DTD in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> , notation declarations in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.notationDeclarations()</span></code></a> , and entity declarations in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.entityDeclarations()</span></code></a> . Details of the DTD declaration are reported in in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.dtdName()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.dtdPublicId()</span></code></a> , and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.dtdSystemId()</span></code></a> .</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.EntityReference</td>
+<td>The reader reports an entity reference that could not be resolved. The name of the reference is reported in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> , the replacement text in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.ProcessingInstruction</td>
+<td>The reader reports a processing instruction in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.processingInstructionTarget()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.processingInstructionData()</span></code></a> .</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.ReadElementTextBehaviour">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">ReadElementTextBehaviour</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.ReadElementTextBehaviour" title="Permalink to this definition">¶</a></dt>
+<dd><p>This enum specifies the different behaviours of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readElementText()</span></code></a> .</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QXmlStreamReader.ErrorOnUnexpectedElement</td>
+<td>Raise an <code class="xref py py-attr docutils literal"><span class="pre">UnexpectedElementError</span></code> and return what was read so far when a child element is encountered.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.IncludeChildElements</td>
+<td>Recursively include the text from child elements.</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.SkipChildElements</td>
+<td>Skip child elements.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This enum was introduced in Qt 4.6.</p>
+</div>
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.Error">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">Error</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>This enum specifies different error cases</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QXmlStreamReader.NoError</td>
+<td>No error has occurred.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.CustomError</td>
+<td>A custom error has been raised with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.raiseError()</span></code></a></td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.NotWellFormedError</td>
+<td>The parser internally raised an error due to the read XML not being well-formed.</td>
+</tr>
+<tr class="row-odd"><td>QXmlStreamReader.PrematureEndOfDocumentError</td>
+<td>The input stream ended before a well-formed XML document was parsed. Recovery from this error is possible if more XML arrives in the stream, either by calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> or by waiting for it to arrive on the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>QXmlStreamReader.UnexpectedElementError</td>
+<td>The parser encountered an element that was different to those it expected.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">addData</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – str</td>
+</tr>
+</tbody>
+</table>
+<p>Adds more <code class="docutils literal"><span class="pre">data</span></code> for the reader to read. This function does nothing if the reader has a <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">addData</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Adds more <code class="docutils literal"><span class="pre">data</span></code> for the reader to read. This function does nothing if the reader has a <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">addData</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Adds more <code class="docutils literal"><span class="pre">data</span></code> for the reader to read. This function does nothing if the reader has a <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">addExtraNamespaceDeclaration</code><span class="sig-paren">(</span><em>extraNamespaceDeclaraction</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extraNamespaceDeclaraction</strong> – <a class="reference internal" href="QXmlStreamNamespaceDeclaration.html#PySide2.QtCore.QXmlStreamNamespaceDeclaration" title="PySide2.QtCore.QXmlStreamNamespaceDeclaration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamNamespaceDeclaration</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Adds an <code class="docutils literal"><span class="pre">extraNamespaceDeclaration</span></code> . The declaration will be valid for children of the current element, or - should the function be called before any elements are read - for the entire XML document.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceDeclarations()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">addExtraNamespaceDeclarations</code><span class="sig-paren">(</span><em>extraNamespaceDeclaractions</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>extraNamespaceDeclaractions</strong> – </td>
+</tr>
+</tbody>
+</table>
+<p>Adds a vector of declarations specified by <code class="docutils literal"><span class="pre">extraNamespaceDeclarations</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceDeclarations()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">atEnd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the reader has read until the end of the XML document, or if an <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> has occurred and reading has been aborted. Otherwise, it returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>When and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.hasError()</span></code></a> return true and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> returns <code class="xref py py-attr docutils literal"><span class="pre">PrematureEndOfDocumentError</span></code> , it means the XML has been well-formed so far, but a complete XML document has not been parsed. The next chunk of XML can be added with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> , if the XML is being read from a <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> , or by waiting for more data to arrive if the XML is being read from a <a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a> . Either way, will return false once more data is available.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.hasError()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a>  <a class="reference internal" href="QIODevice.html#PySide2.QtCore.PySide2.QtCore.QIODevice.atEnd" title="PySide2.QtCore.PySide2.QtCore.QIODevice.atEnd"><code class="xref py py-meth docutils literal"><span class="pre">QIODevice.atEnd()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QXmlStreamAttributes.html#PySide2.QtCore.QXmlStreamAttributes" title="PySide2.QtCore.QXmlStreamAttributes"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamAttributes</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the attributes of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">characterOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the current character offset, starting with 0.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.lineNumber()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.columnNumber()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes any <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> or data from the reader and resets its internal state to the initial state.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">columnNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the current column number, starting with 0.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.lineNumber()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.characterOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">device</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the current device associated with the <a class="reference internal" href="#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> , or 0 if no device has been assigned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setDevice()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">documentEncoding</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">StartDocument</span></code> , this function returns the encoding string as specified in the XML declaration. Otherwise an empty string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">documentVersion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.documentVersion" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">StartDocument</span></code> , this function returns the version string as specified in the XML declaration. Otherwise an empty string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">dtdName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , this function returns the DTD’s name. Otherwise an empty string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">dtdPublicId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdPublicId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , this function returns the DTD’s public identifier. Otherwise an empty string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">dtdSystemId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.dtdSystemId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , this function returns the DTD’s system identifier. Otherwise an empty string is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">entityDeclarations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityDeclarations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , this function returns the DTD’s unparsed (external) entity declarations. Otherwise an empty vector is returned.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QXmlStreamEntityDeclarations</span></code> class is defined to be a <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> of <a class="reference internal" href="QXmlStreamEntityDeclaration.html#PySide2.QtCore.QXmlStreamEntityDeclaration" title="PySide2.QtCore.QXmlStreamEntityDeclaration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamEntityDeclaration</span></code></a> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">entityResolver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QXmlStreamEntityResolver.html#PySide2.QtCore.QXmlStreamEntityResolver" title="PySide2.QtCore.QXmlStreamEntityResolver"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamEntityResolver</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the entity resolver, or 0 if there is no entity resolver.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setEntityResolver()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.Error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.Error"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.Error</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the type of the current error, or <code class="xref py py-attr docutils literal"><span class="pre">NoError</span></code> if no error occurred.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.errorString()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.raiseError()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">errorString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the error message that was set with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.raiseError()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.lineNumber()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.columnNumber()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.characterOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">hasError</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if an error has occurred, otherwise <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.errorString()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isCDATA</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the reader reports characters that stem from a CDATA section; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isCharacters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isCharacters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">Characters</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isWhitespace()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCDATA"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isCDATA()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isComment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">Comment</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isDTD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isEndDocument</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">EndDocument</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isEndElement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isEntityReference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">EntityReference</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isProcessingInstruction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">ProcessingInstruction</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isStandaloneDocument</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStandaloneDocument" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this document has been declared standalone in the XML declaration; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>If no XML declaration has been parsed, this function returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isStartDocument</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">StartDocument</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isStartElement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> equals <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">isWhitespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isWhitespace" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the reader reports characters that only consist of white-space; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isCharacters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">lineNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.lineNumber" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the current line number, starting with 1.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.columnNumber"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.columnNumber()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.characterOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.characterOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the local name of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> , or an <code class="xref py py-attr docutils literal"><span class="pre">EntityReference</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.qualifiedName()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">namespaceDeclarations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceDeclarations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> , this function returns the element’s namespace declarations. Otherwise an empty vector is returned.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QXmlStreamNamespaceDeclarations</span></code> class is defined to be a <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> of <a class="reference internal" href="QXmlStreamNamespaceDeclaration.html#PySide2.QtCore.QXmlStreamNamespaceDeclaration" title="PySide2.QtCore.QXmlStreamNamespaceDeclaration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamNamespaceDeclaration</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclaration()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addExtraNamespaceDeclarations()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">namespaceProcessing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">namespaceUri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.qualifiedName()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">notationDeclarations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.notationDeclarations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>If the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> is <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , this function returns the DTD’s notation declarations. Otherwise an empty vector is returned.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QXmlStreamNotationDeclarations</span></code> class is defined to be a <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> of <a class="reference internal" href="QXmlStreamNotationDeclaration.html#PySide2.QtCore.QXmlStreamNotationDeclaration" title="PySide2.QtCore.QXmlStreamNotationDeclaration"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamNotationDeclaration</span></code></a> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the prefix of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.qualifiedName()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">processingInstructionData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionData" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the data of a <code class="xref py py-attr docutils literal"><span class="pre">ProcessingInstruction</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">processingInstructionTarget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.processingInstructionTarget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the target of a <code class="xref py py-attr docutils literal"><span class="pre">ProcessingInstruction</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">qualifiedName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.qualifiedName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the qualified name of a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> ;</p>
+<p>A qualified name is the raw name of an element in the XML data. It consists of the namespace prefix, followed by colon, followed by the element’s local name. Since the namespace prefix is not unique (the same prefix can point to different namespaces and different prefixes can point to the same namespace), you shouldn’t use , but the resolved <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a> and the attribute’s local <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.name"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.name()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.prefix"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.prefix()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceUri"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceUri()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">raiseError</code><span class="sig-paren">(</span><span class="optional">[</span><em>message=&quot;&quot;</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.raiseError" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>message</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Raises a custom error with an optional error <code class="docutils literal"><span class="pre">message</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.errorString()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">readElementText</code><span class="sig-paren">(</span><span class="optional">[</span><em>behaviour=ErrorOnUnexpectedElement</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readElementText" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>behaviour</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.ReadElementTextBehaviour" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.ReadElementTextBehaviour"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.ReadElementTextBehaviour</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Convenience function to be called in case a <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> was read. Reads until the corresponding <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> and returns all text in-between. In case of no error, the current token (see <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a> ) after having called this function is <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> .</p>
+<p>The function concatenates <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.text()</span></code></a> when it reads either <code class="xref py py-attr docutils literal"><span class="pre">Characters</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">EntityReference</span></code> tokens, but skips <code class="xref py py-attr docutils literal"><span class="pre">ProcessingInstruction</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">Comment</span></code> . If the current token is not <code class="xref py py-attr docutils literal"><span class="pre">StartElement</span></code> , an empty string is returned.</p>
+<p>The <code class="docutils literal"><span class="pre">behaviour</span></code> defines what happens in case anything else is read before reaching <code class="xref py py-attr docutils literal"><span class="pre">EndElement</span></code> . The function can include the text from child elements (useful for example for HTML), ignore child elements, or raise an <code class="xref py py-attr docutils literal"><span class="pre">UnexpectedElementError</span></code> and return what was read so far (default).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">readNext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.TokenType</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Reads the next token and returns its type.</p>
+<p>With one exception, once an <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> is reported by , further reading of the XML stream is not possible. Then <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.atEnd"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.atEnd()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.hasError"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.hasError()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code> , and this function returns <code class="xref py py-attr docutils literal"><span class="pre">QXmlStreamReader.Invalid</span></code> .</p>
+<p>The exception is when <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.error"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.error()</span></code></a> returns <code class="xref py py-attr docutils literal"><span class="pre">PrematureEndOfDocumentError</span></code> . This error is reported when the end of an otherwise well-formed chunk of XML is reached, but the chunk doesn’t represent a complete XML document. In that case, parsing <em>can</em> be resumed by calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.addData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.addData()</span></code></a> to add the next chunk of XML, when the stream is being read from a <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> , or by waiting for more data to arrive when the stream is being read from a <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenString()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNextStartElement">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">readNextStartElement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNextStartElement" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Reads until the next start element within the current element. Returns <code class="docutils literal"><span class="pre">true</span></code> when a start element was reached. When the end element was reached, or when an error occurred, false is returned.</p>
+<p>The current element is the element matching the most recently parsed start element of which a matching end element has not yet been reached. When the parser has reached the end element, the current element becomes the parent element.</p>
+<p>This is a convenience function for when you’re only concerned with parsing XML elements. The <a class="reference internal" href="../../overviews/qtxml-streambookmarks-example.html#qxmlstream-bookmarks-example"><span class="std std-ref">QXmlStream Bookmarks Example</span></a> makes extensive use of this function.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.readNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.readNext()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">setDevice</code><span class="sig-paren">(</span><em>device</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setDevice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>device</strong> – <a class="reference internal" href="QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Sets the current device to <code class="docutils literal"><span class="pre">device</span></code> . Setting the device resets the stream to its initial state.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.device"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.device()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.clear()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">setEntityResolver</code><span class="sig-paren">(</span><em>resolver</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setEntityResolver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resolver</strong> – <a class="reference internal" href="QXmlStreamEntityResolver.html#PySide2.QtCore.QXmlStreamEntityResolver" title="PySide2.QtCore.QXmlStreamEntityResolver"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamEntityResolver</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Makes <code class="docutils literal"><span class="pre">resolver</span></code> the new <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.entityResolver()</span></code></a> .</p>
+<p>The stream reader does <em>not</em> take ownership of the resolver. It’s the callers responsibility to ensure that the resolver is valid during the entire life-time of the stream reader object, or until another resolver or 0 is set.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.entityResolver"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.entityResolver()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">setNamespaceProcessing</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.setNamespaceProcessing" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.namespaceProcessing"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.namespaceProcessing()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.skipCurrentElement">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">skipCurrentElement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.skipCurrentElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads until the end of the current element, skipping any child nodes. This function is useful for skipping unknown elements.</p>
+<p>The current element is the element matching the most recently parsed start element of which a matching end element has not yet been reached. When the parser has reached the end element, the current element becomes the parent element.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.text" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the text of <code class="xref py py-attr docutils literal"><span class="pre">Characters</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">Comment</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">DTD</span></code> , or <code class="xref py py-attr docutils literal"><span class="pre">EntityReference</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">tokenString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the reader’s current token as string.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenType()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType">
+<code class="descclassname">PySide2.QtCore.QXmlStreamReader.</code><code class="descname">tokenType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenType" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.TokenType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.TokenType</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the type of the current token.</p>
+<p>The current token can also be queried with the convenience functions <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartDocument"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isStartDocument()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndDocument"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isEndDocument()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isStartElement"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isStartElement()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEndElement"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isEndElement()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isCharacters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isCharacters()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isComment"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isComment()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isDTD"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isDTD()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isEntityReference"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isEntityReference()</span></code></a> , and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.isProcessingInstruction"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.isProcessingInstruction()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString" title="PySide2.QtCore.PySide2.QtCore.QXmlStreamReader.tokenString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader.tokenString()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

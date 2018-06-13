@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Fortune Server Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fortune Server Example</a></li>
+<li><a class="reference internal" href="#server-cpp-example-file">server.cpp Example File</a></li>
+<li><a class="reference internal" href="#server-h-example-file">server.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#fortuneserver-pro-example-file">fortuneserver.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fortune-server-example">
+<span id="id1"></span><h1>Fortune Server Example<a class="headerlink" href="#fortune-server-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates how to create a server for a network service</p>
+<blockquote>
+<div><p>Demonstrates how to create a server for a network service.</p>
+<p>This example is intended to be run alongside the <a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client</span></a> example or the <a class="reference internal" href="qtnetwork-blockingfortuneclient-example.html#blocking-fortune-client-example"><span class="std std-ref">Blocking Fortune Client Example</span></a> .</p>
+<p>It uses <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> to accept incoming TCP connections, and a simple <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> based data transfer protocol to write a fortune to the connecting client (from the <a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client</span></a> example), before closing the connection.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Server</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">Server</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">sessionOpened</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">sendFortune</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">statusLabel</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+    <span class="n">QTcpServer</span> <span class="o">*</span><span class="n">tcpServer</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">fortunes</span><span class="p">;</span>
+    <span class="n">QNetworkSession</span> <span class="o">*</span><span class="n">networkSession</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The server is implemented using a simple class with only one slot, for handling incoming connections.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>tcpServer = new QTcpServer(this);
+if (!tcpServer-&gt;listen()) {
+    QMessageBox::critical(this, tr(&quot;Fortune Server&quot;),
+                          tr(&quot;Unable to start the server: %1.&quot;)
+                          .arg(tcpServer-&gt;errorString()));
+    close();
+    return;
+}
+
+QString ipAddress;
+QList&lt;QHostAddress&gt; ipAddressesList = QNetworkInterface::allAddresses();
+// use the first non-localhost IPv4 address
+for (int i = 0; i &lt; ipAddressesList.size(); ++i) {
+    if (ipAddressesList.at(i) != QHostAddress::LocalHost &amp;&amp;
+        ipAddressesList.at(i).toIPv4Address()) {
+        ipAddress = ipAddressesList.at(i).toString();
+        break;
+    }
+}
+// if we did not find one, use IPv4 localhost
+if (ipAddress.isEmpty())
+    ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
+statusLabel-&gt;setText(tr(&quot;The server is running on\n\nIP: %1\nport: %2\n\n&quot;
+                        &quot;Run the Fortune Client example now.&quot;)
+                     .arg(ipAddress).arg(tcpServer-&gt;serverPort()));
+</pre></div>
+</div>
+<p>In its constructor, our Server object calls <code class="xref py py-func docutils literal"><span class="pre">QTcpServer.listen()</span></code> to set up a <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> to listen on all addresses, on an arbitrary port. In then displays the port <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> picked in a label, so that user knows which port the fortune client should connect to.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fortunes</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You&#39;ve been leading a dog&#39;s life. Stay off the furniture.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You&#39;ve got to think about tomorrow.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You will be surprised by a loud noise.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You will feel hungry again in another hour.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You might have mail.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You cannot kill time without injuring eternity.&quot;</span><span class="p">)</span>
+         <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Computers are not intelligent. They only think they are.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Our server generates a list of random fortunes that it can send to connecting clients.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">tcpServer</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QTcpServer</span><span class="p">::</span><span class="n">newConnection</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Server</span><span class="p">::</span><span class="n">sendFortune</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a client connects to our server, <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> will emit <code class="xref py py-func docutils literal"><span class="pre">QTcpServer.newConnection()</span></code> . In turn, this will invoke our sendFortune() slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Server</span><span class="p">::</span><span class="n">sendFortune</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="n">QByteArray</span> <span class="n">block</span><span class="p">;</span>
+    <span class="n">QDataStream</span> <span class="n">out</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">,</span> <span class="n">QIODevice</span><span class="p">::</span><span class="n">WriteOnly</span><span class="p">);</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="n">QDataStream</span><span class="p">::</span><span class="n">Qt_5_10</span><span class="p">);</span>
+
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">fortunes</span><span class="p">[</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="n">fortunes</span><span class="o">.</span><span class="n">size</span><span class="p">())];</span>
+</pre></div>
+</div>
+<p>The purpose of this slot is to select a random line from our list of fortunes, encode it into a <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> using <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> , and then write it to the connecting socket. This is a common way to transfer binary data using <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> . First we create a <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> and a <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> object, passing the bytearray to <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> ‘s constructor. We then explicitly set the protocol version of <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> to <code class="xref py py-attr docutils literal"><span class="pre">QDataStream.Qt_4_0</span></code> to ensure that we can communicate with clients from future versions of Qt (see <code class="xref py py-func docutils literal"><span class="pre">QDataStream.setVersion()</span></code> ). We continue by streaming in a random fortune.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTcpSocket</span> <span class="o">*</span><span class="n">clientConnection</span> <span class="o">=</span> <span class="n">tcpServer</span><span class="o">-&gt;</span><span class="n">nextPendingConnection</span><span class="p">();</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">clientConnection</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractSocket</span><span class="p">::</span><span class="n">disconnected</span><span class="p">,</span>
+        <span class="n">clientConnection</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QObject</span><span class="p">::</span><span class="n">deleteLater</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We then call <code class="xref py py-func docutils literal"><span class="pre">QTcpServer.nextPendingConnection()</span></code> , which returns the <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> representing the server side of the connection. By connecting <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.disconnected()</span></code> to <code class="xref py py-func docutils literal"><span class="pre">QObject.deleteLater()</span></code> , we ensure that the socket will be deleted after disconnecting.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">clientConnection</span><span class="o">-&gt;</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">);</span>
+    <span class="n">clientConnection</span><span class="o">-&gt;</span><span class="n">disconnectFromHost</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The encoded fortune is written using <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.write()</span></code> , and we finally call <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.disconnectFromHost()</span></code> , which will close the connection after <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> has finished writing the fortune to the network. Because <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> works asynchronously, the data will be written after this function returns, and control goes back to Qt’s event loop. The socket will then close, which in turn will cause <code class="xref py py-func docutils literal"><span class="pre">QObject.deleteLater()</span></code> to delete it.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client Example</span></a>  <a class="reference internal" href="qtnetwork-threadedfortuneserver-example.html#threaded-fortune-server-example"><span class="std std-ref">Threaded Fortune Server Example</span></a></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="server-cpp-example-file">
+<h1>server.cpp Example File<a class="headerlink" href="#server-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="server-h-example-file">
+<h1>server.h Example File<a class="headerlink" href="#server-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortuneserver-pro-example-file">
+<h1>fortuneserver.pro Example File<a class="headerlink" href="#fortuneserver-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,677 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Styles Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Styles Example</a><ul>
+<li><a class="reference internal" href="#norwegianwoodstyle-class-definition">NorwegianWoodStyle Class Definition</a></li>
+<li><a class="reference internal" href="#norwegianwoodstyle-class-implementation">NorwegianWoodStyle Class Implementation</a></li>
+<li><a class="reference internal" href="#widgetgallery-class">WidgetGallery Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#norwegianwoodstyle-cpp-example-file">norwegianwoodstyle.cpp Example File</a></li>
+<li><a class="reference internal" href="#norwegianwoodstyle-h-example-file">norwegianwoodstyle.h Example File</a></li>
+<li><a class="reference internal" href="#widgetgallery-cpp-example-file">widgetgallery.cpp Example File</a></li>
+<li><a class="reference internal" href="#widgetgallery-h-example-file">widgetgallery.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#styles-pro-example-file">styles.pro Example File</a></li>
+<li><a class="reference internal" href="#styles-qrc-example-file">styles.qrc Example File</a></li>
+<li><a class="reference internal" href="#woodbackground-png-image-file">woodbackground.png Image File</a></li>
+<li><a class="reference internal" href="#woodbutton-png-image-file">woodbutton.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="styles-example">
+<span id="id1"></span><h1>Styles Example<a class="headerlink" href="#styles-example" title="Permalink to this headline">¶</a></h1>
+<p>Styles example illustrates how to create custom widget drawing styles using Qt, and demonstrates Qt’s predefined styles</p>
+<blockquote>
+<div><p>The Styles example illustrates how to create custom widget drawing styles using Qt, and demonstrates Qt’s predefined styles.</p>
+<p>A style in Qt is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> or of one of its subclasses. Styles perform drawing on behalf of widgets. Qt provides a whole range of predefined styles, either built into the Qt Widgets module or found in plugins. Styles are usually customized by subclassing <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> and reimplementing a few virtual functions. While <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> provides a transparent way to customize either a specific style or the appropriate platform’s default style, Qt also provides <a class="reference internal" href="../PySide2/QtWidgets/QCommonStyle.html#PySide2.QtWidgets.QCommonStyle" title="PySide2.QtWidgets.QCommonStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCommonStyle</span></code></a> as a convenient base for full custom style implementations.</p>
+<p>In this example, the custom style is called <code class="docutils literal"><span class="pre">NorwegianWoodStyle</span></code> and derives from <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> . Its main features are the wooden textures used for filling most of the widgets and its round buttons and comboboxes.</p>
+<p>To implement the style, we use some advanced features provided by <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> , such as <code class="xref py py-attr docutils literal"><span class="pre">antialiasing</span></code> (to obtain smoother button edges), <code class="xref py py-func docutils literal"><span class="pre">alpha</span> <span class="pre">blending</span></code> (to make the buttons appeared raised or sunken), and <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">painter</span> <span class="pre">paths</span></code></a> (to fill the buttons and draw the outline). We also use many features of <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> and <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> .</p>
+<p>The example consists of the following classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">NorwegianWoodStyle</span></code> inherits from <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> and implements the Norwegian Wood style.</li>
+<li><code class="docutils literal"><span class="pre">WidgetGallery</span></code> is a <code class="docutils literal"><span class="pre">QDialog</span></code> subclass that shows the most common widgets and allows the user to switch style dynamically.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="norwegianwoodstyle-class-definition">
+<span id="id2"></span><h2>NorwegianWoodStyle Class Definition<a class="headerlink" href="#norwegianwoodstyle-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here’s the definition of the <code class="docutils literal"><span class="pre">NorwegianWoodStyle</span></code> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NorwegianWoodStyle</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QProxyStyle</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">NorwegianWoodStyle</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">polish</span><span class="p">(</span><span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">polish</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">unpolish</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">pixelMetric</span><span class="p">(</span><span class="n">PixelMetric</span> <span class="n">metric</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                    <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">styleHint</span><span class="p">(</span><span class="n">StyleHint</span> <span class="n">hint</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                  <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">,</span> <span class="n">QStyleHintReturn</span> <span class="o">*</span><span class="n">returnData</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">drawPrimitive</span><span class="p">(</span><span class="n">PrimitiveElement</span> <span class="n">element</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                       <span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">drawControl</span><span class="p">(</span><span class="n">ControlElement</span> <span class="n">control</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                     <span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">static</span> <span class="n">void</span> <span class="n">setTexture</span><span class="p">(</span><span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">ColorRole</span> <span class="n">role</span><span class="p">,</span>
+                           <span class="n">const</span> <span class="n">QPixmap</span> <span class="o">&amp;</span><span class="n">pixmap</span><span class="p">);</span>
+    <span class="n">static</span> <span class="n">QPainterPath</span> <span class="n">roundRectPath</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The public functions are all declared in <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> ( <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> ‘s grandparent class) and reimplemented here to override the Windows look and feel. The private functions are helper functions.</p>
+</div></blockquote>
+</div>
+<div class="section" id="norwegianwoodstyle-class-implementation">
+<span id="id3"></span><h2>NorwegianWoodStyle Class Implementation<a class="headerlink" href="#norwegianwoodstyle-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We will now review the implementation of the <code class="docutils literal"><span class="pre">NorwegianWoodStyle</span></code> class.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">polish</span><span class="p">(</span><span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QColor</span> <span class="n">brown</span><span class="p">(</span><span class="mi">212</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">95</span><span class="p">);</span>
+    <span class="n">QColor</span> <span class="n">beige</span><span class="p">(</span><span class="mi">236</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
+    <span class="n">QColor</span> <span class="n">slightlyOpaqueBlack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">63</span><span class="p">);</span>
+
+    <span class="n">QPixmap</span> <span class="n">backgroundImage</span><span class="p">(</span><span class="s2">&quot;:/images/woodbackground.png&quot;</span><span class="p">);</span>
+    <span class="n">QPixmap</span> <span class="n">buttonImage</span><span class="p">(</span><span class="s2">&quot;:/images/woodbutton.png&quot;</span><span class="p">);</span>
+    <span class="n">QPixmap</span> <span class="n">midImage</span> <span class="o">=</span> <span class="n">buttonImage</span><span class="p">;</span>
+
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">;</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">midImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">midImage</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="n">slightlyOpaqueBlack</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">polish()</span></code> function is reimplemented from <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> . It takes a <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> as a reference and adapts the palette to fit the style. Most styles don’t need to reimplement that function. The Norwegian Wood style reimplements it to set a “wooden” palette.</p>
+<p>We start by defining a few <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> s that we’ll need. Then we load two PNG images. The <code class="docutils literal"><span class="pre">:</span></code> prefix in the file path indicates that the PNG files are <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">embedded resources</span></a> .</p>
+<p>++———————————————————————————————————————————————————+
+||**woodbackground.png**                                                                                                                                   |
+||                                                                                                                                                         |
+||    This texture is used as the background of most widgets. The wood pattern is horizontal.                                                              |
+++———————————————————————————————————————————————————+
+||**woodbutton.png**                                                                                                                                       |
+||                                                                                                                                                         |
+||    This texture is used for filling push buttons and comboboxes. The wood pattern is vertical and more reddish than the texture used for the background.|
+++———————————————————————————————————————————————————+</p>
+<p>The <code class="docutils literal"><span class="pre">midImage</span></code> variable is initialized to be the same as <code class="docutils literal"><span class="pre">buttonImage</span></code> , but then we use a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> and fill it with a 25% opaque black color (a black with an <code class="xref py py-func docutils literal"><span class="pre">alpha</span> <span class="pre">channel</span></code> of 63). The result is a somewhat darker image than <code class="docutils literal"><span class="pre">buttonImage</span></code> . This image will be used for filling buttons that the user is holding down.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">palette</span> <span class="o">=</span> <span class="n">QPalette</span><span class="p">(</span><span class="n">brown</span><span class="p">);</span>
+
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">BrightText</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">,</span> <span class="n">beige</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Highlight</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkGreen</span><span class="p">);</span>
+    <span class="n">setTexture</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Button</span><span class="p">,</span> <span class="n">buttonImage</span><span class="p">);</span>
+    <span class="n">setTexture</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Mid</span><span class="p">,</span> <span class="n">midImage</span><span class="p">);</span>
+    <span class="n">setTexture</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Window</span><span class="p">,</span> <span class="n">backgroundImage</span><span class="p">);</span>
+
+    <span class="n">QBrush</span> <span class="n">brush</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">background</span><span class="p">();</span>
+    <span class="n">brush</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">brush</span><span class="o">.</span><span class="n">color</span><span class="p">()</span><span class="o">.</span><span class="n">dark</span><span class="p">());</span>
+
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">WindowText</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Text</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">ButtonText</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Button</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+    <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Mid</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We initialize the palette. Palettes have various <code class="xref py py-attr docutils literal"><span class="pre">color</span> <span class="pre">roles</span></code> , such as <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Base</span></code> (used for filling text editors, item views, etc.), <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Text</span></code> (used for foreground text), and <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Background</span></code> (used for the background of most widgets). Each role has its own <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> , which usually is a plain color but can also be a brush pattern or even a texture (a <a class="reference internal" href="../PySide2/QtGui/QPixmap.html#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> ).</p>
+<p>In addition to the roles, palettes have several <code class="xref py py-attr docutils literal"><span class="pre">color</span> <span class="pre">groups</span></code> : active, disabled, and inactive. The active color group is used for painting widgets in the active window. The disabled group is used for disabled widgets. The inactive group is used for all other widgets. Most palettes have identical active and inactive groups, while the disabled group uses darker shades.</p>
+<p>We initialize the <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> object with a brown color. Qt automatically derivates all color roles for all color groups from that single color. We then override some of the default values. For example, we use <code class="xref py py-attr docutils literal"><span class="pre">Qt.darkGreen</span></code> instead of the default ( <code class="xref py py-attr docutils literal"><span class="pre">Qt.darkBlue</span></code> ) for the <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Highlight</span></code> role. The <code class="xref py py-func docutils literal"><span class="pre">QPalette.setBrush()</span></code> overload that we use here sets the same color or brush for all three color groups.</p>
+<p>The <code class="docutils literal"><span class="pre">setTexture()</span></code> function is a private function that sets the texture for a certain color role, while preserving the existing color in the <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> . A <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> can hold both a solid color and a texture at the same time. The solid color is used for drawing text and other graphical elements where textures don’t look good.</p>
+<p>At the end, we set the brush for the disabled color group of the palette. We use <code class="docutils literal"><span class="pre">woodbackground.png</span></code> as the texture for all disabled widgets, including buttons, and use a darker color to accompany the texture.</p>
+<p>Let’s move on to the other functions reimplemented from <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">polish</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QPushButton</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="o">||</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QComboBox</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">widget</span><span class="p">))</span>
+        <span class="n">widget</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_Hover</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This <code class="xref py py-func docutils literal"><span class="pre">QStyle.polish()</span></code> overload is called once on every widget drawn using the style. We reimplement it to set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_Hover</span></code> attribute on <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> s and <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> es. When this attribute is set, Qt generates paint events when the mouse pointer enters or leaves the widget. This makes it possible to render push buttons and comboboxes differently when the mouse pointer is over them.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">unpolish</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QPushButton</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="o">||</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QComboBox</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">widget</span><span class="p">))</span>
+        <span class="n">widget</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_Hover</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This <code class="xref py py-func docutils literal"><span class="pre">QStyle.unpolish()</span></code> overload is called to undo any modification done to the widget in <code class="docutils literal"><span class="pre">polish()</span></code> . For simplicity, we assume that the flag wasn’t set before <code class="docutils literal"><span class="pre">polish()</span></code> was called. In an ideal world, we would remember the original state for each widgets (e.g., using a <code class="xref py py-class docutils literal"><span class="pre">QMap</span></code> &lt; <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> *, bool&gt;) and restore it in <code class="docutils literal"><span class="pre">unpolish()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">PixelMetric</span> <span class="n">metric</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">metric</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">PM_ComboBoxFrameWidth</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">PM_ScrollBarExtent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">widget</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.pixelMetric()</span></code> function returns the size in pixels for a certain user interface element. By reimplementing this function, we can affect the way certain widgets are drawn and their size hint. Here, we return 8 as the width around a shown in a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> , ensuring that there is enough place around the text and the arrow for the Norwegian Wood round corners. The default value for this setting in the Windows style is 2.</p>
+<p>We also change the extent of <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> s, i.e., the height for a horizontal scroll bar and the width for a vertical scroll bar, to be 4 pixels more than in the Windows style. This makes the style a bit more distinctive.</p>
+<p>For all other <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> elements, we use the Windows settings.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">styleHint</span><span class="p">(</span><span class="n">StyleHint</span> <span class="n">hint</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                                  <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">,</span>
+                                  <span class="n">QStyleHintReturn</span> <span class="o">*</span><span class="n">returnData</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">hint</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">SH_DitherDisabledText</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">case</span> <span class="n">SH_EtchDisabledText</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">styleHint</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">returnData</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.styleHint()</span></code> function returns some hints to widgets or to the base style (in our case <a class="reference internal" href="../PySide2/QtWidgets/QProxyStyle.html#PySide2.QtWidgets.QProxyStyle" title="PySide2.QtWidgets.QProxyStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProxyStyle</span></code></a> ) about how to draw the widgets. The Windows style returns <code class="docutils literal"><span class="pre">true</span></code> for the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SH_DitherDisabledText</span></code> hint, resulting in a most unpleasing visual effect. We override this behavior and return <code class="docutils literal"><span class="pre">false</span></code> instead. We also return <code class="docutils literal"><span class="pre">true</span></code> for the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.SH_EtchDisabledText</span></code> hint, meaning that disabled text is rendered with an embossed look.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void NorwegianWoodStyle::drawPrimitive(PrimitiveElement element,
+                                       const QStyleOption *option,
+                                       QPainter *painter,
+                                       const QWidget *widget) const
+{
+    switch (element) {
+    case PE_PanelButtonCommand:
+        {
+            int delta = (option-&gt;state &amp; State_MouseOver) ? 64 : 0;
+            QColor slightlyOpaqueBlack(0, 0, 0, 63);
+            QColor semiTransparentWhite(255, 255, 255, 127 + delta);
+            QColor semiTransparentBlack(0, 0, 0, 127 - delta);
+
+            int x, y, width, height;
+            option-&gt;rect.getRect(&amp;x, &amp;y, &amp;width, &amp;height);
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawPrimitive()</span></code> function is called by Qt widgets to draw various fundamental graphical elements. Here we reimplement it to draw <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> with round corners. The button part of these widgets is drawn using the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PE_PanelButtonCommand</span></code> primitive element.</p>
+<p>The <code class="docutils literal"><span class="pre">option</span></code> parameter, of type <a class="reference internal" href="../PySide2/QtWidgets/QStyleOption.html#PySide2.QtWidgets.QStyleOption" title="PySide2.QtWidgets.QStyleOption"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOption</span></code></a> , contains everything we need to know about the widget we want to draw on. In particular, <code class="docutils literal"><span class="pre">option-&gt;rect</span></code> gives the rectangle within which to draw the primitive element. The <code class="docutils literal"><span class="pre">painter</span></code> parameter is a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object that we can use to draw on the widget.</p>
+<p>The <code class="docutils literal"><span class="pre">widget</span></code> parameter is the widget itself. Normally, all the information we need is available in <code class="docutils literal"><span class="pre">option</span></code> and <code class="docutils literal"><span class="pre">painter</span></code> , so we don’t need <code class="docutils literal"><span class="pre">widget</span></code> . We can use it to perform special effects; for example, QMacStyle uses it to animate default buttons. If you use it, be aware that the caller is allowed to pass a null pointer.</p>
+<p>We start by defining three <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> s that we’ll need later on. We also put the x, y, width, and height components of the widget’s rectangle in local variables. The value used for the <code class="docutils literal"><span class="pre">semiTransparentWhite</span></code> and for the <code class="docutils literal"><span class="pre">semiTransparentBlack</span></code> color’s alpha channel depends on whether the mouse cursor is over the widget or not. Since we set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_Hover</span></code> attribute on <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> s and <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> es, we can rely on the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.State_MouseOver</span></code> flag to be set when the mouse is over the widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainterPath</span> <span class="n">roundRect</span> <span class="o">=</span> <span class="n">roundRectPath</span><span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">radius</span> <span class="o">=</span> <span class="n">qMin</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">roundRect</span></code> variable is a <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> . A <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> is is a vectorial specification of a shape. Any shape (rectangle, ellipse, spline, etc.) or combination of shapes can be expressed as a path. We will use <code class="docutils literal"><span class="pre">roundRect</span></code> both for filling the button background with a wooden texture and for drawing the outline. The <code class="docutils literal"><span class="pre">roundRectPath()</span></code> function is a private function; we will come back to it later.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QBrush brush;
+bool darker;
+
+const QStyleOptionButton *buttonOption =
+        qstyleoption_cast&lt;const QStyleOptionButton *&gt;(option);
+if (buttonOption
+        &amp;&amp; (buttonOption-&gt;features &amp; QStyleOptionButton::Flat)) {
+    brush = option-&gt;palette.background();
+    darker = (option-&gt;state &amp; (State_Sunken | State_On));
+} else {
+    if (option-&gt;state &amp; (State_Sunken | State_On)) {
+        brush = option-&gt;palette.mid();
+        darker = !(option-&gt;state &amp; State_Sunken);
+    } else {
+        brush = option-&gt;palette.button();
+        darker = false;
+    }
+}
+</pre></div>
+</div>
+<p>We define two variables, <code class="docutils literal"><span class="pre">brush</span></code> and <code class="docutils literal"><span class="pre">darker</span></code> , and initialize them based on the state of the button:</p>
+<ul class="simple">
+<li>If the button is a <code class="xref py py-func docutils literal"><span class="pre">flat</span> <span class="pre">button</span></code> , we use the <code class="xref py py-attr docutils literal"><span class="pre">Background</span></code> brush. We set <code class="docutils literal"><span class="pre">darker</span></code> to <code class="docutils literal"><span class="pre">true</span></code> if the button is <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.down()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> .</li>
+<li>If the button is currently held down by the user or in the <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> state, we use the <code class="xref py py-attr docutils literal"><span class="pre">Mid</span></code> component of the palette. We set <code class="docutils literal"><span class="pre">darker</span></code> to <code class="docutils literal"><span class="pre">true</span></code> if the button is <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> .</li>
+<li>Otherwise, we use the <code class="xref py py-attr docutils literal"><span class="pre">Button</span></code> component of the palette.</li>
+</ul>
+<p>The screenshot below illustrates how <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> s are rendered based on their state:</p>
+<p>To discover whether the button is flat or not, we need to cast the <code class="docutils literal"><span class="pre">option</span></code> parameter to <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> and check if the <span class="xref std std-ref">features</span> member specifies the <code class="xref py py-attr docutils literal"><span class="pre">QStyleOptionButton.Flat</span></code> flag. The <code class="xref py py-func docutils literal"><span class="pre">qstyleoption_cast()</span></code> function performs a dynamic cast; if <code class="docutils literal"><span class="pre">option</span></code> is not a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> , <code class="xref py py-func docutils literal"><span class="pre">qstyleoption_cast()</span></code> returns a null pointer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">painter</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">();</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">,</span> <span class="n">brush</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">darker</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">,</span> <span class="n">slightlyOpaqueBlack</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We turn on antialiasing on <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> . Antialiasing is a technique that reduces the visual distortion that occurs when the edges of a shape are converted into pixels. For the Norwegian Wood style, we use it to obtain smoother edges for the round buttons.</p>
+<p>The first call to <code class="xref py py-func docutils literal"><span class="pre">QPainter.fillPath()</span></code> draws the background of the button with a wooden texture. The second call to <code class="xref py py-func docutils literal"><span class="pre">QPainter.fillPath()</span></code> paints the same area with a semi-transparent black color (a black color with an alpha channel of 63) to make the area darker if <code class="docutils literal"><span class="pre">darker</span></code> is true.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">penWidth</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">penWidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">penWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="n">penWidth</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+
+<span class="n">QPen</span> <span class="n">topPen</span><span class="p">(</span><span class="n">semiTransparentWhite</span><span class="p">,</span> <span class="n">penWidth</span><span class="p">);</span>
+<span class="n">QPen</span> <span class="n">bottomPen</span><span class="p">(</span><span class="n">semiTransparentBlack</span><span class="p">,</span> <span class="n">penWidth</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">State_Sunken</span> <span class="o">|</span> <span class="n">State_On</span><span class="p">))</span>
+    <span class="n">qSwap</span><span class="p">(</span><span class="n">topPen</span><span class="p">,</span> <span class="n">bottomPen</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we draw the outline. The top-left half of the outline and the bottom-right half of the outline are drawn using different <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> s to produce a 3D effect. Normally, the top-left half of the outline is drawn lighter whereas the bottom-right half is drawn darker, but if the button is <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.down()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> , we invert the two <a class="reference internal" href="../PySide2/QtGui/QPen.html#PySide2.QtGui.QPen" title="PySide2.QtGui.QPen"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPen</span></code></a> s to give a sunken look to the button.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">radius</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">-</span> <span class="n">radius</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">direction</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RightToLeft</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">qSwap</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x4</span><span class="p">);</span>
+    <span class="n">qSwap</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QPolygon</span> <span class="n">topHalf</span><span class="p">;</span>
+<span class="n">topHalf</span> <span class="o">&lt;&lt;</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">-</span> <span class="n">radius</span><span class="p">)</span>
+        <span class="o">&lt;&lt;</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">);</span>
+
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">setClipPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">setClipRegion</span><span class="p">(</span><span class="n">topHalf</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">IntersectClip</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">topPen</span><span class="p">);</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We draw the top-left part of the outline by calling <code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPath()</span></code> with an appropriate <code class="xref py py-func docutils literal"><span class="pre">clip</span> <span class="pre">region</span></code> . If the <span class="xref std std-ref">layout direction</span> is right-to-left instead of left-to-right, we swap the <code class="docutils literal"><span class="pre">x1</span></code> , <code class="docutils literal"><span class="pre">x2</span></code> , <code class="docutils literal"><span class="pre">x3</span></code> , and <code class="docutils literal"><span class="pre">x4</span></code> variables to obtain correct results. On right-to-left desktop, the “light” comes from the top-right corner of the screen instead of the top-left corner; raised and sunken widgets must be drawn accordingly.</p>
+<p>The diagram below illustrates how 3D effects are drawn according to the layout direction. The area in red on the diagram corresponds to the <code class="docutils literal"><span class="pre">topHalf</span></code> polygon:</p>
+<p>An easy way to test how a style looks in right-to-left mode is to pass the <code class="docutils literal"><span class="pre">-reverse</span></code> command-line option to the application. This option is recognized by the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> constructor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>            <span class="n">QPolygon</span> <span class="n">bottomHalf</span> <span class="o">=</span> <span class="n">topHalf</span><span class="p">;</span>
+            <span class="n">bottomHalf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">);</span>
+
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setClipPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">);</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setClipRegion</span><span class="p">(</span><span class="n">bottomHalf</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">IntersectClip</span><span class="p">);</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">bottomPen</span><span class="p">);</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">);</span>
+
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">palette</span><span class="o">.</span><span class="n">foreground</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">());</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setClipping</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPath</span><span class="p">(</span><span class="n">roundRect</span><span class="p">);</span>
+
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">restore</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The bottom-right part of the outline is drawn in a similar fashion. Then we draw a one-pixel wide outline around the entire button, using the <code class="xref py py-attr docutils literal"><span class="pre">Foreground</span></code> component of the <a class="reference internal" href="../PySide2/QtGui/QPalette.html#PySide2.QtGui.QPalette" title="PySide2.QtGui.QPalette"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPalette</span></code></a> .</p>
+<p>This completes the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PE_PanelButtonCommand</span></code> case of the <code class="docutils literal"><span class="pre">switch</span></code> statement. Other primitive elements are handled by the base style. Let’s now turn to the other <code class="docutils literal"><span class="pre">NorwegianWoodStyle</span></code> member functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">drawControl</span><span class="p">(</span><span class="n">ControlElement</span> <span class="n">element</span><span class="p">,</span>
+                                     <span class="n">const</span> <span class="n">QStyleOption</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span>
+                                     <span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span>
+                                     <span class="n">const</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">CE_PushButtonLabel</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">QStyleOptionButton</span> <span class="n">myButtonOption</span><span class="p">;</span>
+            <span class="n">const</span> <span class="n">QStyleOptionButton</span> <span class="o">*</span><span class="n">buttonOption</span> <span class="o">=</span>
+                    <span class="n">qstyleoption_cast</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">QStyleOptionButton</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">buttonOption</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">myButtonOption</span> <span class="o">=</span> <span class="o">*</span><span class="n">buttonOption</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">myButtonOption</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">currentColorGroup</span><span class="p">()</span>
+                        <span class="o">!=</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">Disabled</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">myButtonOption</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">State_Sunken</span> <span class="o">|</span> <span class="n">State_On</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="n">myButtonOption</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">ButtonText</span><span class="p">,</span>
+                                <span class="n">myButtonOption</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">brightText</span><span class="p">());</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">drawControl</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myButtonOption</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">QProxyStyle</span><span class="p">::</span><span class="n">drawControl</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">widget</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We reimplement <code class="xref py py-func docutils literal"><span class="pre">QStyle.drawControl()</span></code> to draw the text on a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> in a bright color when the button is <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.down()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> .</p>
+<p>If the <code class="docutils literal"><span class="pre">option</span></code> parameter points to a <a class="reference internal" href="../PySide2/QtWidgets/QStyleOptionButton.html#PySide2.QtWidgets.QStyleOptionButton" title="PySide2.QtWidgets.QStyleOptionButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleOptionButton</span></code></a> object (it normally should), we take a copy of the object and modify its <span class="xref std std-ref">palette</span> member to make the <code class="xref py py-attr docutils literal"><span class="pre">QPalette.ButtonText</span></code> be the same as the <code class="xref py py-attr docutils literal"><span class="pre">QPalette.BrightText</span></code> component (unless the widget is disabled).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">setTexture</span><span class="p">(</span><span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">,</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">ColorRole</span> <span class="n">role</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QPixmap</span> <span class="o">&amp;</span><span class="n">pixmap</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">QPalette</span><span class="p">::</span><span class="n">NColorGroups</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QColor</span> <span class="n">color</span> <span class="o">=</span> <span class="n">palette</span><span class="o">.</span><span class="n">brush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">ColorGroup</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">role</span><span class="p">)</span><span class="o">.</span><span class="n">color</span><span class="p">();</span>
+        <span class="n">palette</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">ColorGroup</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">role</span><span class="p">,</span> <span class="n">QBrush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setTexture()</span></code> function is a private function that sets the <code class="xref py py-func docutils literal"><span class="pre">QBrush.texture()</span></code> component of the <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> es for a certain <code class="xref py py-attr docutils literal"><span class="pre">color</span> <span class="pre">role</span></code> , for all three <code class="xref py py-attr docutils literal"><span class="pre">color</span> <span class="pre">groups</span></code> (active, disabled, inactive). We used it to initialize the Norwegian Wood palette in <code class="docutils literal"><span class="pre">polish(QPalette</span> <span class="pre">&amp;)</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainterPath</span> <span class="n">NorwegianWoodStyle</span><span class="p">::</span><span class="n">roundRectPath</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">radius</span> <span class="o">=</span> <span class="n">qMin</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">diam</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span>
+
+    <span class="nb">int</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">;</span>
+    <span class="n">rect</span><span class="o">.</span><span class="n">getCoords</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y2</span><span class="p">);</span>
+
+    <span class="n">QPainterPath</span> <span class="n">path</span><span class="p">;</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">radius</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">diam</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">90.0</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">radius</span><span class="p">,</span> <span class="n">y1</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">),</span> <span class="mf">90.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">90.0</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">radius</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">),</span> <span class="mf">180.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">90.0</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">radius</span><span class="p">,</span> <span class="n">y2</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">diam</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">,</span> <span class="n">diam</span><span class="p">),</span> <span class="mf">270.0</span><span class="p">,</span> <span class="o">+</span><span class="mf">90.0</span><span class="p">);</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">closeSubpath</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">roundRectPath()</span></code> function is a private function that constructs a <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> object for round buttons. The path consists of eight segments: four arc segments for the corners and four lines for the sides.</p>
+<p>With around 250 lines of code, we have a fully functional custom style based on one of the predefined styles. Custom styles can be used to provide a distinct look to an application or family of applications.</p>
+</div></blockquote>
+</div>
+<div class="section" id="widgetgallery-class">
+<span id="id4"></span><h2>WidgetGallery Class<a class="headerlink" href="#widgetgallery-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For completeness, we will quickly review the <code class="docutils literal"><span class="pre">WidgetGallery</span></code> class, which contains the most common Qt widgets and allows the user to change style dynamically. Here’s the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WidgetGallery</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">WidgetGallery</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">changeStyle</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">styleName</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">changePalette</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">advanceProgressBar</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createTopLeftGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createTopRightGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createBottomLeftTabWidget</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createBottomRightGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createProgressBar</span><span class="p">();</span>
+
+    <span class="n">QPalette</span> <span class="n">originalPalette</span><span class="p">;</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">styleLabel</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">styleComboBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">useStylePaletteCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">disableWidgetsCheckBox</span><span class="p">;</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Here’s the <code class="docutils literal"><span class="pre">WidgetGallery</span></code> constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WidgetGallery</span><span class="p">::</span><span class="n">WidgetGallery</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QDialog</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">originalPalette</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">palette</span><span class="p">();</span>
+
+    <span class="n">styleComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">styleComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="s2">&quot;NorwegianWood&quot;</span><span class="p">);</span>
+    <span class="n">styleComboBox</span><span class="o">-&gt;</span><span class="n">addItems</span><span class="p">(</span><span class="n">QStyleFactory</span><span class="p">::</span><span class="n">keys</span><span class="p">());</span>
+
+    <span class="n">styleLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Style:&quot;</span><span class="p">));</span>
+    <span class="n">styleLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">styleComboBox</span><span class="p">);</span>
+
+    <span class="n">useStylePaletteCheckBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Use style&#39;s standard palette&quot;</span><span class="p">));</span>
+    <span class="n">useStylePaletteCheckBox</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">disableWidgetsCheckBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Disable widgets&quot;</span><span class="p">));</span>
+
+    <span class="n">createTopLeftGroupBox</span><span class="p">();</span>
+    <span class="n">createTopRightGroupBox</span><span class="p">();</span>
+    <span class="n">createBottomLeftTabWidget</span><span class="p">();</span>
+    <span class="n">createBottomRightGroupBox</span><span class="p">();</span>
+    <span class="n">createProgressBar</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We start by creating child widgets. The Style combobox is initialized with all the styles known to <a class="reference internal" href="../PySide2/QtWidgets/QStyleFactory.html#PySide2.QtWidgets.QStyleFactory" title="PySide2.QtWidgets.QStyleFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleFactory</span></code></a> , in addition to <code class="docutils literal"><span class="pre">NorwegianWood</span></code> . The <code class="docutils literal"><span class="pre">create...()</span></code> functions are private functions that set up the various parts of the <code class="docutils literal"><span class="pre">WidgetGallery</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">styleComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="n">QString</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changeStyle</span><span class="p">(</span><span class="n">QString</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">useStylePaletteCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changePalette</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">disableWidgetsCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">topLeftGroupBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setDisabled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">disableWidgetsCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">topRightGroupBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setDisabled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">disableWidgetsCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">bottomLeftTabWidget</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setDisabled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">disableWidgetsCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+        <span class="n">bottomRightGroupBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setDisabled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>We connect the Style combobox to the <code class="docutils literal"><span class="pre">changeStyle()</span></code> private slot, the Use style’s standard palette check box to the <code class="docutils literal"><span class="pre">changePalette()</span></code> slot, and the Disable widgets check box to the child widgets’ <code class="xref py py-func docutils literal"><span class="pre">QWidget.setDisabled()</span></code> slot.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">topLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">topLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">styleLabel</span><span class="p">);</span>
+    <span class="n">topLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">styleComboBox</span><span class="p">);</span>
+    <span class="n">topLayout</span><span class="o">-&gt;</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">topLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">useStylePaletteCheckBox</span><span class="p">);</span>
+    <span class="n">topLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">disableWidgetsCheckBox</span><span class="p">);</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">topLayout</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">topLeftGroupBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">topRightGroupBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">bottomLeftTabWidget</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">bottomRightGroupBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">progressBar</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setRowStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setRowStretch</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Styles&quot;</span><span class="p">));</span>
+    <span class="n">changeStyle</span><span class="p">(</span><span class="s2">&quot;NorwegianWood&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we put the child widgets in layouts.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WidgetGallery</span><span class="p">::</span><span class="n">changeStyle</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">styleName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">styleName</span> <span class="o">==</span> <span class="s2">&quot;NorwegianWood&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QApplication</span><span class="p">::</span><span class="n">setStyle</span><span class="p">(</span><span class="n">new</span> <span class="n">NorwegianWoodStyle</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">QApplication</span><span class="p">::</span><span class="n">setStyle</span><span class="p">(</span><span class="n">QStyleFactory</span><span class="p">::</span><span class="n">create</span><span class="p">(</span><span class="n">styleName</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">changePalette</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user changes the style in the combobox, we call <code class="xref py py-func docutils literal"><span class="pre">QApplication.setStyle()</span></code> to dynamically change the style of the application.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WidgetGallery</span><span class="p">::</span><span class="n">changePalette</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">useStylePaletteCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+        <span class="n">QApplication</span><span class="p">::</span><span class="n">setPalette</span><span class="p">(</span><span class="n">QApplication</span><span class="p">::</span><span class="n">style</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">standardPalette</span><span class="p">());</span>
+    <span class="k">else</span>
+        <span class="n">QApplication</span><span class="p">::</span><span class="n">setPalette</span><span class="p">(</span><span class="n">originalPalette</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the user turns the Use style’s standard palette on, the current style’s <code class="xref py py-func docutils literal"><span class="pre">standard</span> <span class="pre">palette</span></code> is used; otherwise, the system’s default palette is honored.</p>
+<p>For the Norwegian Wood style, this makes no difference because we always override the palette with our own palette in <code class="docutils literal"><span class="pre">NorwegianWoodStyle::polish()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WidgetGallery</span><span class="p">::</span><span class="n">advanceProgressBar</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">curVal</span> <span class="o">=</span> <span class="n">progressBar</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">maxVal</span> <span class="o">=</span> <span class="n">progressBar</span><span class="o">-&gt;</span><span class="n">maximum</span><span class="p">();</span>
+    <span class="n">progressBar</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">curVal</span> <span class="o">+</span> <span class="p">(</span><span class="n">maxVal</span> <span class="o">-</span> <span class="n">curVal</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">advanceProgressBar()</span></code> slot is called at regular intervals to advance the progress bar. Since we don’t know how long the user will keep the Styles application running, we use a logarithmic formula: The closer the progress bar gets to 100%, the slower it advances.</p>
+<p>We will review <code class="docutils literal"><span class="pre">createProgressBar()</span></code> in a moment.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WidgetGallery</span><span class="p">::</span><span class="n">createTopLeftGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">topLeftGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Group 1&quot;</span><span class="p">));</span>
+
+    <span class="n">radioButton1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Radio button 1&quot;</span><span class="p">));</span>
+    <span class="n">radioButton2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Radio button 2&quot;</span><span class="p">));</span>
+    <span class="n">radioButton3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Radio button 3&quot;</span><span class="p">));</span>
+    <span class="n">radioButton1</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">checkBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Tri-state check box&quot;</span><span class="p">));</span>
+    <span class="n">checkBox</span><span class="o">-&gt;</span><span class="n">setTristate</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">checkBox</span><span class="o">-&gt;</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PartiallyChecked</span><span class="p">);</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">radioButton1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">radioButton2</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">radioButton3</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">checkBox</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">topLeftGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createTopLeftGroupBox()</span></code> function creates the <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> that occupies the top-left corner of the <code class="docutils literal"><span class="pre">WidgetGallery</span></code> . We skip the <code class="docutils literal"><span class="pre">createTopRightGroupBox()</span></code> , <code class="docutils literal"><span class="pre">createBottomLeftTabWidget()</span></code> , and <code class="docutils literal"><span class="pre">createBottomRightGroupBox()</span></code> functions, which are very similar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WidgetGallery</span><span class="p">::</span><span class="n">createProgressBar</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">progressBar</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QProgressBar</span><span class="p">;</span>
+    <span class="n">progressBar</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">);</span>
+    <span class="n">progressBar</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QTimer</span> <span class="o">*</span><span class="n">timer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTimer</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">timeout</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">advanceProgressBar</span><span class="p">()));</span>
+    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">createProgressBar()</span></code> , we create a <a class="reference internal" href="../PySide2/QtWidgets/QProgressBar.html#PySide2.QtWidgets.QProgressBar" title="PySide2.QtWidgets.QProgressBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProgressBar</span></code></a> at the bottom of the <code class="docutils literal"><span class="pre">WidgetGallery</span></code> and connect its <code class="xref py py-func docutils literal"><span class="pre">QTimer.timeout()</span></code> signal to the <code class="docutils literal"><span class="pre">advanceProgressBar()</span></code> slot.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="norwegianwoodstyle-cpp-example-file">
+<h1>norwegianwoodstyle.cpp Example File<a class="headerlink" href="#norwegianwoodstyle-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="norwegianwoodstyle-h-example-file">
+<h1>norwegianwoodstyle.h Example File<a class="headerlink" href="#norwegianwoodstyle-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="widgetgallery-cpp-example-file">
+<h1>widgetgallery.cpp Example File<a class="headerlink" href="#widgetgallery-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="widgetgallery-h-example-file">
+<h1>widgetgallery.h Example File<a class="headerlink" href="#widgetgallery-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="styles-pro-example-file">
+<h1>styles.pro Example File<a class="headerlink" href="#styles-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="styles-qrc-example-file">
+<h1>styles.qrc Example File<a class="headerlink" href="#styles-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="woodbackground-png-image-file">
+<h1>woodbackground.png Image File<a class="headerlink" href="#woodbackground-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="woodbutton-png-image-file">
+<h1>woodbutton.png Image File<a class="headerlink" href="#woodbutton-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

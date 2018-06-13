@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Threaded Fortune Server Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Threaded Fortune Server Example</a></li>
+<li><a class="reference internal" href="#dialog-cpp-example-file">dialog.cpp Example File</a></li>
+<li><a class="reference internal" href="#dialog-h-example-file">dialog.h Example File</a></li>
+<li><a class="reference internal" href="#fortuneserver-cpp-example-file">fortuneserver.cpp Example File</a></li>
+<li><a class="reference internal" href="#fortuneserver-h-example-file">fortuneserver.h Example File</a></li>
+<li><a class="reference internal" href="#fortunethread-cpp-example-file">fortunethread.cpp Example File</a></li>
+<li><a class="reference internal" href="#fortunethread-h-example-file">fortunethread.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#threadedfortuneserver-pro-example-file">threadedfortuneserver.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="threaded-fortune-server-example">
+<span id="id1"></span><h1>Threaded Fortune Server Example<a class="headerlink" href="#threaded-fortune-server-example" title="Permalink to this headline">¶</a></h1>
+<p>Threaded Fortune Server example shows how to create a server for a simple network service that uses threads to handle requests from different clients. It is intended to be run alongside the Fortune Client example</p>
+<blockquote>
+<div><p>The Threaded Fortune Server example shows how to create a server for a simple network service that uses threads to handle requests from different clients. It is intended to be run alongside the Fortune Client example.</p>
+<p>The implementation of this example is similar to that of the <a class="reference internal" href="qtnetwork-fortuneserver-example.html#fortune-server-example"><span class="std std-ref">Fortune Server</span></a> example, but here we will implement a subclass of <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> that starts each connection in a different thread.</p>
+<p>For this we need two classes: FortuneServer, a <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> subclass, and FortuneThread, which inherits <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FortuneServer</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QTcpServer</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">FortuneServer</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">incomingConnection</span><span class="p">(</span><span class="n">qintptr</span> <span class="n">socketDescriptor</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QStringList</span> <span class="n">fortunes</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>FortuneServer inherits <a class="reference internal" href="../PySide2/QtNetwork/QTcpServer.html#PySide2.QtNetwork.QTcpServer" title="PySide2.QtNetwork.QTcpServer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpServer</span></code></a> and reimplements <code class="xref py py-func docutils literal"><span class="pre">QTcpServer.incomingConnection()</span></code> . We also use it for storing the list of random fortunes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FortuneServer</span><span class="p">::</span><span class="n">FortuneServer</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QTcpServer</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">fortunes</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You&#39;ve been leading a dog&#39;s life. Stay off the furniture.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You&#39;ve got to think about tomorrow.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You will be surprised by a loud noise.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You will feel hungry again in another hour.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You might have mail.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;You cannot kill time without injuring eternity.&quot;</span><span class="p">)</span>
+             <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Computers are not intelligent. They only think they are.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use FortuneServer’s constructor to simply generate the list of fortunes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">FortuneServer</span><span class="p">::</span><span class="n">incomingConnection</span><span class="p">(</span><span class="n">qintptr</span> <span class="n">socketDescriptor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QString</span> <span class="n">fortune</span> <span class="o">=</span> <span class="n">fortunes</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="n">fortunes</span><span class="o">.</span><span class="n">size</span><span class="p">()));</span>
+    <span class="n">FortuneThread</span> <span class="o">*</span><span class="n">thread</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FortuneThread</span><span class="p">(</span><span class="n">socketDescriptor</span><span class="p">,</span> <span class="n">fortune</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">thread</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">thread</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">deleteLater</span><span class="p">()));</span>
+    <span class="n">thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Our implementation of <code class="xref py py-func docutils literal"><span class="pre">QTcpServer.incomingConnection()</span></code> creates a FortuneThread object, passing the incoming socket descriptor and a random fortune to FortuneThread’s constructor. By connecting FortuneThread’s finished() signal to <code class="xref py py-func docutils literal"><span class="pre">QObject.deleteLater()</span></code> , we ensure that the thread gets deleted once it has finished. We can then call <code class="xref py py-func docutils literal"><span class="pre">QThread.start()</span></code> , which starts the thread.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FortuneThread</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QThread</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">FortuneThread</span><span class="p">(</span><span class="nb">int</span> <span class="n">socketDescriptor</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fortune</span><span class="p">,</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">run</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">error</span><span class="p">(</span><span class="n">QTcpSocket</span><span class="p">::</span><span class="n">SocketError</span> <span class="n">socketError</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">socketDescriptor</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Moving on to the FortuneThread class, this is a <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> subclass whose job is to write the fortune to the connected socket. The class reimplements <code class="xref py py-func docutils literal"><span class="pre">QThread.run()</span></code> , and it has a signal for reporting errors.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FortuneThread</span><span class="p">::</span><span class="n">FortuneThread</span><span class="p">(</span><span class="nb">int</span> <span class="n">socketDescriptor</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fortune</span><span class="p">,</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QThread</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">socketDescriptor</span><span class="p">(</span><span class="n">socketDescriptor</span><span class="p">),</span> <span class="n">text</span><span class="p">(</span><span class="n">fortune</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>FortuneThread’s constructor simply stores the socket descriptor and fortune text, so that they are available for run() later on.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">FortuneThread</span><span class="p">::</span><span class="n">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QTcpSocket</span> <span class="n">tcpSocket</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The first thing our run() function does is to create a <a class="reference internal" href="../PySide2/QtNetwork/QTcpSocket.html#PySide2.QtNetwork.QTcpSocket" title="PySide2.QtNetwork.QTcpSocket"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtNetwork.QTcpSocket</span></code></a> object on the stack. What’s worth noticing is that we are creating this object inside the thread, which automatically associates the socket to the thread’s event loop. This ensures that Qt will not try to deliver events to our socket from the main thread while we are accessing it from FortuneThread::run().</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!tcpSocket.setSocketDescriptor(socketDescriptor)) {
+    emit error(tcpSocket.error());
+    return;
+}
+</pre></div>
+</div>
+<p>The socket is initialized by calling <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.setSocketDescriptor()</span></code> , passing our socket descriptor as an argument. We expect this to succeed, but just to be sure, (although unlikely, the system may run out of resources,) we catch the return value and report any error.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QByteArray</span> <span class="n">block</span><span class="p">;</span>
+<span class="n">QDataStream</span> <span class="n">out</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">,</span> <span class="n">QIODevice</span><span class="p">::</span><span class="n">WriteOnly</span><span class="p">);</span>
+<span class="n">out</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="n">QDataStream</span><span class="p">::</span><span class="n">Qt_4_0</span><span class="p">);</span>
+<span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>As with the <a class="reference internal" href="qtnetwork-fortuneserver-example.html#fortune-server-example"><span class="std std-ref">Fortune Server</span></a> example, we encode the fortune into a <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> using <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">tcpSocket</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">block</span><span class="p">);</span>
+    <span class="n">tcpSocket</span><span class="o">.</span><span class="n">disconnectFromHost</span><span class="p">();</span>
+    <span class="n">tcpSocket</span><span class="o">.</span><span class="n">waitForDisconnected</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But unlike the previous example, we finish off by calling <code class="xref py py-func docutils literal"><span class="pre">QTcpSocket.waitForDisconnected()</span></code> , which blocks the calling thread until the socket has disconnected. Because we are running in a separate thread, the GUI will remain responsive.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="qtnetwork-fortuneserver-example.html#fortune-server-example"><span class="std std-ref">Fortune Server Example</span></a>  <a class="reference internal" href="qtnetwork-fortuneclient-example.html#fortune-client-example"><span class="std std-ref">Fortune Client Example</span></a>  <a class="reference internal" href="qtnetwork-blockingfortuneclient-example.html#blocking-fortune-client-example"><span class="std std-ref">Blocking Fortune Client Example</span></a></p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="dialog-cpp-example-file">
+<h1>dialog.cpp Example File<a class="headerlink" href="#dialog-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dialog-h-example-file">
+<h1>dialog.h Example File<a class="headerlink" href="#dialog-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortuneserver-cpp-example-file">
+<h1>fortuneserver.cpp Example File<a class="headerlink" href="#fortuneserver-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortuneserver-h-example-file">
+<h1>fortuneserver.h Example File<a class="headerlink" href="#fortuneserver-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortunethread-cpp-example-file">
+<h1>fortunethread.cpp Example File<a class="headerlink" href="#fortunethread-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortunethread-h-example-file">
+<h1>fortunethread.h Example File<a class="headerlink" href="#fortunethread-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="threadedfortuneserver-pro-example-file">
+<h1>threadedfortuneserver.pro Example File<a class="headerlink" href="#threadedfortuneserver-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

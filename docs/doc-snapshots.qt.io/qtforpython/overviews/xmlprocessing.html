@@ -1,0 +1,726 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XQuery &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">XQuery</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#advantages-of-using-qt-xml-patterns-and-xquery">Advantages of Using Qt XML Patterns and XQuery</a></li>
+<li><a class="reference internal" href="#using-the-qt-xml-patterns-module">Using the Qt XML Patterns Module</a></li>
+<li><a class="reference internal" href="#running-the-query-engine-from-your-qt-application">Running the query engine from your Qt application</a></li>
+<li><a class="reference internal" href="#running-the-query-engine-from-the-command-line-utility">Running the query engine from the command line utility</a></li>
+<li><a class="reference internal" href="#the-xquery-data-model">The XQuery Data Model</a></li>
+<li><a class="reference internal" href="#binding-program-variables-to-xquery-variables">Binding program variables to XQuery variables</a></li>
+<li><a class="reference internal" href="#binding-to-qvariant-time">Binding To QVariant::Time</a></li>
+<li><a class="reference internal" href="#id15">Binding To QVariantList</a></li>
+<li><a class="reference internal" href="#interpreting-xquery-results">Interpreting XQuery results</a></li>
+<li><a class="reference internal" href="#id19">Handling QXmlNames</a></li>
+<li><a class="reference internal" href="#no-mapping-for-xs-time">No mapping for xs:time</a></li>
+<li><a class="reference internal" href="#using-xquery-with-non-xml-data">Using XQuery with Non-XML Data</a></li>
+<li><a class="reference internal" href="#more-on-using-qt-xml-patterns-with-non-xml-data">More on Using Qt XML Patterns with Non-XML Data</a></li>
+<li><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
+<li><a class="reference internal" href="#code-injection">Code Injection</a></li>
+<li><a class="reference internal" href="#denial-of-service-attacks">Denial of Service Attacks</a></li>
+<li><a class="reference internal" href="#features-and-conformance">Features and Conformance</a></li>
+<li><a class="reference internal" href="#xquery-1-0">XQuery 1.0</a></li>
+<li><a class="reference internal" href="#xslt-2-0">XSLT 2.0</a></li>
+<li><a class="reference internal" href="#xpath-2-0">XPath 2.0</a></li>
+<li><a class="reference internal" href="#xml-id">xml:id</a></li>
+<li><a class="reference internal" href="#xml-schema-1-0">XML Schema 1.0</a></li>
+<li><a class="reference internal" href="#resource-loading">Resource Loading</a></li>
+<li><a class="reference internal" href="#xml">XML</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="xquery">
+<span id="id1"></span><h1>XQuery<a class="headerlink" href="#xquery" title="Permalink to this headline">¶</a></h1>
+<p>An overview of Qt’s support for using XML technologies in Qt programs</p>
+<blockquote>
+<div><p id="xstime-not-mapped"><span id="handling-qxmlnames"></span><span id="binding-to-qvariantlist"></span><span id="binding-to-time"></span><span id="qtxmlpatterns-example-query2"></span><span id="qtxdm"></span><span id="qtxmlpatterns-example-query"></span>An overview of Qt’s support for using XML technologies in Qt programs.</p>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="id2"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> is a language for traversing XML documents to select and aggregate items of interest and to transform them for output as XML or some other format. XPath is the <em>element selection</em> part of <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> .</p>
+<p>The Qt XML Patterns module supports using <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> 1.0 and XPath 2.0 in Qt applications, for querying XML data <em>and</em> for querying <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">non-XML</span> <span class="pre">data</span> <span class="pre">that</span> <span class="pre">can</span> <span class="pre">be</span> <span class="pre">modeled</span> <span class="pre">to</span> <span class="pre">look</span> <span class="pre">like</span> <span class="pre">XML</span></code></a> . Readers who are not familiar with the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> /XPath language can read <a class="reference internal" href="xquery-introduction.html#a-short-path-to-xquery"><span class="std std-ref">A Short Path to XQuery</span></a> for a brief introduction.</p>
+</div></blockquote>
+</div>
+<div class="section" id="advantages-of-using-qt-xml-patterns-and-xquery">
+<span id="id3"></span><h2>Advantages of Using Qt XML Patterns and XQuery<a class="headerlink" href="#advantages-of-using-qt-xml-patterns-and-xquery" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> /XPath language simplifies data searching and transformation tasks by eliminating the need for doing a lot of C++ or Java procedural programming for each new query task. Here is an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> that constructs a bibliography of the contents of a library:</p>
+<div class="highlight-default" id="id4"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/patternist/introductionExample.xq&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>First, the query opens a <code class="docutils literal"><span class="pre">&lt;bibliography&gt;</span></code> element in the output. The <a class="reference internal" href="xquery-introduction.html#a-short-path-to-xquery"><span class="std std-ref">embedded path expression</span></a> then loads the XML document describing the contents of the library (<code class="docutils literal"><span class="pre">library.xml</span></code> ) and begins the search. For each <code class="docutils literal"><span class="pre">&lt;book&gt;</span></code> element it finds, where the publisher was Addison-Wesley and the publication year was after 1991, it creates a new <code class="docutils literal"><span class="pre">&lt;book&gt;</span></code> element in the output as a child of the open <code class="docutils literal"><span class="pre">&lt;bibliography&gt;</span></code> element. Each new <code class="docutils literal"><span class="pre">&lt;book&gt;</span></code> element gets the book’s title as its contents and the book’s publication year as an attribute. Finally, the <code class="docutils literal"><span class="pre">&lt;bibliography&gt;</span></code> element is closed.</p>
+<p>The advantages of using Qt XML Patterns and <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> in your Qt programs are summarized as follows:</p>
+<ul class="simple">
+<li><strong>Ease of development</strong>: All the C++ programming required to perform data query tasks can be replaced by a simple <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> like the example above.</li>
+<li><strong>Comprehensive functionality</strong>: The expression syntax and rich set of functions and operators provided by <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> are sufficient for performing any data searching, selecting, and sorting tasks.</li>
+<li><strong>Conformance to standards</strong>: Conformance to all applicable XML and <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> standards ensures that Qt XML Patterns can always process XML documents generated by other conformant applications, and that XML documents created with Qt XML Patterns can be processed by other conformant applications.</li>
+<li><strong>Maximal flexibility</strong> The Qt XML Patterns module can be used to query XML data <em>and</em> non-XML data that can be <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">modeled</span> <span class="pre">to</span> <span class="pre">look</span> <span class="pre">like</span> <span class="pre">XML</span></code></a> .</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="using-the-qt-xml-patterns-module">
+<span id="id5"></span><h2>Using the Qt XML Patterns Module<a class="headerlink" href="#using-the-qt-xml-patterns-module" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>There are two ways Qt XML Patterns can be used to evaluate queries. You can run the query engine in your Qt application using the Qt XML Patterns C++ API, or you can run the query engine from the command line using Qt’s <code class="docutils literal"><span class="pre">xmlpatterns</span></code> command line utility.</div></blockquote>
+</div>
+<div class="section" id="running-the-query-engine-from-your-qt-application">
+<span id="id6"></span><h2>Running the query engine from your Qt application<a class="headerlink" href="#running-the-query-engine-from-your-qt-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If we save the example <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> shown above in a text file (e.g. <code class="docutils literal"><span class="pre">myquery.xq</span></code> ), we can run it from a Qt application using a standard Qt XML Patterns code sequence:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QFile</span> <span class="n">xq</span><span class="p">(</span><span class="s2">&quot;myquery.xq&quot;</span><span class="p">);</span>
+
+<span class="n">QXmlQuery</span> <span class="n">query</span><span class="p">;</span>
+<span class="n">query</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="o">&amp;</span><span class="n">xq</span><span class="p">,</span> <span class="n">QUrl</span><span class="p">::</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">xq</span><span class="o">.</span><span class="n">fileName</span><span class="p">()));</span>
+
+<span class="n">QXmlSerializer</span> <span class="n">serializer</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">myOutputDevice</span><span class="p">);</span>
+<span class="n">query</span><span class="o">.</span><span class="n">evaluateTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serializer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>First construct a <a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> for the text file containing the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> (<code class="docutils literal"><span class="pre">myquery.xq</span></code> ). Then create an instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlQuery.html#PySide2.QtXmlPatterns.QXmlQuery" title="PySide2.QtXmlPatterns.QXmlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlQuery</span></code></a> and call its <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> function to load and parse the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> file. Then create an <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSerializer.html#PySide2.QtXmlPatterns.QXmlSerializer" title="PySide2.QtXmlPatterns.QXmlSerializer"><code class="xref py py-class docutils literal"><span class="pre">XML</span> <span class="pre">serializer</span></code></a> to output the query’s result set as unformatted XML. Finally, call the <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.evaluateTo()</span></code> function to evaluate the query and serialize the results as XML.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you compile Qt yourself, the Qt XML Patterns module will <em>not</em> be built if exceptions are disabled, or if you compile Qt with a compiler that doesn’t support member templates, e.g., MSVC 6.</p>
+</div>
+<p>See the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlQuery.html#PySide2.QtXmlPatterns.QXmlQuery" title="PySide2.QtXmlPatterns.QXmlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlQuery</span></code></a> documentation for more information about the Qt XML Patterns C++ API.</p>
+</div></blockquote>
+</div>
+<div class="section" id="running-the-query-engine-from-the-command-line-utility">
+<span id="id7"></span><h2>Running the query engine from the command line utility<a class="headerlink" href="#running-the-query-engine-from-the-command-line-utility" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>xmlpatterns</em> is a command line utility for running XQueries. It expects the name of a file containing the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> text.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xmlpatterns</span> <span class="n">myQuery</span><span class="o">.</span><span class="n">xq</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> in <code class="docutils literal"><span class="pre">myQuery.xq</span></code> will be evaluated and its output written to <code class="docutils literal"><span class="pre">stdout</span></code> . Pass the <code class="docutils literal"><span class="pre">-help</span></code> switch to get the list of input flags and their meanings.</p>
+<p>xmlpatterns can be used in scripting. However, the descriptions and messages it outputs were not meant to be parsed and may be changed in future releases of Qt.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-xquery-data-model">
+<span id="id8"></span><span id="id9"></span><h2>The XQuery Data Model<a class="headerlink" href="#the-xquery-data-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> represents data items as <em>atomic values</em> or <em>nodes</em> . An atomic value is a value in the domain of one of the built-in datatypes defined in Part 2 of the W3C XML Schema. A node is normally an XML element or attribute, but when non-XML data is <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">modeled</span> <span class="pre">to</span> <span class="pre">look</span> <span class="pre">like</span> <span class="pre">XML</span></code></a> , a node can also represent a non-XML data items.</p>
+<p>When you run an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> using the C++ API in a Qt application, you will often want to bind program variables to $variables in the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> . After the query is evaluated, you will want to interpret the sequence of data items in the result set.</p>
+</div></blockquote>
+</div>
+<div class="section" id="binding-program-variables-to-xquery-variables">
+<span id="id10"></span><h2>Binding program variables to XQuery variables<a class="headerlink" href="#binding-program-variables-to-xquery-variables" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When you want to run a parameterized <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> from your Qt application, you will need to <code class="xref py py-func docutils literal"><span class="pre">bind</span> <span class="pre">variables</span></code> in your program to $name variables in your <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> .</p>
+<p>Suppose you want to parameterize the bibliography <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> in the example above. You could define variables for the catalog that contains the library (<code class="docutils literal"><span class="pre">$file</span></code> ), the publisher name (<code class="docutils literal"><span class="pre">$publisher</span></code> ), and the year of publication (<code class="docutils literal"><span class="pre">$year</span></code> ):</p>
+<div class="highlight-default" id="id11"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/patternist/introExample2.xq&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Modify the Qt XML Patterns code to use one of the <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> functions to bind a program variable to each <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> $variable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QFile</span> <span class="n">xq</span><span class="p">(</span><span class="s2">&quot;myquery.xq&quot;</span><span class="p">);</span>
+<span class="n">QString</span> <span class="n">fileName</span><span class="p">(</span><span class="s2">&quot;the filename&quot;</span><span class="p">);</span>
+<span class="n">QString</span> <span class="n">publisherName</span><span class="p">(</span><span class="s2">&quot;the publisher&quot;</span><span class="p">);</span>
+<span class="n">qlonglong</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span>
+
+<span class="n">QXmlQuery</span> <span class="n">query</span><span class="p">;</span>
+
+<span class="n">query</span><span class="o">.</span><span class="n">bindVariable</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">(</span><span class="n">fileName</span><span class="p">));</span>
+<span class="n">query</span><span class="o">.</span><span class="n">bindVariable</span><span class="p">(</span><span class="s2">&quot;publisher&quot;</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">(</span><span class="n">publisherName</span><span class="p">));</span>
+<span class="n">query</span><span class="o">.</span><span class="n">bindVariable</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">(</span><span class="n">year</span><span class="p">));</span>
+
+<span class="n">query</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="o">&amp;</span><span class="n">xq</span><span class="p">,</span> <span class="n">QUrl</span><span class="p">::</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">xq</span><span class="o">.</span><span class="n">fileName</span><span class="p">()));</span>
+
+<span class="n">QXmlSerializer</span> <span class="n">serializer</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">myOutputDevice</span><span class="p">);</span>
+<span class="n">query</span><span class="o">.</span><span class="n">evaluateTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">serializer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Each program variable is passed to Qt XML Patterns as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> of the type of the C++ variable or constant from which it is constructed. Note that Qt XML Patterns assumes that the type of the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> in the bindVariable() call is the correct type, so the $variable it is bound to must be used in the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> accordingly. The following table shows how <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> types are mapped to <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> $variable types:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> type</td>
+<td><a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> $variable type</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.LongLong</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:integer</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Int</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:integer</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.UInt</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:nonNegativeInteger</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.ULongLong</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:unsignedLong</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.String</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:string</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Double</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:double</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Bool</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:boolean</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Double</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:decimal</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.ByteArray</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:base64Binary</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.StringList</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:string*</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Url</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:string</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Date</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:date</span></code> .</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+<td><code class="docutils literal"><span class="pre">xs:dateTime</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Time</span></code> .</td>
+<td><code class="docutils literal"><span class="pre">xs:time</span></code> . (see <a class="reference internal" href="#xquery"><span class="std std-ref">Binding To QVariant::Time</span></a> below)</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code></td>
+<td>(see <a class="reference internal" href="#xquery"><span class="std std-ref">Binding To QVariantList</span></a> below)</td>
+</tr>
+</tbody>
+</table>
+<p>A type not shown in the table is not supported and will cause undefined <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> behavior or a $variable binding error, depending on the context in the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> where the variable is used.</p>
+</div></blockquote>
+</div>
+<div class="section" id="binding-to-qvariant-time">
+<span id="id12"></span><span id="id13"></span><h2>Binding To QVariant::Time<a class="headerlink" href="#binding-to-qvariant-time" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Because the instance of <a class="reference internal" href="../PySide2/QtCore/QTime.html#PySide2.QtCore.QTime" title="PySide2.QtCore.QTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTime</span></code></a> used in <code class="xref py py-attr docutils literal"><span class="pre">QVariant.Time</span></code> does not include a zone offset, an instance of <code class="xref py py-attr docutils literal"><span class="pre">QVariant.Time</span></code> should not be bound to an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> variable of type <code class="docutils literal"><span class="pre">xs:time</span></code> , unless the <a class="reference internal" href="../PySide2/QtCore/QTime.html#PySide2.QtCore.QTime" title="PySide2.QtCore.QTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTime</span></code></a> is UTC. When binding a non-UTC <a class="reference internal" href="../PySide2/QtCore/QTime.html#PySide2.QtCore.QTime" title="PySide2.QtCore.QTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTime</span></code></a> to an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> variable, it should first be passed as a string, or converted to a <a class="reference internal" href="../PySide2/QtCore/QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> with an arbitrary date, and then bound to an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> variable of type <code class="docutils literal"><span class="pre">xs:dateTime</span></code> .</div></blockquote>
+</div>
+<div class="section" id="id15">
+<span id="id16"></span><h2>Binding To QVariantList<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A <code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code> can be bound to an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> $variable. All the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> s in the list must be of the same atomic type, and the $variable the variant list is bound to must be of that same atomic type. If the QVariants in the list are not all of the same atomic type, the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> behavior is undefined.</div></blockquote>
+</div>
+<div class="section" id="interpreting-xquery-results">
+<span id="id17"></span><h2>Interpreting XQuery results<a class="headerlink" href="#interpreting-xquery-results" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When the results of an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> are returned in a sequence of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlResultItems.html#PySide2.QtXmlPatterns.QXmlResultItems" title="PySide2.QtXmlPatterns.QXmlResultItems"><code class="xref py py-class docutils literal"><span class="pre">result</span> <span class="pre">items</span></code></a> , atomic values in the sequence are treated as instances of <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> . Suppose that instead of serializing the results of the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> as XML, we process the results programatically. Modify the standard Qt XML Patterns code sequence to call the overload of <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.evaluateTo()</span></code> that populates a sequence of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlResultItems.html#PySide2.QtXmlPatterns.QXmlResultItems" title="PySide2.QtXmlPatterns.QXmlResultItems"><code class="xref py py-class docutils literal"><span class="pre">result</span> <span class="pre">items</span></code></a> with the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> results:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QFile xq(&quot;myquery.xq&quot;);
+QString fileName(&quot;the filename&quot;);
+QString publisherName(&quot;the publisher&quot;);
+qlonglong year = 1234;
+
+QXmlQuery query;
+
+query.bindVariable(&quot;file&quot;, QVariant(fileName));
+query.bindVariable(&quot;publisher&quot;, QVariant(publisherName));
+query.bindVariable(&quot;year&quot;, QVariant(year));
+
+query.setQuery(&amp;xq, QUrl::fromLocalFile(xq.fileName()));
+
+QXmlResultItems result;
+query.evaluateTo(&amp;result);
+QXmlItem item(result.next());
+while (!item.isNull()) {
+    if (item.isAtomicValue()) {
+        QVariant v = item.toAtomicValue();
+        switch (v.type()) {
+            case QVariant::LongLong:
+                // xs:integer
+                break;
+            case QVariant::String:
+                // xs:string
+                break;
+            default:
+                // error
+                break;
+        }
+    }
+    else if (item.isNode()) {
+        QXmlNodeModelIndex i = item.toNodeModelIndex();
+        // process node
+    }
+    item = result.next();
+}
+</pre></div>
+</div>
+<p>Iterate through the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlResultItems.html#PySide2.QtXmlPatterns.QXmlResultItems" title="PySide2.QtXmlPatterns.QXmlResultItems"><code class="xref py py-class docutils literal"><span class="pre">result</span> <span class="pre">items</span></code></a> and test each <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlItem.html#PySide2.QtXmlPatterns.QXmlItem" title="PySide2.QtXmlPatterns.QXmlItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlItem</span></code></a> to see if it is an atomic value or a node. If it is an atomic value, convert it to a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> with <code class="xref py py-func docutils literal"><span class="pre">QXmlItem.toAtomicValue()</span></code> and switch on its <code class="xref py py-func docutils literal"><span class="pre">variant</span> <span class="pre">type</span></code> to handle all the atomic values your <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> might return. The following table shows the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> type to expect for each atomic value type (or <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> ):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> result item type</td>
+<td><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> type returned</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:QName</span></code></td>
+<td><a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> (see <a class="reference internal" href="#xquery"><span class="std std-ref">Handling QXmlNames</span></a> below)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:integer</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.LongLong</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:string</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.String</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:string*</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.StringList</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:double</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Double</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:float</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Double</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:boolean</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Bool</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:decimal</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Double</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:hexBinary</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.ByteArray</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:base64Binary</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.ByteArray</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:gYear</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:gYearMonth</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:gMonthDay</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:gDay</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:gMonth</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:anyURI</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.Url</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:untypedAtomic</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.String</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:ENTITY</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.String</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:date</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xs:dateTime</span></code></td>
+<td><code class="xref py py-attr docutils literal"><span class="pre">QVariant.DateTime</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xs:time</span></code></td>
+<td>(see <a class="reference internal" href="#xquery"><span class="std std-ref">No mapping for xs:time</span></a> below)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id19">
+<span id="id20"></span><h2>Handling QXmlNames<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If your <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> can return atomic value items of type <code class="docutils literal"><span class="pre">xs:QName</span></code> , they will appear in your <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlResultItems.html#PySide2.QtXmlPatterns.QXmlResultItems" title="PySide2.QtXmlPatterns.QXmlResultItems"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlResultItems</span></code></a> as instances of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> . Since the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> class does not support the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> class directly, extracting them from <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlResultItems.html#PySide2.QtXmlPatterns.QXmlResultItems" title="PySide2.QtXmlPatterns.QXmlResultItems"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlResultItems</span></code></a> requires a bit of slight-of-hand using the <code class="xref py py-class docutils literal"><span class="pre">Qt</span> <span class="pre">metatype</span> <span class="pre">system</span></code> . We must modify our example to use a couple of template functions, a friend of <code class="xref py py-class docutils literal"><span class="pre">QMetaType</span></code> ( <code class="xref py py-func docutils literal"><span class="pre">qMetaTypeId()</span></code> &lt;T&gt;()) and a friend of <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> ( <code class="xref py py-func docutils literal"><span class="pre">qvariant_cast()</span></code> &lt;T&gt;()):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QFile xq(&quot;myquery.xq&quot;);
+
+QXmlQuery query;
+query.setQuery(&amp;xq, QUrl::fromLocalFile(xq.fileName()));
+
+QXmlResultItems result;
+query.evaluateTo(&amp;result);
+QXmlItem item(result.next());
+while (!item.isNull()) {
+    if (item.isAtomicValue()) {
+        QVariant v = item.toAtomicValue();
+        switch (v.type()) {
+            case QVariant::LongLong:
+                // xs:integer
+                break;
+            case QVariant::String:
+                // xs:string
+                break;
+            default:
+                if (v.userType() == qMetaTypeId&lt;QXmlName&gt;()) {
+                    QXmlName n = qVariantValue&lt;QXmlName&gt;(v);
+                    // process QXmlName n...
+                }
+                else {
+                    // error
+                }
+                break;
+        }
+    }
+    else if (item.isNode()) {
+        QXmlNodeModelIndex i = item.toNodeModelIndex();
+        // process node
+    }
+    item = result.next();
+}
+</pre></div>
+</div>
+<p>To access the strings in a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> returned by an <code class="xref py py-func docutils literal"><span class="pre">XQuery</span> <span class="pre">evaluation</span></code> , the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> must be accessed with the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNamePool.html#PySide2.QtXmlPatterns.QXmlNamePool" title="PySide2.QtXmlPatterns.QXmlNamePool"><code class="xref py py-class docutils literal"><span class="pre">name</span> <span class="pre">pool</span></code></a> from the instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlQuery.html#PySide2.QtXmlPatterns.QXmlQuery" title="PySide2.QtXmlPatterns.QXmlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlQuery</span></code></a> that was used for the evaluation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="no-mapping-for-xs-time">
+<span id="id21"></span><span id="id22"></span><h2>No mapping for xs:time<a class="headerlink" href="#no-mapping-for-xs-time" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>An instance of <code class="docutils literal"><span class="pre">xs:time</span></code> can’t be represented correctly as an instance of <code class="xref py py-attr docutils literal"><span class="pre">QVariant.Time</span></code> , unless the <code class="docutils literal"><span class="pre">xs:time</span></code> is a UTC time. This is because xs:time has a zone offset (0 for UTC) in addition to the time value, which the <a class="reference internal" href="../PySide2/QtCore/QTime.html#PySide2.QtCore.QTime" title="PySide2.QtCore.QTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTime</span></code></a> in <code class="xref py py-attr docutils literal"><span class="pre">QVariant.Time</span></code> does not have. This means that if an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> tries to return an atomic value of type <code class="docutils literal"><span class="pre">xs:time</span></code> , an invalid <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> will be returned. A query can return an atomic value of type xs:time by either converting it to an <code class="docutils literal"><span class="pre">xs:dateTime</span></code> with an arbitrary date, or to an <code class="docutils literal"><span class="pre">xs:string</span></code> .</div></blockquote>
+</div>
+<div class="section" id="using-xquery-with-non-xml-data">
+<span id="id23"></span><h2>Using XQuery with Non-XML Data<a class="headerlink" href="#using-xquery-with-non-xml-data" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Although the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> language was designed for querying XML, with Qt XML Patterns one can use <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> for querying any data that can be modeled to look like XML. Non-XML data is modeled to look like XML by loading it into a custom subclass of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> , where it is then presented to the Qt XML Patterns <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> engine via the same API the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> engine uses for querying XML.</p>
+<p>When Qt XML Patterns loads and queries XML files and produces XML output, it can always load the XML data into its default XML node model, where it can be traversed efficiently. The <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> below traverses the product orders found in the XML file <em>myOrders.xml</em> to find all the skin care product orders and output them ordered by shipping date.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/patternist/introAcneRemover.xq&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Qt XML Patterns can be used out of the box to perform this query, provided <em>myOrders.xml</em> actually contains well-formed XML. It can be loaded directly into the default XML node model and traversed. But suppose we want Qt XML Patterns to perform queries on the hierarchical structure of the local file system. The default XML node model in Qt XML Patterns is not suitable for navigating the file system, because there is no XML file to load that contains a description of it. Such an XML file, if it existed, might look something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/patternist/introFileHierarchy.xml&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="qtxmlpatterns-filetree-example.html#file-system-example"><span class="std std-ref">File System Example</span></a> does exactly this.</p>
+<p>There is no such file to load into the default XML node model, but one can write a subclass of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> to represent the file system. This custom XML node model, once populated with all the directory and file descriptors obtained directly from the system, presents the complete file system hierarchy to the query engine via the same API used by the default XML node model to present the contents of an XML file. In other words, once the custom XML node model is populated, it presents the file system to the query engine as if a description of it had been loaded into the default XML node model from an XML file like the one shown above.</p>
+<p>Now we can write an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> to find all the XML files and parse them to find the ones that don’t contain well-formed XML.</p>
+<p>Without Qt XML Patterns, there is no simple way to solve this kind of problem. You might do it by writing a C++ program to traverse the file system, sniff out all the XML files, and submit each one to an XML parser to test that it contains valid XML. The C++ code required to write that program will probably be more complex than the C++ code required to subclass <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> , but even if the two are comparable, your custom C++ program can be used only for that one task, while your custom XML node model can be used by any <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> that must navigate the file system.</p>
+<p>The general approach to using <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> to perform queries on non-XML data has been a three step process. In the first step, the data is loaded into a non-XML data model. In the second step, the non-XML data model is serialized as XML and output to XML (text) files. In the final step, an XML tool loads the XML files into a second, XML data model, where the XQueries can be performed. The development cost of implementing this process is often high, and the three step system that results is inefficient because the two data models must be built and maintained separately.</p>
+<p>With Qt XML Patterns, subclassing <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> eliminates the transformation required to convert the non-XML data model to the XML data model, because there is only ever one data model required. The non-XML data model presents the non-XML data to the query engine via the XML data model API. Also, since the query engine uses the API to access the <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> , the data model subclass can construct the elements, attributes and other data on demand, responding to the query’s specific requests. This can greatly improve efficiency, because it means the entire model might not have to be built. For example, in the file system model above, it is not necessary to build an instance for a whole XML file representing the whole file system. Instead nodes are created on demand, which also likely is a small subset of the file system.</p>
+<p>Examples of other places where <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> could be used in Qt XML Patterns to query non-XML data:</p>
+<ul class="simple">
+<li>The internal representation for word processor documents</li>
+<li>The set of dependencies for a software build system</li>
+<li>The hierarchy (or graph) that links a set of HTML documents from a web crawler</li>
+<li>The images and meta-data in an image collection</li>
+<li>The set of D-Bus interfaces available in a system</li>
+<li>A <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> hierarchy.</li>
+</ul>
+<p>See the <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> documentation for information about how to implement custom XML node models.</p>
+</div></blockquote>
+</div>
+<div class="section" id="more-on-using-qt-xml-patterns-with-non-xml-data">
+<span id="id24"></span><h2>More on Using Qt XML Patterns with Non-XML Data<a class="headerlink" href="#more-on-using-qt-xml-patterns-with-non-xml-data" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Subclassing <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> to let the query engine access non-XML data by the same API it uses for XML is the feature that enables Qt XML Patterns to query non-XML data with <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> . It allows <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> to be used as a mapping layer between different non-XML node models or between a non-XML node model and the built-in XML node model. Once the subclass(es) of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> have been written, <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> can be used to select a set of elements from one node model, transform the selected elements, and then write them out, either as XML using <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.evaluateTo()</span></code> and <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSerializer.html#PySide2.QtXmlPatterns.QXmlSerializer" title="PySide2.QtXmlPatterns.QXmlSerializer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlSerializer</span></code></a> , or as some other format using a subclass of QAbstractXmlReceiver.</p>
+<p>Consider a word processor application that must import and export data in several different formats. Rather than writing a lot of C++ code to convert each input format to an intermediate form, and more C++ code to convert the intermediate form back to each output format, one can implement a solution based on Qt XML Patterns that uses simple XQueries to transform each XML or non-XML format (e.g. MathFormula.xml below) to the intermediate form (e.g. the DocumentRepresentation node model class below), and more simple XQueries to transform the intermediate form back to each XML or non-XML format.</p>
+<p>Because CSV files are not XML, a subclass of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> is used to present the CSV data to the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> engine as if it were XML. What are not shown are the subclasses of QAbstractXmlReceiver that would then send the selected elements into the DocumentRepresentation node model, and the subclasses of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> that would ultimately write the output files in each format.</p>
+</div></blockquote>
+</div>
+<div class="section" id="security-considerations">
+<span id="id25"></span><h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="code-injection">
+<span id="id26"></span><h2>Code Injection<a class="headerlink" href="#code-injection" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> is vulnerable to code injection attacks in the same way as the SQL language. If an <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> is constructed by concatenating strings, and the strings come from user input, the constructed <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> could be malevolent. The best way to prevent code injection attacks is to not construct XQueries from user-written strings, but only accept user data input using <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> and variable bindings. See <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> .</p>
+<p>The articles Avoid the dangers of XPath injection, by Robi Sen and Blind XPath Injection, by Amit Klein, discuss the <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> code injection problem in more detail.</p>
+</div></blockquote>
+</div>
+<div class="section" id="denial-of-service-attacks">
+<span id="id27"></span><h2>Denial of Service Attacks<a class="headerlink" href="#denial-of-service-attacks" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Applications using Qt XML Patterns are subject to the same limitations of software as other systems. Generally, these can not be checked. This means Qt XML Patterns does not prevent rogue queries from consuming too many resources. For example, a query could take too much time to execute or try to transfer too much data. A query could also do too much recursion, which could crash the system. XQueries can do these things accidentally, but they can also be done as deliberate denial of service attacks.</div></blockquote>
+</div>
+<div class="section" id="features-and-conformance">
+<span id="id28"></span><h2>Features and Conformance<a class="headerlink" href="#features-and-conformance" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="xquery-1-0">
+<span id="id29"></span><h2>XQuery 1.0<a class="headerlink" href="#xquery-1-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Qt XML Patterns aims at being a conformant <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> processor. It adheres to Minimal Conformance and supports the Serialization Feature and the Full Axis Feature. Qt XML Patterns currently passes 97% of the tests in the XML Query Test Suite. Areas where conformance may be questionable and where behavior may be changed in future releases include:</p>
+<ul class="simple">
+<li>Some corner cases involving namespaces and element constructors are incorrect.</li>
+<li>XPath is a subset of <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> and the implementation of Qt XML Patterns uses XPath 2.0 with <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> 1.0.</li>
+</ul>
+<p>The specifications discusses conformance further: <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> 1.0: An XML Query Language. W3C’s <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> testing effort can be of interest as well, XML Query Test Suite.</p>
+<p>Currently <code class="docutils literal"><span class="pre">fn:collection()</span></code> does not access any data set, and there is no API for providing data through the collection. As a result, evaluating <code class="docutils literal"><span class="pre">fn:collection()</span></code> returns the empty sequence. We intend to provide functionality for this in a future release of Qt.</p>
+<p>Only queries encoded in UTF-8 are supported.</p>
+</div></blockquote>
+</div>
+<div class="section" id="xslt-2-0">
+<span id="id30"></span><h2>XSLT 2.0<a class="headerlink" href="#xslt-2-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Partial support for XSLT was introduced in Qt 4.5. Future releases of Qt XML Patterns will aim to support these XSLT features:</p>
+<ul class="simple">
+<li>Basic XSLT 2.0 processor</li>
+<li>Serialization feature</li>
+<li>Backwards Compatibility feature</li>
+</ul>
+<p>For details, see XSL Transformations (XSLT) Version 2.0, 21 Conformance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this release, XSLT support is considered experimental.</p>
+</div>
+<p>Unsupported or partially supported XSLT features are documented in the following table. The implementation of XSLT in Qt 4.5 can be seen as XSLT 1.0 but with the data model of XPath 2.0 and XSLT 2.0, and using the using the functionality of XPath 2.0 and its accompanying function library. When Qt XML Patterns encounters an unsupported or partially support feature, it will either report a syntax error or silently continue, unless otherwise noted in the table.</p>
+<p>The implementation currently passes 42% of W3C’s XSLT test suite, which focus on features introduced in XSLT 2.0.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>XSL Feature</td>
+<td>Support Status</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:key</span></code> and <code class="docutils literal"><span class="pre">fn:key()</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:include</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:import</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:copy</span></code></td>
+<td>The <code class="docutils literal"><span class="pre">copy-namespaces</span></code> and <code class="docutils literal"><span class="pre">inherit-namespaces</span></code> attributes have no effect. For copied comments, attributes and processing instructions, the copy has the same node identity as the original.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:copy-of</span></code></td>
+<td>The <code class="docutils literal"><span class="pre">copy-namespaces</span></code> attribute has no effect.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">fn:format-number()</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:message</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:use-when</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">Tunnel</span></code> Parameters</td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:attribute-set</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:decimal-format</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:fallback</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:apply-imports</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:character-map</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:number</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:namespace-alias</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:output</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:output-character</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">xsl:preserve-space</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">xsl:result-document</span></code></td>
+<td>not supported</td>
+</tr>
+<tr class="row-even"><td>Patterns</td>
+<td>Complex patterns or patterns with predicates have issues.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">2.0</span></code> Compatibility Mode</td>
+<td>Stylesheets are interpreted as XSLT 2.0 stylesheets, even if the <code class="docutils literal"><span class="pre">version</span></code> attribute is in the XSLT source is 1.0. In other words, the version attribute is ignored.</td>
+</tr>
+<tr class="row-even"><td>Grouping</td>
+<td><code class="docutils literal"><span class="pre">fn:current-group()</span></code> , <code class="docutils literal"><span class="pre">fn:grouping-key()</span></code> and <code class="docutils literal"><span class="pre">xsl:for-each-group</span></code> .</td>
+</tr>
+<tr class="row-odd"><td>Regexp elements</td>
+<td><code class="docutils literal"><span class="pre">xsl:analyze-string</span></code> , <code class="docutils literal"><span class="pre">xsl:matching-substring</span></code> , <code class="docutils literal"><span class="pre">xsl:non-matching-substring</span></code> , and <code class="docutils literal"><span class="pre">fn:regex-group()</span></code></td>
+</tr>
+<tr class="row-even"><td>Date &amp; Time formatting</td>
+<td><code class="docutils literal"><span class="pre">fn:format-dateTime()</span></code> , <code class="docutils literal"><span class="pre">fn:format-date()</span></code> and fn:format-time().</td>
+</tr>
+<tr class="row-odd"><td>XPath Conformance</td>
+<td>Since XPath is a subset of XSLT, its issues are in affect too.</td>
+</tr>
+</tbody>
+</table>
+<p>The Qt XML Patterns implementation of the XPath Data Model does not include entities (due to <a class="reference internal" href="../PySide2/QtCore/QXmlStreamReader.html#PySide2.QtCore.QXmlStreamReader" title="PySide2.QtCore.QXmlStreamReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QXmlStreamReader</span></code></a> not reporting them). This means that functions <code class="docutils literal"><span class="pre">unparsed-entity-uri()</span></code> and <code class="docutils literal"><span class="pre">unparsed-entity-public-id()</span></code> always return negatively.</p>
+</div></blockquote>
+</div>
+<div class="section" id="xpath-2-0">
+<span id="id31"></span><h2>XPath 2.0<a class="headerlink" href="#xpath-2-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Since XPath 2.0 is a subset of <a class="reference internal" href="#xquery"><span class="std std-ref">XQuery</span></a> 1.0, XPath 2.0 is supported. Areas where conformance may be questionable and, consequently, where behavior may be changed in future releases include:</p>
+<ul class="simple">
+<li>Regular expression support is currently not conformant but follows Qt’s <a class="reference internal" href="../PySide2/QtCore/QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> standard syntax.</li>
+<li>Operators for <code class="docutils literal"><span class="pre">xs:time</span></code>, <code class="docutils literal"><span class="pre">xs:date</span></code>, and <code class="docutils literal"><span class="pre">xs:dateTime</span></code> are incomplete.</li>
+<li>Formatting of very large or very small <code class="docutils literal"><span class="pre">xs:double</span></code>, <code class="docutils literal"><span class="pre">xs:float</span></code>, and <code class="docutils literal"><span class="pre">xs:decimal</span></code> values may be incorrect.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="xml-id">
+<span id="id32"></span><h2>xml:id<a class="headerlink" href="#xml-id" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Processing of XML files supports <code class="docutils literal"><span class="pre">xml:id</span></code> . This allows elements that have an attribute named <code class="docutils literal"><span class="pre">xml:id</span></code> to be looked up efficiently with the <code class="docutils literal"><span class="pre">fn:id()</span></code> function. See xml:id Version 1.0 for details.</div></blockquote>
+</div>
+<div class="section" id="xml-schema-1-0">
+<span id="id33"></span><h2>XML Schema 1.0<a class="headerlink" href="#xml-schema-1-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>There are two ways Qt XML Patterns can be used to validate schemas: You can use the C++ API in your Qt application using the classes <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSchema.html#PySide2.QtXmlPatterns.QXmlSchema" title="PySide2.QtXmlPatterns.QXmlSchema"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlSchema</span></code></a> and <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSchemaValidator.html#PySide2.QtXmlPatterns.QXmlSchemaValidator" title="PySide2.QtXmlPatterns.QXmlSchemaValidator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlSchemaValidator</span></code></a> , or you can use the command line utility named xmlpatternsvalidator (located in the “bin” directory of your Qt build).</p>
+<p>The Qt XML Patterns implementation of XML Schema validation supports the schema specification version 1.0 in large parts. Known problems of the implementation and areas where conformancy may be questionable are:</p>
+<ul class="simple">
+<li>Large <code class="docutils literal"><span class="pre">minOccurs</span></code> or <code class="docutils literal"><span class="pre">maxOccurs</span></code> values or deeply nested ones require huge amount of memory which might cause the system to freeze. Such a schema should be rewritten to use <code class="docutils literal"><span class="pre">unbounded</span></code> as value instead of large numbers. This restriction will hopefully be fixed in a later release.</li>
+<li>Comparison of really small or large floating point values might lead to wrong results in some cases. However such numbers should not be relevant for day-to-day usage.</li>
+<li>Regular expression support is currently not conformant but follows Qt’s <a class="reference internal" href="../PySide2/QtCore/QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> standard syntax.</li>
+<li>Identity constraint checks can not use the values of default or fixed attribute definitions.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="resource-loading">
+<span id="id34"></span><h2>Resource Loading<a class="headerlink" href="#resource-loading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When Qt XML Patterns loads an XML resource, e.g., using the <code class="docutils literal"><span class="pre">fn:doc()</span></code> function, the following schemes are supported:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Scheme Name</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">file</span></code></td>
+<td>Local files.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">data</span></code></td>
+<td>The bytes are encoded in the URI itself. e.g., <code class="docutils literal"><span class="pre">data:application/xml,%3Ce%2F%3E</span></code> is <code class="docutils literal"><span class="pre">&lt;e/&gt;</span></code> .</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ftp</span></code></td>
+<td>Resources retrieved via FTP.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">http</span></code></td>
+<td>Resources retrieved via HTTP.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">https</span></code></td>
+<td>Resources retrieved via HTTPS. This will succeed if no SSL errors are encountered.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">qrc</span></code></td>
+<td>Qt Resource files. Expressing it as an empty scheme, :/…, is not supported.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="xml">
+<span id="id35"></span><h2>XML<a class="headerlink" href="#xml" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>XML 1.0 and XML Namespaces 1.0 are supported, as opposed to the 1.1 versions. When a strings is passed to a query as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> , the characters must be XML 1.0 characters. Otherwise, the behavior is undefined. This is not checked.</p>
+<p>URIs are first passed to <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractUriResolver.html#PySide2.QtXmlPatterns.QAbstractUriResolver" title="PySide2.QtXmlPatterns.QAbstractUriResolver"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractUriResolver</span></code></a> . Check <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setUriResolver()</span></code> for possible rewrites.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

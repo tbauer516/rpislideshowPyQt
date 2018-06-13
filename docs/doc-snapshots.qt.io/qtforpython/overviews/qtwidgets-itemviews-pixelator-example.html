@@ -1,0 +1,395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Pixelator Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pixelator Example</a><ul>
+<li><a class="reference internal" href="#imagemodel-class-definition">ImageModel Class Definition</a></li>
+<li><a class="reference internal" href="#imagemodel-class-implementation">ImageModel Class Implementation</a></li>
+<li><a class="reference internal" href="#pixeldelegate-class-definition">PixelDelegate Class Definition</a></li>
+<li><a class="reference internal" href="#pixeldelegate-class-implementation">PixelDelegate Class Implementation</a></li>
+<li><a class="reference internal" href="#using-the-custom-delegate">Using The Custom Delegate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imagemodel-cpp-example-file">imagemodel.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagemodel-h-example-file">imagemodel.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#pixeldelegate-cpp-example-file">pixeldelegate.cpp Example File</a></li>
+<li><a class="reference internal" href="#pixeldelegate-h-example-file">pixeldelegate.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#images-qrc-example-file">images.qrc Example File</a></li>
+<li><a class="reference internal" href="#pixelator-pro-example-file">pixelator.pro Example File</a></li>
+<li><a class="reference internal" href="#qt-png-image-file">qt.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pixelator-example">
+<span id="id1"></span><h1>Pixelator Example<a class="headerlink" href="#pixelator-example" title="Permalink to this headline">¶</a></h1>
+<p>Pixelator example shows how delegates can be used to customize the way that items are rendered in standard item views</p>
+<blockquote>
+<div><p>The Pixelator example shows how delegates can be used to customize the way that items are rendered in standard item views.</p>
+<p>By default, <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> use a standard item delegate to display and edit a set of common data types that are sufficient for many applications. However, an application may need to represent items of data in a particular way, or provide support for rendering more specialized data types, and this often requires the use of a custom delegate.</p>
+<p>In this example, we show how to use custom delegates to modify the appearance of standard views. To do this, we implement the following components:</p>
+<ul class="simple">
+<li>A model which represents each pixel in an image as an item of data, where each item contains a value for the brightness of the corresponding pixel.</li>
+<li>A custom delegate that uses the information supplied by the model to represent each pixel as a black circle on a white background, where the radius of the circle corresponds to the darkness of the pixel.</li>
+</ul>
+<p>This example may be useful for developers who want to implement their own table models or custom delegates. The process of creating custom delegates for editing item data is covered in the <a class="reference internal" href="qtwidgets-itemviews-spinboxdelegate-example.html#spin-box-delegate-example"><span class="std std-ref">Spin Box Delegate</span></a> example.</p>
+</div></blockquote>
+<div class="section" id="imagemodel-class-definition">
+<span id="id2"></span><h2>ImageModel Class Definition<a class="headerlink" href="#imagemodel-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">ImageModel</span></code> class is defined as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageModel</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QAbstractTableModel</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ImageModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">setImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">rowCount</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">parent</span> <span class="o">=</span> <span class="n">QModelIndex</span><span class="p">())</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">columnCount</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">parent</span> <span class="o">=</span> <span class="n">QModelIndex</span><span class="p">())</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">QVariant</span> <span class="n">data</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DisplayRole</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QVariant</span> <span class="n">headerData</span><span class="p">(</span><span class="nb">int</span> <span class="n">section</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Orientation</span> <span class="n">orientation</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DisplayRole</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QImage</span> <span class="n">modelImage</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Since we only require a simple, read-only table model, we only need to implement functions to indicate the dimensions of the image and supply data to other components.</p>
+</div></blockquote>
+</div>
+<div class="section" id="imagemodel-class-implementation">
+<span id="id3"></span><h2>ImageModel Class Implementation<a class="headerlink" href="#imagemodel-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor is trivial:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ImageModel</span><span class="p">::</span><span class="n">ImageModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QAbstractTableModel</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setImage()</span></code> function sets the image that will be used by the model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageModel</span><span class="p">::</span><span class="n">setImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">beginResetModel</span><span class="p">();</span>
+    <span class="n">modelImage</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">endResetModel</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.reset()</span></code> call tells the view(s) that the model has changed.</p>
+<p>The <code class="docutils literal"><span class="pre">rowCount()</span></code> and <code class="docutils literal"><span class="pre">columnCount()</span></code> functions return the height and width of the image respectively:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">ImageModel</span><span class="p">::</span><span class="n">rowCount</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">parent</span> <span class="o">*/</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">modelImage</span><span class="o">.</span><span class="n">height</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">ImageModel</span><span class="p">::</span><span class="n">columnCount</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">parent</span> <span class="o">*/</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">modelImage</span><span class="o">.</span><span class="n">width</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since the image is a simple two-dimensional structure, the <code class="docutils literal"><span class="pre">parent</span></code> arguments to these functions are unused. They both simply return the relevant size from the underlying image object.</p>
+<p>The <code class="docutils literal"><span class="pre">data()</span></code> function returns data for the item that corresponds to a given model index in a format that is suitable for a particular role:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QVariant ImageModel::data(const QModelIndex &amp;index, int role) const
+{
+    if (!index.isValid() || role != Qt::DisplayRole)
+        return QVariant();
+    return qGray(modelImage.pixel(index.column(), index.row()));
+}
+</pre></div>
+</div>
+<p>In this implementation, we only check that the model index is valid, and that the role requested is the <code class="xref py py-attr docutils literal"><span class="pre">DisplayRole</span></code> . If so, the function returns the grayscale value of the relevant pixel in the image; otherwise, a null model index is returned.</p>
+<p>This model can be used with <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> to display the integer brightness values for the pixels in the image. However, we will implement a custom delegate to display this information in a more artistic way.</p>
+<p>The <code class="docutils literal"><span class="pre">headerData()</span></code> function is also reimplemented:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVariant</span> <span class="n">ImageModel</span><span class="p">::</span><span class="n">headerData</span><span class="p">(</span><span class="nb">int</span> <span class="o">/*</span> <span class="n">section</span> <span class="o">*/</span><span class="p">,</span>
+                                <span class="n">Qt</span><span class="p">::</span><span class="n">Orientation</span> <span class="o">/*</span> <span class="n">orientation</span> <span class="o">*/</span><span class="p">,</span>
+                                <span class="nb">int</span> <span class="n">role</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SizeHintRole</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QSize</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">QVariant</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We return (1, 1) as the size hint for a header item. If we didn’t, the headers would default to a larger size, preventing us from displaying really small items (which can be specified using the Pixel size combobox).</p>
+</div></blockquote>
+</div>
+<div class="section" id="pixeldelegate-class-definition">
+<span id="id4"></span><h2>PixelDelegate Class Definition<a class="headerlink" href="#pixeldelegate-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">PixelDelegate</span></code> class is defined as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PixelDelegate</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QAbstractItemDelegate</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">PixelDelegate</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+               <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">(</span><span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                   <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span> <span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setPixelSize</span><span class="p">(</span><span class="nb">int</span> <span class="n">size</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">pixelSize</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This class provides only basic features for a delegate so, unlike the <a class="reference internal" href="qtwidgets-itemviews-spinboxdelegate-example.html#spin-box-delegate-example"><span class="std std-ref">Spin Box Delegate</span></a> example, we subclass <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> instead of <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> .</p>
+<p>We only need to reimplement <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.paint()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.sizeHint()</span></code> in this class. However, we also provide a delegate-specific <code class="docutils literal"><span class="pre">setPixelSize()</span></code> function so that we can change the delegate’s behavior via the signals and slots mechanism.</p>
+</div></blockquote>
+</div>
+<div class="section" id="pixeldelegate-class-implementation">
+<span id="id5"></span><h2>PixelDelegate Class Implementation<a class="headerlink" href="#pixeldelegate-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">PixelDelegate</span></code> constructor is used to set up a default value for the size of each “pixel” that it renders. The base class constructor is also called to ensure that the delegate is set up with a parent object, if one is supplied:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+    <span class="n">QAbstractItemDelegate</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pixelSize</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p>Each item is rendered by the delegate’s <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.paint()</span></code> function. The view calls this function with a ready-to-use <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object, style information that the delegate should use to correctly draw the item, and an index to the item in the model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">QStyle</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The first task the delegate has to perform is to draw the item’s background correctly. Usually, selected items appear differently to non-selected items, so we begin by testing the state passed in the style option and filling the background if necessary.</p>
+<p>The radius of each circle is calculated in the following lines of code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="n">qMin</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+<span class="n">brightness</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">()</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">brightness</span><span class="o">/</span><span class="mf">255.0</span> <span class="o">*</span> <span class="n">size</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+    <span class="k">return</span>
+</pre></div>
+</div>
+<p>First, the largest possible radius of the circle is determined by taking the smallest dimension of the style option’s <code class="docutils literal"><span class="pre">rect</span></code> attribute. Using the model index supplied, we obtain a value for the brightness of the relevant pixel in the image. The radius of the circle is calculated by scaling the brightness to fit within the item and subtracting it from the largest possible radius.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We save the painter’s state, turn on antialiasing (to obtain smoother curves), and turn off the pen.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">QStyle</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlightedText</span><span class="p">())</span>
+<span class="k">else</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QBrush</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">black</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The foreground of the item (the circle representing a pixel) must be rendered using an appropriate brush. For unselected items, we will use a solid black brush; selected items are drawn using a predefined brush from the style option’s palette.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">QRectF</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">radius</span><span class="p">,</span>
+                            <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">radius</span><span class="p">,</span>
+                            <span class="mi">2</span><span class="o">*</span><span class="n">radius</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">radius</span><span class="p">))</span>
+<span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Finally, we paint the circle within the rectangle specified by the style option and we call <code class="xref py py-func docutils literal"><span class="pre">QPainter.restore()</span></code> on the painter.</p>
+<p>The <code class="docutils literal"><span class="pre">paint()</span></code> function does not have to be particularly complicated; it is only necessary to ensure that the state of the painter when the function returns is the same as it was when it was called. This usually means that any transformations applied to the painter must be preceded by a call to <code class="xref py py-func docutils literal"><span class="pre">QPainter.save()</span></code> and followed by a call to <code class="xref py py-func docutils literal"><span class="pre">QPainter.restore()</span></code> .</p>
+<p>The delegate’s <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.sizeHint()</span></code> function returns a size for the item based on the predefined pixel size, initially set up in the constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">QSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The delegate’s size is updated whenever the pixel size is changed. We provide a custom slot to do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setPixelSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pixelSize</span> <span class="o">=</span> <span class="n">size</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-the-custom-delegate">
+<span id="id6"></span><h2>Using The Custom Delegate<a class="headerlink" href="#using-the-custom-delegate" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In this example, we use a main window to display a table of data, using the custom delegate to render each cell in a particular way. Much of the <code class="docutils literal"><span class="pre">MainWindow</span></code> class performs tasks that are not related to item views. Here, we only quote the parts that are relevant. You can look at the rest of the implementation by following the links to the code at the top of this document.</p>
+<p>In the constructor, we set up a table view, turn off its grid, and hide its headers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="o">...</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableView</span><span class="p">;</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">setShowGrid</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setMinimumSectionSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setMinimumSectionSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This enables the items to be drawn without any gaps between them. Removing the headers also prevents the user from adjusting the sizes of individual rows and columns.</p>
+<p>We also set the minimum section size to 1 on the headers. If we didn’t, the headers would default to a larger size, preventing us from displaying really small items (which can be specified using the Pixel size combobox).</p>
+<p>The custom delegate is constructed with the main window as its parent, so that it will be deleted correctly later, and we set it on the table view.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PixelDelegate</span> <span class="o">*</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PixelDelegate</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">view</span><span class="o">-&gt;</span><span class="n">setItemDelegate</span><span class="p">(</span><span class="n">delegate</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Each item in the table view will be rendered by the <code class="docutils literal"><span class="pre">PixelDelegate</span></code> instance.</p>
+<p>We construct a spin box to allow the user to change the size of each “pixel” drawn by the delegate:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLabel</span> <span class="o">*</span><span class="n">pixelSizeLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pixel size:&quot;</span><span class="p">));</span>
+<span class="n">QSpinBox</span> <span class="o">*</span><span class="n">pixelSizeSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">pixelSizeSpinBox</span><span class="o">-&gt;</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="n">pixelSizeSpinBox</span><span class="o">-&gt;</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="n">pixelSizeSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This spin box is connected to the custom slot we implemented in the <code class="docutils literal"><span class="pre">PixelDelegate</span></code> class. This ensures that the delegate always draws each pixel at the currently specified size:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">pixelSizeSpinBox</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QSpinBox</span><span class="p">::</span><span class="n">valueChanged</span><span class="p">),</span>
+            <span class="n">delegate</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">PixelDelegate</span><span class="p">::</span><span class="n">setPixelSize</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">pixelSizeSpinBox</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QSpinBox</span><span class="p">::</span><span class="n">valueChanged</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">updateView</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We also connect the spin box to a slot in the <code class="docutils literal"><span class="pre">MainWindow</span></code> class. This forces the view to take into account the new size hints for each item; these are provided by the delegate in its <code class="docutils literal"><span class="pre">sizeHint()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">updateView</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">resizeColumnsToContents</span><span class="p">();</span>
+    <span class="n">view</span><span class="o">-&gt;</span><span class="n">resizeRowsToContents</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We explicitly resize the columns and rows to match the Pixel size combobox.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="imagemodel-cpp-example-file">
+<h1>imagemodel.cpp Example File<a class="headerlink" href="#imagemodel-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagemodel-h-example-file">
+<h1>imagemodel.h Example File<a class="headerlink" href="#imagemodel-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pixeldelegate-cpp-example-file">
+<h1>pixeldelegate.cpp Example File<a class="headerlink" href="#pixeldelegate-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pixeldelegate-h-example-file">
+<h1>pixeldelegate.h Example File<a class="headerlink" href="#pixeldelegate-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="images-qrc-example-file">
+<h1>images.qrc Example File<a class="headerlink" href="#images-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pixelator-pro-example-file">
+<h1>pixelator.pro Example File<a class="headerlink" href="#pixelator-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-png-image-file">
+<h1>qt.png Image File<a class="headerlink" href="#qt-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

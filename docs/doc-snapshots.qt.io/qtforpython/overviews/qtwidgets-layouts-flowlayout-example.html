@@ -1,0 +1,369 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Flow Layout Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Flow Layout Example</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#flowlayout-class-definition">FlowLayout Class Definition</a></li>
+<li><a class="reference internal" href="#flowlayout-class-implementation">FlowLayout Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flowlayout-cpp-example-file">flowlayout.cpp Example File</a></li>
+<li><a class="reference internal" href="#flowlayout-h-example-file">flowlayout.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#flowlayout-pro-example-file">flowlayout.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="flow-layout-example">
+<span id="id1"></span><h1>Flow Layout Example<a class="headerlink" href="#flow-layout-example" title="Permalink to this headline">¶</a></h1>
+<p>Shows how to arrange widgets for different window sizes</p>
+<blockquote>
+<div><p>Shows how to arrange widgets for different window sizes.</p>
+<p><em>Flow Layout</em> implements a layout that handles different window sizes. The widget placement changes depending on the width of the application window.</p>
+<p>The Flowlayout class mainly uses <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QWidgetItem.html#PySide2.QtWidgets.QWidgetItem" title="PySide2.QtWidgets.QWidgetItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidgetItem</span></code></a> , while the Window uses <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> .</p>
+<p>For more information, visit the <a class="reference internal" href="layout.html#layout-management"><span class="std std-ref">Layout Management</span></a> page.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="flowlayout-class-definition">
+<span id="id3"></span><h2>FlowLayout Class Definition<a class="headerlink" href="#flowlayout-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">FlowLayout</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> . It is a custom layout class that arranges its child widgets horizontally and vertically.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FlowLayout</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QLayout</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">FlowLayout</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span> <span class="nb">int</span> <span class="n">margin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">hSpacing</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">vSpacing</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">explicit</span> <span class="n">FlowLayout</span><span class="p">(</span><span class="nb">int</span> <span class="n">margin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">hSpacing</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">vSpacing</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">FlowLayout</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">addItem</span><span class="p">(</span><span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">horizontalSpacing</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">verticalSpacing</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">Orientations</span> <span class="n">expandingDirections</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">hasHeightForWidth</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">heightForWidth</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">count</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">itemAt</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">minimumSize</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setGeometry</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">takeAt</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">doLayout</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">testOnly</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">smartSpacing</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PixelMetric</span> <span class="n">pm</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">QLayoutItem</span> <span class="o">*&gt;</span> <span class="n">itemList</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">m_hSpace</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">m_vSpace</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We reimplement functions inherited from <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> . These functions add items to the layout and handle their orientation and geometry.</p>
+<p>We also declare two private methods, <code class="docutils literal"><span class="pre">doLayout()</span></code> and <code class="docutils literal"><span class="pre">smartSpacing()</span></code> . <code class="docutils literal"><span class="pre">doLayout()</span></code> lays out the layout items, while the <code class="docutils literal"><span class="pre">smartSpacing()</span></code> function calculates the spacing between them.</p>
+</div></blockquote>
+</div>
+<div class="section" id="flowlayout-class-implementation">
+<span id="id4"></span><h2>FlowLayout Class Implementation<a class="headerlink" href="#flowlayout-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We start off by looking at the constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FlowLayout</span><span class="p">::</span><span class="n">FlowLayout</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span> <span class="nb">int</span> <span class="n">margin</span><span class="p">,</span> <span class="nb">int</span> <span class="n">hSpacing</span><span class="p">,</span> <span class="nb">int</span> <span class="n">vSpacing</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QLayout</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">m_hSpace</span><span class="p">(</span><span class="n">hSpacing</span><span class="p">),</span> <span class="n">m_vSpace</span><span class="p">(</span><span class="n">vSpacing</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setContentsMargins</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">FlowLayout</span><span class="p">::</span><span class="n">FlowLayout</span><span class="p">(</span><span class="nb">int</span> <span class="n">margin</span><span class="p">,</span> <span class="nb">int</span> <span class="n">hSpacing</span><span class="p">,</span> <span class="nb">int</span> <span class="n">vSpacing</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">m_hSpace</span><span class="p">(</span><span class="n">hSpacing</span><span class="p">),</span> <span class="n">m_vSpace</span><span class="p">(</span><span class="n">vSpacing</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setContentsMargins</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we call <code class="docutils literal"><span class="pre">setContentsMargins()</span></code> to set the left, top, right and bottom margin. By default, <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> uses values provided by the current style (see <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> ).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FlowLayout</span><span class="p">::</span><span class="o">~</span><span class="n">FlowLayout</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">item</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">item</span> <span class="o">=</span> <span class="n">takeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+        <span class="n">delete</span> <span class="n">item</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example we reimplement <code class="docutils literal"><span class="pre">addItem()</span></code> , which is a pure virtual function. When using <code class="docutils literal"><span class="pre">addItem()</span></code> the ownership of the layout items is transferred to the layout, and it is therefore the layout’s responsibility to delete them.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">addItem</span><span class="p">(</span><span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">itemList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">addItem()</span></code> is implemented to add items to the layout.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">horizontalSpacing</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_hSpace</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_hSpace</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">smartSpacing</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PM_LayoutHorizontalSpacing</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">verticalSpacing</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_vSpace</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_vSpace</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">smartSpacing</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PM_LayoutVerticalSpacing</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We implement <code class="docutils literal"><span class="pre">horizontalSpacing()</span></code> and <code class="docutils literal"><span class="pre">verticalSpacing()</span></code> to get hold of the spacing between the widgets inside the layout. If the value is less than or equal to 0, this value will be used. If not, <code class="docutils literal"><span class="pre">smartSpacing()</span></code> will be called to calculate the spacing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">count</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">itemList</span><span class="o">.</span><span class="n">size</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">FlowLayout</span><span class="p">::</span><span class="n">itemAt</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">itemList</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">FlowLayout</span><span class="p">::</span><span class="n">takeAt</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">itemList</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">itemList</span><span class="o">.</span><span class="n">takeAt</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We then implement <code class="docutils literal"><span class="pre">count()</span></code> to return the number of items in the layout. To navigate the list of items we use <code class="docutils literal"><span class="pre">itemAt()</span></code> and takeAt() to remove and return items from the list. If an item is removed, the remaining items will be renumbered. All three functions are pure virtual functions from <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Qt</span><span class="p">::</span><span class="n">Orientations</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">expandingDirections</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">expandingDirections()</span></code> returns the <code class="xref py py-attr docutils literal"><span class="pre">Qt.Orientation</span></code> s in which the layout can make use of more space than its <code class="docutils literal"><span class="pre">sizeHint()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">hasHeightForWidth</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">heightForWidth</span><span class="p">(</span><span class="nb">int</span> <span class="n">width</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">doLayout</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">true</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To adjust to widgets of which height is dependent on width, we implement <code class="docutils literal"><span class="pre">heightForWidth()</span></code> . The function <code class="docutils literal"><span class="pre">hasHeightForWidth()</span></code> is used to test for this dependency, and <code class="docutils literal"><span class="pre">heightForWidth()</span></code> passes the width on to <code class="docutils literal"><span class="pre">doLayout()</span></code> which in turn uses the width as an argument for the layout rect, i.e., the bounds in which the items are laid out. This rect does not include the layout margin().</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QLayout</span><span class="p">::</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">);</span>
+    <span class="n">doLayout</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QSize</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">minimumSize</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">QSize</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">minimumSize</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">QSize</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">item</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemList</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">expandedTo</span><span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">minimumSize</span><span class="p">());</span>
+
+    <span class="n">size</span> <span class="o">+=</span> <span class="n">QSize</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">margin</span><span class="p">(),</span> <span class="mi">2</span><span class="o">*</span><span class="n">margin</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">size</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">setGeometry()</span></code> is normally used to do the actual layout, i.e., calculate the geometry of the layout’s items. In this example, it calls <code class="docutils literal"><span class="pre">doLayout()</span></code> and passes the layout rect.</p>
+<p><code class="docutils literal"><span class="pre">sizeHint()</span></code> returns the preferred size of the layout and <code class="docutils literal"><span class="pre">minimumSize()</span></code> returns the minimum size of the layout.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">FlowLayout</span><span class="p">::</span><span class="n">doLayout</span><span class="p">(</span><span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">testOnly</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">;</span>
+    <span class="n">getContentsMargins</span><span class="p">(</span><span class="o">&amp;</span><span class="n">left</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">top</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">right</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bottom</span><span class="p">);</span>
+    <span class="n">QRect</span> <span class="n">effectiveRect</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">+</span><span class="n">left</span><span class="p">,</span> <span class="o">+</span><span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">effectiveRect</span><span class="o">.</span><span class="n">x</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">effectiveRect</span><span class="o">.</span><span class="n">y</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">lineHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">doLayout()</span></code> handles the layout if <code class="docutils literal"><span class="pre">horizontalSpacing()</span></code> or <code class="docutils literal"><span class="pre">verticalSpacing()</span></code> don’t return the default value. It uses <code class="docutils literal"><span class="pre">getContentsMargins()</span></code> to calculate the area available to the layout items.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLayoutItem</span> <span class="o">*</span><span class="n">item</span><span class="p">;</span>
+<span class="n">foreach</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">wid</span> <span class="o">=</span> <span class="n">item</span><span class="o">-&gt;</span><span class="n">widget</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">spaceX</span> <span class="o">=</span> <span class="n">horizontalSpacing</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">spaceX</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">spaceX</span> <span class="o">=</span> <span class="n">wid</span><span class="o">-&gt;</span><span class="n">style</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">layoutSpacing</span><span class="p">(</span>
+            <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">PushButton</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">PushButton</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">spaceY</span> <span class="o">=</span> <span class="n">verticalSpacing</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">spaceY</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">spaceY</span> <span class="o">=</span> <span class="n">wid</span><span class="o">-&gt;</span><span class="n">style</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">layoutSpacing</span><span class="p">(</span>
+            <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">PushButton</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">PushButton</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Vertical</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It then sets the proper amount of spacing for each widget in the layout, based on the current style.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        int nextX = x + item-&gt;sizeHint().width() + spaceX;
+        if (nextX - spaceX &gt; effectiveRect.right() &amp;&amp; lineHeight &gt; 0) {
+            x = effectiveRect.x();
+            y = y + lineHeight + spaceY;
+            nextX = x + item-&gt;sizeHint().width() + spaceX;
+            lineHeight = 0;
+        }
+
+        if (!testOnly)
+            item-&gt;setGeometry(QRect(QPoint(x, y), item-&gt;sizeHint()));
+
+        x = nextX;
+        lineHeight = qMax(lineHeight, item-&gt;sizeHint().height());
+    }
+    return y + lineHeight - rect.y() + bottom;
+}
+</pre></div>
+</div>
+<p>The position of each item in the layout is then calculated by adding the items width and the line height to the initial x and y coordinates. This in turn lets us find out whether the next item will fit on the current line or if it must be moved down to the next. We also find the height of the current line based on the widgets height.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>int FlowLayout::smartSpacing(QStyle::PixelMetric pm) const
+{
+    QObject *parent = this-&gt;parent();
+    if (!parent) {
+        return -1;
+    } else if (parent-&gt;isWidgetType()) {
+        QWidget *pw = static_cast&lt;QWidget *&gt;(parent);
+        return pw-&gt;style()-&gt;pixelMetric(pm, 0, pw);
+    } else {
+        return static_cast&lt;QLayout *&gt;(parent)-&gt;spacing();
+    }
+}
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">smartSpacing()</span></code> is designed to get the default spacing for either the top-level layouts or the sublayouts. The default spacing for top-level layouts, when the parent is a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , will be determined by querying the style. The default spacing for sublayouts, when the parent is a <a class="reference internal" href="../PySide2/QtWidgets/QLayout.html#PySide2.QtWidgets.QLayout" title="PySide2.QtWidgets.QLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLayout</span></code></a> , will be determined by querying the spacing of the parent layout.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="flowlayout-cpp-example-file">
+<h1>flowlayout.cpp Example File<a class="headerlink" href="#flowlayout-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="flowlayout-h-example-file">
+<h1>flowlayout.h Example File<a class="headerlink" href="#flowlayout-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="flowlayout-pro-example-file">
+<h1>flowlayout.pro Example File<a class="headerlink" href="#flowlayout-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

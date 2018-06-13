@@ -1,0 +1,323 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Places API &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Places API</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#introductory-concepts">Introductory Concepts</a></li>
+<li><a class="reference internal" href="#plugin">Plugin</a></li>
+<li><a class="reference internal" href="#models-views-and-delegates">Models, Views and Delegates</a></li>
+<li><a class="reference internal" href="#common-use-cases">Common Use Cases</a></li>
+<li><a class="reference internal" href="#searching-for-places">Searching for Places</a></li>
+<li><a class="reference internal" href="#display-search-results-using-a-listview">Display Search Results using a ListView</a></li>
+<li><a class="reference internal" href="#display-search-results-using-a-mapitemview">Display Search Results using a MapItemView</a></li>
+<li><a class="reference internal" href="#fetching-place-details">Fetching Place Details</a></li>
+<li><a class="reference internal" href="#saving-and-removing-places">Saving and Removing Places</a></li>
+<li><a class="reference internal" href="#learn-more">Learn More</a></li>
+<li><a class="reference internal" href="#places-types">Places Types</a></li>
+<li><a class="reference internal" href="#data-types">Data Types</a></li>
+<li><a class="reference internal" href="#models">Models</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-places-api">
+<span id="id1"></span><h1>QML Places API<a class="headerlink" href="#qml-places-api" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The Places API allows users to discover places of interest and view details about them, such as address and contact information. Some places may have additional content associated with them, such as images and reviews. The Places API also facilitates management of places and categories, allowing users to save and remove them.</div></blockquote>
+</div>
+<div class="section" id="introductory-concepts">
+<span id="id3"></span><h2>Introductory Concepts<a class="headerlink" href="#introductory-concepts" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="plugin">
+<span id="id4"></span><h2>Plugin<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> is an abstraction for a backend. One <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> might access places from a REST server while another may access places from a local database. The following instantiates a <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> object by providing a name of “osm”. The <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> name identifies which backend to choose from. Plugins may also be provided with a set of <span class="xref std std-ref">parameters</span> , which essentially takes the form of a set of key-value pairs. The <span class="xref std std-ref">parameters</span> that can be specified vary among the different <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> backends. For documentation on the possible <span class="xref std std-ref">parameters</span> and nuances of each <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> , see the <span class="xref std std-ref">Plugin References</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Plugin</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">myPlugin</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;osm&quot;</span>
+    <span class="o">//</span><span class="n">specify</span> <span class="n">plugin</span> <span class="n">parameters</span> <span class="k">as</span> <span class="n">necessary</span>
+    <span class="o">//</span><span class="n">PluginParameter</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+    <span class="o">//</span><span class="n">PluginParameter</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+    <span class="o">//...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The HERE plugin must be supplied with some mandatory parameters as outlined in the <a class="reference internal" href="location-plugin-here.html#qt-location-here-plugin"><span class="std std-ref">HERE Plugin</span></a> documentation.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="models-views-and-delegates">
+<span id="id5"></span><h2>Models, Views and Delegates<a class="headerlink" href="#models-views-and-delegates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The QML Places API is built around the notion of models, views and delegates.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="96%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Model</strong></td>
+<td>A model holds data items and maintains their structure. The model is also responsible for retrieving the items from a data source.</td>
+</tr>
+<tr class="row-even"><td><strong>View</strong></td>
+<td>A view is a visual container that displays the data and manages how visual items are shown such as in a list or a grid. The view may also be responsible for navigating the data, for example, scrolling through the visual items during a flicking motion.</td>
+</tr>
+<tr class="row-odd"><td><strong>Delegate</strong></td>
+<td>A delegate defines how individual data elements should appear as visual items in the view. The models expose a set of data roles and the delegate uses them to construct a visual item. The delegate may also define behaviour such as an operation to invoke when a visual item is clicked.</td>
+</tr>
+</tbody>
+</table>
+<p>The Common Use Cases section below demonstrates concrete examples of how these concepts fit together.</p>
+</div></blockquote>
+</div>
+<div class="section" id="common-use-cases">
+<span id="id6"></span><h2>Common Use Cases<a class="headerlink" href="#common-use-cases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="searching-for-places">
+<span id="id7"></span><h2>Searching for Places<a class="headerlink" href="#searching-for-places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Searching is accomplished via the <span class="xref std std-ref">PlaceSearchModel</span> . The <span class="xref std std-ref">plugin</span> property specifies which backend to perform search operations against. Search parameters may be provided through properties such as the <span class="xref std std-ref">searchTerm</span> and <span class="xref std std-ref">searchArea</span> . A search operation can then be started by invoking the <span class="xref std std-ref">update()</span> method. For simplicity, the snippet below invokes <span class="xref std std-ref">update()</span> once construction of the model as been completed, typically <span class="xref std std-ref">update()</span> would be invoked in response to a user action such as a button click. While the search operation is underway the <span class="xref std std-ref">PlaceSearchModel::status</span> property transitions into the <code class="docutils literal"><span class="pre">Loading</span></code> state and when successfully completed moves into the <code class="docutils literal"><span class="pre">Ready</span></code> state.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PlaceSearchModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">searchModel</span>
+
+    <span class="n">plugin</span><span class="p">:</span> <span class="n">myPlugin</span>
+
+    <span class="n">searchTerm</span><span class="p">:</span> <span class="s2">&quot;pizza&quot;</span>
+    <span class="n">searchArea</span><span class="p">:</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">startCoordinate</span><span class="p">);</span>
+
+    <span class="n">Component</span><span class="o">.</span><span class="n">onCompleted</span><span class="p">:</span> <span class="n">update</span><span class="p">()</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="display-search-results-using-a-listview">
+<span id="id8"></span><h2>Display Search Results using a ListView<a class="headerlink" href="#display-search-results-using-a-listview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <span class="xref std std-ref">ListView</span> can be used to show the search results found by the model. It defines the visual region for where the results are shown, and in the case below fills the entirety of its parent. The <span class="xref std std-ref">ListView</span> has built in behavior that enables the region to respond to flicking events and to scroll appropriately.</p>
+<p>In the snippet below, the search model has been assigned to the <span class="xref std std-ref">ListView</span> ‘s <span class="xref std std-ref">model</span> property. When the model is updated with new results, the <span class="xref std std-ref">ListView</span> is automatically updated to reflect the model’s new data items.</p>
+<p>A simple delegate has been bound to the <span class="xref std std-ref">ListView</span> ‘s <span class="xref std std-ref">delegate</span> property. The <span class="xref std std-ref">PlaceSearchModel</span> exposes a set of <span class="xref std std-ref">roles</span> of which the <em>title</em> and <em>place</em> roles have been used below, these are of type string and <span class="xref std std-ref">Place</span> respectively. Essentially for each data item that should be visible in the view, the view invokes the delegate to create a visual representation of the item.</p>
+<p>+———————————————————————-++
+<a href="#id16"><span class="problematic" id="id17">|::                                                                    ||</span></a>
+|                                                                      ||
+|            ListView {                                                ||
+|                anchors.fill: parent                                  ||
+|                model: searchModel                                    ||
+|                delegate: Component {                                 ||
+|                    Row {                                             ||
+|                        spacing: 5                                    ||
+|                        Marker { height: parent.height }              ||
+|                        Column {                                      ||
+|                            Text { text: title; font.bold: true }     ||
+|                            Text { text: place.location.address.text }||
+|                        }                                             ||
+|                    }                                                 ||
+|                }                                                     ||
+|            }                                                         ||
++———————————————————————-++</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For simplicty’s sake we have assumed that every search result is of <span class="xref std std-ref">type</span> <code class="docutils literal"><span class="pre">PlaceSearchResult</span></code> and so always have access to the <em>place</em> role, other search result types may not have a <em>place</em> role.</p>
+</div>
+<p>See the <a class="reference internal" href="qtlocation-places-list-example.html#places-list-qml"><span class="std std-ref">Places List</span></a> example for full source code.</p>
+</div></blockquote>
+</div>
+<div class="section" id="display-search-results-using-a-mapitemview">
+<span id="id9"></span><h2>Display Search Results using a MapItemView<a class="headerlink" href="#display-search-results-using-a-mapitemview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Instead of a <span class="xref std std-ref">ListView</span> , the <span class="xref std std-ref">PlaceSearchModel</span> can be used in conjunction with a <span class="xref std std-ref">MapItemView</span> to display markers on a map. Firstly a <span class="xref std std-ref">Map</span> is used to define the visual region occupied by the map, in this case it fills the entirety of its parent. Other properties are specified such as the <span class="xref std std-ref">plugin</span> providing the maps, and the map’s <span class="xref std std-ref">center</span> and <span class="xref std std-ref">zoomLevel</span> .</p>
+<p>Inside the <span class="xref std std-ref">Map</span> , a <span class="xref std std-ref">MapItemView</span> is declared, where the <span class="xref std std-ref">model</span> property has been set to the search model and a <span class="xref std std-ref">delegate</span> consisting of a <span class="xref std std-ref">MapQuickItem</span> is used to display a marker image. A marker is shown for every place that was found by the search model. The delegate uses the <em>place</em> role to position the marker.</p>
+<p>+———————————————————————++
+<a href="#id18"><span class="problematic" id="id19">|::                                                                   ||</span></a>
+|                                                                     ||
+|            Map {                                                    ||
+|                id: map                                              ||
+|                anchors.fill: parent                                 ||
+|                plugin: myPlugin;                                    ||
+|                center: locationOslo                                 ||
+|                zoomLevel: 13                                        ||
+|                                                                     ||
+|                MapItemView {                                        ||
+|                    model: searchModel                               ||
+|                    delegate: MapQuickItem {                         ||
+|                        coordinate: place.location.coordinate        ||
+|                                                                     ||
+|                        anchorPoint.x: image.width * 0.5             ||
+|                        anchorPoint.y: image.height                  ||
+|                                                                     ||
+|                        sourceItem: Column {                         ||
+|                            Image { id: image; source: “marker.png” }||
+|                            Text { text: title; font.bold: true }    ||
+|                        }                                            ||
+|                    }                                                ||
+|                }                                                    ||
+|            }                                                        ||
++———————————————————————++</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For simplicty’s sake we have assumed that every search result is of <span class="xref std std-ref">type</span> <code class="docutils literal"><span class="pre">PlaceSearchResult</span></code> and so always have access to the <em>place</em> role, other search result types may not have a <em>place</em> role.</p>
+</div>
+<p>See the <a class="reference internal" href="qtlocation-places-map-example.html#places-map-qml"><span class="std std-ref">Places Map</span></a> example for full source code.</p>
+</div></blockquote>
+</div>
+<div class="section" id="fetching-place-details">
+<span id="id10"></span><h2>Fetching Place Details<a class="headerlink" href="#fetching-place-details" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In order to save bandwidth, sometimes a backend will only return places which are partially populated with details. This can be checked with the <span class="xref std std-ref">Place::detailsFetched</span> property which indicates whether all availalable details have been fetched or not. If not, the <span class="xref std std-ref">Place::getDetails()</span> method can be invoked to fetch the remaining details.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!place.detailsFetched)
+    place.getDetails();
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="saving-and-removing-places">
+<span id="id11"></span><h2>Saving and Removing Places<a class="headerlink" href="#saving-and-removing-places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Some backends may support saving and removing places. This can be done by calling the <span class="xref std std-ref">Place::save()</span> and <span class="xref std std-ref">Place::remove()</span> methods respectively. Note that in order to save a <span class="xref std std-ref">Place</span> , a <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Plugin</span></a> must be assigned to specify which backend we are saving to. The <span class="xref std std-ref">status</span> property will transition into the <code class="docutils literal"><span class="pre">Saving</span></code> state while the save operation is happening and on successful completion will move to the <code class="docutils literal"><span class="pre">Ready</span></code> state. The following snippet shows how to save and remove a place using javascript.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">creating</span> <span class="ow">and</span> <span class="n">saving</span> <span class="n">a</span> <span class="n">place</span>
+<span class="n">var</span> <span class="n">place</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">createQmlObject</span><span class="p">(</span><span class="s1">&#39;import QtLocation 5.3; Place { }&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="p">);</span>
+<span class="n">place</span><span class="o">.</span><span class="n">plugin</span> <span class="o">=</span> <span class="n">myPlugin</span><span class="p">;</span>
+<span class="n">place</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;New York&quot;</span><span class="p">;</span>
+<span class="n">place</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="mf">40.7</span>
+<span class="n">place</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="o">-</span><span class="mf">74.0</span>
+<span class="n">place</span><span class="o">.</span><span class="n">save</span><span class="p">();</span>
+
+<span class="o">//</span><span class="n">removing</span> <span class="n">a</span> <span class="n">place</span>
+<span class="n">place</span><span class="o">.</span><span class="n">remove</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="learn-more">
+<span id="id12"></span><h2>Learn More<a class="headerlink" href="#learn-more" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The above snippets only exhibit a small subset of Places functionality. Refer to the <a class="reference internal" href="#qml-places-api"><span class="std std-ref">Places Types</span></a> shown below for richer content such as <span class="xref std std-ref">images</span> , <span class="xref std std-ref">reviews</span> etc, as well as more indepth descriptions and explanations.</p>
+<p>See also the <a class="reference internal" href="qtlocation-places-example.html#places-qml"><span class="std std-ref">Places (QML)</span></a> example for a more comprehensive demonstration on how to use the API.</p>
+</div></blockquote>
+</div>
+<div class="section" id="places-types">
+<span id="id13"></span><h2>Places Types<a class="headerlink" href="#places-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="data-types">
+<span id="id14"></span><h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="models">
+<span id="id15"></span><h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

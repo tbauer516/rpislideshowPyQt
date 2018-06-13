@@ -1,0 +1,261 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Maps and Navigation (QML) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Maps and Navigation (QML)</a><ul>
+<li><a class="reference internal" href="#maps">Maps</a></li>
+<li><a class="reference internal" href="#displaying-maps">Displaying Maps</a></li>
+<li><a class="reference internal" href="#putting-objects-on-a-map-map-overlay-objects">Putting Objects on a Map (Map Overlay Objects)</a></li>
+<li><a class="reference internal" href="#model-view-design-with-map-overlay-objects">Model-View Design with Map Overlay Objects</a></li>
+<li><a class="reference internal" href="#interaction-with-map-overlay-objects">Interaction with Map Overlay Objects</a></li>
+<li><a class="reference internal" href="#geocoding-address-to-coordinate-and-vice-versa">Geocoding – Address to Coordinate and Vice Versa</a></li>
+<li><a class="reference internal" href="#routing-and-navigation">Routing and Navigation</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="maps-and-navigation-qml">
+<span id="id1"></span><h1>Maps and Navigation (QML)<a class="headerlink" href="#maps-and-navigation-qml" title="Permalink to this headline">¶</a></h1>
+<p>Provides QtQuick user interfaces for displaying, navigating and interacting with maps, as well as geocoding and navigation</p>
+<blockquote>
+<div><p>Provides <span class="xref std std-ref">QtQuick</span> user interfaces for displaying, navigating and interacting with maps, as well as geocoding and navigation.</p>
+<p><strong>Maps and Navigation</strong> provides <span class="xref std std-ref">QtQuick</span> user interface types for displaying geographic information on a map, as well as allowing user interaction with map overlay objects and the display itself. It also contains utilities for geocoding (finding a geographic coordinate from a street address) and navigation (including driving and walking directions).</p>
+<p>It builds upon the API concepts and types in the <a class="reference internal" href="location-positioning-qml.html#positioning-qml"><span class="std std-ref">QML Positioning API</span></a> . A more hands-on introduction of the Maps and Navigation types can be found in the <a class="reference internal" href="qml-location5-maps.html#qml-maps"><span class="std std-ref">Maps and Navigation tutorial</span></a> .</p>
+</div></blockquote>
+<div class="section" id="maps">
+<span id="id2"></span><h2>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="displaying-maps">
+<span id="id3"></span><h2>Displaying Maps<a class="headerlink" href="#displaying-maps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Displaying a map is done using the <span class="xref std std-ref">Map</span> QML types. The Map type supports user interaction through the <span class="xref std std-ref">MapGestureArea</span> QML type. The Map object draws the map on-screen using OpenGL (ES), allowing for hardware-accelerated rendering where available.</p>
+<p><strong>Key Types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">Plugin</span></td>
+<td>A location-based services plugin provides data including map data which is then displayed in a Map object.</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">Map</span></td>
+<td><span class="xref std std-ref">QtQuick</span> item to display a map on-screen.</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">MapGestureArea</span></td>
+<td>Interaction helper for panning, flicking and pinch-to-zoom gesture on a Map.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the client must create a <span class="xref std std-ref">Plugin</span> object prior to using a <span class="xref std std-ref">Map</span> type in order to have access to map data to display.</p>
+</div></blockquote>
+</div>
+<div class="section" id="putting-objects-on-a-map-map-overlay-objects">
+<span id="id4"></span><h2>Putting Objects on a Map (Map Overlay Objects)<a class="headerlink" href="#putting-objects-on-a-map-map-overlay-objects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Maps can also contain map overlay objects, which are used to display information on its surface. There is a set of basic pre-defined map overlay objects, as well as the ability to implement custom map overlay objects using the <span class="xref std std-ref">MapQuickItem</span> type, which can contain any standard <span class="xref std std-ref">QtQuick</span> item.</p>
+<p><strong>Key Types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">MapCircle</span></td>
+<td>A geographic circle (all points at a set distance from a center), optionally with a border.</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">MapRectangle</span></td>
+<td>A rectangle whose top left and bottom right points are specified as <span class="xref std std-ref">coordinate</span> types, optionally with a border.</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">MapPolygon</span></td>
+<td>A polygon made of an arbitrary list of <span class="xref std std-ref">coordinates</span> .</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">MapPolyline</span></td>
+<td>A polyline made of an arbitrary list of <span class="xref std std-ref">coordinates</span> .</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">MapQuickItem</span></td>
+<td>Turns any arbitrary <span class="xref std std-ref">QtQuick</span> Item into a map overlay object. <span class="xref std std-ref">MapQuickItem</span> is an enabler for specifying custom map overlay objects.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="model-view-design-with-map-overlay-objects">
+<span id="id5"></span><h2>Model-View Design with Map Overlay Objects<a class="headerlink" href="#model-view-design-with-map-overlay-objects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To automatically generate map overlay objects based on the contents of a <span class="xref std std-ref">QtQuick</span> model (for example a ListModel item), the <span class="xref std std-ref">MapItemView</span> type is available. It accepts any map overlay object as its delegate, and can only be created within a <span class="xref std std-ref">Map</span> .</p>
+<p><strong>Key Types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">MapItemView</span></td>
+<td>Populates a Map with map overlay objects based on the data provided by a model.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="interaction-with-map-overlay-objects">
+<span id="id6"></span><h2>Interaction with Map Overlay Objects<a class="headerlink" href="#interaction-with-map-overlay-objects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Properties of map overlay objects that influence their appearance on the display can be changed at any time, and many can also be used in animations. Animating coordinate-based map overlay objects, such as <span class="xref std std-ref">MapPolygon</span> and <span class="xref std std-ref">MapPolyline</span> , is not yet available.</div></blockquote>
+</div>
+<div class="section" id="geocoding-address-to-coordinate-and-vice-versa">
+<span id="id7"></span><h2>Geocoding – Address to Coordinate and Vice Versa<a class="headerlink" href="#geocoding-address-to-coordinate-and-vice-versa" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Geocoding is the translation of geographic coordinates into addresses, or vice versa. Such a translation usually involves sending the source data to a server which then performs the translation and returns the results, although some location-based service provider <span class="xref std std-ref">plugins</span> may be able to provide some geocoding functionality without sending data to a remote server. The availability and accuracy of the translation usually depends on the location or address being translated, as different areas of the Earth are mapped to varying degrees of accuracy.</p>
+<p>A geocoding query in QML is performed using the <span class="xref std std-ref">GeocodeModel</span> type. For an address-to-coordinate query, its <code class="docutils literal"><span class="pre">query</span></code> property may be set to either an <span class="xref std std-ref">Address</span> object or a string containing the textual form of the address to search for. To perform the reverse, the same property can be set to a <span class="xref std std-ref">coordinate</span> instead. Results are made available in the contents of the model.</p>
+<p><strong>Key Types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">Plugin</span></td>
+<td>A location-based services plugin provides data including geocoding translation results which are exposed to clients via a <span class="xref std std-ref">GeocodeModel</span> .</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">GeocodeModel</span></td>
+<td>Queries the Plugin for geocoding translations and provides access to results via indexes in the model.</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">Address</span></td>
+<td>Structured address for use in queries and results of geocoding.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the client must create a <span class="xref std std-ref">Plugin</span> object prior to using a <span class="xref std std-ref">GeocodeModel</span> object. This will enable access to geocoding translation services and thus data to display.</p>
+</div></blockquote>
+</div>
+<div class="section" id="routing-and-navigation">
+<span id="id8"></span><h2>Routing and Navigation<a class="headerlink" href="#routing-and-navigation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Routing is the determination of a navigable path from one point to another on a map. Given a map that is aware of features that aid or hinder navigation, such as bridges, waterways and so on, a series of segments that make up the journey can be constructed. If these <span class="xref std std-ref">RouteSegment</span> s are simple then we can add navigation information at the connecting points, <span class="xref std std-ref">RouteManeuver</span> s, between the segments.</p>
+<p><strong>Key Types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">Route</span></td>
+<td>The entire path to be navigated.</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">RouteSegment</span></td>
+<td>The individual components of a route.</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">RouteManeuver</span></td>
+<td>The navigation information that joins segments.</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">RouteModel</span></td>
+<td>The means of making requests on the backend to supply route information.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

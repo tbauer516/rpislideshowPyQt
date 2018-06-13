@@ -1,0 +1,457 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sliders Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sliders Example</a><ul>
+<li><a class="reference internal" href="#window-class-definition">Window Class Definition</a></li>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+<li><a class="reference internal" href="#slidersgroup-class-definition">SlidersGroup Class Definition</a></li>
+<li><a class="reference internal" href="#slidersgroup-class-implementation">SlidersGroup Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#slidersgroup-cpp-example-file">slidersgroup.cpp Example File</a></li>
+<li><a class="reference internal" href="#slidersgroup-h-example-file">slidersgroup.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#sliders-pro-example-file">sliders.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sliders-example">
+<span id="id1"></span><h1>Sliders Example<a class="headerlink" href="#sliders-example" title="Permalink to this headline">¶</a></h1>
+<p>Sliders example shows how to use the different types of sliders available in Qt: QSlider, QScrollBar and QDial</p>
+<blockquote>
+<div><p>The Sliders example shows how to use the different types of sliders available in Qt: <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> .</p>
+<p>Qt provides three types of slider-like widgets: <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> . They all inherit most of their functionality from <a class="reference internal" href="../PySide2/QtWidgets/QAbstractSlider.html#PySide2.QtWidgets.QAbstractSlider" title="PySide2.QtWidgets.QAbstractSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractSlider</span></code></a> , and can in theory replace each other in an application since the differences only concern their look and feel. This example shows what they look like, how they work and how their behavior and appearance can be manipulated through their properties.</p>
+<p>The example also demonstrates how signals and slots can be used to synchronize the behavior of two or more widgets.</p>
+<p>The Sliders example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">SlidersGroup</span></code> is a custom widget. It combines a <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , a <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> and a <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> .</li>
+<li><code class="docutils literal"><span class="pre">Window</span></code> is the main widget combining a <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> and a <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> . In this example, the <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> provides a stack of two <code class="docutils literal"><span class="pre">SlidersGroup</span></code> widgets. The <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> contain several widgets that control the behavior of the slider-like widgets.</li>
+</ul>
+<p>First we will review the <code class="docutils literal"><span class="pre">Window</span></code> class, then we will take a look at the <code class="docutils literal"><span class="pre">SlidersGroup</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="window-class-definition">
+<span id="id2"></span><h2>Window Class Definition<a class="headerlink" href="#window-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Window</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createControls</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">);</span>
+
+    <span class="n">SlidersGroup</span> <span class="o">*</span><span class="n">horizontalSliders</span><span class="p">;</span>
+    <span class="n">SlidersGroup</span> <span class="o">*</span><span class="n">verticalSliders</span><span class="p">;</span>
+    <span class="n">QStackedWidget</span> <span class="o">*</span><span class="n">stackedWidget</span><span class="p">;</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">controlsGroup</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">minimumLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">maximumLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">valueLabel</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">invertedAppearance</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">invertedKeyBindings</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">minimumSpinBox</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">maximumSpinBox</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">valueSpinBox</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">orientationCombo</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Window</span></code> class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . It displays the slider widgets and allows the user to set their minimum, maximum and current values and to customize their appearance, key bindings and orientation. We use a private <code class="docutils literal"><span class="pre">createControls()</span></code> function to create the widgets that provide these controlling mechanisms and to connect them to the slider widgets.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-implementation">
+<span id="id3"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Window</span><span class="p">::</span><span class="n">Window</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">horizontalSliders</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SlidersGroup</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Horizontal&quot;</span><span class="p">));</span>
+    <span class="n">verticalSliders</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SlidersGroup</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Vertical</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Vertical&quot;</span><span class="p">));</span>
+
+    <span class="n">stackedWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QStackedWidget</span><span class="p">;</span>
+    <span class="n">stackedWidget</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">horizontalSliders</span><span class="p">);</span>
+    <span class="n">stackedWidget</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">verticalSliders</span><span class="p">);</span>
+
+    <span class="n">createControls</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Controls&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In the constructor we first create the two <code class="docutils literal"><span class="pre">SlidersGroup</span></code> widgets that display the slider widgets horizontally and vertically, and add them to the <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> . <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> provides a stack of widgets where only the top widget is visible. With <code class="docutils literal"><span class="pre">createControls()</span></code> we create a connection from a controlling widget to the <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> , making the user able to choose between horizontal and vertical orientation of the slider widgets. The rest of the controlling mechanisms is implemented by the same function call.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">valueSpinBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">valueSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">controlsGroup</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">stackedWidget</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+
+    <span class="n">minimumSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">maximumSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+    <span class="n">valueSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Sliders&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we connect the <code class="docutils literal"><span class="pre">horizontalSliders</span></code> , <code class="docutils literal"><span class="pre">verticalSliders</span></code> and <code class="docutils literal"><span class="pre">valueSpinBox</span></code> to each other, so that the slider widgets and the control widget will behave synchronized when the current value of one of them changes. The <code class="docutils literal"><span class="pre">valueChanged()</span></code> signal is emitted with the new value as argument. The <code class="docutils literal"><span class="pre">setValue()</span></code> slot sets the current value of the widget to the new value, and emits <code class="docutils literal"><span class="pre">valueChanged()</span></code> if the new value is different from the old one.</p>
+<p>We put the group of control widgets and the stacked widget in a horizontal layout before we initialize the minimum, maximum and current values. The initialization of the current value will propagate to the slider widgets through the connection we made between <code class="docutils literal"><span class="pre">valueSpinBox</span></code> and the <code class="docutils literal"><span class="pre">SlidersGroup</span></code> widgets. The minimum and maximum values propagate through the connections we created with <code class="docutils literal"><span class="pre">createControls()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">createControls</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">controlsGroup</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+
+    <span class="n">minimumLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Minimum value:&quot;</span><span class="p">));</span>
+    <span class="n">maximumLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Maximum value:&quot;</span><span class="p">));</span>
+    <span class="n">valueLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Current value:&quot;</span><span class="p">));</span>
+
+    <span class="n">invertedAppearance</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Inverted appearance&quot;</span><span class="p">));</span>
+    <span class="n">invertedKeyBindings</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Inverted key bindings&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In the private <code class="docutils literal"><span class="pre">createControls()</span></code> function, we let a <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> (<code class="docutils literal"><span class="pre">controlsGroup</span></code> ) display the control widgets. A group box can provide a frame, a title and a keyboard shortcut, and displays various other widgets inside itself. The group of control widgets is composed by two checkboxes, three spin boxes (with labels) and one combobox.</p>
+<p>After creating the labels, we create the two checkboxes. Checkboxes are typically used to represent features in an application that can be enabled or disabled. When <code class="docutils literal"><span class="pre">invertedAppearance</span></code> is enabled, the slider values are inverted. The table below shows the appearance for the different slider-like widgets:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="17%" />
+<col width="7%" />
+<col width="27%" />
+<col width="7%" />
+<col width="16%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td colspan="2"><a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a></td>
+<td colspan="2"><a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a></td>
+<td colspan="2"><a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a></td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>Normal</td>
+<td>Inverted</td>
+<td>Normal Inverted Normal Inverted</td>
+<td>Inverted</td>
+<td>Normal</td>
+<td>Inverted</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">Qt.Horizontal</span></code></td>
+<td>Left to right</td>
+<td>Right to left</td>
+<td>Left to right Right to left Clockwise Counterclockwise</td>
+<td>Right to left</td>
+<td>Clockwise</td>
+<td>Counterclockwise</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">Qt.Vertical</span></code></td>
+<td>Bottom to top</td>
+<td>Top to bottom</td>
+<td>Top to bottom Bottom to top Clockwise Counterclockwise</td>
+<td>Bottom to top</td>
+<td>Clockwise</td>
+<td>Counterclockwise</td>
+</tr>
+</tbody>
+</table>
+<p>It is common to invert the appearance of a vertical <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> . A vertical slider that controls volume, for example, will typically go from bottom to top (the non-inverted appearance), whereas a vertical slider that controls the position of an object on screen might go from top to bottom, because screen coordinates go from top to bottom.</p>
+<p>When the <code class="docutils literal"><span class="pre">invertedKeyBindings</span></code> option is enabled (corresponding to the <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.invertedControls()</span></code> property), the slider’s wheel and key events are inverted. The normal key bindings mean that scrolling the mouse wheel “up” or using keys like page up will increase the slider’s current value towards its maximum. Inverted, the same wheel and key events will move the value toward the slider’s minimum. This can be useful if the <em>appearance</em> of a slider is inverted: Some users might expect the keys to still work the same way on the value, whereas others might expect PageUp to mean “up” on the screen.</p>
+<p>Note that for horizontal and vertical scroll bars, the key bindings are inverted by default: PageDown increases the current value, and PageUp decreases it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">minimumSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">minimumSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">minimumSpinBox</span><span class="o">-&gt;</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">maximumSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">maximumSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">maximumSpinBox</span><span class="o">-&gt;</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">valueSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">valueSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">valueSpinBox</span><span class="o">-&gt;</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">orientationCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+<span class="n">orientationCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Horizontal slider-like widgets&quot;</span><span class="p">));</span>
+<span class="n">orientationCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Vertical slider-like widgets&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Then we create the spin boxes. <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> allows the user to choose a value by clicking the up and down buttons or pressing the Up and Down keys on the keyboard to modify the value currently displayed. The user can also type in the value manually. The spin boxes control the minimum, maximum and current values for the <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> widgets.</p>
+<p>We create a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> that allows the user to choose the orientation of the slider widgets. The <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> widget is a combined button and popup list. It provides a means of presenting a list of options to the user in a way that takes up the minimum amount of screen space.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">orientationCombo</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">stackedWidget</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">minimumSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setMinimum</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">minimumSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setMinimum</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">maximumSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setMaximum</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">maximumSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+            <span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setMaximum</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">invertedAppearance</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+            <span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">invertAppearance</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">invertedAppearance</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+            <span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">invertAppearance</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">invertedKeyBindings</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+            <span class="n">horizontalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">invertKeyBindings</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">invertedKeyBindings</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">toggled</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span>
+            <span class="n">verticalSliders</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">invertKeyBindings</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">controlsLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">minimumLabel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">maximumLabel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">valueLabel</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">minimumSpinBox</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">maximumSpinBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">valueSpinBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">invertedAppearance</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">invertedKeyBindings</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">orientationCombo</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">controlsGroup</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">controlsLayout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We synchronize the behavior of the control widgets and the slider widgets through their signals and slots. We connect each control widget to both the horizontal and vertical group of slider widgets. We also connect <code class="docutils literal"><span class="pre">orientationCombo</span></code> to the <a class="reference internal" href="../PySide2/QtWidgets/QStackedWidget.html#PySide2.QtWidgets.QStackedWidget" title="PySide2.QtWidgets.QStackedWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStackedWidget</span></code></a> , so that the correct “page” is shown. Finally, we lay out the control widgets in a <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> within the <code class="docutils literal"><span class="pre">controlsGroup</span></code> group box.</p>
+</div></blockquote>
+</div>
+<div class="section" id="slidersgroup-class-definition">
+<span id="id4"></span><h2>SlidersGroup Class Definition<a class="headerlink" href="#slidersgroup-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SlidersGroup</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGroupBox</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">SlidersGroup</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Orientation</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">,</span>
+                 <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setValue</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setMinimum</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setMaximum</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">invertAppearance</span><span class="p">(</span><span class="nb">bool</span> <span class="n">invert</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">invertKeyBindings</span><span class="p">(</span><span class="nb">bool</span> <span class="n">invert</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QSlider</span> <span class="o">*</span><span class="n">slider</span><span class="p">;</span>
+    <span class="n">QScrollBar</span> <span class="o">*</span><span class="n">scrollBar</span><span class="p">;</span>
+    <span class="n">QDial</span> <span class="o">*</span><span class="n">dial</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">SlidersGroup</span></code> class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> . It provides a frame and a title, and contains a <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , a <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> and a <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> .</p>
+<p>We provide a <code class="docutils literal"><span class="pre">valueChanged()</span></code> signal and a public <code class="docutils literal"><span class="pre">setValue()</span></code> slot with equivalent functionality to the ones in <a class="reference internal" href="../PySide2/QtWidgets/QAbstractSlider.html#PySide2.QtWidgets.QAbstractSlider" title="PySide2.QtWidgets.QAbstractSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractSlider</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> . In addition, we implement several other public slots to set the minimum and maximum value, and invert the slider widgets’ appearance as well as key bindings.</p>
+</div></blockquote>
+</div>
+<div class="section" id="slidersgroup-class-implementation">
+<span id="id5"></span><h2>SlidersGroup Class Implementation<a class="headerlink" href="#slidersgroup-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SlidersGroup</span><span class="p">::</span><span class="n">SlidersGroup</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Orientation</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">,</span>
+                           <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSlider</span><span class="p">(</span><span class="n">orientation</span><span class="p">);</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">StrongFocus</span><span class="p">);</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setTickPosition</span><span class="p">(</span><span class="n">QSlider</span><span class="p">::</span><span class="n">TicksBothSides</span><span class="p">);</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setTickInterval</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">scrollBar</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QScrollBar</span><span class="p">(</span><span class="n">orientation</span><span class="p">);</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">StrongFocus</span><span class="p">);</span>
+
+    <span class="n">dial</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDial</span><span class="p">;</span>
+    <span class="n">dial</span><span class="o">-&gt;</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">StrongFocus</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">scrollBar</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">scrollBar</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">dial</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">dial</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">slider</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>First we create the slider-like widgets with the appropriate properties. In particular we set the focus policy for each widget. <code class="xref py py-attr docutils literal"><span class="pre">Qt.FocusPolicy</span></code> is an enum type that defines the various policies a widget can have with respect to acquiring keyboard focus. The <code class="xref py py-attr docutils literal"><span class="pre">Qt.StrongFocus</span></code> policy means that the widget accepts focus by both tabbing and clicking.</p>
+<p>Then we connect the widgets with each other, so that they will stay synchronized when the current value of one of them changes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">dial</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>We connect <code class="docutils literal"><span class="pre">dial</span></code> ‘s <code class="docutils literal"><span class="pre">valueChanged()</span></code> signal to the <code class="docutils literal"><span class="pre">SlidersGroup</span></code> ‘s <code class="docutils literal"><span class="pre">valueChanged()</span></code> signal, to notify the other widgets in the application (i.e., the control widgets) of the changed value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QBoxLayout</span><span class="p">::</span><span class="n">Direction</span> <span class="n">direction</span><span class="p">;</span>
+
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">orientation</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">QBoxLayout</span><span class="p">::</span><span class="n">TopToBottom</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">QBoxLayout</span><span class="p">::</span><span class="n">LeftToRight</span><span class="p">;</span>
+
+    <span class="n">QBoxLayout</span> <span class="o">*</span><span class="n">slidersLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QBoxLayout</span><span class="p">(</span><span class="n">direction</span><span class="p">);</span>
+    <span class="n">slidersLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">slider</span><span class="p">);</span>
+    <span class="n">slidersLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">scrollBar</span><span class="p">);</span>
+    <span class="n">slidersLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">dial</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">slidersLayout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, depending on the <code class="xref py py-attr docutils literal"><span class="pre">orientation</span></code> given at the time of construction, we choose and create the layout for the slider widgets within the group box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SlidersGroup</span><span class="p">::</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setValue()</span></code> slot sets the value of the <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> . We don’t need to explicitly call <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.setValue()</span></code> on the <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> widgets, since <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> will emit the <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.valueChanged()</span></code> signal when its value changes, triggering a domino effect.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SlidersGroup</span><span class="p">::</span><span class="n">setMinimum</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setMinimum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setMinimum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">dial</span><span class="o">-&gt;</span><span class="n">setMinimum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">SlidersGroup</span><span class="p">::</span><span class="n">setMaximum</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setMaximum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setMaximum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">dial</span><span class="o">-&gt;</span><span class="n">setMaximum</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setMinimum()</span></code> and <code class="docutils literal"><span class="pre">setMaximum()</span></code> slots are used by the <code class="docutils literal"><span class="pre">Window</span></code> class to set the range of the <a class="reference internal" href="../PySide2/QtWidgets/QSlider.html#PySide2.QtWidgets.QSlider" title="PySide2.QtWidgets.QSlider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSlider</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QDial.html#PySide2.QtWidgets.QDial" title="PySide2.QtWidgets.QDial"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDial</span></code></a> widgets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SlidersGroup</span><span class="p">::</span><span class="n">invertAppearance</span><span class="p">(</span><span class="nb">bool</span> <span class="n">invert</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setInvertedAppearance</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setInvertedAppearance</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+    <span class="n">dial</span><span class="o">-&gt;</span><span class="n">setInvertedAppearance</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">SlidersGroup</span><span class="p">::</span><span class="n">invertKeyBindings</span><span class="p">(</span><span class="nb">bool</span> <span class="n">invert</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">slider</span><span class="o">-&gt;</span><span class="n">setInvertedControls</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setInvertedControls</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+    <span class="n">dial</span><span class="o">-&gt;</span><span class="n">setInvertedControls</span><span class="p">(</span><span class="n">invert</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">invertAppearance()</span></code> and <code class="docutils literal"><span class="pre">invertKeyBindings()</span></code> slots control the child widgets’ <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.invertedAppearance()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractSlider.invertedControls()</span></code> properties.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="slidersgroup-cpp-example-file">
+<h1>slidersgroup.cpp Example File<a class="headerlink" href="#slidersgroup-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="slidersgroup-h-example-file">
+<h1>slidersgroup.h Example File<a class="headerlink" href="#slidersgroup-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sliders-pro-example-file">
+<h1>sliders.pro Example File<a class="headerlink" href="#sliders-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

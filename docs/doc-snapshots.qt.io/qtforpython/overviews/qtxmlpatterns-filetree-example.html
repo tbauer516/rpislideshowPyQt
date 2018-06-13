@@ -1,0 +1,529 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>File System Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">File System Example</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#the-user-interface">The User Interface</a></li>
+<li><a class="reference internal" href="#running-your-own-xqueries">Running your own XQueries</a></li>
+<li><a class="reference internal" href="#code-walk-through">Code Walk-Through</a></li>
+<li><a class="reference internal" href="#the-custom-node-model-class-filetree">The Custom Node Model Class: FileTree</a></li>
+<li><a class="reference internal" href="#accessing-the-node-model">Accessing The Node Model</a></li>
+<li><a class="reference internal" href="#building-and-traversing-the-node-model">Building And Traversing The Node Model</a></li>
+<li><a class="reference internal" href="#the-ui-class-mainwindow">The UI Class: MainWindow</a></li>
+<li><a class="reference internal" href="#selecting-a-directory-to-model">Selecting A Directory To Model</a></li>
+<li><a class="reference internal" href="#selecting-and-running-an-xquery">Selecting And Running An XQuery</a></li>
+<li><a class="reference internal" href="#node-model-building-strategy">Node Model Building Strategy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filetree-cpp-example-file">filetree.cpp Example File</a></li>
+<li><a class="reference internal" href="#filetree-h-example-file">filetree.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-ui-example-file">mainwindow.ui Example File</a></li>
+<li><a class="reference internal" href="#listcppfiles-xq-example-file">listCPPFiles.xq Example File</a></li>
+<li><a class="reference internal" href="#wholetree-xq-example-file">wholeTree.xq Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#filetree-pro-example-file">filetree.pro Example File</a></li>
+<li><a class="reference internal" href="#queries-qrc-example-file">queries.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="file-system-example">
+<span id="id1"></span><h1>File System Example<a class="headerlink" href="#file-system-example" title="Permalink to this headline">¶</a></h1>
+<p>Using Qt XML Patterns for querying non-XML data that is modeled to look like XML</p>
+<blockquote>
+<div><p id="the-standard-code-pattern"><span id="nextsibling-helper"></span><span id="to-file-info"></span><span id="next-node-on-axis"></span><span id="tonodeindex-of-convenience"></span><span id="main-tonodeindex"></span><span id="node-type"></span>Using Qt XML Patterns for querying non-XML data that is modeled to look like XML.</p>
+<p>This example shows how to use Qt XML Patterns for querying non-XML data that is modeled to look like XML.</p>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="id2"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The example models your computer’s file system to look like XML and allows you to query the file system with <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> . Suppose we want to find all the <code class="docutils literal"><span class="pre">cpp</span></code> files in the subtree beginning at <code class="docutils literal"><span class="pre">/filetree</span></code> :</div></blockquote>
+</div>
+<div class="section" id="the-user-interface">
+<span id="id3"></span><h2>The User Interface<a class="headerlink" href="#the-user-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example is shown below. First, we use <code class="docutils literal"><span class="pre">File-&gt;Open</span> <span class="pre">Directory</span></code> (not shown) to select the <code class="docutils literal"><span class="pre">/filetree</span></code> directory. Then we use the combobox on the right to select the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> that searches for <code class="docutils literal"><span class="pre">cpp</span></code> files (<code class="docutils literal"><span class="pre">listCPPFiles.xq</span></code> ). Selecting an <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> runs the query, which in this case traverses the model looking for all the <code class="docutils literal"><span class="pre">cpp</span></code> files. The <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> text and the query results are shown on the right:</p>
+<p>Don’t be mislead by the XML representation of the <code class="docutils literal"><span class="pre">/filetree</span></code> directory shown on the left. This is not the node model itself but the XML obtained by traversing the node model and outputting it as XML. Constructing and using the custom node model is explained in the code walk-through.</p>
+</div></blockquote>
+</div>
+<div class="section" id="running-your-own-xqueries">
+<span id="id4"></span><h2>Running your own XQueries<a class="headerlink" href="#running-your-own-xqueries" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You can write your own <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files and run them in the example program. The file <code class="docutils literal"><span class="pre">xmlpatterns/filetree/queries.qrc</span></code> is the <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">resource file</span></a> for this example. It is used in <code class="docutils literal"><span class="pre">main.cpp</span></code> (<code class="docutils literal"><span class="pre">Q_INIT_RESOURCE(queries);</span></code> ). It lists the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files (<code class="docutils literal"><span class="pre">.xq</span></code> ) that can be selected in the combobox.</p>
+<p>To add your own queries to the example’s combobox, store your <code class="docutils literal"><span class="pre">.xq</span></code> files in the <code class="docutils literal"><span class="pre">examples/xmlpatterns/filetree/queries</span></code> directory and add them to <code class="docutils literal"><span class="pre">queries.qrc</span></code> as shown above.</p>
+</div></blockquote>
+</div>
+<div class="section" id="code-walk-through">
+<span id="id5"></span><h2>Code Walk-Through<a class="headerlink" href="#code-walk-through" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The strategy is to create a custom node model that represents the directory tree of the computer’s file system. That tree structure is non-XML data. The custom node model must have the same callback interface as the XML node models that the Qt XML Patterns query engine uses to execute queries. The query engine can then traverse the custom node model as if it were traversing the node model built from an XML document.</p>
+<p>The required callback interface is in <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> , so we create a custom node model by subclassing <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> and providing implementations for its pure virtual functions. For many cases, the implementations of several of the virtual functions are always the same, so Qt XML Patterns also provides <code class="xref py py-class docutils literal"><span class="pre">QSimpleXmlNodeModel</span></code> , which subclasses <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> and provides implementations for the callback functions that you can ignore. By subclassing <code class="xref py py-class docutils literal"><span class="pre">QSimpleXmlNodeModel</span></code> instead of <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractXmlNodeModel.html#PySide2.QtXmlPatterns.QAbstractXmlNodeModel" title="PySide2.QtXmlPatterns.QAbstractXmlNodeModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractXmlNodeModel</span></code></a> , you can reduce development time.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-custom-node-model-class-filetree">
+<span id="id6"></span><h2>The Custom Node Model Class: FileTree<a class="headerlink" href="#the-custom-node-model-class-filetree" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The custom node model for this example is class <code class="docutils literal"><span class="pre">FileTree</span></code> , which is derived from <code class="xref py py-class docutils literal"><span class="pre">QSimpleXmlNodeModel</span></code> . <code class="docutils literal"><span class="pre">FileTree</span></code> implements all the callback functions that don’t have standard implementations in <code class="xref py py-class docutils literal"><span class="pre">QSimpleXmlNodeModel</span></code> . When you implement your own custom node model, you must provide implementations for these callback functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">virtual</span> <span class="n">QXmlNodeModelIndex</span><span class="p">::</span><span class="n">DocumentOrder</span> <span class="n">compareOrder</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">QXmlNodeModelIndex</span><span class="o">&amp;</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QXmlName</span> <span class="n">name</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QUrl</span> <span class="n">documentUri</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QXmlNodeModelIndex</span><span class="p">::</span><span class="n">NodeKind</span> <span class="n">kind</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QXmlNodeModelIndex</span> <span class="n">root</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QVariant</span> <span class="n">typedValue</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QXmlNodeModelIndex</span><span class="o">&gt;</span> <span class="n">attributes</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">element</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">virtual</span> <span class="n">QXmlNodeModelIndex</span> <span class="n">nextFromSimpleAxis</span><span class="p">(</span><span class="n">SimpleAxis</span><span class="p">,</span> <span class="n">const</span> <span class="n">QXmlNodeModelIndex</span><span class="o">&amp;</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">FileTree</span></code> class declares four data members:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mutable</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QFileInfo</span><span class="o">&gt;</span>  <span class="n">m_fileInfos</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">QDir</span><span class="p">::</span><span class="n">Filters</span>         <span class="n">m_filterAllowAll</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">QDir</span><span class="p">::</span><span class="n">SortFlags</span>       <span class="n">m_sortFlags</span><span class="p">;</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">QXmlName</span><span class="o">&gt;</span>           <span class="n">m_names</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> <code class="docutils literal"><span class="pre">m_fileInfos</span></code> will contain the node model. Each <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in the vector will represent a file or a directory in the file system. At this point it is instructive to note that although the node model class for this example (<code class="docutils literal"><span class="pre">FileTree</span></code> ) actually builds and contains the custom node model, building the custom node model isn’t always required. For example, it is possible to use an already existing <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> tree as a node model and just implement the callback interface for that already existing data structure. In this file system example, however, although we have an already existing data structure, i.e. the file system, that data structure is not in memory and is not in a form we can use. So we must build an analog of the file system in memory from instances of <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> , and we use that analog as the custom node model.</p>
+<p>The two sets of flags, <code class="docutils literal"><span class="pre">m_filterAllowAll</span></code> and <code class="docutils literal"><span class="pre">m_sortFlags</span></code> , contain OR’ed flags from <code class="xref py py-class docutils literal"><span class="pre">QDir.Filters</span></code> and <code class="xref py py-class docutils literal"><span class="pre">QDir.SortFlags</span></code> respectively. They are set by the <code class="docutils literal"><span class="pre">FileTree</span></code> constructor and used in calls to <code class="xref py py-func docutils literal"><span class="pre">QDir.entryInfoList()</span></code> for getting the child list for a directory node, i.e. a <code class="xref py py-class docutils literal"><span class="pre">QFileInfoList</span></code> containing the file and directory nodes for all the immediate children of a directory.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> <code class="docutils literal"><span class="pre">m_names</span></code> is an auxiliary component of the node model. It holds the XML element and attribute names ( <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> ) for all the node types that will be found in the node model. <code class="docutils literal"><span class="pre">m_names</span></code> is indexed by the enum <code class="docutils literal"><span class="pre">FileTree::Type</span></code> , which specifies the node types:</p>
+<div class="highlight-default" id="id7"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="n">Type</span> <span class="p">{</span>
+    <span class="n">File</span><span class="p">,</span>
+    <span class="n">Directory</span><span class="p">,</span>
+    <span class="n">AttributeFileName</span><span class="p">,</span>
+    <span class="n">AttributeFilePath</span><span class="p">,</span>
+    <span class="n">AttributeSize</span><span class="p">,</span>
+    <span class="n">AttributeMIMEType</span><span class="p">,</span>
+    <span class="n">AttributeSuffix</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Directory</span></code> and <code class="docutils literal"><span class="pre">File</span></code> will represent the XML element nodes for directories and files respectively, and the other enum values will represent the XML attribute nodes for a file’s path, name, suffix, its size in bytes, and its mime type. The <code class="docutils literal"><span class="pre">FileTree</span></code> constructor initializes <code class="docutils literal"><span class="pre">m_names</span></code> with an appropriate <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlName.html#PySide2.QtXmlPatterns.QXmlName" title="PySide2.QtXmlPatterns.QXmlName"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlName</span></code></a> for each element and attribute type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FileTree</span><span class="p">::</span><span class="n">FileTree</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNamePool</span><span class="o">&amp;</span> <span class="n">pool</span><span class="p">)</span>
+  <span class="p">:</span> <span class="n">QSimpleXmlNodeModel</span><span class="p">(</span><span class="n">pool</span><span class="p">),</span>
+    <span class="n">m_filterAllowAll</span><span class="p">(</span><span class="n">QDir</span><span class="p">::</span><span class="n">AllEntries</span> <span class="o">|</span>
+                     <span class="n">QDir</span><span class="p">::</span><span class="n">AllDirs</span> <span class="o">|</span>
+                     <span class="n">QDir</span><span class="p">::</span><span class="n">NoDotAndDotDot</span> <span class="o">|</span>
+                     <span class="n">QDir</span><span class="p">::</span><span class="n">Hidden</span><span class="p">),</span>
+    <span class="n">m_sortFlags</span><span class="p">(</span><span class="n">QDir</span><span class="p">::</span><span class="n">Name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QXmlNamePool</span> <span class="n">np</span> <span class="o">=</span> <span class="n">namePool</span><span class="p">();</span>
+    <span class="n">m_names</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">File</span><span class="p">]</span>               <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">Directory</span><span class="p">]</span>          <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">AttributeFileName</span><span class="p">]</span>  <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;fileName&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">AttributeFilePath</span><span class="p">]</span>  <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;filePath&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">AttributeSize</span><span class="p">]</span>      <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">AttributeMIMEType</span><span class="p">]</span>  <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;mimeType&quot;</span><span class="p">));</span>
+    <span class="n">m_names</span><span class="p">[</span><span class="n">AttributeSuffix</span><span class="p">]</span>    <span class="o">=</span> <span class="n">QXmlName</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;suffix&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the constructor does <em>not</em> pre-build the entire node model. Instead, the node model is built <em>incrementally</em> as the query engine evaluates a query. To see how the query engine causes the node model to be built incrementally, see <a class="reference internal" href="#file-system-example"><span class="std std-ref">Building And Traversing The Node Model</span></a> . To see how the query engine accesses the node model, see <a class="reference internal" href="#file-system-example"><span class="std std-ref">Accessing the node model</span></a> . See also: <a class="reference internal" href="#file-system-example"><span class="std std-ref">Node Model Building Strategy</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="accessing-the-node-model">
+<span id="id8"></span><h2>Accessing The Node Model<a class="headerlink" href="#accessing-the-node-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Since the node model is stored outside the query engine in the <code class="docutils literal"><span class="pre">FileTree</span></code> class, the query engine knows nothing about it and can only access it by calling functions in the callback interface. When the query engine calls any callback function to access data in the node model, it passes a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> to identify the node in the node model that it wants to access. Hence all the virtual functions in the callback interface use a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> to uniquely identify a node in the model.</p>
+<p>We use the index of a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in <code class="docutils literal"><span class="pre">m_fileInfos</span></code> to uniquely identify a node in the node model. To get the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> for a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> , the class uses the private function <code class="docutils literal"><span class="pre">toNodeIndex()</span></code> :</p>
+<div class="highlight-default" id="id9"><div class="highlight"><pre><span></span><span class="n">QXmlNodeModelIndex</span>
+<span class="n">FileTree</span><span class="p">::</span><span class="n">toNodeIndex</span><span class="p">(</span><span class="n">const</span> <span class="n">QFileInfo</span> <span class="o">&amp;</span><span class="n">fileInfo</span><span class="p">,</span> <span class="n">Type</span> <span class="n">attributeName</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">const</span> <span class="nb">int</span> <span class="n">indexOf</span> <span class="o">=</span> <span class="n">m_fileInfos</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">indexOf</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">m_fileInfos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">createIndex</span><span class="p">(</span><span class="n">m_fileInfos</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">attributeName</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">createIndex</span><span class="p">(</span><span class="n">indexOf</span><span class="p">,</span> <span class="n">attributeName</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It searches the <code class="docutils literal"><span class="pre">m_fileInfos</span></code> vector for a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> that matches <code class="docutils literal"><span class="pre">fileInfo</span></code> . If a match is found, its array index is passed to <code class="xref py py-func docutils literal"><span class="pre">QAbstractXmlNodeModel.createIndex()</span></code> as the <code class="docutils literal"><span class="pre">data</span></code> value for the QXmlNodeIndex. If no match is found, the unmatched <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> is appended to the vector, so this function is also doing the actual incremental model building (see <a class="reference internal" href="#file-system-example"><span class="std std-ref">Building And Traversing The Node Model</span></a> ).</p>
+<p>Note that <code class="docutils literal"><span class="pre">toNodeIndex()</span></code> gets a <a class="reference internal" href="#file-system-example"><span class="std std-ref">node type</span></a> as the second parameter, which it just passes on to <code class="xref py py-func docutils literal"><span class="pre">QAbstractXmlNodeModel.createIndex()</span></code> as the <code class="docutils literal"><span class="pre">additionalData</span></code> value. Logically, this second parameter represents a second dimension in the node model, where the first dimension represents the <em>element</em> nodes, and the second dimension represents each element’s attribute nodes. The meaning is that each <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in the <code class="docutils literal"><span class="pre">m_fileInfos</span></code> vector can represent an <em>element</em> node <em>and</em> one or more <em>attribute</em> nodes. In particular, the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> for a file will contain the values for the attribute nodes path, name, suffix, size, and mime type (see <code class="docutils literal"><span class="pre">FileTree::attributes()</span></code> ). Since the attributes are contained in the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> of the file element, there aren’t actually any attribute nodes in the node model. Hence, we can use a <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> for <code class="docutils literal"><span class="pre">m_fileInfos</span></code> .</p>
+<p>A convenience overloading of <a class="reference internal" href="#file-system-example"><span class="std std-ref">toNodeIndex()</span></a> is also called in several places, wherever it is known that the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> being requested is for a directory or a file and not for an attribute. The convenience function takes only the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> parameter and calls the other <a class="reference internal" href="#file-system-example"><span class="std std-ref">toNodeIndex()</span></a> , after obtaining either the Directory or File node type directly from the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> :</p>
+<div class="highlight-default" id="id10"><div class="highlight"><pre><span></span>QXmlNodeModelIndex FileTree::toNodeIndex(const QFileInfo &amp;fileInfo) const
+{
+    return toNodeIndex(fileInfo, fileInfo.isDir() ? Directory : File);
+}
+</pre></div>
+</div>
+<p>Note that the auxiliary vector <code class="docutils literal"><span class="pre">m_names</span></code> is accessed using the <a class="reference internal" href="#file-system-example"><span class="std std-ref">node type</span></a> , for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QXmlName</span> <span class="n">FileTree</span><span class="p">::</span><span class="n">name</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_names</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">additionalData</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Most of the virtual functions in the callback interface are as simple as the ones described so far, but the callback function used for traversing (and building) the node model is more complex.</p>
+</div></blockquote>
+</div>
+<div class="section" id="building-and-traversing-the-node-model">
+<span id="id11"></span><h2>Building And Traversing The Node Model<a class="headerlink" href="#building-and-traversing-the-node-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The node model in <code class="docutils literal"><span class="pre">FileTree</span></code> is not fully built before the query engine begins evaluating the query. In fact, when the query engine begins evaluating its first query, the only node in the node model is the one representing the root directory for the selected part of the file system. See <a class="reference internal" href="qtxmlpatterns-schema-example.html#xml-schema-validation-example"><span class="std std-ref">The UI Class: MainWindow</span></a> below for details about how the UI triggers creation of the model.</p>
+<p>The query engine builds the node model incrementally each time it calls the <a class="reference internal" href="#file-system-example"><span class="std std-ref">nextFromSimpleAxis()</span></a> callback function, as it traverses the node model to evaluate a query. Thus the query engine only builds the region of the node model that it needs for evaluating the query.</p>
+<p><a class="reference internal" href="#file-system-example"><span class="std std-ref">nextFromSimpleAxis()</span></a> takes an <code class="xref py py-attr docutils literal"><span class="pre">axis</span> <span class="pre">identifier</span></code> and a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">node</span> <span class="pre">identifier</span></code></a> as parameters. The <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">node</span> <span class="pre">identifier</span></code></a> represents the <em>context node</em> (i.e. the query engine’s current location in the model), and the <code class="xref py py-attr docutils literal"><span class="pre">axis</span> <span class="pre">identifier</span></code> represents the direction we want to move from the context node. The function finds the appropriate next node and returns its <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> .</p>
+<p><a class="reference internal" href="#file-system-example"><span class="std std-ref">nextFromSimpleAxis()</span></a> is where most of the work of implementing a custom node model will be required. The obvious way to do it is to use a switch statement with a case for each <code class="xref py py-attr docutils literal"><span class="pre">axis</span></code> .</p>
+<div class="highlight-default" id="id12"><div class="highlight"><pre><span></span><span class="n">QXmlNodeModelIndex</span>
+<span class="n">FileTree</span><span class="p">::</span><span class="n">nextFromSimpleAxis</span><span class="p">(</span><span class="n">SimpleAxis</span> <span class="n">axis</span><span class="p">,</span> <span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">nodeIndex</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">const</span> <span class="n">QFileInfo</span> <span class="n">fi</span><span class="p">(</span><span class="n">toFileInfo</span><span class="p">(</span><span class="n">nodeIndex</span><span class="p">));</span>
+    <span class="n">const</span> <span class="n">Type</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">nodeIndex</span><span class="o">.</span><span class="n">additionalData</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">!=</span> <span class="n">File</span> <span class="o">&amp;&amp;</span> <span class="nb">type</span> <span class="o">!=</span> <span class="n">Directory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Q_ASSERT_X</span><span class="p">(</span><span class="n">axis</span> <span class="o">==</span> <span class="n">Parent</span><span class="p">,</span> <span class="n">Q_FUNC_INFO</span><span class="p">,</span> <span class="s2">&quot;An attribute only has a parent!&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">toNodeIndex</span><span class="p">(</span><span class="n">fi</span><span class="p">,</span> <span class="n">Directory</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">switch</span> <span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">case</span> <span class="n">Parent</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">toNodeIndex</span><span class="p">(</span><span class="n">QFileInfo</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">path</span><span class="p">()),</span> <span class="n">Directory</span><span class="p">);</span>
+
+        <span class="n">case</span> <span class="n">FirstChild</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">File</span><span class="p">)</span> <span class="o">//</span> <span class="n">A</span> <span class="n">file</span> <span class="n">has</span> <span class="n">no</span> <span class="n">children</span><span class="o">.</span>
+                <span class="k">return</span> <span class="n">QXmlNodeModelIndex</span><span class="p">();</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">Q_ASSERT</span><span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Directory</span><span class="p">);</span>
+                <span class="n">Q_ASSERT_X</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">isDir</span><span class="p">(),</span> <span class="n">Q_FUNC_INFO</span><span class="p">,</span> <span class="s2">&quot;It isn&#39;t really a directory!&quot;</span><span class="p">);</span>
+                <span class="n">const</span> <span class="n">QDir</span> <span class="nb">dir</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">absoluteFilePath</span><span class="p">());</span>
+                <span class="n">Q_ASSERT</span><span class="p">(</span><span class="nb">dir</span><span class="o">.</span><span class="n">exists</span><span class="p">());</span>
+
+                <span class="n">const</span> <span class="n">QFileInfoList</span> <span class="n">children</span><span class="p">(</span><span class="nb">dir</span><span class="o">.</span><span class="n">entryInfoList</span><span class="p">(</span><span class="n">QStringList</span><span class="p">(),</span>
+                                                               <span class="n">m_filterAllowAll</span><span class="p">,</span>
+                                                               <span class="n">m_sortFlags</span><span class="p">));</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">children</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span>
+                    <span class="k">return</span> <span class="n">QXmlNodeModelIndex</span><span class="p">();</span>
+                <span class="n">const</span> <span class="n">QFileInfo</span> <span class="n">firstChild</span><span class="p">(</span><span class="n">children</span><span class="o">.</span><span class="n">first</span><span class="p">());</span>
+                <span class="k">return</span> <span class="n">toNodeIndex</span><span class="p">(</span><span class="n">firstChild</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">case</span> <span class="n">PreviousSibling</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nextSibling</span><span class="p">(</span><span class="n">nodeIndex</span><span class="p">,</span> <span class="n">fi</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">case</span> <span class="n">NextSibling</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nextSibling</span><span class="p">(</span><span class="n">nodeIndex</span><span class="p">,</span> <span class="n">fi</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Q_ASSERT_X</span><span class="p">(</span><span class="n">false</span><span class="p">,</span> <span class="n">Q_FUNC_INFO</span><span class="p">,</span> <span class="s2">&quot;Don&#39;t ever get here!&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">QXmlNodeModelIndex</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first thing this function does is call <a class="reference internal" href="#file-system-example"><span class="std std-ref">toFileInfo()</span></a> to get the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> of the context node. The use of <code class="xref py py-func docutils literal"><span class="pre">QVector.at()</span></code> here is guaranteed to succeed because the context node must already be in the node model, and hence must have a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in <code class="docutils literal"><span class="pre">m_fileInfos</span></code> .</p>
+<div class="highlight-default" id="id13"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">QFileInfo</span><span class="o">&amp;</span>
+<span class="n">FileTree</span><span class="p">::</span><span class="n">toFileInfo</span><span class="p">(</span><span class="n">const</span> <span class="n">QXmlNodeModelIndex</span> <span class="o">&amp;</span><span class="n">nodeIndex</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_fileInfos</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">nodeIndex</span><span class="o">.</span><span class="n">data</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-attr docutils literal"><span class="pre">Parent</span></code> case looks up the context node’s parent by constructing a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> from the context node’s <code class="xref py py-func docutils literal"><span class="pre">path</span></code> and passing it to <a class="reference internal" href="#file-system-example"><span class="std std-ref">toNodeIndex()</span></a> to find the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in <code class="docutils literal"><span class="pre">m_fileInfos</span></code> .</p>
+<p>The <code class="xref py py-attr docutils literal"><span class="pre">FirstChild</span></code> case requires that the context node must be a directory, because a file doesn’t have children. If the context node is not a directory, a default constructed <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> is returned. Otherwise, <code class="xref py py-func docutils literal"><span class="pre">QDir.entryInfoList()</span></code> constructs a <code class="xref py py-class docutils literal"><span class="pre">QFileInfoList</span></code> of the context node’s children. The first <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> in the list is passed to <a class="reference internal" href="#file-system-example"><span class="std std-ref">toNodeIndex()</span></a> to get its <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> . Note that this will add the child to the node model, if it isn’t in the model yet.</p>
+<p>The <code class="xref py py-attr docutils literal"><span class="pre">PreviousSibling</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">NextSibling</span></code> cases call the <a class="reference internal" href="#file-system-example"><span class="std std-ref">nextSibling() helper function</span></a> . It takes the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> of the context node, the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> of the context node, and an offest of +1 or -1. The context node is a child of some parent, so the function gets the parent and then gets the child list for the parent. The child list is searched to find the <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> of the context node. It must be there. Then the offset is applied, -1 for the previous sibling and +1 for the next sibling. The resulting index is passed to <a class="reference internal" href="#file-system-example"><span class="std std-ref">toNodeIndex()</span></a> to get its <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> . Note again that this will add the sibling to the node model, if it isn’t in the model yet.</p>
+<div class="highlight-default" id="id14"><div class="highlight"><pre><span></span>QXmlNodeModelIndex FileTree::nextSibling(const QXmlNodeModelIndex &amp;nodeIndex,
+                                         const QFileInfo &amp;fileInfo,
+                                         qint8 offset) const
+{
+    Q_ASSERT(offset == -1 || offset == 1);
+
+    // Get the context node&#39;s parent.
+    const QXmlNodeModelIndex parent(nextFromSimpleAxis(Parent, nodeIndex));
+
+    if (parent.isNull())
+        return QXmlNodeModelIndex();
+
+    // Get the parent&#39;s child list.
+    const QFileInfo parentFI(toFileInfo(parent));
+    Q_ASSERT(Type(parent.additionalData()) == Directory);
+    const QFileInfoList siblings(QDir(parentFI.absoluteFilePath()).entryInfoList(QStringList(),
+                                                                                 m_filterAllowAll,
+                                                                                 m_sortFlags));
+    Q_ASSERT_X(!siblings.isEmpty(), Q_FUNC_INFO, &quot;Can&#39;t happen! We started at a child.&quot;);
+
+    // Find the index of the child where we started.
+    const int indexOfMe = siblings.indexOf(fileInfo);
+
+    // Apply the offset.
+    const int siblingIndex = indexOfMe + offset;
+    if (siblingIndex &lt; 0 || siblingIndex &gt; siblings.count() - 1)
+        return QXmlNodeModelIndex();
+    else
+        return toNodeIndex(siblings.at(siblingIndex));
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-ui-class-mainwindow">
+<span id="id15"></span><h2>The UI Class: MainWindow<a class="headerlink" href="#the-ui-class-mainwindow" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example’s UI is a conventional Qt GUI application inheriting <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> and the Ui_MainWindow base class generated by Qt Designer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;filetree.h&quot;</span>
+<span class="c1">#include &quot;ui_mainwindow.h&quot;</span>
+
+<span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span><span class="p">,</span> <span class="n">private</span> <span class="n">Ui_MainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">on_actionOpenDirectory_triggered</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">on_actionAbout_triggered</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">on_queryBox_currentIndexChanged</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">loadDirectory</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">directory</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">evaluateResult</span><span class="p">();</span>
+
+    <span class="n">const</span> <span class="n">QXmlNamePool</span>  <span class="n">m_namePool</span><span class="p">;</span>
+    <span class="n">const</span> <span class="n">FileTree</span>      <span class="n">m_fileTree</span><span class="p">;</span>
+    <span class="n">QXmlNodeModelIndex</span>  <span class="n">m_fileNode</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>It contains the custom node model (<code class="docutils literal"><span class="pre">m_fileTree</span></code> ) and an instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlNodeModelIndex.html#PySide2.QtXmlPatterns.QXmlNodeModelIndex" title="PySide2.QtXmlPatterns.QXmlNodeModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlNodeModelIndex</span></code></a> (<code class="docutils literal"><span class="pre">m_fileNode</span></code> ) used for holding the node index for the root of the file system subtree. <code class="docutils literal"><span class="pre">m_fileNode</span></code> will be bound to a $variable in the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> to be evaluated.</p>
+<p>Two actions of interest are handled by slot functions: <a class="reference internal" href="#file-system-example"><span class="std std-ref">Selecting A Directory To Model</span></a> and <a class="reference internal" href="#file-system-example"><span class="std std-ref">Selecting And Running An XQuery</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="selecting-a-directory-to-model">
+<span id="id16"></span><h2>Selecting A Directory To Model<a class="headerlink" href="#selecting-a-directory-to-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The user selects <code class="docutils literal"><span class="pre">File-&gt;Open</span> <span class="pre">Directory</span></code> to choose a directory to be loaded into the custom node model. Choosing a directory signals the <code class="docutils literal"><span class="pre">on_actionOpenDirectory_triggered()</span></code> slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::on_actionOpenDirectory_triggered()
+{
+    const QString directoryName = QFileDialog::getExistingDirectory(this);
+    if (!directoryName.isEmpty())
+        loadDirectory(directoryName);
+}
+</pre></div>
+</div>
+<p>The slot function simply calls the private function <code class="docutils literal"><span class="pre">loadDirectory()</span></code> with the path of the chosen directory:</p>
+<div class="highlight-default" id="id17"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">loadDirectory</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">directory</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">QDir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">());</span>
+
+    <span class="n">m_fileNode</span> <span class="o">=</span> <span class="n">m_fileTree</span><span class="o">.</span><span class="n">nodeFor</span><span class="p">(</span><span class="n">directory</span><span class="p">);</span>
+
+
+    <span class="n">QXmlQuery</span> <span class="n">query</span><span class="p">(</span><span class="n">m_namePool</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">bindVariable</span><span class="p">(</span><span class="s2">&quot;fileTree&quot;</span><span class="p">,</span> <span class="n">m_fileNode</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s2">&quot;qrc:/queries/wholeTree.xq&quot;</span><span class="p">));</span>
+
+    <span class="n">QByteArray</span> <span class="n">output</span><span class="p">;</span>
+    <span class="n">QBuffer</span> <span class="n">buffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">output</span><span class="p">);</span>
+    <span class="n">buffer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="p">::</span><span class="n">WriteOnly</span><span class="p">);</span>
+
+    <span class="n">QXmlFormatter</span> <span class="n">formatter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">evaluateTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">formatter</span><span class="p">);</span>
+
+    <span class="n">treeInfo</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Model of %1 output as XML.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">directory</span><span class="p">));</span>
+    <span class="n">fileTree</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">constData</span><span class="p">()));</span>
+    <span class="n">evaluateResult</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">loadDirectory()</span></code> demonstrates a standard code pattern for using Qt XML Patterns programatically. First it gets the node model index for the root of the selected directory. Then it creates an instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlQuery.html#PySide2.QtXmlPatterns.QXmlQuery" title="PySide2.QtXmlPatterns.QXmlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlQuery</span></code></a> and calls <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> to bind the node index to the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> variable <code class="docutils literal"><span class="pre">$fileTree</span></code> . It then calls <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> to load the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> text.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> must be called <em>before</em> calling <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> , which loads and parses the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> text and must have access to the variable binding as the text is parsed.</p>
+</div>
+<p>The next lines create an output device for outputting the query result, which is then used to create a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlFormatter.html#PySide2.QtXmlPatterns.QXmlFormatter" title="PySide2.QtXmlPatterns.QXmlFormatter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlFormatter</span></code></a> to format the query result as XML. <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.evaluateTo()</span></code> is called to run the query, and the formatted XML output is displayed in the left panel of the UI window.</p>
+<p>Finally, the private function <a class="reference internal" href="#file-system-example"><span class="std std-ref">evaluateResult()</span></a> is called to run the currently selected <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> over the custom node model.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As described in <a class="reference internal" href="#file-system-example"><span class="std std-ref">Building And Traversing The Node Model</span></a> , the <code class="docutils literal"><span class="pre">FileTree</span></code> class wants to build the custom node model incrementally as it evaluates the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> . But, because the <code class="docutils literal"><span class="pre">loadDirectory()</span></code> function runs the <code class="docutils literal"><span class="pre">wholeTree.xq</span></code> <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> , it actually builds the entire node model anyway. See <a class="reference internal" href="#file-system-example"><span class="std std-ref">Node Model Building Strategy</span></a> for a discussion about building your custom node model.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="selecting-and-running-an-xquery">
+<span id="id18"></span><h2>Selecting And Running An XQuery<a class="headerlink" href="#selecting-and-running-an-xquery" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The user chooses an <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> from the menu in the combobox on the right. Choosing an <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> signals the <code class="docutils literal"><span class="pre">on_queryBox_currentIndexChanged()</span></code> slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">on_queryBox_currentIndexChanged</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">currentText</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QFile</span> <span class="n">queryFile</span><span class="p">(</span><span class="s2">&quot;:/queries/&quot;</span> <span class="o">+</span> <span class="n">currentText</span><span class="p">);</span>
+    <span class="n">queryFile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="p">::</span><span class="n">ReadOnly</span><span class="p">);</span>
+
+    <span class="n">queryEdit</span><span class="o">-&gt;</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">queryFile</span><span class="o">.</span><span class="n">readAll</span><span class="p">()));</span>
+    <span class="n">evaluateResult</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The slot function opens and loads the query file and then calls the private function <code class="docutils literal"><span class="pre">evaluateResult()</span></code> to run the query:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">evaluateResult</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">queryBox</span><span class="o">-&gt;</span><span class="n">currentText</span><span class="p">()</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="o">||</span> <span class="n">m_fileNode</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">QXmlQuery</span> <span class="n">query</span><span class="p">(</span><span class="n">m_namePool</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">bindVariable</span><span class="p">(</span><span class="s2">&quot;fileTree&quot;</span><span class="p">,</span> <span class="n">m_fileNode</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s2">&quot;qrc:/queries/&quot;</span> <span class="o">+</span> <span class="n">queryBox</span><span class="o">-&gt;</span><span class="n">currentText</span><span class="p">()));</span>
+
+    <span class="n">QByteArray</span> <span class="n">formatterOutput</span><span class="p">;</span>
+    <span class="n">QBuffer</span> <span class="n">buffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">formatterOutput</span><span class="p">);</span>
+    <span class="n">buffer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="p">::</span><span class="n">WriteOnly</span><span class="p">);</span>
+
+    <span class="n">QXmlFormatter</span> <span class="n">formatter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">evaluateTo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">formatter</span><span class="p">);</span>
+
+    <span class="n">output</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">formatterOutput</span><span class="o">.</span><span class="n">constData</span><span class="p">()));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">evaluateResult()</span></code> is a second example of the same code pattern shown in <a class="reference internal" href="#file-system-example"><span class="std std-ref">loadDirectory()</span></a> . In this case, it runs the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> currently selected in the combobox instead of <code class="docutils literal"><span class="pre">qrc:/queries/wholeTree.xq</span></code> , and it outputs the query result to the panel on the lower right of the UI window.</p>
+</div></blockquote>
+</div>
+<div class="section" id="node-model-building-strategy">
+<span id="id19"></span><h2>Node Model Building Strategy<a class="headerlink" href="#node-model-building-strategy" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We saw that the <a class="reference internal" href="#file-system-example"><span class="std std-ref">FileTree</span></a> tries to build its custom node model incrementally, but we also saw that the <a class="reference internal" href="#file-system-example"><span class="std std-ref">MainWindow::loadDirectory()</span></a> function in the UI class immediately subverts the incremental build by running the <code class="docutils literal"><span class="pre">wholeTree.xq</span></code> <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> , which traverses the entire selected directory, thereby causing the entire node model to be built.</p>
+<p>If we want to preserve the incremental build capability of the <code class="docutils literal"><span class="pre">FileTree</span></code> class, we can strip the running of <code class="docutils literal"><span class="pre">wholeTree.xq</span></code> out of <a class="reference internal" href="#file-system-example"><span class="std std-ref">MainWindow::loadDirectory()</span></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">loadDirectory</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">directory</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">QDir</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">());</span>
+
+    <span class="n">m_fileNode</span> <span class="o">=</span> <span class="n">m_fileTree</span><span class="o">.</span><span class="n">nodeFor</span><span class="p">(</span><span class="n">directory</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note, however, that <code class="docutils literal"><span class="pre">FileTree</span></code> doesn’t have the capability of deleting all or part of the node model. The node model, once built, is only deleted when the <code class="docutils literal"><span class="pre">FileTree</span></code> instance goes out of scope.</p>
+<p>In this example, each element node in the node model represents a directory or a file in the computer’s file system, and each node is represented by an instance of <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> . An instance of <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> is not costly to produce, but you might imagine a node model where building new nodes is very costly. In such cases, the capability to build the node model incrementally is important, because it allows us to only build the region of the model we need for evaluating the query. In other cases, it will be simpler to just build the entire node model.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="filetree-cpp-example-file">
+<h1>filetree.cpp Example File<a class="headerlink" href="#filetree-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="filetree-h-example-file">
+<h1>filetree.h Example File<a class="headerlink" href="#filetree-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-ui-example-file">
+<h1>mainwindow.ui Example File<a class="headerlink" href="#mainwindow-ui-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="listcppfiles-xq-example-file">
+<h1>listCPPFiles.xq Example File<a class="headerlink" href="#listcppfiles-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="wholetree-xq-example-file">
+<h1>wholeTree.xq Example File<a class="headerlink" href="#wholetree-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="filetree-pro-example-file">
+<h1>filetree.pro Example File<a class="headerlink" href="#filetree-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="queries-qrc-example-file">
+<h1>queries.qrc Example File<a class="headerlink" href="#queries-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

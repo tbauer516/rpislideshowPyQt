@@ -1,0 +1,286 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Property System &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Property System</a><ul>
+<li><a class="reference internal" href="#requirements-for-declaring-properties">Requirements for Declaring Properties</a></li>
+<li><a class="reference internal" href="#reading-and-writing-properties-with-the-meta-object-system">Reading and Writing Properties with the Meta-Object System</a></li>
+<li><a class="reference internal" href="#a-simple-example">A Simple Example</a></li>
+<li><a class="reference internal" href="#dynamic-properties">Dynamic Properties</a></li>
+<li><a class="reference internal" href="#properties-and-custom-types">Properties and Custom Types</a></li>
+<li><a class="reference internal" href="#adding-additional-information-to-a-class">Adding Additional Information to a Class</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-property-system">
+<span id="id1"></span><h1>The Property System<a class="headerlink" href="#the-property-system" title="Permalink to this headline">¶</a></h1>
+<p>An overview of Qt’s property system</p>
+<blockquote>
+<div><p>An overview of Qt’s property system.</p>
+<p>Qt provides a sophisticated property system similar to the ones supplied by some compiler vendors. However, as a compiler- and platform-independent library, Qt does not rely on non-standard compiler features like <code class="docutils literal"><span class="pre">__property</span></code> or <code class="docutils literal"><span class="pre">[property]</span></code> . The Qt solution works with <em>any</em> standard C++ compiler on every platform Qt supports. It is based on the <a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">Meta-Object System</span></a> that also provides inter-object communication via <a class="reference internal" href="signalsandslots.html#signals-slots"><span class="std std-ref">signals and slots</span></a> .</p>
+</div></blockquote>
+<div class="section" id="requirements-for-declaring-properties">
+<span id="id2"></span><h2>Requirements for Declaring Properties<a class="headerlink" href="#requirements-for-declaring-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To declare a property, use the <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> macro in a class that inherits <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_PROPERTY</span><span class="p">(</span><span class="nb">type</span> <span class="n">name</span>
+           <span class="p">(</span><span class="n">READ</span> <span class="n">getFunction</span> <span class="p">[</span><span class="n">WRITE</span> <span class="n">setFunction</span><span class="p">]</span> <span class="o">|</span>
+            <span class="n">MEMBER</span> <span class="n">memberName</span> <span class="p">[(</span><span class="n">READ</span> <span class="n">getFunction</span> <span class="o">|</span> <span class="n">WRITE</span> <span class="n">setFunction</span><span class="p">)])</span>
+           <span class="p">[</span><span class="n">RESET</span> <span class="n">resetFunction</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">NOTIFY</span> <span class="n">notifySignal</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">REVISION</span> <span class="nb">int</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">DESIGNABLE</span> <span class="nb">bool</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">SCRIPTABLE</span> <span class="nb">bool</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">STORED</span> <span class="nb">bool</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">USER</span> <span class="nb">bool</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">CONSTANT</span><span class="p">]</span>
+           <span class="p">[</span><span class="n">FINAL</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Here are some typical examples of property declarations taken from class <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_PROPERTY</span><span class="p">(</span><span class="nb">bool</span> <span class="n">focus</span> <span class="n">READ</span> <span class="n">hasFocus</span><span class="p">)</span>
+<span class="n">Q_PROPERTY</span><span class="p">(</span><span class="nb">bool</span> <span class="n">enabled</span> <span class="n">READ</span> <span class="n">isEnabled</span> <span class="n">WRITE</span> <span class="n">setEnabled</span><span class="p">)</span>
+<span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QCursor</span> <span class="n">cursor</span> <span class="n">READ</span> <span class="n">cursor</span> <span class="n">WRITE</span> <span class="n">setCursor</span> <span class="n">RESET</span> <span class="n">unsetCursor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is an example showing how to export member variables as Qt properties using the <code class="docutils literal"><span class="pre">MEMBER</span></code> keyword. Note that a <code class="docutils literal"><span class="pre">NOTIFY</span></code> signal must be specified to allow QML property bindings.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QColor</span> <span class="n">color</span> <span class="n">MEMBER</span> <span class="n">m_color</span> <span class="n">NOTIFY</span> <span class="n">colorChanged</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">qreal</span> <span class="n">spacing</span> <span class="n">MEMBER</span> <span class="n">m_spacing</span> <span class="n">NOTIFY</span> <span class="n">spacingChanged</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QString</span> <span class="n">text</span> <span class="n">MEMBER</span> <span class="n">m_text</span> <span class="n">NOTIFY</span> <span class="n">textChanged</span><span class="p">)</span>
+    <span class="o">...</span>
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">colorChanged</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">spacingChanged</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">textChanged</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">newText</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QColor</span>  <span class="n">m_color</span><span class="p">;</span>
+    <span class="n">qreal</span>   <span class="n">m_spacing</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">m_text</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>A property behaves like a class data member, but it has additional features accessible through the <a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">Meta-Object System</span></a> .</p>
+<ul class="simple">
+<li>A <code class="docutils literal"><span class="pre">READ</span></code> accessor function is required if no <code class="docutils literal"><span class="pre">MEMBER</span></code> variable was specified. It is for reading the property value. Ideally, a const function is used for this purpose, and it must return either the property’s type or a const reference to that type. e.g., <code class="xref py py-func docutils literal"><span class="pre">QWidget.focus()</span></code> is a read-only property with <code class="docutils literal"><span class="pre">READ</span></code> function, <code class="xref py py-func docutils literal"><span class="pre">QWidget.hasFocus()</span></code> .</li>
+<li>A <code class="docutils literal"><span class="pre">WRITE</span></code> accessor function is optional. It is for setting the property value. It must return void and must take exactly one argument, either of the property’s type or a pointer or reference to that type. e.g., <code class="xref py py-func docutils literal"><span class="pre">QWidget.enabled()</span></code> has the <code class="docutils literal"><span class="pre">WRITE</span></code> function <code class="xref py py-func docutils literal"><span class="pre">QWidget.setEnabled()</span></code> . Read-only properties do not need <code class="docutils literal"><span class="pre">WRITE</span></code> functions. e.g., <code class="xref py py-func docutils literal"><span class="pre">QWidget.focus()</span></code> has no <code class="docutils literal"><span class="pre">WRITE</span></code> function.</li>
+<li>A <code class="docutils literal"><span class="pre">MEMBER</span></code> variable association is required if no <code class="docutils literal"><span class="pre">READ</span></code> accessor function is specified. This makes the given member variable readable and writable without the need of creating <code class="docutils literal"><span class="pre">READ</span></code> and <code class="docutils literal"><span class="pre">WRITE</span></code> accessor functions. It’s still possible to use <code class="docutils literal"><span class="pre">READ</span></code> or <code class="docutils literal"><span class="pre">WRITE</span></code> accessor functions in addition to <code class="docutils literal"><span class="pre">MEMBER</span></code> variable association (but not both), if you need to control the variable access.</li>
+<li>A <code class="docutils literal"><span class="pre">RESET</span></code> function is optional. It is for setting the property back to its context specific default value. e.g., <code class="xref py py-func docutils literal"><span class="pre">QWidget.cursor()</span></code> has the typical <code class="docutils literal"><span class="pre">READ</span></code> and <code class="docutils literal"><span class="pre">WRITE</span></code> functions, <code class="xref py py-func docutils literal"><span class="pre">QWidget.cursor()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.setCursor()</span></code> , and it also has a <code class="docutils literal"><span class="pre">RESET</span></code> function, <code class="xref py py-func docutils literal"><span class="pre">QWidget.unsetCursor()</span></code> , since no call to <code class="xref py py-func docutils literal"><span class="pre">QWidget.setCursor()</span></code> can mean <em>reset to the context specific cursor</em>. The <code class="docutils literal"><span class="pre">RESET</span></code> function must return void and take no parameters.</li>
+<li>A <code class="docutils literal"><span class="pre">NOTIFY</span></code> signal is optional. If defined, it should specify one existing signal in that class that is emitted whenever the value of the property changes. <code class="docutils literal"><span class="pre">NOTIFY</span></code> signals for <code class="docutils literal"><span class="pre">MEMBER</span></code> variables must take zero or one parameter, which must be of the same type as the property. The parameter will take the new value of the property. The <code class="docutils literal"><span class="pre">NOTIFY</span></code> signal should only be emitted when the property has really been changed, to avoid bindings being unnecessarily re-evaluated in QML, for example. Qt emits automatically that signal when needed for MEMBER properties that do not have an explicit setter.</li>
+<li>A <code class="docutils literal"><span class="pre">REVISION</span></code> number is optional. If included, it defines the property and its notifier signal to be used in a particular revision of the API (usually for exposure to QML). If not included, it defaults to 0.</li>
+<li>The <code class="docutils literal"><span class="pre">DESIGNABLE</span></code> attribute indicates whether the property should be visible in the property editor of GUI design tool (e.g., Qt Designer). Most properties are <code class="docutils literal"><span class="pre">DESIGNABLE</span></code> (default true). Instead of true or false, you can specify a boolean member function.</li>
+<li>The <code class="docutils literal"><span class="pre">SCRIPTABLE</span></code> attribute indicates whether this property should be accessible by a scripting engine (default true). Instead of true or false, you can specify a boolean member function.</li>
+<li>The <code class="docutils literal"><span class="pre">STORED</span></code> attribute indicates whether the property should be thought of as existing on its own or as depending on other values. It also indicates whether the property value must be saved when storing the object’s state. Most properties are <code class="docutils literal"><span class="pre">STORED</span></code> (default true), but e.g., <code class="xref py py-func docutils literal"><span class="pre">QWidget.minimumWidth()</span></code> has <code class="docutils literal"><span class="pre">STORED</span></code> false, because its value is just taken from the width component of property <code class="xref py py-func docutils literal"><span class="pre">QWidget.minimumSize()</span></code> , which is a <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> .</li>
+<li>The <code class="docutils literal"><span class="pre">USER</span></code> attribute indicates whether the property is designated as the user-facing or user-editable property for the class. Normally, there is only one <code class="docutils literal"><span class="pre">USER</span></code> property per class (default false). e.g., <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.checked()</span></code> is the user editable property for (checkable) buttons. Note that <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> gets and sets a widget’s <code class="docutils literal"><span class="pre">USER</span></code> property.</li>
+<li>The presence of the <code class="docutils literal"><span class="pre">CONSTANT</span></code> attribute indicates that the property value is constant. For a given object instance, the READ method of a constant property must return the same value every time it is called. This constant value may be different for different instances of the object. A constant property cannot have a WRITE method or a NOTIFY signal.</li>
+<li>The presence of the <code class="docutils literal"><span class="pre">FINAL</span></code> attribute indicates that the property will not be overridden by a derived class. This can be used for performance optimizations in some cases, but is not enforced by moc. Care must be taken never to override a <code class="docutils literal"><span class="pre">FINAL</span></code> property.</li>
+</ul>
+<p>The <code class="docutils literal"><span class="pre">READ</span></code> , <code class="docutils literal"><span class="pre">WRITE</span></code> , and <code class="docutils literal"><span class="pre">RESET</span></code> functions can be inherited. They can also be virtual. When they are inherited in classes where multiple inheritance is used, they must come from the first inherited class.</p>
+<p>The property type can be any type supported by <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> , or it can be a user-defined type. In this example, class <a class="reference internal" href="../PySide2/QtCore/QDate.html#PySide2.QtCore.QDate" title="PySide2.QtCore.QDate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDate</span></code></a> is considered to be a user-defined type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QDate</span> <span class="n">date</span> <span class="n">READ</span> <span class="n">getDate</span> <span class="n">WRITE</span> <span class="n">setDate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because <a class="reference internal" href="../PySide2/QtCore/QDate.html#PySide2.QtCore.QDate" title="PySide2.QtCore.QDate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDate</span></code></a> is user-defined, you must include the <code class="docutils literal"><span class="pre">&lt;QDate&gt;</span></code> header file with the property declaration.</p>
+<p>For historical reasons, <code class="docutils literal"><span class="pre">QMap</span></code> and <code class="docutils literal"><span class="pre">QList</span></code> as property types are synonym of <code class="docutils literal"><span class="pre">QVariantMap</span></code> and <code class="docutils literal"><span class="pre">QVariantList</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="reading-and-writing-properties-with-the-meta-object-system">
+<span id="id3"></span><h2>Reading and Writing Properties with the Meta-Object System<a class="headerlink" href="#reading-and-writing-properties-with-the-meta-object-system" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A property can be read and written using the generic functions <code class="xref py py-func docutils literal"><span class="pre">QObject.property()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> , without knowing anything about the owning class except the property’s name. In the code snippet below, the call to <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.setDown()</span></code> and the call to <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> both set property “down”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">;</span>
+<span class="n">QObject</span> <span class="o">*</span><span class="nb">object</span> <span class="o">=</span> <span class="n">button</span><span class="p">;</span>
+
+<span class="n">button</span><span class="o">-&gt;</span><span class="n">setDown</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="nb">object</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Accessing a property through its <code class="docutils literal"><span class="pre">WRITE</span></code> accessor is the better of the two, because it is faster and gives better diagnostics at compile time, but setting the property this way requires that you know about the class at compile time. Accessing properties by name lets you access classes you don’t know about at compile time. You can <em>discover</em> a class’s properties at run time by querying its <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , <a class="reference internal" href="../PySide2/QtCore/QMetaObject.html#PySide2.QtCore.QMetaObject" title="PySide2.QtCore.QMetaObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMetaObject</span></code></a> , and <a class="reference internal" href="../PySide2/QtCore/QMetaProperty.html#PySide2.QtCore.QMetaProperty" title="PySide2.QtCore.QMetaProperty"><code class="xref py py-class docutils literal"><span class="pre">QMetaProperties</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QObject</span> <span class="o">*</span><span class="nb">object</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">const</span> <span class="n">QMetaObject</span> <span class="o">*</span><span class="n">metaobject</span> <span class="o">=</span> <span class="nb">object</span><span class="o">-&gt;</span><span class="n">metaObject</span><span class="p">();</span>
+<span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">metaobject</span><span class="o">-&gt;</span><span class="n">propertyCount</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QMetaProperty</span> <span class="n">metaproperty</span> <span class="o">=</span> <span class="n">metaobject</span><span class="o">-&gt;</span><span class="nb">property</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="n">metaproperty</span><span class="o">.</span><span class="n">name</span><span class="p">();</span>
+    <span class="n">QVariant</span> <span class="n">value</span> <span class="o">=</span> <span class="nb">object</span><span class="o">-&gt;</span><span class="nb">property</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above snippet, <code class="xref py py-func docutils literal"><span class="pre">QMetaObject.property()</span></code> is used to get <a class="reference internal" href="../PySide2/QtCore/QMetaProperty.html#PySide2.QtCore.QMetaProperty" title="PySide2.QtCore.QMetaProperty"><code class="xref py py-class docutils literal"><span class="pre">metadata</span></code></a> about each property defined in some unknown class. The property name is fetched from the metadata and passed to <code class="xref py py-func docutils literal"><span class="pre">QObject.property()</span></code> to get the <code class="xref py py-class docutils literal"><span class="pre">value</span></code> of the property in the current <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="a-simple-example">
+<span id="id4"></span><h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Suppose we have a class MyClass, which is derived from <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> and which uses the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro in its private section. We want to declare a property in MyClass to keep track of a priority value. The name of the property will be <em>priority</em> , and its type will be an enumeration type named <em>Priority</em> , which is defined in MyClass.</p>
+<p>We declare the property with the <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> macro in the private section of the class. The required <code class="docutils literal"><span class="pre">READ</span></code> function is named <code class="docutils literal"><span class="pre">priority</span></code> , and we include a <code class="docutils literal"><span class="pre">WRITE</span></code> function named <code class="docutils literal"><span class="pre">setPriority</span></code> . The enumeration type must be registered with the <a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">Meta-Object System</span></a> using the <code class="xref py py-func docutils literal"><span class="pre">Q_ENUM()</span></code> macro. Registering an enumeration type makes the enumerator names available for use in calls to <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> . We must also provide our own declarations for the <code class="docutils literal"><span class="pre">READ</span></code> and <code class="docutils literal"><span class="pre">WRITE</span></code> functions. The declaration of MyClass then might look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">Priority</span> <span class="n">priority</span> <span class="n">READ</span> <span class="n">priority</span> <span class="n">WRITE</span> <span class="n">setPriority</span> <span class="n">NOTIFY</span> <span class="n">priorityChanged</span><span class="p">)</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">MyClass</span><span class="p">();</span>
+
+    <span class="n">enum</span> <span class="n">Priority</span> <span class="p">{</span> <span class="n">High</span><span class="p">,</span> <span class="n">Low</span><span class="p">,</span> <span class="n">VeryHigh</span><span class="p">,</span> <span class="n">VeryLow</span> <span class="p">};</span>
+    <span class="n">Q_ENUM</span><span class="p">(</span><span class="n">Priority</span><span class="p">)</span>
+
+    <span class="n">void</span> <span class="n">setPriority</span><span class="p">(</span><span class="n">Priority</span> <span class="n">priority</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m_priority</span> <span class="o">=</span> <span class="n">priority</span><span class="p">;</span>
+        <span class="n">emit</span> <span class="n">priorityChanged</span><span class="p">(</span><span class="n">priority</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Priority</span> <span class="n">priority</span><span class="p">()</span> <span class="n">const</span>
+    <span class="p">{</span> <span class="k">return</span> <span class="n">m_priority</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">priorityChanged</span><span class="p">(</span><span class="n">Priority</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">Priority</span> <span class="n">m_priority</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">READ</span></code> function is const and returns the property type. The <code class="docutils literal"><span class="pre">WRITE</span></code> function returns void and has exactly one parameter of the property type. The meta-object compiler enforces these requirements.</p>
+<p>Given a pointer to an instance of MyClass or a pointer to a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> that is an instance of MyClass, we have two ways to set its priority property:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MyClass</span> <span class="o">*</span><span class="n">myinstance</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">;</span>
+<span class="n">QObject</span> <span class="o">*</span><span class="nb">object</span> <span class="o">=</span> <span class="n">myinstance</span><span class="p">;</span>
+
+<span class="n">myinstance</span><span class="o">-&gt;</span><span class="n">setPriority</span><span class="p">(</span><span class="n">MyClass</span><span class="p">::</span><span class="n">VeryHigh</span><span class="p">);</span>
+<span class="nb">object</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;VeryHigh&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the example, the enumeration type that is the property type is declared in MyClass and registered with the <a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">Meta-Object System</span></a> using the <code class="xref py py-func docutils literal"><span class="pre">Q_ENUM()</span></code> macro. This makes the enumeration values available as strings for use as in the call to <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> . Had the enumeration type been declared in another class, its fully qualified name (i.e., OtherClass::Priority) would be required, and that other class would also have to inherit <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> and register the enumeration type there using the <code class="xref py py-func docutils literal"><span class="pre">Q_ENUM()</span></code> macro.</p>
+<p>A similar macro, <code class="xref py py-func docutils literal"><span class="pre">Q_FLAG()</span></code> , is also available. Like <code class="xref py py-func docutils literal"><span class="pre">Q_ENUM()</span></code> , it registers an enumeration type, but it marks the type as being a set of <em>flags</em> , i.e. values that can be OR’d together. An I/O class might have enumeration values <code class="docutils literal"><span class="pre">Read</span></code> and <code class="docutils literal"><span class="pre">Write</span></code> and then <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> could accept <code class="docutils literal"><span class="pre">Read</span> <span class="pre">|</span> <span class="pre">Write</span></code> . <code class="xref py py-func docutils literal"><span class="pre">Q_FLAG()</span></code> should be used to register this enumeration type.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dynamic-properties">
+<span id="id5"></span><h2>Dynamic Properties<a class="headerlink" href="#dynamic-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> can also be used to add <em>new</em> properties to an instance of a class at runtime. When it is called with a name and a value, if a property with the given name exists in the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , and if the given value is compatible with the property’s type, the value is stored in the property, and true is returned. If the value is <em>not</em> compatible with the property’s type, the property is <em>not</em> changed, and false is returned. But if the property with the given name doesn’t exist in the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> (i.e., if it wasn’t declared with <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> ), a new property with the given name and value is automatically added to the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , but false is still returned. This means that a return of false can’t be used to determine whether a particular property was actually set, unless you know in advance that the property already exists in the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> .</p>
+<p>Note that <em>dynamic</em> properties are added on a per instance basis, i.e., they are added to <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , not <a class="reference internal" href="../PySide2/QtCore/QMetaObject.html#PySide2.QtCore.QMetaObject" title="PySide2.QtCore.QMetaObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMetaObject</span></code></a> . A property can be removed from an instance by passing the property name and an invalid <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> value to <code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> . The default constructor for <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> constructs an invalid <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> .</p>
+<p>Dynamic properties can be queried with <code class="xref py py-func docutils literal"><span class="pre">QObject.property()</span></code> , just like properties declared at compile time with <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="properties-and-custom-types">
+<span id="id6"></span><h2>Properties and Custom Types<a class="headerlink" href="#properties-and-custom-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Custom types used by properties need to be registered using the <code class="xref py py-func docutils literal"><span class="pre">Q_DECLARE_METATYPE()</span></code> macro so that their values can be stored in <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> objects. This makes them suitable for use with both static properties declared using the <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> macro in class definitions and dynamic properties created at run-time.</div></blockquote>
+</div>
+<div class="section" id="adding-additional-information-to-a-class">
+<span id="id7"></span><h2>Adding Additional Information to a Class<a class="headerlink" href="#adding-additional-information-to-a-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Connected to the property system is an additional macro, <code class="xref py py-func docutils literal"><span class="pre">Q_CLASSINFO()</span></code> , that can be used to attach additional <em>name</em> –<em>value</em> pairs to a class’s meta-object, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_CLASSINFO</span><span class="p">(</span><span class="s2">&quot;Version&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Like other meta-data, class information is accessible at run-time through the meta-object; see <code class="xref py py-func docutils literal"><span class="pre">QMetaObject.classInfo()</span></code> for details.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">Meta-Object System</span></a>  <a class="reference internal" href="signalsandslots.html#signals-slots"><span class="std std-ref">Signals and Slots</span></a>  <code class="xref py py-func docutils literal"><span class="pre">Q_DECLARE_METATYPE()</span></code>  <code class="xref py py-class docutils literal"><span class="pre">QMetaType</span></code>  <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

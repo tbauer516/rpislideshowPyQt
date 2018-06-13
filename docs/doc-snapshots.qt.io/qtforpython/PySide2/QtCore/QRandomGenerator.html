@@ -1,0 +1,644 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QRandomGenerator &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QRandomGenerator64" href="QRandomGenerator64.html" />
+    <link rel="prev" title="QReadWriteLock" href="QReadWriteLock.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QRandomGenerator</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#seeding-and-determinism">Seeding and determinism</a></li>
+<li><a class="reference internal" href="#bulk-data">Bulk data</a></li>
+<li><a class="reference internal" href="#system-wide-random-number-generator">System-wide random number generator</a></li>
+<li><a class="reference internal" href="#fallback-quality">Fallback quality</a></li>
+<li><a class="reference internal" href="#reentrancy-and-thread-safety">Reentrancy and thread-safety</a></li>
+<li><a class="reference internal" href="#standard-c-library-compatibility">Standard C++ Library compatibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QReadWriteLock.html"
+                        title="previous chapter">QReadWriteLock</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QRandomGenerator64.html"
+                        title="next chapter">QRandomGenerator64</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qrandomgenerator">
+<span id="id1"></span><h1>QRandomGenerator<a class="headerlink" href="#qrandomgenerator" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-18181bb8d4f4d28a0a284565789197c71d9f961e.png" alt="Inheritance diagram of PySide2.QtCore.QRandomGenerator" usemap="#inheritance78324b04dc" class="inheritance"/>
+<map id="inheritance78324b04dc" name="inheritance78324b04dc">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QRandomGenerator" title="QtCore.QRandomGenerator" alt="" coords="5,5,204,31"/>
+</map>
+<p><strong>Inherited by:</strong> <a class="reference internal" href="QRandomGenerator64.html#qrandomgenerator64"><span class="std std-ref">QRandomGenerator64</span></a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class was introduced in Qt 5.10.</p>
+</div>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">bounded</span></code></a> (highest)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">bounded</span></code></a> (highest)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">bounded</span></code></a> (highest)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">bounded</span></code></a> (lowest, highest)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">bounded</span></code></a> (lowest, highest)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.discard" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.discard"><code class="xref py py-meth docutils literal"><span class="pre">discard</span></code></a> (z)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">generate64</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">generate</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">generate</span></code></a> (begin, end)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">generateDouble</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed"><code class="xref py py-meth docutils literal"><span class="pre">seed</span></code></a> ([s=1])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.global_" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.global_"><code class="xref py py-meth docutils literal"><span class="pre">global_</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max"><code class="xref py py-meth docutils literal"><span class="pre">max</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min"><code class="xref py py-meth docutils literal"><span class="pre">min</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">securelySeeded</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">system</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> class allows one to obtain random values from a high-quality Random Number Generator.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> may be used to generate random values from a high-quality random number generator. Like the C++ random engines, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> can be seeded with user-provided values through the constructor. When seeded, the sequence of numbers generated by this class is deterministic. That is to say, given the same seed data, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> will generate the same sequence of numbers. But given different seeds, the results should be considerably different.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.securelySeeded()</span></code></a> can be used to create a <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> that is securely seeded with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> , meaning that the sequence of numbers it generates cannot be easily predicted. Additionally, <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> returns a global instance of <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> that Qt will ensure to be securely seeded. This object is thread-safe, may be shared for most uses, and is always seeded from <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a></p>
+<p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> may be used to access the system’s cryptographically-safe random generator. On Unix systems, it’s equivalent to reading from <code class="docutils literal"><span class="pre">/dev/urandom</span></code> or the <code class="docutils literal"><span class="pre">getrandom()</span></code> or <code class="docutils literal"><span class="pre">getentropy()</span></code> system calls.</p>
+<p>The class can generate 32-bit or 64-bit quantities, or fill an array of those. The most common way of generating new values is to call the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a> or <code class="xref py py-meth docutils literal"><span class="pre">fillRange()</span></code> functions. One would use it as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">quint32</span> <span class="n">value</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Additionally, it provides a floating-point function <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a> that returns a number in the range [0, 1) (that is, inclusive of zero and exclusive of 1). There’s also a set of convenience functions that facilitate obtaining a random number in a bounded, integral range.</p>
+</div></blockquote>
+<div class="section" id="seeding-and-determinism">
+<span id="pyside2-qtcore-qrandomgenerator-seeding-and-determinism"></span><h3>Seeding and determinism<a class="headerlink" href="#seeding-and-determinism" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> may be seeded with specific seed data. When that is done, the numbers generated by the object will always be the same, as in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRandomGenerator</span> <span class="n">prng1</span><span class="p">(</span><span class="mi">1234</span><span class="p">),</span> <span class="n">prng2</span><span class="p">(</span><span class="mi">1234</span><span class="p">);</span>
+<span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">prng1</span><span class="o">.</span><span class="n">generate32</span><span class="p">()</span> <span class="o">==</span> <span class="n">prng2</span><span class="o">.</span><span class="n">generate32</span><span class="p">());</span>
+<span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">prng1</span><span class="o">.</span><span class="n">generate64</span><span class="p">()</span> <span class="o">==</span> <span class="n">prng2</span><span class="o">.</span><span class="n">generate64</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The seed data takes the form of one or more 32-bit words. The ideal seed size is approximately equal to the size of the <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> class itself. Due to mixing of the seed data, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> cannot guarantee that distinct seeds will produce different sequences.</p>
+<p><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> , like all generators created by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.securelySeeded()</span></code></a> , is always seeded from <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> , so it’s not possible to make it produce identical sequences.</p>
+</div></blockquote>
+</div>
+<div class="section" id="bulk-data">
+<span id="pyside2-qtcore-qrandomgenerator-bulk-data"></span><h3>Bulk data<a class="headerlink" href="#bulk-data" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When operating in deterministic mode, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> may be used for bulk data generation. In fact, applications that do not need cryptographically-secure or true random data are advised to use a regular <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> instead of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> for their random data needs.</p>
+<p>For ease of use, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> provides a global object that can be easily used, as in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">generate32</span><span class="p">();</span>
+<span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">generate32</span><span class="p">();</span>
+<span class="nb">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+<span class="nb">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">16384</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="system-wide-random-number-generator">
+<span id="pyside2-qtcore-qrandomgenerator-system-wide-random-number-generator"></span><h3>System-wide random number generator<a class="headerlink" href="#system-wide-random-number-generator" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> may be used to access the system-wide random number generator, which is cryptographically-safe on all systems that Qt runs on. This function will use hardware facilities to generate random numbers where available. On such systems, those facilities are true Random Number Generators. However, if they are true RNGs, those facilities have finite entropy sources and thus may fail to produce any results if their entropy pool is exhausted.</p>
+<p>If that happens, first the operating system then <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> will fall back to Pseudo Random Number Generators of decreasing qualities (Qt’s fallback generator being the simplest). Whether those generators are still of cryptographic quality is implementation-defined. Therefore, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> should not be used for high-frequency random number generation, lest the entropy pool become empty. As a rule of thumb, this class should not be called upon to generate more than a kilobyte per second of random data (note: this may vary from system to system).</p>
+<p>If an application needs true RNG data in bulk, it should use the operating system facilities (such as <code class="docutils literal"><span class="pre">/dev/random</span></code> on Linux) directly and wait for entropy to become available. If the application requires PRNG engines of cryptographic quality but not of true randomness, <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> may still be used (see section below).</p>
+<p>If neither a true RNG nor a cryptographically secure PRNG are required, applications should instead use PRNG engines like <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> ‘s deterministic mode and those from the C++ Standard Library. <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> can be used to seed those.</p>
+</div></blockquote>
+</div>
+<div class="section" id="fallback-quality">
+<span id="pyside2-qtcore-qrandomgenerator-fallback-quality"></span><h3>Fallback quality<a class="headerlink" href="#fallback-quality" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> uses the operating system facilities to obtain random numbers, which attempt to collect real entropy from the surrounding environment to produce true random numbers. However, it’s possible that the entropy pool becomes exhausted, in which case the operating system will fall back to a pseudo-random engine for a time. Under no circumstances will <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> block, waiting for more entropy to be collected.</p>
+<p>The following operating systems guarantee that the results from their random-generation API will be of at least cryptographically-safe quality, even if the entropy pool is exhausted: Apple OSes (Darwin), BSDs, Linux, Windows. Barring a system installation problem (such as <code class="docutils literal"><span class="pre">/dev/urandom</span></code> not being readable by the current process), <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> will therefore have the same guarantees.</p>
+<p>On other operating systems, <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> will fall back to a PRNG of good numeric distribution, but it cannot guarantee proper seeding in all cases. Please consult the OS documentation for more information.</p>
+<p>Applications that require <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> not to fall back to non-cryptographic quality generators are advised to check their operating system documentation or restrict their deployment to one of the above.</p>
+</div></blockquote>
+</div>
+<div class="section" id="reentrancy-and-thread-safety">
+<span id="pyside2-qtcore-qrandomgenerator-reentrancy-and-thread-safety"></span><h3>Reentrancy and thread-safety<a class="headerlink" href="#reentrancy-and-thread-safety" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> is reentrant, meaning that multiple threads can operate on this class at the same time, so long as they operate on different objects. If multiple threads need to share one PRNG sequence, external locking by a mutex is required.</p>
+<p>The exceptions are the objects returned by <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> : those objects are thread-safe and may be used by any thread without external locking. Note that thread-safety does not extend to copying those objects: they should always be used by reference.</p>
+</div></blockquote>
+</div>
+<div class="section" id="standard-c-library-compatibility">
+<span id="pyside2-qtcore-qrandomgenerator-standard-c-library-compatibility"></span><h3>Standard C++ Library compatibility<a class="headerlink" href="#standard-c-library-compatibility" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> is modeled after the requirements for random number engines in the C++ Standard Library and may be used in almost all contexts that the Standard Library engines can. Exceptions to the requirements are the following:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> does not support seeding from another seed sequence-like class besides std::seed_seq itself;</li>
+<li><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> is not comparable (but is copyable) or streamable to <code class="docutils literal"><span class="pre">std::ostream</span></code> or from <code class="docutils literal"><span class="pre">std::istream</span></code>.</li>
+</ul>
+<p><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> is also compatible with the uniform distribution classes <code class="docutils literal"><span class="pre">std::uniform_int_distribution</span></code> and <code class="docutils literal"><span class="pre">std:uniform_real_distribution</span></code> , as well as the free function <code class="docutils literal"><span class="pre">std::generate_canonical</span></code> . For example, the following code may be used to generate a floating-point number in the range [1, 2.5):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">uniform_real_distribution</span> <span class="n">dist</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">dist</span><span class="p">(</span><span class="o">*</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">());</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRandomGenerator64.html#PySide2.QtCore.QRandomGenerator64" title="PySide2.QtCore.QRandomGenerator64"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator64</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">qrand()</span></code></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QRandomGenerator">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRandomGenerator</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.QRandomGenerator" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRandomGenerator</code><span class="sig-paren">(</span><em>begin</em>, <em>end</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRandomGenerator</code><span class="sig-paren">(</span><span class="optional">[</span><em>seedValue=1</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>begin</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+<li><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a></li>
+<li><strong>end</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+<li><strong>seedValue</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates a copy of the generator state in the <code class="docutils literal"><span class="pre">other</span></code> object. If <code class="docutils literal"><span class="pre">other</span></code> is <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> or a copy of that, this object will also read from the operating system random-generating facilities. In that case, the sequences generated by the two objects will be different.</p>
+<p>In all other cases, the new <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object will start at the same position in the deterministic sequence as the <code class="docutils literal"><span class="pre">other</span></code> object was. Both objects will generate the same sequence from this point on.</p>
+<p>For that reason, it is not adviseable to create a copy of <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> . If one needs an exclusive deterministic generator, consider instead using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a> to obtain a new object that shares no relationship with the <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> .</p>
+<p>This is an overloaded function.</p>
+<p>Initializes this <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object with the values found in the range from <code class="docutils literal"><span class="pre">begin</span></code> to <code class="docutils literal"><span class="pre">end</span></code> as the seed. Two objects constructed or reseeded with the same seed value will produce the same number sequence.</p>
+<p>This constructor is equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">std</span><span class="p">::</span><span class="n">seed_seq</span> <span class="n">sseq</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+<span class="n">QRandomGenerator</span> <span class="n">generator</span><span class="p">(</span><span class="n">sseq</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.seed()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a></p>
+</div>
+<p>Initializes this <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object with the value <code class="docutils literal"><span class="pre">seedValue</span></code> as the seed. Two objects constructed or reseeded with the same seed value will produce the same number sequence.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.seed()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">bounded</code><span class="sig-paren">(</span><em>lowest</em>, <em>highest</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lowest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+<li><strong>highest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Generates one random 32-bit quantity in the range between <code class="docutils literal"><span class="pre">lowest</span></code> (inclusive) and <code class="docutils literal"><span class="pre">highest</span></code> (exclusive). The same result may also be obtained by using <code class="docutils literal"><span class="pre">std::uniform_int_distribution</span></code> with parameters <code class="docutils literal"><span class="pre">lowest</span></code> and <code class="docutils literal"><span class="pre">\a</span> <span class="pre">highest</span> <span class="pre">-</span> <span class="pre">1</span></code> . That class can also be used to obtain quantities larger than 32 bits.</p>
+<p>For example, to obtain a value between 1000 (incl.) and 2000 (excl.), one would write:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">quint32</span> <span class="n">v</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="n">bounded</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that this function cannot be used to obtain values in the full 32-bit range of quint32. Instead, use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">bounded</code><span class="sig-paren">(</span><em>highest</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>highest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Generates one random 32-bit quantity in the range between 0 (inclusive) and <code class="docutils literal"><span class="pre">highest</span></code> (exclusive). The same result may also be obtained by using <code class="docutils literal"><span class="pre">std::uniform_int_distribution</span></code> with parameters 0 and <code class="docutils literal"><span class="pre">highest</span> <span class="pre">-</span> <span class="pre">1</span></code> . That class can also be used to obtain quantities larger than 32 bits.</p>
+<p>For example, to obtain a value between 0 and 255 (inclusive), one would write:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">quint32</span> <span class="n">v</span> <span class="o">=</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="n">bounded</span><span class="p">(</span><span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Naturally, the same could also be obtained by masking the result of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> to only the lower 8 bits. Either solution is as efficient.</p>
+<p>Note that this function cannot be used to obtain values in the full 32-bit range of quint32. Instead, use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">bounded</code><span class="sig-paren">(</span><em>highest</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>highest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Generates one random 32-bit quantity in the range between 0 (inclusive) and <code class="docutils literal"><span class="pre">highest</span></code> (exclusive). <code class="docutils literal"><span class="pre">highest</span></code> must not be negative.</p>
+<p>Note that this function cannot be used to obtain values in the full 32-bit range of int. Instead, use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> and cast to int.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">bounded</code><span class="sig-paren">(</span><em>lowest</em>, <em>highest</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lowest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>highest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Generates one random 32-bit quantity in the range between <code class="docutils literal"><span class="pre">lowest</span></code> (inclusive) and <code class="docutils literal"><span class="pre">highest</span></code> (exclusive), both of which may be negative.</p>
+<p>Note that this function cannot be used to obtain values in the full 32-bit range of int. Instead, use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> and cast to int.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">bounded</code><span class="sig-paren">(</span><em>highest</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>highest</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.double</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.double</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Generates one random double in the range between 0 (inclusive) and <code class="docutils literal"><span class="pre">highest</span></code> (exclusive). This function is equivalent to and is implemented as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">generateDouble</span><span class="p">()</span> <span class="o">*</span> <span class="n">highest</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generateDouble()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.bounded()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.discard">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">discard</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.discard" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>z</strong> – long</td>
+</tr>
+</tbody>
+</table>
+<p>Discards the next <code class="docutils literal"><span class="pre">z</span></code> entries from the sequence. This method is equivalent to calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a> <code class="docutils literal"><span class="pre">z</span></code> times and discarding the result, as in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="n">z</span><span class="o">--</span><span class="p">)</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">generate</code><span class="sig-paren">(</span><em>begin</em>, <em>end</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>begin</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+<li><strong>end</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Same as the other overload, but more efficiently fills <code class="docutils literal"><span class="pre">begin</span></code> to <code class="docutils literal"><span class="pre">end</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">generate</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Generates a 32-bit random quantity and returns it.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">operator()()</span></code>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">generate64</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Generates a 64-bit random quantity and returns it.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">operator()()</span></code>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">generateDouble</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generateDouble" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.double</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Generates one random qreal in the canonical range [0, 1) (that is, inclusive of zero and exclusive of 1).</p>
+<p>This function is equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRandomGenerator64</span> <span class="n">rd</span><span class="p">;</span>
+<span class="k">return</span> <span class="n">std</span><span class="p">::</span><span class="n">generate_canonical</span><span class="o">&lt;</span><span class="n">qreal</span><span class="p">,</span> <span class="n">std</span><span class="p">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">qreal</span><span class="o">&gt;</span><span class="p">::</span><span class="n">digits</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rd</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The same may also be obtained by using <code class="docutils literal"><span class="pre">std::uniform_real_distribution</span></code> with parameters 0 and 1.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.generate64"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.generate64()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.bounded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.bounded()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.global_">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">global_</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.global_" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a pointer to a shared <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> that was seeded using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a> . This function should be used to create random data without the expensive creation of a securely-seeded <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> for a specific use or storing the rather large <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object.</p>
+<p>For example, the following creates a random RGB color:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">QColor</span><span class="p">::</span><span class="n">fromRgb</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">generate</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Accesses to this object are thread-safe and it may therefore be used in any thread without locks. The object may also be copied and the sequence produced by the copy will be the same as the shared object will produce. Note, however, that if there are other threads accessing the global object, those threads may obtain samples at unpredictable intervals.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.system()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">max</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">long</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the maximum value that <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> may ever generate. That is, <code class="docutils literal"><span class="pre">std::numeric_limits&lt;result_type&gt;::max()</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.min()</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator64.max()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">min</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.min" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">long</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the minimum value that <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> may ever generate. That is, 0.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.max"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.max()</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator64.min()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">securelySeeded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a new <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object that was securely seeded with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.system()</span></code></a> . This function will obtain the ideal seed size for the algorithm that <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> uses and is therefore the recommended way for creating a new <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object that will be kept for some time.</p>
+<p>Given the amount of data required to securely seed the deterministic engine, this function is somewhat expensive and should not be used for short-term uses of <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> (using it to generate fewer than 2600 bytes of random data is effectively a waste of resources). If the use doesn’t require that much data, consider using <code class="xref py py-meth docutils literal"><span class="pre">QRandomGenerator.global()</span></code> and not storing a <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> object instead.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">global()</span></code>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.system()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed">
+<code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">seed</code><span class="sig-paren">(</span><span class="optional">[</span><em>s=1</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.seed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.quint32</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Reseeds this object using the value <code class="docutils literal"><span class="pre">seed</span></code> as the seed.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRandomGenerator.</code><code class="descname">system</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.system" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a pointer to a shared <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> that always uses the facilities provided by the operating system to generate random numbers. The system facilities are considered to be cryptographically safe on at least the following operating systems: Apple OSes (Darwin), BSDs, Linux, Windows. That may also be the case on other operating systems.</p>
+<p>They are also possibly backed by a true hardware random number generator. For that reason, the <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> returned by this function should not be used for bulk data generation. Instead, use it to seed <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> or a random engine from the &lt;random&gt; header.</p>
+<p>The object returned by this function is thread-safe and may be used in any thread without locks. It may also be copied and the resulting <a class="reference internal" href="#PySide2.QtCore.QRandomGenerator" title="PySide2.QtCore.QRandomGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator</span></code></a> will also access the operating system facilities, but they will not generate the same sequence.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded" title="PySide2.QtCore.PySide2.QtCore.QRandomGenerator.securelySeeded"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRandomGenerator.securelySeeded()</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">global()</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

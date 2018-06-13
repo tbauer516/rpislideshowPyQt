@@ -1,0 +1,350 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Demo - RSS News &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Demo - RSS News</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#using-custom-types">Using Custom Types</a></li>
+<li><a class="reference internal" href="#creating-the-main-window">Creating the Main Window</a></li>
+<li><a class="reference internal" href="#creating-a-category-list">Creating a Category List</a></li>
+<li><a class="reference internal" href="#creating-list-elements">Creating List Elements</a></li>
+<li><a class="reference internal" href="#downloading-xml-data">Downloading XML Data</a></li>
+<li><a class="reference internal" href="#providing-feedback-to-users">Providing Feedback to Users</a></li>
+<li><a class="reference internal" href="#creating-scroll-bars">Creating Scroll Bars</a></li>
+<li><a class="reference internal" href="#creating-footers">Creating Footers</a></li>
+<li><a class="reference internal" href="#creating-buttons">Creating Buttons</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rssnews-qml-example-file">rssnews.qml Example File</a></li>
+<li><a class="reference internal" href="#busyindicator-qml-example-file">BusyIndicator.qml Example File</a></li>
+<li><a class="reference internal" href="#categorydelegate-qml-example-file">CategoryDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#newsdelegate-qml-example-file">NewsDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#rssfeeds-qml-example-file">RssFeeds.qml Example File</a></li>
+<li><a class="reference internal" href="#scrollbar-qml-example-file">ScrollBar.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#rssnews-pro-example-file">rssnews.pro Example File</a></li>
+<li><a class="reference internal" href="#rssnews-qmlproject-example-file">rssnews.qmlproject Example File</a></li>
+<li><a class="reference internal" href="#rssnews-qrc-example-file">rssnews.qrc Example File</a></li>
+<li><a class="reference internal" href="#asia-jpg-image-file">Asia.jpg Image File</a></li>
+<li><a class="reference internal" href="#business-jpg-image-file">Business.jpg Image File</a></li>
+<li><a class="reference internal" href="#entertainment-jpg-image-file">Entertainment.jpg Image File</a></li>
+<li><a class="reference internal" href="#europe-jpg-image-file">Europe.jpg Image File</a></li>
+<li><a class="reference internal" href="#health-jpg-image-file">Health.jpg Image File</a></li>
+<li><a class="reference internal" href="#politics-jpg-image-file">Politics.jpg Image File</a></li>
+<li><a class="reference internal" href="#science-jpg-image-file">Science.jpg Image File</a></li>
+<li><a class="reference internal" href="#sports-jpg-image-file">Sports.jpg Image File</a></li>
+<li><a class="reference internal" href="#technology-jpg-image-file">Technology.jpg Image File</a></li>
+<li><a class="reference internal" href="#topstories-jpg-image-file">TopStories.jpg Image File</a></li>
+<li><a class="reference internal" href="#usnational-jpg-image-file">USNational.jpg Image File</a></li>
+<li><a class="reference internal" href="#world-jpg-image-file">World.jpg Image File</a></li>
+<li><a class="reference internal" href="#btn-close-png-image-file">btn_close.png Image File</a></li>
+<li><a class="reference internal" href="#busy-png-image-file">busy.png Image File</a></li>
+<li><a class="reference internal" href="#scrollbar-png-image-file">scrollbar.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-demo-rss-news">
+<span id="id1"></span><h1>Qt Quick Demo - RSS News<a class="headerlink" href="#qt-quick-demo-rss-news" title="Permalink to this headline">¶</a></h1>
+<p>A QML RSS news reader that uses XmlListModel and XmlRole to download XML data, ListModel and ListElement to create a category list, and ListView to display the data</p>
+<blockquote>
+<div><p>A QML RSS news reader that uses <span class="xref std std-ref">XmlListModel</span> and <span class="xref std std-ref">XmlRole</span> to download XML data, ListModel and ListElement to create a category list, and <span class="xref std std-ref">ListView</span> to display the data.</p>
+<p><em>RSS News</em> demonstrates the following <span class="xref std std-ref">Qt Quick</span> features:</p>
+<ul class="simple">
+<li>Using custom types to create screens and screen controls.</li>
+<li>Using list models and list elements to represent data.</li>
+<li>Using XML list models to download XML data.</li>
+<li>Using list views to display data.</li>
+<li>Using the Component type to create a footer for the news item list view.</li>
+<li>Using the <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> type to create a button for closing the app.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="using-custom-types">
+<span id="id3"></span><h2>Using Custom Types<a class="headerlink" href="#using-custom-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the RSS News app, we use the following custom types that are each defined in a separate .qml file:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">BusyIndicator.qml</span></code></li>
+<li><code class="docutils literal"><span class="pre">CategoryDelegate.qml</span></code></li>
+<li><code class="docutils literal"><span class="pre">NewsDelegate.qml</span></code></li>
+<li><code class="docutils literal"><span class="pre">RssFeeds.qml</span></code></li>
+<li><code class="docutils literal"><span class="pre">ScrollBar.qml</span></code></li>
+</ul>
+<p>To use the custom types, we add an import statement to the main QML file, rssnews.qml that imports the folder called <code class="docutils literal"><span class="pre">content</span></code> where the types are located:</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-the-main-window">
+<span id="id4"></span><h2>Creating the Main Window<a class="headerlink" href="#creating-the-main-window" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use a <span class="xref std std-ref">Rectangle</span> type with custom properties to create the app main window:</p>
+<p>We will use the custom properties later for loading XML data and for adjusting the screen layout depending on its orientation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-a-category-list">
+<span id="id5"></span><h2>Creating a Category List<a class="headerlink" href="#creating-a-category-list" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use the RssFeeds custom type that we specify in RssFeeds.qml to create a list of feed categories:</p>
+<p>In RssFeeds.qml, we use a ListModel type with a ListElement type to create a category list where list elements represent feed categories:</p>
+<p>List elements are defined like other QML types except that they contain a collection of <em>role</em> definitions instead of properties. Roles both define how the data is accessed and include the data itself.</p>
+<p>For each list element, we use the <code class="docutils literal"><span class="pre">name</span></code> role to specify the category name, the <code class="docutils literal"><span class="pre">feed</span></code> role to specify the URL to load the data from, and the <code class="docutils literal"><span class="pre">image</span></code> role to display an image for the category.</p>
+<p>In rssnews.qml, we use a <span class="xref std std-ref">ListView</span> type to display the category list:</p>
+<p>To lay out the category list horizontally at the top of the window in portrait orientation and vertically on the left side in landscape orientation, we use the <code class="docutils literal"><span class="pre">orientation</span></code> property. Based on the orientation, we bind either the width or the height of the list to a fixed value (<code class="docutils literal"><span class="pre">itemWidth</span></code> ).</p>
+<p>We use the <code class="docutils literal"><span class="pre">anchors.top</span></code> property to position the list view at the top of the screen in both orientations.</p>
+<p>We use the <code class="docutils literal"><span class="pre">model</span></code> property to load XML data from the <code class="docutils literal"><span class="pre">rssFeeds</span></code> model, and <code class="docutils literal"><span class="pre">CategoryDelegate</span></code> as the delegate to instantiate each item in the list.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-list-elements">
+<span id="id6"></span><h2>Creating List Elements<a class="headerlink" href="#creating-list-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In CategoryDelegate.qml, we use the <span class="xref std std-ref">Rectangle</span> type with custom properties to create list elements:</p>
+<p>We set the <code class="docutils literal"><span class="pre">selected</span></code> property to the <code class="docutils literal"><span class="pre">ListView.isCurrentItem</span></code> attached property to specify that <code class="docutils literal"><span class="pre">selected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> if <code class="docutils literal"><span class="pre">delegate</span></code> is the current item.</p>
+<p>We use the <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> type <code class="docutils literal"><span class="pre">source</span></code> property to display the image, centered in the delegate, specified for the list element by the <code class="docutils literal"><span class="pre">image</span></code> role in the <code class="docutils literal"><span class="pre">rssFeeds</span></code> list model:</p>
+<p>We use a <span class="xref std std-ref">Text</span> type to add titles to list elements:</p>
+<p>We use the <code class="docutils literal"><span class="pre">anchors</span></code> property to position the title at the top of the list element, with a 20-pixel margin. We use <code class="docutils literal"><span class="pre">font</span></code> properties to adjust font size and text formatting.</p>
+<p>We use the <code class="docutils literal"><span class="pre">color</span></code> property to brighten the text and to scale it slightly larger when the list item is the current item. By applying a <span class="xref std std-ref">Behavior</span> to the property, we animate the actions of selecting and deselecting list items.</p>
+<p>We use a <span class="xref std std-ref">MouseArea</span> type to download XML data when users tap a category list element:</p>
+<p>The <code class="docutils literal"><span class="pre">anchors.fill</span></code> property is set to <code class="docutils literal"><span class="pre">delegate</span></code> to enable users to tap anywhere within the list element.</p>
+<p>We use the <code class="docutils literal"><span class="pre">onClicked</span></code> signal handler to load the XML data for the category list. If the tapped category is already current, the <code class="docutils literal"><span class="pre">reload()</span></code> function is called to reload the data.</p>
+</div></blockquote>
+</div>
+<div class="section" id="downloading-xml-data">
+<span id="id7"></span><h2>Downloading XML Data<a class="headerlink" href="#downloading-xml-data" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use an <span class="xref std std-ref">XmlListModel</span> type as a data source for <span class="xref std std-ref">ListView</span> elements to display news items in the selected category:</p>
+<p>We use the <code class="docutils literal"><span class="pre">source</span></code> property and the <code class="docutils literal"><span class="pre">window.currentFeed</span></code> custom property to fetch news items for the selected category.</p>
+<p>The <code class="docutils literal"><span class="pre">query</span></code> property specifies that the <span class="xref std std-ref">XmlListModel</span> generates a model item for each <code class="docutils literal"><span class="pre">&lt;item&gt;</span></code> in the XML document.</p>
+<p>We use the <span class="xref std std-ref">XmlRole</span> type to specify the model item attributes. Each model item has the <code class="docutils literal"><span class="pre">title</span></code> , <code class="docutils literal"><span class="pre">description</span></code> , <code class="docutils literal"><span class="pre">image</span></code> , <code class="docutils literal"><span class="pre">link</span></code> , and <code class="docutils literal"><span class="pre">pubDate</span></code> attributes that match the values of the corresponding <code class="docutils literal"><span class="pre">&lt;item&gt;</span></code> in the XML document:</p>
+<p>We use the <code class="docutils literal"><span class="pre">feedModel</span></code> model in a <span class="xref std std-ref">ListView</span> type to display the data:</p>
+<p>To list the news items below the category list in portrait orientation and to its right in landscape orientation, we use the <code class="docutils literal"><span class="pre">isPortrait</span></code> custom property to anchor the top of the news items list to the left of <code class="docutils literal"><span class="pre">window</span></code> and bottom of <code class="docutils literal"><span class="pre">categories</span></code> in portrait orientation and to the right of <code class="docutils literal"><span class="pre">categories</span></code> and bottom of <code class="docutils literal"><span class="pre">window</span></code> in landscape orientation.</p>
+<p>We use the <code class="docutils literal"><span class="pre">anchors.bottom</span></code> property to anchor the bottom of the list view to the bottom of the window in both orientations.</p>
+<p>In portrait orientation, we clip the painting of the news items to the bounding rectangle of the list view to avoid graphical artifacts when news items are scrolled over other items. In landscape, this is not required, because the list spans the entire screen vertically.</p>
+<p>We use the <code class="docutils literal"><span class="pre">model</span></code> property to load XML data from the <code class="docutils literal"><span class="pre">feedModel</span></code> model, and use <code class="docutils literal"><span class="pre">NewsDelegate</span></code> as the delegate to instantiate each item in the list.</p>
+<p>In NewsDelegate.qml, we use a <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Column</span></a> type to lay out the XML data:</p>
+<p>Within the column, we use a <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Row</span></a> and another column to position images and title text:</p>
+<p>We generate a textual representation of how long ago the item was posted using the <code class="docutils literal"><span class="pre">timeSinceEvent()</span></code> JavaScript function:</p>
+<p>We use the <code class="docutils literal"><span class="pre">onLinkActivated</span></code> signal handler to open the URL in an external browser when users select the link.</p>
+</div></blockquote>
+</div>
+<div class="section" id="providing-feedback-to-users">
+<span id="id8"></span><h2>Providing Feedback to Users<a class="headerlink" href="#providing-feedback-to-users" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In CategoryDelegate.qml, we use the <code class="docutils literal"><span class="pre">BusyIndicator</span></code> custom type to indicate activity while the XML data is being loaded:</p>
+<p>We use the <code class="docutils literal"><span class="pre">scale</span></code> property to reduce the indicator size to <code class="docutils literal"><span class="pre">0.8</span></code> . We bind the <code class="docutils literal"><span class="pre">visible</span></code> property to the <code class="docutils literal"><span class="pre">isCurrentItem</span></code> attached property of the <code class="docutils literal"><span class="pre">delegate</span></code> list view and <code class="docutils literal"><span class="pre">loading</span></code> property of the main window to display the indicator image when a category list item is the current item and XML data is being loaded.</p>
+<p>We define the <code class="docutils literal"><span class="pre">BusyIndicator</span></code> type in <code class="docutils literal"><span class="pre">BusyIndicator.qml</span></code> . We use an <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> type to display an image and apply a <span class="xref std std-ref">NumberAnimation</span> to its <code class="docutils literal"><span class="pre">rotation</span></code> property to rotate the image in an infinite loop:</p>
+<p>In your apps, you can also use the BusyIndicator type from the Qt Quick Controls module.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-scroll-bars">
+<span id="id9"></span><h2>Creating Scroll Bars<a class="headerlink" href="#creating-scroll-bars" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use our own custom <code class="docutils literal"><span class="pre">ScrollBar</span></code> type to create scroll bars in the category and news item list views. In your apps, you can also use the ScrollView type from the Qt Quick Controls module.</p>
+<p>First, we create a scroll bar in the category list view. We bind the <code class="docutils literal"><span class="pre">orientation</span></code> property to the <code class="docutils literal"><span class="pre">isPortrait</span></code> property and to the <code class="docutils literal"><span class="pre">Horizontal</span></code> value of the <code class="docutils literal"><span class="pre">Qt::Orientation</span></code> enum type to display a horizontal scroll bar in portrait orientation and to the <code class="docutils literal"><span class="pre">Vertical</span></code> value to display a vertical scroll bar in landscape orientation:</p>
+<p>Same as with the <code class="docutils literal"><span class="pre">categories</span></code> list view, we adjust the width and height of the scroll bar based on the <code class="docutils literal"><span class="pre">isPortrait</span></code> property.</p>
+<p>We use the <code class="docutils literal"><span class="pre">scrollArea</span></code> property to display the scroll bar in the <code class="docutils literal"><span class="pre">categories</span></code> list view.</p>
+<p>We use the <code class="docutils literal"><span class="pre">anchors.right</span></code> property to anchor the scroll bar to the right side of the category list.</p>
+<p>Second, we create another scroll bar in the news item list view. We want a vertical scroll bar to appear on the right side of the view regardless of screen orientation, so we can set the <code class="docutils literal"><span class="pre">width</span></code> property to <code class="docutils literal"><span class="pre">8</span></code> and bind the <code class="docutils literal"><span class="pre">anchors.right</span></code> property to the <code class="docutils literal"><span class="pre">window.right</span></code> property. We use the <code class="docutils literal"><span class="pre">anchors.top</span></code> property to anchor the scroll bar top to the bottom of the category list in portrait orientation and to the top of the news item list in landscape orientation. We use the <code class="docutils literal"><span class="pre">anchors.bottom</span></code> property to anchor the scroll bar bottom to the list view bottom in both orientations.</p>
+<p>We define the <code class="docutils literal"><span class="pre">ScrollBar</span></code> type in <code class="docutils literal"><span class="pre">ScrollBar.qml</span></code> . We use an <span class="xref std std-ref">Item</span> type with custom properties to create a container for the scroll bar:</p>
+<p>We use a <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">BorderImage</span></a> type to display the scroll bar thumb at the x and y position that we calculate by using the <code class="docutils literal"><span class="pre">position()</span></code> function:</p>
+<p>We use the <code class="docutils literal"><span class="pre">size</span></code> function to calculate the thumb width and height depending on the screen orientation.</p>
+<p>We use <code class="docutils literal"><span class="pre">states</span></code> to make the scroll bar visible when the users move the scroll area:</p>
+<p>We use <code class="docutils literal"><span class="pre">transitions</span></code> to apply a <span class="xref std std-ref">NumberAnimation</span> to the <code class="docutils literal"><span class="pre">&quot;opacity&quot;</span></code> property when the state changes from “visible” to the default state:</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-footers">
+<span id="id10"></span><h2>Creating Footers<a class="headerlink" href="#creating-footers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use a Component type with a <span class="xref std std-ref">Rectangle</span> type to create a footer for the news list view:</p>
+<p>We bind the <code class="docutils literal"><span class="pre">width</span></code> of the footer to the width of the component and the <code class="docutils literal"><span class="pre">height</span></code> to the of close button to align them when no news items are displayed.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-buttons">
+<span id="id11"></span><h2>Creating Buttons<a class="headerlink" href="#creating-buttons" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In rssnews.qml, we use an <a class="reference internal" href="qtquick-imageelements-example.html#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> type to create a simple push button that users can tap to close the app:</p>
+<p>We use <code class="docutils literal"><span class="pre">anchors</span></code> to position the close button in the top right corner of the news list view, with 4-pixel margins. Because the close button overlaps the category list in portrait orientation, we animate the <code class="docutils literal"><span class="pre">opacity</span></code> property to make the button almost fully transparent when users are scrolling the category list.</p>
+<p>We use the <code class="docutils literal"><span class="pre">onClicked</span></code> signal handler within a <span class="xref std std-ref">MouseArea</span> to call the <code class="docutils literal"><span class="pre">quit()</span></code> function when users select the close button.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">QML</span> <span class="pre">Applications</span></code></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="rssnews-qml-example-file">
+<h1>rssnews.qml Example File<a class="headerlink" href="#rssnews-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="busyindicator-qml-example-file">
+<h1>BusyIndicator.qml Example File<a class="headerlink" href="#busyindicator-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="categorydelegate-qml-example-file">
+<h1>CategoryDelegate.qml Example File<a class="headerlink" href="#categorydelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="newsdelegate-qml-example-file">
+<h1>NewsDelegate.qml Example File<a class="headerlink" href="#newsdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="rssfeeds-qml-example-file">
+<h1>RssFeeds.qml Example File<a class="headerlink" href="#rssfeeds-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scrollbar-qml-example-file">
+<h1>ScrollBar.qml Example File<a class="headerlink" href="#scrollbar-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="rssnews-pro-example-file">
+<h1>rssnews.pro Example File<a class="headerlink" href="#rssnews-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="rssnews-qmlproject-example-file">
+<h1>rssnews.qmlproject Example File<a class="headerlink" href="#rssnews-qmlproject-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="rssnews-qrc-example-file">
+<h1>rssnews.qrc Example File<a class="headerlink" href="#rssnews-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="asia-jpg-image-file">
+<h1>Asia.jpg Image File<a class="headerlink" href="#asia-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="business-jpg-image-file">
+<h1>Business.jpg Image File<a class="headerlink" href="#business-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="entertainment-jpg-image-file">
+<h1>Entertainment.jpg Image File<a class="headerlink" href="#entertainment-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="europe-jpg-image-file">
+<h1>Europe.jpg Image File<a class="headerlink" href="#europe-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="health-jpg-image-file">
+<h1>Health.jpg Image File<a class="headerlink" href="#health-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="politics-jpg-image-file">
+<h1>Politics.jpg Image File<a class="headerlink" href="#politics-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="science-jpg-image-file">
+<h1>Science.jpg Image File<a class="headerlink" href="#science-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sports-jpg-image-file">
+<h1>Sports.jpg Image File<a class="headerlink" href="#sports-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="technology-jpg-image-file">
+<h1>Technology.jpg Image File<a class="headerlink" href="#technology-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="topstories-jpg-image-file">
+<h1>TopStories.jpg Image File<a class="headerlink" href="#topstories-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="usnational-jpg-image-file">
+<h1>USNational.jpg Image File<a class="headerlink" href="#usnational-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="world-jpg-image-file">
+<h1>World.jpg Image File<a class="headerlink" href="#world-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="btn-close-png-image-file">
+<h1>btn_close.png Image File<a class="headerlink" href="#btn-close-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="busy-png-image-file">
+<h1>busy.png Image File<a class="headerlink" href="#busy-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scrollbar-png-image-file">
+<h1>scrollbar.png Image File<a class="headerlink" href="#scrollbar-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

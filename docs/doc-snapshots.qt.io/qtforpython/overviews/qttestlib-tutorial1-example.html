@@ -1,0 +1,197 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Chapter 1: Writing a Unit Test &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 1: Writing a Unit Test</a><ul>
+<li><a class="reference internal" href="#writing-a-test">Writing a Test</a></li>
+<li><a class="reference internal" href="#executing-a-test">Executing a Test</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testqstring-cpp-example-file">testqstring.cpp Example File</a></li>
+<li><a class="reference internal" href="#tutorial1-pro-example-file">tutorial1.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-1-writing-a-unit-test">
+<span id="id1"></span><h1>Chapter 1: Writing a Unit Test<a class="headerlink" href="#chapter-1-writing-a-unit-test" title="Permalink to this headline">¶</a></h1>
+<p>How to write a unit test</p>
+<blockquote>
+<div><p>How to write a unit test.</p>
+<p>In this first chapter we will see how to write a simple unit test for a class, and how to execute it.</p>
+</div></blockquote>
+<div class="section" id="writing-a-test">
+<span id="id2"></span><h2>Writing a Test<a class="headerlink" href="#writing-a-test" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s assume you want to test the behavior of our <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> class. First, you need a class that contains your test functions. This class has to inherit from <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;QtTest/QtTest&gt;</span>
+
+<span class="k">class</span> <span class="nc">TestQString</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">toUpper</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You need to include the <span class="xref std std-ref">QTest</span> header and declare the test functions as private slots so the test framework finds and executes it.</p>
+</div>
+<p>Then you need to implement the test function itself. The implementation could look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">toUpper</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QString</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span><span class="p">;</span>
+    <span class="n">QVERIFY</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">toUpper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;HELLO&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QVERIFY()</span></code> macro evaluates the expression passed as its argument. If the expression evaluates to true, the execution of the test function continues. Otherwise, a message describing the failure is appended to the test log, and the test function stops executing.</p>
+<p>But if you want a more verbose output to the test log, you should use the <code class="xref py py-func docutils literal"><span class="pre">QCOMPARE()</span></code> macro instead:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">toUpper</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QString</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span><span class="p">;</span>
+    <span class="n">QCOMPARE</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the strings are not equal, the contents of both strings are appended to the test log, making it immediately visible why the comparison failed.</p>
+<p>Finally, to make our test case a stand-alone executable, the following two lines are needed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTEST_MAIN</span><span class="p">(</span><span class="n">TestQString</span><span class="p">)</span>
+<span class="c1">#include &quot;testqstring.moc&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QTEST_MAIN()</span></code> macro expands to a simple <code class="docutils literal"><span class="pre">main()</span></code> method that runs all the test functions. Note that if both the declaration and the implementation of our test class are in a <code class="docutils literal"><span class="pre">.cpp</span></code> file, we also need to include the generated moc file to make Qt’s introspection work.</p>
+</div></blockquote>
+</div>
+<div class="section" id="executing-a-test">
+<span id="id3"></span><h2>Executing a Test<a class="headerlink" href="#executing-a-test" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Now that we finished writing our test, we want to execute it. Assuming that our test was saved as <code class="docutils literal"><span class="pre">testqstring.cpp</span></code> in an empty directory, we build the test using qmake to create a project and generate a makefile.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/myTestDirectory$ qmake -project &quot;QT += testlib&quot;
+/myTestDirectory$ qmake
+/myTestDirectory$ make
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you’re using windows, replace <code class="docutils literal"><span class="pre">make</span></code> with <code class="docutils literal"><span class="pre">nmake</span></code> or whatever build tool you use.</p>
+</div>
+<p>Running the resulting executable should give you the following output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*********</span> <span class="n">Start</span> <span class="n">testing</span> <span class="n">of</span> <span class="n">TestQString</span> <span class="o">*********</span>
+<span class="n">Config</span><span class="p">:</span> <span class="n">Using</span> <span class="n">QtTest</span> <span class="n">library</span> <span class="o">%</span><span class="n">VERSION</span><span class="o">%</span><span class="p">,</span> <span class="n">Qt</span> <span class="o">%</span><span class="n">VERSION</span><span class="o">%</span>
+<span class="n">PASS</span>   <span class="p">:</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">initTestCase</span><span class="p">()</span>
+<span class="n">PASS</span>   <span class="p">:</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">toUpper</span><span class="p">()</span>
+<span class="n">PASS</span>   <span class="p">:</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">cleanupTestCase</span><span class="p">()</span>
+<span class="n">Totals</span><span class="p">:</span> <span class="mi">3</span> <span class="n">passed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">failed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">skipped</span>
+<span class="o">*********</span> <span class="n">Finished</span> <span class="n">testing</span> <span class="n">of</span> <span class="n">TestQString</span> <span class="o">*********</span>
+</pre></div>
+</div>
+<p>Congratulations! You just wrote and executed your first unit test using the Qt Test framework.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="testqstring-cpp-example-file">
+<h1>testqstring.cpp Example File<a class="headerlink" href="#testqstring-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tutorial1-pro-example-file">
+<h1>tutorial1.pro Example File<a class="headerlink" href="#tutorial1-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

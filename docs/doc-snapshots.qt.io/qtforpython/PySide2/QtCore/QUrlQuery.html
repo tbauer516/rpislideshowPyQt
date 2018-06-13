@@ -1,0 +1,682 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QUrlQuery &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QMessageAuthenticationCode" href="QMessageAuthenticationCode.html" />
+    <link rel="prev" title="QUrl" href="QUrl.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QUrlQuery</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#encoding">Encoding</a></li>
+<li><a class="reference internal" href="#handling-of-spaces-and-plus">Handling of spaces and plus (“+”)</a></li>
+<li><a class="reference internal" href="#full-decoding">Full decoding</a></li>
+<li><a class="reference internal" href="#non-standard-delimiters">Non-standard delimiters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QUrl.html"
+                        title="previous chapter">QUrl</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QMessageAuthenticationCode.html"
+                        title="next chapter">QMessageAuthenticationCode</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qurlquery">
+<span id="id1"></span><h1>QUrlQuery<a class="headerlink" href="#qurlquery" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-eb4d1444e540208abb60f024ef5b0fb3b3ce78ff.png" alt="Inheritance diagram of PySide2.QtCore.QUrlQuery" usemap="#inheritancec16181c9f6" class="inheritance"/>
+<map id="inheritancec16181c9f6" name="inheritancec16181c9f6">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QUrlQuery" title="QtCore.QUrlQuery" alt="" coords="5,5,143,31"/>
+</map>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class was introduced in Qt 5.0.</p>
+</div>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.__eq__" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.__eq__"><code class="xref py py-meth docutils literal"><span class="pre">__eq__</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.__ne__" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.__ne__"><code class="xref py py-meth docutils literal"><span class="pre">__ne__</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">addQueryItem</span></code></a> (key, value)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues"><code class="xref py py-meth docutils literal"><span class="pre">allQueryItemValues</span></code></a> (key[, encoding=QUrl.PrettyDecoded])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear"><code class="xref py py-meth docutils literal"><span class="pre">clear</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">hasQueryItem</span></code></a> (key)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty"><code class="xref py py-meth docutils literal"><span class="pre">isEmpty</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">query</span></code></a> ([encoding=QUrl.PrettyDecoded])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue"><code class="xref py py-meth docutils literal"><span class="pre">queryItemValue</span></code></a> (key[, encoding=QUrl.PrettyDecoded])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems"><code class="xref py py-meth docutils literal"><span class="pre">queryItems</span></code></a> ([encoding=QUrl.PrettyDecoded])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">queryPairDelimiter</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">queryValueDelimiter</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems"><code class="xref py py-meth docutils literal"><span class="pre">removeAllQueryItems</span></code></a> (key)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">removeQueryItem</span></code></a> (key)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">setQuery</span></code></a> (queryString)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">setQueryDelimiters</span></code></a> (valueDelimiter, pairDelimiter)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems"><code class="xref py py-meth docutils literal"><span class="pre">setQueryItems</span></code></a> (query)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.swap" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.swap"><code class="xref py py-meth docutils literal"><span class="pre">swap</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.toString" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.toString"><code class="xref py py-meth docutils literal"><span class="pre">toString</span></code></a> ([encoding=QUrl.PrettyDecoded])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">defaultQueryPairDelimiter</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">defaultQueryValueDelimiter</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> class provides a way to manipulate a key-value pairs in a URL’s query.</p>
+<p>It is used to parse the query strings found in URLs like the following:</p>
+<img alt="../../_images/qurl-querystring.png" src="../../_images/qurl-querystring.png" />
+<p>Query strings like the above are used to transmit options in the URL and are usually decoded into multiple key-value pairs. The one above would contain two entries in its list, with keys “type” and “color”. <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> can also be used to create a query string suitable for use in <a class="reference internal" href="QUrl.html#PySide2.QtCore.PySide2.QtCore.QUrl.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrl.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">QUrl.setQuery()</span></code></a> from the individual components of the query.</p>
+<p>The most common way of parsing a query string is to initialize it in the constructor by passing it the query string. Otherwise, the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> method can be used to set the query to be parsed. That method can also be used to parse a query with non-standard delimiters, after having set them using the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a> function.</p>
+<p>The encoded query string can be obtained again using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a> . This will take all the internally-stored items and encode the string using the delimiters.</p>
+</div></blockquote>
+<div class="section" id="encoding">
+<span id="pyside2-qtcore-qurlquery-encoding"></span><h3>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>All of the getter methods in <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> support an optional parameter of type <code class="xref py py-class docutils literal"><span class="pre">QUrl.ComponentFormattingOptions</span></code> , including <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a> , which dictate how to encode the data in question. Except for <code class="xref py py-attr docutils literal"><span class="pre">QUrl.FullyDecoded</span></code> , the returned value must still be considered a percent-encoded string, as there are certain values which cannot be expressed in decoded form (like control characters, byte sequences not decodable to UTF-8). For that reason, the percent character is always represented by the string “%25”.</div></blockquote>
+</div>
+<div class="section" id="handling-of-spaces-and-plus">
+<span id="pyside2-qtcore-qurlquery-handling-of-spaces-and-plus"></span><h3>Handling of spaces and plus (“+”)<a class="headerlink" href="#handling-of-spaces-and-plus" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Web browsers usually encode spaces found in HTML FORM elements to a plus sign (“+”) and plus signs to its percent-encoded form (%2B). However, the Internet specifications governing URLs do not consider spaces and the plus character equivalent.</p>
+<p>For that reason, <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> never encodes the space character to “+” and will never decode “+” to a space character. Instead, space characters will be rendered “%20” in encoded form.</p>
+<p>To support encoding like that of HTML forms, <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> also never decodes the “%2B” sequence to a plus sign nor encode a plus sign. In fact, any “%2B” or “+” sequences found in the keys, values, or query string are left exactly like written (except for the uppercasing of “%2b” to “%2B”).</p>
+</div></blockquote>
+</div>
+<div class="section" id="full-decoding">
+<span id="pyside2-qtcore-qurlquery-full-decoding"></span><h3>Full decoding<a class="headerlink" href="#full-decoding" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>With <code class="xref py py-attr docutils literal"><span class="pre">QUrl.FullyDecoded</span></code> formatting, all percent-encoded sequences will be decoded fully and the ‘%’ character is used to represent itself. <code class="xref py py-attr docutils literal"><span class="pre">QUrl.FullyDecoded</span></code> should be used with care, since it may cause data loss. See the documentation of <code class="xref py py-attr docutils literal"><span class="pre">QUrl.FullyDecoded</span></code> for information on what data may be lost.</p>
+<p>This formatting mode should be used only when dealing with text presented to the user in contexts where percent-encoding is not desired. Note that <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> setters and query methods do not support the counterpart <code class="xref py py-attr docutils literal"><span class="pre">QUrl.DecodedMode</span></code> parsing, so using <code class="xref py py-attr docutils literal"><span class="pre">QUrl.FullyDecoded</span></code> to obtain a listing of keys may result in keys not found in the object.</p>
+</div></blockquote>
+</div>
+<div class="section" id="non-standard-delimiters">
+<span id="pyside2-qtcore-qurlquery-non-standard-delimiters"></span><h3>Non-standard delimiters<a class="headerlink" href="#non-standard-delimiters" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>By default, <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> uses an equal sign (“=”) to separate a key from its value, and an ampersand (“&amp;”) to separate key-value pairs from each other. It is possible to change the delimiters that <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> uses for parsing and for reconstructing the query by calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a> .</p>
+<p>Non-standard delimiters should be chosen from among what RFC 3986 calls “sub-delimiters”. They are:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sub</span><span class="o">-</span><span class="n">delims</span>    <span class="o">=</span> <span class="s2">&quot;!&quot;</span> <span class="o">/</span> <span class="s2">&quot;$&quot;</span> <span class="o">/</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">/</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">/</span> <span class="s2">&quot;(&quot;</span> <span class="o">/</span> <span class="s2">&quot;)&quot;</span>
+              <span class="o">/</span> <span class="s2">&quot;*&quot;</span> <span class="o">/</span> <span class="s2">&quot;+&quot;</span> <span class="o">/</span> <span class="s2">&quot;,&quot;</span> <span class="o">/</span> <span class="s2">&quot;;&quot;</span> <span class="o">/</span> <span class="s2">&quot;=&quot;</span>
+</pre></div>
+</div>
+<p>Use of other characters is not supported and may result in unexpected behaviour. <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> does not verify that you passed a valid delimiter.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QUrl.html#PySide2.QtCore.QUrl" title="PySide2.QtCore.QUrl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl</span></code></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QUrlQuery">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QUrlQuery</code><a class="headerlink" href="#PySide2.QtCore.QUrlQuery" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QUrlQuery</code><span class="sig-paren">(</span><em>queryString</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QUrlQuery</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QUrlQuery</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>queryString</strong> – unicode</li>
+<li><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a></li>
+<li><strong>url</strong> – <a class="reference internal" href="QUrl.html#PySide2.QtCore.QUrl" title="PySide2.QtCore.QUrl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs an empty <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object. A query can be set afterwards by calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> or items can be added by using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a></p>
+</div>
+<p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object and parses the <code class="docutils literal"><span class="pre">queryString</span></code> query string, using the default query delimiters. To parse a query string using other delimiters, you should first set them using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a> and then set the query with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> .</p>
+<p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object and parses the query string found in the <code class="docutils literal"><span class="pre">url</span></code> URL, using the default query delimiters. To parse a query string using other delimiters, you should first set them using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a> and then set the query with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QUrl.html#PySide2.QtCore.PySide2.QtCore.QUrl.query" title="PySide2.QtCore.PySide2.QtCore.QUrl.query"><code class="xref py py-meth docutils literal"><span class="pre">QUrl.query()</span></code></a></p>
+</div>
+<p>Copies the contents of the <code class="docutils literal"><span class="pre">other</span></code> <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object, including the query delimiters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">addQueryItem</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> – unicode</li>
+<li><strong>value</strong> – unicode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Appends the pair <code class="docutils literal"><span class="pre">key</span></code> = <code class="docutils literal"><span class="pre">value</span></code> to the end of the query string of the URL. This method does not overwrite existing items that might exist with the same key.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method does not treat spaces (ASCII 0x20) and plus (“+”) signs as the same, like HTML forms do. If you need spaces to be represented as plus signs, use actual plus signs.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.hasQueryItem()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryItemValue()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">allQueryItemValues</code><span class="sig-paren">(</span><em>key</em><span class="optional">[</span>, <em>encoding=QUrl.PrettyDecoded</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> – unicode</li>
+<li><strong>encoding</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl.ComponentFormattingOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of strings</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the a list of query string values whose key is equal to <code class="docutils literal"><span class="pre">key</span></code> from the URL, using the options specified in <code class="docutils literal"><span class="pre">encoding</span></code> to encode the return value. If the key <code class="docutils literal"><span class="pre">key</span></code> is not found, this function returns an empty list.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryItemValue()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object by removing all of the key-value pairs currently stored. If the query delimiters have been changed, this function will leave them with their changed values.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.isEmpty()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">defaultQueryPairDelimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the default character for separating keys-value pairs from each other, an ampersand (“&amp;”).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryPairDelimiter()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">defaultQueryValueDelimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryValueDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the default character for separating keys from values in the query, an equal sign (“=”).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryValueDelimiter()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.defaultQueryPairDelimiter()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">hasQueryItem</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – unicode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if there is a query string pair whose key is equal to <code class="docutils literal"><span class="pre">key</span></code> from the URL.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryItemValue()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">isEmpty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object contains no key-value pairs, such as after being default-constructed or after parsing an empty query string.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.clear"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.clear()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.__ne__">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if <code class="docutils literal"><span class="pre">other</span></code> is not equal to this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> . Otherwise, returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.operator==()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.__eq__">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this object and the <code class="docutils literal"><span class="pre">other</span></code> object contain the same contents, in the same order, and use the same query delimiters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">query</code><span class="sig-paren">(</span><span class="optional">[</span><em>encoding=QUrl.PrettyDecoded</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>encoding</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl.ComponentFormattingOptions</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the reconstructed query string, formed from the key-value pairs currently stored in this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object and separated by the query delimiters chosen for this object. The keys and values are encoded using the options given by the <code class="docutils literal"><span class="pre">encoding</span></code> parameter.</p>
+<p>For this function, the only ambiguous delimiter is the hash (“#”), as in URLs it is used to separate the query string from the fragment that may follow.</p>
+<p>The order of the key-value pairs in the returned string is exactly the same as in the original query.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a>  <a class="reference internal" href="QUrl.html#PySide2.QtCore.PySide2.QtCore.QUrl.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrl.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">QUrl.setQuery()</span></code></a>  <a class="reference internal" href="QUrl.html#PySide2.QtCore.PySide2.QtCore.QUrl.fragment" title="PySide2.QtCore.PySide2.QtCore.QUrl.fragment"><code class="xref py py-meth docutils literal"><span class="pre">QUrl.fragment()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Encoding</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">queryItemValue</code><span class="sig-paren">(</span><em>key</em><span class="optional">[</span>, <em>encoding=QUrl.PrettyDecoded</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItemValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> – unicode</li>
+<li><strong>encoding</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl.ComponentFormattingOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the query value associated with key <code class="docutils literal"><span class="pre">key</span></code> from the URL, using the options specified in <code class="docutils literal"><span class="pre">encoding</span></code> to encode the return value. If the key <code class="docutils literal"><span class="pre">key</span></code> is not found, this function returns an empty string. If you need to distinguish between an empty value and a non-existent key, you should check for the key’s presence first using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.hasQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.hasQueryItem()</span></code></a> .</p>
+<p>If the key <code class="docutils literal"><span class="pre">key</span></code> is multiply defined, this function will return the first one found, in the order they were present in the query string or added using <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.allQueryItemValues"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.allQueryItemValues()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Encoding</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">queryItems</code><span class="sig-paren">(</span><span class="optional">[</span><em>encoding=QUrl.PrettyDecoded</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>encoding</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl.ComponentFormattingOptions</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the query string of the URL, as a map of keys and values, using the options specified in <code class="docutils literal"><span class="pre">encoding</span></code> to encode the items. The order of the elements is the same as the one found in the query string or set with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryItems()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryItems()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Encoding</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">queryPairDelimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the character used to delimit between keys-value pairs when reconstructing the query string in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a> or when parsing in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryValueDelimiter()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">queryValueDelimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the character used to delimit between keys and values when reconstructing the query string in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a> or when parsing in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQuery()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryPairDelimiter()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">removeAllQueryItems</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Removes all the query string pairs whose key is equal to <code class="docutils literal"><span class="pre">key</span></code> from the URL.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.removeQueryItem()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">removeQueryItem</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeQueryItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Removes the query string pair whose key is equal to <code class="docutils literal"><span class="pre">key</span></code> from the URL. If there are multiple items with a key equal to <code class="docutils literal"><span class="pre">key</span></code> , it removes the first item in the order they were present in the query string or added with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.addQueryItem"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.addQueryItem()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.removeAllQueryItems"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.removeAllQueryItems()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">setQuery</code><span class="sig-paren">(</span><em>queryString</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQuery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>queryString</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Parses the query string in <code class="docutils literal"><span class="pre">queryString</span></code> and sets the internal items to the values found there. If any delimiters have been specified with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.setQueryDelimiters()</span></code></a> , this function will use them instead of the default delimiters to parse the string.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">setQueryDelimiters</code><span class="sig-paren">(</span><em>valueDelimiter</em>, <em>pairDelimiter</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryDelimiters" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>valueDelimiter</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></li>
+<li><strong>pairDelimiter</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets the characters used for delimiting between keys and values, and between key-value pairs in the URL’s query string. The default value delimiter is ‘=’ and the default pair delimiter is ‘&amp;’.</p>
+<img alt="../../_images/qurl-querystring.png" src="../../_images/qurl-querystring.png" />
+<p><code class="docutils literal"><span class="pre">valueDelimiter</span></code> will be used for separating keys from values, and <code class="docutils literal"><span class="pre">pairDelimiter</span></code> will be used to separate key-value pairs. Any occurrences of these delimiting characters in the encoded representation of the keys and values of the query string are percent encoded when returned in <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.query" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.query"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.query()</span></code></a> .</p>
+<p>If <code class="docutils literal"><span class="pre">valueDelimiter</span></code> is set to ‘(‘ and <code class="docutils literal"><span class="pre">pairDelimiter</span></code> is ‘)’, the above query string would instead be represented like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://www.example.com/cgi-bin/drawgraph.cgi?type-pie/color-green
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Non-standard delimiters should be chosen from among what RFC 3986 calls “sub-delimiters”. They are:</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sub</span><span class="o">-</span><span class="n">delims</span>    <span class="o">=</span> <span class="s2">&quot;!&quot;</span> <span class="o">/</span> <span class="s2">&quot;$&quot;</span> <span class="o">/</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">/</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">/</span> <span class="s2">&quot;(&quot;</span> <span class="o">/</span> <span class="s2">&quot;)&quot;</span>
+              <span class="o">/</span> <span class="s2">&quot;*&quot;</span> <span class="o">/</span> <span class="s2">&quot;+&quot;</span> <span class="o">/</span> <span class="s2">&quot;,&quot;</span> <span class="o">/</span> <span class="s2">&quot;;&quot;</span> <span class="o">/</span> <span class="s2">&quot;=&quot;</span>
+</pre></div>
+</div>
+<p>Use of other characters is not supported and may result in unexpected behaviour. This method does not verify that you passed a valid delimiter.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryValueDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryValueDelimiter()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryPairDelimiter"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryPairDelimiter()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">setQueryItems</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.setQueryItems" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> – </td>
+</tr>
+</tbody>
+</table>
+<p>Sets the items in this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> object to <code class="docutils literal"><span class="pre">query</span></code> . The order of the elements in <code class="docutils literal"><span class="pre">query</span></code> is preserved.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method does not treat spaces (ASCII 0x20) and plus (“+”) signs as the same, like HTML forms do. If you need spaces to be represented as plus signs, use actual plus signs.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.queryItems"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.queryItems()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty" title="PySide2.QtCore.PySide2.QtCore.QUrlQuery.isEmpty"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery.isEmpty()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.swap">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">swap</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.swap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Swaps this URL query instance with <code class="docutils literal"><span class="pre">other</span></code> . This function is very fast and never fails.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QUrlQuery.toString">
+<code class="descclassname">PySide2.QtCore.QUrlQuery.</code><code class="descname">toString</code><span class="sig-paren">(</span><span class="optional">[</span><em>encoding=QUrl.PrettyDecoded</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QUrlQuery.toString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>encoding</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrl.ComponentFormattingOptions</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns this <a class="reference internal" href="#PySide2.QtCore.QUrlQuery" title="PySide2.QtCore.QUrlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QUrlQuery</span></code></a> as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> . <code class="docutils literal"><span class="pre">encoding</span></code> can be used to specify the URL string encoding of the return value.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Sensors - Grue Sensor Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Sensors - Grue Sensor Example</a><ul>
+<li><a class="reference internal" href="#grue-sensor-definition">Grue Sensor Definition</a></li>
+<li><a class="reference internal" href="#grue-sensor-implementation">Grue Sensor Implementation</a></li>
+<li><a class="reference internal" href="#grue-sensor-console-application">Grue Sensor Console Application</a></li>
+<li><a class="reference internal" href="#grue-sensor-qml-import">Grue Sensor QML Import</a></li>
+<li><a class="reference internal" href="#grue-sensor-qml-application">Grue Sensor QML Application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grue-qml-example-file">grue.qml Example File</a></li>
+<li><a class="reference internal" href="#gruesensor-cpp-example-file">gruesensor.cpp Example File</a></li>
+<li><a class="reference internal" href="#gruesensor-h-example-file">gruesensor.h Example File</a></li>
+<li><a class="reference internal" href="#gruesensor-p-h-example-file">gruesensor_p.h Example File</a></li>
+<li><a class="reference internal" href="#gruesensorimpl-cpp-example-file">gruesensorimpl.cpp Example File</a></li>
+<li><a class="reference internal" href="#gruesensorimpl-h-example-file">gruesensorimpl.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#grue-pro-example-file">grue.pro Example File</a></li>
+<li><a class="reference internal" href="#qml-pro-example-file">qml.pro Example File</a></li>
+<li><a class="reference internal" href="#qml-qrc-example-file">qml.qrc Example File</a></li>
+<li><a class="reference internal" href="#console-app-pro-example-file">console_app.pro Example File</a></li>
+<li><a class="reference internal" href="#import-pro-example-file">import.pro Example File</a></li>
+<li><a class="reference internal" href="#qmldir-example-file">qmldir Example File</a></li>
+<li><a class="reference internal" href="#lib-pro-example-file">lib.pro Example File</a></li>
+<li><a class="reference internal" href="#plugin-pro-example-file">plugin.pro Example File</a></li>
+<li><a class="reference internal" href="#grue-png-image-file">grue.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-sensors-grue-sensor-example">
+<span id="id1"></span><h1>Qt Sensors - Grue Sensor Example<a class="headerlink" href="#qt-sensors-grue-sensor-example" title="Permalink to this headline">¶</a></h1>
+<p>Qt Sensors - Grue sensor example demonstrates all the steps from creating a new sensor to using it</p>
+<blockquote>
+<div><p>The Qt Sensors - Grue sensor example demonstrates all the steps from creating a new sensor to using it.</p>
+<p>The Qt Sensors - Grue sensor example demonstrates all the steps from creating a new sensor to using it.</p>
+<p>The sensor definition is placed in a library where client apps can access it. The actual implementation lives in a plugin.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#qt-sensors-grue-sensor-example"><span class="std std-ref">Grue Sensor Definition</span></a></li>
+<li><a class="reference internal" href="#qt-sensors-grue-sensor-example"><span class="std std-ref">Grue Sensor Implementation</span></a></li>
+</ul>
+<p>The sensor can now be used by a C++ application, even if the application does not have access to the definition.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#qt-sensors-grue-sensor-example"><span class="std std-ref">Grue Sensor Console Application</span></a></li>
+</ul>
+<p>To make the sensor available to a QML application an import must be created.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#qt-sensors-grue-sensor-example"><span class="std std-ref">Grue Sensor QML Import</span></a></li>
+<li><a class="reference internal" href="#qt-sensors-grue-sensor-example"><span class="std std-ref">Grue Sensor QML Application</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="grue-sensor-definition">
+<span id="id2"></span><h2>Grue Sensor Definition<a class="headerlink" href="#grue-sensor-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Grue sensor is defined in a library so that applications can use it. The source code is available in the <code class="docutils literal"><span class="pre">grue/lib</span></code> subdirectory.</p>
+<p>First up is the sensor type. This is the interface for sensors that report on your likelihood of being eaten by a Grue. Such sensors are very important to adventurers, particularly if they are going into dark places as this is where Grues live.</p>
+<p>The interface is a simple one. It provides only 1 piece of information, your chance of being eaten. For the details on how this is property should be interpreted please see the documentation in gruesensor.cpp.</p>
+<p>This example was created using the make_sensor.pl script which can be found in src/sensors. As such, it contains some generated code that defines the convenience classes GrueFilter and GrueSensor.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grue-sensor-implementation">
+<span id="id3"></span><h2>Grue Sensor Implementation<a class="headerlink" href="#grue-sensor-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Grue sensor implementation lives in a plugin that is loaded by the Qt Sensors library. The source code is available in the <code class="docutils literal"><span class="pre">grue/plugin</span></code> subdirectory.</p>
+<p>The Grue sensor needs a backend before it can be used. The backend provided is rather basic and it relies on some kind of light sensor to work but it gets the job done. If new hardware that can detect the actual presence of Grues becomes available a backend could be created that supports this hardware and applications using the Grue sensor would be able to use it without any changes.</p>
+<p>There are a few mandatory parts to a backend. They are the start and stop methods and the setReading call. The start and stop methods are used to start and stop any underlying hardware. In the case of this backend they start and stop a light sensor. In the start method, the backend should be sure to call the sensorStopped() or sensorBusy() methods if it cannot start.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>lightSensor-&gt;setDataRate(sensor()-&gt;dataRate());
+lightSensor-&gt;start();
+// If the light sensor doesn&#39;t work we don&#39;t work either
+if (!lightSensor-&gt;isActive())
+    sensorStopped();
+if (lightSensor-&gt;isBusy())
+    sensorBusy();
+</pre></div>
+</div>
+<p>The setReading method is needed so that the sensors library knows where the readings are coming from. This backend has a local copy of the reading so it passes a pointer to the function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Register</span> <span class="n">our</span> <span class="n">reading</span> <span class="n">instance</span>
+<span class="n">setReading</span><span class="o">&lt;</span><span class="n">GrueSensorReading</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_reading</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>However it is also possible to pass null to the setReading method in which case the sensors library will create an instance and return a pointer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">reading</span> <span class="n">instance</span> <span class="k">for</span> <span class="n">us</span> <span class="n">to</span> <span class="n">use</span>
+<span class="n">m_reading</span> <span class="o">=</span> <span class="n">setReading</span><span class="o">&lt;</span><span class="n">GrueSensorReading</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The Grue sensor backend also supplies some metadata.</p>
+<p>The backend checks 2 things, how dark it is and how long you have been in the dark. It uses the readingChanged() signal to know when to check the light sensor’s value. Once it is dark, it uses a timer to increase your chance of being eaten.</p>
+<p>The Grue sensor backend is delivered as a plugin. The plugin has a factory object that registers the types available and does the actual instantiation of the backend.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grue-sensor-console-application">
+<span id="id4"></span><h2>Grue Sensor Console Application<a class="headerlink" href="#grue-sensor-console-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Grue sensor console application demonstrates use of the Grue sensor. The source code is available in the <code class="docutils literal"><span class="pre">grue/console_app</span></code> subdirectory.</p>
+<p>This is a simple commandline application. It demonstrates how to use the generic access feature of Qt Sensors to avoid a link-time dependency on the Grue Sensor library.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grue-sensor-qml-import">
+<span id="id5"></span><h2>Grue Sensor QML Import<a class="headerlink" href="#grue-sensor-qml-import" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Grue sensor QML import exports the GrueSensor class as a QML type. The source code is available in the <code class="docutils literal"><span class="pre">grue/import</span></code> subdirectory.</p>
+<p>This creates the <em>Grue 1.0</em> import.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grue-sensor-qml-application">
+<span id="id6"></span><h2>Grue Sensor QML Application<a class="headerlink" href="#grue-sensor-qml-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Grue sensor QML application demonstrates the use of GrueSensor QML type.</p>
+<p>The application consists of a single QML file and an image. It is built as an exucutable with C++ code that runs the QML, but it can also be launched directly using the <code class="docutils literal"><span class="pre">qmlscene</span></code> tool.</p>
+<p>You should build the top-level ‘grue’ project before trying to run this example or it will not be able to find its dependencies.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qmlscene</span> <span class="o">-</span><span class="n">I</span> <span class="o">.</span> <span class="n">grue</span><span class="o">.</span><span class="n">qml</span>
+</pre></div>
+</div>
+<p>Above, the <code class="docutils literal"><span class="pre">-I</span> <span class="pre">.</span></code> parameter adds the current directory as a module import path to locate the Grue QML module.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="grue-qml-example-file">
+<h1>grue.qml Example File<a class="headerlink" href="#grue-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gruesensor-cpp-example-file">
+<h1>gruesensor.cpp Example File<a class="headerlink" href="#gruesensor-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gruesensor-h-example-file">
+<h1>gruesensor.h Example File<a class="headerlink" href="#gruesensor-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gruesensor-p-h-example-file">
+<h1>gruesensor_p.h Example File<a class="headerlink" href="#gruesensor-p-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gruesensorimpl-cpp-example-file">
+<h1>gruesensorimpl.cpp Example File<a class="headerlink" href="#gruesensorimpl-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gruesensorimpl-h-example-file">
+<h1>gruesensorimpl.h Example File<a class="headerlink" href="#gruesensorimpl-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="grue-pro-example-file">
+<h1>grue.pro Example File<a class="headerlink" href="#grue-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qml-pro-example-file">
+<h1>qml.pro Example File<a class="headerlink" href="#qml-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qml-qrc-example-file">
+<h1>qml.qrc Example File<a class="headerlink" href="#qml-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="console-app-pro-example-file">
+<h1>console_app.pro Example File<a class="headerlink" href="#console-app-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="import-pro-example-file">
+<h1>import.pro Example File<a class="headerlink" href="#import-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmldir-example-file">
+<h1>qmldir Example File<a class="headerlink" href="#qmldir-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="lib-pro-example-file">
+<h1>lib.pro Example File<a class="headerlink" href="#lib-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="plugin-pro-example-file">
+<h1>plugin.pro Example File<a class="headerlink" href="#plugin-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="grue-png-image-file">
+<h1>grue.png Image File<a class="headerlink" href="#grue-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Chapter 4: Replaying GUI Events &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 4: Replaying GUI Events</a><ul>
+<li><a class="reference internal" href="#writing-the-data-function">Writing the Data Function</a></li>
+<li><a class="reference internal" href="#rewriting-the-test-function">Rewriting the Test Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testgui-cpp-example-file">testgui.cpp Example File</a></li>
+<li><a class="reference internal" href="#tutorial4-pro-example-file">tutorial4.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-4-replaying-gui-events">
+<span id="id1"></span><h1>Chapter 4: Replaying GUI Events<a class="headerlink" href="#chapter-4-replaying-gui-events" title="Permalink to this headline">¶</a></h1>
+<p>How to replay GUI events</p>
+<blockquote>
+<div><p>How to replay GUI events.</p>
+<p>In this chapter, we will show how to simulate a GUI event, and how to store a series of GUI events as well as replay them on a widget.</p>
+<p>The approach to storing a series of events and replaying them is quite similar to the approach explained in <a class="reference internal" href="qttestlib-tutorial2-example.html#chapter-2-data-driven-testing"><span class="std std-ref">chapter 2</span></a> . All you need to do is to add a data function to your test class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestGui</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">testGui_data</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">testGui</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="writing-the-data-function">
+<span id="id2"></span><h2>Writing the Data Function<a class="headerlink" href="#writing-the-data-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As before, a test function’s associated data function carries the same name, appended by <code class="docutils literal"><span class="pre">_data</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestGui</span><span class="p">::</span><span class="n">testGui_data</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">addColumn</span><span class="o">&lt;</span><span class="n">QTestEventList</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">);</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">addColumn</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;expected&quot;</span><span class="p">);</span>
+
+    <span class="n">QTestEventList</span> <span class="n">list1</span><span class="p">;</span>
+    <span class="n">list1</span><span class="o">.</span><span class="n">addKeyClick</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;char&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">list1</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;a&quot;</span><span class="p">;</span>
+
+    <span class="n">QTestEventList</span> <span class="n">list2</span><span class="p">;</span>
+    <span class="n">list2</span><span class="o">.</span><span class="n">addKeyClick</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+    <span class="n">list2</span><span class="o">.</span><span class="n">addKeyClick</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Key_Backspace</span><span class="p">);</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;there and back again&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">list2</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, we define the elements of the table using the <code class="xref py py-func docutils literal"><span class="pre">QTest.addColumn()</span></code> function: A list of GUI events, and the expected result of applying the list of events on a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . Note that the type of the first element is <code class="xref py py-class docutils literal"><span class="pre">QTestEventList</span></code> .</p>
+<p>A <code class="xref py py-class docutils literal"><span class="pre">QTestEventList</span></code> can be populated with GUI events that can be stored as test data for later usage, or be replayed on any <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> .</p>
+<p>In our current data function, we create two <code class="xref py py-class docutils literal"><span class="pre">QTestEventList</span></code> elements. The first list consists of a single click to the ‘a’ key. We add the event to the list using the <code class="xref py py-func docutils literal"><span class="pre">QTestEventList.addKeyClick()</span></code> function. Then we use the <code class="xref py py-func docutils literal"><span class="pre">QTest.newRow()</span></code> function to give the data set a name, and stream the event list and the expected result into the table.</p>
+<p>The second list consists of two key clicks: an ‘a’ with a following ‘backspace’. Again we use the <code class="xref py py-func docutils literal"><span class="pre">QTestEventList.addKeyClick()</span></code> to add the events to the list, and <code class="xref py py-func docutils literal"><span class="pre">QTest.newRow()</span></code> to put the event list and the expected result into the table with an associated name.</p>
+</div></blockquote>
+</div>
+<div class="section" id="rewriting-the-test-function">
+<span id="id3"></span><h2>Rewriting the Test Function<a class="headerlink" href="#rewriting-the-test-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Our test can now be rewritten:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestGui</span><span class="p">::</span><span class="n">testGui</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QFETCH</span><span class="p">(</span><span class="n">QTestEventList</span><span class="p">,</span> <span class="n">events</span><span class="p">);</span>
+    <span class="n">QFETCH</span><span class="p">(</span><span class="n">QString</span><span class="p">,</span> <span class="n">expected</span><span class="p">);</span>
+
+    <span class="n">QLineEdit</span> <span class="n">lineEdit</span><span class="p">;</span>
+
+    <span class="n">events</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lineEdit</span><span class="p">);</span>
+
+    <span class="n">QCOMPARE</span><span class="p">(</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">expected</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The TestGui::testGui() function will be executed two times, once for each entry in the test data that we created in the associated TestGui::testGui_data() function.</p>
+<p>First, we fetch the two elements of the data set using the <code class="xref py py-func docutils literal"><span class="pre">QFETCH()</span></code> macro. <code class="xref py py-func docutils literal"><span class="pre">QFETCH()</span></code> takes two arguments: the data type of the element and the element name. Then we create a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> , and apply the list of events on that widget using the <code class="xref py py-func docutils literal"><span class="pre">QTestEventList.simulate()</span></code> function.</p>
+<p>Finally, we use the <code class="xref py py-func docutils literal"><span class="pre">QCOMPARE()</span></code> macro to check if the line edit’s text is as expected.</p>
+<p>As before, to make our test case a stand-alone executable, the following two lines are needed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTEST_MAIN</span><span class="p">(</span><span class="n">TestGui</span><span class="p">)</span>
+<span class="c1">#include &quot;testgui.moc&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QTEST_MAIN()</span></code> macro expands to a simple main() method that runs all the test functions, and since both the declaration and the implementation of our test class are in a .cpp file, we also need to include the generated moc file to make Qt’s introspection work.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="testgui-cpp-example-file">
+<h1>testgui.cpp Example File<a class="headerlink" href="#testgui-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tutorial4-pro-example-file">
+<h1>tutorial4.pro Example File<a class="headerlink" href="#tutorial4-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

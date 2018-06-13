@@ -1,0 +1,191 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Common Rich Text Editing Tasks &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Common Rich Text Editing Tasks</a><ul>
+<li><a class="reference internal" href="#using-qtextedit">Using QTextEdit</a></li>
+<li><a class="reference internal" href="#selecting-text">Selecting Text</a></li>
+<li><a class="reference internal" href="#finding-text">Finding Text</a></li>
+<li><a class="reference internal" href="#printing-documents">Printing Documents</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="common-rich-text-editing-tasks">
+<span id="id1"></span><h1>Common Rich Text Editing Tasks<a class="headerlink" href="#common-rich-text-editing-tasks" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>There are a number of tasks that are often performed by developers when editing and processing text documents using Qt. These include the use of display widgets such as <a class="reference internal" href="../PySide2/QtWidgets/QTextBrowser.html#PySide2.QtWidgets.QTextBrowser" title="PySide2.QtWidgets.QTextBrowser"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextBrowser</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> , creation of documents with <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> , editing using a <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> , and exporting the document structure. This document outlines some of the more common ways of using the rich text classes to perform these tasks, showing convenient patterns that can be reused in your own applications.</div></blockquote>
+<div class="section" id="using-qtextedit">
+<span id="id2"></span><h2>Using QTextEdit<a class="headerlink" href="#using-qtextedit" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A text editor widget can be constructed and used to display HTML in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextEdit</span> <span class="o">*</span><span class="n">editor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
+<span class="n">editor</span><span class="o">-&gt;</span><span class="n">setHtml</span><span class="p">(</span><span class="n">aStringContainingHTMLtext</span><span class="p">);</span>
+<span class="n">editor</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>By default, the text editor contains a document with a root frame, inside which is an empty text block. This document can be obtained so that it can be modified directly by the application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">document</span> <span class="o">=</span> <span class="n">editor</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The text editor’s cursor may also be used to edit a document:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextCursor</span> <span class="n">cursor</span> <span class="o">=</span> <span class="n">editor</span><span class="o">-&gt;</span><span class="n">textCursor</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Although a document can be edited using many cursors at once, a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> only displays a single cursor at a time. Therefore, if we want to update the editor to display a particular cursor or its selection, we need to set the editor’s cursor after we have modified the document:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">editor</span><span class="o">-&gt;</span><span class="n">setTextCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="selecting-text">
+<span id="id3"></span><h2>Selecting Text<a class="headerlink" href="#selecting-text" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Text is selected by moving the cursor using operations that are similar to those performed by a user in a text editor. To select text between two points in the document, we need to position the cursor at the first point then move it using a special mode ( <code class="xref py py-attr docutils literal"><span class="pre">QTextCursor.MoveMode</span></code> ) with a move operation ( <code class="xref py py-attr docutils literal"><span class="pre">QTextCursor.MoveOperation</span></code> ). When we select the text, we leave the selection anchor at the old cursor position just as the user might do by holding down the Shift key when selecting text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="p">::</span><span class="n">StartOfWord</span><span class="p">);</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="p">::</span><span class="n">EndOfWord</span><span class="p">,</span> <span class="n">QTextCursor</span><span class="p">::</span><span class="n">KeepAnchor</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the above code, a whole word is selected using this method. <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> provides a number of common move operations for selecting individual characters, words, lines, and whole blocks.</p>
+</div></blockquote>
+</div>
+<div class="section" id="finding-text">
+<span id="id4"></span><h2>Finding Text<a class="headerlink" href="#finding-text" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> provides a cursor-based interface for searching, making it easy to find and modify text in the style of a text editor. The following code finds all the instances of a particular word in a document, and changes the color of each:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTextCursor newCursor(document);
+
+while (!newCursor.isNull() &amp;&amp; !newCursor.atEnd()) {
+    newCursor = document-&gt;find(searchString, newCursor);
+
+    if (!newCursor.isNull()) {
+        newCursor.movePosition(QTextCursor::WordRight,
+                               QTextCursor::KeepAnchor);
+
+        newCursor.mergeCharFormat(colorFormat);
+    }
+}
+</pre></div>
+</div>
+<p>Note that the cursor does not have to be moved after each search and replace operation; it is always positioned at the end of the word that was just replaced.</p>
+</div></blockquote>
+</div>
+<div class="section" id="printing-documents">
+<span id="id5"></span><h2>Printing Documents<a class="headerlink" href="#printing-documents" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> is designed for the display of large rich text documents that are read on screen, rendering them in the same way as a web browser. As a result, it does not automatically break the contents of the document into page-sized pieces that are suitable for printing.</p>
+<p><a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> provides a <code class="xref py py-func docutils literal"><span class="pre">QTextDocument.print()</span></code> function to allow documents to be printed using the <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> class. The following code shows how to prepare a document in a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> for printing with a <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">document</span> <span class="o">=</span> <span class="n">editor</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span>
+<span class="n">QPrinter</span> <span class="n">printer</span><span class="p">;</span>
+
+<span class="n">QPrintDialog</span> <span class="o">*</span><span class="n">dlg</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPrintDialog</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">dlg</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">()</span> <span class="o">!=</span> <span class="n">QDialog</span><span class="p">::</span><span class="n">Accepted</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+<span class="n">document</span><span class="o">-&gt;</span><span class="nb">print</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The document is obtained from the text editor, and a <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> is constructed then configured using a <a class="reference internal" href="../PySide2/QtPrintSupport/QPrintDialog.html#PySide2.QtPrintSupport.QPrintDialog" title="PySide2.QtPrintSupport.QPrintDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrintDialog</span></code></a> . If the user accepts the printer’s configuration then the document is formatted and printed using the <code class="xref py py-func docutils literal"><span class="pre">QTextDocument.print()</span></code> function.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

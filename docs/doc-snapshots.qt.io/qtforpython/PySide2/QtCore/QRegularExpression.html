@@ -1,0 +1,1125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QRegularExpression &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QRectF" href="QRectF.html" />
+    <link rel="prev" title="QRegularExpressionMatch" href="QRegularExpressionMatch.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QRegularExpression</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#pattern-options">Pattern Options</a></li>
+<li><a class="reference internal" href="#match-type-and-match-options">Match Type and Match Options</a></li>
+<li><a class="reference internal" href="#pyside2-qtcore-qregularexpression-normal-matching">Normal Matching</a></li>
+<li><a class="reference internal" href="#pyside2-qtcore-qregularexpression-extracting-captured-substrings">Extracting captured substrings</a></li>
+<li><a class="reference internal" href="#pyside2-qtcore-qregularexpression-global-matching">Global Matching</a></li>
+<li><a class="reference internal" href="#pyside2-qtcore-qregularexpression-partial-matching">Partial Matching</a></li>
+<li><a class="reference internal" href="#pyside2-qtcore-qregularexpression-validating-user-input">Validating user input</a></li>
+<li><a class="reference internal" href="#incremental-multi-segment-matching">Incremental/multi-segment matching</a></li>
+<li><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li><a class="reference internal" href="#unsupported-perl-compatible-regular-expressions-features">Unsupported Perl-compatible Regular Expressions Features</a></li>
+<li><a class="reference internal" href="#notes-for-qregexp-users">Notes for QRegExp Users</a></li>
+<li><a class="reference internal" href="#porting-from-qregexp-exactmatch">Porting from QRegExp::exactMatch()</a></li>
+<li><a class="reference internal" href="#porting-from-qregexp-s-exact-matching">Porting from QRegExp’s Exact Matching</a></li>
+<li><a class="reference internal" href="#porting-from-qregexp-s-partial-matching">Porting from QRegExp’s Partial Matching</a></li>
+<li><a class="reference internal" href="#id7">Global matching</a></li>
+<li><a class="reference internal" href="#unicode-properties-support">Unicode properties support</a></li>
+<li><a class="reference internal" href="#wildcard-matching">Wildcard matching</a></li>
+<li><a class="reference internal" href="#other-pattern-syntaxes">Other pattern syntaxes</a></li>
+<li><a class="reference internal" href="#minimal-matching">Minimal matching</a></li>
+<li><a class="reference internal" href="#caret-modes">Caret modes</a></li>
+<li><a class="reference internal" href="#debugging-code-that-uses-qregularexpression">Debugging Code that Uses QRegularExpression</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QRegularExpressionMatch.html"
+                        title="previous chapter">QRegularExpressionMatch</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QRectF.html"
+                        title="next chapter">QRectF</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qregularexpression">
+<span id="id1"></span><h1>QRegularExpression<a class="headerlink" href="#qregularexpression" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-3758cde82008dac36ca34359904c5e91423ce421.png" alt="Inheritance diagram of PySide2.QtCore.QRegularExpression" usemap="#inheritance2079d89663" class="inheritance"/>
+<map id="inheritance2079d89663" name="inheritance2079d89663">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QRegularExpression" title="QtCore.QRegularExpression" alt="" coords="5,5,203,31"/>
+</map>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.__eq__" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.__eq__"><code class="xref py py-meth docutils literal"><span class="pre">__eq__</span></code></a> (re)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.__ne__" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.__ne__"><code class="xref py py-meth docutils literal"><span class="pre">__ne__</span></code></a> (re)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount"><code class="xref py py-meth docutils literal"><span class="pre">captureCount</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString"><code class="xref py py-meth docutils literal"><span class="pre">errorString</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">globalMatch</span></code></a> (subjectRef[, offset=0[, matchType=NormalMatch[, matchOptions=QRegularExpression.NoMatchOption]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">globalMatch</span></code></a> (subject[, offset=0[, matchType=NormalMatch[, matchOptions=QRegularExpression.NoMatchOption]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">isValid</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">match</span></code></a> (subjectRef[, offset=0[, matchType=NormalMatch[, matchOptions=QRegularExpression.NoMatchOption]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">match</span></code></a> (subject[, offset=0[, matchType=NormalMatch[, matchOptions=QRegularExpression.NoMatchOption]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.namedCaptureGroups" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.namedCaptureGroups"><code class="xref py py-meth docutils literal"><span class="pre">namedCaptureGroups</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize"><code class="xref py py-meth docutils literal"><span class="pre">optimize</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern"><code class="xref py py-meth docutils literal"><span class="pre">pattern</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset"><code class="xref py py-meth docutils literal"><span class="pre">patternErrorOffset</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions"><code class="xref py py-meth docutils literal"><span class="pre">patternOptions</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">setPattern</span></code></a> (pattern)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">setPatternOptions</span></code></a> (options)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.swap" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.swap"><code class="xref py py-meth docutils literal"><span class="pre">swap</span></code></a> (other)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.escape" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.escape"><code class="xref py py-meth docutils literal"><span class="pre">escape</span></code></a> (str)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> class provides pattern matching using regular expressions.</p>
+<p>Regular expressions, or <em>regexps</em> , are a very powerful tool to handle strings and texts. This is useful in many contexts, e.g.,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Validation</td>
+<td>A regexp can test whether a substring meets some criteria, e.g. is an integer or contains no whitespace.</td>
+</tr>
+<tr class="row-even"><td>Searching</td>
+<td>A regexp provides more powerful pattern matching than simple substring matching, e.g., match one of the words <em>mail</em> , <em>letter</em> or <em>correspondence</em> , but none of the words <em>email</em> , <em>mailman</em> , <em>mailer</em> , <em>letterbox</em> , etc.</td>
+</tr>
+<tr class="row-odd"><td>Search and Replace</td>
+<td>A regexp can replace all occurrences of a substring with a different substring, e.g., replace all occurrences of <em>&amp;</em> with <em>&amp;amp;</em> except where the <em>&amp;</em> is already followed by an <em>amp;</em> .</td>
+</tr>
+<tr class="row-even"><td>String Splitting</td>
+<td>A regexp can be used to identify where a string should be split apart, e.g. splitting tab-delimited strings.</td>
+</tr>
+</tbody>
+</table>
+<p>This document is by no means a complete reference to pattern matching using regular expressions, and the following parts will require the reader to have some basic knowledge about Perl-like regular expressions and their pattern syntax.</p>
+<p>Good references about regular expressions include:</p>
+<ul class="simple">
+<li><em>Mastering Regular Expressions</em> (Third Edition) by Jeffrey E. F. Friedl, ISBN 0-596-52812-4;</li>
+<li>the pcrepattern(3) man page, describing the pattern syntax supported by PCRE (the reference implementation of Perl-compatible regular expressions);</li>
+<li>the Perl’s regular expression documentation and the Perl’s regular expression tutorial.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="pyside2-qtcore-qregularexpression-introduction"></span><h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> implements Perl-compatible regular expressions. It fully supports Unicode. For an overview of the regular expression syntax supported by <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> , please refer to the aforementioned pcrepattern(3) man page. A regular expression is made up of two things: a <strong>pattern string</strong> and a set of <strong>pattern options</strong> that change the meaning of the pattern string.</p>
+<p>You can set the pattern string by passing a string to the <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;a pattern&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This sets the pattern string to <code class="docutils literal"><span class="pre">a</span> <span class="pre">pattern</span></code> . You can also use the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPattern()</span></code></a> function to set a pattern on an existing <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">setPattern</span><span class="p">(</span><span class="s2">&quot;another pattern&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that due to C++ literal strings rules, you must escape all backslashes inside the pattern string with another backslash:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">matches</span> <span class="n">two</span> <span class="n">digits</span> <span class="n">followed</span> <span class="n">by</span> <span class="n">a</span> <span class="n">space</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">word</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d </span><span class="se">\\</span><span class="s2">w+&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">matches</span> <span class="n">a</span> <span class="n">backslash</span>
+<span class="n">QRegularExpression</span> <span class="n">re2</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.pattern()</span></code></a> function returns the pattern that is currently set for a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;a third pattern&quot;</span><span class="p">);</span>
+<span class="n">QString</span> <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">pattern</span><span class="p">();</span> <span class="o">//</span> <span class="n">pattern</span> <span class="o">==</span> <span class="s2">&quot;a third pattern&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="pattern-options">
+<span id="pyside2-qtcore-qregularexpression-pattern-options"></span><h3>Pattern Options<a class="headerlink" href="#pattern-options" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The meaning of the pattern string can be modified by setting one or more <em>pattern options</em> . For instance, it is possible to set a pattern to match case insensitively by setting the <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.CaseInsensitiveOption</span></code> .</p>
+<p>You can set the options by passing them to the <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> constructor, as in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">matches</span> <span class="s2">&quot;Qt rocks&quot;</span><span class="p">,</span> <span class="n">but</span> <span class="n">also</span> <span class="s2">&quot;QT rocks&quot;</span><span class="p">,</span> <span class="s2">&quot;QT ROCKS&quot;</span><span class="p">,</span> <span class="s2">&quot;qT rOcKs&quot;</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;Qt rocks&quot;</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">CaseInsensitiveOption</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPatternOptions()</span></code></a> function on an existing QRegularExpressionObject:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;^</span><span class="se">\\</span><span class="s2">d+$&quot;</span><span class="p">);</span>
+<span class="n">re</span><span class="o">.</span><span class="n">setPatternOptions</span><span class="p">(</span><span class="n">QRegularExpression</span><span class="p">::</span><span class="n">MultilineOption</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">re</span> <span class="n">matches</span> <span class="nb">any</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">subject</span> <span class="n">string</span> <span class="n">that</span> <span class="n">contains</span> <span class="n">only</span> <span class="n">digits</span> <span class="p">(</span><span class="n">but</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is possible to get the pattern options currently set on a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object by using the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternOptions()</span></code></a> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span> <span class="o">=</span> <span class="n">QRegularExpression</span><span class="p">(</span><span class="s2">&quot;^two.*words$&quot;</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">MultilineOption</span>
+                                                           <span class="o">|</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">DotMatchesEverythingOption</span><span class="p">);</span>
+
+<span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PatternOptions</span> <span class="n">options</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">patternOptions</span><span class="p">();</span>
+<span class="o">//</span> <span class="n">options</span> <span class="o">==</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">MultilineOption</span> <span class="o">|</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">DotMatchesEverythingOption</span>
+</pre></div>
+</div>
+<p>Please refer to the <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.PatternOption</span></code> enum documentation for more information about each pattern option.</p>
+</div></blockquote>
+</div>
+<div class="section" id="match-type-and-match-options">
+<span id="pyside2-qtcore-qregularexpression-match-type-and-match-options"></span><h3>Match Type and Match Options<a class="headerlink" href="#match-type-and-match-options" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The last two arguments of the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> and the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.globalMatch()</span></code></a> functions set the match type and the match options. The match type is a value of the <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.MatchType</span></code> enum; the “traditional” matching algorithm is chosen by using the <code class="xref py py-attr docutils literal"><span class="pre">NormalMatch</span></code> match type (the default). It is also possible to enable partial matching of the regular expression against a subject string: see the <code class="xref py py-class docutils literal"><span class="pre">partial</span> <span class="pre">matching</span></code> section for more details.</p>
+<p>The match options are a set of one or more <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.MatchOption</span></code> values. They change the way a specific match of a regular expression against a subject string is done. Please refer to the <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.MatchOption</span></code> enum documentation for more details.</p>
+</div></blockquote>
+</div>
+<div class="section" id="pyside2-qtcore-qregularexpression-normal-matching">
+<span id="normal-matching"></span><span id="id2"></span><h3>Normal Matching<a class="headerlink" href="#pyside2-qtcore-qregularexpression-normal-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>In order to perform a match you can simply invoke the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> function passing a string to match against. We refer to this string as the <em>subject string</em> . The result of the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> function is a <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object that can be used to inspect the results of the match. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">match</span> <span class="n">two</span> <span class="n">digits</span> <span class="n">followed</span> <span class="n">by</span> <span class="n">a</span> <span class="n">space</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">word</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d </span><span class="se">\\</span><span class="s2">w+&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abc123 def&quot;</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>If a match is successful, the (implicit) capturing group number 0 can be used to retrieve the substring matched by the entire pattern (see also the section about <code class="xref py py-class docutils literal"><span class="pre">extracting</span> <span class="pre">captured</span> <span class="pre">substrings</span></code> ):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d </span><span class="se">\\</span><span class="s2">w+&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abc123 def&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">matched</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="o">//</span> <span class="n">matched</span> <span class="o">==</span> <span class="s2">&quot;23 def&quot;</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It’s also possible to start a match at an arbitrary offset inside the subject string by passing the offset as an argument of the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> function. In the following example <code class="docutils literal"><span class="pre">&quot;12</span> <span class="pre">abc&quot;</span></code> is not matched because the match is started at offset 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d </span><span class="se">\\</span><span class="s2">w+&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;12 abc 45 def&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">matched</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="o">//</span> <span class="n">matched</span> <span class="o">==</span> <span class="s2">&quot;45 def&quot;</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="pyside2-qtcore-qregularexpression-extracting-captured-substrings">
+<span id="extracting-captured-substrings"></span><span id="id3"></span><h3>Extracting captured substrings<a class="headerlink" href="#pyside2-qtcore-qregularexpression-extracting-captured-substrings" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object contains also information about the substrings captured by the capturing groups in the pattern string. The <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.captured" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.captured"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.captured()</span></code></a> function will return the string captured by the n-th capturing group:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;^(</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)/(</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)/(</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)$&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;08/12/1985&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">day</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">//</span> <span class="n">day</span> <span class="o">==</span> <span class="s2">&quot;08&quot;</span>
+    <span class="n">QString</span> <span class="n">month</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="o">//</span> <span class="n">month</span> <span class="o">==</span> <span class="s2">&quot;12&quot;</span>
+    <span class="n">QString</span> <span class="n">year</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="o">//</span> <span class="n">year</span> <span class="o">==</span> <span class="s2">&quot;1985&quot;</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Capturing groups in the pattern are numbered starting from 1, and the implicit capturing group 0 is used to capture the substring that matched the entire pattern.</p>
+<p>It’s also possible to retrieve the starting and the ending offsets (inside the subject string) of each captured substring, by using the <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.capturedStart" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.capturedStart"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.capturedStart()</span></code></a> and the <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.capturedEnd" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.capturedEnd"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.capturedEnd()</span></code></a> functions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;abc(</span><span class="se">\\</span><span class="s2">d+)def&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;XYZabc123defXYZ&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">startOffset</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">//</span> <span class="n">startOffset</span> <span class="o">==</span> <span class="mi">6</span>
+    <span class="nb">int</span> <span class="n">endOffset</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedEnd</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="o">//</span> <span class="n">endOffset</span> <span class="o">==</span> <span class="mi">9</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>All of these functions have an overload taking a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> as a parameter in order to extract <em>named</em> captured substrings. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;^(?&lt;date&gt;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)/(?&lt;month&gt;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)/(?&lt;year&gt;</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d)$&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;08/12/1985&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">date</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">date</span> <span class="o">==</span> <span class="s2">&quot;08&quot;</span>
+    <span class="n">QString</span> <span class="n">month</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="s2">&quot;month&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">month</span> <span class="o">==</span> <span class="s2">&quot;12&quot;</span>
+    <span class="n">QString</span> <span class="n">year</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">year</span> <span class="o">==</span> <span class="mi">1985</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="pyside2-qtcore-qregularexpression-global-matching">
+<span id="global-matching"></span><span id="id4"></span><h3>Global Matching<a class="headerlink" href="#pyside2-qtcore-qregularexpression-global-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><em>Global matching</em> is useful to find all the occurrences of a given regular expression inside a subject string. Suppose that we want to extract all the words from a given string, where a word is a substring matching the pattern <code class="docutils literal"><span class="pre">\w+</span></code> .</p>
+<p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpression.globalMatch</span></code></a> returns a <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> , which is a Java-like forward iterator that can be used to iterate over the results. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;(</span><span class="se">\\</span><span class="s2">w+)&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatchIterator</span> <span class="n">i</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">globalMatch</span><span class="p">(</span><span class="s2">&quot;the quick fox&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Since it’s a Java-like iterator, the <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> will point immediately before the first result. Every result is returned as a <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object. The <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.hasNext" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.hasNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator.hasNext()</span></code></a> function will return true if there’s at least one more result, and <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.next" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.next"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator.next()</span></code></a> will return the next result and advance the iterator. Continuing from the previous example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">words</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">next</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">word</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">words</span> <span class="o">&lt;&lt;</span> <span class="n">word</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">//</span> <span class="n">words</span> <span class="n">contains</span> <span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;quick&quot;</span><span class="p">,</span> <span class="s2">&quot;fox&quot;</span>
+</pre></div>
+</div>
+<p>You can also use <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.peekNext" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatchIterator.peekNext"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator.peekNext()</span></code></a> to get the next result without advancing the iterator.</p>
+<p>It is possible to pass a starting offset and one or more match options to the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.globalMatch()</span></code></a> function, exactly like normal matching with <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="pyside2-qtcore-qregularexpression-partial-matching">
+<span id="partial-matching"></span><span id="id5"></span><h3>Partial Matching<a class="headerlink" href="#pyside2-qtcore-qregularexpression-partial-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A <em>partial match</em> is obtained when the end of the subject string is reached, but more characters are needed to successfully complete the match. Note that a partial match is usually much more inefficient than a normal match because many optimizations of the matching algorithm cannot be employed.</p>
+<p>A partial match must be explicitly requested by specifying a match type of <code class="xref py py-attr docutils literal"><span class="pre">PartialPreferCompleteMatch</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">PartialPreferFirstMatch</span></code> when calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpression.match</span></code></a> or <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpression.globalMatch</span></code></a> . If a partial match is found, then calling the <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.hasMatch()</span></code></a> function on the <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object returned by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> will return <code class="docutils literal"><span class="pre">false</span></code> , but <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch()</span></code></a> will return <code class="docutils literal"><span class="pre">true</span></code> .</p>
+<p>When a partial match is found, no captured substrings are returned, and the (implicit) capturing group 0 corresponding to the whole match captures the partially matched substring of the subject string.</p>
+<p>Note that asking for a partial match can still lead to a complete match, if one is found; in this case, <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.hasMatch()</span></code></a> will return <code class="docutils literal"><span class="pre">true</span></code> and <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.hasPartialMatch()</span></code></a> <code class="docutils literal"><span class="pre">false</span></code> . It never happens that a <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> reports both a partial and a complete match.</p>
+<p>Partial matching is mainly useful in two scenarios: validating user input in real time and incremental/multi-segment matching.</p>
+</div></blockquote>
+</div>
+<div class="section" id="pyside2-qtcore-qregularexpression-validating-user-input">
+<span id="validating-user-input"></span><span id="id6"></span><h3>Validating user input<a class="headerlink" href="#pyside2-qtcore-qregularexpression-validating-user-input" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Suppose that we would like the user to input a date in a specific format, for instance “MMM dd, yyyy”. We can check the input validity with a pattern like:</p>
+<p><code class="docutils literal"><span class="pre">^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)</span> <span class="pre">\d\d?,</span> <span class="pre">\d\d\d\d$</span></code></p>
+<p>(This pattern doesn’t catch invalid days, but let’s keep it for the example’s purposes).</p>
+<p>We would like to validate the input with this regular expression <em>while</em> the user is typing it, so that we can report an error in the input as soon as it is committed (for instance, the user typed the wrong key). In order to do so we must distinguish three cases:</p>
+<ul class="simple">
+<li>the input cannot possibly match the regular expression;</li>
+<li>the input does match the regular expression;</li>
+<li>the input does not match the regular expression right now, but it will if more characters will be added to it.</li>
+</ul>
+<p>Note that these three cases represent exactly the possible states of a <a class="reference internal" href="../QtGui/QValidator.html#PySide2.QtGui.QValidator" title="PySide2.QtGui.QValidator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QValidator</span></code></a> (see the <code class="xref py py-attr docutils literal"><span class="pre">QValidator.State</span></code> enum).</p>
+<p>In particular, in the last case we want the regular expression engine to report a partial match: we are successfully matching the pattern against the subject string but the matching cannot continue because the end of the subject is encountered. Notice, however, that the matching algorithm should continue and try all possibilities, and in case a complete (non-partial) match is found, then this one should be reported, and the input string accepted as fully valid.</p>
+<p>This behaviour is implemented by the <code class="xref py py-attr docutils literal"><span class="pre">PartialPreferCompleteMatch</span></code> match type. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">pattern</span><span class="p">(</span><span class="s2">&quot;^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) </span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d?, </span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d</span><span class="se">\\</span><span class="s2">d$&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="n">pattern</span><span class="p">);</span>
+
+<span class="n">QString</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Jan 21,&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferCompleteMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>If matching the same regular expression against the subject string leads to a complete match, it is reported as usual:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Dec 8, 1985&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferCompleteMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+</pre></div>
+</div>
+<p>Another example with a different pattern, showing the behaviour of preferring a complete match over a partial one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;abc</span><span class="se">\\</span><span class="s2">w+X|def&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abcdef&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferCompleteMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="n">QString</span> <span class="n">captured</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="o">//</span> <span class="n">captured</span> <span class="o">==</span> <span class="s2">&quot;def&quot;</span>
+</pre></div>
+</div>
+<p>In this case, the subpattern <code class="docutils literal"><span class="pre">abc\\w+X</span></code> partially matches the subject string; however, the subpattern <code class="docutils literal"><span class="pre">def</span></code> matches the subject string completely, and therefore a complete match is reported.</p>
+<p>If multiple partial matches are found when matching (but no complete match), then the <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object will report the first one that is found. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;abc</span><span class="se">\\</span><span class="s2">w+X|defY&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abcdef&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferCompleteMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+<span class="n">QString</span> <span class="n">captured</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">captured</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="o">//</span> <span class="n">captured</span> <span class="o">==</span> <span class="s2">&quot;abcdef&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="incremental-multi-segment-matching">
+<span id="pyside2-qtcore-qregularexpression-incremental-multi-segment-matching"></span><h3>Incremental/multi-segment matching<a class="headerlink" href="#incremental-multi-segment-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Incremental matching is another use case of partial matching. Suppose that we want to find the occurrences of a regular expression inside a large text (that is, substrings matching the regular expression). In order to do so we would like to “feed” the large text to the regular expression engines in smaller chunks. The obvious problem is what happens if the substring that matches the regular expression spans across two or more chunks.</p>
+<p>In this case, the regular expression engine should report a partial match, so that we can match again adding new data and (eventually) get a complete match. This implies that the regular expression engine may assume that there are other characters <em>beyond the end</em> of the subject string. This is not to be taken literally – the engine will never try to access any character after the last one in the subject.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> implements this behaviour when using the <code class="xref py py-attr docutils literal"><span class="pre">PartialPreferFirstMatch</span></code> match type. This match type reports a partial match as soon as it is found, and other match alternatives are not tried (even if they could lead to a complete match). For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;abc|ab&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferFirstMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>This happens because when matching the first branch of the alternation operator a partial match is found, and therefore matching stops, without trying the second branch. Another example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;abc(def)?&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferFirstMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>This shows what could seem a counterintuitve behaviour of quantifiers: since <code class="docutils literal"><span class="pre">?</span></code> is greedy, then the engine tries first to continue the match after having matched <code class="docutils literal"><span class="pre">&quot;abc&quot;</span></code> ; but then the matching reaches the end of the subject string, and therefore a partial match is reported. This is even more surprising in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;(abc)*&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpressionMatch</span> <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">PartialPreferFirstMatch</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">hasMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+<span class="nb">bool</span> <span class="n">hasPartialMatch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">();</span> <span class="o">//</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>It’s easy to understand this behaviour if we remember that the engine expects the subject string to be only a substring of the whole text we’re looking for a match into (that is, how we said before, that the engine assumes that there are other characters beyond the end of the subject string).</p>
+<p>Since the <code class="docutils literal"><span class="pre">*</span></code> quantifier is greedy, then reporting a complete match could be an error, because after the current subject <code class="docutils literal"><span class="pre">&quot;abc&quot;</span></code> there may be other occurrences of <code class="docutils literal"><span class="pre">&quot;abc&quot;</span></code> . For instance, the complete text could have been “abcabcX”, and therefore the <em>right</em> match to report (in the complete text) would have been <code class="docutils literal"><span class="pre">&quot;abcabc&quot;</span></code> ; by matching only against the leading <code class="docutils literal"><span class="pre">&quot;abc&quot;</span></code> we instead get a partial match.</p>
+</div></blockquote>
+</div>
+<div class="section" id="error-handling">
+<span id="pyside2-qtcore-qregularexpression-error-handling"></span><h3>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>It is possible for a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object to be invalid because of syntax errors in the pattern string. The <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.isValid()</span></code></a> function will return true if the regular expression is valid, or false otherwise:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">invalidRe</span><span class="p">(</span><span class="s2">&quot;(unmatched|parenthesis&quot;</span><span class="p">);</span>
+<span class="nb">bool</span> <span class="n">isValid</span> <span class="o">=</span> <span class="n">invalidRe</span><span class="o">.</span><span class="n">isValid</span><span class="p">();</span> <span class="o">//</span> <span class="n">false</span>
+</pre></div>
+</div>
+<p>You can get more information about the specific error by calling the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.errorString()</span></code></a> function; moreover, the <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternErrorOffset()</span></code></a> function will return the offset inside the pattern string</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QRegularExpression invalidRe(&quot;(unmatched|parenthesis&quot;);
+if (!invalidRe.isValid()) {
+    QString errorString = invalidRe.errorString(); // errorString == &quot;missing )&quot;
+    int errorOffset = invalidRe.patternErrorOffset(); // errorOffset == 22
+    // ...
+}
+</pre></div>
+</div>
+<p>If a match is attempted with an invalid <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> , then the returned <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object will be invalid as well (that is, its <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch.isValid()</span></code></a> function will return false). The same applies for attempting a global match.</p>
+</div></blockquote>
+</div>
+<div class="section" id="unsupported-perl-compatible-regular-expressions-features">
+<span id="pyside2-qtcore-qregularexpression-unsupported-perl-compatible-regular-expressions-features"></span><h3>Unsupported Perl-compatible Regular Expressions Features<a class="headerlink" href="#unsupported-perl-compatible-regular-expressions-features" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> does not support all the features available in Perl-compatible regular expressions. The most notable one is the fact that duplicated names for capturing groups are not supported, and using them can lead to undefined behaviour.</p>
+<p>This may change in a future version of Qt.</p>
+</div></blockquote>
+</div>
+<div class="section" id="notes-for-qregexp-users">
+<span id="pyside2-qtcore-qregularexpression-notes-for-qregexp-users"></span><h3>Notes for QRegExp Users<a class="headerlink" href="#notes-for-qregexp-users" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> class introduced in Qt 5 is a big improvement upon <a class="reference internal" href="QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> , in terms of APIs offered, supported pattern syntax and speed of execution. The biggest difference is that <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> simply holds a regular expression, and it’s <em>not</em> modified when a match is requested. Instead, a <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object is returned, in order to check the result of a match and extract the captured substring. The same applies with global matching and <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> .</p>
+<p>Other differences are outlined below.</p>
+</div></blockquote>
+</div>
+<div class="section" id="porting-from-qregexp-exactmatch">
+<span id="pyside2-qtcore-qregularexpression-porting-from-qregexp-exactmatch"></span><h3>Porting from QRegExp::exactMatch()<a class="headerlink" href="#porting-from-qregexp-exactmatch" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch" title="PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.exactMatch()</span></code></a> in Qt 4 served two purposes: it exactly matched a regular expression against a subject string, and it implemented partial matching.</div></blockquote>
+</div>
+<div class="section" id="porting-from-qregexp-s-exact-matching">
+<span id="pyside2-qtcore-qregularexpression-porting-from-qregexp-s-exact-matching"></span><h3>Porting from QRegExp’s Exact Matching<a class="headerlink" href="#porting-from-qregexp-s-exact-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Exact matching indicates whether the regular expression matches the entire subject string. For example, the classes yield on the subject string <code class="docutils literal"><span class="pre">&quot;abc123&quot;</span></code> :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="37%" />
+<col width="54%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td><a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch" title="PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.exactMatch()</span></code></a></td>
+<td><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.hasMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpressionMatch.hasMatch()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;\\d+&quot;</span></code></td>
+<td><strong>false</strong></td>
+<td><strong>true</strong></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;[a-z]+\\d+&quot;</span></code></td>
+<td><strong>true</strong></td>
+<td><strong>true</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Exact matching is not reflected in <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> . If you want to be sure that the subject string matches the regular expression exactly, you can wrap the pattern between a couple of anchoring expressions. Simply putting the pattern between the <code class="docutils literal"><span class="pre">^</span></code> and the <code class="docutils literal"><span class="pre">$</span></code> anchors is enough in most cases:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;^this pattern must match exactly$&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>However, remember that the <code class="docutils literal"><span class="pre">$</span></code> anchor not only matches at the end of the string, but also at a newline character right before the end of the string; that is, the previous pattern matches against the string “this pattern must match exactly\n”. Also, the behaviour of both the <code class="docutils literal"><span class="pre">^</span></code> and the <code class="docutils literal"><span class="pre">$</span></code> anchors changes if the MultiLineOption is set either explicitly (as a pattern option) or implicitly (as a directive inside the pattern string).</p>
+<p>Therefore, in the most general case, you should wrap the pattern between the <code class="docutils literal"><span class="pre">\A</span></code> and the <code class="docutils literal"><span class="pre">\z</span></code> anchors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">p</span><span class="p">(</span><span class="s2">&quot;a .*|pattern&quot;</span><span class="p">);</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">A(?:&quot;</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="s2">&quot;)</span><span class="se">\\</span><span class="s2">z&quot;</span><span class="p">);</span> <span class="o">//</span> <span class="n">re</span> <span class="n">matches</span> <span class="n">exactly</span> <span class="n">the</span> <span class="n">pattern</span> <span class="n">string</span> <span class="n">p</span>
+</pre></div>
+</div>
+<p>Note the usage of the non-capturing group in order to preserve the meaning of the branch operator inside the pattern.</p>
+</div></blockquote>
+</div>
+<div class="section" id="porting-from-qregexp-s-partial-matching">
+<span id="pyside2-qtcore-qregularexpression-porting-from-qregexp-s-partial-matching"></span><h3>Porting from QRegExp’s Partial Matching<a class="headerlink" href="#porting-from-qregexp-s-partial-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When using <a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch" title="PySide2.QtCore.PySide2.QtCore.QRegExp.exactMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.exactMatch()</span></code></a> , if an exact match was not found, one could still find out how much of the subject string was matched by the regular expression by calling <a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.matchedLength" title="PySide2.QtCore.PySide2.QtCore.QRegExp.matchedLength"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.matchedLength()</span></code></a> . If the returned length was equal to the subject string’s length, then one could conclude that a partial match was found.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> supports partial matching explicitly by means of the appropriate <code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.MatchType</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="id7">
+<span id="id8"></span><h3>Global matching<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Due to limitations of the <a class="reference internal" href="QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> API it was impossible to implement global matching correctly (that is, like Perl does). In particular, patterns that can match 0 characters (like <code class="docutils literal"><span class="pre">&quot;a*&quot;</span></code> ) are problematic.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpression.globalMatch()</span></code></a> implements Perl global match correctly, and the returned iterator can be used to examine each result.</p>
+</div></blockquote>
+</div>
+<div class="section" id="unicode-properties-support">
+<span id="pyside2-qtcore-qregularexpression-unicode-properties-support"></span><h3>Unicode properties support<a class="headerlink" href="#unicode-properties-support" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When using <a class="reference internal" href="QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> , character classes such as <code class="docutils literal"><span class="pre">\w</span></code> , <code class="docutils literal"><span class="pre">\d</span></code> , etc. match characters with the corresponding Unicode property: for instance, <code class="docutils literal"><span class="pre">\d</span></code> matches any character with the Unicode Nd (decimal digit) property.</p>
+<p>Those character classes only match ASCII characters by default when using <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> : for instance, <code class="docutils literal"><span class="pre">\d</span></code> matches exactly a character in the <code class="docutils literal"><span class="pre">0-9</span></code> ASCII range. It is possible to change this behaviour by using the <code class="xref py py-attr docutils literal"><span class="pre">UseUnicodePropertiesOption</span></code> pattern option.</p>
+</div></blockquote>
+</div>
+<div class="section" id="wildcard-matching">
+<span id="pyside2-qtcore-qregularexpression-wildcard-matching"></span><h3>Wildcard matching<a class="headerlink" href="#wildcard-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>There is no equivalent of wildcard matching in <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> . Nevertheless, rewriting a regular expression in wildcard syntax to a Perl-compatible regular expression is a very easy task, given the fact that wildcard syntax supported by <a class="reference internal" href="QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> is very simple.</div></blockquote>
+</div>
+<div class="section" id="other-pattern-syntaxes">
+<span id="pyside2-qtcore-qregularexpression-other-pattern-syntaxes"></span><h3>Other pattern syntaxes<a class="headerlink" href="#other-pattern-syntaxes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> supports only Perl-compatible regular expressions.</div></blockquote>
+</div>
+<div class="section" id="minimal-matching">
+<span id="pyside2-qtcore-qregularexpression-minimal-matching"></span><h3>Minimal matching<a class="headerlink" href="#minimal-matching" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.setMinimal" title="PySide2.QtCore.PySide2.QtCore.QRegExp.setMinimal"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.setMinimal()</span></code></a> implemented minimal matching by simply reversing the greediness of the quantifiers ( <a class="reference internal" href="QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> did not support lazy quantifiers, like <code class="docutils literal"><span class="pre">*?</span></code> , <code class="docutils literal"><span class="pre">+?</span></code> , etc.). <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> instead does support greedy, lazy and possessive quantifiers. The <code class="xref py py-attr docutils literal"><span class="pre">InvertedGreedinessOption</span></code> pattern option can be useful to emulate the effects of <a class="reference internal" href="QRegExp.html#PySide2.QtCore.PySide2.QtCore.QRegExp.setMinimal" title="PySide2.QtCore.PySide2.QtCore.QRegExp.setMinimal"><code class="xref py py-meth docutils literal"><span class="pre">QRegExp.setMinimal()</span></code></a> : if enabled, it inverts the greediness of quantifiers (greedy ones become lazy and vice versa).</div></blockquote>
+</div>
+<div class="section" id="caret-modes">
+<span id="pyside2-qtcore-qregularexpression-caret-modes"></span><h3>Caret modes<a class="headerlink" href="#caret-modes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>The <code class="xref py py-attr docutils literal"><span class="pre">AnchoredMatchOption</span></code> match option can be used to emulate the <code class="xref py py-attr docutils literal"><span class="pre">QRegExp.CaretAtOffset</span></code> behaviour. There is no equivalent for the other <code class="xref py py-attr docutils literal"><span class="pre">QRegExp.CaretMode</span></code> modes.</div></blockquote>
+</div>
+<div class="section" id="debugging-code-that-uses-qregularexpression">
+<span id="pyside2-qtcore-qregularexpression-debugging-code-that-uses-qregularexpression"></span><h3>Debugging Code that Uses QRegularExpression<a class="headerlink" href="#debugging-code-that-uses-qregularexpression" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> internally uses a just in time compiler (JIT) to optimize the execution of the matching algorithm. The JIT makes extensive usage of self-modifying code, which can lead debugging tools such as Valgrind to crash. You must enable all checks for self-modifying code if you want to debug programs using <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> (f.i., see Valgrind’s <code class="docutils literal"><span class="pre">--smc-check</span></code> command line option). The downside of enabling such checks is that your program will run considerably slower.</p>
+<p>To avoid that, the JIT is disabled by default if you compile Qt in debug mode. It is possible to override the default and enable or disable the JIT usage (both in debug or release mode) by setting the <code class="docutils literal"><span class="pre">QT_ENABLE_REGEXP_JIT</span></code> environment variable to a non-zero or zero value respectively.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a>  <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QRegularExpression">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRegularExpression</code><a class="headerlink" href="#PySide2.QtCore.QRegularExpression" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRegularExpression</code><span class="sig-paren">(</span><em>re</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QRegularExpression</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>options=QRegularExpression.NoPatternOption</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>re</strong> – <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a></li>
+<li><strong>options</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.PatternOptions</span></code></li>
+<li><strong>pattern</strong> – unicode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object with an empty pattern and no pattern options.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPattern()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPatternOptions()</span></code></a></p>
+</div>
+<p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object as a copy of <code class="docutils literal"><span class="pre">re</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.operator=()</span></code></p>
+</div>
+<p>Constructs a <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object using the given <code class="docutils literal"><span class="pre">pattern</span></code> as pattern and the <code class="docutils literal"><span class="pre">options</span></code> as the pattern options.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPattern()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPatternOptions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.PatternOption">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">PatternOption</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.PatternOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>The enum defines modifiers to the way the pattern string should be interpreted, and therefore the way the pattern matches against a subject string.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QRegularExpression.NoPatternOption</td>
+<td>No pattern options are set.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.CaseInsensitiveOption</td>
+<td>The pattern should match against the subject string in a case insensitive way. This option corresponds to the /i modifier in Perl regular expressions.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.DotMatchesEverythingOption</td>
+<td>The dot metacharacter (<code class="docutils literal"><span class="pre">.</span></code>) in the pattern string is allowed to match any character in the subject string, including newlines (normally, the dot does not match newlines). This option corresponds to the <code class="docutils literal"><span class="pre">/s</span></code> modifier in Perl regular expressions.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.MultilineOption</td>
+<td>The caret (<code class="docutils literal"><span class="pre">^</span></code>) and the dollar (<code class="docutils literal"><span class="pre">$</span></code>) metacharacters in the pattern string are allowed to match, respectively, immediately after and immediately before any newline in the subject string, as well as at the very beginning and at the very end of the subject string. This option corresponds to the <code class="docutils literal"><span class="pre">/m</span></code> modifier in Perl regular expressions.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.ExtendedPatternSyntaxOption</td>
+<td>Any whitespace in the pattern string which is not escaped and outside a character class is ignored. Moreover, an unescaped sharp (<strong>#</strong>) outside a character class causes all the following characters, until the first newline (included), to be ignored. This can be used to increase the readability of a pattern string as well as put comments inside regular expressions; this is particulary useful if the pattern string is loaded from a file or written by the user, because in C++ code it is always possible to use the rules for string literals to put comments outside the pattern string. This option corresponds to the <code class="docutils literal"><span class="pre">/x</span></code> modifier in Perl regular expressions.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.InvertedGreedinessOption</td>
+<td>The greediness of the quantifiers is inverted: <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">?</span></code>, <code class="docutils literal"><span class="pre">{m,n}</span></code>, etc. become lazy, while their lazy versions (<code class="docutils literal"><span class="pre">*?</span></code>, <code class="docutils literal"><span class="pre">+?</span></code>, <code class="docutils literal"><span class="pre">??</span></code>, <code class="docutils literal"><span class="pre">{m,n}?</span></code>, etc.) become greedy. There is no equivalent for this option in Perl regular expressions.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.DontCaptureOption</td>
+<td>The non-named capturing groups do not capture substrings; named capturing groups still work as intended, as well as the implicit capturing group number 0 corresponding to the entire match. There is no equivalent for this option in Perl regular expressions.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.UseUnicodePropertiesOption</td>
+<td>The meaning of the <code class="docutils literal"><span class="pre">\w</span></code>, <code class="docutils literal"><span class="pre">\d</span></code>, etc., character classes, as well as the meaning of their counterparts (<code class="docutils literal"><span class="pre">\W</span></code>, <code class="docutils literal"><span class="pre">\D</span></code>, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, <code class="docutils literal"><span class="pre">\d</span></code> is changed to match any character with the Unicode Nd (decimal digit) property; <code class="docutils literal"><span class="pre">\w</span></code> to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the <code class="docutils literal"><span class="pre">/u</span></code> modifier in Perl regular expressions.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.OptimizeOnFirstUsageOption</td>
+<td>The regular expression will be optimized (and possibly JIT-compiled) on its first usage, instead of after a certain (undefined) number of usages. See also <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.optimize()</span></code></a> . This enum value has been introduced in Qt 5.4.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.DontAutomaticallyOptimizeOption</td>
+<td>Regular expressions are automatically optimized after a certain number of usages; setting this option prevents such optimizations, therefore avoiding possible unpredictable spikes in CPU and memory usage. If both this option and the <code class="docutils literal"><span class="pre">OptimizeOnFirstUsageOption</span></code> option are set, then this option takes precedence. Note: this option will still let the regular expression to be optimized by manually calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.optimize()</span></code></a> . This enum value has been introduced in Qt 5.4.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">MatchType</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The enum defines the type of the match that should be attempted against the subject string.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QRegularExpression.NormalMatch</td>
+<td>A normal match is done.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.PartialPreferCompleteMatch</td>
+<td>The pattern string is matched partially against the subject string. If a partial match is found, then it is recorded, and other matching alternatives are tried as usual. If a complete match is then found, then it’s preferred to the partial match; in this case only the complete match is reported. If instead no complete match is found (but only the partial one), then the partial one is reported.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.PartialPreferFirstMatch</td>
+<td>The pattern string is matched partially against the subject string. If a partial match is found, then matching stops and the partial match is reported. In this case, other matching alternatives (potentially leading to a complete match) are not tried. Moreover, this match type assumes that the subject string only a substring of a larger text, and that (in this text) there are other characters beyond the end of the subject string. This can lead to surprising results; see the discussion in the <code class="xref py py-class docutils literal"><span class="pre">partial</span> <span class="pre">matching</span></code> section for more details.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.NoMatch</td>
+<td>No matching is done. This value is returned as the match type by a default constructed <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> or <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> . Using this match type is not very useful for the user, as no matching ever happens. This enum value has been introduced in Qt 5.1.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchOption">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">MatchOption</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchOption" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QRegularExpression.NoMatchOption</td>
+<td>No match options are set.</td>
+</tr>
+<tr class="row-odd"><td>QRegularExpression.AnchoredMatchOption</td>
+<td>The match is constrained to start exactly at the offset passed to <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.match()</span></code></a> in order to be successful, even if the pattern string does not contain any metacharacter that anchors the match at that point.</td>
+</tr>
+<tr class="row-even"><td>QRegularExpression.DontCheckSubjectStringMatchOption</td>
+<td>The subject string is not checked for UTF-16 validity before attempting a match. Use this option with extreme caution, as attempting to match an invalid string may crash the program and/or constitute a security issue. This enum value has been introduced in Qt 5.4.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">captureCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number of capturing groups inside the pattern string, or -1 if the regular expression is not valid.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The implicit capturing group 0 is <em>not</em> included in the returned number.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.isValid()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">errorString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a textual description of the error found when checking the validity of the regular expression, or “no error” if no error was found.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.isValid()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternErrorOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.escape">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">escape</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.escape" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>str</strong> – unicode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Escapes all characters of <code class="docutils literal"><span class="pre">str</span></code> so that they no longer have any special meaning when used as a regular expression pattern string, and returns the escaped string. For instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">escaped</span> <span class="o">=</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">escape</span><span class="p">(</span><span class="s2">&quot;a(x) = f(x) + g(x)&quot;</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">escaped</span> <span class="o">==</span> <span class="s2">&quot;a</span><span class="se">\\</span><span class="s2">(x</span><span class="se">\\</span><span class="s2">)</span><span class="se">\\</span><span class="s2"> </span><span class="se">\\</span><span class="s2">=</span><span class="se">\\</span><span class="s2"> f</span><span class="se">\\</span><span class="s2">(x</span><span class="se">\\</span><span class="s2">)</span><span class="se">\\</span><span class="s2"> </span><span class="se">\\</span><span class="s2">+</span><span class="se">\\</span><span class="s2"> g</span><span class="se">\\</span><span class="s2">(x</span><span class="se">\\</span><span class="s2">)&quot;</span>
+</pre></div>
+</div>
+<p>This is very convenient in order to build patterns from arbitrary strings:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                  <span class="s2">&quot;|&quot;</span> <span class="o">+</span> <span class="n">QRegularExpression</span><span class="p">::</span><span class="n">escape</span><span class="p">(</span><span class="n">nickname</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<span class="n">QRegularExpression</span> <span class="n">re</span><span class="p">(</span><span class="n">pattern</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function implements Perl’s quotemeta algorithm and escapes with a backslash all characters in <code class="docutils literal"><span class="pre">str</span></code> , except for the characters in the <code class="docutils literal"><span class="pre">[A-Z]</span></code> , <code class="docutils literal"><span class="pre">[a-z]</span></code> and <code class="docutils literal"><span class="pre">[0-9]</span></code> ranges, as well as the underscore (<code class="docutils literal"><span class="pre">_</span></code> ) character. The only difference with Perl is that a literal NUL inside <code class="docutils literal"><span class="pre">str</span></code> is escaped with the sequence <code class="docutils literal"><span class="pre">&quot;\\0&quot;</span></code> (backslash + <code class="docutils literal"><span class="pre">'0'</span></code> ), instead of <code class="docutils literal"><span class="pre">&quot;\\\0&quot;</span></code> (backslash + <code class="docutils literal"><span class="pre">NUL</span></code> ).</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">globalMatch</code><span class="sig-paren">(</span><em>subject</em><span class="optional">[</span>, <em>offset=0</em><span class="optional">[</span>, <em>matchType=NormalMatch</em><span class="optional">[</span>, <em>matchOptions=QRegularExpression.NoMatchOption</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.globalMatch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subject</strong> – unicode</li>
+<li><strong>offset</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>matchType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchType</span></code></a></li>
+<li><strong>matchOptions</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Attempts to perform a global match of the regular expression against the given <code class="docutils literal"><span class="pre">subject</span></code> string, starting at the position <code class="docutils literal"><span class="pre">offset</span></code> inside the subject, using a match of type <code class="docutils literal"><span class="pre">matchType</span></code> and honoring the given <code class="docutils literal"><span class="pre">matchOptions</span></code> .</p>
+<p>The returned <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> is positioned before the first match result (if any).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">global</span> <span class="pre">matching</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">globalMatch</code><span class="sig-paren">(</span><em>subjectRef</em><span class="optional">[</span>, <em>offset=0</em><span class="optional">[</span>, <em>matchType=NormalMatch</em><span class="optional">[</span>, <em>matchOptions=QRegularExpression.NoMatchOption</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subjectRef</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></li>
+<li><strong>offset</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>matchType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchType</span></code></a></li>
+<li><strong>matchOptions</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Attempts to perform a global match of the regular expression against the given <code class="docutils literal"><span class="pre">subjectRef</span></code> string reference, starting at the position <code class="docutils literal"><span class="pre">offset</span></code> inside the subject, using a match of type <code class="docutils literal"><span class="pre">matchType</span></code> and honoring the given <code class="docutils literal"><span class="pre">matchOptions</span></code> .</p>
+<p>The returned <a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a> is positioned before the first match result (if any).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRegularExpressionMatchIterator.html#PySide2.QtCore.QRegularExpressionMatchIterator" title="PySide2.QtCore.QRegularExpressionMatchIterator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatchIterator</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">global</span> <span class="pre">matching</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the regular expression is a valid regular expression (that is, it contains no syntax errors, etc.), or false otherwise. Use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.errorString()</span></code></a> to obtain a textual description of the error.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.errorString()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternErrorOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.match">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">match</code><span class="sig-paren">(</span><em>subject</em><span class="optional">[</span>, <em>offset=0</em><span class="optional">[</span>, <em>matchType=NormalMatch</em><span class="optional">[</span>, <em>matchOptions=QRegularExpression.NoMatchOption</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.match" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subject</strong> – unicode</li>
+<li><strong>offset</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>matchType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchType</span></code></a></li>
+<li><strong>matchOptions</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Attempts to match the regular expression against the given <code class="docutils literal"><span class="pre">subject</span></code> string, starting at the position <code class="docutils literal"><span class="pre">offset</span></code> inside the subject, using a match of type <code class="docutils literal"><span class="pre">matchType</span></code> and honoring the given <code class="docutils literal"><span class="pre">matchOptions</span></code> .</p>
+<p>The returned <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object contains the results of the match.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">normal</span> <span class="pre">matching</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">match</code><span class="sig-paren">(</span><em>subjectRef</em><span class="optional">[</span>, <em>offset=0</em><span class="optional">[</span>, <em>matchType=NormalMatch</em><span class="optional">[</span>, <em>matchOptions=QRegularExpression.NoMatchOption</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subjectRef</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringRef</span></code></li>
+<li><strong>offset</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>matchType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.MatchType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchType</span></code></a></li>
+<li><strong>matchOptions</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.MatchOptions</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Attempts to match the regular expression against the given <code class="docutils literal"><span class="pre">subjectRef</span></code> string reference, starting at the position <code class="docutils literal"><span class="pre">offset</span></code> inside the subject, using a match of type <code class="docutils literal"><span class="pre">matchType</span></code> and honoring the given <code class="docutils literal"><span class="pre">matchOptions</span></code> .</p>
+<p>The returned <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a> object contains the results of the match.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.QRegularExpressionMatch" title="PySide2.QtCore.QRegularExpressionMatch"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpressionMatch</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">normal</span> <span class="pre">matching</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.namedCaptureGroups">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">namedCaptureGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.namedCaptureGroups" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of strings</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.captureCount"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.captureCount()</span></code></a> + 1 elements, containing the names of the named capturing groups in the pattern string. The list is sorted such that the element of the list at position <code class="docutils literal"><span class="pre">i</span></code> is the name of the <code class="docutils literal"><span class="pre">i</span></code> -th capturing group, if it has a name, or an empty string if that capturing group is unnamed.</p>
+<p>For instance, given the regular expression</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(?&lt;day&gt;\d\d)-(?&lt;month&gt;\d\d)-(?&lt;year&gt;\d\d\d\d) (\w+) (?&lt;name&gt;\w+)
+</pre></div>
+</div>
+<p>will return the following list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which corresponds to the fact that the capturing group #0 (corresponding to the whole match) has no name, the capturing group #1 has name “day”, the capturing group #2 has name “month”, etc.</p>
+<p>If the regular expression is not valid, returns an empty list.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.isValid()</span></code></a>  <a class="reference internal" href="QRegularExpressionMatch.html#PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.captured" title="PySide2.QtCore.PySide2.QtCore.QRegularExpressionMatch.captured"><code class="xref py py-meth docutils literal"><span class="pre">QRegularExpressionMatch.captured()</span></code></a>  <code class="xref py py-meth docutils literal"><span class="pre">QString.isEmpty()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.__ne__">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">__ne__</code><span class="sig-paren">(</span><em>re</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>re</strong> – <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the regular expression is different from <code class="docutils literal"><span class="pre">re</span></code> , or false otherwise.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.operator==()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.__eq__">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>re</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>re</strong> – <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the regular expression is equal to <code class="docutils literal"><span class="pre">re</span></code> , or false otherwise. Two <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> objects are equal if they have the same pattern string and the same pattern options.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.operator!=()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">optimize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forces an immediate optimization of the pattern, including JIT-compiling it (if the JIT compiler is enabled).</p>
+<p>Patterns are normally optimized only after a certain number of usages. If you can predict that this <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> object is going to be used for several matches, it may be convenient to optimize it in advance by calling this function.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-attr docutils literal"><span class="pre">QRegularExpression.OptimizeOnFirstUsageOption</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the pattern string of the regular expression.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPattern()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternOptions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">patternErrorOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternErrorOffset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the offset, inside the pattern string, at which an error was found when checking the validity of the regular expression. If no error was found, then -1 is returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.pattern()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.isValid"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.isValid()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.errorString"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.errorString()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">patternOptions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.PatternOptions</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the pattern options for the regular expression.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPatternOptions()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.pattern()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">setPattern</code><span class="sig-paren">(</span><em>pattern</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pattern</strong> – unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Sets the pattern string of the regular expression to <code class="docutils literal"><span class="pre">pattern</span></code> . The pattern options are left unchanged.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.pattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.pattern()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPatternOptions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">setPatternOptions</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPatternOptions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.PatternOptions</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets the given <code class="docutils literal"><span class="pre">options</span></code> as the pattern options of the regular expression. The pattern string is left unchanged.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.patternOptions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.patternOptions()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern" title="PySide2.QtCore.PySide2.QtCore.QRegularExpression.setPattern"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression.setPattern()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QRegularExpression.swap">
+<code class="descclassname">PySide2.QtCore.QRegularExpression.</code><code class="descname">swap</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QRegularExpression.swap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Swaps the regular expression <code class="docutils literal"><span class="pre">other</span></code> with this regular expression. This operation is very fast and never fails.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

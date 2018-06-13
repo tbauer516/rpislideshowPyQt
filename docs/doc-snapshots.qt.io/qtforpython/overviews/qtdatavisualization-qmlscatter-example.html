@@ -1,0 +1,328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick 2 Scatter Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick 2 Scatter Example</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#application-basics">Application Basics</a></li>
+<li><a class="reference internal" href="#setting-up-the-graph">Setting up the Graph</a></li>
+<li><a class="reference internal" href="#adding-data-to-the-graph">Adding Data to the Graph</a></li>
+<li><a class="reference internal" href="#example-contents">Example Contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-qml-example-file">Data.qml Example File</a></li>
+<li><a class="reference internal" href="#newbutton-qml-example-file">NewButton.qml Example File</a></li>
+<li><a class="reference internal" href="#main-qml-example-file">main.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#qmlscatter-pro-example-file">qmlscatter.pro Example File</a></li>
+<li><a class="reference internal" href="#qmlscatter-qrc-example-file">qmlscatter.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-2-scatter-example">
+<span id="id1"></span><h1>Qt Quick 2 Scatter Example<a class="headerlink" href="#qt-quick-2-scatter-example" title="Permalink to this headline">¶</a></h1>
+<p>Using Scatter3D in a QML application</p>
+<blockquote>
+<div><p>Using <span class="xref std std-ref">Scatter3D</span> in a QML application.</p>
+<p>The Qt Quick 2 scatter example shows how to make a simple scatter graph visualization using <span class="xref std std-ref">Scatter3D</span> and Qt Quick 2.</p>
+<p>For instructions about how to interact with the graph, see <a class="reference internal" href="qtdatavisualization-interacting-with-data.html#qt-data-visualization-interacting-with-data"><span class="std std-ref">this page</span></a> .</p>
+<p>For instructions how to create a new Qt Quick 2 application of your own, see Qt Creator help.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="application-basics">
+<span id="id3"></span><h2>Application Basics<a class="headerlink" href="#application-basics" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Before diving into the QML code, let’s take a look at the application <code class="docutils literal"><span class="pre">main.cpp</span></code> .</p>
+<p>This application implements a ‘Quit’ button in the UI, so we want to connect the QQmlEngine::quit() signal to our application’s <code class="xref py py-func docutils literal"><span class="pre">QWindow.close()</span></code> slot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="n">viewer</span><span class="o">.</span><span class="n">engine</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">QQmlEngine</span><span class="p">::</span><span class="n">quit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">viewer</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWindow</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To make deployment little simpler, we gather all of the application’s <code class="docutils literal"><span class="pre">.qml</span></code> files to a resource file (<code class="docutils literal"><span class="pre">qmlscatter.qrc</span></code> ):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">RCC</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">qresource</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span><span class="n">qml</span><span class="o">/</span><span class="n">qmlscatter</span><span class="o">/</span><span class="n">Data</span><span class="o">.</span><span class="n">qml</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span><span class="n">qml</span><span class="o">/</span><span class="n">qmlscatter</span><span class="o">/</span><span class="n">main</span><span class="o">.</span><span class="n">qml</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span><span class="n">qml</span><span class="o">/</span><span class="n">qmlscatter</span><span class="o">/</span><span class="n">NewButton</span><span class="o">.</span><span class="n">qml</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">qresource</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">RCC</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This also requires us to set the <code class="docutils literal"><span class="pre">main.qml</span></code> to be read from the resource (<code class="docutils literal"><span class="pre">qrc:</span></code> ):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">setSource</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s2">&quot;qrc:/qml/qmlscatter/main.qml&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Lastly, we want the application to run in a maximized window:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="setting-up-the-graph">
+<span id="id4"></span><h2>Setting up the Graph<a class="headerlink" href="#setting-up-the-graph" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>First we’ll import all the QML modules we need:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.1</span>
+<span class="kn">import</span> <span class="nn">QtQuick.Layouts</span> <span class="mf">1.0</span>
+<span class="kn">import</span> <span class="nn">QtDataVisualization</span> <span class="mf">1.0</span>
+<span class="kn">import</span> <span class="s2">&quot;.&quot;</span>
+</pre></div>
+</div>
+<p>The last <code class="docutils literal"><span class="pre">import</span></code> just imports all the qml files in the same directory as our <code class="docutils literal"><span class="pre">main.qml</span></code> , because that’s where <code class="docutils literal"><span class="pre">NewButton.qml</span></code> and <code class="docutils literal"><span class="pre">Data.qml</span></code> are.</p>
+<p>Then we create our main <code class="docutils literal"><span class="pre">Rectangle</span></code> and call it <code class="docutils literal"><span class="pre">mainView</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">mainView</span>
+</pre></div>
+</div>
+<p>Then we’ll add another <code class="docutils literal"><span class="pre">Item</span></code> inside the main <code class="docutils literal"><span class="pre">Rectangle</span></code> , and call it <code class="docutils literal"><span class="pre">dataView</span></code> . This will be the item to hold the <span class="xref std std-ref">Scatter3D</span> graph. We’ll anchor it to the parent bottom:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">dataView</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">bottom</span>
+</pre></div>
+</div>
+<p>Next we’re ready to add the <span class="xref std std-ref">Scatter3D</span> graph itself. We’ll add it inside the <code class="docutils literal"><span class="pre">dataView</span></code> and name it <code class="docutils literal"><span class="pre">scatterGraph</span></code> . Let’s make it fill the <code class="docutils literal"><span class="pre">dataView</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Scatter3D</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">scatterGraph</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">dataView</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">dataView</span><span class="o">.</span><span class="n">height</span>
+</pre></div>
+</div>
+<p>Now the graph is ready for use, but has no data. It also has the default axes and visual properties.</p>
+<p>Let’s modify some visual properties first by adding the following inside <code class="docutils literal"><span class="pre">scatterGraph</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">theme</span><span class="p">:</span> <span class="n">themeIsabelle</span>
+<span class="n">shadowQuality</span><span class="p">:</span> <span class="n">AbstractGraph3D</span><span class="o">.</span><span class="n">ShadowQualitySoftLow</span>
+</pre></div>
+</div>
+<p>We added a customized theme and changed the shadow quality. We’re happy with the other visual properties, so we won’t change them.</p>
+<p>The custom theme is based on a predefined theme, but we change the font in it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Theme3D</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">themeIsabelle</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">Theme3D</span><span class="o">.</span><span class="n">ThemeIsabelle</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">family</span><span class="p">:</span> <span class="s2">&quot;Lucida Handwriting&quot;</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">:</span> <span class="mi">40</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then it’s time to start feeding the graph some data.</p>
+</div></blockquote>
+</div>
+<div class="section" id="adding-data-to-the-graph">
+<span id="id5"></span><h2>Adding Data to the Graph<a class="headerlink" href="#adding-data-to-the-graph" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s create a <code class="docutils literal"><span class="pre">Data</span></code> item inside the <code class="docutils literal"><span class="pre">mainView</span></code> and name it <code class="docutils literal"><span class="pre">seriesData</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Data</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">seriesData</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">seriesData</span></code> item contains the data models for all three series we use in this example.</p>
+<p>This is the component that holds our data in <code class="docutils literal"><span class="pre">Data.qml</span></code> . It has an <code class="docutils literal"><span class="pre">Item</span></code> as the main component.</p>
+<p>In the main component we’ll add the data itself in a <code class="docutils literal"><span class="pre">ListModel</span></code> and name it <code class="docutils literal"><span class="pre">dataModel</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">dataModel</span>
+    <span class="n">ListElement</span><span class="p">{</span> <span class="n">xPos</span><span class="p">:</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">;</span> <span class="n">yPos</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">;</span> <span class="n">zPos</span><span class="p">:</span> <span class="o">-</span><span class="mf">5.0</span> <span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>We’ll add two more of these for the other two series, and name them <code class="docutils literal"><span class="pre">dataModelTwo</span></code> and <code class="docutils literal"><span class="pre">dataModelThree</span></code> .</p>
+<p>Then we need to expose the data models to be usable from <code class="docutils literal"><span class="pre">main.qml</span></code> . We do this by defining them as aliases in the main data component:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">property</span> <span class="n">alias</span> <span class="n">model</span><span class="p">:</span> <span class="n">dataModel</span>
+<span class="nb">property</span> <span class="n">alias</span> <span class="n">modelTwo</span><span class="p">:</span> <span class="n">dataModelTwo</span>
+<span class="nb">property</span> <span class="n">alias</span> <span class="n">modelThree</span><span class="p">:</span> <span class="n">dataModelThree</span>
+</pre></div>
+</div>
+<p>Now we can use the data from <code class="docutils literal"><span class="pre">Data.qml</span></code> with <code class="docutils literal"><span class="pre">scatterGraph</span></code> in <code class="docutils literal"><span class="pre">main.qml</span></code> . First we’ll add a <span class="xref std std-ref">Scatter3DSeries</span> and call it <code class="docutils literal"><span class="pre">scatterSeries</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Scatter3DSeries</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">scatterSeries</span>
+</pre></div>
+</div>
+<p>Then we’ll set up selection label format for the series:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">itemLabelFormat</span><span class="p">:</span> <span class="s2">&quot;Series 1: X:@xLabel Y:@yLabel Z:@zLabel&quot;</span>
+</pre></div>
+</div>
+<p>And finally the data for series one in a <span class="xref std std-ref">ItemModelScatterDataProxy</span> . We set the data itself as <code class="docutils literal"><span class="pre">itemModel</span></code> for the proxy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ItemModelScatterDataProxy</span> <span class="p">{</span>
+    <span class="n">itemModel</span><span class="p">:</span> <span class="n">seriesData</span><span class="o">.</span><span class="n">model</span>
+    <span class="n">xPosRole</span><span class="p">:</span> <span class="s2">&quot;xPos&quot;</span>
+    <span class="n">yPosRole</span><span class="p">:</span> <span class="s2">&quot;yPos&quot;</span>
+    <span class="n">zPosRole</span><span class="p">:</span> <span class="s2">&quot;zPos&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We’ll add the other two series in the same way, but modify some series-specific details a bit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">Scatter3DSeries</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">scatterSeriesTwo</span>
+            <span class="n">itemLabelFormat</span><span class="p">:</span> <span class="s2">&quot;Series 2: X:@xLabel Y:@yLabel Z:@zLabel&quot;</span>
+            <span class="n">itemSize</span><span class="p">:</span> <span class="mf">0.1</span>
+            <span class="n">mesh</span><span class="p">:</span> <span class="n">Abstract3DSeries</span><span class="o">.</span><span class="n">MeshCube</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Then we’ll modify the properties of the default axes in <code class="docutils literal"><span class="pre">scatterGraph</span></code> a bit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">axisX</span><span class="o">.</span><span class="n">segmentCount</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">axisX</span><span class="o">.</span><span class="n">subSegmentCount</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">axisX</span><span class="o">.</span><span class="n">labelFormat</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span>
+<span class="n">axisZ</span><span class="o">.</span><span class="n">segmentCount</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">axisZ</span><span class="o">.</span><span class="n">subSegmentCount</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">axisZ</span><span class="o">.</span><span class="n">labelFormat</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span>
+<span class="n">axisY</span><span class="o">.</span><span class="n">segmentCount</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">axisY</span><span class="o">.</span><span class="n">subSegmentCount</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">axisY</span><span class="o">.</span><span class="n">labelFormat</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>After that we’ll just add a few buttons to the <code class="docutils literal"><span class="pre">mainView</span></code> to control the graph. We’ll only show one as an example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>NewButton {
+    id: shadowToggle
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    text: scatterGraph.shadowsSupported ? &quot;Hide Shadows&quot; : &quot;Shadows not supported&quot;
+    enabled: scatterGraph.shadowsSupported
+    onClicked: {
+        if (scatterGraph.shadowQuality === AbstractGraph3D.ShadowQualityNone) {
+            scatterGraph.shadowQuality = AbstractGraph3D.ShadowQualitySoftLow;
+            text = &quot;Hide Shadows&quot;;
+        } else {
+            scatterGraph.shadowQuality = AbstractGraph3D.ShadowQualityNone;
+            text = &quot;Show Shadows&quot;;
+        }
+    }
+}
+</pre></div>
+</div>
+<p>Then we’ll modify <code class="docutils literal"><span class="pre">dataView</span></code> to make room for the buttons at the top:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">dataView</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">bottom</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">buttonLayout</span><span class="o">.</span><span class="n">height</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>And we’re done!</p>
+</div></blockquote>
+</div>
+<div class="section" id="example-contents">
+<span id="id6"></span><h2>Example Contents<a class="headerlink" href="#example-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="data-qml-example-file">
+<h1>Data.qml Example File<a class="headerlink" href="#data-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="newbutton-qml-example-file">
+<h1>NewButton.qml Example File<a class="headerlink" href="#newbutton-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-qml-example-file">
+<h1>main.qml Example File<a class="headerlink" href="#main-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmlscatter-pro-example-file">
+<h1>qmlscatter.pro Example File<a class="headerlink" href="#qmlscatter-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmlscatter-qrc-example-file">
+<h1>qmlscatter.qrc Example File<a class="headerlink" href="#qmlscatter-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

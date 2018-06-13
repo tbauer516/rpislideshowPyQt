@@ -1,0 +1,382 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Scene Graph - Custom Geometry &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scene Graph - Custom Geometry</a><ul>
+<li><a class="reference internal" href="#beziercurve-declaration">BezierCurve Declaration</a></li>
+<li><a class="reference internal" href="#beziercurve-implementation">BezierCurve Implementation</a></li>
+<li><a class="reference internal" href="#application-entry-point">Application Entry-Point</a></li>
+<li><a class="reference internal" href="#using-the-item">Using the Item</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#beziercurve-cpp-example-file">beziercurve.cpp Example File</a></li>
+<li><a class="reference internal" href="#beziercurve-h-example-file">beziercurve.h Example File</a></li>
+<li><a class="reference internal" href="#main-qml-example-file">main.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#customgeometry-pro-example-file">customgeometry.pro Example File</a></li>
+<li><a class="reference internal" href="#customgeometry-qrc-example-file">customgeometry.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scene-graph-custom-geometry">
+<span id="id1"></span><h1>Scene Graph - Custom Geometry<a class="headerlink" href="#scene-graph-custom-geometry" title="Permalink to this headline">¶</a></h1>
+<p>Shows how to implement a custom geometry in the Qt Quick Scene Graph</p>
+<blockquote>
+<div><p>Shows how to implement a custom geometry in the Qt Quick Scene Graph.</p>
+<p>The custom geometry example shows how to create a <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> which uses the scene graph API to build a custom geometry for the scene graph. It does this by creating a BezierCurve item which is made part of the CustomGeometry module and makes use of this in a QML file.</p>
+</div></blockquote>
+<div class="section" id="beziercurve-declaration">
+<span id="id2"></span><h2>BezierCurve Declaration<a class="headerlink" href="#beziercurve-declaration" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;QtQuick/QQuickItem&gt;</span>
+
+<span class="k">class</span> <span class="nc">BezierCurve</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QQuickItem</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QPointF</span> <span class="n">p1</span> <span class="n">READ</span> <span class="n">p1</span> <span class="n">WRITE</span> <span class="n">setP1</span> <span class="n">NOTIFY</span> <span class="n">p1Changed</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QPointF</span> <span class="n">p2</span> <span class="n">READ</span> <span class="n">p2</span> <span class="n">WRITE</span> <span class="n">setP2</span> <span class="n">NOTIFY</span> <span class="n">p2Changed</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QPointF</span> <span class="n">p3</span> <span class="n">READ</span> <span class="n">p3</span> <span class="n">WRITE</span> <span class="n">setP3</span> <span class="n">NOTIFY</span> <span class="n">p3Changed</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QPointF</span> <span class="n">p4</span> <span class="n">READ</span> <span class="n">p4</span> <span class="n">WRITE</span> <span class="n">setP4</span> <span class="n">NOTIFY</span> <span class="n">p4Changed</span><span class="p">)</span>
+
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="nb">int</span> <span class="n">segmentCount</span> <span class="n">READ</span> <span class="n">segmentCount</span> <span class="n">WRITE</span> <span class="n">setSegmentCount</span> <span class="n">NOTIFY</span> <span class="n">segmentCountChanged</span><span class="p">)</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">BezierCurve</span><span class="p">(</span><span class="n">QQuickItem</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">BezierCurve</span><span class="p">();</span>
+
+
+    <span class="n">QSGNode</span> <span class="o">*</span><span class="n">updatePaintNode</span><span class="p">(</span><span class="n">QSGNode</span> <span class="o">*</span><span class="p">,</span> <span class="n">UpdatePaintNodeData</span> <span class="o">*</span><span class="p">);</span>
+
+
+    <span class="n">QPointF</span> <span class="n">p1</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_p1</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">QPointF</span> <span class="n">p2</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_p2</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">QPointF</span> <span class="n">p3</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_p3</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">QPointF</span> <span class="n">p4</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_p4</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="nb">int</span> <span class="n">segmentCount</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_segmentCount</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">void</span> <span class="n">setP1</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setP2</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setP3</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setP4</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">setSegmentCount</span><span class="p">(</span><span class="nb">int</span> <span class="n">count</span><span class="p">);</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">p1Changed</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">p2Changed</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">p3Changed</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">p4Changed</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">segmentCountChanged</span><span class="p">(</span><span class="nb">int</span> <span class="n">count</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QPointF</span> <span class="n">m_p1</span><span class="p">;</span>
+    <span class="n">QPointF</span> <span class="n">m_p2</span><span class="p">;</span>
+    <span class="n">QPointF</span> <span class="n">m_p3</span><span class="p">;</span>
+    <span class="n">QPointF</span> <span class="n">m_p4</span><span class="p">;</span>
+
+    <span class="nb">int</span> <span class="n">m_segmentCount</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The item declaration subclasses the <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> class and adds five properties. One for each of the four control points in the bezier curve and a parameter to control the number of segments the curve is subdivided into. For each of the properties we have corresponding getter and setter functions. Since these properties can be bound to in QML, it is also preferable to have notifier signals for each of them so changes will be picked up the QML engine and used accordingly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSGNode</span> <span class="o">*</span><span class="n">updatePaintNode</span><span class="p">(</span><span class="n">QSGNode</span> <span class="o">*</span><span class="p">,</span> <span class="n">UpdatePaintNodeData</span> <span class="o">*</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The synchronization point between the QML scene and the rendering scene graph is the virtual function <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> which all items with custom scene graph logic must implement.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The scene graph will on many hardware configurations be rendering on a separate thread. It is therefore crucial that interaction with the scene graph happens in a controlled manner, first and foremost through the <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> function.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="beziercurve-implementation">
+<span id="id3"></span><h2>BezierCurve Implementation<a class="headerlink" href="#beziercurve-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BezierCurve</span><span class="p">::</span><span class="n">BezierCurve</span><span class="p">(</span><span class="n">QQuickItem</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QQuickItem</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_p1</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_p2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_p3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_p4</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_segmentCount</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setFlag</span><span class="p">(</span><span class="n">ItemHasContents</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The BezierCurve constructor sets up default values for the control points and the number of segments. The bezier curve is specified in normalized coordinates relative to the item’s bounding rectangle.</p>
+<p>The constructor also sets the flag <code class="xref py py-attr docutils literal"><span class="pre">QQuickItem.ItemHasContents</span></code> . This flags tells the canvas that this item provides visual content and will call <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> when it is time for the QML scene to be synchronized with the rendering scene graph.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BezierCurve</span><span class="p">::</span><span class="o">~</span><span class="n">BezierCurve</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The BezierCurve class has no data members that need to be cleaned up so the destructor does nothing. It is worth mentioning that the rendering scene graph is managed by the scene graph it self, potentially in a different thread, so one should never retain <a class="reference internal" href="../PySide2/QtQuick/QSGNode.html#PySide2.QtQuick.QSGNode" title="PySide2.QtQuick.QSGNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGNode</span></code></a> references in the <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> class nor try to clean them up explicitly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">BezierCurve</span><span class="p">::</span><span class="n">setP1</span><span class="p">(</span><span class="n">const</span> <span class="n">QPointF</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">m_p1</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">m_p1</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="n">emit</span> <span class="n">p1Changed</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The setter function for the p1 property checks if the value is unchanged and exits early if this is the case. Then it updates the internal value and emits the changed signal. It then proceeds to call the <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.update()</span></code> function which will notify the rendering scene graph, that the state of this object has changed and needs to be synchronized with the rendering scene graph. A call to update() will result in a call to <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> at a later time.</p>
+<p>The other property setters are equivalent, and are omitted from this example.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QSGNode *BezierCurve::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+{
+    QSGGeometryNode *node = nullptr;
+    QSGGeometry *geometry = nullptr;
+
+    if (!oldNode) {
+        node = new QSGGeometryNode;
+</pre></div>
+</div>
+<p>The updatePaintNode() function is the primary integration point for synchronizing the state of the QML scene with the rendering scene graph. The function gets passed a <a class="reference internal" href="../PySide2/QtQuick/QSGNode.html#PySide2.QtQuick.QSGNode" title="PySide2.QtQuick.QSGNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGNode</span></code></a> which is the instance that was returned on the last call to the function. It will be null the first time the function gets called and we create our <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> which we will fill with geometry and a material.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">geometry</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSGGeometry</span><span class="p">(</span><span class="n">QSGGeometry</span><span class="p">::</span><span class="n">defaultAttributes_Point2D</span><span class="p">(),</span> <span class="n">m_segmentCount</span><span class="p">);</span>
+<span class="n">geometry</span><span class="o">-&gt;</span><span class="n">setLineWidth</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">geometry</span><span class="o">-&gt;</span><span class="n">setDrawingMode</span><span class="p">(</span><span class="n">QSGGeometry</span><span class="p">::</span><span class="n">DrawLineStrip</span><span class="p">);</span>
+<span class="n">node</span><span class="o">-&gt;</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">);</span>
+<span class="n">node</span><span class="o">-&gt;</span><span class="n">setFlag</span><span class="p">(</span><span class="n">QSGNode</span><span class="p">::</span><span class="n">OwnsGeometry</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We then create the geometry and add it to the node. The first argument to the <a class="reference internal" href="../PySide2/QtQuick/QSGGeometry.html#PySide2.QtQuick.QSGGeometry" title="PySide2.QtQuick.QSGGeometry"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometry</span></code></a> constructor is a definition of the vertex type, called an “attribute set”. Since the graphics often used in QML centers around a few common standard attribute sets, these are provided by default. Here we use the Point2D attribute set which has two floats, one for x coordinates and one for y coordinates. The second argument is the vertex count.</p>
+<p>Custom attribute sets can also created, but that is not covered in this example.</p>
+<p>Since we do not have any special needs for memory managing the geometry, we specify that the <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> should own the geometry.</p>
+<p>To minimize allocations, reduce memory fragmentation and improve performance, it would also be possible to make the geometry a member of a <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> subclass, in which case, we would not have set the <code class="xref py py-attr docutils literal"><span class="pre">QSGGeometryNode.OwnsGeometry</span></code> flag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSGFlatColorMaterial</span> <span class="o">*</span><span class="n">material</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSGFlatColorMaterial</span><span class="p">;</span>
+<span class="n">material</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+<span class="n">node</span><span class="o">-&gt;</span><span class="n">setMaterial</span><span class="p">(</span><span class="n">material</span><span class="p">);</span>
+<span class="n">node</span><span class="o">-&gt;</span><span class="n">setFlag</span><span class="p">(</span><span class="n">QSGNode</span><span class="p">::</span><span class="n">OwnsMaterial</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The scene graph API provides a few commonly used material implementations. In this example we use the <code class="xref py py-class docutils literal"><span class="pre">QSGFlatColorMaterial</span></code> which will fill the shape defined by the geometry with a solid color. Again we pass the ownership of the material to the node, so it can be cleaned up by the scene graph.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QSGGeometryNode</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">oldNode</span><span class="p">);</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">geometry</span><span class="p">();</span>
+    <span class="n">geometry</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">m_segmentCount</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the case where the QML item has changed and we only want to modify the existing node’s geometry, we cast the <code class="docutils literal"><span class="pre">oldNode</span></code> to a <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> instance and extract it’s geometry. In case the segment count has changed, we call <code class="xref py py-func docutils literal"><span class="pre">QSGGeometry.allocate()</span></code> to make sure it has the right number of vertices.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSizeF</span> <span class="n">itemSize</span> <span class="o">=</span> <span class="n">size</span><span class="p">();</span>
+<span class="n">QSGGeometry</span><span class="p">::</span><span class="n">Point2D</span> <span class="o">*</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">-&gt;</span><span class="n">vertexDataAsPoint2D</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m_segmentCount</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">qreal</span> <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">qreal</span><span class="p">(</span><span class="n">m_segmentCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">qreal</span> <span class="n">invt</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">;</span>
+
+    <span class="n">QPointF</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">m_p1</span>
+                <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">m_p2</span>
+                <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">invt</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">m_p3</span>
+                <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">m_p4</span><span class="p">;</span>
+
+    <span class="nb">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">*</span> <span class="n">itemSize</span><span class="o">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="nb">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">*</span> <span class="n">itemSize</span><span class="o">.</span><span class="n">height</span><span class="p">();</span>
+
+    <span class="n">vertices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">node</span><span class="o">-&gt;</span><span class="n">markDirty</span><span class="p">(</span><span class="n">QSGNode</span><span class="p">::</span><span class="n">DirtyGeometry</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To fill the geometry, we first extract the vertex array from it. Since we are using one of the default attribute sets, we can use the convenience function <code class="xref py py-func docutils literal"><span class="pre">QSGGeometry.vertexDataAsPoint2D()</span></code> . Then we go through each segment and calculate its position and write that value to the vertex.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the end of the function, we return the node so the scene graph can render it.</p>
+</div></blockquote>
+</div>
+<div class="section" id="application-entry-point">
+<span id="id4"></span><h2>Application Entry-Point<a class="headerlink" href="#application-entry-point" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">qmlRegisterType</span><span class="o">&lt;</span><span class="n">BezierCurve</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;CustomGeometry&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;BezierCurve&quot;</span><span class="p">);</span>
+
+    <span class="n">QQuickView</span> <span class="n">view</span><span class="p">;</span>
+    <span class="n">QSurfaceFormat</span> <span class="nb">format</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">format</span><span class="p">();</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">setSamples</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setSource</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s2">&quot;qrc:///scenegraph/customgeometry/main.qml&quot;</span><span class="p">));</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The application is a straightforward QML application, with a <a class="reference internal" href="../PySide2/QtGui/QGuiApplication.html#PySide2.QtGui.QGuiApplication" title="PySide2.QtGui.QGuiApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QGuiApplication</span></code></a> and a <a class="reference internal" href="../PySide2/QtQuick/QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> that we pass a .qml file. To make use of the BezierCurve item, we need to register it in the QML engine, using the qmlRegisterType() function. We give it the name BezierCurve and make it part of the <code class="docutils literal"><span class="pre">CustomGeometry</span> <span class="pre">1.0</span></code> module.</p>
+<p>As the bezier curve is drawn using GL_LINE_STRIP, we specify that the view should be multisampled to get antialiasing. This is not required, but it will make the item look a bit nicer on hardware that supports it. Multisampling is not enabled by default because it often results in higher memory usage.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-the-item">
+<span id="id5"></span><h2>Using the Item<a class="headerlink" href="#using-the-item" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+<span class="kn">import</span> <span class="nn">CustomGeometry</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>Our .qml file imports the <code class="docutils literal"><span class="pre">QtQuick</span> <span class="pre">2.0</span></code> module to get the standard types and also our own <code class="docutils literal"><span class="pre">CustomGeometry</span> <span class="pre">1.0</span></code> module which contains our newly created BezierCurve objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">300</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+
+    <span class="n">BezierCurve</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">line</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">margins</span><span class="p">:</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p>Then we create the our root item and an instance of the BezierCurve which we anchor to fill the root.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="nb">property</span> <span class="n">real</span> <span class="n">t</span>
+    <span class="n">SequentialAnimation</span> <span class="n">on</span> <span class="n">t</span> <span class="p">{</span>
+        <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">to</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">2000</span><span class="p">;</span> <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span> <span class="p">}</span>
+        <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">to</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">2000</span><span class="p">;</span> <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span> <span class="p">}</span>
+        <span class="n">loops</span><span class="p">:</span> <span class="n">Animation</span><span class="o">.</span><span class="n">Infinite</span>
+    <span class="p">}</span>
+
+    <span class="n">p2</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">p3</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To make the example a bit more interesting we add an animation to change the two control points in the curve. The end points stay unchanged.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Text</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">bottom</span>
+
+        <span class="n">x</span><span class="p">:</span> <span class="mi">20</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">40</span>
+        <span class="n">wrapMode</span><span class="p">:</span> <span class="n">Text</span><span class="o">.</span><span class="n">WordWrap</span>
+
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;This curve is a custom scene graph item, implemented using GL_LINE_STRIP&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally we overlay a short text outlining what the example shows.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="beziercurve-cpp-example-file">
+<h1>beziercurve.cpp Example File<a class="headerlink" href="#beziercurve-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="beziercurve-h-example-file">
+<h1>beziercurve.h Example File<a class="headerlink" href="#beziercurve-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-qml-example-file">
+<h1>main.qml Example File<a class="headerlink" href="#main-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="customgeometry-pro-example-file">
+<h1>customgeometry.pro Example File<a class="headerlink" href="#customgeometry-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="customgeometry-qrc-example-file">
+<h1>customgeometry.qrc Example File<a class="headerlink" href="#customgeometry-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

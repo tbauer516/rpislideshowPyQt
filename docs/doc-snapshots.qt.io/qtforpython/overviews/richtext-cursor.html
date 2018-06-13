@@ -1,0 +1,417 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The QTextCursor Interface &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The QTextCursor Interface</a><ul>
+<li><a class="reference internal" href="#cursor-based-editing">Cursor-Based Editing</a></li>
+<li><a class="reference internal" href="#using-a-cursor">Using a Cursor</a></li>
+<li><a class="reference internal" href="#grouping-cursor-operations">Grouping Cursor Operations</a></li>
+<li><a class="reference internal" href="#multiple-cursors">Multiple Cursors</a></li>
+<li><a class="reference internal" href="#inserting-document-elements">Inserting Document Elements</a></li>
+<li><a class="reference internal" href="#text-and-text-fragments">Text and Text Fragments</a></li>
+<li><a class="reference internal" href="#blocks">Blocks</a></li>
+<li><a class="reference internal" href="#frames">Frames</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+<li><a class="reference internal" href="#images">Images</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#manipulating-rich-text">Manipulating Rich Text</a></li>
+<li><a class="reference internal" href="#generating-a-calendar">Generating a Calendar</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-qtextcursor-interface">
+<span id="id1"></span><h1>The QTextCursor Interface<a class="headerlink" href="#the-qtextcursor-interface" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Documents can be edited via the interface provided by the <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> class; cursors are either created using a constructor or obtained from an editor widget. The cursor is used to perform editing operations that correspond exactly to those the user is able to make themselves in an editor. As a result, information about the document structure is also available through the cursor, and this allows the structure to be modified. The use of a cursor-oriented interface for editing makes the process of writing a custom editor simpler for developers, since the editing operations can be easily visualized.</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> class also maintains information about any text it has selected in the document, again following a model that is conceptually similar to the actions made by the user to select text in an editor.</p>
+<p>Rich text documents can have multiple cursors associated with them, and each of these contains information about their position in the document and any selections that they may hold. This cursor-based paradigm makes common operations, such as cutting and pasting text, simple to implement programmatically, yet it also allows more complex editing operations to be performed on the document.</p>
+<p>This chapter describes most of the common editing operations that you will need to perform using a cursor, from basic insertion of text and document elements to more complex manipulation of document structures.</p>
+</div></blockquote>
+<div class="section" id="cursor-based-editing">
+<span id="id2"></span><h2>Cursor-Based Editing<a class="headerlink" href="#cursor-based-editing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>At the simplest level, text documents are made up of a string of characters, marked up in some way to represent the block structure of the text within the document. <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> provides a cursor-based interface that allows the contents of a <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> to be manipulated at the character level. Since the elements (blocks, frames, tables, etc.) are also encoded in the character stream, the document structure can itself be changed by the cursor.</p>
+<p>The cursor keeps track of its location within its parent document, and can report information about the surrounding structure, such as the enclosing text block, frame, table, or list. The formats of the enclosing structures can also be directly obtained through the cursor.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-a-cursor">
+<span id="id3"></span><h2>Using a Cursor<a class="headerlink" href="#using-a-cursor" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The main use of a cursor is to insert or modify text within a block. We can use a text editor’s cursor to do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextEdit</span> <span class="o">*</span><span class="n">editor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">();</span>
+<span class="n">QTextCursor</span> <span class="n">cursor</span><span class="p">(</span><span class="n">editor</span><span class="o">-&gt;</span><span class="n">textCursor</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Alternatively, we can obtain a cursor directly from a document:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">document</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextDocument</span><span class="p">(</span><span class="n">editor</span><span class="p">);</span>
+<span class="n">QTextCursor</span> <span class="n">cursor</span><span class="p">(</span><span class="n">document</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cursor is positioned at the start of the document so that we can write into the first (empty) block in the document.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grouping-cursor-operations">
+<span id="id4"></span><h2>Grouping Cursor Operations<a class="headerlink" href="#grouping-cursor-operations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A series of editing operations can be packaged together so that they can be replayed, or undone together in a single action. This is achieved by using the <code class="docutils literal"><span class="pre">beginEditBlock()</span></code> and <code class="docutils literal"><span class="pre">endEditBlock()</span></code> functions in the following way, as in the following example where we select the word that contains the cursor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">beginEditBlock</span><span class="p">();</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="p">::</span><span class="n">StartOfWord</span><span class="p">);</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="p">::</span><span class="n">EndOfWord</span><span class="p">,</span> <span class="n">QTextCursor</span><span class="p">::</span><span class="n">KeepAnchor</span><span class="p">);</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">endEditBlock</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If editing operations are not grouped, the document automatically records the individual operations so that they can be undone later. Grouping operations into larger packages can make editing more efficient both for the user and for the application, but care has to be taken not to group too many operations together as the user may want find-grained control over the undo process.</p>
+</div></blockquote>
+</div>
+<div class="section" id="multiple-cursors">
+<span id="id5"></span><h2>Multiple Cursors<a class="headerlink" href="#multiple-cursors" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Multiple cursors can be used to simultaneously edit the same document, although only one will be visible to the user in a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> widget. The <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> ensures that each cursor writes text correctly and does not interfere with any of the others.</div></blockquote>
+</div>
+<div class="section" id="inserting-document-elements">
+<span id="id6"></span><h2>Inserting Document Elements<a class="headerlink" href="#inserting-document-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> provides several functions that can be used to change the structure of a rich text document. Generally, these functions allow document elements to be created with relevant formatting information, and they are inserted into the document at the cursor’s position.</p>
+<p>The first group of functions insert block-level elements, and update the cursor position, but they do not return the element that was inserted:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertBlock()</span></code> inserts a new text block (paragraph) into a document at the cursor’s position, and moves the cursor to the start of the new block.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertFragment()</span></code> inserts an existing text fragment into a document at the cursor’s position.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertImage()</span></code> inserts an image into a document at the cursor’s position.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertText()</span></code> inserts text into the document at the cursor’s position.</li>
+</ul>
+<p>You can examine the contents of the element that was inserted through the cursor interface.</p>
+<p>The second group of functions insert elements that provide structure to the document, and return the structure that was inserted:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertFrame()</span></code> inserts a frame into the document <em>after</em> the cursor’s current block, and moves the cursor to the start of the empty block in the new frame.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertList()</span></code> inserts a list into the document at the cursor’s position, and moves the cursor to the start of the first item in the list.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertTable()</span></code> inserts a table into the document <em>after</em> the cursor’s current block, and moves the cursor to the start of the block following the table.</li>
+</ul>
+<p>These elements either contain or group together other elements in the document.</p>
+</div></blockquote>
+</div>
+<div class="section" id="text-and-text-fragments">
+<span id="id7"></span><h2>Text and Text Fragments<a class="headerlink" href="#text-and-text-fragments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Text can be inserted into the current block in the current character format, or in a custom format that is specified with the text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Character formats&quot;</span><span class="p">),</span>
+                  <span class="n">headingFormat</span><span class="p">);</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertBlock</span><span class="p">();</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Text can be displayed in a variety of &quot;</span>
+                              <span class="s2">&quot;different character formats. &quot;</span><span class="p">),</span> <span class="n">plainFormat</span><span class="p">);</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;We can emphasize text by &quot;</span><span class="p">));</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;making it italic&quot;</span><span class="p">),</span> <span class="n">emphasisFormat</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once the character format has been used with a cursor, that format becomes the default format for any text inserted with that cursor until another character format is specified.</p>
+<p>If a cursor is used to insert text without specifying a character format, the text will be given the character format used at that position in the document.</p>
+</div></blockquote>
+</div>
+<div class="section" id="blocks">
+<span id="id8"></span><h2>Blocks<a class="headerlink" href="#blocks" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Text blocks are inserted into the document with the <code class="xref py py-func docutils literal"><span class="pre">QTextCursor.insertBlock()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextBlockFormat</span> <span class="n">backgroundFormat</span> <span class="o">=</span> <span class="n">blockFormat</span><span class="p">;</span>
+<span class="n">backgroundFormat</span><span class="o">.</span><span class="n">setBackground</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="s2">&quot;lightGray&quot;</span><span class="p">));</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">setBlockFormat</span><span class="p">(</span><span class="n">backgroundFormat</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cursor is positioned at the start of the new block.</p>
+</div></blockquote>
+</div>
+<div class="section" id="frames">
+<span id="id9"></span><h2>Frames<a class="headerlink" href="#frames" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Frames are inserted into a document using the cursor, and will be placed within the cursor’s current frame <em>after</em> the current block. The following code shows how a frame can be inserted between two text blocks in a document’s root frame. We begin by finding the cursor’s current frame:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextFrame</span> <span class="o">*</span><span class="n">mainFrame</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">currentFrame</span><span class="p">();</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We insert some text in this frame then set up a frame format for the child frame:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextFrameFormat</span> <span class="n">frameFormat</span><span class="p">;</span>
+<span class="n">frameFormat</span><span class="o">.</span><span class="n">setMargin</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="n">frameFormat</span><span class="o">.</span><span class="n">setPadding</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="n">frameFormat</span><span class="o">.</span><span class="n">setBorder</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The frame format will give the frame an external margin of 32 pixels, internal padding of 8 pixels, and a border that is 4 pixels wide. See the <a class="reference internal" href="../PySide2/QtGui/QTextFrameFormat.html#PySide2.QtGui.QTextFrameFormat" title="PySide2.QtGui.QTextFrameFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrameFormat</span></code></a> documentation for more information about frame formats.</p>
+<p>The frame is inserted into the document after the preceding text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">insertFrame</span><span class="p">(</span><span class="n">frameFormat</span><span class="p">);</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We add some text to the document immediately after we insert the frame. Since the text cursor is positioned <em>inside the frame</em> when it is inserted into the document, this text will also be inserted inside the frame.</p>
+<p>Finally, we position the cursor outside the frame by taking the last available cursor position inside the frame we recorded earlier:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span> <span class="o">=</span> <span class="n">mainFrame</span><span class="o">-&gt;</span><span class="n">lastCursorPosition</span><span class="p">();</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The text that we add last is inserted after the child frame in the document. Since each frame is padded with text blocks, this ensures that more elements can always be inserted with a cursor.</p>
+</div></blockquote>
+</div>
+<div class="section" id="tables">
+<span id="id10"></span><h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Tables are inserted into the document using the cursor, and will be placed within the cursor’s current frame <em>after</em> the current block:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cursor</span> <span class="o">=</span> <span class="n">QTextCursor</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">textCursor</span><span class="p">())</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">insertTable</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">tableFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Tables can be created with a specific format that defines the overall properties of the table, such as its alignment, background color, and the cell spacing used. It can also determine the constraints on each column, allowing each of them to have a fixed width, or resize according to the available space.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tableFormat</span> <span class="o">=</span> <span class="n">QTextTableFormat</span><span class="p">()</span>
+<span class="n">tableFormat</span><span class="o">.</span><span class="n">setBackground</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="s2">&quot;#e0e0e0&quot;</span><span class="p">))</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">QTextLength</span><span class="o">&gt;</span> <span class="n">constraints</span>
+<span class="n">constraints</span> <span class="o">&lt;&lt;</span> <span class="n">QTextLength</span><span class="p">(</span><span class="n">QTextLength</span><span class="o">.</span><span class="n">PercentageLength</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">constraints</span> <span class="o">&lt;&lt;</span> <span class="n">QTextLength</span><span class="p">(</span><span class="n">QTextLength</span><span class="o">.</span><span class="n">PercentageLength</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="n">constraints</span> <span class="o">&lt;&lt;</span> <span class="n">QTextLength</span><span class="p">(</span><span class="n">QTextLength</span><span class="o">.</span><span class="n">PercentageLength</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="n">constraints</span> <span class="o">&lt;&lt;</span> <span class="n">QTextLength</span><span class="p">(</span><span class="n">QTextLength</span><span class="o">.</span><span class="n">PercentageLength</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="n">tableFormat</span><span class="o">.</span><span class="n">setColumnWidthConstraints</span><span class="p">(</span><span class="n">constraints</span><span class="p">)</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">insertTable</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">tableFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The columns in the table created above will each take up a certain percentage of the available width. Note that the table format is optional; if you insert a table without a format, some sensible default values will be used for the table’s properties.</p>
+<p>Since cells can contain other document elements, they too can be formatted and styled as necessary.</p>
+<p>Text can be added to the table by navigating to each cell with the cursor and inserting text.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cellAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">cellCursor</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">firstCursorPosition</span><span class="p">()</span>
+<span class="n">cellCursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Week&quot;</span><span class="p">),</span> <span class="n">charFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can create a simple timetable by following this approach:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">column</span>  <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cellAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+    <span class="n">cellCursor</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">firstCursorPosition</span><span class="p">()</span>
+    <span class="n">cellCursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Team %1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">column</span><span class="p">),</span> <span class="n">charFormat</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cellAt</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">cellCursor</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">firstCursorPosition</span><span class="p">()</span>
+    <span class="n">cellCursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">row</span><span class="p">),</span> <span class="n">charFormat</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="n">column</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cellAt</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+            <span class="n">cellCursor</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">firstCursorPosition</span><span class="p">()</span>
+            <span class="n">cellCursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;On duty&quot;</span><span class="p">),</span> <span class="n">charFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="lists">
+<span id="id11"></span><h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Lists of block elements can be automatically created and inserted into the document at the current cursor position. Each list that is created in this way requires a list format to be specified:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">listFormat</span> <span class="o">=</span> <span class="n">QTextListFormat</span><span class="p">()</span>
+<span class="k">if</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="n">listFormat</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">format</span><span class="p">()</span>
+    <span class="n">listFormat</span><span class="o">.</span><span class="n">setIndent</span><span class="p">(</span><span class="n">listFormat</span><span class="o">.</span><span class="n">indent</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">listFormat</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">QTextListFormat</span><span class="o">.</span><span class="n">ListDisc</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertList</span><span class="p">(</span><span class="n">listFormat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above code first checks whether the cursor is within an existing list and, if so, gives the list format for the new list a suitable level of indentation. This allows nested lists to be created with increasing levels of indentation. A more sophisticated implementation would also use different kinds of symbol for the bullet points in each level of the list.</p>
+</div></blockquote>
+</div>
+<div class="section" id="images">
+<span id="id12"></span><h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Inline images are added to documents through the cursor in the usual manner. Unlike many other elements, all of the image properties are specified by the image’s format. This means that a <a class="reference internal" href="../PySide2/QtGui/QTextImageFormat.html#PySide2.QtGui.QTextImageFormat" title="PySide2.QtGui.QTextImageFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextImageFormat</span></code></a> object has to be created before an image can be inserted:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextImageFormat</span> <span class="n">imageFormat</span><span class="p">;</span>
+<span class="n">imageFormat</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s2">&quot;:/images/advert.png&quot;</span><span class="p">);</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertImage</span><span class="p">(</span><span class="n">imageFormat</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The image name refers to an entry in the application’s resource file. The method used to derive this name is described in <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">The Qt Resource System</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="examples">
+<span id="id13"></span><h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Rich text is stored in text documents that can either be created by importing HTML from an external source, or generated using a <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> .</div></blockquote>
+</div>
+<div class="section" id="manipulating-rich-text">
+<span id="id14"></span><h2>Manipulating Rich Text<a class="headerlink" href="#manipulating-rich-text" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The easiest way to use a rich text document is through the <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> class, providing an editable view onto a document. The code below imports HTML into a document, and displays the document using a text edit widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">editor</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">editor</span><span class="o">.</span><span class="n">setHtml</span><span class="p">(</span><span class="n">aStringContainingHTMLtext</span><span class="p">)</span>
+<span class="n">editor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can retrieve the document from the text edit using the document() function. The document can then be edited programmatically using the <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> class. This class is modeled after a screen cursor, and editing operations follow the same semantics. The following code changes the first line of the document to a bold font, leaving all other font properties untouched. The editor will be automatically updated to reflect the changes made to the underlying document data.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">document</span> <span class="o">=</span> <span class="n">edit</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">QTextCursor</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="o">.</span><span class="n">Start</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="o">.</span><span class="n">EndOfLine</span><span class="p">,</span> <span class="n">QTextCursor</span><span class="o">.</span><span class="n">KeepAnchor</span><span class="p">)</span>
+
+<span class="nb">format</span> <span class="o">=</span> <span class="n">QTextCharFormat</span><span class="p">()</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">QFont</span><span class="o">.</span><span class="n">Bold</span><span class="p">)</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">mergeCharFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the cursor was moved from the start of the first line to the end, but that it retained an anchor at the start of the line. This demonstrates the cursor-based selection facilities of the <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> class.</p>
+</div></blockquote>
+</div>
+<div class="section" id="generating-a-calendar">
+<span id="id15"></span><h2>Generating a Calendar<a class="headerlink" href="#generating-a-calendar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Rich text can be generated very quickly using the cursor-based approach. The following example shows a simple calendar in a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> widget with bold headers for the days of the week:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">editor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+<span class="n">QTextCursor</span> <span class="n">cursor</span><span class="p">(</span><span class="n">editor</span><span class="o">-&gt;</span><span class="n">textCursor</span><span class="p">());</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">movePosition</span><span class="p">(</span><span class="n">QTextCursor</span><span class="p">::</span><span class="n">Start</span><span class="p">);</span>
+
+<span class="n">QTextCharFormat</span> <span class="nb">format</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">charFormat</span><span class="p">());</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setFontFamily</span><span class="p">(</span><span class="s2">&quot;Courier&quot;</span><span class="p">);</span>
+
+<span class="n">QTextCharFormat</span> <span class="n">boldFormat</span> <span class="o">=</span> <span class="nb">format</span><span class="p">;</span>
+<span class="n">boldFormat</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">QFont</span><span class="p">::</span><span class="n">Bold</span><span class="p">);</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertBlock</span><span class="p">();</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">boldFormat</span><span class="p">);</span>
+
+<span class="n">QDate</span> <span class="n">date</span> <span class="o">=</span> <span class="n">QDate</span><span class="p">::</span><span class="n">currentDate</span><span class="p">();</span>
+<span class="nb">int</span> <span class="n">year</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="n">month</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">();</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">weekDay</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">weekDay</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">;</span> <span class="o">++</span><span class="n">weekDay</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;%1 &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">QDate</span><span class="p">::</span><span class="n">shortDayName</span><span class="p">(</span><span class="n">weekDay</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="n">boldFormat</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertBlock</span><span class="p">();</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nb">format</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;</span> <span class="n">QDate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dayOfWeek</span><span class="p">();</span> <span class="o">++</span><span class="n">column</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="s2">&quot;    &quot;</span><span class="p">,</span> <span class="nb">format</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">day</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">day</span> <span class="o">&lt;=</span> <span class="n">date</span><span class="o">.</span><span class="n">daysInMonth</span><span class="p">();</span> <span class="o">++</span><span class="n">day</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">weekDay</span> <span class="o">=</span> <span class="n">QDate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span><span class="o">.</span><span class="n">dayOfWeek</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">QDate</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span> <span class="o">==</span> <span class="n">date</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;%1 &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">boldFormat</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;%1 &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="nb">format</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">weekDay</span> <span class="o">==</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">insertBlock</span><span class="p">();</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nb">format</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above example demonstrates how simple it is to quickly generate new rich text documents using a minimum amount of code. Although we have generated a crude fixed-pitch calendar to avoid quoting too much code, Scribe provides much more sophisticated layout and formatting features.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,558 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Character Map Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Character Map Example</a><ul>
+<li><a class="reference internal" href="#characterwidget-class-definition">CharacterWidget Class Definition</a></li>
+<li><a class="reference internal" href="#characterwidget-class-implementation">CharacterWidget Class Implementation</a></li>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#characterwidget-cpp-example-file">characterwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#characterwidget-h-example-file">characterwidget.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#charactermap-pro-example-file">charactermap.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="character-map-example">
+<span id="id1"></span><h1>Character Map Example<a class="headerlink" href="#character-map-example" title="Permalink to this headline">¶</a></h1>
+<p>Character Map example shows how to create a custom widget that can both display its own content and respond to user input</p>
+<blockquote>
+<div><p>The Character Map example shows how to create a custom widget that can both display its own content and respond to user input.</p>
+<p>The example displays an array of characters which the user can click on to enter text in a line edit. The contents of the line edit can then be copied into the clipboard, and pasted into other applications. The purpose behind this sort of tool is to allow users to enter characters that may be unavailable or difficult to locate on their keyboards.</p>
+<p>The example consists of the following classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">CharacterWidget</span></code> displays the available characters in the current font and style.</li>
+<li><code class="docutils literal"><span class="pre">MainWindow</span></code> provides a standard main window that contains font and style information, a view onto the characters, a line edit, and a push button for submitting text to the clipboard.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="characterwidget-class-definition">
+<span id="id2"></span><h2>CharacterWidget Class Definition<a class="headerlink" href="#characterwidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">CharacterWidget</span></code> class is used to display an array of characters in a user-specified font and style. For flexibility, we subclass <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and reimplement only the functions that we need to provide basic rendering and interaction features.</p>
+<p>The class definition looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CharacterWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">CharacterWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">updateFont</span><span class="p">(</span><span class="n">const</span> <span class="n">QFont</span> <span class="o">&amp;</span><span class="n">font</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">updateSize</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fontSize</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">updateStyle</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fontStyle</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">updateFontMerging</span><span class="p">(</span><span class="nb">bool</span> <span class="n">enable</span><span class="p">);</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">characterSelected</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">character</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">calculateSquareSize</span><span class="p">();</span>
+
+    <span class="n">QFont</span> <span class="n">displayFont</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">columns</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">lastKey</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">squareSize</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The widget does not contain any other widgets, so it must provide its own size hint to allow its contents to be displayed correctly. We reimplement <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> to draw custom content. We also reimplement <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> to allow the user to interact with the widget.</p>
+<p>The updateFont() and updateStyle() slots are used to update the font and style of the characters in the widget whenever the user changes the settings in the application. The class defines the characterSelected() signal so that other parts of the application are informed whenever the user selects a character in the widget. As a courtesy, the widget provides a tooltip that shows the current character value. We reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.mouseMoveEvent()</span></code> event handler and define showToolTip() to enable this feature.</p>
+<p>The <code class="docutils literal"><span class="pre">columns</span></code> , <code class="docutils literal"><span class="pre">displayFont</span></code> and <code class="docutils literal"><span class="pre">currentKey</span></code> private data members are used to record the number of columns to be shown, the current font, and the currently highlighted character in the widget.</p>
+</div></blockquote>
+</div>
+<div class="section" id="characterwidget-class-implementation">
+<span id="id3"></span><h2>CharacterWidget Class Implementation<a class="headerlink" href="#characterwidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Since the widget is to be used as a simple canvas, the constructor just calls the base class constructor and defines some default values for private data members.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CharacterWidget</span><span class="p">::</span><span class="n">CharacterWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">columns</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">lastKey</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">calculateSquareSize</span><span class="p">();</span>
+    <span class="n">setMouseTracking</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We initialize <code class="docutils literal"><span class="pre">currentKey</span></code> with a value of -1 to indicate that no character is initially selected. We enable mouse tracking to allow us to follow the movement of the cursor across the widget.</p>
+<p>The class provides two functions to allow the font and style to be set up. Each of these modify the widget’s display font and call update():</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">updateFont</span><span class="p">(</span><span class="n">const</span> <span class="n">QFont</span> <span class="o">&amp;</span><span class="n">font</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">displayFont</span><span class="o">.</span><span class="n">setFamily</span><span class="p">(</span><span class="n">font</span><span class="o">.</span><span class="n">family</span><span class="p">());</span>
+    <span class="n">calculateSquareSize</span><span class="p">();</span>
+    <span class="n">adjustSize</span><span class="p">();</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">updateSize</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fontSize</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">displayFont</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">fontSize</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+    <span class="n">calculateSquareSize</span><span class="p">();</span>
+    <span class="n">adjustSize</span><span class="p">();</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use a fixed size font for the display. Similarly, a fixed size hint is provided by the sizeHint() function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSize</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QSize</span><span class="p">(</span><span class="n">columns</span><span class="o">*</span><span class="n">squareSize</span><span class="p">,</span> <span class="p">(</span><span class="mi">65536</span><span class="o">/</span><span class="n">columns</span><span class="p">)</span><span class="o">*</span><span class="n">squareSize</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Three standard event functions are implemented so that the widget can respond to clicks, provide tooltips, and render the available characters. The paintEvent() shows how the contents of the widget are arranged and displayed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">(),</span> <span class="n">QBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">displayFont</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> is created for the widget and, in all cases, we ensure that the widget’s background is painted. The painter’s font is set to the user-specified display font.</p>
+<p>The area of the widget that needs to be redrawn is used to determine which characters need to be displayed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRect</span> <span class="n">redrawRect</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">();</span>
+<span class="nb">int</span> <span class="n">beginRow</span> <span class="o">=</span> <span class="n">redrawRect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">endRow</span> <span class="o">=</span> <span class="n">redrawRect</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">beginColumn</span> <span class="o">=</span> <span class="n">redrawRect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">endColumn</span> <span class="o">=</span> <span class="n">redrawRect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Using integer division, we obtain the row and column numbers of each characters that should be displayed, and we draw a square on the widget for each character displayed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">gray</span><span class="p">));</span>
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">beginRow</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="n">endRow</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">column</span> <span class="o">=</span> <span class="n">beginColumn</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;=</span> <span class="n">endColumn</span><span class="p">;</span> <span class="o">++</span><span class="n">column</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">column</span><span class="o">*</span><span class="n">squareSize</span><span class="p">,</span> <span class="n">row</span><span class="o">*</span><span class="n">squareSize</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The symbols for each character in the array are drawn within each square, with the symbol for the most recently selected character displayed in red:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QFontMetrics</span> <span class="n">fontMetrics</span><span class="p">(</span><span class="n">displayFont</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">beginRow</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="n">endRow</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">column</span> <span class="o">=</span> <span class="n">beginColumn</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;=</span> <span class="n">endColumn</span><span class="p">;</span> <span class="o">++</span><span class="n">column</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="nb">int</span> <span class="n">key</span> <span class="o">=</span> <span class="n">row</span><span class="o">*</span><span class="n">columns</span> <span class="o">+</span> <span class="n">column</span><span class="p">;</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setClipRect</span><span class="p">(</span><span class="n">column</span><span class="o">*</span><span class="n">squareSize</span><span class="p">,</span> <span class="n">row</span><span class="o">*</span><span class="n">squareSize</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">lastKey</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">column</span><span class="o">*</span><span class="n">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">*</span><span class="n">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">,</span> <span class="n">squareSize</span><span class="p">,</span> <span class="n">QBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">red</span><span class="p">));</span>
+
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">column</span><span class="o">*</span><span class="n">squareSize</span> <span class="o">+</span> <span class="p">(</span><span class="n">squareSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">fontMetrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">QChar</span><span class="p">(</span><span class="n">key</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                             <span class="n">row</span><span class="o">*</span><span class="n">squareSize</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">fontMetrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">(),</span>
+                             <span class="n">QString</span><span class="p">(</span><span class="n">QChar</span><span class="p">(</span><span class="n">key</span><span class="p">)));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We do not need to take into account the difference between the area displayed in the viewport and the area we are drawing on because everything outside the visible area will be clipped.</p>
+<p>The mousePressEvent() defines how the widget responds to mouse clicks.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastKey</span> <span class="o">=</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">)</span><span class="o">*</span><span class="n">columns</span> <span class="o">+</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">QChar</span><span class="p">(</span><span class="n">lastKey</span><span class="p">)</span><span class="o">.</span><span class="n">category</span><span class="p">()</span> <span class="o">!=</span> <span class="n">QChar</span><span class="p">::</span><span class="n">Other_NotAssigned</span><span class="p">)</span>
+            <span class="n">emit</span> <span class="n">characterSelected</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="n">QChar</span><span class="p">(</span><span class="n">lastKey</span><span class="p">)));</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+        <span class="n">QWidget</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We are only interested when the user clicks with the left mouse button over the widget. When this happens, we calculate which character was selected and emit the characterSelected() signal. The character’s number is found by dividing the x and y-coordinates of the click by the size of each character’s grid square. Since the number of columns in the widget is defined by the <code class="docutils literal"><span class="pre">columns</span></code> variable, we simply multiply the row index by that value and add the column number to obtain the character number.</p>
+<p>If any other mouse button is pressed, the event is passed on to the <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> base class. This ensures that the event can be handled properly by any other interested widgets.</p>
+<p>The mouseMoveEvent() maps the mouse cursor’s position in global coordinates to widget coordinates, and determines the character that was clicked by performing the calculation</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">CharacterWidget</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPoint</span> <span class="n">widgetPosition</span> <span class="o">=</span> <span class="n">mapFromGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">globalPos</span><span class="p">());</span>
+    <span class="n">uint</span> <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">widgetPosition</span><span class="o">.</span><span class="n">y</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">)</span><span class="o">*</span><span class="n">columns</span> <span class="o">+</span> <span class="n">widgetPosition</span><span class="o">.</span><span class="n">x</span><span class="p">()</span><span class="o">/</span><span class="n">squareSize</span><span class="p">;</span>
+
+    <span class="n">QString</span> <span class="n">text</span> <span class="o">=</span> <span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Character: &lt;span style=</span><span class="se">\&quot;</span><span class="s2">font-size: 24pt; font-family: %1</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">displayFont</span><span class="o">.</span><span class="n">family</span><span class="p">())</span>
+                  <span class="o">+</span> <span class="n">QChar</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                  <span class="o">+</span> <span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="s2">&quot;&lt;/span&gt;&lt;p&gt;Value: 0x&quot;</span><span class="p">)</span>
+                  <span class="o">+</span> <span class="n">QString</span><span class="p">::</span><span class="n">number</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="n">QToolTip</span><span class="p">::</span><span class="n">showText</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">globalPos</span><span class="p">(),</span> <span class="n">text</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The tooltip is given a position defined in global coordinates.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-definition">
+<span id="id4"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> class provides a minimal user interface for the example, with only a constructor, slots that respond to signals emitted by standard widgets, and some convenience functions that are used to set up the user interface.</p>
+<p>The class definition looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">filterChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">findStyles</span><span class="p">(</span><span class="n">const</span> <span class="n">QFont</span> <span class="o">&amp;</span><span class="n">font</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">findSizes</span><span class="p">(</span><span class="n">const</span> <span class="n">QFont</span> <span class="o">&amp;</span><span class="n">font</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">insertCharacter</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">character</span><span class="p">);</span>
+<span class="c1">#ifndef QT_NO_CLIPBOARD</span>
+    <span class="n">void</span> <span class="n">updateClipboard</span><span class="p">();</span>
+<span class="c1">#endif</span>
+    <span class="n">void</span> <span class="n">showInfo</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">CharacterWidget</span> <span class="o">*</span><span class="n">characterWidget</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">filterCombo</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">styleCombo</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">sizeCombo</span><span class="p">;</span>
+    <span class="n">QFontComboBox</span> <span class="o">*</span><span class="n">fontCombo</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">lineEdit</span><span class="p">;</span>
+    <span class="n">QScrollArea</span> <span class="o">*</span><span class="n">scrollArea</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">fontMerging</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The main window contains various widgets that are used to control how the characters will be displayed, and defines the findFonts() function for clarity and convenience. The findStyles() slot is used by the widgets to determine the styles that are available, insertCharacter() inserts a user-selected character into the window’s line edit, and updateClipboard() synchronizes the clipboard with the contents of the line edit.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id5"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor, we set up the window’s central widget and fill it with some standard widgets (two comboboxes, a line edit, and a push button). We also construct a CharacterWidget custom widget, and add a <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> so that we can view its contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Q_DECLARE_METATYPE</span><span class="p">(</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">FontFilter</span><span class="p">)</span>
+
+<span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;File&quot;</span><span class="p">));</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">));</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Show Font Info&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">showInfo</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="n">qApp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QApplication</span><span class="p">::</span><span class="n">aboutQt</span><span class="p">);</span>
+
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">centralWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QWidget</span><span class="p">;</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">filterLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Filter:&quot;</span><span class="p">));</span>
+    <span class="n">filterCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">filterCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;All&quot;</span><span class="p">),</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">AllFonts</span><span class="p">));</span>
+    <span class="n">filterCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Scalable&quot;</span><span class="p">),</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">ScalableFonts</span><span class="p">));</span>
+    <span class="n">filterCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Monospaced&quot;</span><span class="p">),</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">MonospacedFonts</span><span class="p">));</span>
+    <span class="n">filterCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Proportional&quot;</span><span class="p">),</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">ProportionalFonts</span><span class="p">));</span>
+    <span class="n">filterCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">filterCombo</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">currentIndexChanged</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">filterChanged</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">fontLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Font:&quot;</span><span class="p">));</span>
+    <span class="n">fontCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QFontComboBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">sizeLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Size:&quot;</span><span class="p">));</span>
+    <span class="n">sizeCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">styleLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Style:&quot;</span><span class="p">));</span>
+    <span class="n">styleCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">fontMergingLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Automatic Font Merging:&quot;</span><span class="p">));</span>
+    <span class="n">fontMerging</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">;</span>
+    <span class="n">fontMerging</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">scrollArea</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QScrollArea</span><span class="p">;</span>
+    <span class="n">characterWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">CharacterWidget</span><span class="p">;</span>
+    <span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setWidget</span><span class="p">(</span><span class="n">characterWidget</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> provides a viewport onto the <code class="docutils literal"><span class="pre">CharacterWidget</span></code> when we set its widget and handles much of the work needed to provide a scrolling viewport.</p>
+<p>The font combo box is automatically popuplated with a list of available fonts. We list the available styles for the current font in the style combobox using the following function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">findStyles</span><span class="p">(</span><span class="n">fontCombo</span><span class="o">-&gt;</span><span class="n">currentFont</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The line edit and push button are used to supply text to the clipboard:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">lineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+    <span class="n">lineEdit</span><span class="o">-&gt;</span><span class="n">setClearButtonEnabled</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="c1">#ifndef QT_NO_CLIPBOARD</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">clipboardButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;To clipboard&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>We also obtain a clipboard object so that we can send text entered by the user to other applications.</p>
+<p>Most of the signals emitted in the example come from standard widgets. We connect these signals to slots in this class, and to the slots provided by other widgets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">fontCombo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">currentFontChanged</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">findStyles</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">fontCombo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">currentFontChanged</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">findSizes</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">fontCombo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QFontComboBox</span><span class="p">::</span><span class="n">currentFontChanged</span><span class="p">,</span>
+        <span class="n">characterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CharacterWidget</span><span class="p">::</span><span class="n">updateFont</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">sizeCombo</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">currentIndexChanged</span><span class="p">),</span>
+        <span class="n">characterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CharacterWidget</span><span class="p">::</span><span class="n">updateSize</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">styleCombo</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">currentIndexChanged</span><span class="p">),</span>
+        <span class="n">characterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CharacterWidget</span><span class="p">::</span><span class="n">updateStyle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The font combobox’s <code class="xref py py-func docutils literal"><span class="pre">QFontComboBox.currentFontChanged()</span></code> signal is connected to the findStyles() function so that the list of available styles can be shown for each font that is used. Since both the font and the style can be changed by the user, the font combobox’s currentFontChanged() signal and the style combobox’s <code class="xref py py-func docutils literal"><span class="pre">QComboBox.currentIndexChanged()</span></code> are connected directly to the character widget.</p>
+<p>The final two connections allow characters to be selected in the character widget, and text to be inserted into the clipboard:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">characterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CharacterWidget</span><span class="p">::</span><span class="n">characterSelected</span><span class="p">,</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">insertCharacter</span><span class="p">);</span>
+
+<span class="c1">#ifndef QT_NO_CLIPBOARD</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">clipboardButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">updateClipboard</span><span class="p">);</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>The character widget emits the characterSelected() custom signal when the user clicks on a character, and this is handled by the insertCharacter() function in this class. The clipboard is changed when the push button emits the clicked() signal, and we handle this with the updateClipboard() function.</p>
+<p>The remaining code in the constructor sets up the layout of the central widget, and provides a window title:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">controlsLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">filterLabel</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">filterCombo</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fontLabel</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fontCombo</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sizeLabel</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sizeCombo</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">styleLabel</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">styleCombo</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fontMergingLabel</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fontMerging</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">controlsLayout</span><span class="o">-&gt;</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">lineLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">lineLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lineEdit</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">lineLayout</span><span class="o">-&gt;</span><span class="n">addSpacing</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+<span class="c1">#ifndef QT_NO_CLIPBOARD</span>
+    <span class="n">lineLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">clipboardButton</span><span class="p">);</span>
+<span class="c1">#endif</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">centralLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">centralLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">controlsLayout</span><span class="p">);</span>
+    <span class="n">centralLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">scrollArea</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">centralLayout</span><span class="o">-&gt;</span><span class="n">addSpacing</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">centralLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">lineLayout</span><span class="p">);</span>
+    <span class="n">centralWidget</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">centralLayout</span><span class="p">);</span>
+
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">centralWidget</span><span class="p">);</span>
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Character Map&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The font combobox is automatically populated with a list of available font families. The styles that can be used with each font are found by the findStyles() function. This function is called whenever the user selects a different font in the font combobox.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">findStyles</span><span class="p">(</span><span class="n">const</span> <span class="n">QFont</span> <span class="o">&amp;</span><span class="n">font</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QFontDatabase</span> <span class="n">fontDatabase</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">currentItem</span> <span class="o">=</span> <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">currentText</span><span class="p">();</span>
+    <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We begin by recording the currently selected style, and we clear the style combobox so that we can insert the styles associated with the current font family.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QString</span> <span class="n">style</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">fontDatabase</span><span class="o">.</span><span class="n">styles</span><span class="p">(</span><span class="n">font</span><span class="o">.</span><span class="n">family</span><span class="p">()))</span>
+        <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">style</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">styleIndex</span> <span class="o">=</span> <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">findText</span><span class="p">(</span><span class="n">currentItem</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">styleIndex</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">styleCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">styleIndex</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use the font database to collect the styles that are available for the current font, and insert them into the style combobox. The current item is reset if the original style is not available for this font.</p>
+<p>The last two functions are slots that respond to signals from the character widget and the main window’s push button. The insertCharacter() function is used to insert characters from the character widget when the user clicks a character:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">insertCharacter</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">character</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lineEdit</span><span class="o">-&gt;</span><span class="n">insert</span><span class="p">(</span><span class="n">character</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The character is inserted into the line edit at the current cursor position.</p>
+<p>The main window’s “To clipboard” push button is connected to the updateClipboard() function so that, when it is clicked, the clipboard is updated to contain the contents of the line edit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#ifndef QT_NO_CLIPBOARD
+void MainWindow::updateClipboard()
+{
+
+    QGuiApplication::clipboard()-&gt;setText(lineEdit-&gt;text(), QClipboard::Clipboard);
+
+    QGuiApplication::clipboard()-&gt;setText(lineEdit-&gt;text(), QClipboard::Selection);
+}
+#endif
+
+class FontInfoDialog : public QDialog
+{
+public:
+    explicit FontInfoDialog(QWidget *parent = nullptr);
+
+private:
+    QString text() const;
+};
+
+FontInfoDialog::FontInfoDialog(QWidget *parent) : QDialog(parent)
+{
+    setWindowFlags(windowFlags() &amp; ~Qt::WindowContextHelpButtonHint);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QPlainTextEdit *textEdit = new QPlainTextEdit(text(), this);
+    textEdit-&gt;setReadOnly(true);
+    textEdit-&gt;setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
+    mainLayout-&gt;addWidget(textEdit);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
+    connect(buttonBox, &amp;QDialogButtonBox::rejected, this, &amp;QDialog::reject);
+    mainLayout-&gt;addWidget(buttonBox);
+}
+
+QString FontInfoDialog::text() const
+{
+    QString text;
+    QTextStream str(&amp;text);
+    const QFont defaultFont = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+    const QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    const QFont titleFont = QFontDatabase::systemFont(QFontDatabase::TitleFont);
+    const QFont smallestReadableFont = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+
+    str &lt;&lt; &quot;Qt &quot; &lt;&lt; QT_VERSION_STR &lt;&lt; &quot; on &quot; &lt;&lt; QGuiApplication::platformName()
+        &lt;&lt; &quot;, &quot; &lt;&lt; logicalDpiX() &lt;&lt; &quot;DPI&quot;;
+    if (!qFuzzyCompare(devicePixelRatioF(), qreal(1)))
+        str  &lt;&lt; &quot;, device pixel ratio: &quot; &lt;&lt; devicePixelRatioF();
+    str &lt;&lt; &quot;\n\nDefault font : &quot; &lt;&lt; defaultFont.family() &lt;&lt; &quot;, &quot; &lt;&lt; defaultFont.pointSizeF() &lt;&lt; &quot;pt\n&quot;
+        &lt;&lt; &quot;Fixed font   : &quot; &lt;&lt; fixedFont.family() &lt;&lt; &quot;, &quot; &lt;&lt; fixedFont.pointSizeF() &lt;&lt; &quot;pt\n&quot;
+        &lt;&lt; &quot;Title font   : &quot; &lt;&lt; titleFont.family() &lt;&lt; &quot;, &quot; &lt;&lt; titleFont.pointSizeF() &lt;&lt; &quot;pt\n&quot;
+        &lt;&lt; &quot;Smallest font: &quot; &lt;&lt; smallestReadableFont.family() &lt;&lt; &quot;, &quot; &lt;&lt; smallestReadableFont.pointSizeF() &lt;&lt; &quot;pt\n&quot;;
+
+    return text;
+}
+
+void MainWindow::showInfo()
+{
+    const QRect screenGeometry = QApplication::desktop()-&gt;screenGeometry(this);
+    FontInfoDialog *dialog = new FontInfoDialog(this);
+    dialog-&gt;setWindowTitle(tr(&quot;Fonts&quot;));
+    dialog-&gt;setAttribute(Qt::WA_DeleteOnClose);
+    dialog-&gt;resize(screenGeometry.width() / 4, screenGeometry.height() / 4);
+    dialog-&gt;show();
+}
+</pre></div>
+</div>
+<p>We copy all the text from the line edit to the clipboard, but we do not clear the line edit.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="characterwidget-cpp-example-file">
+<h1>characterwidget.cpp Example File<a class="headerlink" href="#characterwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="characterwidget-h-example-file">
+<h1>characterwidget.h Example File<a class="headerlink" href="#characterwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="charactermap-pro-example-file">
+<h1>charactermap.pro Example File<a class="headerlink" href="#charactermap-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

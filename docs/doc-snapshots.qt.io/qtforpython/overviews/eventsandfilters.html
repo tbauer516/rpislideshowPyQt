@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Event System &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Event System</a><ul>
+<li><a class="reference internal" href="#how-events-are-delivered">How Events are Delivered</a></li>
+<li><a class="reference internal" href="#event-types">Event Types</a></li>
+<li><a class="reference internal" href="#event-handlers">Event Handlers</a></li>
+<li><a class="reference internal" href="#event-filters">Event Filters</a></li>
+<li><a class="reference internal" href="#sending-events">Sending Events</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-event-system">
+<span id="id1"></span><h1>The Event System<a class="headerlink" href="#the-event-system" title="Permalink to this headline">¶</a></h1>
+<p>A guide to event handling in Qt</p>
+<blockquote>
+<div><p>A guide to event handling in Qt.</p>
+<p>In Qt, events are objects, derived from the abstract <a class="reference internal" href="../PySide2/QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a> class, that represent things that have happened either within an application or as a result of outside activity that the application needs to know about. Events can be received and handled by any instance of a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass, but they are especially relevant to widgets. This document describes how events are delivered and handled in a typical application.</p>
+</div></blockquote>
+<div class="section" id="how-events-are-delivered">
+<span id="id2"></span><h2>How Events are Delivered<a class="headerlink" href="#how-events-are-delivered" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When an event occurs, Qt creates an event object to represent it by constructing an instance of the appropriate <a class="reference internal" href="../PySide2/QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a> subclass, and delivers it to a particular instance of <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> (or one of its subclasses) by calling its <code class="xref py py-func docutils literal"><span class="pre">QObject.event()</span></code> function.</p>
+<p>This function does not handle the event itself; based on the type of event delivered, it calls an event handler for that specific type of event, and sends a response based on whether the event was accepted or ignored.</p>
+<p>Some events, such as <a class="reference internal" href="../PySide2/QtGui/QMouseEvent.html#PySide2.QtGui.QMouseEvent" title="PySide2.QtGui.QMouseEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMouseEvent</span></code></a> and <a class="reference internal" href="../PySide2/QtGui/QKeyEvent.html#PySide2.QtGui.QKeyEvent" title="PySide2.QtGui.QKeyEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QKeyEvent</span></code></a> , come from the window system; some, such as <a class="reference internal" href="../PySide2/QtCore/QTimerEvent.html#PySide2.QtCore.QTimerEvent" title="PySide2.QtCore.QTimerEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimerEvent</span></code></a> , come from other sources; some come from the application itself.</p>
+</div></blockquote>
+</div>
+<div class="section" id="event-types">
+<span id="id3"></span><h2>Event Types<a class="headerlink" href="#event-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Most event types have special classes, notably <a class="reference internal" href="../PySide2/QtGui/QResizeEvent.html#PySide2.QtGui.QResizeEvent" title="PySide2.QtGui.QResizeEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QResizeEvent</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QPaintEvent.html#PySide2.QtGui.QPaintEvent" title="PySide2.QtGui.QPaintEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintEvent</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QMouseEvent.html#PySide2.QtGui.QMouseEvent" title="PySide2.QtGui.QMouseEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMouseEvent</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QKeyEvent.html#PySide2.QtGui.QKeyEvent" title="PySide2.QtGui.QKeyEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QKeyEvent</span></code></a> , and <a class="reference internal" href="../PySide2/QtGui/QCloseEvent.html#PySide2.QtGui.QCloseEvent" title="PySide2.QtGui.QCloseEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QCloseEvent</span></code></a> . Each class subclasses <a class="reference internal" href="../PySide2/QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a> and adds event-specific functions. For example, <a class="reference internal" href="../PySide2/QtGui/QResizeEvent.html#PySide2.QtGui.QResizeEvent" title="PySide2.QtGui.QResizeEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QResizeEvent</span></code></a> adds <code class="xref py py-func docutils literal"><span class="pre">QResizeEvent.size()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QResizeEvent.oldSize()</span></code> to enable widgets to discover how their dimensions have been changed.</p>
+<p>Some classes support more than one actual event type. <a class="reference internal" href="../PySide2/QtGui/QMouseEvent.html#PySide2.QtGui.QMouseEvent" title="PySide2.QtGui.QMouseEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMouseEvent</span></code></a> supports mouse button presses, double-clicks, moves, and other related operations.</p>
+<p>Each event has an associated type, defined in <code class="xref py py-attr docutils literal"><span class="pre">QEvent.Type</span></code> , and this can be used as a convenient source of run-time type information to quickly determine which subclass a given event object was constructed from.</p>
+<p>Since programs need to react in varied and complex ways, Qt’s event delivery mechanisms are flexible. The documentation for <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.notify()</span></code> concisely tells the whole story; the <em>Qt Quarterly</em> article Another Look at Events rehashes it less concisely. Here we will explain enough for 95% of applications.</p>
+</div></blockquote>
+</div>
+<div class="section" id="event-handlers">
+<span id="id4"></span><h2>Event Handlers<a class="headerlink" href="#event-handlers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The normal way for an event to be delivered is by calling a virtual function. For example, <a class="reference internal" href="../PySide2/QtGui/QPaintEvent.html#PySide2.QtGui.QPaintEvent" title="PySide2.QtGui.QPaintEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintEvent</span></code></a> is delivered by calling <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> . This virtual function is responsible for reacting appropriately, normally by repainting the widget. If you do not perform all the necessary work in your implementation of the virtual function, you may need to call the base class’s implementation.</p>
+<p>For example, the following code handles left mouse button clicks on a custom checkbox widget while passing all other button clicks to the base <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MyCheckBox</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">handle</span> <span class="n">left</span> <span class="n">mouse</span> <span class="n">button</span> <span class="n">here</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="k">pass</span> <span class="n">on</span> <span class="n">other</span> <span class="n">buttons</span> <span class="n">to</span> <span class="n">base</span> <span class="k">class</span>
+        <span class="nc">QCheckBox</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to replace the base class’s function, you must implement everything yourself. However, if you only want to extend the base class’s functionality, then you implement what you want and call the base class to obtain the default behavior for any cases you do not want to handle.</p>
+<p>Occasionally, there isn’t such an event-specific function, or the event-specific function isn’t sufficient. The most common example involves Tab key presses. Normally, <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> intercepts these to move the keyboard focus, but a few widgets need the Tab key for themselves.</p>
+<p>These objects can reimplement <code class="xref py py-func docutils literal"><span class="pre">QObject.event()</span></code> , the general event handler, and either do their event handling before or after the usual handling, or they can replace the function completely. A very unusual widget that both interprets Tab and has an application-specific custom event might contain the following <code class="xref py py-func docutils literal"><span class="pre">QObject.event()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">MyWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">KeyPress</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">ke</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QKeyEvent</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ke</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Tab</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">special</span> <span class="n">tab</span> <span class="n">handling</span> <span class="n">here</span>
+            <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">MyCustomEventType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">MyCustomEvent</span> <span class="o">*</span><span class="n">myEvent</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">MyCustomEvent</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+        <span class="o">//</span> <span class="n">custom</span> <span class="n">event</span> <span class="n">handling</span> <span class="n">here</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">QWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> is still called for all of the cases not handled, and that the return value indicates whether an event was dealt with; a <code class="docutils literal"><span class="pre">true</span></code> value prevents the event from being sent on to other objects.</p>
+</div></blockquote>
+</div>
+<div class="section" id="event-filters">
+<span id="id5"></span><h2>Event Filters<a class="headerlink" href="#event-filters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Sometimes an object needs to look at, and possibly intercept, the events that are delivered to another object. For example, dialogs commonly want to filter key presses for some widgets; for example, to modify Return-key handling.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QObject.installEventFilter()</span></code> function enables this by setting up an <em>event filter</em> , causing a nominated filter object to receive the events for a target object in its <code class="xref py py-func docutils literal"><span class="pre">QObject.eventFilter()</span></code> function. An event filter gets to process events before the target object does, allowing it to inspect and discard the events as required. An existing event filter can be removed using the <code class="xref py py-func docutils literal"><span class="pre">QObject.removeEventFilter()</span></code> function.</p>
+<p>When the filter object’s <code class="xref py py-func docutils literal"><span class="pre">QObject.eventFilter()</span></code> implementation is called, it can accept or reject the event, and allow or deny further processing of the event. If all the event filters allow further processing of an event (by each returning <code class="docutils literal"><span class="pre">false</span></code> ), the event is sent to the target object itself. If one of them stops processing (by returning <code class="docutils literal"><span class="pre">true</span></code> ), the target and any later event filters do not get to see the event at all.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">FilterObject</span><span class="p">::</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="nb">object</span><span class="p">,</span> <span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">object</span> <span class="o">==</span> <span class="n">target</span> <span class="o">&amp;&amp;</span> <span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">KeyPress</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">keyEvent</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QKeyEvent</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">keyEvent</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Tab</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">Special</span> <span class="n">tab</span> <span class="n">handling</span>
+            <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span>
+            <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above code shows another way to intercept Tab key press events sent to a particular target widget. In this case, the filter handles the relevant events and returns <code class="docutils literal"><span class="pre">true</span></code> to stop them from being processed any further. All other events are ignored, and the filter returns <code class="docutils literal"><span class="pre">false</span></code> to allow them to be sent on to the target widget, via any other event filters that are installed on it.</p>
+<p>It is also possible to filter <em>all</em> events for the entire application, by installing an event filter on the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> or <a class="reference internal" href="../PySide2/QtCore/QCoreApplication.html#PySide2.QtCore.QCoreApplication" title="PySide2.QtCore.QCoreApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QCoreApplication</span></code></a> object. Such global event filters are called before the object-specific filters. This is very powerful, but it also slows down event delivery of every single event in the entire application; the other techniques discussed should generally be used instead.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sending-events">
+<span id="id6"></span><h2>Sending Events<a class="headerlink" href="#sending-events" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Many applications want to create and send their own events. You can send events in exactly the same ways as Qt’s own event loop by constructing suitable event objects and sending them with <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.sendEvent()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.postEvent()</span></code> .</p>
+<p><code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.sendEvent()</span></code> processes the event immediately. When it returns, the event filters and/or the object itself have already processed the event. For many event classes there is a function called <code class="xref py py-func docutils literal"><span class="pre">QEvent.isAccepted()</span></code> that tells you whether the event was accepted or rejected by the last handler that was called.</p>
+<p><code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.postEvent()</span></code> posts the event on a queue for later dispatch. The next time Qt’s main event loop runs, it dispatches all posted events, with some optimization. For example, if there are several resize events, they are compressed into one. The same applies to paint events: <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> calls <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.postEvent()</span></code> , which eliminates flickering and increases speed by avoiding multiple repaints.</p>
+<p><code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.postEvent()</span></code> is also used during object initialization, since the posted event will typically be dispatched very soon after the initialization of the object is complete. When implementing a widget, it is important to realize that events can be delivered very early in its lifetime so, in its constructor, be sure to initialize member variables early on, before there’s any chance that it might receive an event.</p>
+<p>To create events of a custom type, you need to define an event number, which must be greater than <code class="xref py py-attr docutils literal"><span class="pre">QEvent.User</span></code> , and you may need to subclass <a class="reference internal" href="../PySide2/QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a> in order to pass specific information about your custom event. See the <a class="reference internal" href="../PySide2/QtCore/QEvent.html#PySide2.QtCore.QEvent" title="PySide2.QtCore.QEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEvent</span></code></a> documentation for further details.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

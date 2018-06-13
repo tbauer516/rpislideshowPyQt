@@ -1,0 +1,353 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Keyboard Focus in Qt Quick &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Keyboard Focus in Qt Quick</a><ul>
+<li><a class="reference internal" href="#key-handling-overview">Key Handling Overview</a></li>
+<li><a class="reference internal" href="#querying-the-active-focus-item">Querying the Active Focus Item</a></li>
+<li><a class="reference internal" href="#acquiring-focus-and-focus-scopes">Acquiring Focus and Focus Scopes</a></li>
+<li><a class="reference internal" href="#advanced-uses-of-focus-scopes">Advanced Uses of Focus Scopes</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="keyboard-focus-in-qt-quick">
+<span id="id1"></span><h1>Keyboard Focus in Qt Quick<a class="headerlink" href="#keyboard-focus-in-qt-quick" title="Permalink to this headline">¶</a></h1>
+<p>Handling keyboard focus</p>
+<blockquote>
+<div><p>handling keyboard focus</p>
+<p>When a key is pressed or released, a key event is generated and delivered to the focused Qt Quick <span class="xref std std-ref">Item</span> . To facilitate the construction of reusable components and to address some of the cases unique to fluid user interfaces, the Qt Quick items add a scope based extension to Qt’s traditional keyboard focus model.</p>
+</div></blockquote>
+<div class="section" id="key-handling-overview">
+<span id="id2"></span><h2>Key Handling Overview<a class="headerlink" href="#key-handling-overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When the user presses or releases a key, the following occurs:</p>
+<ol class="arabic">
+<li><p class="first">Qt receives the key action and generates a key event.</p>
+</li>
+<li><p class="first">If a <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> is the active window, the key event is delivered to it.</p>
+</li>
+<li><p class="first">The key event is delivered by the scene to the <span class="xref std std-ref">Item</span> with <em>active focus</em>. If no item has active focus, the key event is ignored.</p>
+</li>
+<li><p class="first">If the <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> with active focus accepts the key event, propagation stops. Otherwise the event is sent to the Item’s parent until the event is accepted, or the root item is reached.</p>
+<p>If the <code class="docutils literal"><span class="pre">Rectangle</span></code> type in the following example has active focus and the <code class="docutils literal"><span class="pre">A</span></code> key is pressed, the event will not be propagated further. Upon pressing the <code class="docutils literal"><span class="pre">B</span></code> key, the event will propagate to the root item and thus be ignored.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">Keys</span><span class="o">.</span><span class="n">onPressed</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_A</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Key A was pressed&#39;</span><span class="p">);</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">accepted</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If the root <span class="xref std std-ref">Item</span> is reached, the key event is <code class="xref py py-func docutils literal"><span class="pre">ignored</span></code> and regular Qt key handling continues.</p>
+</li>
+</ol>
+<p>See also the <span class="xref std std-ref">Keys attached property</span> and <span class="xref std std-ref">KeyNavigation attached property</span> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="querying-the-active-focus-item">
+<span id="id3"></span><h2>Querying the Active Focus Item<a class="headerlink" href="#querying-the-active-focus-item" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Whether or not an <span class="xref std std-ref">Item</span> has active focus can be queried through the <code class="docutils literal"><span class="pre">Item::activeFocus</span></code> property. For example, here we have a <span class="xref std std-ref">Text</span> type whose text is determined by whether or not it has active focus.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Text {
+    text: activeFocus ? &quot;I have active focus!&quot; : &quot;I do not have active focus&quot;
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="acquiring-focus-and-focus-scopes">
+<span id="id4"></span><h2>Acquiring Focus and Focus Scopes<a class="headerlink" href="#acquiring-focus-and-focus-scopes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An <span class="xref std std-ref">Item</span> requests focus by setting the <code class="docutils literal"><span class="pre">focus</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> .</p>
+<p>For very simple cases simply setting the <code class="docutils literal"><span class="pre">focus</span></code> property is sometimes sufficient. If we run the following example with qmlscene, we see that the <code class="docutils literal"><span class="pre">keyHandler</span></code> type has active focus and pressing the <code class="docutils literal"><span class="pre">A</span></code> , <code class="docutils literal"><span class="pre">B</span></code> , or <code class="docutils literal"><span class="pre">C</span></code> keys modifies the text appropriately.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">240</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span>
+    <span class="n">Text</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">myText</span> <span class="p">}</span>
+    <span class="n">Item</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">keyHandler</span>
+        <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">Keys</span><span class="o">.</span><span class="n">onPressed</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_A</span><span class="p">)</span>
+                <span class="n">myText</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key A was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_B</span><span class="p">)</span>
+                <span class="n">myText</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key B was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_C</span><span class="p">)</span>
+                <span class="n">myText</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key C was pressed&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>However, were the above example to be used as a reusable or imported component, this simple use of the <code class="docutils literal"><span class="pre">focus</span></code> property is no longer sufficient.</p>
+<p>To demonstrate, we create two instances of our previously defined component and set the first one to have focus. The intention is that when the <code class="docutils literal"><span class="pre">A</span></code> , <code class="docutils literal"><span class="pre">B</span></code> , or <code class="docutils literal"><span class="pre">C</span></code> keys are pressed, the first of the two components receives the event and responds accordingly.</p>
+<p>The code that imports and creates two MyWidget instances:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">Window</span> <span class="n">code</span> <span class="n">that</span> <span class="n">imports</span> <span class="n">MyWidget</span>
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">window</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">240</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">150</span>
+
+    <span class="n">Column</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span><span class="p">;</span> <span class="n">spacing</span><span class="p">:</span> <span class="mi">15</span>
+
+        <span class="n">MyWidget</span> <span class="p">{</span>
+            <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>             <span class="o">//</span><span class="nb">set</span> <span class="n">this</span> <span class="n">MyWidget</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">the</span> <span class="n">focus</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="p">}</span>
+        <span class="n">MyWidget</span> <span class="p">{</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;palegreen&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The MyWidget code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">widget</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">175</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span><span class="p">;</span> <span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">antialiasing</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">Text</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">label</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span><span class="p">}</span>
+    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">Keys</span><span class="o">.</span><span class="n">onPressed</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_A</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key A was pressed&#39;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_B</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key B was pressed&#39;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_C</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key C was pressed&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We want the first <code class="docutils literal"><span class="pre">MyWidget</span></code> object to have the focus, so we set its <code class="docutils literal"><span class="pre">focus</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> . However, by running the code, we can confirm that the second widget receives the focus.</p>
+<p>Looking at both <code class="docutils literal"><span class="pre">MyWidget</span></code> and <code class="docutils literal"><span class="pre">window</span></code> code, the problem is evident - there are three types that set the <code class="docutils literal"><span class="pre">focus</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> . The two <code class="docutils literal"><span class="pre">MyWidget</span></code> s set the <code class="docutils literal"><span class="pre">focus</span></code> to <code class="docutils literal"><span class="pre">true</span></code> and the <code class="docutils literal"><span class="pre">window</span></code> component also sets the focus. Ultimately, only one type can have keyboard focus, and the system has to decide which type receives the focus. When the second <code class="docutils literal"><span class="pre">MyWidget</span></code> is created, it receives the focus because it is the last type to set its <code class="docutils literal"><span class="pre">focus</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> .</p>
+<p>This problem is due to visibility. The <code class="docutils literal"><span class="pre">MyWidget</span></code> component would like to have the focus, but it cannot control the focus when it is imported or reused. Likewise, the <code class="docutils literal"><span class="pre">window</span></code> component does not have the ability to know if its imported components are requesting the focus.</p>
+<p>To solve this problem, QML introduces a concept known as a <em>focus scope</em> . For existing Qt users, a focus scope is like an automatic focus proxy. A focus scope is created by declaring the <span class="xref std std-ref">FocusScope</span> type.</p>
+<p>In the next example, a <span class="xref std std-ref">FocusScope</span> type is added to the component, and the visual result shown.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FocusScope</span> <span class="p">{</span>
+
+    <span class="o">//</span><span class="n">FocusScope</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">bind</span> <span class="n">to</span> <span class="n">visual</span> <span class="n">properties</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Rectangle</span>
+    <span class="nb">property</span> <span class="n">alias</span> <span class="n">color</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">color</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">x</span><span class="p">;</span> <span class="n">y</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">height</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">rectangle</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">175</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span><span class="p">;</span> <span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">antialiasing</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">label</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span>
+        <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">Keys</span><span class="o">.</span><span class="n">onPressed</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_A</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key A was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_B</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key B was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_C</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key C was pressed&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Conceptually <em>focus scopes</em> are quite simple.</p>
+<ul class="simple">
+<li>Within each focus scope one object may have <code class="docutils literal"><span class="pre">Item::focus</span></code> set to <code class="docutils literal"><span class="pre">true</span></code>. If more than one <span class="xref std std-ref">Item</span> has the <code class="docutils literal"><span class="pre">focus</span></code> property set, the last type to set the <code class="docutils literal"><span class="pre">focus</span></code> will have the focus and the others are unset, similar to when there are no focus scopes.</li>
+<li>When a focus scope receives active focus, the contained type with <code class="docutils literal"><span class="pre">focus</span></code> set (if any) also gets the active focus. If this type is also a <span class="xref std std-ref">FocusScope</span> , the proxying behavior continues. Both the focus scope and the sub-focused item will have the <code class="docutils literal"><span class="pre">activeFocus</span></code> property set.</li>
+</ul>
+<p>Note that, since the <span class="xref std std-ref">FocusScope</span> type is not a visual type, the properties of its children need to be exposed to the parent item of the <span class="xref std std-ref">FocusScope</span> . Layouts and positioning types will use these visual and styling properties to create the layout. In our example, the <code class="docutils literal"><span class="pre">Column</span></code> type cannot display the two widgets properly because the <span class="xref std std-ref">FocusScope</span> lacks visual properties of its own. The MyWidget component directly binds to the <code class="docutils literal"><span class="pre">rectangle</span></code> properties to allow the <code class="docutils literal"><span class="pre">Column</span></code> type to create the layout containing the children of the <span class="xref std std-ref">FocusScope</span> .</p>
+<p>So far, the example has the second component statically selected. It is trivial now to extend this component to make it clickable, and add it to the original application. We still set one of the widgets as focused by default. Now, clicking either MyClickableWidget gives it focus and the other widget loses the focus.</p>
+<p>The code that imports and creates two MyClickableWidget instances:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">window</span>
+
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">240</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">150</span>
+
+    <span class="n">Column</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span><span class="p">;</span> <span class="n">spacing</span><span class="p">:</span> <span class="mi">15</span>
+
+        <span class="n">MyClickableWidget</span> <span class="p">{</span>
+            <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>             <span class="o">//</span><span class="nb">set</span> <span class="n">this</span> <span class="n">MyWidget</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">the</span> <span class="n">focus</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightblue&quot;</span>
+        <span class="p">}</span>
+        <span class="n">MyClickableWidget</span> <span class="p">{</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;palegreen&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The MyClickableWidget code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FocusScope</span> <span class="p">{</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="n">scope</span>
+
+    <span class="o">//</span><span class="n">FocusScope</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">bind</span> <span class="n">to</span> <span class="n">visual</span> <span class="n">properties</span> <span class="n">of</span> <span class="n">the</span> <span class="n">children</span>
+    <span class="nb">property</span> <span class="n">alias</span> <span class="n">color</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">color</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">x</span><span class="p">;</span> <span class="n">y</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">height</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">rectangle</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">175</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span><span class="p">;</span> <span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">antialiasing</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">label</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span>
+        <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">Keys</span><span class="o">.</span><span class="n">onPressed</span><span class="p">:</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_A</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key A was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_B</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key B was pressed&#39;</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Key_C</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Key C was pressed&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">MouseArea</span> <span class="p">{</span> <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span> <span class="n">scope</span><span class="o">.</span><span class="n">focus</span> <span class="o">=</span> <span class="n">true</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a QML <span class="xref std std-ref">Item</span> explicitly relinquishes focus (by setting its <code class="docutils literal"><span class="pre">focus</span></code> property to <code class="docutils literal"><span class="pre">false</span></code> while it has active focus), the system does not automatically select another type to receive focus. That is, it is possible for there to be no currently active focus.</p>
+<p>See <a class="reference internal" href="qtquick-keyinteraction-example.html#qt-quick-examples-key-interaction"><span class="std std-ref">Qt Quick Examples - Key Interaction</span></a> for a demonstration of moving keyboard focus between multiple areas using <span class="xref std std-ref">FocusScope</span> types.</p>
+</div></blockquote>
+</div>
+<div class="section" id="advanced-uses-of-focus-scopes">
+<span id="id5"></span><h2>Advanced Uses of Focus Scopes<a class="headerlink" href="#advanced-uses-of-focus-scopes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Focus scopes allow focus to allocation to be easily partitioned. Several QML items use it to this effect.</p>
+<p><span class="xref std std-ref">ListView</span> , for example, is itself a focus scope. Generally this isn’t noticeable as <span class="xref std std-ref">ListView</span> doesn’t usually have manually added visual children. By being a focus scope, <span class="xref std std-ref">ListView</span> can focus the current list item without worrying about how that will effect the rest of the application. This allows the current item delegate to react to key presses.</p>
+<p>This contrived example shows how this works. Pressing the <code class="docutils literal"><span class="pre">Return</span></code> key will print the name of the current list item.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">50</span>
+
+    <span class="n">ListView</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+
+        <span class="n">model</span><span class="p">:</span> <span class="n">ListModel</span> <span class="p">{</span>
+            <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span> <span class="p">}</span>
+            <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span> <span class="p">}</span>
+            <span class="n">ListElement</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Michael&quot;</span> <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">FocusScope</span> <span class="p">{</span>
+                <span class="n">width</span><span class="p">:</span> <span class="n">childrenRect</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">childrenRect</span><span class="o">.</span><span class="n">height</span>
+                <span class="n">x</span><span class="p">:</span><span class="n">childrenRect</span><span class="o">.</span><span class="n">x</span><span class="p">;</span> <span class="n">y</span><span class="p">:</span> <span class="n">childrenRect</span><span class="o">.</span><span class="n">y</span>
+                <span class="n">TextInput</span> <span class="p">{</span>
+                    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+                    <span class="n">text</span><span class="p">:</span> <span class="n">name</span>
+                    <span class="n">Keys</span><span class="o">.</span><span class="n">onReturnPressed</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While the example is simple, there is a lot going on behind the scenes. Whenever the current item changes, the <span class="xref std std-ref">ListView</span> sets the delegate’s <code class="docutils literal"><span class="pre">Item::focus</span></code> property. As the <span class="xref std std-ref">ListView</span> is a focus scope, this doesn’t affect the rest of the application. However, if the <span class="xref std std-ref">ListView</span> itself has active focus this causes the delegate itself to receive active focus. In this example, the root type of the delegate is also a focus scope, which in turn gives active focus to the <code class="docutils literal"><span class="pre">Text</span></code> type that actually performs the work of handling the <code class="docutils literal"><span class="pre">Return</span></code> key.</p>
+<p>All of the QML view classes, such as <span class="xref std std-ref">PathView</span> and <span class="xref std std-ref">GridView</span> , behave in a similar manner to allow key handling in their respective delegates.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

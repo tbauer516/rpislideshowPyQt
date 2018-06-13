@@ -1,0 +1,994 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QTimeZone &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QTimeZone.OffsetData" href="QTimeZone.OffsetData.html" />
+    <link rel="prev" title="QLocale" href="QLocale.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtCore</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QTimeZone</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#remarks">Remarks</a></li>
+<li><a class="reference internal" href="#iana-time-zone-ids">IANA Time Zone IDs</a></li>
+<li><a class="reference internal" href="#utc-offset-time-zones">UTC Offset Time Zones</a></li>
+<li><a class="reference internal" href="#windows-time-zones">Windows Time Zones</a></li>
+<li><a class="reference internal" href="#system-time-zone">System Time Zone</a></li>
+<li><a class="reference internal" href="#time-zone-offsets">Time Zone Offsets</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QLocale.html"
+                        title="previous chapter">QLocale</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QTimeZone.OffsetData.html"
+                        title="next chapter">QTimeZone.OffsetData</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtCore"></span><div class="section" id="qtimezone">
+<span id="id1"></span><h1>QTimeZone<a class="headerlink" href="#qtimezone" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-5c2f71c92724b578187315c89cc46ce173cd106f.png" alt="Inheritance diagram of PySide2.QtCore.QTimeZone" usemap="#inheritance7379562876" class="inheritance"/>
+<map id="inheritance7379562876" name="inheritance7379562876">
+<area shape="rect" id="node1" href="#PySide2.QtCore.QTimeZone" title="QtCore.QTimeZone" alt="" coords="5,5,152,31"/>
+</map>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.__eq__" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.__eq__"><code class="xref py py-meth docutils literal"><span class="pre">__eq__</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.__ne__" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.__ne__"><code class="xref py py-meth docutils literal"><span class="pre">__ne__</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">abbreviation</span></code></a> (atDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.comment" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.comment"><code class="xref py py-meth docutils literal"><span class="pre">comment</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.country" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.country"><code class="xref py py-meth docutils literal"><span class="pre">country</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">daylightTimeOffset</span></code></a> (atDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName"><code class="xref py py-meth docutils literal"><span class="pre">displayName</span></code></a> (atDateTime[, nameType=QTimeZone.DefaultName[, locale=QLocale()]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName"><code class="xref py py-meth docutils literal"><span class="pre">displayName</span></code></a> (timeType[, nameType=QTimeZone.DefaultName[, locale=QLocale()]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime"><code class="xref py py-meth docutils literal"><span class="pre">hasDaylightTime</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions"><code class="xref py py-meth docutils literal"><span class="pre">hasTransitions</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.id" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.id"><code class="xref py py-meth docutils literal"><span class="pre">id</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime"><code class="xref py py-meth docutils literal"><span class="pre">isDaylightTime</span></code></a> (atDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isValid" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isValid"><code class="xref py py-meth docutils literal"><span class="pre">isValid</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition"><code class="xref py py-meth docutils literal"><span class="pre">nextTransition</span></code></a> (afterDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetData" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetData"><code class="xref py py-meth docutils literal"><span class="pre">offsetData</span></code></a> (forDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">offsetFromUtc</span></code></a> (atDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition"><code class="xref py py-meth docutils literal"><span class="pre">previousTransition</span></code></a> (beforeDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">standardTimeOffset</span></code></a> (atDateTime)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.swap" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.swap"><code class="xref py py-meth docutils literal"><span class="pre">swap</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions"><code class="xref py py-meth docutils literal"><span class="pre">transitions</span></code></a> (fromDateTime, toDateTime)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">availableTimeZoneIds</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">availableTimeZoneIds</span></code></a> (country)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">availableTimeZoneIds</span></code></a> (offsetSeconds)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId"><code class="xref py py-meth docutils literal"><span class="pre">ianaIdToWindowsId</span></code></a> (ianaId)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable"><code class="xref py py-meth docutils literal"><span class="pre">isTimeZoneIdAvailable</span></code></a> (ianaId)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone"><code class="xref py py-meth docutils literal"><span class="pre">systemTimeZone</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId"><code class="xref py py-meth docutils literal"><span class="pre">systemTimeZoneId</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.utc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.utc"><code class="xref py py-meth docutils literal"><span class="pre">utc</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId"><code class="xref py py-meth docutils literal"><span class="pre">windowsIdToDefaultIanaId</span></code></a> (windowsId)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId"><code class="xref py py-meth docutils literal"><span class="pre">windowsIdToDefaultIanaId</span></code></a> (windowsId, country)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds"><code class="xref py py-meth docutils literal"><span class="pre">windowsIdToIanaIds</span></code></a> (windowsId)</li>
+<li>def <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds"><code class="xref py py-meth docutils literal"><span class="pre">windowsIdToIanaIds</span></code></a> (windowsId, country)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> class converts between UTC and local time in a specific time zone.</p>
+<p>This class provides a stateless calculator for time zone conversions between UTC and the local time in a specific time zone. By default it uses the host system time zone data to perform these conversions.</p>
+<p>This class is primarily designed for use in <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> ; most applications will not need to access this class directly and should instead use <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> with a <code class="xref py py-attr docutils literal"><span class="pre">Qt.TimeSpec</span></code> of <code class="xref py py-attr docutils literal"><span class="pre">Qt.TimeZone</span></code> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For consistency with <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> does not account for leap seconds.</p>
+</div>
+</div></blockquote>
+<div class="section" id="remarks">
+<span id="pyside2-qtcore-qtimezone-remarks"></span><h3>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="iana-time-zone-ids">
+<span id="pyside2-qtcore-qtimezone-iana-time-zone-ids"></span><h3>IANA Time Zone IDs<a class="headerlink" href="#iana-time-zone-ids" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> uses the IANA time zone IDs as defined in the IANA Time Zone Database (<a class="reference external" href="http://www.iana.org/time-zones">http://www.iana.org/time-zones</a>). This is to ensure a standard ID across all supported platforms. Most platforms support the IANA IDs and the IANA Database natively, but for Windows a mapping is required to the native IDs. See below for more details.</p>
+<p>The IANA IDs can and do change on a regular basis, and can vary depending on how recently the host system data was updated. As such you cannot rely on any given ID existing on any host system. You must use <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a> to determine what IANA IDs are available.</p>
+<p>The IANA IDs and database are also know as the Olson IDs and database, named after their creator.</p>
+</div></blockquote>
+</div>
+<div class="section" id="utc-offset-time-zones">
+<span id="pyside2-qtcore-qtimezone-utc-offset-time-zones"></span><h3>UTC Offset Time Zones<a class="headerlink" href="#utc-offset-time-zones" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>A default UTC time zone backend is provided which is always guaranteed to be available. This provides a set of generic Offset From UTC time zones in the range UTC-14:00 to UTC+14:00. These time zones can be created using either the standard ISO format names “UTC+00:00” as listed by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a> , or using the number of offset seconds.</div></blockquote>
+</div>
+<div class="section" id="windows-time-zones">
+<span id="pyside2-qtcore-qtimezone-windows-time-zones"></span><h3>Windows Time Zones<a class="headerlink" href="#windows-time-zones" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Windows native time zone support is severely limited compared to the standard IANA TZ Database. Windows time zones cover larger geographic areas and are thus less accurate in their conversions. They also do not support as much historic conversion data and so may only be accurate for the current year.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> uses a conversion table derived form the Unicode CLDR data to map between IANA IDs and Windows IDs. Depending on your version of Windows and Qt, this table may not be able to provide a valid conversion, in which “UTC” will be returned.</p>
+<p><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> provides a public API to use this conversion table. The Windows ID used is the Windows Registry Key for the time zone which is also the MS Exchange EWS ID as well, but is different to the Time Zone Name (TZID) and COD code used by MS Exchange in versions before 2007.</p>
+</div></blockquote>
+</div>
+<div class="section" id="system-time-zone">
+<span id="pyside2-qtcore-qtimezone-system-time-zone"></span><h3>System Time Zone<a class="headerlink" href="#system-time-zone" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> does not support any concept of a system or default time zone. If you require a <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> that uses the current system time zone at any given moment then you should use a <code class="xref py py-attr docutils literal"><span class="pre">Qt.TimeSpec</span></code> of <code class="xref py py-attr docutils literal"><span class="pre">Qt.LocalTime</span></code> .</p>
+<p>The method <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.systemTimeZoneId()</span></code></a> returns the current system IANA time zone ID which on Unix-like systems will always be correct. On Windows this ID is translated from the Windows system ID using an internal translation table and the user’s selected country. As a consequence there is a small chance any Windows install may have IDs not known by Qt, in which case “UTC” will be returned.</p>
+<p>Creating a new <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> instance using the system time zone ID will only produce a fixed named copy of the time zone, it will not change if the system time zone changes.</p>
+</div></blockquote>
+</div>
+<div class="section" id="time-zone-offsets">
+<span id="pyside2-qtcore-qtimezone-time-zone-offsets"></span><h3>Time Zone Offsets<a class="headerlink" href="#time-zone-offsets" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>The difference between UTC and the local time in a time zone is expressed as an offset in seconds from UTC, i.e. the number of seconds to add to UTC to obtain the local time. The total offset is comprised of two component parts, the standard time offset and the daylight-saving time offset. The standard time offset is the number of seconds to add to UTC to obtain standard time in the time zone. The daylight-saving time offset is the number of seconds to add to the standard time offset to obtain daylight-saving time (abbreviated DST and sometimes called “daylight time” or “summer time”) in the time zone.</p>
+<p>Note that the standard and DST offsets for a time zone may change over time as countries have changed DST laws or even their standard time offset.</p>
+</div></blockquote>
+</div>
+<div class="section" id="license">
+<span id="pyside2-qtcore-qtimezone-license"></span><h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>This class includes data obtained from the CLDR data files under the terms of the Unicode Data Files and Software License. See Unicode CLDR (Unicode Common Locale Data Repository) for the details.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtCore.QTimeZone">
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTimeZone</code><a class="headerlink" href="#PySide2.QtCore.QTimeZone" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTimeZone</code><span class="sig-paren">(</span><em>ianaId</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTimeZone</code><span class="sig-paren">(</span><em>zoneId</em>, <em>offsetSeconds</em>, <em>name</em>, <em>abbreviation</em><span class="optional">[</span>, <em>country=QLocale.AnyCountry</em><span class="optional">[</span>, <em>comment=&quot;&quot;</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTimeZone</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtCore.</code><code class="descname">QTimeZone</code><span class="sig-paren">(</span><em>offsetSeconds</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>offsetSeconds</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>zoneId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></li>
+<li><strong>name</strong> – unicode</li>
+<li><strong>comment</strong> – unicode</li>
+<li><strong>country</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.PySide2.QtCore.QLocale.Country" title="PySide2.QtCore.PySide2.QtCore.QLocale.Country"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QLocale.Country</span></code></a></li>
+<li><strong>ianaId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>abbreviation</strong> – unicode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a null/invalid time zone instance.</p>
+<p>Creates an instance of the requested time zone <code class="docutils literal"><span class="pre">ianaId</span></code> .</p>
+<p>The ID must be one of the available system IDs otherwise an invalid time zone will be returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a></p>
+</div>
+<p>Creates a custom time zone with an ID of <code class="docutils literal"><span class="pre">ianaId</span></code> and an offset from UTC of <code class="docutils literal"><span class="pre">offsetSeconds</span></code> . The <code class="docutils literal"><span class="pre">name</span></code> will be the name used by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.displayName()</span></code></a> for the <code class="xref py py-attr docutils literal"><span class="pre">LongName</span></code> , the <code class="docutils literal"><span class="pre">abbreviation</span></code> will be used by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.displayName()</span></code></a> for the <code class="xref py py-attr docutils literal"><span class="pre">ShortName</span></code> and by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.abbreviation()</span></code></a> , and the optional <code class="docutils literal"><span class="pre">country</span></code> will be used by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.country" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.country"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.country()</span></code></a> . The <code class="docutils literal"><span class="pre">comment</span></code> is an optional note that may be displayed in a GUI to assist users in selecting a time zone.</p>
+<p>The <code class="docutils literal"><span class="pre">ianaId</span></code> must not be one of the available system IDs returned by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a> . The <code class="docutils literal"><span class="pre">offsetSeconds</span></code> from UTC must be in the range -14 hours to +14 hours.</p>
+<p>If the custom time zone does not have a specific country then set it to the default value of <code class="xref py py-attr docutils literal"><span class="pre">QLocale.AnyCountry</span></code> .</p>
+<p>Copy constructor, copy <code class="docutils literal"><span class="pre">other</span></code> to this.</p>
+<p>Creates an instance of a time zone with the requested Offset from UTC of <code class="docutils literal"><span class="pre">offsetSeconds</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">offsetSeconds</span></code> from UTC must be in the range -14 hours to +14 hours otherwise an invalid time zone will be returned.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.TimeType">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">TimeType</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.TimeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of time zone time, for example when requesting the name. In time zones that do not apply DST, all three values may return the same result.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QTimeZone.StandardTime</td>
+<td>The standard time in a time zone, i.e. when Daylight-Saving is not in effect. For example when formatting a display name this will show something like “Pacific Standard Time”.</td>
+</tr>
+<tr class="row-odd"><td>QTimeZone.DaylightTime</td>
+<td>A time when Daylight-Saving is in effect. For example when formatting a display name this will show something like “Pacific daylight-saving time”.</td>
+</tr>
+<tr class="row-even"><td>QTimeZone.GenericTime</td>
+<td>A time which is not specifically Standard or Daylight-Saving time, either an unknown time or a neutral form. For example when formatting a display name this will show something like “Pacific Time”.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">NameType</code><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of time zone name.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QTimeZone.DefaultName</td>
+<td>The default form of the time zone name, e.g. , or</td>
+</tr>
+<tr class="row-odd"><td>QTimeZone.LongName</td>
+<td>The long form of the time zone name, e.g. “Central European Time”</td>
+</tr>
+<tr class="row-even"><td>QTimeZone.ShortName</td>
+<td>The short form of the time zone name, usually an abbreviation, e.g. “CET”</td>
+</tr>
+<tr class="row-odd"><td>QTimeZone.OffsetName</td>
+<td>The standard ISO offset form of the time zone name, e.g. “UTC+01:00”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">abbreviation</code><span class="sig-paren">(</span><em>atDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the time zone abbreviation at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> . The abbreviation may change depending on DST or even historical events.</p>
+<p>Note that the abbreviation is not guaranteed to be unique to this time zone and should not be used in place of the ID or display name.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.displayName()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">availableTimeZoneIds</code><span class="sig-paren">(</span><em>country</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>country</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.PySide2.QtCore.QLocale.Country" title="PySide2.QtCore.PySide2.QtCore.QLocale.Country"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QLocale.Country</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of all available IANA time zone IDs for a given <code class="docutils literal"><span class="pre">country</span></code> .</p>
+<p>As a special case, a <code class="docutils literal"><span class="pre">country</span></code> of Qt::AnyCountry returns those time zones that do not have any country related to them, such as UTC. If you require a list of all time zone IDs for all countries then use the standard <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a> method.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">availableTimeZoneIds</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of all available IANA time zone IDs on this system.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">availableTimeZoneIds</code><span class="sig-paren">(</span><em>offsetSeconds</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offsetSeconds</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of all available IANA time zone IDs with a given standard time offset of <code class="docutils literal"><span class="pre">offsetSeconds</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.comment">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">comment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.comment" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">unicode</td>
+</tr>
+</tbody>
+</table>
+<p>Returns any comment for the time zone.</p>
+<p>A comment may be provided by the host platform to assist users in choosing the correct time zone. Depending on the platform this may not be localized.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.country">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">country</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.country" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QLocale.html#PySide2.QtCore.PySide2.QtCore.QLocale.Country" title="PySide2.QtCore.PySide2.QtCore.QLocale.Country"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QLocale.Country</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the country for the time zone.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">daylightTimeOffset</code><span class="sig-paren">(</span><em>atDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the daylight-saving time offset at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> , i.e. the number of seconds to add to the standard time offset to obtain the local daylight-saving time.</p>
+<p>For example, for the time zone “Europe/Berlin” the DST offset is +3600 seconds. During standard time will return 0, and when daylight-saving is in effect it will return +3600.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.offsetFromUtc()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.standardTimeOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">displayName</code><span class="sig-paren">(</span><em>timeType</em><span class="optional">[</span>, <em>nameType=QTimeZone.DefaultName</em><span class="optional">[</span>, <em>locale=QLocale()</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timeType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.TimeType" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.TimeType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.TimeType</span></code></a></li>
+<li><strong>nameType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.NameType</span></code></a></li>
+<li><strong>locale</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.QLocale" title="PySide2.QtCore.QLocale"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QLocale</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the localized time zone display name for the given <code class="docutils literal"><span class="pre">timeType</span></code> and <code class="docutils literal"><span class="pre">nameType</span></code> in the given <code class="docutils literal"><span class="pre">locale</span></code> . The <code class="docutils literal"><span class="pre">nameType</span></code> and <code class="docutils literal"><span class="pre">locale</span></code> requested may not be supported on all platforms, in which case the best available option will be returned.</p>
+<p>If the <code class="docutils literal"><span class="pre">locale</span></code> is not provided then the application default locale will be used.</p>
+<p>Where the time zone display names have changed over time then the most recent names will be used.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.abbreviation()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">displayName</code><span class="sig-paren">(</span><em>atDateTime</em><span class="optional">[</span>, <em>nameType=QTimeZone.DefaultName</em><span class="optional">[</span>, <em>locale=QLocale()</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></li>
+<li><strong>nameType</strong> – <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.NameType"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.NameType</span></code></a></li>
+<li><strong>locale</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.QLocale" title="PySide2.QtCore.QLocale"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QLocale</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">unicode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the localized time zone display name at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> for the given <code class="docutils literal"><span class="pre">nameType</span></code> in the given <code class="docutils literal"><span class="pre">locale</span></code> . The <code class="docutils literal"><span class="pre">nameType</span></code> and <code class="docutils literal"><span class="pre">locale</span></code> requested may not be supported on all platforms, in which case the best available option will be returned.</p>
+<p>If the <code class="docutils literal"><span class="pre">locale</span></code> is not provided then the application default locale will be used.</p>
+<p>The display name may change depending on DST or historical events.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.abbreviation()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">hasDaylightTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the time zone has practiced daylight-saving at any time.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.isDaylightTime()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">hasTransitions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the system backend supports obtaining transitions.</p>
+<p>Transitions are changes in the time-zone: these happen when DST turns on or off and when authorities alter the offsets for the time-zone.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.nextTransition()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.previousTransition()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.transitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">ianaIdToWindowsId</code><span class="sig-paren">(</span><em>ianaId</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ianaId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the Windows ID equivalent to the given <code class="docutils literal"><span class="pre">ianaId</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToIanaIds()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.id">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the IANA ID for the time zone.</p>
+<p>IANA IDs are used on all platforms. On Windows these are translated from the Windows ID into the closest IANA ID for the time zone and country.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">isDaylightTime</code><span class="sig-paren">(</span><em>atDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isDaylightTime" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if daylight-saving was in effect at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasDaylightTime"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.hasDaylightTime()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">isTimeZoneIdAvailable</code><span class="sig-paren">(</span><em>ianaId</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isTimeZoneIdAvailable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ianaId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if a given time zone <code class="docutils literal"><span class="pre">ianaId</span></code> is available on this system.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.availableTimeZoneIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.availableTimeZoneIds()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.isValid">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">isValid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.isValid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this time zone is valid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">nextTransition</code><span class="sig-paren">(</span><em>afterDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>afterDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone::OffsetData</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the first time zone Transition after the given <code class="docutils literal"><span class="pre">afterDateTime</span></code> . This is most useful when you have a Transition time and wish to find the Transition after it.</p>
+<p>If there is no transition after the given <code class="docutils literal"><span class="pre">afterDateTime</span></code> then an invalid <code class="xref py py-class docutils literal"><span class="pre">OffsetData</span></code> will be returned with an invalid <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> .</p>
+<p>The given <code class="docutils literal"><span class="pre">afterDateTime</span></code> is exclusive.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.hasTransitions()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.previousTransition()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.transitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetData">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">offsetData</code><span class="sig-paren">(</span><em>forDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetData" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>forDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone::OffsetData</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the effective offset details at the given <code class="docutils literal"><span class="pre">forDateTime</span></code> . This is the equivalent of calling <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.offsetFromUtc()</span></code></a> , <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.abbreviation()</span></code></a> , etc individually but is more efficient.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.offsetFromUtc()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.standardTimeOffset()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.abbreviation"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.abbreviation()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">offsetFromUtc</code><span class="sig-paren">(</span><em>atDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the total effective offset at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> , i.e. the number of seconds to add to UTC to obtain the local time. This includes any DST offset that may be in effect, i.e. it is the sum of <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.standardTimeOffset()</span></code></a> and <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a> for the given datetime.</p>
+<p>For example, for the time zone “Europe/Berlin” the standard time offset is +3600 seconds and the DST offset is +3600 seconds. During standard time will return +3600 (UTC+01:00), and during DST it will return +7200 (UTC+02:00).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.standardTimeOffset()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.__ne__">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">__ne__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.__ne__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this time zone is not equal to the <code class="docutils literal"><span class="pre">other</span></code> time zone.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.__eq__">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this time zone is equal to the <code class="docutils literal"><span class="pre">other</span></code> time zone.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">previousTransition</code><span class="sig-paren">(</span><em>beforeDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>beforeDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone::OffsetData</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the first time zone Transition before the given <code class="docutils literal"><span class="pre">beforeDateTime</span></code> . This is most useful when you have a Transition time and wish to find the Transition before it.</p>
+<p>If there is no transition before the given <code class="docutils literal"><span class="pre">beforeDateTime</span></code> then an invalid <code class="xref py py-class docutils literal"><span class="pre">OffsetData</span></code> will be returned with an invalid <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> .</p>
+<p>The given <code class="docutils literal"><span class="pre">beforeDateTime</span></code> is exclusive.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.hasTransitions()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.nextTransition()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.transitions()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">standardTimeOffset</code><span class="sig-paren">(</span><em>atDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.standardTimeOffset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>atDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the standard time offset at the given <code class="docutils literal"><span class="pre">atDateTime</span></code> , i.e. the number of seconds to add to UTC to obtain the local Standard Time. This excludes any DST offset that may be in effect.</p>
+<p>For example, for the time zone “Europe/Berlin” the standard time offset is +3600 seconds. During both standard and DST <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.offsetFromUtc()</span></code></a> will return +3600 (UTC+01:00).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.offsetFromUtc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.offsetFromUtc()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.daylightTimeOffset"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.daylightTimeOffset()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.swap">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">swap</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.swap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Swaps this time zone instance with <code class="docutils literal"><span class="pre">other</span></code> . This function is very fast and never fails.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">systemTimeZone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> object that refers to the local system time, as specified by <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.systemTimeZoneId()</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.utc" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.utc"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.utc()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">systemTimeZoneId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZoneId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the current system time zone IANA ID.</p>
+<p>On Windows this ID is translated from the Windows ID using an internal translation table and the user’s selected country. As a consequence there is a small chance any Windows install may have IDs not known by Qt, in which case “UTC” will be returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions">
+<code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">transitions</code><span class="sig-paren">(</span><em>fromDateTime</em>, <em>toDateTime</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.transitions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fromDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></li>
+<li><strong>toDateTime</strong> – <a class="reference internal" href="QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of all time zone transitions between the given datetimes.</p>
+<p>The given <code class="docutils literal"><span class="pre">fromDateTime</span></code> and <code class="docutils literal"><span class="pre">toDateTime</span></code> are inclusive.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.hasTransitions"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.hasTransitions()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.nextTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.nextTransition()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.previousTransition"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.previousTransition()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.utc">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">utc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.utc" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a <a class="reference internal" href="#PySide2.QtCore.QTimeZone" title="PySide2.QtCore.QTimeZone"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimeZone</span></code></a> object that refers to UTC (Universal Time Coordinated).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.systemTimeZone"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.systemTimeZone()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">windowsIdToDefaultIanaId</code><span class="sig-paren">(</span><em>windowsId</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>windowsId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the default IANA ID for a given <code class="docutils literal"><span class="pre">windowsId</span></code> .</p>
+<p>Because a Windows ID can cover several IANA IDs in several different countries, this function returns the most frequently used IANA ID with no regard for the country and should thus be used with care. It is usually best to request the default for a specific country.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.ianaIdToWindowsId()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToIanaIds()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">windowsIdToDefaultIanaId</code><span class="sig-paren">(</span><em>windowsId</em>, <em>country</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>windowsId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>country</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.PySide2.QtCore.QLocale.Country" title="PySide2.QtCore.PySide2.QtCore.QLocale.Country"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QLocale.Country</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the default IANA ID for a given <code class="docutils literal"><span class="pre">windowsId</span></code> and <code class="docutils literal"><span class="pre">country</span></code> .</p>
+<p>Because a Windows ID can cover several IANA IDs within a given country, the most frequently used IANA ID in that country is returned.</p>
+<p>As a special case, <code class="xref py py-attr docutils literal"><span class="pre">QLocale.AnyCountry</span></code> returns the default of those IANA IDs that do not have any specific country.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.ianaIdToWindowsId()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToIanaIds()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds">
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">windowsIdToIanaIds</code><span class="sig-paren">(</span><em>windowsId</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToIanaIds" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>windowsId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Returns all the IANA IDs for a given <code class="docutils literal"><span class="pre">windowsId</span></code> .</p>
+<p>The returned list is sorted alphabetically.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.ianaIdToWindowsId()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtCore.QTimeZone.</code><code class="descname">windowsIdToIanaIds</code><span class="sig-paren">(</span><em>windowsId</em>, <em>country</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>windowsId</strong> – <a class="reference internal" href="QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>country</strong> – <a class="reference internal" href="QLocale.html#PySide2.QtCore.PySide2.QtCore.QLocale.Country" title="PySide2.QtCore.PySide2.QtCore.QLocale.Country"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.QLocale.Country</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns all the IANA IDs for a given <code class="docutils literal"><span class="pre">windowsId</span></code> and <code class="docutils literal"><span class="pre">country</span></code> .</p>
+<p>As a special case <code class="xref py py-attr docutils literal"><span class="pre">QLocale.AnyCountry</span></code> returns those IANA IDs that do not have any specific country.</p>
+<p>The returned list is in order of frequency of usage, i.e. larger zones within a country are listed first.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.ianaIdToWindowsId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.ianaIdToWindowsId()</span></code></a>  <a class="reference internal" href="#PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId" title="PySide2.QtCore.PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtCore.QTimeZone.windowsIdToDefaultIanaId()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

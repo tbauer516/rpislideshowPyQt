@@ -1,0 +1,553 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Places (C++) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Places (C++)</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#place-definition">Place Definition</a></li>
+<li><a class="reference internal" href="#common-operations">Common Operations</a></li>
+<li><a class="reference internal" href="#initializing-a-manager">Initializing a Manager</a></li>
+<li><a class="reference internal" href="#discovery-search">Discovery/Search</a></li>
+<li><a class="reference internal" href="#recommendations">Recommendations</a></li>
+<li><a class="reference internal" href="#paging">Paging</a></li>
+<li><a class="reference internal" href="#fetching-place-details">Fetching Place Details</a></li>
+<li><a class="reference internal" href="#fetching-rich-content">Fetching Rich Content</a></li>
+<li><a class="reference internal" href="#search-suggestions">Search Suggestions</a></li>
+<li><a class="reference internal" href="#saving-a-place">Saving a Place</a></li>
+<li><a class="reference internal" href="#caveats">Caveats</a></li>
+<li><a class="reference internal" href="#saving-between-managers">Saving Between Managers</a></li>
+<li><a class="reference internal" href="#removing-a-place">Removing a Place</a></li>
+<li><a class="reference internal" href="#using-categories">Using Categories</a></li>
+<li><a class="reference internal" href="#saving-a-category">Saving a Category</a></li>
+<li><a class="reference internal" href="#removing-a-category">Removing a Category</a></li>
+<li><a class="reference internal" href="#matching-places-between-managers">Matching Places Between Managers</a></li>
+<li><a class="reference internal" href="#classes-in-places">Classes in Places</a></li>
+<li><a class="reference internal" href="#data-classes">Data Classes</a></li>
+<li><a class="reference internal" href="#request-classes">Request Classes</a></li>
+<li><a class="reference internal" href="#reply-classes">Reply classes</a></li>
+<li><a class="reference internal" href="#manager-classes">Manager Classes</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="places-c">
+<span id="id1"></span><h1>Places (C++)<a class="headerlink" href="#places-c" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="overview">
+<span id="places-reply-classes"></span><span id="removing-a-place-cpp"></span><span id="saving-a-place-cpp"></span><span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The Places API allows users to discover places/points of interest and view details about them such as address and contact information; some places may even have rich content such as images and reviews. The Places API also facilitates management of places and categories, allowing users to save and remove them.</div></blockquote>
+</div>
+<div class="section" id="place-definition">
+<span id="id3"></span><h2>Place Definition<a class="headerlink" href="#place-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A place is a point of interest, it could be a favorite restaurant, a park or someone’s home. A <a class="reference internal" href="../PySide2/QtLocation/QPlace.html#PySide2.QtLocation.QPlace" title="PySide2.QtLocation.QPlace"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlace</span></code></a> object represents a place by acting as a container for various information about that place.</p>
+<p>This information can be divided into 2 broad classifications</p>
+<ul class="simple">
+<li>Details</li>
+<li>Rich content</li>
+</ul>
+<p>The place details consist of properties of the place, such as the name, location, contact information and so on. When a place is returned during a search, these details are filled in. Sometimes in order to save bandwidth, there are further details about the place that can be retrieved on an individual place by place basis, if the user is interested. The <code class="xref py py-func docutils literal"><span class="pre">QPlace.detailsFetched()</span></code> function can be queried to see if all available details have been fetched, and if not, <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.getPlaceDetails()</span></code> can be used to retrieve them. Precisely which details are populated during a search and which need to be fetched individually may vary from provider to provider. See <span class="xref std std-ref">plugin documentation</span> for more details.</p>
+<p>The rich content of a place consists of items such as images, reviews and editorials. Potentially there may be many rich content items, so they are treated separately from the place details. They can be retrieved in a paged fashion via <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.getPlaceContent()</span></code> . If necessary, the content may be assigned to a place so it can act as a convenient container.</p>
+</div></blockquote>
+</div>
+<div class="section" id="common-operations">
+<span id="id4"></span><h2>Common Operations<a class="headerlink" href="#common-operations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="initializing-a-manager">
+<span id="id5"></span><h2>Initializing a Manager<a class="headerlink" href="#initializing-a-manager" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>All places functionality is facilitated by a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> instance. One must specify a <a class="reference internal" href="../PySide2/QtLocation/QGeoServiceProvider.html#PySide2.QtLocation.QGeoServiceProvider" title="PySide2.QtLocation.QGeoServiceProvider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QGeoServiceProvider</span></code></a> in order to create the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">The</span> <span class="s2">&quot;provider name&quot;</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">select</span> <span class="n">a</span> <span class="n">particular</span> <span class="n">provider</span>
+<span class="n">QGeoServiceProvider</span> <span class="o">*</span><span class="n">provider</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGeoServiceProvider</span><span class="p">(</span><span class="s2">&quot;provider name&quot;</span><span class="p">);</span>
+<span class="n">QPlaceManager</span> <span class="o">*</span><span class="n">manager</span> <span class="o">=</span> <span class="n">provider</span><span class="o">-&gt;</span><span class="n">placeManager</span><span class="p">();</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="discovery-search">
+<span id="id6"></span><h2>Discovery/Search<a class="headerlink" href="#discovery-search" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In order to perform a search operation we simply create a <a class="reference internal" href="../PySide2/QtLocation/QPlaceSearchRequest.html#PySide2.QtLocation.QPlaceSearchRequest" title="PySide2.QtLocation.QPlaceSearchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceSearchRequest</span></code></a> and set the desired search parameters, such as a search term and search center.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">instantiate</span> <span class="n">request</span> <span class="ow">and</span> <span class="nb">set</span> <span class="n">parameters</span>
+<span class="n">QPlaceSearchRequest</span> <span class="n">searchRequest</span><span class="p">;</span>
+<span class="n">searchRequest</span><span class="o">.</span><span class="n">setSearchTerm</span><span class="p">(</span><span class="s2">&quot;ice cream&quot;</span><span class="p">);</span>
+<span class="n">searchRequest</span><span class="o">.</span><span class="n">setSearchArea</span><span class="p">(</span><span class="n">QGeoCircle</span><span class="p">(</span><span class="n">QGeoCoordinate</span><span class="p">(</span><span class="mf">12.34</span><span class="p">,</span> <span class="mf">56.78</span><span class="p">)));</span>
+
+<span class="o">//</span><span class="n">send</span> <span class="n">off</span> <span class="n">a</span> <span class="n">search</span> <span class="n">request</span>
+<span class="o">/*</span><span class="n">QPlaceSearchReply</span> <span class="o">*</span> <span class="o">*/</span> <span class="n">searchReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="n">searchRequest</span><span class="p">);</span>
+
+<span class="o">//</span><span class="n">connect</span> <span class="n">a</span> <span class="n">slot</span> <span class="n">to</span> <span class="n">handle</span> <span class="n">the</span> <span class="n">reply</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">searchReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleSearchReply</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>The request is an asynchronous operation so we need a slot to handle the completion of the request. In the handler we check that there are no errors and that our search result type is a place. If so we can then retrieve some of the core details of the place. At the end of the slot, we delete the reply since they are for single use only.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">handleSearchReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">searchReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QPlaceSearchResult</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">,</span> <span class="n">searchReply</span><span class="o">-&gt;</span><span class="n">results</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceSearchResult</span><span class="p">::</span><span class="n">PlaceResult</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">QPlaceResult</span> <span class="n">placeResult</span> <span class="o">=</span> <span class="n">result</span><span class="p">;</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Name: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">placeResult</span><span class="o">.</span><span class="n">place</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">();</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Coordinate &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">placeResult</span><span class="o">.</span><span class="n">place</span><span class="p">()</span><span class="o">.</span><span class="n">location</span><span class="p">()</span><span class="o">.</span><span class="n">coordinate</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Street: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">placeResult</span><span class="o">.</span><span class="n">place</span><span class="p">()</span><span class="o">.</span><span class="n">location</span><span class="p">()</span><span class="o">.</span><span class="n">address</span><span class="p">()</span><span class="o">.</span><span class="n">street</span><span class="p">();</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Distance: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">placeResult</span><span class="o">.</span><span class="n">distance</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">searchReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span>  <span class="o">//</span><span class="n">discard</span> <span class="n">reply</span>
+    <span class="n">searchReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Depending upon the plugin backend that was chosen, the search results may contain places which have further details that can be fetched on a place by place basis. To fetch these other details see <a class="reference internal" href="#places-c"><span class="std std-ref">Fetching Place Details</span></a> .</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="recommendations">
+<span id="id7"></span><h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Recommendations can be retrieved by supplying a place id via <code class="xref py py-func docutils literal"><span class="pre">QPlaceSearchRequest.setRecommendationId()</span></code> . Any places similar to the given place are retrieved.</div></blockquote>
+</div>
+<div class="section" id="paging">
+<span id="id8"></span><h2>Paging<a class="headerlink" href="#paging" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If the plugin supports paging, the limit parameter may be provided to the search request.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPlaceSearchRequest</span> <span class="n">searchRequest</span><span class="p">;</span>
+<span class="n">searchRequest</span><span class="o">.</span><span class="n">setLimit</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span> <span class="o">//</span><span class="n">specify</span> <span class="n">how</span> <span class="n">many</span> <span class="n">results</span> <span class="n">are</span> <span class="n">to</span> <span class="n">be</span> <span class="n">retrieved</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="fetching-place-details">
+<span id="id9"></span><h2>Fetching Place Details<a class="headerlink" href="#fetching-place-details" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A place that has been returned from a search request may have more details that can be fetched. The following demonstrates how to check if there are further details and if so how to request them.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    if (!place.detailsFetched()) {
+        /*QPlaceDetailsReply * */ detailsReply = manager-&gt;getPlaceDetails(place.placeId());
+        connect(detailsReply, SIGNAL(finished()), this, SLOT(handleDetailsReply()));
+    }
+...
+...
+void handleDetailsReply() {
+    QPlace place;
+    if (detailsReply-&gt;error() == QPlaceReply::NoError)
+        place = detailsReply-&gt;place();
+
+    detailsReply-&gt;deleteLater(); //discard reply
+    detailsReply = 0;
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="fetching-rich-content">
+<span id="id10"></span><h2>Fetching Rich Content<a class="headerlink" href="#fetching-rich-content" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Rich content such as images and reviews is retrieved through the manager and then if required assigned to a place.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPlaceContentRequest</span> <span class="n">request</span><span class="p">;</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="n">QPlaceContent</span><span class="p">::</span><span class="n">ImageType</span><span class="p">);</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setPlaceId</span><span class="p">(</span><span class="n">place</span><span class="o">.</span><span class="n">placeId</span><span class="p">());</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setLimit</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="o">/*</span><span class="n">QPlaceContentReply</span> <span class="o">*</span> <span class="o">*/</span> <span class="n">contentReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">getPlaceContent</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">contentReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleImagesReply</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>We can handle the content request as shown below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">handleImagesReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QMapIterator</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="n">QPlaceContent</span><span class="o">&gt;</span> <span class="nb">iter</span><span class="p">(</span><span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">());</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nb">iter</span><span class="o">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Index: &quot;</span> <span class="o">&lt;&lt;</span> <span class="nb">iter</span><span class="o">.</span><span class="n">key</span><span class="p">();</span>
+            <span class="n">QPlaceImage</span> <span class="n">image</span> <span class="o">=</span> <span class="nb">iter</span><span class="o">.</span><span class="n">value</span><span class="p">();</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">image</span><span class="o">.</span><span class="n">url</span><span class="p">();</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">image</span><span class="o">.</span><span class="n">mimeType</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="o">//</span><span class="n">alternatively</span> <span class="k">if</span> <span class="n">indexes</span> <span class="n">are</span> <span class="n">irrelevant</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QPlaceImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">,</span> <span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">image</span><span class="o">.</span><span class="n">url</span><span class="p">();</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">image</span><span class="o">.</span><span class="n">mimeType</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="o">//</span><span class="n">we</span> <span class="n">can</span> <span class="n">assign</span> <span class="n">content</span> <span class="n">to</span> <span class="n">the</span> <span class="n">place</span> <span class="n">that</span> <span class="n">it</span> <span class="n">belongs</span> <span class="n">to</span><span class="o">.</span>
+        <span class="o">//</span><span class="n">the</span> <span class="n">place</span> <span class="nb">object</span> <span class="n">serves</span> <span class="k">as</span> <span class="n">a</span> <span class="n">container</span> <span class="n">where</span> <span class="n">we</span> <span class="n">can</span> <span class="n">retrieve</span>
+        <span class="o">//</span><span class="n">content</span> <span class="n">that</span> <span class="n">has</span> <span class="n">already</span> <span class="n">been</span> <span class="n">fetched</span>
+        <span class="n">place</span><span class="o">.</span><span class="n">insertContent</span><span class="p">(</span><span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">request</span><span class="p">()</span><span class="o">.</span><span class="n">contentType</span><span class="p">(),</span> <span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">());</span>
+        <span class="n">place</span><span class="o">.</span><span class="n">setTotalContentCount</span><span class="p">(</span><span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">request</span><span class="p">()</span><span class="o">.</span><span class="n">contentType</span><span class="p">(),</span> <span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">totalCount</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">contentReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span>
+    <span class="n">contentReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is important to note that the results in the <a class="reference internal" href="../PySide2/QtLocation/QPlaceContentReply.html#PySide2.QtLocation.QPlaceContentReply" title="PySide2.QtLocation.QPlaceContentReply"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceContentReply</span></code></a> , is a <code class="xref py py-class docutils literal"><span class="pre">QPlaceContent.Collection</span></code> which is essentially a <code class="xref py py-class docutils literal"><span class="pre">QMap</span></code> &lt;int, <a class="reference internal" href="../PySide2/QtLocation/QPlaceContent.html#PySide2.QtLocation.QPlaceContent" title="PySide2.QtLocation.QPlaceContent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceContent</span></code></a> &gt;. The key <code class="docutils literal"><span class="pre">int</span></code> in this case is the index of the content, and the value is the content itself. Due to the way Content is implemented it is possible to convert a content type as follows</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPlaceImage</span> <span class="n">image</span> <span class="o">=</span> <span class="n">content</span><span class="p">;</span> <span class="o">//</span><span class="n">provided</span> <span class="n">that</span> <span class="s1">&#39;content&#39;</span> <span class="n">has</span> <span class="n">a</span> <span class="nb">type</span> <span class="n">QPlace</span><span class="p">::</span><span class="n">ImageType</span>
+</pre></div>
+</div>
+<p>The usage of the <code class="xref py py-class docutils literal"><span class="pre">QPlaceContent.Collection</span></code> and the conversion between content and its subtypes means that code for handling the mechanics of paging reviews, images and editorials can be easily shared.</p>
+</div></blockquote>
+</div>
+<div class="section" id="search-suggestions">
+<span id="id11"></span><h2>Search Suggestions<a class="headerlink" href="#search-suggestions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The retrieval of search term suggestions is very similar to performing a place search. A <a class="reference internal" href="../PySide2/QtLocation/QPlaceSearchRequest.html#PySide2.QtLocation.QPlaceSearchRequest" title="PySide2.QtLocation.QPlaceSearchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceSearchRequest</span></code></a> is used just like a place search, the only difference being that the search term is set to a partially completed string.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPlaceSearchRequest</span> <span class="n">request</span><span class="p">;</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setSearchTerm</span><span class="p">(</span><span class="s2">&quot;piz&quot;</span><span class="p">);</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setSearchArea</span><span class="p">(</span><span class="n">QGeoCircle</span><span class="p">(</span><span class="n">QGeoCoordinate</span><span class="p">(</span><span class="mf">12.34</span><span class="p">,</span> <span class="mf">56.78</span><span class="p">)));</span>
+<span class="o">/*</span> <span class="n">QPlaceSearchSuggestion</span> <span class="o">*</span> <span class="o">*/</span><span class="n">suggestionReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">searchSuggestions</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">suggestionReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleSuggestionReply</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>And when the request is done, we can use the reply to show the suggestions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">handleSuggestionReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">suggestionReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">suggestion</span><span class="p">,</span> <span class="n">suggestionReply</span><span class="o">-&gt;</span><span class="n">suggestions</span><span class="p">())</span>
+            <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">suggestion</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">suggestionReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span> <span class="o">//</span><span class="n">discard</span> <span class="n">reply</span>
+    <span class="n">suggestionReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="saving-a-place">
+<span id="id12"></span><span id="id13"></span><h2>Saving a Place<a class="headerlink" href="#saving-a-place" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The saving of a new place is performed as follows, we create a <a class="reference internal" href="../PySide2/QtLocation/QPlace.html#PySide2.QtLocation.QPlace" title="PySide2.QtLocation.QPlace"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlace</span></code></a> instance and populate it with information such as a name, address and coordinate. Once done we can invoke <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.savePlace()</span></code> to begin a save operation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPlace</span>  <span class="n">place</span><span class="p">;</span>
+    <span class="n">place</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span> <span class="s2">&quot;Fred&#39;s Ice Cream Parlor&quot;</span> <span class="p">);</span>
+
+    <span class="n">QGeoLocation</span> <span class="n">location</span><span class="p">;</span>
+    <span class="n">location</span><span class="o">.</span><span class="n">setCoordinate</span><span class="p">(</span><span class="n">QGeoCoordinate</span><span class="p">(</span><span class="mf">12.34</span><span class="p">,</span> <span class="mf">56.78</span><span class="p">));</span>
+
+    <span class="n">QGeoAddress</span> <span class="n">address</span><span class="p">;</span>
+    <span class="n">address</span><span class="o">.</span><span class="n">setStreet</span><span class="p">(</span><span class="s2">&quot;111 Nother Street&quot;</span><span class="p">);</span>
+<span class="o">...</span>
+    <span class="n">location</span><span class="o">.</span><span class="n">setAddress</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+    <span class="n">place</span><span class="o">.</span><span class="n">setLocation</span><span class="p">(</span><span class="n">location</span><span class="p">);</span>
+
+    <span class="o">/*</span> <span class="n">QPlaceIdReply</span> <span class="o">*</span> <span class="o">*/</span><span class="n">savePlaceReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">savePlace</span><span class="p">(</span><span class="n">place</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">savePlaceReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleSavePlaceReply</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>Once a place is saved the reply contains the new identifier for that place.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">handleSavePlaceReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">savePlaceReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">savePlaceReply</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">();</span>
+
+    <span class="n">savePlaceReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span> <span class="o">//</span><span class="n">discard</span> <span class="n">reply</span>
+    <span class="n">savePlaceReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that to save an already <em>existing</em> place, the <code class="xref py py-func docutils literal"><span class="pre">QPlace.placeId()</span></code> must be filled in with the correct identifier. Otherwise a new place will be created if empty or the wrong place overwritten if the identifier is incorrect.</p>
+<p>When a place is saved, the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> may emit QPlaceManager::placedAdded() or <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.placeUpdated()</span></code> signals. However whether a manager does so or not is provider specific, managers accessing places from a web service will typically not emit these signals while managers accessing places locally stored generally will.</p>
+</div></blockquote>
+</div>
+<div class="section" id="caveats">
+<span id="id14"></span><h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Places API is currently designed for only saving <code class="docutils literal"><span class="pre">core</span></code> details. Saving rich content like images and reviews or details like supplier and rating is not a supported use case. Typically a manager will generally ignore these fields upon save and may produce a warning message if they are populated.</p>
+<p>The Places API only supports saving of the following <em>core details</em> :</p>
+<ul class="simple">
+<li>name</li>
+<li>place id</li>
+<li>location</li>
+<li>contact details</li>
+<li>icon</li>
+<li>categories (tag-like names to describe a place)</li>
+<li>visibility scope</li>
+</ul>
+<p>It is possible that providers may only support a subset of these. See the <span class="xref std std-ref">plugin documentation</span> for more details.</p>
+<p>Saving of properties such as the rating, extended attributes, images, reviews, editorials and supplier is explicitly not supported by the Places API.</p>
+</div></blockquote>
+</div>
+<div class="section" id="saving-between-managers">
+<span id="id15"></span><h2>Saving Between Managers<a class="headerlink" href="#saving-between-managers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When saving places between managers, there are a few things to be aware of. Some fields of a place such as the id, categories and icons are manager specific entities for example the categories in one manager may not be recognized in another. Therefore trying to save a place directly from one manager to another is not possible.</p>
+<p>The typical approach is to use the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.compatiblePlace()</span></code> function, it creates a copy of a place, but only copies data that the manager supports. Manager specific data such as the place identifier is not copied over. The new copy is now suitable for saving into the manager. If the manager supports matching by alternative identifiers, an alternative identifier attribute is assigned to the copy (see <a class="reference internal" href="#places-c"><span class="std std-ref">Matching places between managers</span></a> )</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;places/requesthandler.h:Save to different manager&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="removing-a-place">
+<span id="id16"></span><span id="id17"></span><h2>Removing a Place<a class="headerlink" href="#removing-a-place" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The removal of a place is performed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="o">/*</span> <span class="n">QPlaceIdReply</span> <span class="o">*</span> <span class="o">*/</span><span class="n">removePlaceReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">removePlace</span><span class="p">(</span><span class="n">place</span><span class="o">.</span><span class="n">placeId</span><span class="p">());</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">removePlaceReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleRemovePlaceReply</span><span class="p">()));</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">void</span> <span class="n">handleRemovePlaceReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">removePlaceReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Removal of place identified by&quot;</span>
+                 <span class="o">&lt;&lt;</span> <span class="n">removePlaceReply</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;was successful&quot;</span><span class="p">;</span>
+
+    <span class="n">removePlaceReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span> <span class="o">//</span><span class="n">discard</span> <span class="n">reply</span>
+    <span class="n">removePlaceReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a place is removed, the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> may emit the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.placeRemoved()</span></code> signal. Whether a manager does so is provider specific. Managers accessing places from a web service will typically not emit these signals, while managers accessing places stored locally generally will.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-categories">
+<span id="id18"></span><h2>Using Categories<a class="headerlink" href="#using-categories" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Categories are keywords that can describe a place. For example, ‘park’, ‘theater’, ‘restaurant’. A place could be described by many categories, it could be a park and a music venue and a ferry or bus stop.</p>
+<p>To use categories they must first be initialized.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="o">/*</span> <span class="n">QPlaceReply</span> <span class="o">*</span> <span class="o">*/</span><span class="n">initCatReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">initializeCategories</span><span class="p">();</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">initCatReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleInitCatReply</span><span class="p">()));</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">void</span> <span class="n">handleInitCatReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">initCatReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Categories initialized&quot;</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Failed to initialize categories&quot;</span><span class="p">;</span>
+
+    <span class="n">initCatReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span>
+    <span class="n">initCatReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After the categories have been initialized we can then use these category functions.</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.childCategories()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.category()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.parentCategoryId()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.childCategoryIds()</span></code> ;</li>
+</ul>
+<p>To retrieve the top level categories we use the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.childCategories()</span></code> function but do not provide a category identifier.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QList</span><span class="o">&lt;</span><span class="n">QPlaceCategory</span><span class="o">&gt;</span> <span class="n">topLevelCategories</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">childCategories</span><span class="p">();</span>
+<span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QPlaceCategory</span> <span class="o">&amp;</span><span class="n">category</span><span class="p">,</span> <span class="n">topLevelCategories</span><span class="p">)</span>
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If we did provide an identifier then we could retrieve a category’s children.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QList</span><span class="o">&lt;</span><span class="n">QPlaceCategory</span><span class="o">&gt;</span> <span class="n">childCategories</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">childCategories</span><span class="p">(</span><span class="n">pizza</span><span class="o">.</span><span class="n">categoryId</span><span class="p">());</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="saving-a-category">
+<span id="id19"></span><h2>Saving a Category<a class="headerlink" href="#saving-a-category" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following shows how to save a category</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPlaceCategory</span> <span class="n">fastFood</span><span class="p">;</span>
+
+    <span class="n">QPlaceCategory</span> <span class="n">category</span><span class="p">;</span>
+    <span class="n">category</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s2">&quot;pizza&quot;</span><span class="p">);</span>
+    <span class="o">/*</span><span class="n">QPlaceIdReply</span> <span class="o">*/</span> <span class="n">saveCategoryReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">saveCategory</span><span class="p">(</span><span class="n">category</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">saveCategoryReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleSaveCategoryReply</span><span class="p">()));</span>
+
+    <span class="o">//</span><span class="n">we</span> <span class="n">could</span> <span class="n">have</span> <span class="n">saved</span> <span class="n">a</span> <span class="n">category</span> <span class="k">as</span> <span class="n">a</span> <span class="n">child</span> <span class="n">by</span> <span class="n">supplying</span> <span class="n">a</span> <span class="n">parent</span> <span class="n">identifier</span><span class="o">.</span>
+    <span class="n">saveCategoryReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">saveCategory</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">fastFood</span><span class="o">.</span><span class="n">categoryId</span><span class="p">());</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">void</span> <span class="n">handleSaveCategoryReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">saveCategoryReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Saved category id =&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">saveCategoryReply</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">saveCategoryReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span>
+    <span class="n">saveCategoryReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a category is saved, the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> may emit <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.categoryAdded()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.categoryUpdated()</span></code> signals. However whether a manager does so or not is provider specific, managers accessing places from a web service will typically not emit these signals while managers accessing places locally stored generally will.</p>
+</div></blockquote>
+</div>
+<div class="section" id="removing-a-category">
+<span id="id20"></span><h2>Removing a Category<a class="headerlink" href="#removing-a-category" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Category removal is very similar to removing a place</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="o">/*</span> <span class="n">QPlaceIdReply</span> <span class="o">*</span> <span class="o">*/</span><span class="n">removeCategoryReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">removeCategory</span><span class="p">(</span><span class="n">place</span><span class="o">.</span><span class="n">placeId</span><span class="p">());</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">removeCategoryReply</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">handleRemoveCategoryReply</span><span class="p">()));</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">void</span> <span class="n">handleRemoveCategoryReply</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">removeCategoryReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span>
+        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Removal of category identified by&quot;</span>
+                 <span class="o">&lt;&lt;</span> <span class="n">removeCategoryReply</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;was successful&quot;</span><span class="p">;</span>
+
+    <span class="n">removeCategoryReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span> <span class="o">//</span><span class="n">discard</span> <span class="n">reply</span>
+    <span class="n">removeCategoryReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a category is removed, the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> may emit the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.categoryRemoved()</span></code> signal. Whether a manager does so is provider specific. Managers accessing places from a web service will typically not emit these signals, while managers accessing places stored locally generally will.</p>
+</div></blockquote>
+</div>
+<div class="section" id="matching-places-between-managers">
+<span id="id21"></span><h2>Matching Places Between Managers<a class="headerlink" href="#matching-places-between-managers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Sometimes you may want to cross reference whether places from one manager match those from another manager. Such a situation may arise where one manager provides read-only access to places (origin manager) while another second r/w manager (destination manager) is used to save selected favorites from the first. During a search of the origin manager we may want to know which ones have been ‘favorited’ into the destination manager and perhaps display a customized favorite name rather than the original name.</p>
+<p>The matching mechanism can vary between managers, but is typically accomplished through an alternative identifier. As part of the save process, the place identifier from the origin manager is saved as an alternative identifier attribute in the destination manager (which can have its own place identifier scheme). In the following example, the origin manager is from the ‘here’ QGeoServiceProider, therefore as part of the saving process an alternative identifier attribute, x_id_here, is set for the place saved into the destination manager (when <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.compatiblePlace()</span></code> is called)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">origin</span> <span class="n">R</span><span class="o">/</span><span class="n">O</span> <span class="n">manager</span><span class="p">(</span><span class="n">here</span><span class="p">)</span>       <span class="n">destination</span> <span class="n">R</span><span class="o">/</span><span class="n">W</span> <span class="n">manager</span> <span class="p">(</span><span class="n">places_jsondb</span><span class="p">)</span>
+                        <span class="n">Save</span>
+<span class="n">Place</span> <span class="nb">id</span><span class="p">:</span> <span class="n">ae246</span>         <span class="o">---&gt;</span>    <span class="n">Place</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">0001</span>
+<span class="n">Attribute</span> <span class="nb">type</span><span class="p">:</span> <span class="n">x_provider</span>      <span class="n">Attribute</span> <span class="nb">type</span><span class="p">:</span> <span class="n">x_id_here</span>
+<span class="n">Attribute</span> <span class="n">value</span><span class="p">:</span> <span class="n">here</span>           <span class="n">Attribute</span> <span class="n">text</span> <span class="n">value</span><span class="p">:</span> <span class="n">ae246</span>
+</pre></div>
+</div>
+<p>In order to perform the matching, we create a <a class="reference internal" href="../PySide2/QtLocation/QPlaceMatchRequest.html#PySide2.QtLocation.QPlaceMatchRequest" title="PySide2.QtLocation.QPlaceMatchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceMatchRequest</span></code></a> and assign it the search results from the origin manager. The <a class="reference internal" href="../PySide2/QtLocation/QPlaceMatchRequest.html#PySide2.QtLocation.QPlaceMatchRequest" title="PySide2.QtLocation.QPlaceMatchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceMatchRequest</span></code></a> will be used on the destination manager to return corresponding places. We also specify matching parameters which are key value pairs. As mentioned previously, this can vary depending on the manager but typically the key is <span class="xref std std-ref">QPlaceMatchRequest::AlternativeId</span> to indicate we are matching by alternative id, the value in this case would be x_id_here which specifies which alternative identifier attribute we are using to do the matching.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPlaceMatchRequest</span> <span class="n">request</span><span class="p">;</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">setResults</span><span class="p">(</span><span class="n">results</span><span class="p">);</span>
+    <span class="n">QVariantMap</span> <span class="n">parameters</span><span class="p">;</span>
+    <span class="n">parameters</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">QPlaceMatchRequest</span><span class="p">::</span><span class="n">AlternativeId</span><span class="p">,</span> <span class="s2">&quot;x_id_here&quot;</span><span class="p">);</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">);</span>
+    <span class="n">matchReply</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">matchingPlaces</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">void</span> <span class="n">matchHandler</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">matchReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">==</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QPlace</span> <span class="n">place</span><span class="p">,</span> <span class="n">matchReply</span><span class="o">-&gt;</span><span class="n">places</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">place</span> <span class="o">!=</span> <span class="n">QPlace</span><span class="p">())</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Place is a favorite with name&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">place</span><span class="o">.</span><span class="n">name</span><span class="p">();</span>
+            <span class="k">else</span>
+                <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Place is not a favorite&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">matchReply</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span>
+    <span class="n">matchReply</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="classes-in-places">
+<span id="id22"></span><h2>Classes in Places<a class="headerlink" href="#classes-in-places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="data-classes">
+<span id="id23"></span><h2>Data Classes<a class="headerlink" href="#data-classes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="request-classes">
+<span id="id24"></span><h2>Request Classes<a class="headerlink" href="#request-classes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="reply-classes">
+<span id="id25"></span><span id="id26"></span><h2>Reply classes<a class="headerlink" href="#reply-classes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="manager-classes">
+<span id="id27"></span><h2>Manager Classes<a class="headerlink" href="#manager-classes" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

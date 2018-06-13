@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Timers &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="timers">
+<span id="id1"></span><h1>Timers<a class="headerlink" href="#timers" title="Permalink to this headline">¶</a></h1>
+<p>How to use Qt timers in your application</p>
+<blockquote>
+<div><p>How to use Qt timers in your application.</p>
+<p><a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , the base class of all Qt objects, provides the basic timer support in Qt. With <code class="xref py py-func docutils literal"><span class="pre">QObject.startTimer()</span></code> , you start a timer with an interval in milliseconds as argument. The function returns a unique integer timer ID. The timer will now fire at regular intervals until you explicitly call <code class="xref py py-func docutils literal"><span class="pre">QObject.killTimer()</span></code> with the timer ID.</p>
+<p>For this mechanism to work, the application must run in an event loop. You start an event loop with <code class="xref py py-func docutils literal"><span class="pre">QApplication.exec()</span></code> . When a timer fires, the application sends a <a class="reference internal" href="../PySide2/QtCore/QTimerEvent.html#PySide2.QtCore.QTimerEvent" title="PySide2.QtCore.QTimerEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimerEvent</span></code></a> , and the flow of control leaves the event loop until the timer event is processed. This implies that a timer cannot fire while your application is busy doing something else. In other words: the accuracy of timers depends on the granularity of your application.</p>
+<p>In multithreaded applications, you can use the timer mechanism in any thread that has an event loop. To start an event loop from a non-GUI thread, use <code class="xref py py-func docutils literal"><span class="pre">QThread.exec()</span></code> . Qt uses the object’s <code class="xref py py-func docutils literal"><span class="pre">thread</span> <span class="pre">affinity</span></code> to determine which thread will deliver the <a class="reference internal" href="../PySide2/QtCore/QTimerEvent.html#PySide2.QtCore.QTimerEvent" title="PySide2.QtCore.QTimerEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimerEvent</span></code></a> . Because of this, you must start and stop all timers in the object’s thread; it is not possible to start timers for objects in another thread.</p>
+<p>The upper limit for the interval value is determined by the number of milliseconds that can be specified in a signed integer (in practice, this is a period of just over 24 days). The accuracy depends on the underlying operating system. Windows 2000 has 15 millisecond accuracy; other systems that we have tested can handle 1 millisecond intervals.</p>
+<p>The main API for the timer functionality is <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> . That class provides regular timers that emit a signal when the timer fires, and inherits <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> so that it fits well into the ownership structure of most GUI programs. The normal way of using it is like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">timer</span> <span class="o">=</span> <span class="n">QTimer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">updateCaption</span><span class="p">)</span>
+<span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> object is made into a child of this widget so that, when this widget is deleted, the timer is deleted too. Next, its <code class="xref py py-func docutils literal"><span class="pre">QTimer.timeout()</span></code> signal is connected to the slot that will do the work, it is started with a value of 1000 milliseconds, indicating that it will time out every second.</p>
+<p><a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> also provides a static function for single-shot timers. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">updateCaption</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>200 milliseconds (0.2 seconds) after this line of code is executed, the <code class="docutils literal"><span class="pre">updateCaption()</span></code> slot will be called.</p>
+<p>For <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> to work, you must have an event loop in your application; that is, you must call <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.exec()</span></code> somewhere. Timer events will be delivered only while the event loop is running.</p>
+<p>In multithreaded applications, you can use <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> in any thread that has an event loop. To start an event loop from a non-GUI thread, use <code class="xref py py-func docutils literal"><span class="pre">QThread.exec()</span></code> . Qt uses the timer’s <code class="xref py py-func docutils literal"><span class="pre">thread</span> <span class="pre">affinity</span></code> to determine which thread will emit the <code class="xref py py-func docutils literal"><span class="pre">QTimer.timeout()</span></code> signal. Because of this, you must start and stop the timer in its thread; it is not possible to start a timer from another thread.</p>
+<p>The <a class="reference internal" href="qtwidgets-widgets-analogclock-example.html#analog-clock-example"><span class="std std-ref">Analog Clock</span></a> example shows how to use <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> to redraw a widget at regular intervals. From <code class="docutils literal"><span class="pre">AnalogClock</span></code> ‘s implementation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">AnalogClock</span><span class="p">::</span><span class="n">AnalogClock</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QTimer</span> <span class="o">*</span><span class="n">timer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTimer</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">timeout</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">update</span><span class="p">()));</span>
+    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Every second, <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> will call the <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> slot to refresh the clock’s display.</p>
+<p>If you already have a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass and want an easy optimization, you can use <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> instead of <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> . With <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> , you must reimplement <code class="xref py py-func docutils literal"><span class="pre">QObject.timerEvent()</span></code> in your <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass and handle the timeout there. The <a class="reference internal" href="qtwidgets-widgets-wiggly-example.html#wiggly-example"><span class="std std-ref">Wiggly</span></a> example shows how to use <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> .</p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

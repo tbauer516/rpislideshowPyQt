@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Positioning with Anchors &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Positioning with Anchors</a><ul>
+<li><a class="reference internal" href="#anchor-margins-and-offsets">Anchor Margins and Offsets</a></li>
+<li><a class="reference internal" href="#changing-anchors">Changing Anchors</a></li>
+<li><a class="reference internal" href="#restrictions">Restrictions</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="positioning-with-anchors">
+<span id="id1"></span><h1>Positioning with Anchors<a class="headerlink" href="#positioning-with-anchors" title="Permalink to this headline">¶</a></h1>
+<p>Placing items with anchor properties</p>
+<blockquote>
+<div><p>placing items with anchor properties</p>
+<p>In addition to the more traditional <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Grid</span></a> , <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Row</span></a> , and <a class="reference internal" href="qtquick-positioning-layouts.html#item-positioners"><span class="std std-ref">Column</span></a> , Qt Quick also provides a way to layout items using the concept of <em>anchors</em> . Each item can be thought of as having a set of 7 invisible “anchor lines”: <span class="xref std std-ref">left</span> , <span class="xref std std-ref">horizontalCenter</span> , <span class="xref std std-ref">right</span> , <span class="xref std std-ref">top</span> , <span class="xref std std-ref">verticalCenter</span> , <span class="xref std std-ref">baseline</span> , and <span class="xref std std-ref">bottom</span> .</p>
+<p>The baseline (not pictured above) corresponds to the imaginary line on which text would sit. For items with no text it is the same as <em>top</em> .</p>
+<p>The Qt Quick anchoring system allows you to define relationships between the anchor lines of different items. For example, you can write:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect1</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+<span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect2</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">rect1</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, the left edge of <em>rect2</em> is bound to the right edge of <em>rect1</em> , producing the following:</p>
+<p>You can specify multiple anchors. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect1</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+<span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect2</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">rect1</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">top</span><span class="p">:</span> <span class="n">rect1</span><span class="o">.</span><span class="n">bottom</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>By specifying multiple horizontal or vertical anchors you can control the size of an item. Below, <em>rect2</em> is anchored to the right of <em>rect1</em> and the left of <em>rect3</em> . If either of the blue rectangles are moved, <em>rect2</em> will stretch and shrink as necessary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect1</span><span class="p">;</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+<span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect2</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">rect1</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">right</span><span class="p">:</span> <span class="n">rect3</span><span class="o">.</span><span class="n">left</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+<span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect3</span><span class="p">;</span> <span class="n">x</span><span class="p">:</span> <span class="mi">150</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>There are also some convenience anchors. anchors.fill is a convenience that is the same as setting the left,right,top and bottom anchors to the left,right,top and bottom of the target item. anchors.centerIn is another convenience anchor, and is the same as setting the verticalCenter and horizontalCenter anchors to the verticalCenter and horizontalCenter of the target item.</p>
+</div></blockquote>
+<div class="section" id="anchor-margins-and-offsets">
+<span id="id2"></span><h2>Anchor Margins and Offsets<a class="headerlink" href="#anchor-margins-and-offsets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The anchoring system also allows <em>margins</em> and <em>offsets</em> to be specified for an item’s anchors. Margins specify the amount of empty space to leave to the outside of an item’s anchor, while offsets allow positioning to be manipulated using the center anchor lines. An item can specify its anchor margins individually through <span class="xref std std-ref">leftMargin</span> , <span class="xref std std-ref">rightMargin</span> , <span class="xref std std-ref">topMargin</span> and <span class="xref std std-ref">bottomMargin</span> , or use <span class="xref std std-ref">anchors.margins</span> to specify the same margin value for all four edges. Anchor offsets are specified using <span class="xref std std-ref">horizontalCenterOffset</span> , <span class="xref std std-ref">verticalCenterOffset</span> and <span class="xref std std-ref">baselineOffset</span> .</p>
+<p>The following example specifies a left margin:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect1</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+<span class="n">Rectangle</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">rect2</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">rect1</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">leftMargin</span><span class="p">:</span> <span class="mi">5</span><span class="p">;</span> <span class="o">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, a margin of 5 pixels is reserved to the left of <em>rect2</em> , producing the following:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Anchor margins only apply to anchors; they are <em>not</em> a generic means of applying margins to an <span class="xref std std-ref">Item</span> . If an anchor margin is specified for an edge but the item is not anchored to any item on that edge, the margin is not applied.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="changing-anchors">
+<span id="id3"></span><h2>Changing Anchors<a class="headerlink" href="#changing-anchors" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Qt Quick provides the <span class="xref std std-ref">AnchorChanges</span> type for specifying the anchors in a state.</p>
+<p><span class="xref std std-ref">AnchorChanges</span> can be animated using the <span class="xref std std-ref">AnchorAnimation</span> type.</p>
+<p>Anchors can also be changed imperatively within JavaScript. However, these changes should be carefully ordered, or they may produce unexpected outcomes. The following example illustrates the issue:</p>
+<p>+—————————————————-++
+<a href="#id5"><span class="problematic" id="id6">|::                                                  ||</span></a>
+|                                                    ||
+|                //bad code                          ||
+|                Rectangle {                         ||
+|                    width: 50                       ||
+|                    anchors.left: parent.left       ||
+|                                                    ||
+|                    function reanchorToRight() {    ||
+|                        anchors.right = parent.right||
+|                        anchors.left = undefined    ||
+|                    }                               ||
+|                }                                   ||
++—————————————————-++</p>
+<p>When <code class="docutils literal"><span class="pre">reanchorToRight</span></code> is called, the function first sets the right anchor. At that point, both left and right anchors are set, and the item will be stretched horizontally to fill its parent. When the left anchor is unset, the new width will remain. Thus when updating anchors within JavaScript, you should first unset any anchors that are no longer required, and only then set any new anchors that are required, as shown below:</p>
+<p>Because the evaluation order of bindings is not defined, it is not recommended to change anchors via conditional bindings, as this can lead to the ordering issue described above. In the following example the Rectangle will eventually grow to the full width of its parent, because both left and right anchors will be simultaneously set during binding update.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>//bad code
+Rectangle {
+    width: 50; height: 50
+    anchors.left: state == &quot;right&quot; ? undefined : parent.left;
+    anchors.right: state == &quot;right&quot; ? parent.right : undefined;
+}
+</pre></div>
+</div>
+<p>This should be rewritten to use <span class="xref std std-ref">AnchorChanges</span> instead, as <span class="xref std std-ref">AnchorChanges</span> will automatically handle ordering issues internally.</p>
+</div></blockquote>
+</div>
+<div class="section" id="restrictions">
+<span id="id4"></span><h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For performance reasons, you can only anchor an item to its siblings and direct parent. For example, the following anchor is invalid and would produce a warning:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>//bad code
+Item {
+    id: group1
+    Rectangle { id: rect1; ... }
+}
+Item {
+    id: group2
+    Rectangle { id: rect2; anchors.left: rect1.right; ... }    // invalid anchor!
+}
+</pre></div>
+</div>
+<p>Also, anchor-based layouts cannot be mixed with absolute positioning. If an item specifies its <span class="xref std std-ref">x</span> position and also sets <span class="xref std std-ref">anchors.left</span> , or anchors its left and right edges but additionally sets a <span class="xref std std-ref">width</span> , the result is undefined, as it would not be clear whether the item should use anchoring or absolute positioning. The same can be said for setting an item’s <span class="xref std std-ref">y</span> and <span class="xref std std-ref">height</span> with <span class="xref std std-ref">anchors.top</span> and <span class="xref std std-ref">anchors.bottom</span> , or setting <span class="xref std std-ref">anchors.fill</span> as well as <span class="xref std std-ref">width</span> or <span class="xref std std-ref">height</span> . The same applies when using positioners such as Row and Grid, which may set the item’s <span class="xref std std-ref">x</span> and <span class="xref std std-ref">y</span> properties. If you wish to change from using anchor-based to absolute positioning, you can clear an anchor value by setting it to <code class="docutils literal"><span class="pre">undefined</span></code> .</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

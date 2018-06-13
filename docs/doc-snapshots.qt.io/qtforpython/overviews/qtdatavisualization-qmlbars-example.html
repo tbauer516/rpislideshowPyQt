@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick 2 Bars Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick 2 Bars Example</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#custom-axis-labels">Custom Axis Labels</a></li>
+<li><a class="reference internal" href="#switching-series">Switching Series</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#axes-qml-example-file">Axes.qml Example File</a></li>
+<li><a class="reference internal" href="#data-qml-example-file">Data.qml Example File</a></li>
+<li><a class="reference internal" href="#main-qml-example-file">main.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#qmlbars-pro-example-file">qmlbars.pro Example File</a></li>
+<li><a class="reference internal" href="#qmlbars-qrc-example-file">qmlbars.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-2-bars-example">
+<span id="id1"></span><h1>Qt Quick 2 Bars Example<a class="headerlink" href="#qt-quick-2-bars-example" title="Permalink to this headline">¶</a></h1>
+<p>Using Bars3D in a QML application</p>
+<blockquote>
+<div><p>Using <span class="xref std std-ref">Bars3D</span> in a QML application.</p>
+<p>The Qt Quick 2 bars example shows how to make a simple 3D bar graph using <span class="xref std std-ref">Bars3D</span> and Qt Quick 2.</p>
+<p>The interesting thing about this example is switching series and displaying more than one series at once. We’ll concentrate on those and skip explaining the basic <span class="xref std std-ref">Bars3D</span> functionality - for more detailed QML example documentation, see <a class="reference internal" href="qtdatavisualization-qmlscatter-example.html#qt-quick-2-scatter-example"><span class="std std-ref">Qt Quick 2 Scatter Example</span></a> .</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="data">
+<span id="id3"></span><h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example data is monthly income and expenses of a fictional company over several years. The data is defined in a list model in <code class="docutils literal"><span class="pre">Data.qml</span></code> like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">dataModel</span>
+    <span class="n">ListElement</span><span class="p">{</span> <span class="n">timestamp</span><span class="p">:</span> <span class="s2">&quot;2006-01&quot;</span><span class="p">;</span> <span class="n">expenses</span><span class="p">:</span> <span class="s2">&quot;-4&quot;</span><span class="p">;</span>  <span class="n">income</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span><span class="p">{</span> <span class="n">timestamp</span><span class="p">:</span> <span class="s2">&quot;2006-02&quot;</span><span class="p">;</span> <span class="n">expenses</span><span class="p">:</span> <span class="s2">&quot;-5&quot;</span><span class="p">;</span>  <span class="n">income</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span> <span class="p">}</span>
+    <span class="n">ListElement</span><span class="p">{</span> <span class="n">timestamp</span><span class="p">:</span> <span class="s2">&quot;2006-03&quot;</span><span class="p">;</span> <span class="n">expenses</span><span class="p">:</span> <span class="s2">&quot;-7&quot;</span><span class="p">;</span>  <span class="n">income</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span> <span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Each data item has three roles: timestamp, income, and expenses. The timestamp value is in format: <code class="docutils literal"><span class="pre">&lt;four</span> <span class="pre">digit</span> <span class="pre">year&gt;-&lt;two</span> <span class="pre">digit</span> <span class="pre">month&gt;</span></code> . Years and months are natural to map to rows and columns of a bar chart, but we can only show either income or expenses as the value.</p>
+<p>Now we need to add the data to the <span class="xref std std-ref">Bars3D</span> graph. We will create two <span class="xref std std-ref">Bar3DSeries</span> inside it, starting with a series for the income:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        Bar3DSeries {
+            id: barSeries
+            itemLabelFormat: &quot;Income, @colLabel, @rowLabel: @valueLabel&quot;
+            baseGradient: barGradient
+
+            ItemModelBarDataProxy {
+                id: modelProxy
+                itemModel: graphData.model
+                rowRole: &quot;timestamp&quot;
+                columnRole: &quot;timestamp&quot;
+                valueRole: &quot;income&quot;
+                rowRolePattern: /^(\d\d\d\d).*$/
+                columnRolePattern: /^.*-(\d\d)$/
+                rowRoleReplace: &quot;\\1&quot;
+                columnRoleReplace: &quot;\\1&quot;
+                multiMatchBehavior: ItemModelBarDataProxy.MMBCumulative
+            }
+...
+</pre></div>
+</div>
+<p>The data is attached to the <code class="docutils literal"><span class="pre">itemModel</span></code> property of the <span class="xref std std-ref">ItemModelBarDataProxy</span> inside the series. For <code class="docutils literal"><span class="pre">valueRole</span></code> we simply specify the <code class="docutils literal"><span class="pre">income</span></code> field, as it contains the value we want, but getting the years and months is a bit more complicated, since they are both found in the same field. To extract those values, we specify the <code class="docutils literal"><span class="pre">timestamp</span></code> field for both <code class="docutils literal"><span class="pre">rowRole</span></code> and <code class="docutils literal"><span class="pre">columnRole</span></code> , and additionally specify a search pattern and a replace rule for those roles to extract the correct portion of the field contents for each role. The search pattern is a normal JavaScript regular expression and the replace rule specifies what the field content that matches the regular expression is replaced with. In this case we want to replace the entire field content with just the year or the month, which is the first captured substring for both rows and columns. For more information how the replace using regular expressions works, see <code class="xref py py-func docutils literal"><span class="pre">QString.replace()</span></code> (const <a class="reference internal" href="../PySide2/QtCore/QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> &amp;rx, const <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> &amp;after) function documentation.</p>
+<p>The <code class="docutils literal"><span class="pre">multiMatchBehavior</span></code> property specifies what to do in case multiple item model items match the same row/column combination. In this case we want to add their values together. This property has no effect when we are showing values for each month, as there are no duplicate months in our item model, but it becomes relevant later when we want to show the yearly totals.</p>
+<p>Then we add another series for the expenses:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        Bar3DSeries {
+            id: secondarySeries
+            visible: false
+            itemLabelFormat: &quot;Expenses, @colLabel, @rowLabel: -@valueLabel&quot;
+            baseGradient: secondaryGradient
+
+            ItemModelBarDataProxy {
+                id: secondaryProxy
+                itemModel: graphData.model
+                rowRole: &quot;timestamp&quot;
+                columnRole: &quot;timestamp&quot;
+                valueRole: &quot;expenses&quot;
+                rowRolePattern: /^(\d\d\d\d).*$/
+                columnRolePattern: /^.*-(\d\d)$/
+                valueRolePattern: /-/
+                rowRoleReplace: &quot;\\1&quot;
+                columnRoleReplace: &quot;\\1&quot;
+                multiMatchBehavior: ItemModelBarDataProxy.MMBCumulative
+            }
+...
+</pre></div>
+</div>
+<p>The model contains expenses as negative values, but we want to show them as positive bars, so that we can easily compare them to income bars. We use <code class="docutils literal"><span class="pre">valueRolePattern</span></code> to remove the minus sign to achieve this. No replacement string needs to be specified as the default replacement is an empty string.</p>
+<p>We use the <code class="docutils literal"><span class="pre">visible</span></code> property of the series to hide the second series for now.</p>
+</div></blockquote>
+</div>
+<div class="section" id="custom-axis-labels">
+<span id="id4"></span><h2>Custom Axis Labels<a class="headerlink" href="#custom-axis-labels" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>One interesting tidbit about axes is that we redefine the category labels for column axis in <code class="docutils literal"><span class="pre">Axes.qml</span></code> . This is done because the data contains numbers for months, which we don’t want to use for our column labels:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CategoryAxis3D</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">columnAxis</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;January&quot;</span><span class="p">,</span> <span class="s2">&quot;February&quot;</span><span class="p">,</span> <span class="s2">&quot;March&quot;</span><span class="p">,</span> <span class="s2">&quot;April&quot;</span><span class="p">,</span> <span class="s2">&quot;May&quot;</span><span class="p">,</span> <span class="s2">&quot;June&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;July&quot;</span><span class="p">,</span> <span class="s2">&quot;August&quot;</span><span class="p">,</span> <span class="s2">&quot;September&quot;</span><span class="p">,</span> <span class="s2">&quot;October&quot;</span><span class="p">,</span> <span class="s2">&quot;November&quot;</span><span class="p">,</span> <span class="s2">&quot;December&quot;</span><span class="p">]</span>
+    <span class="n">labelAutoRotation</span><span class="p">:</span> <span class="mi">30</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We also set automatic axis label rotation to make axis labels more readable at low camera angles.</p>
+</div></blockquote>
+</div>
+<div class="section" id="switching-series">
+<span id="id5"></span><h2>Switching Series<a class="headerlink" href="#switching-series" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the <code class="docutils literal"><span class="pre">main.qml</span></code> , we set up the graph and various UI elements. There are three interesting code blocks we want to highlight here. The first one shows how to change the visualized data between income, expenses, and both, by simply changing visibility of the two series:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">text</span> <span class="o">===</span> <span class="s2">&quot;Show Expenses&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">barSeries</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+        <span class="n">secondarySeries</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">barGraph</span><span class="o">.</span><span class="n">valueAxis</span><span class="o">.</span><span class="n">labelFormat</span> <span class="o">=</span> <span class="s2">&quot;-</span><span class="si">%.2f</span><span class="s2"> M</span><span class="se">\u20AC</span><span class="s2">&quot;</span>
+        <span class="n">secondarySeries</span><span class="o">.</span><span class="n">itemLabelFormat</span> <span class="o">=</span> <span class="s2">&quot;Expenses, @colLabel, @rowLabel: @valueLabel&quot;</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Show Both&quot;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">text</span> <span class="o">===</span> <span class="s2">&quot;Show Both&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">barSeries</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">true</span>
+        <span class="n">barGraph</span><span class="o">.</span><span class="n">valueAxis</span><span class="o">.</span><span class="n">labelFormat</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2"> M</span><span class="se">\u20AC</span><span class="s2">&quot;</span>
+        <span class="n">secondarySeries</span><span class="o">.</span><span class="n">itemLabelFormat</span> <span class="o">=</span> <span class="s2">&quot;Expenses, @colLabel, @rowLabel: -@valueLabel&quot;</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Show Income&quot;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="o">//</span> <span class="n">text</span> <span class="o">===</span> <span class="s2">&quot;Show Income&quot;</span>
+        <span class="n">secondarySeries</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">false</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Show Expenses&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The axis label format and item selection label formats are tweaked to get the negative sign showing properly for expenses, which were actually resolved as positive values.</p>
+<p>The second interesting block is where we change the visualized data by adjusting the proxy propertes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>onClicked: {
+    if (text === &quot;Show yearly totals&quot;) {
+        modelProxy.autoRowCategories = true
+        secondaryProxy.autoRowCategories = true
+        modelProxy.columnRolePattern = /^.*$/
+        secondaryProxy.columnRolePattern = /^.*$/
+        graphAxes.value.autoAdjustRange = true
+        barGraph.columnAxis = graphAxes.total
+        text = &quot;Show all years&quot;
+    } else if (text === &quot;Show all years&quot;) {
+        modelProxy.autoRowCategories = true
+        secondaryProxy.autoRowCategories = true
+        modelProxy.columnRolePattern = /^.*-(\d\d)$/
+        secondaryProxy.columnRolePattern = /^.*-(\d\d)$/
+        graphAxes.value.min = 0
+        graphAxes.value.max = 35
+        barGraph.columnAxis = graphAxes.column
+        text = &quot;Show 2010 - 2012&quot;
+    } else { // text === &quot;Show 2010 - 2012&quot;
+        // Explicitly defining row categories, since we do not want to show data for
+        // all years in the model, just for the selected ones.
+        modelProxy.autoRowCategories = false
+        secondaryProxy.autoRowCategories = false
+        modelProxy.rowCategories = [&quot;2010&quot;, &quot;2011&quot;, &quot;2012&quot;]
+        secondaryProxy.rowCategories = [&quot;2010&quot;, &quot;2011&quot;, &quot;2012&quot;]
+        text = &quot;Show yearly totals&quot;
+    }
+}
+</pre></div>
+</div>
+<p>To show yearly totals, we need to combine the twelve months of each year into a single bar. We achieve this by specifying a <code class="docutils literal"><span class="pre">columnRolePattern</span></code> that matches all model items. That way the data proxy will only have a single column. The cumulative <code class="docutils literal"><span class="pre">multiMatchBehavior</span></code> we specified earlier for the proxy becomes relevant now, causing the values of all twelve months of each year to be added up into a single bar.</p>
+<p>To show just a subset of years, we set <code class="docutils literal"><span class="pre">autoRowCategories</span></code> to false on the <span class="xref std std-ref">ItemModelBarDataProxy</span> item and define the row categories explicitly. This way, only the items in specified row categories are visualized.</p>
+<p>The third interesting block shows how to get the row and column index of an item if you know the row and column values by using <span class="xref std std-ref">ItemModelBarDataProxy</span> methods <code class="docutils literal"><span class="pre">rowCategoryIndex()</span></code> and <code class="docutils literal"><span class="pre">columnCategoryIndex()</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">onCurrentRowChanged</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">graphData</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">currentRow</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="n">var</span> <span class="n">pattern</span> <span class="o">=</span> <span class="o">/</span><span class="p">(</span>\<span class="n">d</span>\<span class="n">d</span>\<span class="n">d</span>\<span class="n">d</span><span class="p">)</span><span class="o">-</span><span class="p">(</span>\<span class="n">d</span>\<span class="n">d</span><span class="p">)</span><span class="o">/</span>
+    <span class="n">var</span> <span class="n">matches</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+    <span class="n">var</span> <span class="n">rowIndex</span> <span class="o">=</span> <span class="n">modelProxy</span><span class="o">.</span><span class="n">rowCategoryIndex</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">var</span> <span class="n">colIndex</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">barGraph</span><span class="o">.</span><span class="n">columnAxis</span> <span class="o">===</span> <span class="n">graphAxes</span><span class="o">.</span><span class="n">total</span><span class="p">)</span>
+        <span class="n">colIndex</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">//</span> <span class="n">Just</span> <span class="n">one</span> <span class="n">column</span> <span class="n">when</span> <span class="n">showing</span> <span class="n">yearly</span> <span class="n">totals</span>
+    <span class="k">else</span>
+        <span class="n">colIndex</span> <span class="o">=</span> <span class="n">modelProxy</span><span class="o">.</span><span class="n">columnCategoryIndex</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">selectedSeries</span><span class="o">.</span><span class="n">visible</span><span class="p">)</span>
+        <span class="n">mainview</span><span class="o">.</span><span class="n">selectedSeries</span><span class="o">.</span><span class="n">selectedBar</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="n">rowIndex</span><span class="p">,</span> <span class="n">colIndex</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">barSeries</span><span class="o">.</span><span class="n">visible</span><span class="p">)</span>
+        <span class="n">barSeries</span><span class="o">.</span><span class="n">selectedBar</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="n">rowIndex</span><span class="p">,</span> <span class="n">colIndex</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="n">secondarySeries</span><span class="o">.</span><span class="n">selectedBar</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="n">rowIndex</span><span class="p">,</span> <span class="n">colIndex</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="axes-qml-example-file">
+<h1>Axes.qml Example File<a class="headerlink" href="#axes-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="data-qml-example-file">
+<h1>Data.qml Example File<a class="headerlink" href="#data-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-qml-example-file">
+<h1>main.qml Example File<a class="headerlink" href="#main-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmlbars-pro-example-file">
+<h1>qmlbars.pro Example File<a class="headerlink" href="#qmlbars-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qmlbars-qrc-example-file">
+<h1>qmlbars.qrc Example File<a class="headerlink" href="#qmlbars-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

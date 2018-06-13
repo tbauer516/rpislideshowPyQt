@@ -1,0 +1,303 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Basic Layouts Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic Layouts Example</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#dialog-class-definition">Dialog Class Definition</a></li>
+<li><a class="reference internal" href="#dialog-class-implementation">Dialog Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dialog-cpp-example-file">dialog.cpp Example File</a></li>
+<li><a class="reference internal" href="#dialog-h-example-file">dialog.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#basiclayouts-pro-example-file">basiclayouts.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-layouts-example">
+<span id="id1"></span><h1>Basic Layouts Example<a class="headerlink" href="#basic-layouts-example" title="Permalink to this headline">¶</a></h1>
+<p>Shows how to use the standard layout managers</p>
+<blockquote>
+<div><p>Shows how to use the standard layout managers.</p>
+<p><em>Basic Layouts</em> shows how to use the standard layout managers that are available in Qt: <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.QFormLayout" title="PySide2.QtWidgets.QFormLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFormLayout</span></code></a> .</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> class lines up widgets horizontally or vertically. <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> are convenience subclasses of <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> . <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> lays out widgets in cells by dividing the available space into rows and columns. <a class="reference internal" href="../PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.QFormLayout" title="PySide2.QtWidgets.QFormLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFormLayout</span></code></a> , on the other hand, sets its children in a two-column form with labels in the left column and input fields in the right column.</p>
+<p>For more information, visit the <a class="reference internal" href="layout.html#layout-management"><span class="std std-ref">Layout Management</span></a> page.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="dialog-class-definition">
+<span id="id3"></span><h2>Dialog Class Definition<a class="headerlink" href="#dialog-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dialog</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Dialog</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createMenu</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createHorizontalGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createGridGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createFormGroupBox</span><span class="p">();</span>
+
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">NumGridRows</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">NumButtons</span> <span class="o">=</span> <span class="mi">4</span> <span class="p">};</span>
+
+    <span class="n">QMenuBar</span> <span class="o">*</span><span class="n">menuBar</span><span class="p">;</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">horizontalGroupBox</span><span class="p">;</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">gridGroupBox</span><span class="p">;</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">formGroupBox</span><span class="p">;</span>
+    <span class="n">QTextEdit</span> <span class="o">*</span><span class="n">smallEditor</span><span class="p">;</span>
+    <span class="n">QTextEdit</span> <span class="o">*</span><span class="n">bigEditor</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">labels</span><span class="p">[</span><span class="n">NumGridRows</span><span class="p">];</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">lineEdits</span><span class="p">[</span><span class="n">NumGridRows</span><span class="p">];</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">buttons</span><span class="p">[</span><span class="n">NumButtons</span><span class="p">];</span>
+    <span class="n">QDialogButtonBox</span> <span class="o">*</span><span class="n">buttonBox</span><span class="p">;</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAction</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Dialog</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> . It is a custom widget that displays its child widgets using the geometry managers: <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.QFormLayout" title="PySide2.QtWidgets.QFormLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFormLayout</span></code></a> .</p>
+<p>There are four private functions to simplify the class constructor: the <code class="docutils literal"><span class="pre">createMenu()</span></code> , <code class="docutils literal"><span class="pre">createHorizontalGroupBox()</span></code> , <code class="docutils literal"><span class="pre">createGridGroupBox()</span></code> , and <code class="docutils literal"><span class="pre">createFormGroupBox()</span></code> functions create several widgets that the example uses to demonstrate how the layout affects their appearances.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dialog-class-implementation">
+<span id="id4"></span><h2>Dialog Class Implementation<a class="headerlink" href="#dialog-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Dialog</span><span class="p">::</span><span class="n">Dialog</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">createMenu</span><span class="p">();</span>
+    <span class="n">createHorizontalGroupBox</span><span class="p">();</span>
+    <span class="n">createGridGroupBox</span><span class="p">();</span>
+    <span class="n">createFormGroupBox</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In the constructor, we first use the <code class="docutils literal"><span class="pre">createMenu()</span></code> function to create and populate a menu bar and the <code class="docutils literal"><span class="pre">createHorizontalGroupBox()</span></code> function to create a group box containing four buttons with a horizontal layout. Next, we use the <code class="docutils literal"><span class="pre">createGridGroupBox()</span></code> function to create a group box containing several line edits and a small text editor which are displayed in a grid layout. Finally, we use the <code class="docutils literal"><span class="pre">createFormGroupBox()</span></code> function to create a group box with three labels and three input fields: a line edit, a combo box, and a spin box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bigEditor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">;</span>
+<span class="n">bigEditor</span><span class="o">-&gt;</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This widget takes up all the remaining space &quot;</span>
+                           <span class="s2">&quot;in the top-level layout.&quot;</span><span class="p">));</span>
+
+<span class="n">buttonBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDialogButtonBox</span><span class="p">(</span><span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">Ok</span>
+                                 <span class="o">|</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">Cancel</span><span class="p">);</span>
+
+<span class="n">connect</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">accepted</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">accept</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">rejected</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">reject</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>We also create a big text editor and a dialog button box. The <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> class is a widget that presents buttons in a layout that is appropriate to the current widget style. The preferred buttons can be specified as arguments to the constructor, using the <code class="xref py py-class docutils literal"><span class="pre">QDialogButtonBox.StandardButtons</span></code> enum.</p>
+<p>Note that we don’t have to specify a parent for the widgets when we create them. The reason is that all the widgets we create here will be added to a layout, and when we add a widget to a layout, it is automatically reparented to the widget the layout is installed on.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The main layout is a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> object. <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> is a convenience class for a box layout with vertical orientation.</p>
+<p>In general, the <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> class takes the space it gets (from its parent layout or from the parent widget), divides it up into a series of boxes, and makes each managed widget fill one box. If the <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> ‘s orientation is <code class="xref py py-attr docutils literal"><span class="pre">Qt.Horizontal</span></code> the boxes are placed in a row. If the orientation is <code class="xref py py-attr docutils literal"><span class="pre">Qt.Vertical</span></code> , the boxes are placed in a column. The corresponding convenience classes are <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> , respectively.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setMenuBar</span><span class="p">(</span><span class="n">menuBar</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When we call the <code class="xref py py-func docutils literal"><span class="pre">QLayout.setMenuBar()</span></code> function, the layout places the provided menu bar at the top of the parent widget, and outside the widget’s <code class="xref py py-func docutils literal"><span class="pre">content</span> <span class="pre">margins</span></code> . All child widgets are placed below the bottom edge of the menu bar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">horizontalGroupBox</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">gridGroupBox</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">formGroupBox</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">bigEditor</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We use the <code class="xref py py-func docutils literal"><span class="pre">QBoxLayout.addWidget()</span></code> function to add the widgets to the end of the layout. Each widget will get at least its minimum size and at most its maximum size. It is possible to specify a stretch factor in the <code class="xref py py-func docutils literal"><span class="pre">QBoxLayout.addWidget()</span></code> function, and any excess space is shared according to these stretch factors. If not specified, a widget’s stretch factor is 0.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Basic Layouts&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We install the main layout on the <code class="docutils literal"><span class="pre">Dialog</span></code> widget using the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setLayout()</span></code> function, and all of the layout’s widgets are automatically reparented to be children of the <code class="docutils literal"><span class="pre">Dialog</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Dialog</span><span class="p">::</span><span class="n">createMenu</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">menuBar</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenuBar</span><span class="p">;</span>
+
+    <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">exitAction</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">));</span>
+    <span class="n">menuBar</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">fileMenu</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">exitAction</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">accept</span><span class="p">()));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the private <code class="docutils literal"><span class="pre">createMenu()</span></code> function we create a menu bar, and add a pull-down File menu containing an Exit option.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Dialog</span><span class="p">::</span><span class="n">createHorizontalGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">horizontalGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Horizontal layout&quot;</span><span class="p">));</span>
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NumButtons</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">buttons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Button %1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">buttons</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">horizontalGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When we create the horizontal group box, we use a <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> as the internal layout. We create the buttons we want to put in the group box, add them to the layout and install the layout on the group box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Dialog</span><span class="p">::</span><span class="n">createGridGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">gridGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Grid layout&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">createGridGroupBox()</span></code> function we use a <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> which lays out widgets in a grid. It takes the space made available to it (by its parent layout or by the parent widget), divides it up into rows and columns, and puts each widget it manages into the correct cell.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NumGridRows</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Line %1:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="n">lineEdits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lineEdits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For each row in the grid we create a label and an associated line edit, and add them to the layout. The <code class="xref py py-func docutils literal"><span class="pre">QGridLayout.addWidget()</span></code> function differ from the corresponding function in <a class="reference internal" href="../PySide2/QtWidgets/QBoxLayout.html#PySide2.QtWidgets.QBoxLayout" title="PySide2.QtWidgets.QBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QBoxLayout</span></code></a> : It needs the row and column specifying the grid cell to put the widget in.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">smallEditor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">;</span>
+<span class="n">smallEditor</span><span class="o">-&gt;</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This widget takes up about two thirds of the &quot;</span>
+                             <span class="s2">&quot;grid layout.&quot;</span><span class="p">));</span>
+<span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">smallEditor</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">QGridLayout.addWidget()</span></code> can in addition take arguments specifying the number of rows and columns the cell will be spanning. In this example, we create a small editor which spans three rows and one column.</p>
+<p>For both the <code class="xref py py-func docutils literal"><span class="pre">QBoxLayout.addWidget()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGridLayout.addWidget()</span></code> functions it is also possible to add a last argument specifying the widget’s alignment. By default it fills the whole cell. But we could, for example, align a widget with the right edge by specifying the alignment to be <code class="xref py py-attr docutils literal"><span class="pre">Qt.AlignRight</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">setColumnStretch</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">gridGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each column in a grid layout has a stretch factor. The stretch factor is set using <code class="xref py py-func docutils literal"><span class="pre">QGridLayout.setColumnStretch()</span></code> and determines how much of the available space the column will get over and above its necessary minimum.</p>
+<p>In this example, we set the stretch factors for columns 1 and 2. The stretch factor is relative to the other columns in this grid; columns with a higher stretch factor take more of the available space. So column 2 in our grid layout will get more of the available space than column 1, and column 0 will not grow at all since its stretch factor is 0 (the default).</p>
+<p>Columns and rows behave identically; there is an equivalent stretch factor for rows, as well as a <code class="xref py py-func docutils literal"><span class="pre">QGridLayout.setRowStretch()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Dialog</span><span class="p">::</span><span class="n">createFormGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">formGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Form layout&quot;</span><span class="p">));</span>
+    <span class="n">QFormLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QFormLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addRow</span><span class="p">(</span><span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Line 1:&quot;</span><span class="p">)),</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addRow</span><span class="p">(</span><span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Line 2, long text:&quot;</span><span class="p">)),</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addRow</span><span class="p">(</span><span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Line 3:&quot;</span><span class="p">)),</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">);</span>
+    <span class="n">formGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">createFormGroupBox()</span></code> function, we use a <a class="reference internal" href="../PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.QFormLayout" title="PySide2.QtWidgets.QFormLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFormLayout</span></code></a> to neatly arrange objects into two columns - name and field. There are three <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> objects for names with three corresponding input widgets as fields: a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> , a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> and a <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> . Unlike <code class="xref py py-func docutils literal"><span class="pre">QBoxLayout.addWidget()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGridLayout.addWidget()</span></code> , we use <code class="xref py py-func docutils literal"><span class="pre">QFormLayout.addRow()</span></code> to add widgets to the layout.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="dialog-cpp-example-file">
+<h1>dialog.cpp Example File<a class="headerlink" href="#dialog-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dialog-h-example-file">
+<h1>dialog.h Example File<a class="headerlink" href="#dialog-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="basiclayouts-pro-example-file">
+<h1>basiclayouts.pro Example File<a class="headerlink" href="#basiclayouts-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

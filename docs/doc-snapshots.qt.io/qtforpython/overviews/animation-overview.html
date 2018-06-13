@@ -1,0 +1,303 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Animation Framework &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Animation Framework</a><ul>
+<li><a class="reference internal" href="#the-animation-architecture">The Animation Architecture</a></li>
+<li><a class="reference internal" href="#classes-in-the-animation-framework">Classes in the Animation Framework</a></li>
+<li><a class="reference internal" href="#animating-qt-properties">Animating Qt Properties</a></li>
+<li><a class="reference internal" href="#animations-and-the-graphics-view-framework">Animations and the Graphics View Framework</a></li>
+<li><a class="reference internal" href="#easing-curves">Easing Curves</a></li>
+<li><a class="reference internal" href="#putting-animations-together">Putting Animations Together</a></li>
+<li><a class="reference internal" href="#animations-and-states">Animations and States</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-animation-framework">
+<span id="id1"></span><h1>The Animation Framework<a class="headerlink" href="#the-animation-framework" title="Permalink to this headline">¶</a></h1>
+<p>An overview of the Animation Framework</p>
+<blockquote>
+<div><p>An overview of the Animation Framework</p>
+<p>The animation framework aims to provide an easy way for creating animated and smooth GUIs. By animating Qt properties, the framework provides great freedom for animating widgets and other <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> s. The framework can also be used with the Graphics View framework. Many of the concepts available in the animation framework are also available in <span class="xref std std-ref">Qt Quick</span> , where it offers a declarative way of defining animations. Much of the knowledge acquired about the animation framework can be applied to <span class="xref std std-ref">Qt Quick</span> .</p>
+<p>In this overview, we explain the basics of its architecture. We also show examples of the most common techniques that the framework allows for animating <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> s and graphics items.</p>
+</div></blockquote>
+<div class="section" id="the-animation-architecture">
+<span id="id2"></span><h2>The Animation Architecture<a class="headerlink" href="#the-animation-architecture" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We will in this section take a high-level look at the animation framework’s architecture and how it is used to animate Qt properties. The following diagram shows the most important classes in the animation framework.</p>
+<p>The animation framework foundation consists of the base class <a class="reference internal" href="../PySide2/QtCore/QAbstractAnimation.html#PySide2.QtCore.QAbstractAnimation" title="PySide2.QtCore.QAbstractAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractAnimation</span></code></a> , and its two subclasses <a class="reference internal" href="../PySide2/QtCore/QVariantAnimation.html#PySide2.QtCore.QVariantAnimation" title="PySide2.QtCore.QVariantAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariantAnimation</span></code></a> and <a class="reference internal" href="../PySide2/QtCore/QAnimationGroup.html#PySide2.QtCore.QAnimationGroup" title="PySide2.QtCore.QAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAnimationGroup</span></code></a> . <a class="reference internal" href="../PySide2/QtCore/QAbstractAnimation.html#PySide2.QtCore.QAbstractAnimation" title="PySide2.QtCore.QAbstractAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractAnimation</span></code></a> is the ancestor of all animations. It represents basic properties that are common for all animations in the framework; notably, the ability to start, stop, and pause an animation. It is also receives the time change notifications.</p>
+<p>The animation framework further provides the <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> class, which inherits <a class="reference internal" href="../PySide2/QtCore/QVariantAnimation.html#PySide2.QtCore.QVariantAnimation" title="PySide2.QtCore.QVariantAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariantAnimation</span></code></a> and performs animation of a Qt property, which is part of Qt’s <a class="reference internal" href="metaobjects.html#the-meta-object-system"><span class="std std-ref">meta-object system</span></a> . The class performs an interpolation over the property using an easing curve. So when you want to animate a value, you can declare it as a property and make your class a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . Note that this gives us great freedom in animating already existing widgets and other <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> s.</p>
+<p>Complex animations can be constructed by building a tree structure of <a class="reference internal" href="../PySide2/QtCore/QAbstractAnimation.html#PySide2.QtCore.QAbstractAnimation" title="PySide2.QtCore.QAbstractAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractAnimation</span></code></a> s. The tree is built by using <a class="reference internal" href="../PySide2/QtCore/QAnimationGroup.html#PySide2.QtCore.QAnimationGroup" title="PySide2.QtCore.QAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAnimationGroup</span></code></a> s, which function as containers for other animations. Note also that the groups are subclasses of <a class="reference internal" href="../PySide2/QtCore/QAbstractAnimation.html#PySide2.QtCore.QAbstractAnimation" title="PySide2.QtCore.QAbstractAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractAnimation</span></code></a> , so groups can themselves contain other groups.</p>
+<p>The animation framework can be used on its own, but is also designed to be part of the state machine framework (See the <a class="reference internal" href="statemachine-api.html#the-state-machine-framework"><span class="std std-ref">state machine framework</span></a> for an introduction to the Qt state machine). The state machine provides a special state that can play an animation. A <a class="reference internal" href="../PySide2/QtCore/QState.html#PySide2.QtCore.QState" title="PySide2.QtCore.QState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QState</span></code></a> can also set properties when the state is entered or exited, and this special animation state will interpolate between these values when given a <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> . We will look more closely at this later.</p>
+<p>Behind the scenes, the animations are controlled by a global timer, which sends <code class="xref py py-func docutils literal"><span class="pre">updates</span></code> to all animations that are playing.</p>
+<p>For detailed descriptions of the classes’ function and roles in the framework, please look up their class descriptions.</p>
+</div></blockquote>
+</div>
+<div class="section" id="classes-in-the-animation-framework">
+<span id="id3"></span><h2>Classes in the Animation Framework<a class="headerlink" href="#classes-in-the-animation-framework" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>These classes provide a framework for creating both simple and complex animations.</div></blockquote>
+</div>
+<div class="section" id="animating-qt-properties">
+<span id="id4"></span><h2>Animating Qt Properties<a class="headerlink" href="#animating-qt-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As mentioned in the previous section, the <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> class can interpolate over Qt properties. It is often this class that should be used for animation of values; in fact, its superclass, <a class="reference internal" href="../PySide2/QtCore/QVariantAnimation.html#PySide2.QtCore.QVariantAnimation" title="PySide2.QtCore.QVariantAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariantAnimation</span></code></a> , has an empty implementation of <code class="xref py py-func docutils literal"><span class="pre">QVariantAnimation.updateCurrentValue()</span></code> , and does not change any value unless we change it ourselves on the <code class="xref py py-func docutils literal"><span class="pre">valueChanged</span> <span class="pre">signal</span></code> .</p>
+<p>A major reason we chose to animate Qt properties is that it presents us with freedom to animate already existing classes in the Qt API. Notably, the <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> class (which we can also embed in a <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> ) has properties for its bounds, colors, etc. Let’s look at a small example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Animated Button&quot;</span><span class="p">);</span>
+<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPropertyAnimation</span> <span class="n">animation</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setStartValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">animation</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This code will move <code class="docutils literal"><span class="pre">button</span></code> from the top left corner of the screen to the position (250, 250) in 10 seconds (10000 milliseconds).</p>
+<p>The example above will do a linear interpolation between the start and end value. It is also possible to set values situated between the start and end value. The interpolation will then go by these points.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Animated Button&quot;</span><span class="p">);</span>
+<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPropertyAnimation</span> <span class="n">animation</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
+
+<span class="n">animation</span><span class="o">.</span><span class="n">setKeyValueAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setKeyValueAt</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setKeyValueAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">animation</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In this example, the animation will take the button to (250, 250) in 8 seconds, and then move it back to its original position in the remaining 2 seconds. The movement will be linearly interpolated between these points.</p>
+<p>You also have the possibility to animate values of a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> that is not declared as a Qt property. The only requirement is that this value has a setter. You can then subclass the class containing the value and declare a property that uses this setter. Note that each Qt property requires a getter, so you will need to provide a getter yourself if this is not defined.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyGraphicsRectItem</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span><span class="p">,</span> <span class="n">public</span> <span class="n">QGraphicsRectItem</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QRectF</span> <span class="n">geometry</span> <span class="n">READ</span> <span class="n">geometry</span> <span class="n">WRITE</span> <span class="n">setGeometry</span><span class="p">)</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In the above code example, we subclass <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsRectItem.html#PySide2.QtWidgets.QGraphicsRectItem" title="PySide2.QtWidgets.QGraphicsRectItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsRectItem</span></code></a> and define a geometry property. We can now animate the widgets geometry even if <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsRectItem.html#PySide2.QtWidgets.QGraphicsRectItem" title="PySide2.QtWidgets.QGraphicsRectItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsRectItem</span></code></a> does not provide the geometry property.</p>
+<p>For a general introduction to the Qt property system, see its <a class="reference internal" href="properties.html#the-property-system"><span class="std std-ref">overview</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="animations-and-the-graphics-view-framework">
+<span id="id5"></span><h2>Animations and the Graphics View Framework<a class="headerlink" href="#animations-and-the-graphics-view-framework" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When you want to animate <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> s, you also use <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> . However, <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> does not inherit <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . A good solution is to subclass the graphics item you wish to animate. This class will then also inherit <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . This way, <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> can be used for <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> s. The example below shows how this is done. Another possibility is to inherit <a class="reference internal" href="graphicsview.html#graphics-view-framework"><span class="std std-ref">QGraphicsWidget</span></a> , which already is a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pixmap</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span><span class="p">,</span> <span class="n">public</span> <span class="n">QGraphicsPixmapItem</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QPointF</span> <span class="n">pos</span> <span class="n">READ</span> <span class="n">pos</span> <span class="n">WRITE</span> <span class="n">setPos</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>As described in the previous section, we need to define properties that we wish to animate.</p>
+<p>Note that <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> must be the first class inherited as the meta-object system demands this.</p>
+</div></blockquote>
+</div>
+<div class="section" id="easing-curves">
+<span id="id6"></span><h2>Easing Curves<a class="headerlink" href="#easing-curves" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As mentioned, <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> performs an interpolation between the start and end property value. In addition to adding more key values to the animation, you can also use an easing curve. Easing curves describe a function that controls how the speed of the interpolation between 0 and 1 should be, and are useful if you want to control the speed of an animation without changing the path of the interpolation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Animated Button&quot;</span><span class="p">);</span>
+<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPropertyAnimation</span> <span class="n">animation</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setStartValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">animation</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">animation</span><span class="o">.</span><span class="n">setEasingCurve</span><span class="p">(</span><span class="n">QEasingCurve</span><span class="p">::</span><span class="n">OutBounce</span><span class="p">);</span>
+
+<span class="n">animation</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Here the animation will follow a curve that makes it bounce like a ball as if it was dropped from the start to the end position. <a class="reference internal" href="../PySide2/QtCore/QEasingCurve.html#PySide2.QtCore.QEasingCurve" title="PySide2.QtCore.QEasingCurve"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEasingCurve</span></code></a> has a large collection of curves for you to choose from. These are defined by the <code class="xref py py-attr docutils literal"><span class="pre">QEasingCurve.Type</span></code> enum. If you are in need of another curve, you can also implement one yourself, and register it with <a class="reference internal" href="../PySide2/QtCore/QEasingCurve.html#PySide2.QtCore.QEasingCurve" title="PySide2.QtCore.QEasingCurve"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEasingCurve</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="putting-animations-together">
+<span id="id7"></span><h2>Putting Animations Together<a class="headerlink" href="#putting-animations-together" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An application will often contain more than one animation. For instance, you might want to move more than one graphics item simultaneously or move them in sequence after each other.</p>
+<p>The subclasses of <a class="reference internal" href="../PySide2/QtCore/QAnimationGroup.html#PySide2.QtCore.QAnimationGroup" title="PySide2.QtCore.QAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAnimationGroup</span></code></a> ( <a class="reference internal" href="../PySide2/QtCore/QSequentialAnimationGroup.html#PySide2.QtCore.QSequentialAnimationGroup" title="PySide2.QtCore.QSequentialAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSequentialAnimationGroup</span></code></a> and <a class="reference internal" href="../PySide2/QtCore/QParallelAnimationGroup.html#PySide2.QtCore.QParallelAnimationGroup" title="PySide2.QtCore.QParallelAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QParallelAnimationGroup</span></code></a> ) are containers for other animations so that these animations can be animated either in sequence or parallel. The <a class="reference internal" href="../PySide2/QtCore/QAnimationGroup.html#PySide2.QtCore.QAnimationGroup" title="PySide2.QtCore.QAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAnimationGroup</span></code></a> is an example of an animation that does not animate properties, but it gets notified of time changes periodically. This enables it to forward those time changes to its contained animations, and thereby controlling when its animations are played.</p>
+<p>Let’s look at code examples that use both <a class="reference internal" href="../PySide2/QtCore/QSequentialAnimationGroup.html#PySide2.QtCore.QSequentialAnimationGroup" title="PySide2.QtCore.QSequentialAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSequentialAnimationGroup</span></code></a> and <a class="reference internal" href="../PySide2/QtCore/QParallelAnimationGroup.html#PySide2.QtCore.QParallelAnimationGroup" title="PySide2.QtCore.QParallelAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QParallelAnimationGroup</span></code></a> , starting off with the latter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">bonnie</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Bonnie&quot;</span><span class="p">);</span>
+<span class="n">bonnie</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPushButton</span> <span class="o">*</span><span class="n">clyde</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Clyde&quot;</span><span class="p">);</span>
+<span class="n">clyde</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">anim1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">bonnie</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Set</span> <span class="n">up</span> <span class="n">anim1</span>
+
+<span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">anim2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">clyde</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Set</span> <span class="n">up</span> <span class="n">anim2</span>
+
+<span class="n">QParallelAnimationGroup</span> <span class="o">*</span><span class="n">group</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QParallelAnimationGroup</span><span class="p">;</span>
+<span class="n">group</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">anim1</span><span class="p">);</span>
+<span class="n">group</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">anim2</span><span class="p">);</span>
+
+<span class="n">group</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>A parallel group plays more than one animation at the same time. Calling its <code class="xref py py-func docutils literal"><span class="pre">QAbstractAnimation.start()</span></code> function will start all animations it governs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="n">button</span><span class="p">(</span><span class="s2">&quot;Animated Button&quot;</span><span class="p">);</span>
+<span class="n">button</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QPropertyAnimation</span> <span class="n">anim1</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="n">anim1</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="n">anim1</span><span class="o">.</span><span class="n">setStartValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">anim1</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">QPropertyAnimation</span> <span class="n">anim2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">);</span>
+<span class="n">anim2</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="n">anim2</span><span class="o">.</span><span class="n">setStartValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">anim2</span><span class="o">.</span><span class="n">setEndValue</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">QSequentialAnimationGroup</span> <span class="n">group</span><span class="p">;</span>
+
+<span class="n">group</span><span class="o">.</span><span class="n">addAnimation</span><span class="p">(</span><span class="o">&amp;</span><span class="n">anim1</span><span class="p">);</span>
+<span class="n">group</span><span class="o">.</span><span class="n">addAnimation</span><span class="p">(</span><span class="o">&amp;</span><span class="n">anim2</span><span class="p">);</span>
+
+<span class="n">group</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As you no doubt have guessed, <a class="reference internal" href="../PySide2/QtCore/QSequentialAnimationGroup.html#PySide2.QtCore.QSequentialAnimationGroup" title="PySide2.QtCore.QSequentialAnimationGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSequentialAnimationGroup</span></code></a> plays its animations in sequence. It starts the next animation in the list after the previous is finished.</p>
+<p>Since an animation group is an animation itself, you can add it to another group. This way, you can build a tree structure of animations which specifies when the animations are played in relation to each other.</p>
+</div></blockquote>
+</div>
+<div class="section" id="animations-and-states">
+<span id="id8"></span><h2>Animations and States<a class="headerlink" href="#animations-and-states" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When using a <a class="reference internal" href="statemachine-api.html#the-state-machine-framework"><span class="std std-ref">state machine</span></a> , we can associate one or more animations to a transition between states using a <a class="reference internal" href="../PySide2/QtCore/QSignalTransition.html#PySide2.QtCore.QSignalTransition" title="PySide2.QtCore.QSignalTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSignalTransition</span></code></a> or <a class="reference internal" href="../PySide2/QtCore/QEventTransition.html#PySide2.QtCore.QEventTransition" title="PySide2.QtCore.QEventTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEventTransition</span></code></a> class. These classes are both derived from <a class="reference internal" href="../PySide2/QtCore/QAbstractTransition.html#PySide2.QtCore.QAbstractTransition" title="PySide2.QtCore.QAbstractTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractTransition</span></code></a> , which defines the convenience function <code class="xref py py-func docutils literal"><span class="pre">QAbstractTransition.addAnimation()</span></code> that enables the appending of one or more animations triggered when the transition occurs.</p>
+<p>We also have the possibility to associate properties with the states rather than setting the start and end values ourselves. Below is a complete code example that animates the geometry of a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Animated Button&quot;</span><span class="p">);</span>
+<span class="n">button</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+
+<span class="n">QStateMachine</span> <span class="o">*</span><span class="n">machine</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QStateMachine</span><span class="p">;</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">state1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">machine</span><span class="p">);</span>
+<span class="n">state1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+<span class="n">machine</span><span class="o">-&gt;</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">state1</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">state2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">machine</span><span class="p">);</span>
+<span class="n">state2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+
+<span class="n">QSignalTransition</span> <span class="o">*</span><span class="n">transition1</span> <span class="o">=</span> <span class="n">state1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span>
+    <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">state2</span><span class="p">);</span>
+<span class="n">transition1</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">));</span>
+
+<span class="n">QSignalTransition</span> <span class="o">*</span><span class="n">transition2</span> <span class="o">=</span> <span class="n">state2</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span>
+    <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">state1</span><span class="p">);</span>
+<span class="n">transition2</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">));</span>
+
+<span class="n">machine</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>For a more comprehensive example of how to use the state machine framework for animations, see the states example (it lives in the <code class="docutils literal"><span class="pre">examples/animation/states</span></code> directory).</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

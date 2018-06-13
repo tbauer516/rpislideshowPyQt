@@ -1,0 +1,234 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Draggable Icons Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Draggable Icons Example</a><ul>
+<li><a class="reference internal" href="#dragwidget-class-definition">DragWidget Class Definition</a></li>
+<li><a class="reference internal" href="#dragwidget-class-implementation">DragWidget Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dragwidget-cpp-example-file">dragwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#dragwidget-h-example-file">dragwidget.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#draggableicons-pro-example-file">draggableicons.pro Example File</a></li>
+<li><a class="reference internal" href="#draggableicons-qrc-example-file">draggableicons.qrc Example File</a></li>
+<li><a class="reference internal" href="#boat-png-image-file">boat.png Image File</a></li>
+<li><a class="reference internal" href="#car-png-image-file">car.png Image File</a></li>
+<li><a class="reference internal" href="#house-png-image-file">house.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="draggable-icons-example">
+<span id="id1"></span><h1>Draggable Icons Example<a class="headerlink" href="#draggable-icons-example" title="Permalink to this headline">¶</a></h1>
+<p>Draggable Icons example shows how to drag and drop image data between widgets in the same application, and between different applications</p>
+<blockquote>
+<div><p>The Draggable Icons example shows how to drag and drop image data between widgets in the same application, and between different applications.</p>
+<p>In many situations where drag and drop is used, the user starts dragging from a particular widget and drops the payload onto another widget. In this example, we subclass <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> to create labels that we use as drag sources, and place them inside <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> s that serve as both containers and drop sites.</p>
+<p>In addition, when a drag and drop operation occurs, we want to send more than just an image. We also want to send information about where the user clicked in the image so that the user can place it precisely on the drop target. This level of detail means that we must create a custom MIME type for our data.</p>
+</div></blockquote>
+<div class="section" id="dragwidget-class-definition">
+<span id="id2"></span><h2>DragWidget Class Definition<a class="headerlink" href="#dragwidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The icon widgets that we use to display icons are subclassed from <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DragWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QFrame</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">DragWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QDragEnterEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dragMoveEvent</span><span class="p">(</span><span class="n">QDragMoveEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dropEvent</span><span class="p">(</span><span class="n">QDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Since the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> class provides most of what we require for the icon, we only need to reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> to provide drag and drop facilities.</p>
+</div></blockquote>
+</div>
+<div class="section" id="dragwidget-class-implementation">
+<span id="id3"></span><h2>DragWidget Class Implementation<a class="headerlink" href="#dragwidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">DragWidget</span></code> constructor sets an attribute on the widget that ensures that it will be deleted when it is closed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DragWidget</span><span class="p">::</span><span class="n">DragWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QFrame</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="p">::</span><span class="n">Sunken</span> <span class="o">|</span> <span class="n">QFrame</span><span class="p">::</span><span class="n">StyledPanel</span><span class="p">);</span>
+    <span class="n">setAcceptDrops</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">boatIcon</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">boatIcon</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/boat.png&quot;</span><span class="p">));</span>
+    <span class="n">boatIcon</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">boatIcon</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">boatIcon</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_DeleteOnClose</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">carIcon</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">carIcon</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/car.png&quot;</span><span class="p">));</span>
+    <span class="n">carIcon</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="n">carIcon</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">carIcon</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_DeleteOnClose</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">houseIcon</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">houseIcon</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/house.png&quot;</span><span class="p">));</span>
+    <span class="n">houseIcon</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="n">houseIcon</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">houseIcon</span><span class="o">-&gt;</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WA_DeleteOnClose</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To enable dragging from the icon, we need to act on a mouse press event. We do this by reimplementing <code class="xref py py-func docutils literal"><span class="pre">QWidget.mousePressEvent()</span></code> and setting up a <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void DragWidget::mousePressEvent(QMouseEvent *event)
+{
+    QLabel *child = static_cast&lt;QLabel*&gt;(childAt(event-&gt;pos()));
+    if (!child)
+        return;
+
+    QPixmap pixmap = *child-&gt;pixmap();
+
+    QByteArray itemData;
+    QDataStream dataStream(&amp;itemData, QIODevice::WriteOnly);
+    dataStream &lt;&lt; pixmap &lt;&lt; QPoint(event-&gt;pos() - child-&gt;pos());
+</pre></div>
+</div>
+<p>Since we will be sending pixmap data for the icon and information about the user’s click in the icon widget, we construct a <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> and package up the details using a <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> .</p>
+<p>For interoperability, drag and drop operations describe the data they contain using MIME types. In Qt, we describe this data using a <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMimeData</span> <span class="o">*</span><span class="n">mimeData</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMimeData</span><span class="p">;</span>
+<span class="n">mimeData</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="s2">&quot;application/x-dnditemdata&quot;</span><span class="p">,</span> <span class="n">itemData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We choose an unofficial MIME type for this purpose, and supply the <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> to the MIME data object.</p>
+<p>The drag and drop operation itself is handled by a <a class="reference internal" href="../PySide2/QtGui/QDrag.html#PySide2.QtGui.QDrag" title="PySide2.QtGui.QDrag"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDrag</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QDrag</span> <span class="o">*</span><span class="n">drag</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDrag</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setMimeData</span><span class="p">(</span><span class="n">mimeData</span><span class="p">);</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">);</span>
+<span class="n">drag</span><span class="o">-&gt;</span><span class="n">setHotSpot</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="n">child</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Here, we pass the data to the drag object, set a pixmap that will be shown alongside the cursor during the operation, and define the position of a hot spot that places the position of this pixmap under the cursor.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="dragwidget-cpp-example-file">
+<h1>dragwidget.cpp Example File<a class="headerlink" href="#dragwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dragwidget-h-example-file">
+<h1>dragwidget.h Example File<a class="headerlink" href="#dragwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="draggableicons-pro-example-file">
+<h1>draggableicons.pro Example File<a class="headerlink" href="#draggableicons-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="draggableicons-qrc-example-file">
+<h1>draggableicons.qrc Example File<a class="headerlink" href="#draggableicons-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="boat-png-image-file">
+<h1>boat.png Image File<a class="headerlink" href="#boat-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="car-png-image-file">
+<h1>car.png Image File<a class="headerlink" href="#car-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="house-png-image-file">
+<h1>house.png Image File<a class="headerlink" href="#house-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

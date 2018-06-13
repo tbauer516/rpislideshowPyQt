@@ -1,0 +1,281 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Wiggly Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wiggly Example</a><ul>
+<li><a class="reference internal" href="#dialog-class-definition">Dialog Class Definition</a></li>
+<li><a class="reference internal" href="#dialog-class-implementation">Dialog Class Implementation</a></li>
+<li><a class="reference internal" href="#wigglywidget-class-definition">WigglyWidget Class Definition</a></li>
+<li><a class="reference internal" href="#wigglywidget-class-implementation">WigglyWidget Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dialog-cpp-example-file">dialog.cpp Example File</a></li>
+<li><a class="reference internal" href="#dialog-h-example-file">dialog.h Example File</a></li>
+<li><a class="reference internal" href="#wigglywidget-cpp-example-file">wigglywidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#wigglywidget-h-example-file">wigglywidget.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#wiggly-pro-example-file">wiggly.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="wiggly-example">
+<span id="id1"></span><h1>Wiggly Example<a class="headerlink" href="#wiggly-example" title="Permalink to this headline">¶</a></h1>
+<p>Wiggly example shows how to animate a widget using QBasicTimer and timerEvent(). In addition, the example demonstrates how to use QFontMetrics to determine the size of text on screen</p>
+<blockquote>
+<div><p>The Wiggly example shows how to animate a widget using <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> and <code class="xref py py-func docutils literal"><span class="pre">QObject.timerEvent()</span></code> . In addition, the example demonstrates how to use <a class="reference internal" href="../PySide2/QtGui/QFontMetrics.html#PySide2.QtGui.QFontMetrics" title="PySide2.QtGui.QFontMetrics"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QFontMetrics</span></code></a> to determine the size of text on screen.</p>
+<p><a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> is a low-level class for timers. Unlike <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> , <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> doesn’t inherit from <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> ; instead of emitting a <code class="xref py py-func docutils literal"><span class="pre">QTimer.timeout()</span></code> signal when a certain amount of time has passed, it sends a <a class="reference internal" href="../PySide2/QtCore/QTimerEvent.html#PySide2.QtCore.QTimerEvent" title="PySide2.QtCore.QTimerEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimerEvent</span></code></a> to a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> of our choice. This makes <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> a more lightweight alternative to <a class="reference internal" href="../PySide2/QtCore/QTimer.html#PySide2.QtCore.QTimer" title="PySide2.QtCore.QTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTimer</span></code></a> . Qt’s built-in widgets use it internally, and it is provided in Qt’s API for highly-optimized applications (such as embedded applications).</p>
+<p>The example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">WigglyWidget</span></code> is the custom widget displaying the text in a wiggly line.</li>
+<li><code class="docutils literal"><span class="pre">Dialog</span></code> is the dialog widget allowing the user to enter a text. It combines a <code class="docutils literal"><span class="pre">WigglyWidget</span></code> and a <code class="docutils literal"><span class="pre">QLineEdit</span></code>.</li>
+</ul>
+<p>We will first take a quick look at the <code class="docutils literal"><span class="pre">Dialog</span></code> class, then we will review the <code class="docutils literal"><span class="pre">WigglyWidget</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="dialog-class-definition">
+<span id="id2"></span><h2>Dialog Class Definition<a class="headerlink" href="#dialog-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Dialog</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">Dialog</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Dialog</span></code> class provides a dialog widget that allows the user to enter a text. The text is then rendered by <code class="docutils literal"><span class="pre">WigglyWidget</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="dialog-class-implementation">
+<span id="id3"></span><h2>Dialog Class Implementation<a class="headerlink" href="#dialog-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Dialog</span><span class="p">::</span><span class="n">Dialog</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QDialog</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">WigglyWidget</span> <span class="o">*</span><span class="n">wigglyWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">WigglyWidget</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">lineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">wigglyWidget</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lineEdit</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">lineEdit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QLineEdit</span><span class="p">::</span><span class="n">textChanged</span><span class="p">,</span> <span class="n">wigglyWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">WigglyWidget</span><span class="p">::</span><span class="n">setText</span><span class="p">);</span>
+    <span class="n">lineEdit</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">));</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Wiggly&quot;</span><span class="p">));</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">145</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we create a wiggly widget along with a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">line</span> <span class="pre">edit</span></code></a> , and we put the two widgets in a vertical layout. We connect the line edit’s <code class="xref py py-func docutils literal"><span class="pre">QLineEdit.textChanged()</span></code> signal to the wiggly widget’s <code class="docutils literal"><span class="pre">setText()</span></code> slot to obtain the real time interaction with the wiggly widget. The widget’s default text is “Hello world!”.</p>
+</div></blockquote>
+</div>
+<div class="section" id="wigglywidget-class-definition">
+<span id="id4"></span><h2>WigglyWidget Class Definition<a class="headerlink" href="#wigglywidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WigglyWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">WigglyWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setText</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">newText</span><span class="p">)</span> <span class="p">{</span> <span class="n">text</span> <span class="o">=</span> <span class="n">newText</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">timerEvent</span><span class="p">(</span><span class="n">QTimerEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QBasicTimer</span> <span class="n">timer</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">text</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">step</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">WigglyWidget</span></code> class provides the wiggly line displaying the text. We subclass <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and reimplement the standard <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QObject.timerEvent()</span></code> functions to draw and update the widget. In addition we implement a public <code class="docutils literal"><span class="pre">setText()</span></code> slot that sets the widget’s text.</p>
+<p>The <code class="docutils literal"><span class="pre">timer</span></code> variable, of type <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> , is used to update the widget at regular intervals, making the widget move. The <code class="docutils literal"><span class="pre">text</span></code> variable is used to store the currently displayed text, and <code class="docutils literal"><span class="pre">step</span></code> to calculate position and color for each character on the wiggly line.</p>
+</div></blockquote>
+</div>
+<div class="section" id="wigglywidget-class-implementation">
+<span id="id5"></span><h2>WigglyWidget Class Implementation<a class="headerlink" href="#wigglywidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WigglyWidget</span><span class="p">::</span><span class="n">WigglyWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Midlight</span><span class="p">);</span>
+    <span class="n">setAutoFillBackground</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">QFont</span> <span class="n">newFont</span> <span class="o">=</span> <span class="n">font</span><span class="p">();</span>
+    <span class="n">newFont</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">newFont</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span> <span class="o">+</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">setFont</span><span class="p">(</span><span class="n">newFont</span><span class="p">);</span>
+
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we make the widget’s background slightly lighter than the usual background using the <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Midlight</span></code> color role. The background role defines the brush from the widget’s palette that Qt uses to paint the background. Then we enlarge the widget’s font with 20 points.</p>
+<p>Finally we start the timer; the call to <code class="xref py py-func docutils literal"><span class="pre">QBasicTimer.start()</span></code> makes sure that <em>this</em> particular wiggly widget will receive the timer events generated when the timer times out (every 60 milliseconds).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WigglyWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="nb">int</span> <span class="n">sineTable</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">38</span><span class="p">,</span> <span class="o">-</span><span class="mi">71</span><span class="p">,</span> <span class="o">-</span><span class="mi">92</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">92</span><span class="p">,</span> <span class="o">-</span><span class="mi">71</span><span class="p">,</span> <span class="o">-</span><span class="mi">38</span>
+    <span class="p">};</span>
+
+    <span class="n">QFontMetrics</span> <span class="n">metrics</span><span class="p">(</span><span class="n">font</span><span class="p">());</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">text</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">()</span> <span class="o">-</span> <span class="n">metrics</span><span class="o">.</span><span class="n">descent</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">paintEvent()</span></code> function is called whenever a <a class="reference internal" href="../PySide2/QtGui/QPaintEvent.html#PySide2.QtGui.QPaintEvent" title="PySide2.QtGui.QPaintEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintEvent</span></code></a> is sent to the widget. Paint events are sent to widgets that need to update themselves, for instance when part of a widget is exposed because a covering widget was moved. For the wiggly widget, a paint event will also be generated every 60 milliseconds from the <code class="docutils literal"><span class="pre">timerEvent()</span></code> slot.</p>
+<p>The <code class="docutils literal"><span class="pre">sineTable</span></code> represents y-values of the sine curve, multiplied by 100. It is used to make the wiggly widget move along the sine curve.</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QFontMetrics.html#PySide2.QtGui.QFontMetrics" title="PySide2.QtGui.QFontMetrics"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QFontMetrics</span></code></a> object provides information about the widget’s font. The <code class="docutils literal"><span class="pre">x</span></code> variable is the horizontal position where we start drawing the text. The <code class="docutils literal"><span class="pre">y</span></code> variable is the vertical position of the text’s base line. Both variables are computed so that the text is horizontally and vertically centered. To compute the base line, we take into account the font’s ascent (the height of the font above the base line) and font’s descent (the height of the font below the base line). If the descent equals the ascent, they cancel out each other and the base line is at <code class="docutils literal"><span class="pre">height()</span></code> / 2.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">text</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">16</span><span class="p">;</span>
+        <span class="n">color</span><span class="o">.</span><span class="n">setHsv</span><span class="p">((</span><span class="mi">15</span> <span class="o">-</span> <span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">191</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="p">((</span><span class="n">sineTable</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">*</span> <span class="n">metrics</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">400</span><span class="p">),</span>
+                         <span class="n">QString</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each time the <code class="docutils literal"><span class="pre">paintEvent()</span></code> function is called, we create a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object <code class="docutils literal"><span class="pre">painter</span></code> to draw the contents of the widget. For each character in <code class="docutils literal"><span class="pre">text</span></code> , we determine the color and the position on the wiggly line based on <code class="docutils literal"><span class="pre">step</span></code> . In addition, <code class="docutils literal"><span class="pre">x</span></code> is incremented by the character’s width.</p>
+<p>For simplicity, we assume that <code class="xref py py-func docutils literal"><span class="pre">QFontMetrics.horizontalAdvance()</span></code> (<code class="docutils literal"><span class="pre">text</span></code> ) returns the sum of the individual character advances ( <code class="xref py py-func docutils literal"><span class="pre">QFontMetrics.horizontalAdvance()</span></code> (<code class="docutils literal"><span class="pre">text[i]</span></code> )). In practice, this is not always the case because <code class="xref py py-func docutils literal"><span class="pre">QFontMetrics.horizontalAdvance()</span></code> (<code class="docutils literal"><span class="pre">text</span></code> ) also takes into account the kerning between certain letters (e.g., ‘A’ and ‘V’). The result is that the text isn’t perfectly centered. You can verify this by typing “AVAVAVAVAVAV” in the line edit.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">WigglyWidget</span><span class="p">::</span><span class="n">timerEvent</span><span class="p">(</span><span class="n">QTimerEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">timerId</span><span class="p">()</span> <span class="o">==</span> <span class="n">timer</span><span class="o">.</span><span class="n">timerId</span><span class="p">())</span> <span class="p">{</span>
+        <span class="o">++</span><span class="n">step</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">QWidget</span><span class="p">::</span><span class="n">timerEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">timerEvent()</span></code> function receives all the timer events that are generated for this widget. If a timer event is sent from the widget’s <a class="reference internal" href="../PySide2/QtCore/QBasicTimer.html#PySide2.QtCore.QBasicTimer" title="PySide2.QtCore.QBasicTimer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBasicTimer</span></code></a> , we increment <code class="docutils literal"><span class="pre">step</span></code> to make the text move, and call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to refresh the display. Any other timer event is passed on to the base class’s implementation of the <code class="xref py py-func docutils literal"><span class="pre">QWidget.timerEvent()</span></code> function.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> slot does not cause an immediate repaint; instead the slot schedules a paint event for processing when Qt returns to the main event loop. The paint events are then handled by <code class="docutils literal"><span class="pre">WigglyWidget</span></code> ‘s <code class="docutils literal"><span class="pre">paintEvent()</span></code> function.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="dialog-cpp-example-file">
+<h1>dialog.cpp Example File<a class="headerlink" href="#dialog-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dialog-h-example-file">
+<h1>dialog.h Example File<a class="headerlink" href="#dialog-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="wigglywidget-cpp-example-file">
+<h1>wigglywidget.cpp Example File<a class="headerlink" href="#wigglywidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="wigglywidget-h-example-file">
+<h1>wigglywidget.h Example File<a class="headerlink" href="#wigglywidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="wiggly-pro-example-file">
+<h1>wiggly.pro Example File<a class="headerlink" href="#wiggly-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

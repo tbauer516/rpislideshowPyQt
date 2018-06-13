@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Presenting Data in a Table View &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="presenting-data-in-a-table-view">
+<span id="id1"></span><h1>Presenting Data in a Table View<a class="headerlink" href="#presenting-data-in-a-table-view" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> , <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> , and <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> classes can be used as a data source for Qt’s view classes such as <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> , and <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> . In practice, <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> is by far the most common choice, because an SQL result set is essentially a two-dimensional data structure.</p>
+<p>The following example creates a view based on an SQL data model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">view</span> <span class="o">=</span>  <span class="n">QTableView</span><span class="p">()</span>
+<span class="n">view</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">view</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If the model is a read-write model (e.g., <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> ), the view lets the user edit the fields. You can disable this by calling</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">view</span><span class="o">.</span><span class="n">setEditTriggers</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">NoEditTriggers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can use the same model as a data source for multiple views. If the user edits the model through one of the views, the other views will reflect the changes immediately. The <span class="xref std std-ref">Table Model</span> example shows how it works.</p>
+<p>View classes display a header at the top to label the columns. To change the header texts, call <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.setHeaderData()</span></code> on the model. The header’s labels default to the table’s field names. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">QObject</span><span class="p">::</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;ID&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">QObject</span><span class="p">::</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">QObject</span><span class="p">::</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">QObject</span><span class="p">::</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Country&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> also has a vertical header on the left with numbers identifying the rows. If you insert rows programmatically using <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.insertRows()</span></code> , the new rows will be marked with an asterisk (*) until they are submitted using <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.submitAll()</span></code> or automatically when the user moves to another record (assuming the <code class="xref py py-attr docutils literal"><span class="pre">edit</span> <span class="pre">strategy</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnRowChange</span></code> ).</p>
+<p>Likewise, if you remove rows using <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.removeRows()</span></code> , the rows will be marked with an exclamation mark (!) until the change is submitted.</p>
+<p>The items in the view are rendered using a delegate. The default delegate, <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> , handles the most common data types (<code class="docutils literal"><span class="pre">int</span></code> , <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> , <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , etc.). The delegate is also responsible for providing editor widgets (e.g., a combobox) when the user starts editing an item in the view. You can create your own delegates by subclassing <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> or <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> . See <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model/View Programming</span></a> for more information.</p>
+<p><a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> is optimized to operate on a single table at a time. If you need a read-write model that operates on an arbitrary result set, you can subclass <a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> and reimplement <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.flags()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.setData()</span></code> to make it read-write. The following two functions make fields 1 and 2 of a query model editable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Qt</span><span class="p">::</span><span class="n">ItemFlags</span> <span class="n">EditableSqlModel</span><span class="p">::</span><span class="n">flags</span><span class="p">(</span>
+        <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">ItemFlags</span> <span class="n">flags</span> <span class="o">=</span> <span class="n">QSqlQueryModel</span><span class="p">::</span><span class="n">flags</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">ItemIsEditable</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">flags</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">bool</span> <span class="n">EditableSqlModel</span><span class="p">::</span><span class="n">setData</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="n">const</span> <span class="n">QVariant</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span> <span class="o">/*</span> <span class="n">role</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+
+    <span class="n">QModelIndex</span> <span class="n">primaryKeyIndex</span> <span class="o">=</span> <span class="n">QSqlQueryModel</span><span class="p">::</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">data</span><span class="p">(</span><span class="n">primaryKeyIndex</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">();</span>
+
+    <span class="n">clear</span><span class="p">();</span>
+
+    <span class="nb">bool</span> <span class="n">ok</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="n">setFirstName</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">toString</span><span class="p">());</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="n">setLastName</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">toString</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="n">refresh</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The setFirstName() helper function is defined as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">EditableSqlModel</span><span class="p">::</span><span class="n">setFirstName</span><span class="p">(</span><span class="nb">int</span> <span class="n">personId</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">firstName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QSqlQuery</span> <span class="n">query</span><span class="p">;</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s2">&quot;update person set firstname = ? where id = ?&quot;</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">addBindValue</span><span class="p">(</span><span class="n">firstName</span><span class="p">);</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">addBindValue</span><span class="p">(</span><span class="n">personId</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">query</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The setLastName() function is similar. See the <span class="xref std std-ref">Query Model</span> example for the complete source code.</p>
+<p>Subclassing a model makes it possible to customize it in many ways: You can provide tooltips for the items, change the background color, provide calculated values, provide different values for viewing and editing, handle null values specially, and more. See <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model/View Programming</span></a> as well as the <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemView.html#PySide2.QtWidgets.QAbstractItemView" title="PySide2.QtWidgets.QAbstractItemView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemView</span></code></a> reference documentation for details.</p>
+<p>If all you need is to resolve a foreign key to a more human-friendly string, you can use <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> . For best results, you should also use <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalDelegate</span></code> , a delegate that provides combobox editors for editing foreign keys.</p>
+<p>The <span class="xref std std-ref">Relational Table Model</span> example illustrates how to use <a class="reference internal" href="../PySide2/QtSql/QSqlRelationalTableModel.html#PySide2.QtSql.QSqlRelationalTableModel" title="PySide2.QtSql.QSqlRelationalTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalTableModel</span></code></a> in conjunction with <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRelationalDelegate</span></code> to provide tables with foreign key support.</p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

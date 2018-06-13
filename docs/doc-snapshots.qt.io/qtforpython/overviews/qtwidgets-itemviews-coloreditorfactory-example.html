@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Color Editor Factory Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Color Editor Factory Example</a><ul>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+<li><a class="reference internal" href="#colorlisteditor-definition">ColorListEditor Definition</a></li>
+<li><a class="reference internal" href="#colorlisteditor-implementation">ColorListEditor Implementation</a></li>
+<li><a class="reference internal" href="#further-customization-of-item-view-editors">Further Customization of Item View Editors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#colorlisteditor-cpp-example-file">colorlisteditor.cpp Example File</a></li>
+<li><a class="reference internal" href="#colorlisteditor-h-example-file">colorlisteditor.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#coloreditorfactory-pro-example-file">coloreditorfactory.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="color-editor-factory-example">
+<span id="id1"></span><h1>Color Editor Factory Example<a class="headerlink" href="#color-editor-factory-example" title="Permalink to this headline">¶</a></h1>
+<p>This example shows how to create an editor that can be used by a QItemDelegate</p>
+<blockquote>
+<div><p>This example shows how to create an editor that can be used by a <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> .</p>
+<p>When editing data in a <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> , or <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> , editors are created and displayed by a <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">delegate</span></a> . <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> , which is the default delegate used by Qt’s <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">item views</span></a> , uses a <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorFactory.html#PySide2.QtWidgets.QItemEditorFactory" title="PySide2.QtWidgets.QItemEditorFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorFactory</span></code></a> to create editors for it. A unique instance provided by <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorFactory.html#PySide2.QtWidgets.QItemEditorFactory" title="PySide2.QtWidgets.QItemEditorFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorFactory</span></code></a> is by default installed on all item delegates.</p>
+<p>An item editor factory contains a collection of <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorCreatorBase.html#PySide2.QtWidgets.QItemEditorCreatorBase" title="PySide2.QtWidgets.QItemEditorCreatorBase"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorCreatorBase</span></code></a> instances, which are specialized factories that produce editors for one particular <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> data type (all models in Qt store their data in <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> s). An editor can be any Qt or custom widget.</p>
+<p>In this example, we will create an editor (implemented in the <code class="docutils literal"><span class="pre">ColorListEditor</span></code> class) that can edit the <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> data type and be used by <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> s. We do this by creating a new <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorCreatorBase.html#PySide2.QtWidgets.QItemEditorCreatorBase" title="PySide2.QtWidgets.QItemEditorCreatorBase"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorCreatorBase</span></code></a> that produces <code class="docutils literal"><span class="pre">ColorListEditors</span></code> and register it with a new factory, which we set as the default editor item factory (the unique factory instance). To test our editor, we have implemented the <code class="docutils literal"><span class="pre">Window</span></code> class, which displays a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> in which <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> s can be edited.</p>
+</div></blockquote>
+<div class="section" id="window-class-implementation">
+<span id="id2"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the Window class, we create the item editor creator base for our color editor and add it to the default factory. We also create a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> in which our editor can be tested. It is filled with some data and displayed in a window.</p>
+<p>We take a closer look at the constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Window</span><span class="p">::</span><span class="n">Window</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QItemEditorFactory</span> <span class="o">*</span><span class="n">factory</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QItemEditorFactory</span><span class="p">;</span>
+
+    <span class="n">QItemEditorCreatorBase</span> <span class="o">*</span><span class="n">colorListCreator</span> <span class="o">=</span>
+        <span class="n">new</span> <span class="n">QStandardItemEditorCreator</span><span class="o">&lt;</span><span class="n">ColorListEditor</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">factory</span><span class="o">-&gt;</span><span class="n">registerEditor</span><span class="p">(</span><span class="n">QVariant</span><span class="p">::</span><span class="n">Color</span><span class="p">,</span> <span class="n">colorListCreator</span><span class="p">);</span>
+
+    <span class="n">QItemEditorFactory</span><span class="p">::</span><span class="n">setDefaultFactory</span><span class="p">(</span><span class="n">factory</span><span class="p">);</span>
+
+    <span class="n">createGUI</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">QStandardItemEditorCreator</span></code> is a convenience class that inherits <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorCreatorBase.html#PySide2.QtWidgets.QItemEditorCreatorBase" title="PySide2.QtWidgets.QItemEditorCreatorBase"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorCreatorBase</span></code></a> . Its constructor takes a template class, of which instances are returned from <code class="xref py py-func docutils literal"><span class="pre">QItemEditorCreatorBase.createWidget()</span></code> . The creator uses a constructor that takes a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> as its only parameter; the template class must provide this. This way, there is no need to subclass <code class="xref py py-class docutils literal"><span class="pre">QStandardItemEditorCreator</span></code> .</p>
+<p>After the new factory has been set, all standard item delegates will use it (i.e, also delegates that were created before the new default factory was set).</p>
+<p>The <code class="docutils literal"><span class="pre">createGUI()</span></code> function sets up the table and fills it with data.</p>
+</div></blockquote>
+</div>
+<div class="section" id="colorlisteditor-definition">
+<span id="id3"></span><h2>ColorListEditor Definition<a class="headerlink" href="#colorlisteditor-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The ColorListEditor inherits <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> and lets the user select a <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> from its popup list.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ColorListEditor</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QComboBox</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QColor</span> <span class="n">color</span> <span class="n">READ</span> <span class="n">color</span> <span class="n">WRITE</span> <span class="n">setColor</span> <span class="n">USER</span> <span class="n">true</span><span class="p">)</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ColorListEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">QColor</span> <span class="n">c</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">populateList</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> manages the interaction between the editor and the model, i.e., it retrieves data to edit from the model and store data from the editor in the model. The data that is edited by an editor is stored in the editor’s user data property, and the delegate uses Qt’s <a class="reference internal" href="properties.html#the-property-system"><span class="std std-ref">property system</span></a> to access it by name. We declare our user data property with the <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> macro. The property is set to be the user type with the USER keyword.</p>
+</div></blockquote>
+</div>
+<div class="section" id="colorlisteditor-implementation">
+<span id="id4"></span><h2>ColorListEditor Implementation<a class="headerlink" href="#colorlisteditor-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor of <code class="docutils literal"><span class="pre">ColorListEditor</span></code> simply calls <code class="docutils literal"><span class="pre">populateList()</span></code> , which we will look at later. We move on to the <code class="docutils literal"><span class="pre">color()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QColor</span> <span class="n">ColorListEditor</span><span class="p">::</span><span class="n">color</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">QColor</span><span class="o">&gt;</span><span class="p">(</span><span class="n">itemData</span><span class="p">(</span><span class="n">currentIndex</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DecorationRole</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We return the data that is selected in the combobox. The data is stored in the <code class="xref py py-attr docutils literal"><span class="pre">Qt.DecorationRole</span></code> as the color is then also displayed in the popup list (as shown in the image above).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorListEditor</span><span class="p">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">QColor</span> <span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">findData</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">DecorationRole</span><span class="p">)));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">findData()</span></code> function searches the items in the combobox and returns the index of the item that has <code class="docutils literal"><span class="pre">color</span></code> in the Qt::Decoration role.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ColorListEditor</span><span class="p">::</span><span class="n">populateList</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QStringList</span> <span class="n">colorNames</span> <span class="o">=</span> <span class="n">QColor</span><span class="p">::</span><span class="n">colorNames</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QColor</span> <span class="n">color</span><span class="p">(</span><span class="n">colorNames</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+        <span class="n">insertItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorNames</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">setItemData</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DecorationRole</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Qt knows some predefined colors by name. We simply loop through these to fill our editor with items.</p>
+</div></blockquote>
+</div>
+<div class="section" id="further-customization-of-item-view-editors">
+<span id="id5"></span><h2>Further Customization of Item View Editors<a class="headerlink" href="#further-customization-of-item-view-editors" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You can customize Qt’s <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">model view framework</span></a> in many ways. The procedure shown in this example is usually sufficient to provide custom editors. Further customization is achieved by subclassing <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorFactory.html#PySide2.QtWidgets.QItemEditorFactory" title="PySide2.QtWidgets.QItemEditorFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorFactory</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorCreatorBase.html#PySide2.QtWidgets.QItemEditorCreatorBase" title="PySide2.QtWidgets.QItemEditorCreatorBase"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorCreatorBase</span></code></a> . It is also possible to subclass <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> if you don’t wish to use a factory at all.</p>
+<p>Possible suggestions are:</p>
+<ul class="simple">
+<li>If the editor widget has no user property defined, the delegate asks the factory for the property name, which it in turn asks the item editor creator for. In this case, you can use the <code class="xref py py-class docutils literal"><span class="pre">QItemEditorCreator</span></code> class, which takes the property name to use for editing as a constructor argument.</li>
+<li>If the editor requires other constructors or other initialization than provided by <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorCreatorBase.html#PySide2.QtWidgets.QItemEditorCreatorBase" title="PySide2.QtWidgets.QItemEditorCreatorBase"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorCreatorBase</span></code></a> , you must reimplement <code class="xref py py-func docutils literal"><span class="pre">QItemEditorCreatorBase.createWidget()</span></code> .</li>
+<li>You could also subclass <a class="reference internal" href="../PySide2/QtWidgets/QItemEditorFactory.html#PySide2.QtWidgets.QItemEditorFactory" title="PySide2.QtWidgets.QItemEditorFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemEditorFactory</span></code></a> if you only want to provide editors for certain kinds of data or use another method of creating the editors than using creator bases.</li>
+</ul>
+<p>In this example, we use a standard <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> data type. You can also use custom types. In the <a class="reference internal" href="qtwidgets-itemviews-stardelegate-example.html#star-delegate-example"><span class="std std-ref">Star Delegate Example</span></a> , we show how to store a custom data type in a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> and paint and edit it in a class that inherits <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> .</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="colorlisteditor-cpp-example-file">
+<h1>colorlisteditor.cpp Example File<a class="headerlink" href="#colorlisteditor-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="colorlisteditor-h-example-file">
+<h1>colorlisteditor.h Example File<a class="headerlink" href="#colorlisteditor-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="coloreditorfactory-pro-example-file">
+<h1>coloreditorfactory.pro Example File<a class="headerlink" href="#coloreditorfactory-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

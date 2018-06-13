@@ -1,0 +1,487 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Application Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Application Example</a><ul>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#the-main-function">The main() Function</a></li>
+<li><a class="reference internal" href="#the-resource-file">The Resource File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#application-pro-example-file">application.pro Example File</a></li>
+<li><a class="reference internal" href="#application-qrc-example-file">application.qrc Example File</a></li>
+<li><a class="reference internal" href="#copy-png-image-file">copy.png Image File</a></li>
+<li><a class="reference internal" href="#cut-png-image-file">cut.png Image File</a></li>
+<li><a class="reference internal" href="#new-png-image-file">new.png Image File</a></li>
+<li><a class="reference internal" href="#open-png-image-file">open.png Image File</a></li>
+<li><a class="reference internal" href="#paste-png-image-file">paste.png Image File</a></li>
+<li><a class="reference internal" href="#save-png-image-file">save.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="application-example">
+<span id="id1"></span><h1>Application Example<a class="headerlink" href="#application-example" title="Permalink to this headline">¶</a></h1>
+<p>Application example shows how to implement a standard GUI application with menus, toolbars, and a status bar. The example itself is a simple text editor program built around QPlainTextEdit</p>
+<blockquote>
+<div><p id="close-event-handler">The Application example shows how to implement a standard GUI application with menus, toolbars, and a status bar. The example itself is a simple text editor program built around <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> .</p>
+<p>Nearly all of the code for the Application example is in the <code class="docutils literal"><span class="pre">MainWindow</span></code> class, which inherits <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> . <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> provides the framework for windows that have menus, toolbars, dock windows, and a status bar. The application provides File, Edit, and Help entries in the menu bar, with the following popup menus:</p>
+<p>The status bar at the bottom of the main window shows a description of the menu item or toolbar button under the cursor.</p>
+<p>To keep the example simple, recently opened files aren’t shown in the File menu, even though this feature is desired in 90% of applications. Furthermore, this example can only load one file at a time. The <span class="xref std std-ref">SDI</span> and <span class="xref std std-ref">MDI</span> examples show how to lift these restrictions and how to implement recently opened files handling.</p>
+</div></blockquote>
+<div class="section" id="mainwindow-class-definition">
+<span id="id2"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here’s the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">loadFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">closeEvent</span><span class="p">(</span><span class="n">QCloseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">newFile</span><span class="p">();</span>
+    <span class="n">void</span> <span class="nb">open</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">save</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">saveAs</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">documentWasModified</span><span class="p">();</span>
+<span class="c1">#ifndef QT_NO_SESSIONMANAGER</span>
+    <span class="n">void</span> <span class="n">commitData</span><span class="p">(</span><span class="n">QSessionManager</span> <span class="o">&amp;</span><span class="p">);</span>
+<span class="c1">#endif</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createStatusBar</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">readSettings</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">writeSettings</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">maybeSave</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">saveFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setCurrentFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">);</span>
+    <span class="n">QString</span> <span class="n">strippedName</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fullFileName</span><span class="p">);</span>
+
+    <span class="n">QPlainTextEdit</span> <span class="o">*</span><span class="n">textEdit</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">curFile</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The public API is restricted to the constructor. In the <code class="docutils literal"><span class="pre">protected</span></code> section, we reimplement <code class="xref py py-func docutils literal"><span class="pre">QWidget.closeEvent()</span></code> to detect when the user attempts to close the window, and warn the user about unsaved changes. In the <code class="docutils literal"><span class="pre">private</span> <span class="pre">slots</span></code> section, we declare slots that correspond to menu entries, as well as a mysterious <code class="docutils literal"><span class="pre">documentWasModified()</span></code> slot. Finally, in the <code class="docutils literal"><span class="pre">private</span></code> section of the class, we have various members that will be explained in due time.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id3"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySide2.QtGui</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>We start by including <code class="docutils literal"><span class="pre">&lt;QtWidgets&gt;</span></code> , a header file that contains the definition of all classes in the Qt Core, Qt GUI and Qt Widgets modules. This saves us from the trouble of having to include every class individually. We also include <code class="docutils literal"><span class="pre">mainwindow.h</span></code> .</p>
+<p>You might wonder why we don’t include <code class="docutils literal"><span class="pre">&lt;QtWidgets&gt;</span></code> in <code class="docutils literal"><span class="pre">mainwindow.h</span></code> and be done with it. The reason is that including such a large header from another header file can rapidly degrade performances. Here, it wouldn’t do any harm, but it’s still generally a good idea to include only the header files that are strictly necessary from another header file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">QMainWindow</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">textEdit</span> <span class="o">=</span>  <span class="n">QPlainTextEdit</span><span class="p">()</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">textEdit</span><span class="p">)</span>
+
+    <span class="n">createActions</span><span class="p">()</span>
+    <span class="n">createMenus</span><span class="p">()</span>
+    <span class="n">createToolBars</span><span class="p">()</span>
+    <span class="n">createStatusBar</span><span class="p">()</span>
+
+    <span class="n">readSettings</span><span class="p">()</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">textEdit</span><span class="o">.</span><span class="n">document</span><span class="p">(),</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;contentsChanged()&quot;</span><span class="p">),</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;documentWasModified()&quot;</span><span class="p">))</span>
+
+    <span class="n">setCurrentFile</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">setUnifiedTitleAndToolBarOnMac</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the constructor, we start by creating a <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> widget as a child of the main window (the <code class="docutils literal"><span class="pre">this</span></code> object). Then we call <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.setCentralWidget()</span></code> to tell that this is going to be the widget that occupies the central area of the main window, between the toolbars and the status bar.</p>
+<p>Then we call <code class="docutils literal"><span class="pre">createActions()</span></code> and <code class="docutils literal"><span class="pre">createStatusBar()</span></code> , two private functions that set up the user interface. After that, we call <code class="docutils literal"><span class="pre">readSettings()</span></code> to restore the user’s preferences.</p>
+<p>We establish a signal-slot connection between the <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> ‘s document object and our <code class="docutils literal"><span class="pre">documentWasModified()</span></code> slot. Whenever the user modifies the text in the <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> , we want to update the title bar to show that the file was modified.</p>
+<p>At the end, we set the window title using the private <code class="docutils literal"><span class="pre">setCurrentFile()</span></code> function. We’ll come back to this later.</p>
+<div class="highlight-default" id="id4"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">maybeSave</span><span class="p">():</span>
+        <span class="n">writeSettings</span><span class="p">()</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>When the user attempts to close the window, we call the private function <code class="docutils literal"><span class="pre">maybeSave()</span></code> to give the user the possibility to save pending changes. The function returns true if the user wants the application to close; otherwise, it returns false. In the first case, we save the user’s preferences to disk and accept the close event; in the second case, we ignore the close event, meaning that the application will stay up and running as if nothing happened.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">File</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">maybeSave</span><span class="p">():</span>
+        <span class="n">textEdit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">setCurrentFile</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">newFile()</span></code> slot is invoked when the user selects File|New from the menu. We call <code class="docutils literal"><span class="pre">maybeSave()</span></code> to save any pending changes and if the user accepts to go on, we clear the <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> and call the private function <code class="docutils literal"><span class="pre">setCurrentFile()</span></code> to update the window title and clear the <code class="xref py py-func docutils literal"><span class="pre">QWidget.windowModified()</span></code> flag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>def open(self):
+    if maybeSave():
+        fileName = QFileDialog.getOpenFileName(self)
+        if !fileName.isEmpty():
+            loadFile(fileName)
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">open()</span></code> slot is invoked when the user clicks File|Open. We pop up a <a class="reference internal" href="../PySide2/QtWidgets/QFileDialog.html#PySide2.QtWidgets.QFileDialog" title="PySide2.QtWidgets.QFileDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileDialog</span></code></a> asking the user to choose a file. If the user chooses a file (i.e., <code class="docutils literal"><span class="pre">fileName</span></code> is not an empty string), we call the private function <code class="docutils literal"><span class="pre">loadFile()</span></code> to actually load the file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">curFile</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">saveAs</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">saveFile</span><span class="p">(</span><span class="n">curFile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">save()</span></code> slot is invoked when the user clicks File|Save. If the user hasn’t provided a name for the file yet, we call <code class="docutils literal"><span class="pre">saveAs()</span></code> ; otherwise, we call the private function <code class="docutils literal"><span class="pre">saveFile()</span></code> to actually save the file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">saveAs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">fileName</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fileName</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">saveFile</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">saveAs()</span></code> , we start by popping up a <a class="reference internal" href="../PySide2/QtWidgets/QFileDialog.html#PySide2.QtWidgets.QFileDialog" title="PySide2.QtWidgets.QFileDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileDialog</span></code></a> asking the user to provide a name. If the user clicks Cancel, the returned file name is empty, and we do nothing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">about</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="n">QMessageBox</span><span class="o">.</span><span class="n">about</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About Application&quot;</span><span class="p">),</span>
+            <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The &lt;b&gt;Application&lt;/b&gt; example demonstrates how to &quot;</span>
+               <span class="s2">&quot;write modern GUI applications using Qt, with a menu bar, &quot;</span>
+               <span class="s2">&quot;toolbars, and a status bar.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The application’s About box is done using one statement, using the <code class="xref py py-func docutils literal"><span class="pre">QMessageBox.about()</span></code> static function and relying on its support for an HTML subset.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QObject.tr()</span></code> call around the literal string marks the string for translation. It is a good habit to call <code class="xref py py-func docutils literal"><span class="pre">QObject.tr()</span></code> on all user-visible strings, in case you later decide to translate your application to other languages. The Internationalization with Qt overview covers <code class="xref py py-func docutils literal"><span class="pre">QObject.tr()</span></code> in more detail.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">documentWasModified</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">setWindowModified</span><span class="p">(</span><span class="n">textEdit</span><span class="o">.</span><span class="n">document</span><span class="p">()</span><span class="o">.</span><span class="n">isModified</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">documentWasModified()</span></code> slot is invoked each time the text in the <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> changes because of user edits. We call <code class="xref py py-func docutils literal"><span class="pre">QWidget.setWindowModified()</span></code> to make the title bar show that the file was modified. How this is done varies on each platform.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MainWindow</span><span class="o">.</span><span class="n">createActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">Act</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/new.png&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;New&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="n">Act</span><span class="o">.</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">New</span><span class="p">)</span>
+    <span class="n">Act</span><span class="o">.</span><span class="n">setStatusTip</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Create a new file&quot;</span><span class="p">))</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">Act</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;triggered()&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;newFile()&quot;</span><span class="p">))</span>
+
+
+    <span class="n">openAct</span> <span class="o">=</span>  <span class="n">QAction</span><span class="p">(</span><span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/open.png&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Open...&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="n">openAct</span><span class="o">.</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">Open</span><span class="p">)</span>
+    <span class="n">openAct</span><span class="o">.</span><span class="n">setStatusTip</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Open an existing file&quot;</span><span class="p">))</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">openAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;triggered()&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;open()&quot;</span><span class="p">))</span>
+    <span class="o">...</span>
+    <span class="n">aboutQtAct</span> <span class="o">=</span>  <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="n">aboutQtAct</span><span class="o">.</span><span class="n">setStatusTip</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Show the Qt library&#39;s About box&quot;</span><span class="p">))</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;triggered()&quot;</span><span class="p">),</span> <span class="n">qApp</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;aboutQt()&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createActions()</span></code> private function, which is called from the <code class="docutils literal"><span class="pre">MainWindow</span></code> constructor, creates <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> s and populates the menus and two toolbars. The code is very repetitive, so we show only the actions corresponding to File|New, File|Open, and Help|About Qt.</p>
+<p>A <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> is an object that represents one user action, such as saving a file or invoking a dialog. An action can be put in a <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> or a <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> , or both, or in any other widget that reimplements <code class="xref py py-func docutils literal"><span class="pre">QWidget.actionEvent()</span></code> .</p>
+<p>An action has a text that is shown in the menu, an icon, a shortcut key, a tooltip, a status tip (shown in the status bar), a “What’s This?” text, and more. It emits a <code class="xref py py-func docutils literal"><span class="pre">QAction.triggered()</span></code> signal whenever the user invokes the action (e.g., by clicking the associated menu item or toolbar button).</p>
+<p>Instances of <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> can be created by passing a parent <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> or by using one of the convenience functions of <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> or <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> . We create the actions that are in a menu as well as in a toolbar parented on the window to prevent ownership issues. For actions that are only in the menu, we use the convenience function <code class="xref py py-func docutils literal"><span class="pre">QMenu.addAction()</span></code> , which allows us to pass text, icon and the target object and its slot member function.</p>
+<p>Creating toolbars is very similar to creating menus. The same actions that we put in the menus can be reused in the toolbars. After creating the action, we add it to the toolbar using <code class="xref py py-func docutils literal"><span class="pre">QToolBar.addAction()</span></code> .</p>
+<p>The code above contains one more idiom that must be explained. For some of the actions, we specify an icon as a <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> to the <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> constructor. We use <code class="xref py py-func docutils literal"><span class="pre">QIcon.fromTheme()</span></code> to obtain the correct standard icon from the underlying window system. If that fails due to the platform not supporting it, we pass a file name as fallback. Here, the file name starts with <code class="docutils literal"><span class="pre">:</span></code> . Such file names aren’t ordinary file names, but rather path in the executable’s stored resources. We’ll come back to this when we review the <code class="docutils literal"><span class="pre">application.qrc</span></code> file that’s part of the project.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">cutAct</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">copyAct</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">textEdit</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;copyAvailable(bool)&quot;</span><span class="p">),</span>
+            <span class="n">cutAct</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;setEnabled(bool)&quot;</span><span class="p">))</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">textEdit</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;copyAvailable(bool)&quot;</span><span class="p">),</span>
+            <span class="n">copyAct</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;setEnabled(bool)&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The Edit|Cut and Edit|Copy actions must be available only when the <a class="reference internal" href="../PySide2/QtWidgets/QPlainTextEdit.html#PySide2.QtWidgets.QPlainTextEdit" title="PySide2.QtWidgets.QPlainTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPlainTextEdit</span></code></a> contains selected text. We disable them by default and connect the <code class="xref py py-func docutils literal"><span class="pre">QPlainTextEdit.copyAvailable()</span></code> signal to the <code class="xref py py-func docutils literal"><span class="pre">QAction.setEnabled()</span></code> slot, ensuring that the actions are disabled when the text editor has no selection.</p>
+<p>Just before we create the Help menu, we call <code class="xref py py-func docutils literal"><span class="pre">QMenuBar.addSeparator()</span></code> . This has no effect for most widget styles (e.g., Windows and <span class="xref std std-ref">macOS</span> styles), but for some styles this makes sure that Help is pushed to the right side of the menu bar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createStatusBar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">statusBar</span><span class="p">()</span><span class="o">.</span><span class="n">showMessage</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ready&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">QMainWindow.statusBar()</span></code> returns a pointer to the main window’s <a class="reference internal" href="../PySide2/QtWidgets/QStatusBar.html#PySide2.QtWidgets.QStatusBar" title="PySide2.QtWidgets.QStatusBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStatusBar</span></code></a> widget. Like with <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.menuBar()</span></code> , the widget is automatically created the first time the function is called.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">readSettings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">settings</span><span class="p">(</span><span class="s2">&quot;Trolltech&quot;</span><span class="p">,</span> <span class="s2">&quot;Application Example&quot;</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="n">QPoint</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span><span class="o">.</span><span class="n">toPoint</span><span class="p">()</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">QSize</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">))</span><span class="o">.</span><span class="n">toSize</span><span class="p">()</span>
+    <span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">move</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">readSettings()</span></code> function is called from the constructor to load the user’s preferences and other application settings. The <a class="reference internal" href="../PySide2/QtCore/QSettings.html#PySide2.QtCore.QSettings" title="PySide2.QtCore.QSettings"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSettings</span></code></a> class provides a high-level interface for storing settings permanently on disk. On Windows, it uses the (in)famous Windows registry; on <span class="xref std std-ref">macOS</span> , it uses the native XML-based CFPreferences API; on Unix/X11, it uses text files.</p>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QSettings.html#PySide2.QtCore.QSettings" title="PySide2.QtCore.QSettings"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSettings</span></code></a> constructor takes arguments that identify your company and the name of the product. This ensures that the settings for different applications are kept separately.</p>
+<p>We use <code class="xref py py-func docutils literal"><span class="pre">QSettings.value()</span></code> to extract the value of the geometry setting. The second argument to <code class="xref py py-func docutils literal"><span class="pre">QSettings.value()</span></code> is optional and specifies a default value for the setting if there exists none. This value is used the first time the application is run.</p>
+<p>We use <code class="xref py py-func docutils literal"><span class="pre">QWidget.saveGeometry()</span></code> and Widget::restoreGeometry() to save the position. They use an opaque <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> to store screen number, geometry and window state.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">writeSettings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">QSettings</span><span class="p">(</span><span class="s2">&quot;Trolltech&quot;</span><span class="p">,</span> <span class="s2">&quot;Application Example&quot;</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="p">())</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">writeSettings()</span></code> function is called from <code class="docutils literal"><span class="pre">closeEvent()</span></code> . Writing settings is similar to reading them, except simpler. The arguments to the <a class="reference internal" href="../PySide2/QtCore/QSettings.html#PySide2.QtCore.QSettings" title="PySide2.QtCore.QSettings"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSettings</span></code></a> constructor must be the same as in <code class="docutils literal"><span class="pre">readSettings()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">maybeSave</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">textEdit</span><span class="o">.</span><span class="n">document</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">isModified</span><span class="p">():</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Application&quot;</span><span class="p">),</span>
+                                  <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The document has been modified.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                     <span class="s2">&quot;Do you want to save your changes?&quot;</span><span class="p">),</span>
+                                 <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Save</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Discard</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Save</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">save</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">maybeSave()</span></code> function is called to save pending changes. If there are pending changes, it pops up a <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> giving the user to save the document. The options are <code class="xref py py-attr docutils literal"><span class="pre">QMessageBox.Yes</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QMessageBox.No</span></code> , and <code class="xref py py-attr docutils literal"><span class="pre">QMessageBox.Cancel</span></code> . The Yes button is made the default button (the button that is invoked when the user presses Return) using the <code class="xref py py-attr docutils literal"><span class="pre">QMessageBox.Default</span></code> flag; the Cancel button is made the escape button (the button that is invoked when the user presses Esc) using the <code class="xref py py-attr docutils literal"><span class="pre">QMessageBox.Escape</span></code> flag.</p>
+<p>The <code class="docutils literal"><span class="pre">maybeSave()</span></code> function returns <code class="docutils literal"><span class="pre">true</span></code> in all cases, except when the user clicks Cancel or saving the file fails. The caller must check the return value and stop whatever it was doing if the return value is <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>def loadFile(self, fileName):
+    file = QFile(fileName)
+    if !file.open(QFile.ReadOnly | QFile.Text):
+        QMessageBox.warning(self, tr(&quot;Application&quot;),
+                             tr(&quot;Cannot read file %1:\n%2.&quot;)
+                             .arg(fileName)
+                             .arg(file.errorString()))
+        return
+
+    in = QTextStream(file)
+    QApplication.setOverrideCursor(Qt::WaitCursor)
+    textEdit.setPlainText(in.readAll())
+    QApplication.restoreOverrideCursor()
+
+    setCurrentFile(fileName)
+    statusBar().showMessage(tr(&quot;File loaded&quot;), 2000)
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">loadFile()</span></code> , we use <a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> and <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> to read in the data. The <a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> object provides access to the bytes stored in a file.</p>
+<p>We start by opening the file in read-only mode. The <code class="xref py py-attr docutils literal"><span class="pre">QFile.Text</span></code> flag indicates that the file is a text file, not a binary file. On Unix and <span class="xref std std-ref">macOS</span> , this makes no difference, but on Windows, it ensures that the “\r\n” end-of-line sequence is converted to “\n” when reading.</p>
+<p>If we successfully opened the file, we use a <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> object to read in the data. <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> automatically converts the 8-bit data into a Unicode <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> and supports various encodings. If no encoding is specified, <a class="reference internal" href="../PySide2/QtCore/QTextStream.html#PySide2.QtCore.QTextStream" title="PySide2.QtCore.QTextStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QTextStream</span></code></a> assumes the file is written using the system’s default 8-bit encoding (for example, Latin-1; see <code class="xref py py-func docutils literal"><span class="pre">QTextCodec.codecForLocale()</span></code> for details).</p>
+<p>Since the call to <code class="xref py py-func docutils literal"><span class="pre">QTextStream.readAll()</span></code> might take some time, we set the cursor to be <code class="xref py py-attr docutils literal"><span class="pre">Qt.WaitCursor</span></code> for the entire application while it goes on.</p>
+<p>At the end, we call the private <code class="docutils literal"><span class="pre">setCurrentFile()</span></code> function, which we’ll cover in a moment, and we display the string “File loaded” in the status bar for 2 seconds (2000 milliseconds).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>def saveFile(self, fileName):
+    file = QFile(fileName)
+    if !file.open(QFile.WriteOnly | QFile::Text):
+        QMessageBox.warning(self, tr(&quot;Application&quot;),
+                             tr(&quot;Cannot write file %1:\n%2.&quot;)
+                             .arg(fileName)
+                             .arg(file.errorString()))
+        return False
+
+    out = QTextStream(file)
+    QApplication.setOverrideCursor(Qt.WaitCursor)
+    out &lt;&lt; textEdit.toPlainText()
+    QApplication.restoreOverrideCursor()
+
+    setCurrentFile(fileName)
+    statusBar().showMessage(tr(&quot;File saved&quot;), 2000)
+    return True
+</pre></div>
+</div>
+<p>Saving a file is very similar to loading one. Here, the <code class="xref py py-attr docutils literal"><span class="pre">QFile.Text</span></code> flag ensures that on Windows, “\n” is converted into “\r\n” to conform to the Windows convension.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setCurrentFile</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+    <span class="n">curFile</span> <span class="o">=</span> <span class="n">fileName</span>
+    <span class="n">textEdit</span><span class="o">.</span><span class="n">document</span><span class="p">()</span><span class="o">.</span><span class="n">setModified</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">setWindowModified</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">curFile</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+        <span class="n">shownName</span> <span class="o">=</span> <span class="s2">&quot;untitled.txt&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shownName</span> <span class="o">=</span> <span class="n">strippedName</span><span class="p">(</span><span class="n">curFile</span><span class="p">)</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1[*] - %2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">shownName</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Application&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setCurrentFile()</span></code> function is called to reset the state of a few variables when a file is loaded or saved, or when the user starts editing a new file (in which case <code class="docutils literal"><span class="pre">fileName</span></code> is empty). We update the <code class="docutils literal"><span class="pre">curFile</span></code> variable, clear the <code class="xref py py-func docutils literal"><span class="pre">QTextDocument.modified()</span></code> flag and the associated <code class="docutils literal"><span class="pre">QWidget:windowModified</span></code> flag, and update the window title to contain the new file name (or <code class="docutils literal"><span class="pre">untitled.txt</span></code> ).</p>
+<p>The <code class="docutils literal"><span class="pre">strippedName()</span></code> function call around <code class="docutils literal"><span class="pre">curFile</span></code> in the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setWindowTitle()</span></code> call shortens the file name to exclude the path. Here’s the function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strippedName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fullFileName</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">QFileInfo</span><span class="p">(</span><span class="n">fullFileName</span><span class="p">)</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id5"></span><h2>The main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">main()</span></code> function for this application is typical of applications that contain one main window:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#include &lt;QApplication&gt;
+#include &lt;QCommandLineParser&gt;
+#include &lt;QCommandLineOption&gt;
+
+#include &quot;mainwindow.h&quot;
+
+int main(int argc, char *argv[])
+{
+    Q_INIT_RESOURCE(application);
+
+    QApplication app(argc, argv);
+    QCoreApplication::setOrganizationName(&quot;QtProject&quot;);
+    QCoreApplication::setApplicationName(&quot;Application Example&quot;);
+    QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QCoreApplication::applicationName());
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument(&quot;file&quot;, &quot;The file to open.&quot;);
+    parser.process(app);
+
+    MainWindow mainWin;
+    if (!parser.positionalArguments().isEmpty())
+        mainWin.loadFile(parser.positionalArguments().first());
+    mainWin.show();
+    return app.exec();
+}
+</pre></div>
+</div>
+<p>The main function uses <a class="reference internal" href="../PySide2/QtCore/QCommandLineParser.html#PySide2.QtCore.QCommandLineParser" title="PySide2.QtCore.QCommandLineParser"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QCommandLineParser</span></code></a> to check whether some file argument was passed to the application and loads it via MainWindow::loadFile().</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-resource-file">
+<span id="id6"></span><h2>The Resource File<a class="headerlink" href="#the-resource-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As you will probably recall, for some of the actions, we specified icons with file names starting with <code class="docutils literal"><span class="pre">:</span></code> and mentioned that such file names aren’t ordinary file names, but path in the executable’s stored resources. These resources are compiled</p>
+<p>The resources associated with an application are specified in a <code class="docutils literal"><span class="pre">.qrc</span></code> file, an XML-based file format that lists files on the disk. Here’s the <code class="docutils literal"><span class="pre">application.qrc</span></code> file that’s used by the Application example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/mainwindows/application/application.qrc&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.png</span></code> files listed in the <code class="docutils literal"><span class="pre">application.qrc</span></code> file are files that are part of the Application example’s source tree. Paths are relative to the directory where the <code class="docutils literal"><span class="pre">application.qrc</span></code> file is located (the <code class="docutils literal"><span class="pre">mainwindows/application</span></code> directory).</p>
+<p>The resource file must be mentioned in the <code class="docutils literal"><span class="pre">application.pro</span></code> file so that <code class="docutils literal"><span class="pre">qmake</span></code> knows about it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;mainwindows/application/application.pro:0&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">qmake</span></code> will produce make rules to generate a file called <code class="docutils literal"><span class="pre">qrc_application.cpp</span></code> that is linked into the application. This file contains all the data for the images and other resources as static C++ arrays of compressed binary data. See <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">The Qt Resource System</span></a> for more information about resources.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="application-pro-example-file">
+<h1>application.pro Example File<a class="headerlink" href="#application-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="application-qrc-example-file">
+<h1>application.qrc Example File<a class="headerlink" href="#application-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="copy-png-image-file">
+<h1>copy.png Image File<a class="headerlink" href="#copy-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="cut-png-image-file">
+<h1>cut.png Image File<a class="headerlink" href="#cut-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="new-png-image-file">
+<h1>new.png Image File<a class="headerlink" href="#new-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="open-png-image-file">
+<h1>open.png Image File<a class="headerlink" href="#open-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="paste-png-image-file">
+<h1>paste.png Image File<a class="headerlink" href="#paste-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="save-png-image-file">
+<h1>save.png Image File<a class="headerlink" href="#save-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

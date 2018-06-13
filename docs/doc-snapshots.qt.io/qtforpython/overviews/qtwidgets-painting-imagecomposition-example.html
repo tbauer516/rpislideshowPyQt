@@ -1,0 +1,398 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Image Composition Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Image Composition Example</a><ul>
+<li><a class="reference internal" href="#setting-up-the-resource-file">Setting Up The Resource File</a></li>
+<li><a class="reference internal" href="#imagecomposer-class-definition">ImageComposer Class Definition</a></li>
+<li><a class="reference internal" href="#imagecomposer-class-implementation">ImageComposer Class Implementation</a></li>
+<li><a class="reference internal" href="#function">Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imagecomposer-cpp-example-file">imagecomposer.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagecomposer-h-example-file">imagecomposer.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagecomposition-pro-example-file">imagecomposition.pro Example File</a></li>
+<li><a class="reference internal" href="#imagecomposition-qrc-example-file">imagecomposition.qrc Example File</a></li>
+<li><a class="reference internal" href="#background-png-image-file">background.png Image File</a></li>
+<li><a class="reference internal" href="#blackrectangle-png-image-file">blackrectangle.png Image File</a></li>
+<li><a class="reference internal" href="#butterfly-png-image-file">butterfly.png Image File</a></li>
+<li><a class="reference internal" href="#checker-png-image-file">checker.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="image-composition-example">
+<span id="id1"></span><h1>Image Composition Example<a class="headerlink" href="#image-composition-example" title="Permalink to this headline">¶</a></h1>
+<p>Shows how composition modes work in QPainter</p>
+<blockquote>
+<div><p>Shows how composition modes work in <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> .</p>
+<p>The Image Composition example lets the user combine images together using any composition mode supported by <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> , described in detail in <code class="xref py py-class docutils literal"><span class="pre">Composition</span> <span class="pre">Modes</span></code> .</p>
+</div></blockquote>
+<div class="section" id="setting-up-the-resource-file">
+<span id="id2"></span><h2>Setting Up The Resource File<a class="headerlink" href="#setting-up-the-resource-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Image Composition example requires two source images, <em>butterfly.png</em> and <em>checker.png</em> that are embedded within <em>imagecomposition.qrc</em> . The file contains the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/painting/imagecomposition/imagecomposition.qrc&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For more information on resource files, see <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">The Qt Resource System</span></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="imagecomposer-class-definition">
+<span id="id3"></span><h2>ImageComposer Class Definition<a class="headerlink" href="#imagecomposer-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">ImageComposer</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> that implements three private slots, <code class="docutils literal"><span class="pre">chooseSource()</span></code> , <code class="docutils literal"><span class="pre">chooseDestination()</span></code> , and <code class="docutils literal"><span class="pre">recalculateResult()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageComposer</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ImageComposer</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">chooseSource</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">chooseDestination</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">recalculateResult</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>In addition, <code class="docutils literal"><span class="pre">ImageComposer</span></code> consists of five private functions, <code class="docutils literal"><span class="pre">addOp()</span></code> , <code class="docutils literal"><span class="pre">chooseImage()</span></code> , <code class="docutils literal"><span class="pre">loadImage()</span></code> , <code class="docutils literal"><span class="pre">currentMode()</span></code> , and <code class="docutils literal"><span class="pre">imagePos()</span></code> , as well as private instances of <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> , and <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span> <span class="n">mode</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">chooseImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">title</span><span class="p">,</span> <span class="n">QImage</span> <span class="o">*</span><span class="n">image</span><span class="p">,</span> <span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">loadImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">,</span> <span class="n">QImage</span> <span class="o">*</span><span class="n">image</span><span class="p">,</span> <span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span><span class="p">);</span>
+    <span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span> <span class="n">currentMode</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">imagePos</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">sourceButton</span><span class="p">;</span>
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">destinationButton</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">operatorComboBox</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">equalLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">resultLabel</span><span class="p">;</span>
+
+    <span class="n">QImage</span> <span class="n">sourceImage</span><span class="p">;</span>
+    <span class="n">QImage</span> <span class="n">destinationImage</span><span class="p">;</span>
+    <span class="n">QImage</span> <span class="n">resultImage</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="imagecomposer-class-implementation">
+<span id="id4"></span><h2>ImageComposer Class Implementation<a class="headerlink" href="#imagecomposer-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We declare a <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> object, <code class="docutils literal"><span class="pre">resultSize</span></code> , as a static constant with width and height equal to 200.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">static</span> <span class="n">const</span> <span class="n">QSize</span> <span class="n">resultSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Within the constructor, we instantiate a <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> object, <code class="docutils literal"><span class="pre">sourceButton</span></code> and set its <code class="xref py py-func docutils literal"><span class="pre">iconSize</span></code> property to <code class="docutils literal"><span class="pre">resultSize</span></code> . The <code class="docutils literal"><span class="pre">operatorComboBox</span></code> is instantiated and then populated using the <code class="docutils literal"><span class="pre">addOp()</span></code> function. This function accepts a <code class="xref py py-attr docutils literal"><span class="pre">QPainter.CompositionMode</span></code> , <code class="docutils literal"><span class="pre">mode</span></code> , and a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> , <code class="docutils literal"><span class="pre">name</span></code> , representing the name of the composition mode.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ImageComposer</span><span class="p">::</span><span class="n">ImageComposer</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">sourceButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QToolButton</span><span class="p">;</span>
+    <span class="n">sourceButton</span><span class="o">-&gt;</span><span class="n">setIconSize</span><span class="p">(</span><span class="n">resultSize</span><span class="p">);</span>
+
+    <span class="n">operatorComboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceOver</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SourceOver&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_DestinationOver</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;DestinationOver&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Clear</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Clear&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Source</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Source&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Destination</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Destination&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceIn</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SourceIn&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_DestinationIn</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;DestinationIn&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceOut</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SourceOut&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_DestinationOut</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;DestinationOut&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceAtop</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SourceAtop&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_DestinationAtop</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;DestinationAtop&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Xor</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Xor&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Plus</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Plus&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Multiply</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Multiply&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Screen</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Screen&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Overlay</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Overlay&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Darken</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Darken&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Lighten</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Lighten&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_ColorDodge</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;ColorDodge&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_ColorBurn</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;ColorBurn&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_HardLight</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;HardLight&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SoftLight</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SoftLight&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Difference</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Difference&quot;</span><span class="p">));</span>
+    <span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Exclusion</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Exclusion&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">destinationButton</span></code> is instantiated and its <code class="xref py py-func docutils literal"><span class="pre">iconSize</span></code> property is set to <code class="docutils literal"><span class="pre">resultSize</span></code> as well. The <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> s <code class="docutils literal"><span class="pre">equalLabel</span></code> and <code class="docutils literal"><span class="pre">resultLabel</span></code> are created and <code class="docutils literal"><span class="pre">resultLabel</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">minimumWidth</span></code> is set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">destinationButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QToolButton</span><span class="p">;</span>
+<span class="n">destinationButton</span><span class="o">-&gt;</span><span class="n">setIconSize</span><span class="p">(</span><span class="n">resultSize</span><span class="p">);</span>
+
+<span class="n">equalLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">));</span>
+
+<span class="n">resultLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+<span class="n">resultLabel</span><span class="o">-&gt;</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">resultSize</span><span class="o">.</span><span class="n">width</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>We connect the following signals to their corresponding slots:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">sourceButton</span></code>’s <code class="xref py py-func docutils literal"><span class="pre">QPushButton.clicked()</span></code> signal is connected to <code class="docutils literal"><span class="pre">chooseSource()</span></code>,</li>
+<li><code class="docutils literal"><span class="pre">operatorComboBox</span></code>’s <code class="xref py py-func docutils literal"><span class="pre">QComboBox.activated()</span></code> signal is connected to <code class="docutils literal"><span class="pre">recalculateResult()</span></code>, and</li>
+<li><code class="docutils literal"><span class="pre">destinationButton</span></code>’s <code class="xref py py-func docutils literal"><span class="pre">QToolButton.clicked()</span></code> signal is connected to <code class="docutils literal"><span class="pre">chooseDestination()</span></code>.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">sourceButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">chooseSource</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">operatorComboBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">recalculateResult</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">destinationButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">chooseDestination</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> , <code class="docutils literal"><span class="pre">mainLayout</span></code> , is used to place all the widgets. Note that <code class="docutils literal"><span class="pre">mainLayout</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">sizeConstraint</span></code> property is set to <code class="xref py py-attr docutils literal"><span class="pre">QLayout.SetFixedSize</span></code> , which means that <code class="docutils literal"><span class="pre">ImageComposer</span></code> ‘s size cannot be resized at all.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QGridLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sourceButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">operatorComboBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">destinationButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">equalLabel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">resultLabel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">setSizeConstraint</span><span class="p">(</span><span class="n">QLayout</span><span class="p">::</span><span class="n">SetFixedSize</span><span class="p">);</span>
+<span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We create a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , <code class="docutils literal"><span class="pre">resultImage</span></code> , and we invoke <code class="docutils literal"><span class="pre">loadImage()</span></code> twice to load both the image files in our <em>imagecomposition.qrc</em> file. Then, we set the <code class="xref py py-func docutils literal"><span class="pre">windowTitle</span></code> property to “Image Composition”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">resultImage</span> <span class="o">=</span> <span class="n">QImage</span><span class="p">(</span><span class="n">resultSize</span><span class="p">,</span> <span class="n">QImage</span><span class="p">::</span><span class="n">Format_ARGB32_Premultiplied</span><span class="p">);</span>
+
+    <span class="n">loadImage</span><span class="p">(</span><span class="s2">&quot;:/images/butterfly.png&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sourceImage</span><span class="p">,</span> <span class="n">sourceButton</span><span class="p">);</span>
+    <span class="n">loadImage</span><span class="p">(</span><span class="s2">&quot;:/images/checker.png&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">destinationImage</span><span class="p">,</span> <span class="n">destinationButton</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Image Composition&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">chooseSource()</span></code> and <code class="docutils literal"><span class="pre">chooseDestination()</span></code> functions are convenience functions that invoke <code class="docutils literal"><span class="pre">chooseImage()</span></code> with specific parameters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">chooseSource</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">chooseImage</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Choose Source Image&quot;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">sourceImage</span><span class="p">,</span> <span class="n">sourceButton</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">chooseDestination</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">chooseImage</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Choose Destination Image&quot;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">destinationImage</span><span class="p">,</span> <span class="n">destinationButton</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">chooseImage()</span></code> function loads an image of the user’s choice, depending on the <code class="docutils literal"><span class="pre">title</span></code> , <code class="docutils literal"><span class="pre">image</span></code> , and <code class="docutils literal"><span class="pre">button</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void ImageComposer::chooseImage(const QString &amp;title, QImage *image,
+                                QToolButton *button)
+{
+    QString fileName = QFileDialog::getOpenFileName(this, title);
+    if (!fileName.isEmpty())
+        loadImage(fileName, image, button);
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">recalculateResult()</span></code> function is used to calculate amd display the result of combining the two images together with the user’s choice of composition mode.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">recalculateResult</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">currentMode</span><span class="p">();</span>
+
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resultImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Source</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">resultImage</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">transparent</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceOver</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">destinationImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sourceImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_DestinationOver</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">resultImage</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+
+    <span class="n">resultLabel</span><span class="o">-&gt;</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">::</span><span class="n">fromImage</span><span class="p">(</span><span class="n">resultImage</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">addOp()</span></code> function adds an item to the <code class="docutils literal"><span class="pre">operatorComboBox</span></code> using <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QComboBox.addItem()</span></code> function. This function accepts a <code class="xref py py-attr docutils literal"><span class="pre">QPainter.CompositionMode</span></code> , <code class="docutils literal"><span class="pre">mode</span></code> , and a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> , <code class="docutils literal"><span class="pre">name</span></code> . The rectangle is filled with Qt::Transparent and both the <code class="docutils literal"><span class="pre">sourceImage</span></code> and <code class="docutils literal"><span class="pre">destinationImage</span></code> are painted, before displaying it on <code class="docutils literal"><span class="pre">resultLabel</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">addOp</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span> <span class="n">mode</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">operatorComboBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">loadImage()</span></code> function paints a transparent background using <code class="xref py py-func docutils literal"><span class="pre">QPainter.fillRect()</span></code> and draws <code class="docutils literal"><span class="pre">image</span></code> in a centralized position using <code class="xref py py-func docutils literal"><span class="pre">QPainter.drawImage()</span></code> . This <code class="docutils literal"><span class="pre">image</span></code> is then set as the <code class="docutils literal"><span class="pre">button</span></code> ‘s icon.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">loadImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">,</span> <span class="n">QImage</span> <span class="o">*</span><span class="n">image</span><span class="p">,</span>
+                              <span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">image</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Scale</span> <span class="n">the</span> <span class="n">image</span> <span class="n">to</span> <span class="n">given</span> <span class="n">size</span>
+    <span class="o">*</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">-&gt;</span><span class="n">scaled</span><span class="p">(</span><span class="n">resultSize</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">KeepAspectRatio</span><span class="p">);</span>
+
+    <span class="n">QImage</span> <span class="n">fixedImage</span><span class="p">(</span><span class="n">resultSize</span><span class="p">,</span> <span class="n">QImage</span><span class="p">::</span><span class="n">Format_ARGB32_Premultiplied</span><span class="p">);</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fixedImage</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_Source</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">fixedImage</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">transparent</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode_SourceOver</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="n">imagePos</span><span class="p">(</span><span class="o">*</span><span class="n">image</span><span class="p">),</span> <span class="o">*</span><span class="n">image</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QPixmap</span><span class="p">::</span><span class="n">fromImage</span><span class="p">(</span><span class="n">fixedImage</span><span class="p">));</span>
+
+    <span class="o">*</span><span class="n">image</span> <span class="o">=</span> <span class="n">fixedImage</span><span class="p">;</span>
+
+    <span class="n">recalculateResult</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">currentMode()</span></code> function returns the composition mode currently selected in <code class="docutils literal"><span class="pre">operatorComboBox</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">currentMode</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">CompositionMode</span><span class="p">)</span>
+           <span class="n">operatorComboBox</span><span class="o">-&gt;</span><span class="n">itemData</span><span class="p">(</span><span class="n">operatorComboBox</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">())</span><span class="o">.</span><span class="n">toInt</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use the <code class="docutils literal"><span class="pre">imagePos()</span></code> function to ensure that images loaded onto the <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> objects, <code class="docutils literal"><span class="pre">sourceButton</span></code> and <code class="docutils literal"><span class="pre">destinationButton</span></code> , are centralized.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPoint</span> <span class="n">ImageComposer</span><span class="p">::</span><span class="n">imagePos</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QPoint</span><span class="p">((</span><span class="n">resultSize</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">image</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="p">(</span><span class="n">resultSize</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">image</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p id="the-main-function">The
+<code class="docutils literal"><span class="pre">main()</span></code></p>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">main()</span></code> function instantiates <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> and <code class="docutils literal"><span class="pre">ImageComposer</span></code> and invokes its <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">imagecomposition</span><span class="p">);</span>
+
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">ImageComposer</span> <span class="n">composer</span><span class="p">;</span>
+    <span class="n">composer</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="imagecomposer-cpp-example-file">
+<h1>imagecomposer.cpp Example File<a class="headerlink" href="#imagecomposer-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagecomposer-h-example-file">
+<h1>imagecomposer.h Example File<a class="headerlink" href="#imagecomposer-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagecomposition-pro-example-file">
+<h1>imagecomposition.pro Example File<a class="headerlink" href="#imagecomposition-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagecomposition-qrc-example-file">
+<h1>imagecomposition.qrc Example File<a class="headerlink" href="#imagecomposition-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="background-png-image-file">
+<h1>background.png Image File<a class="headerlink" href="#background-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="blackrectangle-png-image-file">
+<h1>blackrectangle.png Image File<a class="headerlink" href="#blackrectangle-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="butterfly-png-image-file">
+<h1>butterfly.png Image File<a class="headerlink" href="#butterfly-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="checker-png-image-file">
+<h1>checker.png Image File<a class="headerlink" href="#checker-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

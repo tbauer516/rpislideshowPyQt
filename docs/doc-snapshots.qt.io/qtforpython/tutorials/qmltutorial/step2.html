@@ -1,0 +1,249 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Tutorial 2 - QML Components &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QML Tutorial 3 - States and Transitions" href="step3.html" />
+    <link rel="prev" title="QML Tutorial 1 - Basic Types" href="step1.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" >PySide examples and tutorials</a></li>
+                            <li><a href="index.html" accesskey="U">QML Tutorial</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Tutorial 2 - QML Components</a><ul>
+<li><a class="reference internal" href="#walkthrough">Walkthrough</a><ul>
+<li><a class="reference internal" href="#the-cell-component">The Cell Component</a></li>
+<li><a class="reference internal" href="#the-main-qml-file">The main QML file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="step1.html"
+                        title="previous chapter">QML Tutorial 1 - Basic Types</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="step3.html"
+                        title="next chapter">QML Tutorial 3 - States and Transitions</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-tutorial-2-qml-components">
+<span id="qmlcomponents"></span><h1>QML Tutorial 2 - QML Components<a class="headerlink" href="#qml-tutorial-2-qml-components" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter, you are going to add a color picker to change the color of the text.</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-tutorial2.png" src="../../_images/declarative-tutorial2.png" />
+</div>
+<p>The color picker is made of six cells with different colors.
+To avoid writing the same code multiple times for each cell, create a new <code class="docutils literal"><span class="pre">Cell</span></code> component.
+A component provides a way of defining a new type that you can re-use in other QML files.
+A QML component is like a black-box that interacts with the outside world through its properties, signals,
+and functions, and is generally defined in its own QML file.
+The component’s filename must always start with a capital letter.</p>
+<p>Here is the QML code for <code class="docutils literal"><span class="pre">Cell</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">container</span>
+    <span class="nb">property</span> <span class="n">alias</span> <span class="n">cellColor</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">color</span>
+    <span class="n">signal</span> <span class="n">clicked</span><span class="p">(</span><span class="n">color</span> <span class="n">cellColor</span><span class="p">)</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">rectangle</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="p">}</span>
+
+    <span class="n">MouseArea</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">onClicked</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">clicked</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">cellColor</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="walkthrough">
+<h2>Walkthrough<a class="headerlink" href="#walkthrough" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-cell-component">
+<h3>The Cell Component<a class="headerlink" href="#the-cell-component" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">container</span>
+    <span class="nb">property</span> <span class="n">alias</span> <span class="n">cellColor</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">color</span>
+    <span class="n">signal</span> <span class="n">clicked</span><span class="p">(</span><span class="n">color</span> <span class="n">cellColor</span><span class="p">)</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">25</span>
+</pre></div>
+</div>
+<p>The root element of the component is an Item with the <code class="docutils literal"><span class="pre">id</span></code>, <em>container</em>.
+An Item is the most basic visual element in QML and is often used as a container for other elements.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="nb">property</span> <span class="n">alias</span> <span class="n">cellColor</span><span class="p">:</span> <span class="n">rectangle</span><span class="o">.</span><span class="n">color</span>
+</pre></div>
+</div>
+<p>Its <code class="docutils literal"><span class="pre">cellColor</span></code> property is accessible from  <em>outside</em> the component, allowing you
+to instantiate cells with different colors. It is an alias to the existing color property of the rectangle
+that composes the cell.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">signal</span> <span class="n">clicked</span><span class="p">(</span><span class="n">color</span> <span class="n">cellColor</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The Cell has a signal called <em>clicked</em> with the <em>cellColor</em> parameter of type <em>color</em>.
+You need this signal to change the color of the text in the main QML file later.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">rectangle</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The cell component is basically a colored rectangle with the <code class="docutils literal"><span class="pre">id</span></code>, <em>rectangle</em>.</p>
+<p>Its <code class="docutils literal"><span class="pre">anchors.fill</span></code> property is a convenient way to set the size of an element.
+In this case the rectangle will have the same size as its parent.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">MouseArea</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">onClicked</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">clicked</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">cellColor</span><span class="p">)</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to change the color of the text when the cell is clicked, a MouseArea element with
+the same size as its parent is used.</p>
+<p>A MouseArea enables you to react to mouse events such as clicked, hover, and so on. In this case, when the MouseArea <em>clicked</em>
+signal is reported, the Cell’s <em>clicked</em> signal is emitted.</p>
+</div>
+<div class="section" id="the-main-qml-file">
+<h3>The main QML file<a class="headerlink" href="#the-main-qml-file" title="Permalink to this headline">¶</a></h3>
+<p>In the main QML file, use the <code class="docutils literal"><span class="pre">Cell</span></code> component to create the color picker:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">page</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">500</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightgray&quot;</span>
+
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">helloText</span>
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Hello world!&quot;</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">30</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">horizontalCenter</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">horizontalCenter</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span>
+    <span class="p">}</span>
+
+    <span class="n">Grid</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">colorPicker</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">bottom</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">bottomMargin</span><span class="p">:</span> <span class="mi">4</span>
+        <span class="n">rows</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="n">columns</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span> <span class="n">spacing</span><span class="p">:</span> <span class="mi">3</span>
+
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;steelblue&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Create the color picker by putting 6 cells with different colors in a grid.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">Cell</span> <span class="p">{</span> <span class="n">cellColor</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span> <span class="n">onClicked</span><span class="p">:</span> <span class="n">helloText</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">cellColor</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>When the <em>clicked</em> signal of a cell is triggered, set the color of the text to the <em>cellColor</em> passed as a parameter.
+You can react to a signal of a component through a handler of the name, <em>‘onSignalName’</em>.</p>
+<p>[Previous <a class="reference internal" href="step1.html#qmlbasictypes"><span class="std std-ref">QML Tutorial 1 - Basic Types</span></a>][Next <a class="reference internal" href="step3.html#qmlstatesandtransitions"><span class="std std-ref">QML Tutorial 3 - States and Transitions</span></a>]</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

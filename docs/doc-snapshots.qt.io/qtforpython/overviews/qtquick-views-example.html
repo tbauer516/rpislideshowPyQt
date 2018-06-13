@@ -1,0 +1,812 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Examples - Views &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Examples - Views</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#gridview-and-pathview">GridView and PathView</a></li>
+<li><a class="reference internal" href="#dynamic-list">Dynamic List</a></li>
+<li><a class="reference internal" href="#expanding-delegates">Expanding Delegates</a></li>
+<li><a class="reference internal" href="#highlight">Highlight</a></li>
+<li><a class="reference internal" href="#highlight-ranges">Highlight Ranges</a></li>
+<li><a class="reference internal" href="#sections">Sections</a></li>
+<li><a class="reference internal" href="#packages">Packages</a></li>
+<li><a class="reference internal" href="#objectmodel">ObjectModel</a></li>
+<li><a class="reference internal" href="#display-margins">Display Margins</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#views-qml-example-file">views.qml Example File</a></li>
+<li><a class="reference internal" href="#gridview-example-qml-example-file">gridview-example.qml Example File</a></li>
+<li><a class="reference internal" href="#displaymargin-qml-example-file">displaymargin.qml Example File</a></li>
+<li><a class="reference internal" href="#dynamiclist-qml-example-file">dynamiclist.qml Example File</a></li>
+<li><a class="reference internal" href="#expandingdelegates-qml-example-file">expandingdelegates.qml Example File</a></li>
+<li><a class="reference internal" href="#highlight-qml-example-file">highlight.qml Example File</a></li>
+<li><a class="reference internal" href="#highlightranges-qml-example-file">highlightranges.qml Example File</a></li>
+<li><a class="reference internal" href="#sections-qml-example-file">sections.qml Example File</a></li>
+<li><a class="reference internal" href="#petsmodel-qml-example-file">PetsModel.qml Example File</a></li>
+<li><a class="reference internal" href="#pressandholdbutton-qml-example-file">PressAndHoldButton.qml Example File</a></li>
+<li><a class="reference internal" href="#recipesmodel-qml-example-file">RecipesModel.qml Example File</a></li>
+<li><a class="reference internal" href="#smalltext-qml-example-file">SmallText.qml Example File</a></li>
+<li><a class="reference internal" href="#textbutton-qml-example-file">TextButton.qml Example File</a></li>
+<li><a class="reference internal" href="#togglebutton-qml-example-file">ToggleButton.qml Example File</a></li>
+<li><a class="reference internal" href="#objectmodel-qml-example-file">objectmodel.qml Example File</a></li>
+<li><a class="reference internal" href="#delegate-qml-example-file">Delegate.qml Example File</a></li>
+<li><a class="reference internal" href="#view-qml-example-file">view.qml Example File</a></li>
+<li><a class="reference internal" href="#parallax-qml-example-file">parallax.qml Example File</a></li>
+<li><a class="reference internal" href="#clock-qml-example-file">Clock.qml Example File</a></li>
+<li><a class="reference internal" href="#parallaxview-qml-example-file">ParallaxView.qml Example File</a></li>
+<li><a class="reference internal" href="#quitbutton-qml-example-file">QuitButton.qml Example File</a></li>
+<li><a class="reference internal" href="#smiley-qml-example-file">Smiley.qml Example File</a></li>
+<li><a class="reference internal" href="#home-page-svg-example-file">home-page.svg Example File</a></li>
+<li><a class="reference internal" href="#pathview-example-qml-example-file">pathview-example.qml Example File</a></li>
+<li><a class="reference internal" href="#dragselection-qml-example-file">dragselection.qml Example File</a></li>
+<li><a class="reference internal" href="#slideshow-qml-example-file">slideshow.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#views-pro-example-file">views.pro Example File</a></li>
+<li><a class="reference internal" href="#views-qmlproject-example-file">views.qmlproject Example File</a></li>
+<li><a class="reference internal" href="#views-qrc-example-file">views.qrc Example File</a></li>
+<li><a class="reference internal" href="#visualdatamodel-qmlproject-example-file">visualdatamodel.qmlproject Example File</a></li>
+<li><a class="reference internal" href="#addressbook-48-png-image-file">AddressBook_48.png Image File</a></li>
+<li><a class="reference internal" href="#audioplayer-48-png-image-file">AudioPlayer_48.png Image File</a></li>
+<li><a class="reference internal" href="#camera-48-png-image-file">Camera_48.png Image File</a></li>
+<li><a class="reference internal" href="#datebook-48-png-image-file">DateBook_48.png Image File</a></li>
+<li><a class="reference internal" href="#email-48-png-image-file">EMail_48.png Image File</a></li>
+<li><a class="reference internal" href="#todolist-48-png-image-file">TodoList_48.png Image File</a></li>
+<li><a class="reference internal" href="#videoplayer-48-png-image-file">VideoPlayer_48.png Image File</a></li>
+<li><a class="reference internal" href="#arrow-down-png-image-file">arrow-down.png Image File</a></li>
+<li><a class="reference internal" href="#arrow-up-png-image-file">arrow-up.png Image File</a></li>
+<li><a class="reference internal" href="#fruit-salad-jpg-image-file">fruit-salad.jpg Image File</a></li>
+<li><a class="reference internal" href="#hamburger-jpg-image-file">hamburger.jpg Image File</a></li>
+<li><a class="reference internal" href="#lemonade-jpg-image-file">lemonade.jpg Image File</a></li>
+<li><a class="reference internal" href="#list-delete-png-image-file">list-delete.png Image File</a></li>
+<li><a class="reference internal" href="#minus-sign-png-image-file">minus-sign.png Image File</a></li>
+<li><a class="reference internal" href="#moredown-png-image-file">moreDown.png Image File</a></li>
+<li><a class="reference internal" href="#moreup-png-image-file">moreUp.png Image File</a></li>
+<li><a class="reference internal" href="#pancakes-jpg-image-file">pancakes.jpg Image File</a></li>
+<li><a class="reference internal" href="#plus-sign-png-image-file">plus-sign.png Image File</a></li>
+<li><a class="reference internal" href="#vegetable-soup-jpg-image-file">vegetable-soup.jpg Image File</a></li>
+<li><a class="reference internal" href="#background-png-image-file">background.png Image File</a></li>
+<li><a class="reference internal" href="#center-png-image-file">center.png Image File</a></li>
+<li><a class="reference internal" href="#clock-night-png-image-file">clock-night.png Image File</a></li>
+<li><a class="reference internal" href="#clock-png-image-file">clock.png Image File</a></li>
+<li><a class="reference internal" href="#hour-png-image-file">hour.png Image File</a></li>
+<li><a class="reference internal" href="#minute-png-image-file">minute.png Image File</a></li>
+<li><a class="reference internal" href="#quit-png-image-file">quit.png Image File</a></li>
+<li><a class="reference internal" href="#second-png-image-file">second.png Image File</a></li>
+<li><a class="reference internal" href="#background-jpg-image-file">background.jpg Image File</a></li>
+<li><a class="reference internal" href="#face-smile-png-image-file">face-smile.png Image File</a></li>
+<li><a class="reference internal" href="#home-page-png-image-file">home-page.png Image File</a></li>
+<li><a class="reference internal" href="#shadow-png-image-file">shadow.png Image File</a></li>
+<li><a class="reference internal" href="#yast-joystick-png-image-file">yast-joystick.png Image File</a></li>
+<li><a class="reference internal" href="#yast-wol-png-image-file">yast-wol.png Image File</a></li>
+<li><a class="reference internal" href="#id12">AddressBook_48.png Image File</a></li>
+<li><a class="reference internal" href="#id13">AudioPlayer_48.png Image File</a></li>
+<li><a class="reference internal" href="#id14">Camera_48.png Image File</a></li>
+<li><a class="reference internal" href="#id15">DateBook_48.png Image File</a></li>
+<li><a class="reference internal" href="#id16">EMail_48.png Image File</a></li>
+<li><a class="reference internal" href="#id17">TodoList_48.png Image File</a></li>
+<li><a class="reference internal" href="#id18">VideoPlayer_48.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-examples-views">
+<span id="id1"></span><h1>Qt Quick Examples - Views<a class="headerlink" href="#qt-quick-examples-views" title="Permalink to this headline">¶</a></h1>
+<p>This is a collection of QML model-view examples</p>
+<blockquote>
+<div><p>This is a collection of QML model-view examples.</p>
+<p><em>Views</em> is a collection of small QML examples relating to model and view functionality. They demonstrate how to show data from a model using the Qt Quick view types. For more information, visit the <a class="reference internal" href="qtquick-modelviewsdata-modelview.html#models-and-views-in-qt-quick"><span class="std std-ref">Models and Views in Qt Quick</span></a> page.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="gridview-and-pathview">
+<span id="id3"></span><h2>GridView and PathView<a class="headerlink" href="#gridview-and-pathview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>GridView</em> and <em>PathView</em> demonstrate usage of these types to display views.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GridView</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">cellWidth</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">cellHeight</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">appModel</span>
+
+    <span class="n">highlight</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span> <span class="p">}</span>
+
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Item</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+
+        <span class="n">Image</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">myIcon</span>
+            <span class="n">y</span><span class="p">:</span> <span class="mi">20</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">horizontalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">horizontalCenter</span>
+            <span class="n">source</span><span class="p">:</span> <span class="n">icon</span>
+        <span class="p">}</span>
+        <span class="n">Text</span> <span class="p">{</span>
+            <span class="n">anchors</span> <span class="p">{</span> <span class="n">top</span><span class="p">:</span> <span class="n">myIcon</span><span class="o">.</span><span class="n">bottom</span><span class="p">;</span> <span class="n">horizontalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">horizontalCenter</span> <span class="p">}</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">name</span>
+        <span class="p">}</span>
+        <span class="n">MouseArea</span> <span class="p">{</span>
+            <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">GridView</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">currentIndex</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="dynamic-list">
+<span id="id4"></span><h2>Dynamic List<a class="headerlink" href="#dynamic-list" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Dynamic List</em> demonstrates animation of runtime additions and removals to a <span class="xref std std-ref">ListView</span> .</p>
+<p>The <span class="xref std std-ref">ListView</span> .onAdd signal handler runs an animation when new items are added to the view, and the <span class="xref std std-ref">ListView</span> .onRemove another when they are removed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="n">ListView</span><span class="o">.</span><span class="n">onAdd</span><span class="p">:</span> <span class="n">SequentialAnimation</span> <span class="p">{</span>
+        <span class="n">PropertyAction</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">delegateItem</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;height&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+        <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">delegateItem</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;height&quot;</span><span class="p">;</span> <span class="n">to</span><span class="p">:</span> <span class="mi">80</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">250</span><span class="p">;</span> <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">ListView</span><span class="o">.</span><span class="n">onRemove</span><span class="p">:</span> <span class="n">SequentialAnimation</span> <span class="p">{</span>
+        <span class="n">PropertyAction</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">delegateItem</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;ListView.delayRemove&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="n">true</span> <span class="p">}</span>
+        <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">delegateItem</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;height&quot;</span><span class="p">;</span> <span class="n">to</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">250</span><span class="p">;</span> <span class="n">easing</span><span class="o">.</span><span class="n">type</span><span class="p">:</span> <span class="n">Easing</span><span class="o">.</span><span class="n">InOutQuad</span> <span class="p">}</span>
+
+        <span class="o">//</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">delayRemove</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">back</span> <span class="n">to</span> <span class="n">false</span> <span class="n">so</span> <span class="n">that</span> <span class="n">the</span> <span class="n">item</span> <span class="n">can</span> <span class="n">be</span> <span class="n">destroyed</span>
+        <span class="n">PropertyAction</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">delegateItem</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;ListView.delayRemove&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="n">false</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="expanding-delegates">
+<span id="id5"></span><h2>Expanding Delegates<a class="headerlink" href="#expanding-delegates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Expanding Delegates</em> demonstrates delegates that expand when activated.</p>
+<p>It has a complex delegate the size and appearance of which can change, displacing other items in the view.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">recipe</span>
+
+    <span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="nb">property</span> <span class="n">to</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">visibility</span> <span class="n">of</span> <span class="n">the</span> <span class="n">details</span><span class="o">.</span>
+    <span class="o">//</span> <span class="n">We</span> <span class="n">can</span> <span class="n">bind</span> <span class="n">multiple</span> <span class="n">element</span><span class="s1">&#39;s opacity to this one property,</span>
+    <span class="o">//</span> <span class="n">rather</span> <span class="n">than</span> <span class="n">having</span> <span class="n">a</span> <span class="s2">&quot;PropertyChanges&quot;</span> <span class="n">line</span> <span class="k">for</span> <span class="n">each</span> <span class="n">element</span> <span class="n">we</span>
+    <span class="o">//</span> <span class="n">want</span> <span class="n">to</span> <span class="n">fade</span><span class="o">.</span>
+    <span class="nb">property</span> <span class="n">real</span> <span class="n">detailsOpacity</span> <span class="p">:</span> <span class="mi">0</span>
+    <span class="n">MouseArea</span> <span class="p">{</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">onClicked</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;Details&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span> <span class="n">Lay</span> <span class="n">out</span> <span class="n">the</span> <span class="n">page</span><span class="p">:</span> <span class="n">picture</span><span class="p">,</span> <span class="n">title</span> <span class="ow">and</span> <span class="n">ingredients</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span><span class="p">,</span> <span class="ow">and</span> <span class="n">method</span> <span class="n">at</span> <span class="n">the</span>
+    <span class="o">//</span> <span class="n">bottom</span><span class="o">.</span>  <span class="n">Note</span> <span class="n">that</span> <span class="n">elements</span> <span class="n">that</span> <span class="n">should</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">visible</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span>
+    <span class="o">//</span> <span class="n">mode</span> <span class="n">have</span> <span class="n">their</span> <span class="n">opacity</span> <span class="nb">set</span> <span class="n">to</span> <span class="n">recipe</span><span class="o">.</span><span class="n">detailsOpacity</span><span class="o">.</span>
+
+    <span class="n">Row</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">topLayout</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">y</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">recipeImage</span><span class="o">.</span><span class="n">height</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">spacing</span><span class="p">:</span> <span class="mi">10</span>
+
+        <span class="n">Image</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">recipeImage</span>
+            <span class="n">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">50</span>
+            <span class="n">source</span><span class="p">:</span> <span class="n">picture</span>
+        <span class="p">}</span>
+    <span class="n">Item</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">details</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">20</span>
+
+        <span class="n">anchors</span> <span class="p">{</span> <span class="n">top</span><span class="p">:</span> <span class="n">topLayout</span><span class="o">.</span><span class="n">bottom</span><span class="p">;</span> <span class="n">topMargin</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">bottom</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">bottom</span><span class="p">;</span> <span class="n">bottomMargin</span><span class="p">:</span> <span class="mi">10</span> <span class="p">}</span>
+        <span class="n">opacity</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">detailsOpacity</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span> <span class="n">A</span> <span class="n">button</span> <span class="n">to</span> <span class="n">close</span> <span class="n">the</span> <span class="n">detailed</span> <span class="n">view</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">state</span> <span class="n">back</span> <span class="n">to</span> <span class="n">default</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">TextButton</span> <span class="p">{</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="n">anchors</span> <span class="p">{</span> <span class="n">right</span><span class="p">:</span> <span class="n">background</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="n">rightMargin</span><span class="p">:</span> <span class="mi">10</span> <span class="p">}</span>
+        <span class="n">opacity</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">detailsOpacity</span>
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Close&quot;</span>
+
+        <span class="n">onClicked</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">states</span><span class="p">:</span> <span class="n">State</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Details&quot;</span>
+
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">background</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span> <span class="p">}</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">recipeImage</span><span class="p">;</span> <span class="n">width</span><span class="p">:</span> <span class="mi">130</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">130</span> <span class="p">}</span> <span class="o">//</span> <span class="n">Make</span> <span class="n">picture</span> <span class="n">bigger</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">recipe</span><span class="p">;</span> <span class="n">detailsOpacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="o">//</span> <span class="n">Make</span> <span class="n">details</span> <span class="n">visible</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">recipe</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">listView</span><span class="o">.</span><span class="n">height</span> <span class="p">}</span> <span class="o">//</span> <span class="n">Fill</span> <span class="n">the</span> <span class="n">entire</span> <span class="nb">list</span> <span class="n">area</span> <span class="k">with</span> <span class="n">the</span> <span class="n">detailed</span> <span class="n">view</span>
+
+        <span class="o">//</span> <span class="n">Move</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">so</span> <span class="n">that</span> <span class="n">this</span> <span class="n">item</span> <span class="ow">is</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span><span class="o">.</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">ListView</span><span class="o">.</span><span class="n">view</span><span class="p">;</span> <span class="n">explicit</span><span class="p">:</span> <span class="n">true</span><span class="p">;</span> <span class="n">contentY</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">y</span> <span class="p">}</span>
+
+        <span class="o">//</span> <span class="n">Disallow</span> <span class="n">flicking</span> <span class="k">while</span> <span class="n">we</span><span class="s1">&#39;re in detailed view</span>
+        <span class="n">PropertyChanges</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">recipe</span><span class="o">.</span><span class="n">ListView</span><span class="o">.</span><span class="n">view</span><span class="p">;</span> <span class="n">interactive</span><span class="p">:</span> <span class="n">false</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">transitions</span><span class="p">:</span> <span class="n">Transition</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Make</span> <span class="n">the</span> <span class="n">state</span> <span class="n">changes</span> <span class="n">smooth</span>
+        <span class="n">ParallelAnimation</span> <span class="p">{</span>
+            <span class="n">ColorAnimation</span> <span class="p">{</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;color&quot;</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">500</span> <span class="p">}</span>
+            <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">300</span><span class="p">;</span> <span class="n">properties</span><span class="p">:</span> <span class="s2">&quot;detailsOpacity,x,contentY,height,width&quot;</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="highlight">
+<span id="id6"></span><h2>Highlight<a class="headerlink" href="#highlight" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Highlight</em> demonstrates adding a custom highlight to a <span class="xref std std-ref">ListView</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">highlight</span> <span class="k">with</span> <span class="n">customized</span> <span class="n">movement</span> <span class="n">between</span> <span class="n">items</span><span class="o">.</span>
+<span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">highlightBar</span>
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">50</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#FFFF88&quot;</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">listView</span><span class="o">.</span><span class="n">currentItem</span><span class="o">.</span><span class="n">y</span><span class="p">;</span>
+        <span class="n">Behavior</span> <span class="n">on</span> <span class="n">y</span> <span class="p">{</span> <span class="n">SpringAnimation</span> <span class="p">{</span> <span class="n">spring</span><span class="p">:</span> <span class="mi">2</span><span class="p">;</span> <span class="n">damping</span><span class="p">:</span> <span class="mf">0.1</span> <span class="p">}</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">listView</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span>
+    <span class="n">x</span><span class="p">:</span> <span class="mi">30</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">PetsModel</span> <span class="p">{}</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">petDelegate</span>
+    <span class="n">focus</span><span class="p">:</span> <span class="n">true</span>
+
+    <span class="o">//</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">highlight</span> <span class="n">delegate</span><span class="o">.</span> <span class="n">Note</span> <span class="n">we</span> <span class="n">must</span> <span class="n">also</span> <span class="nb">set</span> <span class="n">highlightFollowsCurrentItem</span>
+    <span class="o">//</span> <span class="n">to</span> <span class="n">false</span> <span class="n">so</span> <span class="n">the</span> <span class="n">highlight</span> <span class="n">delegate</span> <span class="n">can</span> <span class="n">control</span> <span class="n">how</span> <span class="n">the</span> <span class="n">highlight</span> <span class="ow">is</span> <span class="n">moved</span><span class="o">.</span>
+    <span class="n">highlight</span><span class="p">:</span> <span class="n">highlightBar</span>
+    <span class="n">highlightFollowsCurrentItem</span><span class="p">:</span> <span class="n">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="highlight-ranges">
+<span id="id7"></span><h2>Highlight Ranges<a class="headerlink" href="#highlight-ranges" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Highlight Ranges</em> shows the three different highlight range modes of <span class="xref std std-ref">ListView</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Rectangle {
+    id: root
+    property int current: 0
+    property bool increasing: true
+    // Example index automation for convenience, disabled on click or tap
+    SequentialAnimation {
+        id: anim
+        loops: -1
+        running: true
+        ScriptAction {
+            script: if (increasing) {
+                        current++;
+                        if (current &gt;= aModel.count -1) {
+                            current = aModel.count - 1;
+                            increasing = !increasing;
+                        }
+                    } else {
+                        current--;
+                        if (current &lt;= 0) {
+                            current = 0;
+                            increasing = !increasing;
+                        }
+                    }
+        }
+
+        PauseAnimation { duration: 500 }
+    }
+    ListView {
+        id: list1
+        height: 50; width: parent.width
+        model: PetsModel {id: aModel}
+        delegate: petDelegate
+        orientation: ListView.Horizontal
+
+        highlight: Rectangle { color: &quot;lightsteelblue&quot; }
+        currentIndex: root.current
+        onCurrentIndexChanged: root.current = currentIndex
+        focus: true
+    }
+
+    ListView {
+        id: list2
+        y: 160
+        height: 50; width: parent.width
+        model: PetsModel {}
+        delegate: petDelegate
+        orientation: ListView.Horizontal
+
+        highlight: Rectangle { color: &quot;yellow&quot; }
+        currentIndex: root.current
+        preferredHighlightBegin: 80; preferredHighlightEnd: 220
+        highlightRangeMode: ListView.ApplyRange
+    }
+
+    ListView {
+        id: list3
+        y: 320
+        height: 50; width: parent.width
+        model: PetsModel {}
+        delegate: petDelegate
+        orientation: ListView.Horizontal
+
+        highlight: Rectangle { color: &quot;yellow&quot; }
+        currentIndex: root.current
+        onCurrentIndexChanged: root.current = currentIndex
+        preferredHighlightBegin: 125; preferredHighlightEnd: 125
+        highlightRangeMode: ListView.StrictlyEnforceRange
+    }
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="sections">
+<span id="id8"></span><h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Sections</em> demonstrates the various section headers and footers available to <span class="xref std std-ref">ListView</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">The</span> <span class="n">delegate</span> <span class="k">for</span> <span class="n">each</span> <span class="n">section</span> <span class="n">header</span>
+<span class="n">Component</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">sectionHeading</span>
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">height</span><span class="p">:</span> <span class="n">childrenRect</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightsteelblue&quot;</span>
+
+        <span class="n">Text</span> <span class="p">{</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">section</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">20</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">view</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">top</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">top</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">buttonBar</span><span class="o">.</span><span class="n">top</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">animalsModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="n">name</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">pixelSize</span><span class="p">:</span> <span class="mi">18</span> <span class="p">}</span>
+
+    <span class="n">section</span><span class="o">.</span><span class="n">property</span><span class="p">:</span> <span class="s2">&quot;size&quot;</span>
+    <span class="n">section</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span> <span class="n">ViewSection</span><span class="o">.</span><span class="n">FullString</span>
+    <span class="n">section</span><span class="o">.</span><span class="n">delegate</span><span class="p">:</span> <span class="n">sectionHeading</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="packages">
+<span id="id9"></span><h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Packages</em> uses the Package type to transition delegates between two views.</p>
+<p>It has a Package object which defines delegate items for each view and an item that can be transferred between delegates.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Package {
+    Text { id: listDelegate; width: parent.width; height: 25; text: &#39;Empty&#39;; Package.name: &#39;list&#39; }
+    Text { id: gridDelegate; width: parent.width / 2; height: 50; text: &#39;Empty&#39;; Package.name: &#39;grid&#39; }
+
+    Rectangle {
+        id: wrapper
+        width: parent.width; height: 25
+        color: &#39;lightsteelblue&#39;
+
+        Text { text: display; anchors.centerIn: parent }
+        state: root.upTo &gt; index ? &#39;inGrid&#39; : &#39;inList&#39;
+        states: [
+            State {
+                name: &#39;inList&#39;
+                ParentChange { target: wrapper; parent: listDelegate }
+            },
+            State {
+                name: &#39;inGrid&#39;
+                ParentChange {
+                    target: wrapper; parent: gridDelegate
+                    x: 0; y: 0; width: gridDelegate.width; height: gridDelegate.height
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                ParentAnimation {
+                    NumberAnimation { properties: &#39;x,y,width,height&#39;; duration: 300 }
+                }
+            }
+        ]
+    }
+}
+</pre></div>
+</div>
+<p>A DelegateModel allows the individual views to access their specific items from the shared package delegate.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DelegateModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">visualModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Delegate</span> <span class="p">{}</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">myModel</span>
+<span class="p">}</span>
+
+<span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">lv</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">visualModel</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">list</span>
+<span class="p">}</span>
+<span class="n">GridView</span> <span class="p">{</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">cellWidth</span><span class="p">:</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">cellHeight</span><span class="p">:</span> <span class="mi">50</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">visualModel</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">grid</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="objectmodel">
+<span id="id10"></span><h2>ObjectModel<a class="headerlink" href="#objectmodel" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>ObjectModel</em> uses an <a class="reference internal" href="#qt-quick-examples-views"><span class="std std-ref">ObjectModel</span></a> for the model instead of a ListModel.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ObjectModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">itemModel</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#FFFEF0&quot;</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Page 1&quot;</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span>
+
+        <span class="n">Component</span><span class="o">.</span><span class="n">onDestruction</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">printDestruction</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;destroyed 1&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#F0FFF7&quot;</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Page 2&quot;</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span>
+
+        <span class="n">Component</span><span class="o">.</span><span class="n">onDestruction</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">printDestruction</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;destroyed 2&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;#F4F0FF&quot;</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Page 3&quot;</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span><span class="p">;</span> <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span> <span class="p">}</span>
+
+        <span class="n">Component</span><span class="o">.</span><span class="n">onDestruction</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">printDestruction</span><span class="p">)</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;destroyed 3&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">view</span>
+    <span class="n">anchors</span> <span class="p">{</span> <span class="n">fill</span><span class="p">:</span> <span class="n">parent</span><span class="p">;</span> <span class="n">bottomMargin</span><span class="p">:</span> <span class="mi">30</span> <span class="p">}</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">itemModel</span>
+    <span class="n">preferredHighlightBegin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="n">preferredHighlightEnd</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="n">highlightRangeMode</span><span class="p">:</span> <span class="n">ListView</span><span class="o">.</span><span class="n">StrictlyEnforceRange</span>
+    <span class="n">orientation</span><span class="p">:</span> <span class="n">ListView</span><span class="o">.</span><span class="n">Horizontal</span>
+    <span class="n">snapMode</span><span class="p">:</span> <span class="n">ListView</span><span class="o">.</span><span class="n">SnapOneItem</span><span class="p">;</span> <span class="n">flickDeceleration</span><span class="p">:</span> <span class="mi">2000</span>
+    <span class="n">cacheBuffer</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="display-margins">
+<span id="id11"></span><h2>Display Margins<a class="headerlink" href="#display-margins" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><em>Display Margins</em> uses delegates to display items and implements a simple header and footer components.</div></blockquote>
+</div>
+</div>
+<div class="section" id="views-qml-example-file">
+<h1>views.qml Example File<a class="headerlink" href="#views-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gridview-example-qml-example-file">
+<h1>gridview-example.qml Example File<a class="headerlink" href="#gridview-example-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="displaymargin-qml-example-file">
+<h1>displaymargin.qml Example File<a class="headerlink" href="#displaymargin-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dynamiclist-qml-example-file">
+<h1>dynamiclist.qml Example File<a class="headerlink" href="#dynamiclist-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="expandingdelegates-qml-example-file">
+<h1>expandingdelegates.qml Example File<a class="headerlink" href="#expandingdelegates-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="highlight-qml-example-file">
+<h1>highlight.qml Example File<a class="headerlink" href="#highlight-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="highlightranges-qml-example-file">
+<h1>highlightranges.qml Example File<a class="headerlink" href="#highlightranges-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sections-qml-example-file">
+<h1>sections.qml Example File<a class="headerlink" href="#sections-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="petsmodel-qml-example-file">
+<h1>PetsModel.qml Example File<a class="headerlink" href="#petsmodel-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pressandholdbutton-qml-example-file">
+<h1>PressAndHoldButton.qml Example File<a class="headerlink" href="#pressandholdbutton-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="recipesmodel-qml-example-file">
+<h1>RecipesModel.qml Example File<a class="headerlink" href="#recipesmodel-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="smalltext-qml-example-file">
+<h1>SmallText.qml Example File<a class="headerlink" href="#smalltext-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="textbutton-qml-example-file">
+<h1>TextButton.qml Example File<a class="headerlink" href="#textbutton-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="togglebutton-qml-example-file">
+<h1>ToggleButton.qml Example File<a class="headerlink" href="#togglebutton-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="objectmodel-qml-example-file">
+<h1>objectmodel.qml Example File<a class="headerlink" href="#objectmodel-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="delegate-qml-example-file">
+<h1>Delegate.qml Example File<a class="headerlink" href="#delegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="view-qml-example-file">
+<h1>view.qml Example File<a class="headerlink" href="#view-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="parallax-qml-example-file">
+<h1>parallax.qml Example File<a class="headerlink" href="#parallax-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="clock-qml-example-file">
+<h1>Clock.qml Example File<a class="headerlink" href="#clock-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="parallaxview-qml-example-file">
+<h1>ParallaxView.qml Example File<a class="headerlink" href="#parallaxview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="quitbutton-qml-example-file">
+<h1>QuitButton.qml Example File<a class="headerlink" href="#quitbutton-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="smiley-qml-example-file">
+<h1>Smiley.qml Example File<a class="headerlink" href="#smiley-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="home-page-svg-example-file">
+<h1>home-page.svg Example File<a class="headerlink" href="#home-page-svg-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pathview-example-qml-example-file">
+<h1>pathview-example.qml Example File<a class="headerlink" href="#pathview-example-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dragselection-qml-example-file">
+<h1>dragselection.qml Example File<a class="headerlink" href="#dragselection-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="slideshow-qml-example-file">
+<h1>slideshow.qml Example File<a class="headerlink" href="#slideshow-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="views-pro-example-file">
+<h1>views.pro Example File<a class="headerlink" href="#views-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="views-qmlproject-example-file">
+<h1>views.qmlproject Example File<a class="headerlink" href="#views-qmlproject-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="views-qrc-example-file">
+<h1>views.qrc Example File<a class="headerlink" href="#views-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="visualdatamodel-qmlproject-example-file">
+<h1>visualdatamodel.qmlproject Example File<a class="headerlink" href="#visualdatamodel-qmlproject-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="addressbook-48-png-image-file">
+<h1>AddressBook_48.png Image File<a class="headerlink" href="#addressbook-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="audioplayer-48-png-image-file">
+<h1>AudioPlayer_48.png Image File<a class="headerlink" href="#audioplayer-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="camera-48-png-image-file">
+<h1>Camera_48.png Image File<a class="headerlink" href="#camera-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="datebook-48-png-image-file">
+<h1>DateBook_48.png Image File<a class="headerlink" href="#datebook-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="email-48-png-image-file">
+<h1>EMail_48.png Image File<a class="headerlink" href="#email-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="todolist-48-png-image-file">
+<h1>TodoList_48.png Image File<a class="headerlink" href="#todolist-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="videoplayer-48-png-image-file">
+<h1>VideoPlayer_48.png Image File<a class="headerlink" href="#videoplayer-48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="arrow-down-png-image-file">
+<h1>arrow-down.png Image File<a class="headerlink" href="#arrow-down-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="arrow-up-png-image-file">
+<h1>arrow-up.png Image File<a class="headerlink" href="#arrow-up-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fruit-salad-jpg-image-file">
+<h1>fruit-salad.jpg Image File<a class="headerlink" href="#fruit-salad-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="hamburger-jpg-image-file">
+<h1>hamburger.jpg Image File<a class="headerlink" href="#hamburger-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="lemonade-jpg-image-file">
+<h1>lemonade.jpg Image File<a class="headerlink" href="#lemonade-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="list-delete-png-image-file">
+<h1>list-delete.png Image File<a class="headerlink" href="#list-delete-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="minus-sign-png-image-file">
+<h1>minus-sign.png Image File<a class="headerlink" href="#minus-sign-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="moredown-png-image-file">
+<h1>moreDown.png Image File<a class="headerlink" href="#moredown-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="moreup-png-image-file">
+<h1>moreUp.png Image File<a class="headerlink" href="#moreup-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="pancakes-jpg-image-file">
+<h1>pancakes.jpg Image File<a class="headerlink" href="#pancakes-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="plus-sign-png-image-file">
+<h1>plus-sign.png Image File<a class="headerlink" href="#plus-sign-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="vegetable-soup-jpg-image-file">
+<h1>vegetable-soup.jpg Image File<a class="headerlink" href="#vegetable-soup-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="background-png-image-file">
+<h1>background.png Image File<a class="headerlink" href="#background-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="center-png-image-file">
+<h1>center.png Image File<a class="headerlink" href="#center-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="clock-night-png-image-file">
+<h1>clock-night.png Image File<a class="headerlink" href="#clock-night-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="clock-png-image-file">
+<h1>clock.png Image File<a class="headerlink" href="#clock-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="hour-png-image-file">
+<h1>hour.png Image File<a class="headerlink" href="#hour-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="minute-png-image-file">
+<h1>minute.png Image File<a class="headerlink" href="#minute-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="quit-png-image-file">
+<h1>quit.png Image File<a class="headerlink" href="#quit-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="second-png-image-file">
+<h1>second.png Image File<a class="headerlink" href="#second-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="background-jpg-image-file">
+<h1>background.jpg Image File<a class="headerlink" href="#background-jpg-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="face-smile-png-image-file">
+<h1>face-smile.png Image File<a class="headerlink" href="#face-smile-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="home-page-png-image-file">
+<h1>home-page.png Image File<a class="headerlink" href="#home-page-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="shadow-png-image-file">
+<h1>shadow.png Image File<a class="headerlink" href="#shadow-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="yast-joystick-png-image-file">
+<h1>yast-joystick.png Image File<a class="headerlink" href="#yast-joystick-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="yast-wol-png-image-file">
+<h1>yast-wol.png Image File<a class="headerlink" href="#yast-wol-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id12">
+<h1>AddressBook_48.png Image File<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id13">
+<h1>AudioPlayer_48.png Image File<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id14">
+<h1>Camera_48.png Image File<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id15">
+<h1>DateBook_48.png Image File<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id16">
+<h1>EMail_48.png Image File<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id17">
+<h1>TodoList_48.png Image File<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="id18">
+<h1>VideoPlayer_48.png Image File<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

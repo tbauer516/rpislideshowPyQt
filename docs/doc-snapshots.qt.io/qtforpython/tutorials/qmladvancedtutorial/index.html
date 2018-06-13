@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Advanced Tutorial &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks" href="samegame1.html" />
+    <link rel="prev" title="QML Tutorial 3 - States and Transitions" href="../qmltutorial/step3.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" accesskey="U">PySide examples and tutorials</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../qmltutorial/step3.html"
+                        title="previous chapter">QML Tutorial 3 - States and Transitions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="samegame1.html"
+                        title="next chapter">QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-advanced-tutorial">
+<span id="qmladvancedtutorial"></span><h1>QML Advanced Tutorial<a class="headerlink" href="#qml-advanced-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial walks you through the steps of creating an application using QML.
+It assumes that you already know the basics of QML (for example, from reading the
+<a class="reference internal" href="../qmltutorial/index.html#qmltutorial"><span class="std std-ref">QML Tutorial</span></a>.</p>
+<p>In this tutorial, you will develop the game, <em>Same Game</em>. It is based on the
+Same Game application included in the declarative demos directory, and looks
+like this:</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-samegame.png" src="../../_images/declarative-samegame.png" />
+</div>
+<p>The tutorial covers concepts related to producing a fully functional application,
+including JavaScript integration, using QML states and behaviors to manage
+components and enhance your interface, and storing persistent application data.</p>
+<p>Prior knowledge of JavaScript is useful to understand parts of this
+tutorial, but if you don’t know it, you can still get a feel of
+integrating the backend logic that creates and controls QML items.</p>
+<p>Tutorial chapters:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="samegame1.html">QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samegame2.html">QML Advanced Tutorial 2 - Populating the Game Canvas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samegame3.html">QML Advanced Tutorial 3 - Implementing the Game Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="samegame4.html">QML Advanced Tutorial 4 - Finishing Touches</a></li>
+</ul>
+</div>
+<p>All the code in this tutorial can be found <a class="reference download internal" href="../../_downloads/samegame.tar.bz2" download=""><code class="xref download docutils literal"><span class="pre">here</span></code></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

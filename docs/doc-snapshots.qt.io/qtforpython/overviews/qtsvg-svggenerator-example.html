@@ -1,0 +1,315 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SVG Generator Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SVG Generator Example</a><ul>
+<li><a class="reference internal" href="#the-displaywidget-class">The DisplayWidget Class</a></li>
+<li><a class="reference internal" href="#the-window-class">The Window Class</a></li>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#displaywidget-cpp-example-file">displaywidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#displaywidget-h-example-file">displaywidget.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#window-ui-example-file">window.ui Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#svggenerator-pro-example-file">svggenerator.pro Example File</a></li>
+<li><a class="reference internal" href="#svggenerator-qrc-example-file">svggenerator.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="svg-generator-example">
+<span id="id1"></span><h1>SVG Generator Example<a class="headerlink" href="#svg-generator-example" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>The SVG Generator example shows how to add SVG file export to applications.</p>
+<p>Scalable Vector Graphics (SVG) is an XML-based language for describing two-dimensional vector graphics. Qt provides classes for rendering and generating SVG drawings. This example allows the user to create a simple picture and save it to an SVG file.</p>
+<p>The example consists of two classes: <code class="docutils literal"><span class="pre">Window</span></code> and <code class="docutils literal"><span class="pre">DisplayWidget</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">Window</span></code> class contains the application logic and constructs the user interface from a Qt Designer UI file as described in the Qt Designer manual. It also contains the code to write an SVG file.</p>
+<p>The <code class="docutils literal"><span class="pre">DisplayWidget</span></code> class performs all the work of painting a picture on screen. Since we want the SVG to resemble this picture as closely as possible, we make this code available to the <code class="docutils literal"><span class="pre">Window</span></code> class so that it can be used to generate SVG files.</p>
+</div></blockquote>
+<div class="section" id="the-displaywidget-class">
+<span id="id2"></span><h2>The DisplayWidget Class<a class="headerlink" href="#the-displaywidget-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">DisplayWidget</span></code> class displays a drawing consisting of a selection of elements chosen by the user. These are defined using <code class="docutils literal"><span class="pre">Shape</span></code> and <code class="docutils literal"><span class="pre">Background</span></code> enums that are included within the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DisplayWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">Shape</span> <span class="p">{</span> <span class="n">House</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Car</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">};</span>
+    <span class="n">enum</span> <span class="n">Background</span> <span class="p">{</span> <span class="n">Sky</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Trees</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Road</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">};</span>
+
+    <span class="n">DisplayWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setBackground</span><span class="p">(</span><span class="n">Background</span> <span class="n">background</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setShape</span><span class="p">(</span><span class="n">Shape</span> <span class="n">shape</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">Background</span> <span class="n">background</span><span class="p">;</span>
+    <span class="n">QColor</span> <span class="n">shapeColor</span><span class="p">;</span>
+    <span class="n">Shape</span> <span class="n">shape</span><span class="p">;</span>
+    <span class="n">QHash</span><span class="o">&lt;</span><span class="n">Shape</span><span class="p">,</span><span class="n">QPainterPath</span><span class="o">&gt;</span> <span class="n">shapeMap</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">moon</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">tree</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Much of this class is used to configure the appearance of the drawing. The <code class="docutils literal"><span class="pre">paintEvent()</span></code> and <code class="docutils literal"><span class="pre">paint()</span></code> functions are most relevant to the purpose of this example, so we will describe these here and leave the reader to look at the source code for the example to see how shapes and colors are handled.</p>
+<p>We reimplement the <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> function to display the drawing on screen:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">DisplayWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">;</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+    <span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, we only construct a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> object, begin painting on the device and set a render hint for improved output quality before calling the <code class="docutils literal"><span class="pre">paint()</span></code> function to perform the painting itself. When this returns, we close the painter and return.</p>
+<p>The <code class="docutils literal"><span class="pre">paint()</span></code> function is designed to be used for different painting tasks. In this example, we use it to draw on a <code class="docutils literal"><span class="pre">DisplayWidget</span></code> instance and on a <a class="reference internal" href="../PySide2/QtSvg/QSvgGenerator.html#PySide2.QtSvg.QSvgGenerator" title="PySide2.QtSvg.QSvgGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSvg.QSvgGenerator</span></code></a> object. We show how the painting is performed to demonstrate that there is nothing device-specific about the process:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">DisplayWidget</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">&amp;</span><span class="n">painter</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">setClipRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+
+    <span class="n">switch</span> <span class="p">(</span><span class="n">background</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">Sky</span><span class="p">:</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkBlue</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">145</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">moon</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="mi">145</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Trees</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkGreen</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">green</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">55</span><span class="p">,</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">;</span> <span class="n">y</span> <span class="o">+=</span> <span class="mi">50</span><span class="p">,</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">int</span> <span class="n">xs</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">row</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">||</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="n">xs</span> <span class="o">=</span> <span class="mi">150</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="n">xs</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">;</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">xs</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">();</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">tree</span><span class="p">);</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">case</span> <span class="n">Road</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">gray</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DashLine</span><span class="p">));</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">QLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">35</span><span class="p">));</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">QLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">165</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">shapeColor</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">shapeMap</span><span class="p">[</span><span class="n">shape</span><span class="p">]);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-window-class">
+<span id="id3"></span><h2>The Window Class<a class="headerlink" href="#the-window-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Window</span></code> class represents the example’s window, containing the user interface, which has been created using Qt Designer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">private</span> <span class="n">Ui</span><span class="p">::</span><span class="n">Window</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Window</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">saveSvg</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">updateBackground</span><span class="p">(</span><span class="nb">int</span> <span class="n">background</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">updateColor</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">updateShape</span><span class="p">(</span><span class="nb">int</span> <span class="n">shape</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">path</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>As with the <code class="docutils literal"><span class="pre">DisplayWidget</span></code> class, we concentrate on the parts of the code which are concerned with painting and SVG generation. In the <code class="docutils literal"><span class="pre">Window</span></code> class, the <code class="docutils literal"><span class="pre">saveSvg()</span></code> function is called whenever the <strong>Save As…</strong> button is clicked; this connection was defined in the <code class="docutils literal"><span class="pre">window.ui</span></code> file using Qt Designer.</p>
+<p>The start of the <code class="docutils literal"><span class="pre">saveSvg()</span></code> function performs the task of showing a file dialog so that the user can specify a SVG file to save the drawing to.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">saveSvg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">newPath</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">QObject</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Save SVG&quot;</span><span class="p">),</span> <span class="n">path</span><span class="p">,</span> <span class="n">QObject</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SVG files (*.svg)&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">newPath</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">newPath</span>
+
+
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">QSvgGenerator</span><span class="p">()</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">setFileName</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="n">QSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">setViewBox</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="n">QObject</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;SVG Generator Example Drawing&quot;</span><span class="p">))</span>
+    <span class="n">generator</span><span class="o">.</span><span class="n">setDescription</span><span class="p">(</span><span class="n">QObject</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;An SVG drawing created by the SVG Generator Example provided with Qt.&quot;</span><span class="p">))</span>
+
+
+    <span class="n">painter</span> <span class="o">=</span> <span class="n">QPainter</span><span class="p">()</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+
+    <span class="n">displayWidget</span><span class="o">-&gt;</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">)</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the rest of the function, we set up the generator and configure it to generate output with the appropriate dimensions and write to the user-specified file. We paint on the <a class="reference internal" href="../PySide2/QtSvg/QSvgGenerator.html#PySide2.QtSvg.QSvgGenerator" title="PySide2.QtSvg.QSvgGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSvg.QSvgGenerator</span></code></a> object in the same way that we paint on a widget, calling the <code class="docutils literal"><span class="pre">DisplayWidget::paint()</span></code> function so that we use exactly the same code that we used to display the drawing.</p>
+<p>The generation process itself begins with the call to the painter’s <code class="xref py py-func docutils literal"><span class="pre">QPainter.begin()</span></code> function and ends with call to its <code class="xref py py-func docutils literal"><span class="pre">QPainter.end()</span></code> function. The <a class="reference internal" href="../PySide2/QtSvg/QSvgGenerator.html#PySide2.QtSvg.QSvgGenerator" title="PySide2.QtSvg.QSvgGenerator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSvg.QSvgGenerator</span></code></a> paint device relies on the explicit use of these functions to ensure that output is written to the file.</p>
+</div></blockquote>
+</div>
+<div class="section" id="further-reading">
+<span id="id4"></span><h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="qtsvg-svgviewer-example.html#svg-viewer-example"><span class="std std-ref">SVG Viewer Example</span></a> shows how to display SVG drawings in an application, and can be used to show the contents of SVG files created by this example.</p>
+<p>See the Qt SVG module documentation for more information about SVG and Qt’s SVG classes.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="displaywidget-cpp-example-file">
+<h1>displaywidget.cpp Example File<a class="headerlink" href="#displaywidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="displaywidget-h-example-file">
+<h1>displaywidget.h Example File<a class="headerlink" href="#displaywidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-ui-example-file">
+<h1>window.ui Example File<a class="headerlink" href="#window-ui-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="svggenerator-pro-example-file">
+<h1>svggenerator.pro Example File<a class="headerlink" href="#svggenerator-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="svggenerator-qrc-example-file">
+<h1>svggenerator.qrc Example File<a class="headerlink" href="#svggenerator-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QML Advanced Tutorial 2 - Populating the Game Canvas" href="samegame2.html" />
+    <link rel="prev" title="QML Advanced Tutorial" href="index.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" >PySide examples and tutorials</a></li>
+                            <li><a href="index.html" accesskey="U">QML Advanced Tutorial</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks</a><ul>
+<li><a class="reference internal" href="#creating-the-application-screen">Creating the application screen</a></li>
+<li><a class="reference internal" href="#adding-button-and-block-components">Adding button and block components</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">QML Advanced Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="samegame2.html"
+                        title="next chapter">QML Advanced Tutorial 2 - Populating the Game Canvas</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-advanced-tutorial-1-creating-the-game-canvas-and-blocks">
+<span id="samegame1"></span><h1>QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks<a class="headerlink" href="#qml-advanced-tutorial-1-creating-the-game-canvas-and-blocks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-the-application-screen">
+<h2>Creating the application screen<a class="headerlink" href="#creating-the-application-screen" title="Permalink to this headline">¶</a></h2>
+<p>The first step is to create the basic QML items in your application.</p>
+<p>To begin with, create a main screen like this:</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-adv-tutorial1.png" src="../../_images/declarative-adv-tutorial1.png" />
+</div>
+<p>This is defined by the main application file, <code class="docutils literal"><span class="pre">samegame.qml</span></code>, which looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">screen</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="mi">490</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">720</span>
+
+    <span class="n">SystemPalette</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">activePalette</span> <span class="p">}</span>
+
+    <span class="n">Item</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">anchors</span> <span class="p">{</span> <span class="n">top</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">top</span><span class="p">;</span> <span class="n">bottom</span><span class="p">:</span> <span class="n">toolBar</span><span class="o">.</span><span class="n">top</span> <span class="p">}</span>
+
+        <span class="n">Image</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">background</span>
+            <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+            <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;../shared/pics/background.jpg&quot;</span>
+            <span class="n">fillMode</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">PreserveAspectCrop</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">toolBar</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">30</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">activePalette</span><span class="o">.</span><span class="n">window</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">screen</span><span class="o">.</span><span class="n">bottom</span>
+
+        <span class="n">Button</span> <span class="p">{</span>
+            <span class="n">anchors</span> <span class="p">{</span> <span class="n">left</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">left</span><span class="p">;</span> <span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span> <span class="p">}</span>
+            <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;New Game&quot;</span> 
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;This doesn&#39;t do anything yet...&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">Text</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">score</span>
+            <span class="n">anchors</span> <span class="p">{</span> <span class="n">right</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">right</span><span class="p">;</span> <span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span> <span class="p">}</span>
+            <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Score: Who knows?&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It gives a basic game window that includes the main canvas for the
+blocks, a “New Game” button, and a score display.</p>
+<p>One item you may not recognize here is the SystemPalette item. This provides
+access to the Qt system palette and is used to give the button a more native
+look-and-feel.</p>
+<p>Notice the anchors for the <code class="docutils literal"><span class="pre">Item</span></code>, <code class="docutils literal"><span class="pre">Button</span></code>, and <code class="docutils literal"><span class="pre">Text</span></code> items are set using
+group notation for readability.</p>
+</div>
+<div class="section" id="adding-button-and-block-components">
+<h2>Adding button and block components<a class="headerlink" href="#adding-button-and-block-components" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">Button</span></code> item in the code above is defined in a separate component file named <code class="docutils literal"><span class="pre">Button.qml</span></code>.
+To create a functional button, use the Text and MouseArea QML types inside a Rectangle.
+Here is the <code class="docutils literal"><span class="pre">Button.qml</span></code> code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">container</span>
+
+    <span class="nb">property</span> <span class="n">string</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Button&quot;</span>
+
+    <span class="n">signal</span> <span class="n">clicked</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="n">buttonLabel</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="n">buttonLabel</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="mi">5</span>
+    <span class="n">border</span> <span class="p">{</span> <span class="n">width</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">darker</span><span class="p">(</span><span class="n">activePalette</span><span class="o">.</span><span class="n">button</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">smooth</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="mi">8</span>
+
+    <span class="o">//</span> <span class="n">color</span> <span class="n">the</span> <span class="n">button</span> <span class="k">with</span> <span class="n">a</span> <span class="n">gradient</span>
+    <span class="n">gradient</span><span class="p">:</span> <span class="n">Gradient</span> <span class="p">{</span>
+        <span class="n">GradientStop</span> <span class="p">{</span>
+            <span class="n">position</span><span class="p">:</span> <span class="mf">0.0</span>
+            <span class="n">color</span><span class="p">:</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">mouseArea</span><span class="o">.</span><span class="n">pressed</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">activePalette</span><span class="o">.</span><span class="n">dark</span>
+                <span class="k">else</span>
+                    <span class="k">return</span> <span class="n">activePalette</span><span class="o">.</span><span class="n">light</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">GradientStop</span> <span class="p">{</span> <span class="n">position</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">color</span><span class="p">:</span> <span class="n">activePalette</span><span class="o">.</span><span class="n">button</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">MouseArea</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">mouseArea</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">onClicked</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">clicked</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">buttonLabel</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">container</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">activePalette</span><span class="o">.</span><span class="n">buttonText</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">container</span><span class="o">.</span><span class="n">text</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This essentially defines a rectangle that contains text and can be clicked. The MouseArea
+has an <code class="docutils literal"><span class="pre">onClicked()</span></code> handler that is implemented to emit the <code class="docutils literal"><span class="pre">clicked()</span></code> signal of the
+<code class="docutils literal"><span class="pre">container</span></code> when the area is clicked.</p>
+<p>In Same Game, the screen is filled with small blocks when the game begins.
+Each block is an item that contains an image. The block
+is defined in the <code class="docutils literal"><span class="pre">Block.qml</span></code> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Item</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">block</span>
+
+    <span class="n">Image</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">img</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+        <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;../shared/pics/redStone.png&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At the moment, the block doesn’t do anything; it is just an image. As the
+tutorial progresses, you will animate and give behaviors to the blocks.
+You have not added any code yet to create the blocks; this
+will be done in the next chapter.</p>
+<p>You have set the image to be the size of its parent Item using <code class="docutils literal"><span class="pre">anchors.fill:</span> <span class="pre">parent</span></code>.
+This means that when you dynamically create and resize the block items
+later on in the tutorial, the image will be scaled automatically to the
+correct size.</p>
+<p>Notice the relative path for the Image item’s <code class="docutils literal"><span class="pre">source</span></code> property.
+It is relative to the location of the file that contains the Image item.
+Alternatively, you could set the Image source to an absolute file path or a URL
+that contains an image.</p>
+<p>You should be familiar with the code so far, as you have created some basic
+items to get started. In the next chapter, you will populate the game canvas
+with some blocks.</p>
+<p>[Previous <a class="reference internal" href="index.html#qmladvancedtutorial"><span class="std std-ref">QML Advanced Tutorial</span></a>] [Next <a class="reference internal" href="samegame2.html#samegame2"><span class="std std-ref">QML Advanced Tutorial 2 - Populating the Game Canvas</span></a>]</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

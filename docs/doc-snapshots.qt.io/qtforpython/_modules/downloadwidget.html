@@ -1,0 +1,248 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>downloadwidget &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="index.html" accesskey="U">Module code</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for downloadwidget</h1><div class="highlight"><pre>
+<span></span><span class="c1">#############################################################################</span>
+<span class="c1">##</span>
+<span class="c1">## Copyright (C) 2018 The Qt Company Ltd.</span>
+<span class="c1">## Contact: http://www.qt.io/licensing/</span>
+<span class="c1">##</span>
+<span class="c1">## This file is part of the Qt for Python examples of the Qt Toolkit.</span>
+<span class="c1">##</span>
+<span class="c1">## $QT_BEGIN_LICENSE:BSD$</span>
+<span class="c1">## You may use this file under the terms of the BSD license as follows:</span>
+<span class="c1">##</span>
+<span class="c1">## &quot;Redistribution and use in source and binary forms, with or without</span>
+<span class="c1">## modification, are permitted provided that the following conditions are</span>
+<span class="c1">## met:</span>
+<span class="c1">##   * Redistributions of source code must retain the above copyright</span>
+<span class="c1">##     notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">##   * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">##     notice, this list of conditions and the following disclaimer in</span>
+<span class="c1">##     the documentation and/or other materials provided with the</span>
+<span class="c1">##     distribution.</span>
+<span class="c1">##   * Neither the name of The Qt Company Ltd nor the names of its</span>
+<span class="c1">##     contributors may be used to endorse or promote products derived</span>
+<span class="c1">##     from this software without specific prior written permission.</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1">## &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1">## LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+<span class="c1">## A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
+<span class="c1">## OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
+<span class="c1">## SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
+<span class="c1">## LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<span class="c1">## DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
+<span class="c1">## THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c1">## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1">## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;</span>
+<span class="c1">##</span>
+<span class="c1">## $QT_END_LICENSE$</span>
+<span class="c1">##</span>
+<span class="c1">#############################################################################</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">PySide2</span> <span class="k">import</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtCore</span> <span class="k">import</span> <span class="n">QDir</span><span class="p">,</span> <span class="n">QFileInfo</span><span class="p">,</span> <span class="n">QStandardPaths</span><span class="p">,</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QUrl</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtGui</span> <span class="k">import</span> <span class="n">QDesktopServices</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtWidgets</span> <span class="k">import</span> <span class="p">(</span><span class="n">QAction</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QMenu</span><span class="p">,</span> <span class="n">QProgressBar</span><span class="p">,</span>
+    <span class="n">QStyleFactory</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtWebEngineWidgets</span> <span class="k">import</span> <span class="n">QWebEngineDownloadItem</span>
+
+<span class="c1"># A QProgressBar with context menu for displaying downloads in a QStatusBar.</span>
+<div class="viewcode-block" id="DownloadWidget"><a class="viewcode-back" href="../tutorials/examples/tabbedbrowser.html#downloadwidget.DownloadWidget">[docs]</a><span class="k">class</span> <span class="nc">DownloadWidget</span><span class="p">(</span><span class="n">QProgressBar</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Lets you track progress of a QWebEngineDownloadItem.&quot;&quot;&quot;</span>
+    <span class="n">finished</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
+    <span class="n">remove_requested</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_item</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DownloadWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span> <span class="o">=</span> <span class="n">download_item</span>
+        <span class="n">download_item</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">)</span>
+        <span class="n">download_item</span><span class="o">.</span><span class="n">downloadProgress</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_download_progress</span><span class="p">)</span>
+        <span class="n">download_item</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_tool_tip</span><span class="p">())</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">download_item</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+        <span class="c1"># Shorten &#39;PySide2-5.11.0a1-5.11.0-cp36-cp36m-linux_x86_64.whl&#39;...</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">QFileInfo</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span>
+        <span class="n">description_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">description_length</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">...</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="n">description</span><span class="p">[</span><span class="n">description_length</span> <span class="o">-</span> <span class="mi">10</span><span class="p">:])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> %p%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">description</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMaximum</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_tool_tip</span><span class="p">()</span>
+        <span class="c1"># Force progress bar text to be shown on macoS by using &#39;fusion&#39; style</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">QStyleFactory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;fusion&#39;</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+        <span class="n">QDesktopServices</span><span class="o">.</span><span class="n">openUrl</span><span class="p">(</span><span class="n">QUrl</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">open_download_directory</span><span class="p">():</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">QStandardPaths</span><span class="o">.</span><span class="n">writableLocation</span><span class="p">(</span><span class="n">QStandardPaths</span><span class="o">.</span><span class="n">DownloadLocation</span><span class="p">)</span>
+        <span class="n">DownloadWidget</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_update_tool_tip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+        <span class="n">tool_tip</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">url</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span>
+            <span class="n">QDir</span><span class="o">.</span><span class="n">toNativeSeparators</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="n">total_bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">total_bytes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">total_bytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="si">{}</span><span class="s2">K&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_bytes</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadRequested</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(requested)&quot;</span>
+        <span class="k">elif</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadInProgress</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(downloading)&quot;</span>
+        <span class="k">elif</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadCompleted</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(completed)&quot;</span>
+        <span class="k">elif</span> <span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadCancelled</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(cancelled)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tool_tip</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(interrupted)&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">tool_tip</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_download_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">,</span> <span class="n">bytes_total</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">bytes_received</span> <span class="o">/</span> <span class="n">bytes_total</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_tool_tip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">DownloadWidget</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">path</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">mouse_double_click_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadCompleted</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_launch</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">context_menu_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span>
+        <span class="n">context_menu</span> <span class="o">=</span> <span class="n">QMenu</span><span class="p">()</span>
+        <span class="n">launch_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Launch&quot;</span><span class="p">)</span>
+        <span class="n">launch_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadCompleted</span><span class="p">)</span>
+        <span class="n">show_in_folder_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Show in Folder&quot;</span><span class="p">)</span>
+        <span class="n">show_in_folder_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadCompleted</span><span class="p">)</span>
+        <span class="n">cancel_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Cancel&quot;</span><span class="p">)</span>
+        <span class="n">cancel_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadInProgress</span><span class="p">)</span>
+        <span class="n">remove_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Remove&quot;</span><span class="p">)</span>
+        <span class="n">remove_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">state</span> <span class="o">!=</span> <span class="n">QWebEngineDownloadItem</span><span class="o">.</span><span class="n">DownloadInProgress</span><span class="p">)</span>
+
+        <span class="n">chosen_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">launch_action</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_launch</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">show_in_folder_action</span><span class="p">:</span>
+            <span class="n">DownloadWidget</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="n">QFileInfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">path</span><span class="p">())</span><span class="o">.</span><span class="n">absolutePath</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">cancel_action</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_download_item</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">remove_action</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_requested</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

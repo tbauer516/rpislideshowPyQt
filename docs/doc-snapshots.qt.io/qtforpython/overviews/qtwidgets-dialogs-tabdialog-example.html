@@ -1,0 +1,372 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tab Dialog Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tab Dialog Example</a><ul>
+<li><a class="reference internal" href="#tabdialog-class-definition">TabDialog Class Definition</a></li>
+<li><a class="reference internal" href="#tabdialog-class-implementation">TabDialog Class Implementation</a></li>
+<li><a class="reference internal" href="#generaltab-class-definition">GeneralTab Class Definition</a></li>
+<li><a class="reference internal" href="#generaltab-class-implementation">GeneralTab Class Implementation</a></li>
+<li><a class="reference internal" href="#permissionstab-class-definition">PermissionsTab Class Definition</a></li>
+<li><a class="reference internal" href="#permissionstab-class-implementation">PermissionsTab Class Implementation</a></li>
+<li><a class="reference internal" href="#applicationstab-class-definition">ApplicationsTab Class Definition</a></li>
+<li><a class="reference internal" href="#applicationstab-class-implementation">ApplicationsTab Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tabdialog-cpp-example-file">tabdialog.cpp Example File</a></li>
+<li><a class="reference internal" href="#tabdialog-h-example-file">tabdialog.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#tabdialog-pro-example-file">tabdialog.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tab-dialog-example">
+<span id="id1"></span><h1>Tab Dialog Example<a class="headerlink" href="#tab-dialog-example" title="Permalink to this headline">¶</a></h1>
+<p>Tab Dialog example shows how to construct a tab dialog using the QTabWidget class</p>
+<blockquote>
+<div><p>The Tab Dialog example shows how to construct a tab dialog using the <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> class.</p>
+<p>Dialogs provide an efficient way for the application to communicate with the user, but complex dialogs suffer from the problem that they often take up too much screen area. By using a number of tabs in a dialog, information can be split into different categories, while remaining accessible.</p>
+<p>The Tab Dialog example consists of a single <code class="docutils literal"><span class="pre">TabDialog</span></code> class that provides three tabs, each containing information about a particular file, and two standard push buttons that are used to accept or reject the contents of the dialog.</p>
+</div></blockquote>
+<div class="section" id="tabdialog-class-definition">
+<span id="id2"></span><h2>TabDialog Class Definition<a class="headerlink" href="#tabdialog-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">TabDialog</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> that displays a <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> and two standard dialog buttons. The class definition only contain the class constructor and a private data member for the <a class="reference internal" href="../PySide2/QtWidgets/QTabWidget.html#PySide2.QtWidgets.QTabWidget" title="PySide2.QtWidgets.QTabWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTabWidget</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabDialog</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">TabDialog</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QTabWidget</span> <span class="o">*</span><span class="n">tabWidget</span><span class="p">;</span>
+    <span class="n">QDialogButtonBox</span> <span class="o">*</span><span class="n">buttonBox</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In the example, the widget will be used as a top-level window, but we define the constructor so that it can take a parent widget. This allows the dialog to be centered on top of an application’s main window.</p>
+</div></blockquote>
+</div>
+<div class="section" id="tabdialog-class-implementation">
+<span id="id3"></span><h2>TabDialog Class Implementation<a class="headerlink" href="#tabdialog-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor calls the <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> constructor and creates a <a class="reference internal" href="../PySide2/QtCore/QFileInfo.html#PySide2.QtCore.QFileInfo" title="PySide2.QtCore.QFileInfo"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileInfo</span></code></a> object for the specified filename.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TabDialog</span> <span class="p">(</span><span class="n">QDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">QDialog</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="n">fileInfo</span> <span class="o">=</span> <span class="n">QFileInfo</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabWidget</span> <span class="o">=</span> <span class="n">QTabWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabWidget</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">GeneralTab</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">),</span> <span class="s2">&quot;General&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabWidget</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">PermissionsTab</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">),</span> <span class="s2">&quot;Permissions&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabWidget</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">ApplicationsTab</span><span class="p">(</span><span class="n">fileInfo</span><span class="p">),</span> <span class="s2">&quot;Applications&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The tab widget is populated with three custom widgets that each contain information about the file. We construct each of these without a parent widget because the tab widget will reparent them as they are added to it.</p>
+<p>We create two standard push buttons, and connect each of them to the appropriate slots in the dialog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">buttonBox</span> <span class="o">=</span> <span class="n">QDialogButtonBox</span><span class="p">(</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Ok</span>
+                             <span class="o">|</span> <span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">accepted</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">rejected</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reject</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We arrange the tab widget above the buttons in the dialog:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+<span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tabWidget</span><span class="p">)</span>
+<span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we set the dialog’s title:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Tab Dialog&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each of the tabs are subclassed from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , and only provide constructors.</p>
+</div></blockquote>
+</div>
+<div class="section" id="generaltab-class-definition">
+<span id="id4"></span><h2>GeneralTab Class Definition<a class="headerlink" href="#generaltab-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The GeneralTab widget definition is simple because we are only interested in displaying the contents of a widget within a tab:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GeneralTab</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">GeneralTab</span><span class="p">(</span><span class="n">const</span> <span class="n">QFileInfo</span> <span class="o">&amp;</span><span class="n">fileInfo</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="generaltab-class-implementation">
+<span id="id5"></span><h2>GeneralTab Class Implementation<a class="headerlink" href="#generaltab-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The GeneralTab widget simply displays some information about the file passed by the TabDialog. Various widgets for this purpose, and these are arranged within a vertical layout:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GeneralTab</span> <span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileInfo</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">QWidget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="n">fileNameLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;File Name:&quot;</span><span class="p">)</span>
+        <span class="n">fileNameEdit</span> <span class="o">=</span> <span class="n">QLineEdit</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">fileName</span><span class="p">())</span>
+
+        <span class="n">pathLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Path:&quot;</span><span class="p">)</span>
+        <span class="n">pathValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">absoluteFilePath</span><span class="p">())</span>
+        <span class="n">pathValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">sizeLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Size:&quot;</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">/</span><span class="mi">1024</span>
+        <span class="n">sizeValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> K&quot;</span> <span class="o">%</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">sizeValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">lastReadLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Last Read:&quot;</span><span class="p">)</span>
+        <span class="n">lastReadValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">lastRead</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span>
+        <span class="n">lastReadValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">lastModLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Last Modified:&quot;</span><span class="p">)</span>
+        <span class="n">lastModValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">lastModified</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span>
+        <span class="n">lastModValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">mainLayout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fileNameLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fileNameEdit</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">pathLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">pathValueLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sizeLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sizeValueLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lastReadLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lastReadValueLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lastModLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lastModValueLabel</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="permissionstab-class-definition">
+<span id="id6"></span><h2>PermissionsTab Class Definition<a class="headerlink" href="#permissionstab-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Like the GeneralTab, the PermissionsTab is just used as a placeholder widget for its children:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PermissionsTab</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">PermissionsTab</span><span class="p">(</span><span class="n">const</span> <span class="n">QFileInfo</span> <span class="o">&amp;</span><span class="n">fileInfo</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="permissionstab-class-implementation">
+<span id="id7"></span><h2>PermissionsTab Class Implementation<a class="headerlink" href="#permissionstab-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The PermissionsTab shows information about the file’s access information, displaying details of the file permissions and owner in widgets that are arranged in nested layouts:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PermissionsTab</span> <span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileInfo</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">QWidget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="n">permissionsGroup</span> <span class="o">=</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Permissions&quot;</span><span class="p">)</span>
+
+        <span class="n">readable</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Readable&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">isReadable</span><span class="p">():</span>
+            <span class="n">readable</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">writable</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Writable&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">isWritable</span><span class="p">():</span>
+            <span class="n">writable</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">executable</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Executable&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">isExecutable</span><span class="p">():</span>
+            <span class="n">executable</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">ownerGroup</span> <span class="o">=</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;Ownership&quot;</span><span class="p">)</span>
+
+        <span class="n">ownerLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Owner&quot;</span><span class="p">)</span>
+        <span class="n">ownerValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">owner</span><span class="p">())</span>
+        <span class="n">ownerValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">groupLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+        <span class="n">groupValueLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">fileInfo</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+        <span class="n">groupValueLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+
+        <span class="n">permissionsLayout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">permissionsLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">readable</span><span class="p">)</span>
+        <span class="n">permissionsLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">writable</span><span class="p">)</span>
+        <span class="n">permissionsLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span>
+        <span class="n">permissionsGroup</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">permissionsLayout</span><span class="p">)</span>
+
+        <span class="n">ownerLayout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">ownerLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">ownerLabel</span><span class="p">)</span>
+        <span class="n">ownerLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">ownerValueLabel</span><span class="p">)</span>
+        <span class="n">ownerLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">groupLabel</span><span class="p">)</span>
+        <span class="n">ownerLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">groupValueLabel</span><span class="p">)</span>
+        <span class="n">ownerGroup</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">ownerLayout</span><span class="p">)</span>
+
+        <span class="n">mainLayout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">permissionsGroup</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">ownerGroup</span><span class="p">)</span>
+        <span class="n">mainLayout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="applicationstab-class-definition">
+<span id="id8"></span><h2>ApplicationsTab Class Definition<a class="headerlink" href="#applicationstab-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The ApplicationsTab is another placeholder widget that is mostly cosmetic:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApplicationsTab</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">ApplicationsTab</span><span class="p">(</span><span class="n">const</span> <span class="n">QFileInfo</span> <span class="o">&amp;</span><span class="n">fileInfo</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="applicationstab-class-implementation">
+<span id="id9"></span><h2>ApplicationsTab Class Implementation<a class="headerlink" href="#applicationstab-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The ApplicationsTab does not show any useful information, but could be used as a template for a more complicated example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApplicationsTab</span> <span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileInfo</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">QWidget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="n">topLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Open with:&quot;</span><span class="p">)</span>
+
+        <span class="n">applicationsListBox</span> <span class="o">=</span> <span class="n">QListWidget</span><span class="p">()</span>
+        <span class="n">applications</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+            <span class="n">applications</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Application </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">s</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">applicationsListBox</span><span class="o">.</span><span class="n">insertItems</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">applications</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">suffix</span><span class="p">()</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="n">alwaysCheckBox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Always use this application to open this type of file&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">alwaysCheckBox</span> <span class="o">=</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="s2">&quot;Always use this application to open files with the extension &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">fileInfo</span><span class="o">.</span><span class="n">suffix</span><span class="p">())</span>
+
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">topLabel</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">applicationsListBox</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">alwaysCheckBox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="tabdialog-cpp-example-file">
+<h1>tabdialog.cpp Example File<a class="headerlink" href="#tabdialog-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tabdialog-h-example-file">
+<h1>tabdialog.h Example File<a class="headerlink" href="#tabdialog-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tabdialog-pro-example-file">
+<h1>tabdialog.pro Example File<a class="headerlink" href="#tabdialog-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,291 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Examples - Image Elements &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Examples - Image Elements</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#borderimage">BorderImage</a></li>
+<li><a class="reference internal" href="#image">Image</a></li>
+<li><a class="reference internal" href="#shadows">Shadows</a></li>
+<li><a class="reference internal" href="#animatedsprite">AnimatedSprite</a></li>
+<li><a class="reference internal" href="#spritesequence">SpriteSequence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#animatedimage-qml-example-file">animatedimage.qml Example File</a></li>
+<li><a class="reference internal" href="#animatedsprite-qml-example-file">animatedsprite.qml Example File</a></li>
+<li><a class="reference internal" href="#borderimage-qml-example-file">borderimage.qml Example File</a></li>
+<li><a class="reference internal" href="#image-qml-example-file">image.qml Example File</a></li>
+<li><a class="reference internal" href="#imageelements-qml-example-file">imageelements.qml Example File</a></li>
+<li><a class="reference internal" href="#shadows-qml-example-file">shadows.qml Example File</a></li>
+<li><a class="reference internal" href="#spritesequence-qml-example-file">spritesequence.qml Example File</a></li>
+<li><a class="reference internal" href="#borderimageselector-qml-example-file">BorderImageSelector.qml Example File</a></li>
+<li><a class="reference internal" href="#imagecell-qml-example-file">ImageCell.qml Example File</a></li>
+<li><a class="reference internal" href="#myborderimage-qml-example-file">MyBorderImage.qml Example File</a></li>
+<li><a class="reference internal" href="#shadowrectangle-qml-example-file">ShadowRectangle.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#imageelements-pro-example-file">imageelements.pro Example File</a></li>
+<li><a class="reference internal" href="#imageelements-qmlproject-example-file">imageelements.qmlproject Example File</a></li>
+<li><a class="reference internal" href="#imageelements-qrc-example-file">imageelements.qrc Example File</a></li>
+<li><a class="reference internal" href="#bearsheet-png-image-file">BearSheet.png Image File</a></li>
+<li><a class="reference internal" href="#uniflow-steam-engine-gif-image-file">Uniflow_steam_engine.gif Image File</a></li>
+<li><a class="reference internal" href="#arrow-png-image-file">arrow.png Image File</a></li>
+<li><a class="reference internal" href="#bw-png-image-file">bw.png Image File</a></li>
+<li><a class="reference internal" href="#colors-png-image-file">colors.png Image File</a></li>
+<li><a class="reference internal" href="#qt-logo-png-image-file">qt-logo.png Image File</a></li>
+<li><a class="reference internal" href="#shadow-png-image-file">shadow.png Image File</a></li>
+<li><a class="reference internal" href="#speaker-png-image-file">speaker.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-examples-image-elements">
+<span id="id1"></span><h1>Qt Quick Examples - Image Elements<a class="headerlink" href="#qt-quick-examples-image-elements" title="Permalink to this headline">¶</a></h1>
+<p>This is a collection of QML examples relating to image types</p>
+<blockquote>
+<div><p>This is a collection of QML examples relating to image types.</p>
+<p><em>Image Elements</em> is a collection of small QML examples relating to image types. For more information, visit Use Case - Visual Elements In QML.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</div></blockquote>
+</div>
+<div class="section" id="borderimage">
+<span id="id3"></span><h2>BorderImage<a class="headerlink" href="#borderimage" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><em>BorderImage</em> shows off the various scaling modes of the <a class="reference internal" href="#qt-quick-examples-image-elements"><span class="std std-ref">BorderImage</span></a> type by setting its horizontalTileMode and verticalTileMode properties.</div></blockquote>
+</div>
+<div class="section" id="image">
+<span id="id4"></span><h2>Image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><em>Image</em> shows off the various fill modes of the <a class="reference internal" href="#qt-quick-examples-image-elements"><span class="std std-ref">Image</span></a> type.</div></blockquote>
+</div>
+<div class="section" id="shadows">
+<span id="id5"></span><h2>Shadows<a class="headerlink" href="#shadows" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>Shadows</em> shows how to create a drop shadow effect for a rectangular item using a <a class="reference internal" href="#qt-quick-examples-image-elements"><span class="std std-ref">BorderImage</span></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BorderImage</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">rectangle</span>
+    <span class="n">anchors</span> <span class="p">{</span> <span class="n">leftMargin</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">;</span> <span class="n">topMargin</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">;</span> <span class="n">rightMargin</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span><span class="p">;</span> <span class="n">bottomMargin</span><span class="p">:</span> <span class="o">-</span><span class="mi">8</span> <span class="p">}</span>
+    <span class="n">border</span> <span class="p">{</span> <span class="n">left</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">top</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">right</span><span class="p">:</span> <span class="mi">10</span><span class="p">;</span> <span class="n">bottom</span><span class="p">:</span> <span class="mi">10</span> <span class="p">}</span>
+    <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;shadow.png&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="animatedsprite">
+<span id="id6"></span><h2>AnimatedSprite<a class="headerlink" href="#animatedsprite" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>AnimatedSprite</em> shows how to display a simple animation using an <a class="reference internal" href="#qt-quick-examples-image-elements"><span class="std std-ref">AnimatedSprite</span></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">AnimatedSprite</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">sprite</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">centerIn</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;content/speaker.png&quot;</span>
+    <span class="n">frameCount</span><span class="p">:</span> <span class="mi">60</span>
+    <span class="n">frameSync</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">frameWidth</span><span class="p">:</span> <span class="mi">170</span>
+    <span class="n">frameHeight</span><span class="p">:</span> <span class="mi">170</span>
+    <span class="n">loops</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The sprite animation will loop three times.</p>
+</div></blockquote>
+</div>
+<div class="section" id="spritesequence">
+<span id="id7"></span><h2>SpriteSequence<a class="headerlink" href="#spritesequence" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><em>SpriteSequence</em> demonstrates using a sprite sequence to draw an animated and interactive bear. The <a class="reference internal" href="#qt-quick-examples-image-elements"><span class="std std-ref">SpriteSequence</span></a> object defines five different sprites. The bear is initially in a <em>still</em> state:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Sprite</span><span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;still&quot;</span>
+    <span class="n">source</span><span class="p">:</span> <span class="s2">&quot;content/BearSheet.png&quot;</span>
+    <span class="n">frameCount</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">frameWidth</span><span class="p">:</span> <span class="mi">256</span>
+    <span class="n">frameHeight</span><span class="p">:</span> <span class="mi">256</span>
+    <span class="n">frameDuration</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="n">to</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;still&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;blink&quot;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;floating&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the scene is clicked, an animation sets the sprite sequence to the <em>falling</em> states and animates the bear’s y property.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SequentialAnimation</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">anim</span>
+    <span class="n">ScriptAction</span> <span class="p">{</span> <span class="n">script</span><span class="p">:</span> <span class="n">image</span><span class="o">.</span><span class="n">goalSprite</span> <span class="o">=</span> <span class="s2">&quot;falling&quot;</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">NumberAnimation</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">image</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">;</span> <span class="n">to</span><span class="p">:</span> <span class="mi">480</span><span class="p">;</span> <span class="n">duration</span><span class="p">:</span> <span class="mi">12000</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">ScriptAction</span> <span class="p">{</span> <span class="n">script</span><span class="p">:</span> <span class="p">{</span><span class="n">image</span><span class="o">.</span><span class="n">goalSprite</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">image</span><span class="o">.</span><span class="n">jumpTo</span><span class="p">(</span><span class="s2">&quot;still&quot;</span><span class="p">);}</span> <span class="p">}</span>
+    <span class="n">PropertyAction</span> <span class="p">{</span> <span class="n">target</span><span class="p">:</span> <span class="n">image</span><span class="p">;</span> <span class="nb">property</span><span class="p">:</span> <span class="s2">&quot;y&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At the end of the animation the bear is set back to its initial state.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="animatedimage-qml-example-file">
+<h1>animatedimage.qml Example File<a class="headerlink" href="#animatedimage-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="animatedsprite-qml-example-file">
+<h1>animatedsprite.qml Example File<a class="headerlink" href="#animatedsprite-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="borderimage-qml-example-file">
+<h1>borderimage.qml Example File<a class="headerlink" href="#borderimage-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="image-qml-example-file">
+<h1>image.qml Example File<a class="headerlink" href="#image-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageelements-qml-example-file">
+<h1>imageelements.qml Example File<a class="headerlink" href="#imageelements-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="shadows-qml-example-file">
+<h1>shadows.qml Example File<a class="headerlink" href="#shadows-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="spritesequence-qml-example-file">
+<h1>spritesequence.qml Example File<a class="headerlink" href="#spritesequence-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="borderimageselector-qml-example-file">
+<h1>BorderImageSelector.qml Example File<a class="headerlink" href="#borderimageselector-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagecell-qml-example-file">
+<h1>ImageCell.qml Example File<a class="headerlink" href="#imagecell-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="myborderimage-qml-example-file">
+<h1>MyBorderImage.qml Example File<a class="headerlink" href="#myborderimage-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="shadowrectangle-qml-example-file">
+<h1>ShadowRectangle.qml Example File<a class="headerlink" href="#shadowrectangle-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageelements-pro-example-file">
+<h1>imageelements.pro Example File<a class="headerlink" href="#imageelements-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageelements-qmlproject-example-file">
+<h1>imageelements.qmlproject Example File<a class="headerlink" href="#imageelements-qmlproject-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageelements-qrc-example-file">
+<h1>imageelements.qrc Example File<a class="headerlink" href="#imageelements-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="bearsheet-png-image-file">
+<h1>BearSheet.png Image File<a class="headerlink" href="#bearsheet-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="uniflow-steam-engine-gif-image-file">
+<h1>Uniflow_steam_engine.gif Image File<a class="headerlink" href="#uniflow-steam-engine-gif-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="arrow-png-image-file">
+<h1>arrow.png Image File<a class="headerlink" href="#arrow-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="bw-png-image-file">
+<h1>bw.png Image File<a class="headerlink" href="#bw-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="colors-png-image-file">
+<h1>colors.png Image File<a class="headerlink" href="#colors-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-logo-png-image-file">
+<h1>qt-logo.png Image File<a class="headerlink" href="#qt-logo-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="shadow-png-image-file">
+<h1>shadow.png Image File<a class="headerlink" href="#shadow-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="speaker-png-image-file">
+<h1>speaker.png Image File<a class="headerlink" href="#speaker-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

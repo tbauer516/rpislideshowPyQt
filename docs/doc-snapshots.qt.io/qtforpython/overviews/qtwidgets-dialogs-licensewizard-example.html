@@ -1,0 +1,462 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>License Wizard Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">License Wizard Example</a><ul>
+<li><a class="reference internal" href="#the-licensewizard-class">The LicenseWizard Class</a></li>
+<li><a class="reference internal" href="#the-intropage-class">The IntroPage Class</a></li>
+<li><a class="reference internal" href="#the-evaluatepage-class">The EvaluatePage Class</a></li>
+<li><a class="reference internal" href="#the-conclusionpage-class">The ConclusionPage Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#licensewizard-cpp-example-file">licensewizard.cpp Example File</a></li>
+<li><a class="reference internal" href="#licensewizard-h-example-file">licensewizard.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#licensewizard-pro-example-file">licensewizard.pro Example File</a></li>
+<li><a class="reference internal" href="#licensewizard-qrc-example-file">licensewizard.qrc Example File</a></li>
+<li><a class="reference internal" href="#logo-png-image-file">logo.png Image File</a></li>
+<li><a class="reference internal" href="#watermark-png-image-file">watermark.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="license-wizard-example">
+<span id="id1"></span><h1>License Wizard Example<a class="headerlink" href="#license-wizard-example" title="Permalink to this headline">¶</a></h1>
+<p>License Wizard example shows how to implement complex wizards in Qt</p>
+<blockquote>
+<div><p>The License Wizard example shows how to implement complex wizards in Qt.</p>
+<p>Most wizards have a linear structure, with page 1 followed by page 2 and so on until the last page. The <a class="reference internal" href="qtwidgets-dialogs-classwizard-example.html#class-wizard-example"><span class="std std-ref">Class Wizard</span></a> example shows how to create such wizards.</p>
+<p>Some wizards are more complex in that they allow different traversal paths based on the information provided by the user. The License Wizard example illustrates this. It provides five wizard pages; depending on which options are selected, the user can reach different pages.</p>
+<p>The example consists of the following classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">LicenseWizard</span></code> inherits <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> and implements a non-linear five-page wizard that leads the user through the process of choosing a license agreement.</li>
+<li><code class="docutils literal"><span class="pre">IntroPage</span></code>, <code class="docutils literal"><span class="pre">EvaluatePage</span></code>, <code class="docutils literal"><span class="pre">RegisterPage</span></code>, <code class="docutils literal"><span class="pre">DetailsPage</span></code>, and <code class="docutils literal"><span class="pre">ConclusionPage</span></code> are <a class="reference internal" href="../PySide2/QtWidgets/QWizardPage.html#PySide2.QtWidgets.QWizardPage" title="PySide2.QtWidgets.QWizardPage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizardPage</span></code></a> subclasses that implement the wizard pages.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="the-licensewizard-class">
+<span id="id2"></span><h2>The LicenseWizard Class<a class="headerlink" href="#the-licensewizard-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">LicenseWizard</span></code> class derives from <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> and provides a five-page wizard that guides the user through the process of registering their copy of a fictitious software product. Here’s the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LicenseWizard</span> <span class="p">(</span><span class="n">QWizard</span><span class="p">):</span>
+
+
+    <span class="n">Page_Intro</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Page_Evaluate</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Page_Register</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">Page_Details</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">Page_Conclusion</span> <span class="o">=</span> <span class="mi">5</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">showHelp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>The class’s public API is limited to a constructor and an enum. The enum defines the IDs associated with the various pages:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="43%" />
+<col width="16%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Class name</td>
+<td>Enum value</td>
+<td>Page ID</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">IntroPage</span></code></td>
+<td><code class="docutils literal"><span class="pre">Page_Intro</span></code></td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">EvaluatePage</span></code></td>
+<td><code class="docutils literal"><span class="pre">Page_Evaluate</span></code></td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">RegisterPage</span></code></td>
+<td><code class="docutils literal"><span class="pre">Page_Register</span></code></td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">DetailsPage</span></code></td>
+<td><code class="docutils literal"><span class="pre">Page_Details</span></code></td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ConclusionPage</span></code></td>
+<td><code class="docutils literal"><span class="pre">Page_Conclusion</span></code></td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>For this example, the IDs are arbitrary. The only constraints are that they must be unique and different from -1. IDs allow us to refer to pages.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># class LicenseWizard</span>
+<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+    <span class="n">QWizard</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Intro</span><span class="p">,</span> <span class="n">IntroPage</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Evaluate</span><span class="p">,</span> <span class="n">EvaluatePage</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Register</span><span class="p">,</span> <span class="n">RegisterPage</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Details</span><span class="p">,</span> <span class="n">DetailsPage</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Conclusion</span><span class="p">,</span> <span class="n">ConclusionPage</span><span class="p">())</span>
+
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">setStartId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Page_Intro</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the constructor, we create the five pages, insert them into the wizard using <code class="xref py py-func docutils literal"><span class="pre">QWizard.setPage()</span></code> , and set <code class="docutils literal"><span class="pre">Page_Intro</span></code> to be the first page.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">setWizardStyle</span><span class="p">(</span><span class="n">QWizard</span><span class="o">.</span><span class="n">ModernStyle</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We set the style to <code class="xref py py-attr docutils literal"><span class="pre">ModernStyle</span></code> on all platforms except <span class="xref std std-ref">macOS</span> ,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="bp">self</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">HaveHelpButton</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">QWizard</span><span class="o">.</span><span class="n">LogoPixmap</span><span class="p">,</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/logo.png&quot;</span><span class="p">));</span>
+
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">helpRequested</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">showHelp</span><span class="p">()));</span>
+
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;License Wizard&quot;</span><span class="p">));</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We configure the <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> to show a Help button, which is connected to our <code class="docutils literal"><span class="pre">showHelp()</span></code> slot. We also set the <code class="xref py py-attr docutils literal"><span class="pre">LogoPixmap</span></code> for all pages that have a header (i.e., <code class="docutils literal"><span class="pre">EvaluatePage</span></code> , <code class="docutils literal"><span class="pre">RegisterPage</span></code> , and <code class="docutils literal"><span class="pre">DetailsPage</span></code> ).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">LicenseWizard</span><span class="p">::</span><span class="n">showHelp</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">QString</span> <span class="n">lastHelpMessage</span><span class="p">;</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">switch</span> <span class="p">(</span><span class="n">currentId</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">Page_Intro</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The decision you make here will affect which page you &quot;</span>
+                     <span class="s2">&quot;get to see next.&quot;</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="o">...</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This help is likely not to be of any help.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">lastHelpMessage</span> <span class="o">==</span> <span class="n">message</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Sorry, I already gave what help I could. &quot;</span>
+                     <span class="s2">&quot;Maybe you should try asking a human?&quot;</span><span class="p">);</span>
+
+
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">information</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;License Wizard Help&quot;</span><span class="p">),</span> <span class="n">message</span><span class="p">);</span>
+
+
+    <span class="n">lastHelpMessage</span> <span class="o">=</span> <span class="n">message</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">showHelp()</span></code> , we display help texts that are appropriate for the current page. If the user clicks Help twice for the same page, we say, “Sorry, I already gave what help I could. Maybe you should try asking a human?”</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-intropage-class">
+<span id="id3"></span><h2>The IntroPage Class<a class="headerlink" href="#the-intropage-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The pages are defined in <code class="docutils literal"><span class="pre">licensewizard.h</span></code> and implemented in <code class="docutils literal"><span class="pre">licensewizard.cpp</span></code> , together with <code class="docutils literal"><span class="pre">LicenseWizard</span></code> .</p>
+<p>Here’s the definition and implementation of <code class="docutils literal"><span class="pre">IntroPage</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IntroPage</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWizardPage</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">IntroPage</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">nextId</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">topLabel</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">registerRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">evaluateRadioButton</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">IntroPage</span><span class="p">::</span><span class="n">IntroPage</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWizardPage</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Introduction&quot;</span><span class="p">));</span>
+    <span class="n">setPixmap</span><span class="p">(</span><span class="n">QWizard</span><span class="p">::</span><span class="n">WatermarkPixmap</span><span class="p">,</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;:/images/watermark.png&quot;</span><span class="p">));</span>
+
+    <span class="n">topLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This wizard will help you register your copy of &quot;</span>
+                             <span class="s2">&quot;&lt;i&gt;Super Product One&lt;/i&gt;&amp;trade; or start &quot;</span>
+                             <span class="s2">&quot;evaluating the product.&quot;</span><span class="p">));</span>
+    <span class="n">topLabel</span><span class="o">-&gt;</span><span class="n">setWordWrap</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">registerRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Register your copy&quot;</span><span class="p">));</span>
+    <span class="n">evaluateRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Evaluate the product for 30 &quot;</span>
+                                              <span class="s2">&quot;days&quot;</span><span class="p">));</span>
+    <span class="n">registerRadioButton</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">topLabel</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">registerRadioButton</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">evaluateRadioButton</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A page inherits from <a class="reference internal" href="../PySide2/QtWidgets/QWizardPage.html#PySide2.QtWidgets.QWizardPage" title="PySide2.QtWidgets.QWizardPage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizardPage</span></code></a> . We set a <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.title()</span></code> and a <code class="xref py py-attr docutils literal"><span class="pre">watermark</span> <span class="pre">pixmap</span></code> . By not setting any <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.subTitle()</span></code> , we ensure that no header is displayed for this page. (On Windows, it is customary for wizards to display a watermark pixmap on the first and last pages, and to have a header on the other pages.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># class IntroPage</span>
+<span class="k">def</span> <span class="nf">nextId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">evaluateRadioButton</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Evaluate</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Register</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">nextId()</span></code> function returns the ID for <code class="docutils literal"><span class="pre">EvaluatePage</span></code> if the Evaluate the product for 30 days option is checked; otherwise it returns the ID for <code class="docutils literal"><span class="pre">RegisterPage</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-evaluatepage-class">
+<span id="id4"></span><h2>The EvaluatePage Class<a class="headerlink" href="#the-evaluatepage-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">EvaluatePage</span></code> is slightly more involved:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EvaluatePage</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWizardPage</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">EvaluatePage</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">nextId</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">nameLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">emailLabel</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">nameLineEdit</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">emailLineEdit</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">EvaluatePage</span><span class="p">::</span><span class="n">EvaluatePage</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWizardPage</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Evaluate &lt;i&gt;Super Product One&lt;/i&gt;&amp;trade;&quot;</span><span class="p">));</span>
+    <span class="n">setSubTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Please fill both fields. Make sure to provide a valid &quot;</span>
+                   <span class="s2">&quot;email address (e.g., john.smith@example.com).&quot;</span><span class="p">));</span>
+
+    <span class="n">nameLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;N&amp;ame:&quot;</span><span class="p">));</span>
+    <span class="n">nameLineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+    <span class="o">...</span>
+    <span class="n">registerField</span><span class="p">(</span><span class="s2">&quot;evaluate.name*&quot;</span><span class="p">,</span> <span class="n">nameLineEdit</span><span class="p">);</span>
+    <span class="n">registerField</span><span class="p">(</span><span class="s2">&quot;evaluate.email*&quot;</span><span class="p">,</span> <span class="n">emailLineEdit</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, we set the page’s <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.title()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.subTitle()</span></code> .</p>
+<p>Then we create the child widgets, create <code class="xref py py-class docutils literal"><span class="pre">wizard</span> <span class="pre">fields</span></code> associated with them, and put them into layouts. The fields are created with an asterisk (<code class="docutils literal"><span class="pre">*</span></code> ) next to their name. This makes them <code class="xref py py-class docutils literal"><span class="pre">mandatory</span> <span class="pre">fields</span></code> , that is, fields that must be filled before the user can press the Next button (Continue on <span class="xref std std-ref">macOS</span> ). The fields’ values can be accessed from any other page using <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.field()</span></code> .</p>
+<p>Resetting the page amounts to clearing the two text fields.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># class EvaluatePage</span>
+<span class="k">def</span> <span class="nf">nextId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Conclusion</span>
+</pre></div>
+</div>
+<p>The next page is always the <code class="docutils literal"><span class="pre">ConclusionPage</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-conclusionpage-class">
+<span id="id5"></span><h2>The ConclusionPage Class<a class="headerlink" href="#the-conclusionpage-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">RegisterPage</span></code> and <code class="docutils literal"><span class="pre">DetailsPage</span></code> are very similar to <code class="docutils literal"><span class="pre">EvaluatePage</span></code> . Let’s go directly to the <code class="docutils literal"><span class="pre">ConclusionPage</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConclusionPage</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWizardPage</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ConclusionPage</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">initializePage</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">nextId</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span> <span class="n">visible</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">printButtonClicked</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">bottomLabel</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">agreeCheckBox</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This time, we reimplement <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.initializePage()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.setVisible()</span></code> , in addition to <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.nextId()</span></code> . We also declare a private slot: <code class="docutils literal"><span class="pre">printButtonClicked()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># class IntroPage</span>
+<span class="k">def</span> <span class="nf">nextId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">evaluateRadioButton</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Evaluate</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Register</span>
+</pre></div>
+</div>
+<p>The default implementation of <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.nextId()</span></code> returns the page with the next ID, or -1 if the current page has the highest ID. This behavior would work here, because <code class="docutils literal"><span class="pre">Page_Conclusion</span></code> equals 5 and there is no page with a higher ID, but to avoid relying on such subtle behavior, we reimplement <code class="xref py py-func docutils literal"><span class="pre">QWizardPage.nextId()</span></code> to return -1.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># class ConclusionPage</span>
+<span class="k">def</span> <span class="nf">initializePage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">wizard</span><span class="p">()</span><span class="o">.</span><span class="n">hasVisitedPage</span><span class="p">(</span><span class="n">LicenseWizard</span><span class="p">::</span><span class="n">Page_Evaluate</span><span class="p">):</span>
+        <span class="n">licenseText</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;u&gt;Evaluation License Agreement:&lt;/u&gt; &quot;</span> \
+                         <span class="s2">&quot;You can use this software for 30 days and make one &quot;</span> \
+                         <span class="s2">&quot;backup, but you are not allowed to distribute it.&quot;</span><span class="p">)</span>
+    <span class="n">elsif</span> <span class="n">wizard</span><span class="p">()</span><span class="o">.</span><span class="n">hasVisitedPage</span><span class="p">(</span><span class="n">LicenseWizard</span><span class="o">.</span><span class="n">Page_Details</span><span class="p">):</span>
+        <span class="n">licenseText</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;u&gt;First-Time License Agreement:&lt;/u&gt; &quot;</span> \
+                         <span class="s2">&quot;You can use this software subject to the license &quot;</span> \
+                         <span class="s2">&quot;you will receive by email.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">licenseText</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;u&gt;Upgrade License Agreement:&lt;/u&gt; &quot;</span> \
+                         <span class="s2">&quot;This software is licensed under the terms of your &quot;</span> \
+                         <span class="s2">&quot;current license.&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">bottomLabel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">licenseText</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We use <code class="xref py py-func docutils literal"><span class="pre">QWizard.hasVisitedPage()</span></code> to determine the type of license agreement the user has chosen. If the user filled the <code class="docutils literal"><span class="pre">EvaluatePage</span></code> , the license text refers to an Evaluation License Agreement. If the user filled the <code class="docutils literal"><span class="pre">DetailsPage</span></code> , the license text is a First-Time License Agreement. If the user provided an upgrade key and skipped the <code class="docutils literal"><span class="pre">DetailsPage</span></code> , the license text is an Update License Agreement.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ConclusionPage</span><span class="p">::</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">bool</span> <span class="n">visible</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QWizardPage</span><span class="p">::</span><span class="n">setVisible</span><span class="p">(</span><span class="n">visible</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">visible</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">wizard</span><span class="p">()</span><span class="o">.</span><span class="n">setButtonText</span><span class="p">(</span><span class="n">QWizard</span><span class="o">.</span><span class="n">CustomButton1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Print&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wizard</span><span class="p">()</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">QWizard</span><span class="o">.</span><span class="n">HaveCustomButton1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">wizard</span><span class="p">(),</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;customButtonClicked(int)&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;printButtonClicked()&quot;</span><span class="p">))</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">wizard</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setOption</span><span class="p">(</span><span class="n">QWizard</span><span class="p">::</span><span class="n">HaveCustomButton1</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+        <span class="n">disconnect</span><span class="p">(</span><span class="n">wizard</span><span class="p">(),</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">customButtonClicked</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span>
+                   <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">printButtonClicked</span><span class="p">()));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We want to display a Print button in the wizard when the <code class="docutils literal"><span class="pre">ConclusionPage</span></code> is up. One way to accomplish this is to reimplement <code class="xref py py-func docutils literal"><span class="pre">QWidget.setVisible()</span></code> :</p>
+<ul class="simple">
+<li>If the page is shown, we set the <code class="xref py py-attr docutils literal"><span class="pre">CustomButton1</span></code> button’s text to <em>P</em>rint, we enable the <code class="xref py py-attr docutils literal"><span class="pre">HaveCustomButton1</span></code> option, and we connect the <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWizard.customButtonClicked()</span></code> signal to our <code class="docutils literal"><span class="pre">printButtonClicked()</span></code> slot.</li>
+<li>If the page is hidden, we disable the <code class="xref py py-attr docutils literal"><span class="pre">HaveCustomButton1</span></code> option and disconnect the <code class="docutils literal"><span class="pre">printButtonClicked()</span></code> slot.</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a>  <a class="reference internal" href="qtwidgets-dialogs-classwizard-example.html#class-wizard-example"><span class="std std-ref">Class Wizard Example</span></a>  <a class="reference internal" href="qtwidgets-dialogs-trivialwizard-example.html#trivial-wizard-example"><span class="std std-ref">Trivial Wizard Example</span></a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="licensewizard-cpp-example-file">
+<h1>licensewizard.cpp Example File<a class="headerlink" href="#licensewizard-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="licensewizard-h-example-file">
+<h1>licensewizard.h Example File<a class="headerlink" href="#licensewizard-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="licensewizard-pro-example-file">
+<h1>licensewizard.pro Example File<a class="headerlink" href="#licensewizard-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="licensewizard-qrc-example-file">
+<h1>licensewizard.qrc Example File<a class="headerlink" href="#licensewizard-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="logo-png-image-file">
+<h1>logo.png Image File<a class="headerlink" href="#logo-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="watermark-png-image-file">
+<h1>watermark.png Image File<a class="headerlink" href="#watermark-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

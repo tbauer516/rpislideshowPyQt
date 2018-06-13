@@ -1,0 +1,674 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QOpenGLDebugLogger &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QStandardItemModel" href="QStandardItemModel.html" />
+    <link rel="prev" title="QOpenGLContext" href="QOpenGLContext.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtGui</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QOpenGLDebugLogger</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#slots">Slots</a></li>
+<li><a class="reference internal" href="#signals">Signals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#creating-an-opengl-debug-context">Creating an OpenGL Debug Context</a></li>
+<li><a class="reference internal" href="#creating-and-initializing-a-qopengldebuglogger">Creating and Initializing a QOpenGLDebugLogger</a></li>
+<li><a class="reference internal" href="#reading-the-internal-opengl-debug-log">Reading the Internal OpenGL Debug Log</a></li>
+<li><a class="reference internal" href="#real-time-logging-of-messages">Real-time logging of messages</a></li>
+<li><a class="reference internal" href="#inserting-messages-in-the-debug-log">Inserting Messages in the Debug Log</a></li>
+<li><a class="reference internal" href="#controlling-the-debug-output">Controlling the Debug Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QOpenGLContext.html"
+                        title="previous chapter">QOpenGLContext</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QStandardItemModel.html"
+                        title="next chapter">QStandardItemModel</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtGui"></span><div class="section" id="qopengldebuglogger">
+<span id="id1"></span><h1>QOpenGLDebugLogger<a class="headerlink" href="#qopengldebuglogger" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-987b0980b8fb4702f2064bc5c40c0590de10fa2c.png" alt="Inheritance diagram of PySide2.QtGui.QOpenGLDebugLogger" usemap="#inheritanceb0903225b8" class="inheritance"/>
+<map id="inheritanceb0903225b8" name="inheritanceb0903225b8">
+<area shape="rect" id="node1" href="#PySide2.QtGui.QOpenGLDebugLogger" title="QtGui.QOpenGLDebugLogger" alt="" coords="176,5,385,31"/>
+<area shape="rect" id="node2" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="QtCore.QObject" alt="" coords="5,5,128,31"/>
+</map>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class was introduced in Qt 5.1.</p>
+</div>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">disableMessages</span></code></a> ([sources=QOpenGLDebugMessage.AnySource[, types=QOpenGLDebugMessage.AnyType[, severities=QOpenGLDebugMessage.AnySeverity]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">disableMessages</span></code></a> (ids[, sources=QOpenGLDebugMessage.AnySource[, types=QOpenGLDebugMessage.AnyType]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">enableMessages</span></code></a> ([sources=QOpenGLDebugMessage.AnySource[, types=QOpenGLDebugMessage.AnyType[, severities=QOpenGLDebugMessage.AnySeverity]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">enableMessages</span></code></a> (ids[, sources=QOpenGLDebugMessage.AnySource[, types=QOpenGLDebugMessage.AnyType]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">initialize</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.isLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.isLogging"><code class="xref py py-meth docutils literal"><span class="pre">isLogging</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages"><code class="xref py py-meth docutils literal"><span class="pre">loggedMessages</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggingMode" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggingMode"><code class="xref py py-meth docutils literal"><span class="pre">loggingMode</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength"><code class="xref py py-meth docutils literal"><span class="pre">maximumMessageLength</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">popGroup</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">pushGroup</span></code></a> (name[, id=0[, source=QOpenGLDebugMessage.ApplicationSource]])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="slots">
+<h3>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage"><code class="xref py py-meth docutils literal"><span class="pre">logMessage</span></code></a> (debugMessage)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">startLogging</span></code></a> ([loggingMode=AsynchronousLogging])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging"><code class="xref py py-meth docutils literal"><span class="pre">stopLogging</span></code></a> ()</li>
+</ul>
+</div>
+</div>
+<div class="section" id="signals">
+<h3>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">messageLogged</span></code></a> (debugMessage)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The <a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> enables logging of OpenGL debugging messages.</div></blockquote>
+<div class="section" id="introduction">
+<span id="pyside2-qtgui-qopengldebuglogger-introduction"></span><h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>OpenGL programming can be very error prone. Most of the time, a single failing call to OpenGL can cause an entire portion of an application to stop working, with nothing being drawn on the screen.</p>
+<p>The only way to be sure that no errors are being returned from the OpenGL implementation is checking with <code class="docutils literal"><span class="pre">glGetError</span></code> after each and every API call. Moreover, OpenGL errors stack up, therefore glGetError should always be used in a loop like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GLenum</span> <span class="n">error</span> <span class="o">=</span> <span class="n">GL_NO_ERROR</span><span class="p">;</span>
+<span class="n">do</span> <span class="p">{</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">glGetError</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">GL_NO_ERROR</span><span class="p">)</span>
+        <span class="o">//</span> <span class="n">handle</span> <span class="n">the</span> <span class="n">error</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">GL_NO_ERROR</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are also many other information we are interested in (as application developers), for instance performance issues, or warnings about using deprecated APIs. Those kind of messages are not reported through the ordinary OpenGL error reporting mechanisms.</p>
+<p><a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> aims at addressing these issues by providing access to the <em>OpenGL debug log</em> . If your OpenGL implementation supports it (by exposing the <code class="docutils literal"><span class="pre">GL_KHR_debug</span></code> extension), messages from the OpenGL server will be either logged in an internal OpenGL log, or passed in “real-time” to listeners as they’re generated from OpenGL.</p>
+<p><a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> supports both these modes of operation. Refer to the following sections to find out the differences between them.</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-an-opengl-debug-context">
+<span id="pyside2-qtgui-qopengldebuglogger-creating-an-opengl-debug-context"></span><h3>Creating an OpenGL Debug Context<a class="headerlink" href="#creating-an-opengl-debug-context" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>For efficiency reasons, OpenGL implementations are allowed not to create any debug output at all, unless the OpenGL context is a debug context. In order to create a debug context from Qt, you must set the <code class="xref py py-attr docutils literal"><span class="pre">QSurfaceFormat.DebugContext</span></code> format option on the <a class="reference internal" href="QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> used to create the <a class="reference internal" href="QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSurfaceFormat</span> <span class="nb">format</span><span class="p">;</span>
+<span class="o">//</span> <span class="n">asks</span> <span class="k">for</span> <span class="n">a</span> <span class="n">OpenGL</span> <span class="mf">3.2</span> <span class="n">debug</span> <span class="n">context</span> <span class="n">using</span> <span class="n">the</span> <span class="n">Core</span> <span class="n">profile</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setMajorVersion</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setMinorVersion</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setProfile</span><span class="p">(</span><span class="n">QSurfaceFormat</span><span class="p">::</span><span class="n">CoreProfile</span><span class="p">);</span>
+<span class="nb">format</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">QSurfaceFormat</span><span class="p">::</span><span class="n">DebugContext</span><span class="p">);</span>
+
+<span class="n">QOpenGLContext</span> <span class="o">*</span><span class="n">context</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLContext</span><span class="p">;</span>
+<span class="n">context</span><span class="o">-&gt;</span><span class="n">setFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">);</span>
+<span class="n">context</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Note that requesting a 3.2 OpenGL Core Profile is just for the example’s purposes; this class is not tied to any specific OpenGL or OpenGL ES version, as it relies on the availability of the <code class="docutils literal"><span class="pre">GL_KHR_debug</span></code> extension (see below).</p>
+</div></blockquote>
+</div>
+<div class="section" id="creating-and-initializing-a-qopengldebuglogger">
+<span id="pyside2-qtgui-qopengldebuglogger-creating-and-initializing-a-qopengldebuglogger"></span><h3>Creating and Initializing a QOpenGLDebugLogger<a class="headerlink" href="#creating-and-initializing-a-qopengldebuglogger" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> is a simple <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> -derived class. Just like all <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclasses, you create an instance (and optionally specify a parent object), and like the other OpenGL functions in Qt you <em>must</em> initialize it before usage by calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.initialize()</span></code></a> whilst there is a current OpenGL context:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QOpenGLContext</span> <span class="o">*</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">QOpenGLContext</span><span class="p">::</span><span class="n">currentContext</span><span class="p">();</span>
+<span class="n">QOpenGLDebugLogger</span> <span class="o">*</span><span class="n">logger</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QOpenGLDebugLogger</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+<span class="n">logger</span><span class="o">-&gt;</span><span class="n">initialize</span><span class="p">();</span> <span class="o">//</span> <span class="n">initializes</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">context</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">ctx</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal"><span class="pre">GL_KHR_debug</span></code> extension <em>must</em> be available in the context in order to access the messages logged by OpenGL. You can check the presence of this extension by calling:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">hasExtension</span><span class="p">(</span><span class="n">QByteArrayLiteral</span><span class="p">(</span><span class="s2">&quot;GL_KHR_debug&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">ctx</span></code> is a valid <a class="reference internal" href="QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a> . If the extension is not available, <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.initialize()</span></code></a> will return false.</p>
+</div></blockquote>
+</div>
+<div class="section" id="reading-the-internal-opengl-debug-log">
+<span id="pyside2-qtgui-qopengldebuglogger-reading-the-internal-opengl-debug-log"></span><h3>Reading the Internal OpenGL Debug Log<a class="headerlink" href="#reading-the-internal-opengl-debug-log" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>OpenGL implementations keep an internal log of debug messages. Messages stored in this log can be retrieved by using the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.loggedMessages()</span></code></a> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">QList</span><span class="o">&lt;</span><span class="n">QOpenGLDebugMessage</span><span class="o">&gt;</span> <span class="n">messages</span> <span class="o">=</span> <span class="n">logger</span><span class="o">-&gt;</span><span class="n">loggedMessages</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">QOpenGLDebugMessage</span> <span class="o">&amp;</span><span class="n">message</span> <span class="p">:</span> <span class="n">messages</span><span class="p">)</span>
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">message</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The internal log has a limited size; when it fills up, older messages will get discarded to make room for the new incoming messages. When you call <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.loggedMessages()</span></code></a> , the internal log will be emptied as well.</p>
+<p>If you want to be sure not to lose any debug message, you must use real-time logging instead of calling this function. However, debug messages might still be generated in the timespan between context creation and activation of real-time logging (or, in general, when the real-time logging is disabled).</p>
+</div></blockquote>
+</div>
+<div class="section" id="real-time-logging-of-messages">
+<span id="pyside2-qtgui-qopengldebuglogger-real-time-logging-of-messages"></span><h3>Real-time logging of messages<a class="headerlink" href="#real-time-logging-of-messages" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>It is also possible to receive a stream of debug messages from the OpenGL server <em>as they are generated</em> by the implementation. In order to do so, you need to connect a suitable slot to the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal, and start logging by calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QOpenGLDebugLogger</span><span class="p">::</span><span class="n">messageLogged</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">LogHandler</span><span class="p">::</span><span class="n">handleLoggedMessage</span><span class="p">);</span>
+<span class="n">logger</span><span class="o">-&gt;</span><span class="n">startLogging</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Similarly, logging can be disabled at any time by calling the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.stopLogging()</span></code></a> function.</p>
+<p>Real-time logging can be either asynchronous or synchronous, depending on the parameter passed to <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a> . When logging in asynchronous mode (the default, as it has a very small overhead), the OpenGL implementation can generate messages at any time, and/or in an order which is different from the order of the OpenGL commands which caused those messages to be logged. The messages could also be generated from a thread that it’s different from the thread the context is currently bound to. This is because OpenGL implementations are usually highly threaded and asynchronous, and therefore no warranties are made about the relative order and the timings of the debug messages.</p>
+<p>On the other hand, logging in synchronous mode has a high overhead, but the OpenGL implementation guarantees that all the messages caused by a certain command are received in order, before the command returns, and from the same thread the OpenGL context is bound to.</p>
+<p>This means that when logging in synchronous mode you will be able to run your OpenGL application in a debugger, put a breakpoint on a slot connected to the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal, and see in the backtrace the exact call that caused the logged message. This can be extremely useful to debug an OpenGL problem. Note that if OpenGL rendering is happening in another thread, you must force the signal/slot connection type to <code class="xref py py-attr docutils literal"><span class="pre">Qt.DirectConnection</span></code> in order to be able to see the actual backtrace.</p>
+<p>Refer to the <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugLogger.LoggingMode</span></code> enum documentation for more information about logging modes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When real-time logging is enabled, debug messages will <em>not</em> be inserted in the internal OpenGL debug log any more; messages already present in the internal log will not be deleted, nor they will be emitted through the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal. Since some messages might be generated before real-time logging is started (and therefore be kept in the internal OpenGL log), it is important to always check if it contains any message after calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a> .</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="inserting-messages-in-the-debug-log">
+<span id="pyside2-qtgui-qopengldebuglogger-inserting-messages-in-the-debug-log"></span><h3>Inserting Messages in the Debug Log<a class="headerlink" href="#inserting-messages-in-the-debug-log" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>It is possible for applications and libraries to insert custom messages in the debug log, for instance for marking a group of related OpenGL commands and therefore being then able to identify eventual messages coming from them.</p>
+<p>In order to do so, you can create a <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a> object by calling <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.createApplicationMessage" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.createApplicationMessage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.createApplicationMessage()</span></code></a> or <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.createThirdPartyMessage" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.createThirdPartyMessage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.createThirdPartyMessage()</span></code></a> , and then inserting it into the log by calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.logMessage()</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QOpenGLDebugMessage</span> <span class="n">message</span> <span class="o">=</span>
+    <span class="n">QOpenGLDebugMessage</span><span class="p">::</span><span class="n">createApplicationMessage</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Custom message&quot;</span><span class="p">));</span>
+
+<span class="n">logger</span><span class="o">-&gt;</span><span class="n">logMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that OpenGL implementations have a vendor-specific limit to the length of the messages that can be inserted in the debug log. You can retrieve this length by calling the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength()</span></code></a> method; messages longer than the limit will automatically get truncated.</p>
+</div></blockquote>
+</div>
+<div class="section" id="controlling-the-debug-output">
+<span id="pyside2-qtgui-qopengldebuglogger-controlling-the-debug-output"></span><h3>Controlling the Debug Output<a class="headerlink" href="#controlling-the-debug-output" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a> is also able to apply filters to the debug messages, and therefore limit the amount of messages logged. You can enable or disable logging of messages by calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a> respectively. By default, all messages are logged.</p>
+<p>It is possible to enable or disable messages by selecting them by:</p>
+<ul class="simple">
+<li>source, type and severity (and including all ids in the selection);</li>
+<li>id, source and type (and including all severities in the selection).</li>
+</ul>
+<p>Note that the “enabled” status for a given message is a property of the (id, source, type, severity) tuple; the message attributes <em>do not</em> form a hierarchy of any kind. You should be careful about the order of the calls to <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a> , as it will change which messages will are enabled / disabled.</p>
+<p>It’s not possible to filter by the message text itself; applications have to do that on their own (in slots connected to the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal, or after fetching the messages in the internal debug log through <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.loggedMessages()</span></code></a> ).</p>
+<p>In order to simplify the management of the enabled / disabled statuses, <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a> also supports the concept of <code class="docutils literal"><span class="pre">debug</span> <span class="pre">groups</span></code> . A debug group contains the group of enabled / disabled configurations of debug messages. Moreover, debug groups are organized in a stack: it is possible to push and pop groups by calling <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a> respectively. (When an OpenGL context is created, there is already a group in the stack).</p>
+<p>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a> functions will modify the configuration in the current debug group, that is, the one at the top of the debug groups stack.</p>
+<p>When a new group is pushed onto the debug groups stack, it will inherit the configuration of the group that was previously on the top of the stack. Vice versa, popping a debug group will restore the configuration of the debug group that becomes the new top.</p>
+<p>Pushing (respectively popping) debug groups will also automatically generate a debug message of type <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.GroupPushType</span></code> (respectively <code class="xref py py-attr docutils literal"><span class="pre">GroupPopType</span></code> ).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtGui.QOpenGLDebugLogger">
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QOpenGLDebugLogger</code><span class="sig-paren">(</span><span class="optional">[</span><em>parent=nullptr</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.QOpenGLDebugLogger" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> – <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a new logger object with the given <code class="docutils literal"><span class="pre">parent</span></code> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The object must be initialized before logging can happen.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.initialize()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">LoggingMode</code><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>The enum defines the logging mode of the logger object.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Constant</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QOpenGLDebugLogger.AsynchronousLogging</td>
+<td>Messages from the OpenGL server are logged asynchronously. This means that messages can be logged some time after the corresponding OpenGL actions that caused them, and even be received in an out-of-order fashion, depending on the OpenGL implementation. This mode has a very low performance penalty, as OpenGL implementations are heavily threaded and asynchronous by nature.</td>
+</tr>
+<tr class="row-odd"><td>QOpenGLDebugLogger.SynchronousLogging</td>
+<td>Messages from the OpenGL server are logged synchronously and sequentially. This has a severe performance hit, as OpenGL implementations are very asynchronous by nature; but it’s very useful to debug OpenGL problems, as OpenGL guarantees that the messages generated by a OpenGL command will be logged before the corresponding command execution has returned. Therefore, you can install a breakpoint on the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal and see in the backtrace which OpenGL command caused it; the only caveat is that if you are using OpenGL from multiple threads you may need to force direct connection when connecting to the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> signal.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">disableMessages</code><span class="sig-paren">(</span><em>ids</em><span class="optional">[</span>, <em>sources=QOpenGLDebugMessage.AnySource</em><span class="optional">[</span>, <em>types=QOpenGLDebugMessage.AnyType</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ids</strong> – </li>
+<li><strong>sources</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Sources</span></code></li>
+<li><strong>types</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Types</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Disables the logging of messages with the given <code class="docutils literal"><span class="pre">ids</span></code> , from the given <code class="docutils literal"><span class="pre">sources</span></code> and of the given <code class="docutils literal"><span class="pre">types</span></code> and any severity.</p>
+<p>The logging will be disabled in the current control group.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">disableMessages</code><span class="sig-paren">(</span><span class="optional">[</span><em>sources=QOpenGLDebugMessage.AnySource</em><span class="optional">[</span>, <em>types=QOpenGLDebugMessage.AnyType</em><span class="optional">[</span>, <em>severities=QOpenGLDebugMessage.AnySeverity</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sources</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Sources</span></code></li>
+<li><strong>types</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Types</span></code></li>
+<li><strong>severities</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Severities</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Disables the logging of messages with the given <code class="docutils literal"><span class="pre">sources</span></code> , of the given <code class="docutils literal"><span class="pre">types</span></code> and with the given <code class="docutils literal"><span class="pre">severities</span></code> and any message id.</p>
+<p>The logging will be disabled in the current control group.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">enableMessages</code><span class="sig-paren">(</span><span class="optional">[</span><em>sources=QOpenGLDebugMessage.AnySource</em><span class="optional">[</span>, <em>types=QOpenGLDebugMessage.AnyType</em><span class="optional">[</span>, <em>severities=QOpenGLDebugMessage.AnySeverity</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sources</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Sources</span></code></li>
+<li><strong>types</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Types</span></code></li>
+<li><strong>severities</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Severities</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Enables the logging of messages from the given <code class="docutils literal"><span class="pre">sources</span></code> , of the given <code class="docutils literal"><span class="pre">types</span></code> and with the given <code class="docutils literal"><span class="pre">severities</span></code> and any message id.</p>
+<p>The logging will be enabled in the current control group.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">enableMessages</code><span class="sig-paren">(</span><em>ids</em><span class="optional">[</span>, <em>sources=QOpenGLDebugMessage.AnySource</em><span class="optional">[</span>, <em>types=QOpenGLDebugMessage.AnyType</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ids</strong> – </li>
+<li><strong>sources</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Sources</span></code></li>
+<li><strong>types</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Types</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Enables the logging of messages with the given <code class="docutils literal"><span class="pre">ids</span></code> , from the given <code class="docutils literal"><span class="pre">sources</span></code> and of the given <code class="docutils literal"><span class="pre">types</span></code> and any severity.</p>
+<p>The logging will be enabled in the current control group.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Initializes the object in the current OpenGL context. The context must support the <code class="docutils literal"><span class="pre">GL_KHR_debug</span></code> extension for the initialization to succeed. The object must be initialized before any logging can happen.</p>
+<p>It is safe to call this function multiple times from the same context.</p>
+<p>This function can also be used to change the context of a previously initialized object; note that in this case the object must not be logging when you call this function.</p>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the logger is successfully initialized; false otherwise.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QOpenGLContext.html#PySide2.QtGui.QOpenGLContext" title="PySide2.QtGui.QOpenGLContext"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLContext</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.isLogging">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">isLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.isLogging" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this object is currently logging, false otherwise.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">logMessage</code><span class="sig-paren">(</span><em>debugMessage</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>debugMessage</strong> – <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Inserts the message <code class="docutils literal"><span class="pre">debugMessage</span></code> into the OpenGL debug log. This provides a way for applications or libraries to insert custom messages that can ease the debugging of OpenGL applications.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">debugMessage</span></code> must have <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.ApplicationSource</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.ThirdPartySource</span></code> as its source, and a valid type and severity, otherwise it will not be inserted into the log.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The object must be initialized before logging can happen.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.initialize()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">loggedMessages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggedMessages" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>Reads all the available messages in the OpenGL internal debug log and returns them. Moreover, this function will clear the internal debug log, so that subsequent invocations will not return messages that were already returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggingMode">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">loggingMode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.loggingMode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.LoggingMode</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the logging mode of the object.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">maximumMessageLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.maximumMessageLength" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the maximum supported length, in bytes, for the text of the messages passed to <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.logMessage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.logMessage()</span></code></a> . This is also the maximum length of a debug group name, as pushing or popping groups will automatically log a message with the debug group name as the message text.</p>
+<p>If a message text is too long, it will be automatically truncated by <a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Message texts are encoded in UTF-8 when they get passed to OpenGL, so their size in bytes does not usually match the amount of UTF-16 code units, as returned f.i. by <code class="xref py py-meth docutils literal"><span class="pre">QString.length()</span></code> . (It does if the message contains 7-bit ASCII only data, which is typical for debug messages.)</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">messageLogged</code><span class="sig-paren">(</span><em>debugMessage</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>debugMessage</strong> – <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.QOpenGLDebugMessage" title="PySide2.QtGui.QOpenGLDebugMessage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">popGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pops the topmost debug group from the debug groups stack. If the group is successfully popped, OpenGL will automatically log a message with message, id and source matching those of the popped group, type <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.GroupPopType</span></code> and severity <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.NotificationSeverity</span></code> .</p>
+<p>Popping a debug group will restore the message filtering settings of the group that becomes the top of the debug groups stack.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The object must be initialized before managing debug groups.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.pushGroup()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">pushGroup</code><span class="sig-paren">(</span><em>name</em><span class="optional">[</span>, <em>id=0</em><span class="optional">[</span>, <em>source=QOpenGLDebugMessage.ApplicationSource</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.pushGroup" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> – unicode</li>
+<li><strong>id</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtOpenGL.GLuint</span></code></li>
+<li><strong>source</strong> – <a class="reference internal" href="QOpenGLDebugMessage.html#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.Source" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugMessage.Source"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugMessage.Source</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Pushes a debug group with name <code class="docutils literal"><span class="pre">name</span></code> , id <code class="docutils literal"><span class="pre">id</span></code> , and source <code class="docutils literal"><span class="pre">source</span></code> onto the debug groups stack. If the group is successfully pushed, OpenGL will automatically log a message with message <code class="docutils literal"><span class="pre">name</span></code> , id <code class="docutils literal"><span class="pre">id</span></code> , source <code class="docutils literal"><span class="pre">source</span></code> , type <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.GroupPushType</span></code> and severity <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.NotificationSeverity</span></code> .</p>
+<p>The newly pushed group will inherit the same filtering settings of the group that was on the top of the stack; that is, the filtering will not be changed by pushing a new group.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">source</span></code> must either be <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.ApplicationSource</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">QOpenGLDebugMessage.ThirdPartySource</span></code> , otherwise the group will not be pushed.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The object must be initialized before managing debug groups.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.popGroup"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.popGroup()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.enableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.enableMessages()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.disableMessages"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.disableMessages()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">startLogging</code><span class="sig-paren">(</span><span class="optional">[</span><em>loggingMode=AsynchronousLogging</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>loggingMode</strong> – <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.LoggingMode"><code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.LoggingMode</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Starts logging messages coming from the OpenGL server. When a new message is received, the signal <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.messageLogged"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.messageLogged()</span></code></a> is emitted, carrying the logged message as argument.</p>
+<p><code class="docutils literal"><span class="pre">loggingMode</span></code> specifies whether the logging must be asynchronous (the default) or synchronous.</p>
+<p><a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> will record the values of <code class="docutils literal"><span class="pre">GL_DEBUG_OUTPUT</span></code> and <code class="docutils literal"><span class="pre">GL_DEBUG_OUTPUT_SYNCHRONOUS</span></code> when logging is started, and set them back when logging is stopped. Moreover, any user-defined OpenGL debug callback installed when this function is invoked will be restored when logging is stopped; <a class="reference internal" href="#PySide2.QtGui.QOpenGLDebugLogger" title="PySide2.QtGui.QOpenGLDebugLogger"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger</span></code></a> will ensure that the pre-existing callback will still be invoked when logging.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It’s not possible to change the logging mode without stopping and starting logging again. This might change in a future version of Qt.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The object must be initialized before logging can happen.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.stopLogging()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.initialize"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.initialize()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging">
+<code class="descclassname">PySide2.QtGui.QOpenGLDebugLogger.</code><code class="descname">stopLogging</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.stopLogging" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops logging messages from the OpenGL server.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging" title="PySide2.QtGui.PySide2.QtGui.QOpenGLDebugLogger.startLogging"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QOpenGLDebugLogger.startLogging()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

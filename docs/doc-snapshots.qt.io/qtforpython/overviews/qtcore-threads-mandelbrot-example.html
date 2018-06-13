@@ -1,0 +1,631 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mandelbrot Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Mandelbrot Example</a><ul>
+<li><a class="reference internal" href="#renderthread-class-definition">RenderThread Class Definition</a></li>
+<li><a class="reference internal" href="#renderthread-class-implementation">RenderThread Class Implementation</a></li>
+<li><a class="reference internal" href="#mandelbrotwidget-class-definition">MandelbrotWidget Class Definition</a></li>
+<li><a class="reference internal" href="#mandelbrotwidget-class-implementation">MandelbrotWidget Class Implementation</a></li>
+<li><a class="reference internal" href="#the-main-function">The main() Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mandelbrotwidget-cpp-example-file">mandelbrotwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#mandelbrotwidget-h-example-file">mandelbrotwidget.h Example File</a></li>
+<li><a class="reference internal" href="#renderthread-cpp-example-file">renderthread.cpp Example File</a></li>
+<li><a class="reference internal" href="#renderthread-h-example-file">renderthread.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#mandelbrot-pro-example-file">mandelbrot.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mandelbrot-example">
+<span id="id1"></span><h1>Mandelbrot Example<a class="headerlink" href="#mandelbrot-example" title="Permalink to this headline">¶</a></h1>
+<p>Mandelbrot example demonstrates multi-thread programming using Qt. It shows how to use a worker thread to perform heavy computations without blocking the main thread’s event loop</p>
+<blockquote>
+<div><p>The Mandelbrot example demonstrates multi-thread programming using Qt. It shows how to use a worker thread to perform heavy computations without blocking the main thread’s event loop.</p>
+<p>The heavy computation here is the Mandelbrot set, probably the world’s most famous fractal. These days, while sophisticated programs such as XaoS that provide real-time zooming in the Mandelbrot set, the standard Mandelbrot algorithm is just slow enough for our purposes.</p>
+<p>In real life, the approach described here is applicable to a large set of problems, including synchronous network I/O and database access, where the user interface must remain responsive while some heavy operation is taking place. The <a class="reference internal" href="qtnetwork-blockingfortuneclient-example.html#blocking-fortune-client-example"><span class="std std-ref">Blocking Fortune Client Example</span></a> shows the same principle at work in a TCP client.</p>
+<p>The Mandelbrot application supports zooming and scrolling using the mouse or the keyboard. To avoid freezing the main thread’s event loop (and, as a consequence, the application’s user interface), we put all the fractal computation in a separate worker thread. The thread emits a signal when it is done rendering the fractal.</p>
+<p>During the time where the worker thread is recomputing the fractal to reflect the new zoom factor position, the main thread simply scales the previously rendered pixmap to provide immediate feedback. The result doesn’t look as good as what the worker thread eventually ends up providing, but at least it makes the application more responsive. The sequence of screenshots below shows the original image, the scaled image, and the rerendered image.</p>
+<p>Similarly, when the user scrolls, the previous pixmap is scrolled immediately, revealing unpainted areas beyond the edge of the pixmap, while the image is rendered by the worker thread.</p>
+<p>The application consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">RenderThread</span></code> is a <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> subclass that renders the Mandelbrot set.</li>
+<li><code class="docutils literal"><span class="pre">MandelbrotWidget</span></code> is a <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> subclass that shows the Mandelbrot set on screen and lets the user zoom and scroll.</li>
+</ul>
+<p>If you are not already familiar with Qt’s thread support, we recommend that you start by reading the Thread Support in Qt overview.</p>
+</div></blockquote>
+<div class="section" id="renderthread-class-definition">
+<span id="id2"></span><h2>RenderThread Class Definition<a class="headerlink" href="#renderthread-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We’ll start with the definition of the <code class="docutils literal"><span class="pre">RenderThread</span></code> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RenderThread</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QThread</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">RenderThread</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">RenderThread</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">render</span><span class="p">(</span><span class="n">double</span> <span class="n">centerX</span><span class="p">,</span> <span class="n">double</span> <span class="n">centerY</span><span class="p">,</span> <span class="n">double</span> <span class="n">scaleFactor</span><span class="p">,</span> <span class="n">QSize</span> <span class="n">resultSize</span><span class="p">);</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">renderedImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">,</span> <span class="n">double</span> <span class="n">scaleFactor</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">run</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">uint</span> <span class="n">rgbFromWaveLength</span><span class="p">(</span><span class="n">double</span> <span class="n">wave</span><span class="p">);</span>
+
+    <span class="n">QMutex</span> <span class="n">mutex</span><span class="p">;</span>
+    <span class="n">QWaitCondition</span> <span class="n">condition</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">centerX</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">centerY</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">scaleFactor</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">resultSize</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">restart</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">abort</span><span class="p">;</span>
+
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">ColormapSize</span> <span class="o">=</span> <span class="mi">512</span> <span class="p">};</span>
+    <span class="n">uint</span> <span class="n">colormap</span><span class="p">[</span><span class="n">ColormapSize</span><span class="p">];</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The class inherits <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> so that it gains the ability to run in a separate thread. Apart from the constructor and destructor, <code class="docutils literal"><span class="pre">render()</span></code> is the only public function. Whenever the thread is done rendering an image, it emits the <code class="docutils literal"><span class="pre">renderedImage()</span></code> signal.</p>
+<p>The protected <code class="docutils literal"><span class="pre">run()</span></code> function is reimplemented from <a class="reference internal" href="../PySide2/QtCore/QThread.html#PySide2.QtCore.QThread" title="PySide2.QtCore.QThread"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QThread</span></code></a> . It is automatically called when the thread is started.</p>
+<p>In the <code class="docutils literal"><span class="pre">private</span></code> section, we have a <a class="reference internal" href="../PySide2/QtCore/QMutex.html#PySide2.QtCore.QMutex" title="PySide2.QtCore.QMutex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMutex</span></code></a> , a <a class="reference internal" href="../PySide2/QtCore/QWaitCondition.html#PySide2.QtCore.QWaitCondition" title="PySide2.QtCore.QWaitCondition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QWaitCondition</span></code></a> , and a few other data members. The mutex protects the other data member.</p>
+</div></blockquote>
+</div>
+<div class="section" id="renderthread-class-implementation">
+<span id="id3"></span><h2>RenderThread Class Implementation<a class="headerlink" href="#renderthread-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RenderThread</span><span class="p">::</span><span class="n">RenderThread</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QThread</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">restart</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">abort</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ColormapSize</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">colormap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rgbFromWaveLength</span><span class="p">(</span><span class="mf">380.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">400.0</span> <span class="o">/</span> <span class="n">ColormapSize</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we initialize the <code class="docutils literal"><span class="pre">restart</span></code> and <code class="docutils literal"><span class="pre">abort</span></code> variables to <code class="docutils literal"><span class="pre">false</span></code> . These variables control the flow of the <code class="docutils literal"><span class="pre">run()</span></code> function.</p>
+<p>We also initialize the <code class="docutils literal"><span class="pre">colormap</span></code> array, which contains a series of RGB colors.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RenderThread</span><span class="p">::</span><span class="o">~</span><span class="n">RenderThread</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+    <span class="n">abort</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="n">condition</span><span class="o">.</span><span class="n">wakeOne</span><span class="p">();</span>
+    <span class="n">mutex</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+
+    <span class="n">wait</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The destructor can be called at any point while the thread is active. We set <code class="docutils literal"><span class="pre">abort</span></code> to <code class="docutils literal"><span class="pre">true</span></code> to tell <code class="docutils literal"><span class="pre">run()</span></code> to stop running as soon as possible. We also call <code class="xref py py-func docutils literal"><span class="pre">QWaitCondition.wakeOne()</span></code> to wake up the thread if it’s sleeping. (As we will see when we review <code class="docutils literal"><span class="pre">run()</span></code> , the thread is put to sleep when it has nothing to do.)</p>
+<p>The important thing to notice here is that <code class="docutils literal"><span class="pre">run()</span></code> is executed in its own thread (the worker thread), whereas the <code class="docutils literal"><span class="pre">RenderThread</span></code> constructor and destructor (as well as the <code class="docutils literal"><span class="pre">render()</span></code> function) are called by the thread that created the worker thread. Therefore, we need a mutex to protect accesses to the <code class="docutils literal"><span class="pre">abort</span></code> and <code class="docutils literal"><span class="pre">condition</span></code> variables, which might be accessed at any time by <code class="docutils literal"><span class="pre">run()</span></code> .</p>
+<p>At the end of the destructor, we call <code class="xref py py-func docutils literal"><span class="pre">QThread.wait()</span></code> to wait until <code class="docutils literal"><span class="pre">run()</span></code> has exited before the base class destructor is invoked.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void RenderThread::render(double centerX, double centerY, double scaleFactor,
+                          QSize resultSize)
+{
+    QMutexLocker locker(&amp;mutex);
+
+    this-&gt;centerX = centerX;
+    this-&gt;centerY = centerY;
+    this-&gt;scaleFactor = scaleFactor;
+    this-&gt;resultSize = resultSize;
+
+    if (!isRunning()) {
+        start(LowPriority);
+    } else {
+        restart = true;
+        condition.wakeOne();
+    }
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">render()</span></code> function is called by the <code class="docutils literal"><span class="pre">MandelbrotWidget</span></code> whenever it needs to generate a new image of the Mandelbrot set. The <code class="docutils literal"><span class="pre">centerX</span></code> , <code class="docutils literal"><span class="pre">centerY</span></code> , and <code class="docutils literal"><span class="pre">scaleFactor</span></code> parameters specify the portion of the fractal to render; <code class="docutils literal"><span class="pre">resultSize</span></code> specifies the size of the resulting <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> .</p>
+<p>The function stores the parameters in member variables. If the thread isn’t already running, it starts it; otherwise, it sets <code class="docutils literal"><span class="pre">restart</span></code> to <code class="docutils literal"><span class="pre">true</span></code> (telling <code class="docutils literal"><span class="pre">run()</span></code> to stop any unfinished computation and start again with the new parameters) and wakes up the thread, which might be sleeping.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">RenderThread</span><span class="p">::</span><span class="n">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">forever</span> <span class="p">{</span>
+        <span class="n">mutex</span><span class="o">.</span><span class="n">lock</span><span class="p">();</span>
+        <span class="n">QSize</span> <span class="n">resultSize</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">resultSize</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">scaleFactor</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">scaleFactor</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">centerX</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">centerX</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">centerY</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">centerY</span><span class="p">;</span>
+        <span class="n">mutex</span><span class="o">.</span><span class="n">unlock</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">run()</span></code> is quite a big function, so we’ll break it down into parts.</p>
+<p>The function body is an infinite loop which starts by storing the rendering parameters in local variables. As usual, we protect accesses to the member variables using the class’s mutex. Storing the member variables in local variables allows us to minimize the amout of code that needs to be protected by a mutex. This ensures that the main thread will never have to block for too long when it needs to access <code class="docutils literal"><span class="pre">RenderThread</span></code> ‘s member variables (e.g., in <code class="docutils literal"><span class="pre">render()</span></code> ).</p>
+<p>The <code class="docutils literal"><span class="pre">forever</span></code> keyword is, like <code class="docutils literal"><span class="pre">foreach</span></code> , a Qt pseudo-keyword.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>int halfWidth = resultSize.width() / 2;
+int halfHeight = resultSize.height() / 2;
+QImage image(resultSize, QImage::Format_RGB32);
+
+const int NumPasses = 8;
+int pass = 0;
+while (pass &lt; NumPasses) {
+    const int MaxIterations = (1 &lt;&lt; (2 * pass + 6)) + 32;
+    const int Limit = 4;
+    bool allBlack = true;
+
+    for (int y = -halfHeight; y &lt; halfHeight; ++y) {
+        if (restart)
+            break;
+        if (abort)
+            return;
+
+        uint *scanLine =
+                reinterpret_cast&lt;uint *&gt;(image.scanLine(y + halfHeight));
+        double ay = centerY + (y * scaleFactor);
+
+        for (int x = -halfWidth; x &lt; halfWidth; ++x) {
+            double ax = centerX + (x * scaleFactor);
+            double a1 = ax;
+            double b1 = ay;
+            int numIterations = 0;
+
+            do {
+                ++numIterations;
+                double a2 = (a1 * a1) - (b1 * b1) + ax;
+                double b2 = (2 * a1 * b1) + ay;
+                if ((a2 * a2) + (b2 * b2) &gt; Limit)
+                    break;
+
+                ++numIterations;
+                a1 = (a2 * a2) - (b2 * b2) + ax;
+                b1 = (2 * a2 * b2) + ay;
+                if ((a1 * a1) + (b1 * b1) &gt; Limit)
+                    break;
+            } while (numIterations &lt; MaxIterations);
+
+            if (numIterations &lt; MaxIterations) {
+                *scanLine++ = colormap[numIterations % ColormapSize];
+                allBlack = false;
+            } else {
+                *scanLine++ = qRgb(0, 0, 0);
+            }
+        }
+    }
+
+    if (allBlack &amp;&amp; pass == 0) {
+        pass = 4;
+    } else {
+        if (!restart)
+            emit renderedImage(image, scaleFactor);
+        ++pass;
+    }
+}
+</pre></div>
+</div>
+<p>Then comes the core of the algorithm. Instead of trying to create a perfect Mandelbrot set image, we do multiple passes and generate more and more precise (and computationally expensive) approximations of the fractal.</p>
+<p>If we discover inside the loop that <code class="docutils literal"><span class="pre">restart</span></code> has been set to <code class="docutils literal"><span class="pre">true</span></code> (by <code class="docutils literal"><span class="pre">render()</span></code> ), we break out of the loop immediately, so that the control quickly returns to the very top of the outer loop (the <code class="docutils literal"><span class="pre">forever</span></code> loop) and we fetch the new rendering parameters. Similarly, if we discover that <code class="docutils literal"><span class="pre">abort</span></code> has been set to <code class="docutils literal"><span class="pre">true</span></code> (by the <code class="docutils literal"><span class="pre">RenderThread</span></code> destructor), we return from the function immediately, terminating the thread.</p>
+<p>The core algorithm is beyond the scope of this tutorial.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        mutex.lock();
+        if (!restart)
+            condition.wait(&amp;mutex);
+        restart = false;
+        mutex.unlock();
+    }
+}
+</pre></div>
+</div>
+<p>Once we’re done with all the iterations, we call <code class="xref py py-func docutils literal"><span class="pre">QWaitCondition.wait()</span></code> to put the thread to sleep by calling, unless <code class="docutils literal"><span class="pre">restart</span></code> is <code class="docutils literal"><span class="pre">true</span></code> . There’s no use in keeping a worker thread looping indefinitely while there’s nothing to do.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">uint</span> <span class="n">RenderThread</span><span class="p">::</span><span class="n">rgbFromWaveLength</span><span class="p">(</span><span class="n">double</span> <span class="n">wave</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">double</span> <span class="n">r</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">g</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">380.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">440.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">440.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">440.0</span> <span class="o">-</span> <span class="mf">380.0</span><span class="p">);</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">440.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">490.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">440.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">490.0</span> <span class="o">-</span> <span class="mf">440.0</span><span class="p">);</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">490.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">510.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">510.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">510.0</span> <span class="o">-</span> <span class="mf">490.0</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">510.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">580.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">510.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">580.0</span> <span class="o">-</span> <span class="mf">510.0</span><span class="p">);</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">580.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">645.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">645.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">645.0</span> <span class="o">-</span> <span class="mf">580.0</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;=</span> <span class="mf">645.0</span> <span class="o">&amp;&amp;</span> <span class="n">wave</span> <span class="o">&lt;=</span> <span class="mf">780.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&gt;</span> <span class="mf">700.0</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">+</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="p">(</span><span class="mf">780.0</span> <span class="o">-</span> <span class="n">wave</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">780.0</span> <span class="o">-</span> <span class="mf">700.0</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wave</span> <span class="o">&lt;</span>  <span class="mf">420.0</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">+</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="p">(</span><span class="n">wave</span> <span class="o">-</span> <span class="mf">380.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">420.0</span> <span class="o">-</span> <span class="mf">380.0</span><span class="p">);</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="nb">pow</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">);</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="nb">pow</span><span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">);</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="nb">pow</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">qRgb</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="mi">255</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="mi">255</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="mi">255</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">rgbFromWaveLength()</span></code> function is a helper function that converts a wave length to a RGB value compatible with 32-bit <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> s. It is called from the constructor to initialize the <code class="docutils literal"><span class="pre">colormap</span></code> array with pleasing colors.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mandelbrotwidget-class-definition">
+<span id="id4"></span><h2>MandelbrotWidget Class Definition<a class="headerlink" href="#mandelbrotwidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MandelbrotWidget</span></code> class uses <code class="docutils literal"><span class="pre">RenderThread</span></code> to draw the Mandelbrot set on screen. Here’s the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MandelbrotWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MandelbrotWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">keyPressEvent</span><span class="p">(</span><span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="c1">#if QT_CONFIG(wheelevent)</span>
+    <span class="n">void</span> <span class="n">wheelEvent</span><span class="p">(</span><span class="n">QWheelEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="c1">#endif</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">updatePixmap</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">image</span><span class="p">,</span> <span class="n">double</span> <span class="n">scaleFactor</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">zoom</span><span class="p">(</span><span class="n">double</span> <span class="n">zoomFactor</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">scroll</span><span class="p">(</span><span class="nb">int</span> <span class="n">deltaX</span><span class="p">,</span> <span class="nb">int</span> <span class="n">deltaY</span><span class="p">);</span>
+
+    <span class="n">RenderThread</span> <span class="n">thread</span><span class="p">;</span>
+    <span class="n">QPixmap</span> <span class="n">pixmap</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">pixmapOffset</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">lastDragPos</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">centerX</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">centerY</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">pixmapScale</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">curScale</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The widget reimplements many event handlers from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . In addition, it has an <code class="docutils literal"><span class="pre">updatePixmap()</span></code> slot that we’ll connect to the worker thread’s <code class="docutils literal"><span class="pre">renderedImage()</span></code> signal to update the display whenever we receive new data from the thread.</p>
+<p>Among the private variables, we have <code class="docutils literal"><span class="pre">thread</span></code> of type <code class="docutils literal"><span class="pre">RenderThread</span></code> and <code class="docutils literal"><span class="pre">pixmap</span></code> , which contains the last rendered image.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mandelbrotwidget-class-implementation">
+<span id="id5"></span><h2>MandelbrotWidget Class Implementation<a class="headerlink" href="#mandelbrotwidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">double</span> <span class="n">DefaultCenterX</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.637011</span><span class="n">f</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">double</span> <span class="n">DefaultCenterY</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0395159</span><span class="n">f</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">double</span> <span class="n">DefaultScale</span> <span class="o">=</span> <span class="mf">0.00403897</span><span class="n">f</span><span class="p">;</span>
+
+<span class="n">const</span> <span class="n">double</span> <span class="n">ZoomInFactor</span> <span class="o">=</span> <span class="mf">0.8</span><span class="n">f</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">double</span> <span class="n">ZoomOutFactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ZoomInFactor</span><span class="p">;</span>
+<span class="n">const</span> <span class="nb">int</span> <span class="n">ScrollStep</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The implementation starts with a few contants that we’ll need later on.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">MandelbrotWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">centerX</span> <span class="o">=</span> <span class="n">DefaultCenterX</span><span class="p">;</span>
+    <span class="n">centerY</span> <span class="o">=</span> <span class="n">DefaultCenterY</span><span class="p">;</span>
+    <span class="n">pixmapScale</span> <span class="o">=</span> <span class="n">DefaultScale</span><span class="p">;</span>
+    <span class="n">curScale</span> <span class="o">=</span> <span class="n">DefaultScale</span><span class="p">;</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">renderedImage</span><span class="p">(</span><span class="n">QImage</span><span class="p">,</span><span class="n">double</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">updatePixmap</span><span class="p">(</span><span class="n">QImage</span><span class="p">,</span><span class="n">double</span><span class="p">)));</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Mandelbrot&quot;</span><span class="p">));</span>
+<span class="c1">#ifndef QT_NO_CURSOR</span>
+    <span class="n">setCursor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">CrossCursor</span><span class="p">);</span>
+<span class="c1">#endif</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">550</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The interesting part of the constructor is the <code class="xref py py-func docutils literal"><span class="pre">qRegisterMetaType()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QObject.connect()</span></code> calls. Let’s start with the <code class="xref py py-func docutils literal"><span class="pre">QObject.connect()</span></code> call.</p>
+<p>Although it looks like a standard signal-slot connection between two <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> s, because the signal is emitted in a different thread than the receiver lives in, the connection is effectively a <code class="xref py py-attr docutils literal"><span class="pre">queued</span> <span class="pre">connection</span></code> . These connections are asynchronous (i.e., non-blocking), meaning that the slot will be called at some point after the <code class="docutils literal"><span class="pre">emit</span></code> statement. What’s more, the slot will be invoked in the thread in which the receiver lives. Here, the signal is emitted in the worker thread, and the slot is executed in the GUI thread when control returns to the event loop.</p>
+<p>With queued connections, Qt must store a copy of the arguments that were passed to the signal so that it can pass them to the slot later on. Qt knows how to take of copy of many C++ and Qt types, but <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> isn’t one of them. We must therefore call the template function <code class="xref py py-func docutils literal"><span class="pre">qRegisterMetaType()</span></code> before we can use <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> as parameter in queued connections.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">rect</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Rendering initial image, please wait...&quot;</span><span class="p">));</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> , we start by filling the background with black. If we have nothing yet to paint (<code class="docutils literal"><span class="pre">pixmap</span></code> is null), we print a message on the widget asking the user to be patient and return from the function immediately.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">curScale</span> <span class="o">==</span> <span class="n">pixmapScale</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">pixmapOffset</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">double</span> <span class="n">scaleFactor</span> <span class="o">=</span> <span class="n">pixmapScale</span> <span class="o">/</span> <span class="n">curScale</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">newWidth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">*</span> <span class="n">scaleFactor</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">newHeight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">*</span> <span class="n">scaleFactor</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">newX</span> <span class="o">=</span> <span class="n">pixmapOffset</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">newWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">newY</span> <span class="o">=</span> <span class="n">pixmapOffset</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">newHeight</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">();</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scaleFactor</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="p">);</span>
+    <span class="n">QRectF</span> <span class="n">exposed</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span><span class="o">.</span><span class="n">inverted</span><span class="p">()</span><span class="o">.</span><span class="n">mapRect</span><span class="p">(</span><span class="n">rect</span><span class="p">())</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">exposed</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">,</span> <span class="n">exposed</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the pixmap has the right scale factor, we draw the pixmap directly onto the widget. Otherwise, we scale and translate the <a class="reference internal" href="qtquick-visualcanvas-topic.html#coordinate-system"><span class="std std-ref">coordinate system</span></a> before we draw the pixmap. By reverse mapping the widget’s rectangle using the scaled painter matrix, we also make sure that only the exposed areas of the pixmap are drawn. The calls to <code class="xref py py-func docutils literal"><span class="pre">QPainter.save()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QPainter.restore()</span></code> make sure that any painting performed afterwards uses the standard coordinate system.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QString</span> <span class="n">text</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Use mouse wheel or the &#39;+&#39; and &#39;-&#39; keys to zoom. &quot;</span>
+                      <span class="s2">&quot;Press and hold left mouse button to scroll.&quot;</span><span class="p">);</span>
+    <span class="n">QFontMetrics</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">();</span>
+    <span class="nb">int</span> <span class="n">textWidth</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">((</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">textWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">textWidth</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="n">metrics</span><span class="o">.</span><span class="n">lineSpacing</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">((</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">textWidth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">metrics</span><span class="o">.</span><span class="n">leading</span><span class="p">()</span> <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">(),</span> <span class="n">text</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At the end of the paint event handler, we draw a text string and a semi-transparent rectangle on top of the fractal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">centerX</span><span class="p">,</span> <span class="n">centerY</span><span class="p">,</span> <span class="n">curScale</span><span class="p">,</span> <span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whenever the user resizes the widget, we call <code class="docutils literal"><span class="pre">render()</span></code> to start generating a new image, with the same <code class="docutils literal"><span class="pre">centerX</span></code> , <code class="docutils literal"><span class="pre">centerY</span></code> , and <code class="docutils literal"><span class="pre">curScale</span></code> parameters but with the new widget size.</p>
+<p>Notice that we rely on <code class="docutils literal"><span class="pre">resizeEvent()</span></code> being automatically called by Qt when the widget is shown the first time to generate the image the very first time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Plus</span><span class="p">:</span>
+        <span class="n">zoom</span><span class="p">(</span><span class="n">ZoomInFactor</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Minus</span><span class="p">:</span>
+        <span class="n">zoom</span><span class="p">(</span><span class="n">ZoomOutFactor</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Left</span><span class="p">:</span>
+        <span class="n">scroll</span><span class="p">(</span><span class="o">-</span><span class="n">ScrollStep</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Right</span><span class="p">:</span>
+        <span class="n">scroll</span><span class="p">(</span><span class="o">+</span><span class="n">ScrollStep</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Down</span><span class="p">:</span>
+        <span class="n">scroll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">ScrollStep</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Up</span><span class="p">:</span>
+        <span class="n">scroll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="n">ScrollStep</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">QWidget</span><span class="p">::</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The key press event handler provides a few keyboard bindings for the benefit of users who don’t have a mouse. The <code class="docutils literal"><span class="pre">zoom()</span></code> and <code class="docutils literal"><span class="pre">scroll()</span></code> functions will be covered later.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">wheelEvent</span><span class="p">(</span><span class="n">QWheelEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">numDegrees</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">delta</span><span class="p">()</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">numSteps</span> <span class="o">=</span> <span class="n">numDegrees</span> <span class="o">/</span> <span class="mf">15.0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">zoom</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">ZoomInFactor</span><span class="p">,</span> <span class="n">numSteps</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The wheel event handler is reimplemented to make the mouse wheel control the zoom level. <code class="xref py py-func docutils literal"><span class="pre">QWheelEvent.delta()</span></code> returns the angle of the wheel mouse movement, in eights of a degree. For most mice, one wheel step corresponds to 15 degrees. We find out how many mouse steps we have and determine the zoom factor in consequence. For example, if we have two wheel steps in the positive direction (i.e., +30 degrees), the zoom factor becomes <code class="docutils literal"><span class="pre">ZoomInFactor</span></code> to the second power, i.e. 0.8 * 0.8 = 0.64.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span>
+        <span class="n">lastDragPos</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user presses the left mouse button, we store the mouse pointer position in <code class="docutils literal"><span class="pre">lastDragPos</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pixmapOffset</span> <span class="o">+=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastDragPos</span><span class="p">;</span>
+        <span class="n">lastDragPos</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user moves the mouse pointer while the left mouse button is pressed, we adjust <code class="docutils literal"><span class="pre">pixmapOffset</span></code> to paint the pixmap at a shifted position and call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to force a repaint.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pixmapOffset</span> <span class="o">+=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastDragPos</span><span class="p">;</span>
+        <span class="n">lastDragPos</span> <span class="o">=</span> <span class="n">QPoint</span><span class="p">();</span>
+
+        <span class="nb">int</span> <span class="n">deltaX</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">pixmapOffset</span><span class="o">.</span><span class="n">x</span><span class="p">();</span>
+        <span class="nb">int</span> <span class="n">deltaY</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">pixmapOffset</span><span class="o">.</span><span class="n">y</span><span class="p">();</span>
+        <span class="n">scroll</span><span class="p">(</span><span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the left mouse button is released, we update <code class="docutils literal"><span class="pre">pixmapOffset</span></code> just like we did on a mouse move and we reset <code class="docutils literal"><span class="pre">lastDragPos</span></code> to a default value. Then, we call <code class="docutils literal"><span class="pre">scroll()</span></code> to render a new image for the new position. (Adjusting <code class="docutils literal"><span class="pre">pixmapOffset</span></code> isn’t sufficient because areas revealed when dragging the pixmap are drawn in black.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MandelbrotWidget::updatePixmap(const QImage &amp;image, double scaleFactor)
+{
+    if (!lastDragPos.isNull())
+        return;
+
+    pixmap = QPixmap::fromImage(image);
+    pixmapOffset = QPoint();
+    lastDragPos = QPoint();
+    pixmapScale = scaleFactor;
+    update();
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">updatePixmap()</span></code> slot is invoked when the worker thread has finished rendering an image. We start by checking whether a drag is in effect and do nothing in that case. In the normal case, we store the image in <code class="docutils literal"><span class="pre">pixmap</span></code> and reinitialize some of the other members. At the end, we call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to refresh the display.</p>
+<p>At this point, you might wonder why we use a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> for the parameter and a <a class="reference internal" href="../PySide2/QtGui/QPixmap.html#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> for the data member. Why not stick to one type? The reason is that <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> is the only class that supports direct pixel manipulation, which we need in the worker thread. On the other hand, before an image can be drawn on screen, it must be converted into a pixmap. It’s better to do the conversion once and for all here, rather than in <code class="docutils literal"><span class="pre">paintEvent()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">zoom</span><span class="p">(</span><span class="n">double</span> <span class="n">zoomFactor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">curScale</span> <span class="o">*=</span> <span class="n">zoomFactor</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">centerX</span><span class="p">,</span> <span class="n">centerY</span><span class="p">,</span> <span class="n">curScale</span><span class="p">,</span> <span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">zoom()</span></code> , we recompute <code class="docutils literal"><span class="pre">curScale</span></code> . Then we call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to draw a scaled pixmap, and we ask the worker thread to render a new image corresponding to the new <code class="docutils literal"><span class="pre">curScale</span></code> value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MandelbrotWidget</span><span class="p">::</span><span class="n">scroll</span><span class="p">(</span><span class="nb">int</span> <span class="n">deltaX</span><span class="p">,</span> <span class="nb">int</span> <span class="n">deltaY</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">centerX</span> <span class="o">+=</span> <span class="n">deltaX</span> <span class="o">*</span> <span class="n">curScale</span><span class="p">;</span>
+    <span class="n">centerY</span> <span class="o">+=</span> <span class="n">deltaY</span> <span class="o">*</span> <span class="n">curScale</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">centerX</span><span class="p">,</span> <span class="n">centerY</span><span class="p">,</span> <span class="n">curScale</span><span class="p">,</span> <span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">scroll()</span></code> is similar to <code class="docutils literal"><span class="pre">zoom()</span></code> , except that the affected parameters are <code class="docutils literal"><span class="pre">centerX</span></code> and <code class="docutils literal"><span class="pre">centerY</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id6"></span><h2>The main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The application’s multithreaded nature has no impact on its <code class="docutils literal"><span class="pre">main()</span></code> function, which is as simple as usual:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">MandelbrotWidget</span> <span class="n">widget</span><span class="p">;</span>
+    <span class="n">widget</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mandelbrotwidget-cpp-example-file">
+<h1>mandelbrotwidget.cpp Example File<a class="headerlink" href="#mandelbrotwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mandelbrotwidget-h-example-file">
+<h1>mandelbrotwidget.h Example File<a class="headerlink" href="#mandelbrotwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="renderthread-cpp-example-file">
+<h1>renderthread.cpp Example File<a class="headerlink" href="#renderthread-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="renderthread-h-example-file">
+<h1>renderthread.h Example File<a class="headerlink" href="#renderthread-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mandelbrot-pro-example-file">
+<h1>mandelbrot.pro Example File<a class="headerlink" href="#mandelbrot-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

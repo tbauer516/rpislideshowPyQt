@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QGridLayout, QLabel
-from PyQt5.QtSvg import QSvgWidget
+from PySide2.QtWidgets import QGridLayout, QLabel
+from PySide2.QtSvg import QSvgWidget
 
 class Forecast:
 

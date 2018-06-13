@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Direct3D 12 Adaptation &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Direct3D 12 Adaptation</a><ul>
+<li><a class="reference internal" href="#motivation">Motivation</a></li>
+<li><a class="reference internal" href="#graphics-adapters">Graphics Adapters</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li><a class="reference internal" href="#render-loops">Render Loops</a></li>
+<li><a class="reference internal" href="#renderer">Renderer</a></li>
+<li><a class="reference internal" href="#shader-effects">Shader Effects</a></li>
+<li><a class="reference internal" href="#multisample-render-targets">Multisample Render Targets</a></li>
+<li><a class="reference internal" href="#semi-transparent-windows">Semi-transparent Windows</a></li>
+<li><a class="reference internal" href="#mipmaps">Mipmaps</a></li>
+<li><a class="reference internal" href="#image-formats">Image Formats</a></li>
+<li><a class="reference internal" href="#unsupported-features">Unsupported Features</a></li>
+<li><a class="reference internal" href="#related-apis">Related APIs</a></li>
+<li><a class="reference internal" href="#advanced-configuration">Advanced Configuration</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-direct3d-12-adaptation">
+<span id="id1"></span><h1>Qt Quick Direct3D 12 Adaptation<a class="headerlink" href="#qt-quick-direct3d-12-adaptation" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>The Direct3D 12 adaptation for Windows 10 (both Win32 (<code class="docutils literal"><span class="pre">windows</span></code> platform plugin) and UWP (<code class="docutils literal"><span class="pre">winrt</span></code> platform plugin)) is shipped as a dynamically loaded plugin. It will not be functional on earlier Windows versions. The building of the plugin is enabled automatically whenever the necessary D3D and DXGI develpoment files are present. In practice this currently means Visual Studio 2015 and newer.</p>
+<p>The adaptation is available both in normal, OpenGL-enabled Qt builds and also when Qt was configured with <code class="docutils literal"><span class="pre">-no-opengl</span></code> . However, it is never the default, meaning the user or the application has to explicitly request it by setting the <code class="docutils literal"><span class="pre">QT_QUICK_BACKEND</span></code> environment variable to <code class="docutils literal"><span class="pre">d3d12</span></code> or by calling <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.setSceneGraphBackend()</span></code> .</p>
+</div></blockquote>
+<div class="section" id="motivation">
+<span id="id2"></span><h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>This experimental adaptation is the first Qt Quick backend focusing on a modern, lower-level graphics API in combination with a windowing system interface different from the traditional approaches used in combination with OpenGL.</p>
+<p>It also allows better integration with Windows, Direct3D being the primary vendor-supported solution. This means that there are fewer problems anticipated with drivers, operations like window resizes, and special events like graphics device loss caused by device resets or graphics driver updates.</p>
+<p>Performance-wise the general expectation is a somewhat lower CPU usage compared to OpenGL due to lower driver overhead, and a higher GPU utilization with less wasted idle time. The backend does not heavily utilize threads yet, which means there are opportunities for further improvements in the future, for example to further optimize image loading.</p>
+<p>The D3D12 backend also introduces support for pre-compiled shaders. All the backend’s own shaders (used by the built-in materials on which the Rectangle, Image, Text, etc. QML types are built) are compiled to D3D shader bytecode when compiling Qt. Applications using <span class="xref std std-ref">ShaderEffect</span> items can chose to ship bytecode either in regular files or via the Qt resource system, or use HLSL source strings. Unlike OpenGL, the compilation for the latter is properly threaded, meaning shader compilation will not block the application and its user interface.</p>
+</div></blockquote>
+</div>
+<div class="section" id="graphics-adapters">
+<span id="id3"></span><h2>Graphics Adapters<a class="headerlink" href="#graphics-adapters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The plugin does not necessarily require hardware acceleration. Using WARP, the Direct3D software rasterizer, is also an option. By default the first adapter providing hardware acceleration is chosen. To override this, in order to use another graphics adapter or to force the usage of the software rasterizer, set the environment variable <code class="docutils literal"><span class="pre">QT_D3D_ADAPTER_INDEX</span></code> to the index of the adapter. The discovered adapters are printed at startup when <code class="docutils literal"><span class="pre">QSG_INFO</span></code> or the logging category <code class="docutils literal"><span class="pre">qt.scenegraph.general</span></code> is enabled.</div></blockquote>
+</div>
+<div class="section" id="troubleshooting">
+<span id="id4"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>When encountering issues, always set the <code class="docutils literal"><span class="pre">QSG_INFO</span></code> and <code class="docutils literal"><span class="pre">QT_D3D_DEBUG</span></code> environment variables to 1 in order to get debug and warning messages printed on the debug output. The latter enables the Direct3D debug layer. Note that the debug layer should not be enabled in production use since it can significantly impact performance (CPU load) due to increased API overhead.</div></blockquote>
+</div>
+<div class="section" id="render-loops">
+<span id="id5"></span><h2>Render Loops<a class="headerlink" href="#render-loops" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>By default the D3D12 adaptation uses a single-threaded render loop similar to OpenGL’s <code class="docutils literal"><span class="pre">windows</span></code> render loop. There is also a threaded variant available, that can be requested by setting the <code class="docutils literal"><span class="pre">QSG_RENDER_LOOP</span></code> environment variable to <code class="docutils literal"><span class="pre">threaded</span></code> . However, due to conceptual limitations in DXGI, the windowing system interface, the threaded loop is prone to deadlocks when multiple <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> or <a class="reference internal" href="../PySide2/QtQuick/QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> instances are shown. Therefore the default is the single-threaded loop for the time being. This means that with the D3D12 backend applications are expected to move their work from the main (GUI) thread out to worker threads, instead of expecting Qt to keep the GUI thread responsive and suitable for heavy, blocking operations.</p>
+<p>See the <a class="reference internal" href="qtquick-visualcanvas-scenegraph.html#qt-quick-scene-graph"><span class="std std-ref">Scene Graph page</span></a> for more information on render loops and the MSDN page for DXGI regarding the issues with multithreading.</p>
+</div></blockquote>
+</div>
+<div class="section" id="renderer">
+<span id="id6"></span><h2>Renderer<a class="headerlink" href="#renderer" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The scenegraph renderer in the D3D12 adaptation does not currently perform any batching. This is less of an issue, unlike OpenGL, because state changes are not presenting any problems in the first place. The simpler renderer logic can also lead to lower CPU overhead in some cases. The trade-offs between the various approaches are currently under research.</div></blockquote>
+</div>
+<div class="section" id="shader-effects">
+<span id="id7"></span><h2>Shader Effects<a class="headerlink" href="#shader-effects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">ShaderEffect</span> QML type is fully functional with the D3D12 adaptation as well. However, the interpretation of the fragmentShader and vertexShader properties is different than with OpenGL.</p>
+<p>With D3D12, these strings can either be an URL for a local file or a file in the resource system, or a HLSL source string. The former indicates that the file in question contains pre-compiled D3D shader bytecode generated by the <code class="docutils literal"><span class="pre">fxc</span></code> tool, or, alternatively, HLSL source code. The type of the file is detected automatically. This means that the D3D12 backend supports all options from <span class="xref std std-ref">GraphicsInfo</span> .shaderCompilationType and <span class="xref std std-ref">GraphicsInfo</span> .shaderSourceType.</p>
+<p>Unlike OpenGL, there is a <a class="reference internal" href="../PySide2/QtCore/QFileSelector.html#PySide2.QtCore.QFileSelector" title="PySide2.QtCore.QFileSelector"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFileSelector</span></code></a> with the extra selector <code class="docutils literal"><span class="pre">hlsl</span></code> used whenever opening a file. This allows easy creation of <span class="xref std std-ref">ShaderEffect</span> items that are functional across both backends, for example by placing the GLSL source code into <code class="docutils literal"><span class="pre">shaders/effect.frag</span></code> , the HLSL source code or - preferably - pre-compiled bytecode into <code class="docutils literal"><span class="pre">shaders/+hlsl/effect.frag</span></code> , while simply writing <code class="docutils literal"><span class="pre">fragmentShader:</span> <span class="pre">&quot;qrc:shaders/effect.frag&quot;</span></code> in QML.</p>
+<p>See the <span class="xref std std-ref">ShaderEffect</span> documentation for more details.</p>
+</div></blockquote>
+</div>
+<div class="section" id="multisample-render-targets">
+<span id="id8"></span><h2>Multisample Render Targets<a class="headerlink" href="#multisample-render-targets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The Direct3D 12 adaptation ignores the <a class="reference internal" href="../PySide2/QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> set on the <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> or <a class="reference internal" href="../PySide2/QtQuick/QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> (or set via <code class="xref py py-func docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> ), with two exceptions: <code class="xref py py-func docutils literal"><span class="pre">QSurfaceFormat.samples()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QSurfaceFormat.alphaBufferSize()</span></code> are still taken into account. When the samples value is greater than 1, multisample offscreen render targets will be created with the specified sample count and a quality of the maximum supported quality level. The backend automatically performs resolving into the non-multisample swapchain buffers after each frame.</div></blockquote>
+</div>
+<div class="section" id="semi-transparent-windows">
+<span id="id9"></span><h2>Semi-transparent Windows<a class="headerlink" href="#semi-transparent-windows" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When the alpha channel is enabled either via <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.setDefaultAlphaBuffer()</span></code> or by setting alphaBufferSize to a non-zero value in the window’s <a class="reference internal" href="../PySide2/QtGui/QSurfaceFormat.html#PySide2.QtGui.QSurfaceFormat" title="PySide2.QtGui.QSurfaceFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QSurfaceFormat</span></code></a> or in the global format managed by <code class="xref py py-func docutils literal"><span class="pre">QSurfaceFormat.setDefaultFormat()</span></code> , the D3D12 backend will create a swapchain for composition and go through DirectComposition since the flip model swapchain (which is mandatory) would not support transparency otherwise.</p>
+<p>It is therefore important not to unneccessarily request an alpha channel. When the alphaBufferSize is 0 or the default -1, all these extra steps can be avoided and the traditional window-based swapchain is sufficient.</p>
+<p>This is not relevant on WinRT because there the backend always uses a composition swapchain which is associated with the ISwapChainPanel that backs <a class="reference internal" href="../PySide2/QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> on that platform.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mipmaps">
+<span id="id10"></span><h2>Mipmaps<a class="headerlink" href="#mipmaps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Mipmap generation is supported and handled transparently to the applications via a built-in compute shader, but is experimental and only supports power-of-two images at the moment. Textures of other size will work too, but this involves a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> -based scaling on the CPU first. Therefore avoid enabling mipmapping for NPOT images whenever possible.</div></blockquote>
+</div>
+<div class="section" id="image-formats">
+<span id="id11"></span><h2>Image Formats<a class="headerlink" href="#image-formats" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>When creating textures via the C++ scenegraph APIs like <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.createTextureFromImage()</span></code> , 32-bit formats will not involve any conversion, they will map directly to the corresponding <code class="docutils literal"><span class="pre">R8G8B8A8_UNORM</span></code> or <code class="docutils literal"><span class="pre">B8G8R8A8_UNORM</span></code> format. Everything else will trigger a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> -based format conversion on the CPU first.</div></blockquote>
+</div>
+<div class="section" id="unsupported-features">
+<span id="id12"></span><h2>Unsupported Features<a class="headerlink" href="#unsupported-features" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Particles and some other OpenGL-dependent utilities, like <a class="reference internal" href="../PySide2/QtQuick/QQuickFramebufferObject.html#PySide2.QtQuick.QQuickFramebufferObject" title="PySide2.QtQuick.QQuickFramebufferObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickFramebufferObject</span></code></a> , are not currently supported.</p>
+<p>Like with the <a class="reference internal" href="qtquick-visualcanvas-adaptations-software.html#qt-quick-software-adaptation"><span class="std std-ref">Software adaptation</span></a> , text is always rendered using the native method. Distance field-based text rendering is not currently implemented.</p>
+<p>The shader sources in the Qt Graphical Effects module have not been ported to any format other than the OpenGL 2.0 compatible one, meaning the QML types provided by that module are not currently functional with the D3D12 backend.</p>
+<p>Texture atlases are not currently in use.</p>
+<p>The renderer may lack support for certain minor features, for example drawing points and lines with a width other than 1.</p>
+<p>Custom Qt Quick items using custom scenegraph nodes can be problematic. Materials are inherently tied to the graphics API. Therefore only items using the utility rectangle and image nodes are functional across all adaptations.</p>
+<p><a class="reference internal" href="../PySide2/QtQuickWidgets/QQuickWidget.html#PySide2.QtQuickWidgets.QQuickWidget" title="PySide2.QtQuickWidgets.QQuickWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuickWidgets.QQuickWidget</span></code></a> and its underlying OpenGL-based compositing architecture is not supported. If mixing with <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> -based user interfaces is desired, use <code class="xref py py-func docutils literal"><span class="pre">QWidget.createWindowContainer()</span></code> to embed the native window of the <a class="reference internal" href="../PySide2/QtQuick/QQuickWindow.html#PySide2.QtQuick.QQuickWindow" title="PySide2.QtQuick.QQuickWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickWindow</span></code></a> or <a class="reference internal" href="../PySide2/QtQuick/QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> .</p>
+<p>Finally, rendering via <a class="reference internal" href="../PySide2/QtQuick/QSGEngine.html#PySide2.QtQuick.QSGEngine" title="PySide2.QtQuick.QSGEngine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGEngine</span></code></a> and <a class="reference internal" href="../PySide2/QtQuick/QSGAbstractRenderer.html#PySide2.QtQuick.QSGAbstractRenderer" title="PySide2.QtQuick.QSGAbstractRenderer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGAbstractRenderer</span></code></a> is not feasible with the D3D12 adaptation at the moment.</p>
+</div></blockquote>
+</div>
+<div class="section" id="related-apis">
+<span id="id13"></span><h2>Related APIs<a class="headerlink" href="#related-apis" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To integrate custom Direct3D 12 rendering, use <code class="xref py py-class docutils literal"><span class="pre">QSGRenderNode</span></code> in combination with <code class="xref py py-class docutils literal"><span class="pre">QSGRendererInterface</span></code> . This approach does not rely on OpenGL contexts or API specifics like framebuffers, and allows exposing the graphics device and command buffer from the adaptation. It is not necessarily suitable for easy integration of all types of content, in particular true 3D, so it will likely get complemented by an alternative to <a class="reference internal" href="../PySide2/QtQuick/QQuickFramebufferObject.html#PySide2.QtQuick.QQuickFramebufferObject" title="PySide2.QtQuick.QQuickFramebufferObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickFramebufferObject</span></code></a> in future releases.</p>
+<p>To perform runtime decisions based on the adaptation in use, use <code class="xref py py-class docutils literal"><span class="pre">QSGRendererInterface</span></code> from C++ and <span class="xref std std-ref">GraphicsInfo</span> from QML. They can also be used to check the level of shader support (shading language, compilation approach).</p>
+<p>When creating custom items, use the new <code class="xref py py-class docutils literal"><span class="pre">QSGRectangleNode</span></code> and <code class="xref py py-class docutils literal"><span class="pre">QSGImageNode</span></code> classes. These replace the now deprecated <a class="reference internal" href="../PySide2/QtQuick/QSGSimpleRectNode.html#PySide2.QtQuick.QSGSimpleRectNode" title="PySide2.QtQuick.QSGSimpleRectNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGSimpleRectNode</span></code></a> and <a class="reference internal" href="../PySide2/QtQuick/QSGSimpleTextureNode.html#PySide2.QtQuick.QSGSimpleTextureNode" title="PySide2.QtQuick.QSGSimpleTextureNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGSimpleTextureNode</span></code></a> . Unlike their predecessors, the new classes are interfaces, and implementations are created via the factory functions <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.createRectangleNode()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.createImageNode()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="advanced-configuration">
+<span id="id14"></span><h2>Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The D3D12 adaptation can keep multiple frames in flight, similarly to modern game engines. This is somewhat different from the traditional render - swap - wait for vsync model and allows better GPU utilization at the expense of higher resource usage. This means that the renderer will be a number of frames ahead of what is displayed on the screen.</p>
+<p>For a discussion of flip model swap chains and the typical configuration parameters, refer to this article.</p>
+<p>Vertical synchronization is always enabled, meaning Present() is invoked with an interval of 1.</p>
+<p>The configuration can be changed by setting the following environment variables:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">QT_D3D_BUFFER_COUNT</span></code> - The number of swap chain buffers in range 2 - 4. The default value is 3.</li>
+<li><code class="docutils literal"><span class="pre">QT_D3D_FRAME_COUNT</span></code> - The number of frames prepared without blocking in range 1 - 4. Note that Present will start blocking after queuing 3 frames (regardless of <code class="docutils literal"><span class="pre">QT_D3D_BUFFER_COUNT</span></code>), unless the waitable object is in use. Note that every additional frame increases GPU resource usage since geometry and constant buffer data will have to be duplicated, and involves more bookkeeping on the CPU side. The default value is 2.</li>
+<li><code class="docutils literal"><span class="pre">QT_D3D_WAITABLE_SWAP_CHAIN_MAX_LATENCY</span></code> - When set to a value between 1 and 16, the frame latency is set to the specified value. This changes the limit for Present() and will trigger a wait for an available swap chain buffer when beginning each frame. Refer to the article above for a detailed discussion. This is considered experimental for now and the default value is 0 (disabled).</li>
+<li><code class="docutils literal"><span class="pre">QT_D3D_BLOCKING_PRESENT</span></code> - When set to a non-zero value, there will be CPU-side wait for the GPU to finish its work after each call to Present. This effectively kills all parallelism but makes the behavior resemble the traditional swap-blocks-for-vsync model, and can therefore be useful in some special cases. This is not the same as setting the frame count to 1 because that still avoids blocking after Present, and may block only when starting to prepare the next frame (or may not block at all depending on the time gap between the frames). By default blocking present is disabled.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

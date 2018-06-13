@@ -1,0 +1,1307 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Icons Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Icons Example</a><ul>
+<li><a class="reference internal" href="#qicon-overview">QIcon Overview</a></li>
+<li><a class="reference internal" href="#overview-of-the-icons-application">Overview of the Icons Application</a></li>
+<li><a class="reference internal" href="#line-by-line-walkthrough">Line-by-Line Walkthrough</a></li>
+<li><a class="reference internal" href="#iconpreviewarea-class-definition">IconPreviewArea Class Definition</a></li>
+<li><a class="reference internal" href="#iconpreviewarea-class-implementation">IconPreviewArea Class Implementation</a></li>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#iconsizespinbox-class-definition">IconSizeSpinBox Class Definition</a></li>
+<li><a class="reference internal" href="#iconsizespinbox-class-implementation">IconSizeSpinBox Class Implementation</a></li>
+<li><a class="reference internal" href="#imagedelegate-class-definition">ImageDelegate Class Definition</a></li>
+<li><a class="reference internal" href="#imagedelegate-class-implementation">ImageDelegate Class Implementation</a></li>
+<li><a class="reference internal" href="#the-implementation-of-the-function-main">The Implementation of the Function main()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iconpreviewarea-cpp-example-file">iconpreviewarea.cpp Example File</a></li>
+<li><a class="reference internal" href="#iconpreviewarea-h-example-file">iconpreviewarea.h Example File</a></li>
+<li><a class="reference internal" href="#iconsizespinbox-cpp-example-file">iconsizespinbox.cpp Example File</a></li>
+<li><a class="reference internal" href="#iconsizespinbox-h-example-file">iconsizespinbox.h Example File</a></li>
+<li><a class="reference internal" href="#imagedelegate-cpp-example-file">imagedelegate.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagedelegate-h-example-file">imagedelegate.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#icons-pro-example-file">icons.pro Example File</a></li>
+<li><a class="reference internal" href="#designer-png-image-file">designer.png Image File</a></li>
+<li><a class="reference internal" href="#find-disabled-png-image-file">find_disabled.png Image File</a></li>
+<li><a class="reference internal" href="#find-normal-png-image-file">find_normal.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-off-128x128-png-image-file">monkey_off_128x128.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-off-16x16-png-image-file">monkey_off_16x16.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-off-32x32-png-image-file">monkey_off_32x32.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-off-64x64-png-image-file">monkey_off_64x64.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-on-128x128-png-image-file">monkey_on_128x128.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-on-16x16-png-image-file">monkey_on_16x16.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-on-32x32-png-image-file">monkey_on_32x32.png Image File</a></li>
+<li><a class="reference internal" href="#monkey-on-64x64-png-image-file">monkey_on_64x64.png Image File</a></li>
+<li><a class="reference internal" href="#qt-extended-16x16-png-image-file">qt_extended_16x16.png Image File</a></li>
+<li><a class="reference internal" href="#qt-extended-32x32-png-image-file">qt_extended_32x32.png Image File</a></li>
+<li><a class="reference internal" href="#qt-extended-48x48-png-image-file">qt_extended_48x48.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="icons-example">
+<span id="id1"></span><h1>Icons Example<a class="headerlink" href="#icons-example" title="Permalink to this headline">¶</a></h1>
+<p>Icons example shows how QIcon can generate pixmaps reflecting an icon’s state, mode and size</p>
+<blockquote>
+<div><p>The Icons example shows how <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> can generate pixmaps reflecting an icon’s state, mode and size.</p>
+<p>These pixmaps are generated from the set of pixmaps made available to the icon, and are used by Qt widgets to show an icon representing a particular action.</p>
+<p>Contents:</p>
+</div></blockquote>
+<div class="section" id="qicon-overview">
+<span id="id2"></span><h2>QIcon Overview<a class="headerlink" href="#qicon-overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> class provides scalable icons in different modes and states. An icon’s state and mode are depending on the intended use of the icon. Qt currently defines four modes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Mode</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QIcon.Normal</span></code></td>
+<td>Display the pixmap when the user is not interacting with the icon, but the functionality represented by the icon is available.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QIcon.Active</span></code></td>
+<td>Display the pixmap when the functionality represented by the icon is available and the user is interacting with the icon, for example, moving the mouse over it or clicking it.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-attr docutils literal"><span class="pre">QIcon.Disabled</span></code></td>
+<td>Display the pixmap when the functionality represented by the icon is not available.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-attr docutils literal"><span class="pre">QIcon.Selected</span></code></td>
+<td>Display the pixmap when the icon is selected.</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s states are <code class="xref py py-attr docutils literal"><span class="pre">QIcon.On</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Off</span></code> , which will display the pixmap when the widget is in the respective state. The most common usage of <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s states are when displaying checkable tool buttons or menu entries (see <code class="xref py py-func docutils literal"><span class="pre">QAbstractButton.setCheckable()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAction.setCheckable()</span></code> ). When a tool button or menu entry is checked, the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s state is <code class="xref py py-attr docutils literal"><span class="pre">On</span></code> , otherwise it’s <code class="xref py py-attr docutils literal"><span class="pre">Off</span></code> . You can, for example, use the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s states to display differing pixmaps depending on whether the tool button or menu entry is checked or not.</p>
+<p>A <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> can generate smaller, larger, active, disabled, and selected pixmaps from the set of pixmaps it is given. Such pixmaps are used by Qt widgets to show an icon representing a particular action.</p>
+</div></blockquote>
+</div>
+<div class="section" id="overview-of-the-icons-application">
+<span id="id3"></span><h2>Overview of the Icons Application<a class="headerlink" href="#overview-of-the-icons-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>With the Icons application you get a preview of an icon’s generated pixmaps reflecting its different states, modes and size.</p>
+<p>When an image is loaded into the application, it is converted into a pixmap and becomes a part of the set of pixmaps available to the icon. An image can be excluded from this set by checking off the related checkbox. The application provides a sub directory containing sets of images explicitly designed to illustrate how Qt renders an icon in different modes and states.</p>
+<p>The application allows you to manipulate the icon size with some predefined sizes and a spin box. The predefined sizes are style dependent, but most of the styles have the same values. Only the <span class="xref std std-ref">macOS</span> style differs by using 32 pixels instead of 16 pixels for toolbar buttons. You can navigate between the available styles using the View menu.</p>
+<p>The View menu also provide the option to make the application guess the icon state and mode from an image’s file name. The File menu provide the options of adding an image and removing all images. These last options are also available through a context menu that appears if you press the right mouse button within the table of image files. In addition, the File menu provide an Exit option, and the Help menu provide information about the example and about Qt.</p>
+<p>The screenshot above shows the application with one image file loaded. The Guess Image Mode/State is enabled and the style is Plastique.</p>
+<p>When <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> is provided with only one available pixmap, that pixmap is used for all the states and modes. In this case the pixmap’s icon mode is set to normal, and the generated pixmaps for the normal and active modes will look the same. But in disabled and selected mode, Qt will generate a slightly different pixmap.</p>
+<p>The next screenshot shows the application with an additional file loaded, providing <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> with two available pixmaps. Note that the new image file’s mode is set to disabled. When rendering the Disabled mode pixmaps, Qt will now use the new image. We can see the difference: The generated disabled pixmap in the first screenshot is slightly darker than the pixmap with the originally set disabled mode in the second screenshot.</p>
+<p>When Qt renders the icon’s pixmaps it searches through the set of available pixmaps following a particular algorithm. The algorithm is documented in <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> , but we will describe some particular cases below.</p>
+<p>In the screenshot above, we have set <code class="docutils literal"><span class="pre">monkey_on_32x32</span></code> to be an Active/On pixmap and <code class="docutils literal"><span class="pre">monkey_off_64x64</span></code> to be Normal/Off. To render the other six mode/state combinations, <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> uses the search algorithm described in the table below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="33%" />
+<col width="30%" />
+<col width="6%" />
+<col width="6%" />
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="2">Requested Pixmap</td>
+<td colspan="8">Preferred Alternatives (mode/state)</td>
+</tr>
+<tr class="row-even"><td>Mode</td>
+<td>State 1 2 3 4 5 6 7 8</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">Normal</td>
+<td>Off <strong>N0</strong> A0 N1 A1 D0 S0 D1 S1</td>
+<td><strong>N0</strong></td>
+<td>A0</td>
+<td>N1</td>
+<td>A1</td>
+<td>D0</td>
+<td>S0</td>
+<td>D1</td>
+<td>S1</td>
+</tr>
+<tr class="row-even"><td>On</td>
+<td>N1 <strong>A1</strong> N0 A0 D1 S1 D0 S0</td>
+<td><strong>A1</strong></td>
+<td>N0</td>
+<td>A0</td>
+<td>D1</td>
+<td>S1</td>
+<td>D0</td>
+<td>S0</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">Active</td>
+<td>Off A0 <strong>N0</strong> A1 N1 D0 S0 D1 S1</td>
+<td>A0</td>
+<td><strong>N0</strong></td>
+<td>A1</td>
+<td>N1</td>
+<td>D0</td>
+<td>S0</td>
+<td>D1</td>
+<td>S1</td>
+</tr>
+<tr class="row-even"><td>On</td>
+<td><strong>A1</strong> N1 A0 N0 D1 S1 D0 S0</td>
+<td>N1</td>
+<td>A0</td>
+<td>N0</td>
+<td>D1</td>
+<td>S1</td>
+<td>D0</td>
+<td>S0</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">Disabled</td>
+<td>Off D0 <strong>N0’</strong> A0’ D1 N1’ A1’ S0’ S1’</td>
+<td>D0</td>
+<td><strong>N0’</strong></td>
+<td>A0’</td>
+<td>D1</td>
+<td>N1’</td>
+<td>A1’</td>
+<td>S0’</td>
+<td>S1’</td>
+</tr>
+<tr class="row-even"><td>On</td>
+<td>D1 N1’ <strong>A1’</strong> D0 N0’ A0’ S1’ S0’</td>
+<td>N1’</td>
+<td><strong>A1’</strong></td>
+<td>D0</td>
+<td>N0’</td>
+<td>A0’</td>
+<td>S1’</td>
+<td>S0’</td>
+</tr>
+<tr class="row-odd"><td rowspan="2">Selected</td>
+<td>Off S0 <strong>N0’‘</strong> A0’’ S1 N1’’ A1’’ D0’’ D1’‘</td>
+<td>S0</td>
+<td><strong>N0’‘</strong></td>
+<td>A0’‘</td>
+<td>S1</td>
+<td>N1’‘</td>
+<td>A1’‘</td>
+<td>D0’‘</td>
+<td>D1’‘</td>
+</tr>
+<tr class="row-even"><td>On</td>
+<td>S1 N1’’ <strong>A1’‘</strong> S0 N0’’ A0’’ D1’’ D0’‘</td>
+<td>N1’‘</td>
+<td><strong>A1’‘</strong></td>
+<td>S0</td>
+<td>N0’‘</td>
+<td>A0’‘</td>
+<td>D1’‘</td>
+<td>D0’‘</td>
+</tr>
+</tbody>
+</table>
+<p>In the table, “0” and “1” stand for Off” and “On”, respectively. Single quotes indicates that <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> generates a disabled (“grayed out”) version of the pixmap; similarly, double quuote indicate that <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> generates a selected (“blued out”) version of the pixmap.</p>
+<p>The alternatives used in the screenshot above are shown in bold. For example, the Disabled/Off pixmap is derived by graying out the Normal/Off pixmap (<code class="docutils literal"><span class="pre">monkey_off_64x64</span></code> ).</p>
+<p>In the next screenshots, we loaded the whole set of monkey images. By checking or unchecking file names from the image list, we get different results:</p>
+<p>For any given mode/state combination, it is possible to specify several images at different resolutions. When rendering an icon, <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> will automatically pick the most suitable image and scale it down if necessary. ( <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> never scales up images, because this rarely looks good.)</p>
+<p>The screenshots below shows what happens when we provide <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> with three images (<code class="docutils literal"><span class="pre">qt_extended_16x16.png</span></code> , <code class="docutils literal"><span class="pre">qt_extended_32x32.png</span></code> , <code class="docutils literal"><span class="pre">qt_extended_48x48.png</span></code> ) and try to render the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> at various resolutions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="19%" />
+<col width="31%" />
+<col width="19%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>8 x 8</td>
+<td><strong>16 x 16</strong></td>
+<td>17 x 17</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>32 x 32</strong></td>
+<td>33 x 33</td>
+<td><strong>48 x 48</strong></td>
+<td>64 x 64</td>
+</tr>
+</tbody>
+</table>
+<p>For sizes up to 16 x 16, <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> uses <code class="docutils literal"><span class="pre">qt_extended_16x16.png</span></code> and scales it down if necessary. For sizes between 17 x 17 and 32 x 32, it uses <code class="docutils literal"><span class="pre">qt_extended_32x32.png</span></code> . For sizes above 32 x 32, it uses <code class="docutils literal"><span class="pre">qt_extended_48x48.png</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="line-by-line-walkthrough">
+<span id="id4"></span><h2>Line-by-Line Walkthrough<a class="headerlink" href="#line-by-line-walkthrough" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Icons example consists of four classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">MainWindow</span></code> inherits <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> and is the main application window.</li>
+<li><code class="docutils literal"><span class="pre">IconPreviewArea</span></code> is a custom widget that displays all combinations of states and modes for a given icon.</li>
+<li><code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> that lets the user enter icon sizes (e.g., “48 x 48”).</li>
+<li><code class="docutils literal"><span class="pre">ImageDelegate</span></code> is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> that provides comboboxes for letting the user set the mode and state associated with an image.</li>
+</ul>
+<p>We will start by reviewing the <code class="docutils literal"><span class="pre">IconPreviewArea</span></code> class before we take a look at the <code class="docutils literal"><span class="pre">MainWindow</span></code> class. Finally, we will review the <code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> and <code class="docutils literal"><span class="pre">ImageDelegate</span></code> classes.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iconpreviewarea-class-definition">
+<span id="id5"></span><h2>IconPreviewArea Class Definition<a class="headerlink" href="#iconpreviewarea-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>An <code class="docutils literal"><span class="pre">IconPreviewArea</span></code> widget consists of a group box containing a grid of <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> widgets displaying headers and pixmaps.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IconPreviewArea</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">IconPreviewArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">setIcon</span><span class="p">(</span><span class="n">const</span> <span class="n">QIcon</span> <span class="o">&amp;</span><span class="n">icon</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setSize</span><span class="p">(</span><span class="n">const</span> <span class="n">QSize</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+    <span class="n">static</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span><span class="o">&gt;</span> <span class="n">iconModes</span><span class="p">();</span>
+    <span class="n">static</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">iconStates</span><span class="p">();</span>
+    <span class="n">static</span> <span class="n">QStringList</span> <span class="n">iconModeNames</span><span class="p">();</span>
+    <span class="n">static</span> <span class="n">QStringList</span> <span class="n">iconStateNames</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">createHeaderLabel</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">createPixmapLabel</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">updatePixmapLabels</span><span class="p">();</span>
+
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">NumModes</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">NumStates</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">};</span>
+
+    <span class="n">QIcon</span> <span class="n">icon</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">stateLabels</span><span class="p">[</span><span class="n">NumStates</span><span class="p">];</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">modeLabels</span><span class="p">[</span><span class="n">NumModes</span><span class="p">];</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">pixmapLabels</span><span class="p">[</span><span class="n">NumModes</span><span class="p">][</span><span class="n">NumStates</span><span class="p">];</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">IconPreviewArea</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . It displays the generated pixmaps corresponding to an icon’s possible states and modes at a given size.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span><span class="o">&gt;</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModes</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Normal</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Active</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Selected</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStates</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Off</span><span class="p">,</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">On</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QStringList</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModeNames</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">QStringList</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Normal&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Active&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Disabled&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Selected&quot;</span><span class="p">)};</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QStringList</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStateNames</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">QStringList</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Off&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;On&quot;</span><span class="p">)};</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We would like the table columns to be in the order <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Normal</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Active</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Disabled</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Selected</span></code> and the rows in the order <code class="xref py py-attr docutils literal"><span class="pre">QIcon.Off</span></code> , <code class="xref py py-attr docutils literal"><span class="pre">QIcon.On</span></code> , which does not match the enumeration. The above code provides arrays allowing to map from enumeration value to row/column (by using <code class="xref py py-func docutils literal"><span class="pre">QVector.indexOf()</span></code> ) and back by using the array index and lists of the matching strings. Qt’s containers can be easily populated by using C++ 11 initializer lists. If the compiler does not provide that feature, a pattern like</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span><span class="o">&gt;</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModes</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">())</span>
+        <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Normal</span> <span class="o">&lt;&lt;</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Active</span> <span class="o">&lt;&lt;</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Disabled</span> <span class="o">&lt;&lt;</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Selected</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>can be used.</p>
+<p>We need two public functions to set the current icon and the icon’s size. In addition the class has three private functions: We use the <code class="docutils literal"><span class="pre">createHeaderLabel()</span></code> and <code class="docutils literal"><span class="pre">createPixmapLabel()</span></code> functions when constructing the preview area, and we need the <code class="docutils literal"><span class="pre">updatePixmapLabels()</span></code> function to update the preview area when the icon or the icon’s size has changed.</p>
+<p>The <code class="docutils literal"><span class="pre">NumModes</span></code> and <code class="docutils literal"><span class="pre">NumStates</span></code> constants reflect <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s number of currently defined modes and states.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iconpreviewarea-class-implementation">
+<span id="id6"></span><h2>IconPreviewArea Class Implementation<a class="headerlink" href="#iconpreviewarea-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">IconPreviewArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">NumStates</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">stateLabels</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">createHeaderLabel</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStateNames</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">row</span><span class="p">));</span>
+        <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">stateLabels</span><span class="p">[</span><span class="n">row</span><span class="p">],</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">NumStates</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;</span> <span class="n">NumModes</span><span class="p">;</span> <span class="o">++</span><span class="n">column</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">modeLabels</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">createHeaderLabel</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModeNames</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">column</span><span class="p">));</span>
+        <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">modeLabels</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">NumModes</span> <span class="o">==</span> <span class="mi">4</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;</span> <span class="n">NumModes</span><span class="p">;</span> <span class="o">++</span><span class="n">column</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">NumStates</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pixmapLabels</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">createPixmapLabel</span><span class="p">();</span>
+            <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">pixmapLabels</span><span class="p">[</span><span class="n">column</span><span class="p">][</span><span class="n">row</span><span class="p">],</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we create the labels displaying the headers and the icon’s generated pixmaps, and add them to a grid layout.</p>
+<p>When creating the header labels, we make sure the enums <code class="docutils literal"><span class="pre">NumModes</span></code> and <code class="docutils literal"><span class="pre">NumStates</span></code> defined in the <code class="docutils literal"><span class="pre">.h</span></code> file, correspond with the number of labels that we create. Then if the enums at some point are changed, the <code class="docutils literal"><span class="pre">Q_ASSERT()</span></code> macro will alert that this part of the <code class="docutils literal"><span class="pre">.cpp</span></code> file needs to be updated as well.</p>
+<p>If the application is built in debug mode, the <code class="docutils literal"><span class="pre">Q_ASSERT()</span></code> macro will expand to</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!condition)
+   qFatal(&quot;ASSERT: &quot;condition&quot; in file ...&quot;);
+</pre></div>
+</div>
+<p>In release mode, the macro simply disappear. The mode can be set in the application’s <code class="docutils literal"><span class="pre">.pro</span></code> file. One way to do so is to add an option to <code class="docutils literal"><span class="pre">qmake</span></code> when building the application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qmake</span> <span class="s2">&quot;CONFIG += debug&quot;</span> <span class="n">icons</span><span class="o">.</span><span class="n">pro</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qmake</span> <span class="s2">&quot;CONFIG += release&quot;</span> <span class="n">icons</span><span class="o">.</span><span class="n">pro</span>
+</pre></div>
+</div>
+<p>Another approach is to add this line directly to the <code class="docutils literal"><span class="pre">.pro</span></code> file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">setIcon</span><span class="p">(</span><span class="n">const</span> <span class="n">QIcon</span> <span class="o">&amp;</span><span class="n">icon</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">icon</span> <span class="o">=</span> <span class="n">icon</span><span class="p">;</span>
+    <span class="n">updatePixmapLabels</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">setSize</span><span class="p">(</span><span class="n">const</span> <span class="n">QSize</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">!=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+        <span class="n">updatePixmapLabels</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The public <code class="docutils literal"><span class="pre">setIcon()</span></code> and <code class="docutils literal"><span class="pre">setSize()</span></code> functions change the icon or the icon size, and make sure that the generated pixmaps are updated.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLabel</span> <span class="o">*</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">createHeaderLabel</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;%1&lt;/b&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">text</span><span class="p">));</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">label</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QLabel</span> <span class="o">*</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">createPixmapLabel</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setFrameShape</span><span class="p">(</span><span class="n">QFrame</span><span class="p">::</span><span class="n">Box</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Expanding</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setAutoFillBackground</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="mi">132</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">label</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We use the <code class="docutils literal"><span class="pre">createHeaderLabel()</span></code> and <code class="docutils literal"><span class="pre">createPixmapLabel()</span></code> functions to create the preview area’s labels displaying the headers and the icon’s generated pixmaps. Both functions return the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> that is created.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void IconPreviewArea::updatePixmapLabels()
+{
+    QWindow *window = nullptr;
+    if (const QWidget *nativeParent = nativeParentWidget())
+        window = nativeParent-&gt;windowHandle();
+    for (int column = 0; column &lt; NumModes; ++column) {
+        for (int row = 0; row &lt; NumStates; ++row) {
+            const QPixmap pixmap =
+                icon.pixmap(window, size, IconPreviewArea::iconModes().at(column),
+                            IconPreviewArea::iconStates().at(row));
+            QLabel *pixmapLabel = pixmapLabels[column][row];
+            pixmapLabel-&gt;setPixmap(pixmap);
+            pixmapLabel-&gt;setEnabled(!pixmap.isNull());
+            QString toolTip;
+            if (!pixmap.isNull()) {
+                const QSize actualSize = icon.actualSize(size);
+                toolTip =
+                    tr(&quot;Size: %1x%2\nActual size: %3x%4\nDevice pixel ratio: %5&quot;)
+                        .arg(size.width()).arg(size.height())
+                        .arg(actualSize.width()).arg(actualSize.height())
+                        .arg(pixmap.devicePixelRatioF());
+            }
+            pixmapLabel-&gt;setToolTip(toolTip);
+        }
+    }
+}
+</pre></div>
+</div>
+<p>We use the private <code class="docutils literal"><span class="pre">updatePixmapLabel()</span></code> function to update the generated pixmaps displayed in the preview area.</p>
+<p>For each mode, and for each state, we retrieve a pixmap using the <code class="xref py py-func docutils literal"><span class="pre">QIcon.pixmap()</span></code> function, which generates a pixmap corresponding to the given state, mode and size. We pass the QWindows instance obtained by calling <code class="xref py py-func docutils literal"><span class="pre">QWidget.windowHandle()</span></code> on the top level widget ( <code class="xref py py-func docutils literal"><span class="pre">QWidget.nativeParentWidget()</span></code> ) in order to retrieve the pixmap that matches best. We format a tooltip displaying size, actual size and device pixel ratio.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-definition">
+<span id="id7"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> widget consists of three main elements: an images group box, an icon size group box and a preview area.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">loadImages</span><span class="p">(</span><span class="n">const</span> <span class="n">QStringList</span> <span class="o">&amp;</span><span class="n">fileNames</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">show</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">changeStyle</span><span class="p">(</span><span class="nb">bool</span> <span class="n">checked</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">changeSize</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">triggerChangeSize</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">changeIcon</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">addSampleImages</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">addOtherImages</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">removeAllImages</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">useHighDpiPixmapsChanged</span><span class="p">(</span><span class="nb">int</span> <span class="n">checkState</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">screenChanged</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">createImagesGroupBox</span><span class="p">();</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">createIconSizeGroupBox</span><span class="p">();</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">createHighDpiIconSizeGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createContextMenu</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">checkCurrentStyle</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">addImages</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">directory</span><span class="p">);</span>
+
+    <span class="n">IconPreviewArea</span> <span class="o">*</span><span class="n">previewArea</span><span class="p">;</span>
+
+    <span class="n">QTableWidget</span> <span class="o">*</span><span class="n">imagesTable</span><span class="p">;</span>
+
+    <span class="n">QButtonGroup</span> <span class="o">*</span><span class="n">sizeButtonGroup</span><span class="p">;</span>
+    <span class="n">IconSizeSpinBox</span> <span class="o">*</span><span class="n">otherSpinBox</span><span class="p">;</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">devicePixelRatioLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">screenNameLabel</span><span class="p">;</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">addOtherImagesAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">addSampleImagesAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">removeAllImagesAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">guessModeStateAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">nativeFileDialogAct</span><span class="p">;</span>
+    <span class="n">QActionGroup</span> <span class="o">*</span><span class="n">styleActionGroup</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The MainWindow class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> . We reimplement the constructor, and declare several private slots:</p>
+<ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">about()</span></code> slot simply provides information about the example.</li>
+<li>The <code class="docutils literal"><span class="pre">changeStyle()</span></code> slot changes the application’s GUI style and adjust the style dependent size options.</li>
+<li>The <code class="docutils literal"><span class="pre">changeSize()</span></code> slot changes the size of the preview area’s icon.</li>
+<li>The <code class="docutils literal"><span class="pre">changeIcon()</span></code> slot updates the set of pixmaps available to the icon displayed in the preview area.</li>
+<li>The <code class="docutils literal"><span class="pre">addSampleImages()</span></code> slot allows the user to load a new image from the samples provided into the application.</li>
+<li>The <code class="docutils literal"><span class="pre">addOtherImages()</span></code> slot allows the user to load a new image from the directory obtained by calling <code class="xref py py-func docutils literal"><span class="pre">QStandardPaths.standardLocations()</span></code> ( <code class="xref py py-attr docutils literal"><span class="pre">QStandardPaths.PicturesLocation</span></code> ).</li>
+<li>The <code class="docutils literal"><span class="pre">screenChanged()</span></code> updates the display in the High DPI group box to correctly display the parameters of the current screen the window is located on.</li>
+</ul>
+<p>In addition we declare several private functions to simplify the constructor.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id8"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">centralWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">centralWidget</span><span class="p">);</span>
+
+    <span class="n">createActions</span><span class="p">();</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="n">centralWidget</span><span class="p">);</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">previewGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Preview&quot;</span><span class="p">));</span>
+    <span class="n">previewArea</span> <span class="o">=</span> <span class="n">new</span> <span class="n">IconPreviewArea</span><span class="p">(</span><span class="n">previewGroupBox</span><span class="p">);</span>
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">previewLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">previewGroupBox</span><span class="p">);</span>
+    <span class="n">previewLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">previewArea</span><span class="p">);</span>
+
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">previewGroupBox</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">createImagesGroupBox</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">vBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">vBox</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">createIconSizeGroupBox</span><span class="p">());</span>
+    <span class="n">vBox</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">createHighDpiIconSizeGroupBox</span><span class="p">());</span>
+    <span class="n">vBox</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">QSpacerItem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Ignored</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">MinimumExpanding</span><span class="p">));</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">vBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">createContextMenu</span><span class="p">();</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Icons&quot;</span><span class="p">));</span>
+    <span class="n">checkCurrentStyle</span><span class="p">();</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">(</span><span class="n">OtherSize</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">click</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we first create the main window’s central widget and its child widgets, and put them in a grid layout. Then we create the menus with their associated entries and actions.</p>
+<p>We set the window title and determine the current style for the application. We also enable the icon size spin box by clicking the associated radio button, making the current value of the spin box the icon’s initial size.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">about</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About Icons&quot;</span><span class="p">),</span>
+            <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The &lt;b&gt;Icons&lt;/b&gt; example illustrates how Qt renders an icon in &quot;</span>
+               <span class="s2">&quot;different modes (active, normal, disabled, and selected) and &quot;</span>
+               <span class="s2">&quot;states (on and off) based on a set of images.&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">about()</span></code> slot displays a message box using the static <code class="xref py py-func docutils literal"><span class="pre">QMessageBox.about()</span></code> function. In this example it displays a simple box with information about the example.</p>
+<p>The <code class="docutils literal"><span class="pre">about()</span></code> function looks for a suitable icon in four locations: It prefers its parent’s icon if that exists. If it doesn’t, the function tries the top-level widget containing parent, and if that fails, it tries the active window. As a last resort it uses the <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> ‘s Information icon.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::changeStyle(bool checked)
+{
+    if (!checked)
+        return;
+
+    const QAction *action = qobject_cast&lt;QAction *&gt;(sender());
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">changeStyle()</span></code> slot we first check the slot’s parameter. If it is false we immediately return, otherwise we find out which style to change to, i.e. which action that triggered the slot, using the <code class="xref py py-func docutils literal"><span class="pre">QObject.sender()</span></code> function.</p>
+<p>This function returns the sender as a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> pointer. Since we know that the sender is a <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> object, we can safely cast the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> . We could have used a C-style cast or a C++ <code class="docutils literal"><span class="pre">static_cast()</span></code> , but as a defensive programming technique we use a <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> . The advantage is that if the object has the wrong type, a null pointer is returned. Crashes due to null pointers are much easier to diagnose than crashes due to unsafe casts.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QStyle</span> <span class="o">*</span><span class="n">style</span> <span class="o">=</span> <span class="n">QStyleFactory</span><span class="p">::</span><span class="n">create</span><span class="p">(</span><span class="n">action</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">());</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">style</span><span class="p">);</span>
+    <span class="n">QApplication</span><span class="p">::</span><span class="n">setStyle</span><span class="p">(</span><span class="n">style</span><span class="p">);</span>
+
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">QAbstractButton</span> <span class="o">*</span><span class="n">button</span><span class="p">,</span> <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">buttons</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PixelMetric</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PixelMetric</span><span class="o">&gt;</span><span class="p">(</span><span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="nb">id</span><span class="p">(</span><span class="n">button</span><span class="p">));</span>
+        <span class="n">const</span> <span class="nb">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">style</span><span class="o">-&gt;</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">metric</span><span class="p">);</span>
+        <span class="n">switch</span> <span class="p">(</span><span class="n">metric</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_SmallIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Small (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_LargeIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Large (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_ToolBarIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Toolbars (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_ListViewIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;List views (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_IconViewIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Icon views (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_TabBarIconSize</span><span class="p">:</span>
+            <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Tab bars (%1 x %1)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">default</span><span class="p">:</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">triggerChangeSize</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once we have the action, we extract the style name using <code class="xref py py-func docutils literal"><span class="pre">QAction.data()</span></code> . Then we create a <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> object using the static <code class="xref py py-func docutils literal"><span class="pre">QStyleFactory.create()</span></code> function.</p>
+<p>Although we can assume that the style is supported by the <a class="reference internal" href="../PySide2/QtWidgets/QStyleFactory.html#PySide2.QtWidgets.QStyleFactory" title="PySide2.QtWidgets.QStyleFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleFactory</span></code></a> : To be on the safe side, we use the <code class="docutils literal"><span class="pre">Q_ASSERT()</span></code> macro to check if the created style is valid before we use the <code class="xref py py-func docutils literal"><span class="pre">QApplication.setStyle()</span></code> function to set the application’s GUI style to the new style. <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> will automatically delete the style object when a new style is set or when the application exits.</p>
+<p>The predefined icon size options provided in the application are style dependent, so we need to update the labels in the icon size group box and in the end call the <code class="docutils literal"><span class="pre">changeSize()</span></code> slot to update the icon’s size.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::changeSize(int id, bool checked)
+{
+    if (!checked)
+        return;
+
+    const bool other = id == int(OtherSize);
+    const int extent = other
+        ? otherSpinBox-&gt;value()
+        : QApplication::style()-&gt;pixelMetric(static_cast&lt;QStyle::PixelMetric&gt;(id));
+
+    previewArea-&gt;setSize(QSize(extent, extent));
+    otherSpinBox-&gt;setEnabled(other);
+}
+
+void MainWindow::triggerChangeSize()
+{
+    changeSize(sizeButtonGroup-&gt;checkedId(), true);
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">changeSize()</span></code> slot sets the size for the preview area’s icon.</p>
+<p>It is invoked by the <a class="reference internal" href="../PySide2/QtWidgets/QButtonGroup.html#PySide2.QtWidgets.QButtonGroup" title="PySide2.QtWidgets.QButtonGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QButtonGroup</span></code></a> whose members are radio buttons for controlling the icon size. In <code class="docutils literal"><span class="pre">createIconSizeGroupBox()</span></code> , each button is assigned a <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> value as an id, which is passed as a parameter to the slot.</p>
+<p>The special value <code class="docutils literal"><span class="pre">OtherSize</span></code> indicates that the spin box is enabled. If it is, we extract the extent of the new size from the box. If it’s not, we query the style for the metric. Then we create a <a class="reference internal" href="../PySide2/QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> object based on the extent, and use that object to set the size of the preview area’s icon.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::addImages(const QString &amp;directory)
+{
+    QFileDialog fileDialog(this, tr(&quot;Open Images&quot;), directory);
+    QStringList mimeTypeFilters;
+    foreach (const QByteArray &amp;mimeTypeName, QImageReader::supportedMimeTypes())
+        mimeTypeFilters.append(mimeTypeName);
+    mimeTypeFilters.sort();
+    fileDialog.setMimeTypeFilters(mimeTypeFilters);
+    fileDialog.selectMimeTypeFilter(QLatin1String(&quot;image/png&quot;));
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setFileMode(QFileDialog::ExistingFiles);
+    if (!nativeFileDialogAct-&gt;isChecked())
+        fileDialog.setOption(QFileDialog::DontUseNativeDialog);
+    if (fileDialog.exec() == QDialog::Accepted)
+        loadImages(fileDialog.selectedFiles());
+</pre></div>
+</div>
+<p>The function <code class="docutils literal"><span class="pre">addImages()</span></code> is called by the slot addSampleImages() passing the samples directory, or by the slot addOtherImages() passing the directory obtained by querying <code class="xref py py-func docutils literal"><span class="pre">QStandardPaths.standardLocations()</span></code> .</p>
+<p>The first thing we do is to show a file dialog to the user. We initialize it to show the filters returned by <code class="xref py py-func docutils literal"><span class="pre">QImageReader.supportedMimeTypes()</span></code> .</p>
+<p>For each of the files the file dialog returns, we add a row to the table widget. The table widget is listing the images the user has loaded into the application.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>const QFileInfo fileInfo(fileName);
+const QString imageName = fileInfo.baseName();
+const QString fileName2x = fileInfo.absolutePath()
+    + QLatin1Char(&#39;/&#39;) + imageName + QLatin1String(&quot;@2x.&quot;) + fileInfo.suffix();
+const QFileInfo fileInfo2x(fileName2x);
+const QImage image(fileName);
+const QString toolTip =
+    tr(&quot;Directory: %1\nFile: %2\nFile@2x: %3\nSize: %4x%5&quot;)
+       .arg(QDir::toNativeSeparators(fileInfo.absolutePath()), fileInfo.fileName())
+       .arg(fileInfo2x.exists() ? fileInfo2x.fileName() : tr(&quot;&lt;None&gt;&quot;))
+       .arg(image.width()).arg(image.height());
+QTableWidgetItem *fileItem = new QTableWidgetItem(imageName);
+fileItem-&gt;setData(Qt::UserRole, fileName);
+fileItem-&gt;setIcon(QPixmap::fromImage(image));
+fileItem-&gt;setFlags((fileItem-&gt;flags() | Qt::ItemIsUserCheckable) &amp; ~Qt::ItemIsEditable);
+fileItem-&gt;setToolTip(toolTip);
+</pre></div>
+</div>
+<p>We retrieve the image name using the <code class="xref py py-func docutils literal"><span class="pre">QFileInfo.baseName()</span></code> function that returns the base name of the file without the path, and create the first table widget item in the row. We check if a high resolution version of the image exists (identified by the suffix <code class="docutils literal"><span class="pre">&#64;2x</span></code> on the base name) and display that along with the size in the tooltip.</p>
+<p>We add the file’s complete name to the item’s data. Since an item can hold several information pieces, we need to assign the file name a role that will distinguish it from other data. This role can be <code class="xref py py-attr docutils literal"><span class="pre">Qt.UserRole</span></code> or any value above it.</p>
+<p>We also make sure that the item is not editable by removing the <code class="xref py py-attr docutils literal"><span class="pre">Qt.ItemIsEditable</span></code> flag. Table items are editable by default.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Normal</span><span class="p">;</span>
+<span class="n">QIcon</span><span class="p">::</span><span class="n">State</span> <span class="n">state</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Off</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">guessModeStateAct</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">imageName</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;_act&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CaseInsensitive</span><span class="p">))</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Active</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">imageName</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;_dis&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CaseInsensitive</span><span class="p">))</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Disabled</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">imageName</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;_sel&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CaseInsensitive</span><span class="p">))</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Selected</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">imageName</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">QLatin1String</span><span class="p">(</span><span class="s2">&quot;_on&quot;</span><span class="p">),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CaseInsensitive</span><span class="p">))</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">On</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we create the second and third items in the row making the default mode Normal and the default state Off. But if the Guess Image Mode/State option is checked, and the file name contains “_act”, “_dis”, or “_sel”, the modes are changed to Active, Disabled, or Selected. And if the file name contains “_on”, the state is changed to On. The sample files in the example’s <code class="docutils literal"><span class="pre">images</span></code> subdirectory respect this naming convention.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fileItem</span><span class="p">);</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">modeItem</span> <span class="o">=</span>
+            <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModeNames</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModes</span><span class="p">()</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">mode</span><span class="p">)));</span>
+        <span class="n">modeItem</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">toolTip</span><span class="p">);</span>
+        <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">modeItem</span><span class="p">);</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">stateItem</span> <span class="o">=</span>
+            <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStateNames</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStates</span><span class="p">()</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">state</span><span class="p">)));</span>
+        <span class="n">stateItem</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">toolTip</span><span class="p">);</span>
+        <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">stateItem</span><span class="p">);</span>
+        <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">openPersistentEditor</span><span class="p">(</span><span class="n">modeItem</span><span class="p">);</span>
+        <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">openPersistentEditor</span><span class="p">(</span><span class="n">stateItem</span><span class="p">);</span>
+
+        <span class="n">fileItem</span><span class="o">-&gt;</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Checked</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the end we add the items to the associated row, and use the <code class="xref py py-func docutils literal"><span class="pre">QTableWidget.openPersistentEditor()</span></code> function to create comboboxes for the mode and state columns of the items.</p>
+<p>Due to the connection between the table widget’s <code class="xref py py-func docutils literal"><span class="pre">QTableWidget.itemChanged()</span></code> signal and the <code class="docutils literal"><span class="pre">changeIcon()</span></code> slot, the new image is automatically converted into a pixmap and made part of the set of pixmaps available to the icon in the preview area. So, corresponding to this fact, we need to make sure that the new image’s check box is enabled.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">changeIcon</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QIcon</span> <span class="n">icon</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">rowCount</span><span class="p">();</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">fileItem</span> <span class="o">=</span> <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">const</span> <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">modeItem</span> <span class="o">=</span> <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">const</span> <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">stateItem</span> <span class="o">=</span> <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">fileItem</span><span class="o">-&gt;</span><span class="n">checkState</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Checked</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">const</span> <span class="nb">int</span> <span class="n">modeIndex</span> <span class="o">=</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModeNames</span><span class="p">()</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">modeItem</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">());</span>
+            <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">modeIndex</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="n">const</span> <span class="nb">int</span> <span class="n">stateIndex</span> <span class="o">=</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStateNames</span><span class="p">()</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="n">stateItem</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">());</span>
+            <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">stateIndex</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="n">const</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">Mode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModes</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">modeIndex</span><span class="p">);</span>
+            <span class="n">const</span> <span class="n">QIcon</span><span class="p">::</span><span class="n">State</span> <span class="n">state</span> <span class="o">=</span> <span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStates</span><span class="p">()</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">stateIndex</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">changeIcon()</span></code> slot is called when the user alters the set of images listed in the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> , to update the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> object rendered by the <code class="docutils literal"><span class="pre">IconPreviewArea</span></code> .</p>
+<p>We first create a <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> object, and then we run through the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> , which lists the images the user has loaded into the application.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        const QString fileName = fileItem-&gt;data(Qt::UserRole).toString();
+        QImage image(fileName);
+        if (!image.isNull())
+            icon.addPixmap(QPixmap::fromImage(image), mode, state);
+    }
+}
+</pre></div>
+</div>
+<p>We also extract the image file’s name using the <code class="xref py py-func docutils literal"><span class="pre">QTableWidgetItem.data()</span></code> function. This function takes a Qt::DataItemRole as an argument to retrieve the right data (remember that an item can hold several pieces of information) and returns it as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> . Then we use the <code class="xref py py-func docutils literal"><span class="pre">QVariant.toString()</span></code> function to get the file name as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> .</p>
+<p>To create a pixmap from the file, we need to first create an image and then convert this image into a pixmap using <code class="xref py py-func docutils literal"><span class="pre">QPixmap.fromImage()</span></code> . Once we have the final pixmap, we add it, with its associated mode and state, to the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> ‘s set of available pixmaps.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">previewArea</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After running through the entire list of images, we change the icon of the preview area to the one we just created.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">removeAllImages</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setRowCount</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">changeIcon</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">removeAllImages()</span></code> slot, we simply set the table widget’s row count to zero, automatically removing all the images the user has loaded into the application. Then we update the set of pixmaps available to the preview area’s icon using the <code class="docutils literal"><span class="pre">changeIcon()</span></code> slot.</p>
+<p>The <code class="docutils literal"><span class="pre">createImagesGroupBox()</span></code> function is implemented to simplify the constructor. The main purpose of the function is to create a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> that will keep track of the images the user has loaded into the application.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">createImagesGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">imagesGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Images&quot;</span><span class="p">));</span>
+
+    <span class="n">imagesTable</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidget</span><span class="p">;</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setSelectionMode</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="p">::</span><span class="n">NoSelection</span><span class="p">);</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setItemDelegate</span><span class="p">(</span><span class="n">new</span> <span class="n">ImageDelegate</span><span class="p">(</span><span class="n">this</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>First we create a group box that will contain the table widget. Then we create a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> and customize it to suit our purposes.</p>
+<p>We call <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.setSelectionMode()</span></code> to prevent the user from selecting items.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.setItemDelegate()</span></code> call sets the item delegate for the table widget. We create a <code class="docutils literal"><span class="pre">ImageDelegate</span></code> that we make the item delegate for our view.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> class can be used to provide an editor for an item view class that is subclassed from <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemView.html#PySide2.QtWidgets.QAbstractItemView" title="PySide2.QtWidgets.QAbstractItemView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemView</span></code></a> . Using a delegate for this purpose allows the editing mechanism to be customized and developed independently from the model and view.</p>
+<p>In this example we derive <code class="docutils literal"><span class="pre">ImageDelegate</span></code> from <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> . <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> usually provides line editors, while our subclass <code class="docutils literal"><span class="pre">ImageDelegate</span></code> , provides comboboxes for the mode and state fields.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">labels</span><span class="p">;</span>
+<span class="n">labels</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Mode&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;State&quot;</span><span class="p">);</span>
+
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setDefaultSectionSize</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setColumnCount</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setHorizontalHeaderLabels</span><span class="p">(</span><span class="n">labels</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QHeaderView</span><span class="p">::</span><span class="n">Stretch</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">QHeaderView</span><span class="p">::</span><span class="n">Fixed</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">QHeaderView</span><span class="p">::</span><span class="n">Fixed</span><span class="p">);</span>
+<span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then we customize the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> ‘s horizontal header, and hide the vertical header.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">imagesTable</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QTableWidget</span><span class="p">::</span><span class="n">itemChanged</span><span class="p">,</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">changeIcon</span><span class="p">);</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">imagesGroupBox</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">imagesTable</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">imagesGroupBox</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At the end, we connect the <code class="xref py py-func docutils literal"><span class="pre">QTableWidget.itemChanged()</span></code> signal to the <code class="docutils literal"><span class="pre">changeIcon()</span></code> slot to ensure that the preview area is in sync with the image table.</p>
+<p>The <code class="docutils literal"><span class="pre">createIconSizeGroupBox()</span></code> function is called from the constructor. It creates the widgets controlling the size of the preview area’s icon.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">createIconSizeGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">iconSizeGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Icon Size&quot;</span><span class="p">));</span>
+
+    <span class="n">sizeButtonGroup</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QButtonGroup</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">setExclusive</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">sizeButtonGroup</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QButtonGroup</span><span class="p">::</span><span class="n">buttonToggled</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">changeSize</span><span class="p">);</span>
+
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">smallRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">smallRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_SmallIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">largeRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">largeRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_LargeIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">toolBarRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">toolBarRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_ToolBarIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">listViewRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">listViewRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_ListViewIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">iconViewRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">iconViewRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_IconViewIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">tabBarRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">;</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">tabBarRadioButton</span><span class="p">,</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_TabBarIconSize</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">otherRadioButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Other:&quot;</span><span class="p">));</span>
+    <span class="n">sizeButtonGroup</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">otherRadioButton</span><span class="p">,</span> <span class="n">OtherSize</span><span class="p">);</span>
+    <span class="n">otherSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">IconSizeSpinBox</span><span class="p">;</span>
+    <span class="n">otherSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+    <span class="n">const</span> <span class="n">QString</span> <span class="n">spinBoxToolTip</span> <span class="o">=</span>
+        <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Enter a custom size within %1..%2&quot;</span><span class="p">)</span>
+           <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">otherSpinBox</span><span class="o">-&gt;</span><span class="n">minimum</span><span class="p">())</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">otherSpinBox</span><span class="o">-&gt;</span><span class="n">maximum</span><span class="p">());</span>
+    <span class="n">otherSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">64</span><span class="p">);</span>
+    <span class="n">otherSpinBox</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">spinBoxToolTip</span><span class="p">);</span>
+    <span class="n">otherRadioButton</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">spinBoxToolTip</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>First we create a group box that will contain all the widgets; then we create the radio buttons and the spin box. We add the radio buttons to an instance of <a class="reference internal" href="../PySide2/QtWidgets/QButtonGroup.html#PySide2.QtWidgets.QButtonGroup" title="PySide2.QtWidgets.QButtonGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QButtonGroup</span></code></a> , using the value of the <code class="xref py py-attr docutils literal"><span class="pre">QStyle.PixelMetric</span></code> they represent as an integer id.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">enum</span> <span class="p">{</span> <span class="n">OtherSize</span> <span class="o">=</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">PM_CustomBase</span> <span class="p">};</span>
+</pre></div>
+</div>
+<p>We introduce an enumeration constant <code class="docutils literal"><span class="pre">OtherSize</span></code> to represent a custom size.</p>
+<p>The spin box is not a regular <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> but an <code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> . The <code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> and reimplements two functions: <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.textFromValue()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.valueFromText()</span></code> . The <code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> is designed to handle icon sizes, e.g., “32 x 32”, instead of plain integer values.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">connect</span><span class="p">(</span><span class="n">otherSpinBox</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QSpinBox</span><span class="p">::</span><span class="n">valueChanged</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">triggerChangeSize</span><span class="p">);</span>
+
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">otherSizeLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">otherSizeLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">otherRadioButton</span><span class="p">);</span>
+    <span class="n">otherSizeLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">otherSpinBox</span><span class="p">);</span>
+    <span class="n">otherSizeLayout</span><span class="o">-&gt;</span><span class="n">addStretch</span><span class="p">();</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="n">iconSizeGroupBox</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">smallRadioButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">largeRadioButton</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">toolBarRadioButton</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">listViewRadioButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">iconViewRadioButton</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tabBarRadioButton</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">otherSizeLayout</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">setRowStretch</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">iconSizeGroupBox</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we connect all of the radio buttons <code class="xref py py-func docutils literal"><span class="pre">QRadioButton.toggled()</span></code> signals and the spin box’s <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.valueChanged()</span></code> signal to the <code class="docutils literal"><span class="pre">changeSize()</span></code> slot to make sure that the size of the preview area’s icon is updated whenever the user changes the icon size. In the end we put the widgets in a layout that we install on the group box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createActions</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">));</span>
+
+    <span class="n">addSampleImagesAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Add &amp;Sample Images...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">addSampleImagesAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+A&quot;</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">addSampleImagesAct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAction</span><span class="p">::</span><span class="n">triggered</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">addSampleImages</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">addSampleImagesAct</span><span class="p">);</span>
+
+    <span class="n">addOtherImagesAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Add Images...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">addOtherImagesAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Open</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">addOtherImagesAct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAction</span><span class="p">::</span><span class="n">triggered</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">addOtherImages</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">addOtherImagesAct</span><span class="p">);</span>
+
+    <span class="n">removeAllImagesAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Remove All Images&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">removeAllImagesAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+R&quot;</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">removeAllImagesAct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAction</span><span class="p">::</span><span class="n">triggered</span><span class="p">,</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">removeAllImages</span><span class="p">);</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">removeAllImagesAct</span><span class="p">);</span>
+
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Quit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+    <span class="n">exitAct</span><span class="o">-&gt;</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Quit</span><span class="p">);</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">viewMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;View&quot;</span><span class="p">));</span>
+
+    <span class="n">styleActionGroup</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QActionGroup</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">styleName</span><span class="p">,</span> <span class="n">QStyleFactory</span><span class="p">::</span><span class="n">keys</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QAction</span> <span class="o">*</span><span class="n">action</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1 Style&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">styleName</span><span class="p">),</span> <span class="n">styleActionGroup</span><span class="p">);</span>
+        <span class="n">action</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">styleName</span><span class="p">);</span>
+        <span class="n">action</span><span class="o">-&gt;</span><span class="n">setCheckable</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+        <span class="n">connect</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAction</span><span class="p">::</span><span class="n">triggered</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">changeStyle</span><span class="p">);</span>
+        <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">settingsMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Settings&quot;</span><span class="p">));</span>
+
+    <span class="n">guessModeStateAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Guess Image Mode/State&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">guessModeStateAct</span><span class="o">-&gt;</span><span class="n">setCheckable</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">guessModeStateAct</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">settingsMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">guessModeStateAct</span><span class="p">);</span>
+
+    <span class="n">nativeFileDialogAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Use Native File Dialog&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">nativeFileDialogAct</span><span class="o">-&gt;</span><span class="n">setCheckable</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">nativeFileDialogAct</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">settingsMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">nativeFileDialogAct</span><span class="p">);</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">));</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="n">qApp</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QApplication</span><span class="p">::</span><span class="n">aboutQt</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">createActions()</span></code> function we create and customize all the actions needed to implement the functionality associated with the menu entries in the application.</p>
+<p>In particular we create the <code class="docutils literal"><span class="pre">styleActionGroup</span></code> based on the currently available GUI styles using <a class="reference internal" href="../PySide2/QtWidgets/QStyleFactory.html#PySide2.QtWidgets.QStyleFactory" title="PySide2.QtWidgets.QStyleFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleFactory</span></code></a> . <code class="xref py py-func docutils literal"><span class="pre">QStyleFactory.keys()</span></code> returns a list of valid keys, typically including “windows” and “fusion”. Depending on the platform, “windowsvista” and “macintosh” may be available.</p>
+<p>We create one action for each key, and adds the action to the action group. Also, for each action, we call <code class="xref py py-func docutils literal"><span class="pre">QAction.setData()</span></code> with the style name. We will retrieve it later using <code class="xref py py-func docutils literal"><span class="pre">QAction.data()</span></code> .</p>
+<p>As we go along, we create the File, View and Help menus and add the actions to them.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> class provides a menu widget for use in menu bars, context menus, and other popup menus. We put each menu in the application’s menu bar, which we retrieve using <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.menuBar()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createContextMenu</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">ActionsContextMenu</span><span class="p">);</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">addSampleImagesAct</span><span class="p">);</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">addOtherImagesAct</span><span class="p">);</span>
+    <span class="n">imagesTable</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">removeAllImagesAct</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>QWidgets have a <code class="xref py py-func docutils literal"><span class="pre">QWidget.contextMenuPolicy()</span></code> property that controls how the widget should behave when the user requests a context menu (e.g., by right-clicking). We set the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> ‘s context menu policy to <code class="xref py py-attr docutils literal"><span class="pre">Qt.ActionsContextMenu</span></code> , meaning that the <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> s associated with the widget should appear in its context menu.</p>
+<p>Then we add the Add Image and Remove All Images actions to the table widget. They will then appear in the table widget’s context menu.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::checkCurrentStyle()
+{
+    foreach (QAction *action, styleActionGroup-&gt;actions()) {
+        QString styleName = action-&gt;data().toString();
+        QScopedPointer&lt;QStyle&gt; candidate(QStyleFactory::create(styleName));
+        Q_ASSERT(!candidate.isNull());
+        if (candidate-&gt;metaObject()-&gt;className()
+                == QApplication::style()-&gt;metaObject()-&gt;className()) {
+            action-&gt;trigger();
+            return;
+        }
+    }
+}
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">checkCurrentStyle()</span></code> function we go through the group of style actions, looking for the current GUI style.</p>
+<p>For each action, we first extract the style name using <code class="xref py py-func docutils literal"><span class="pre">QAction.data()</span></code> . Since this is only a <a class="reference internal" href="../PySide2/QtWidgets/QStyleFactory.html#PySide2.QtWidgets.QStyleFactory" title="PySide2.QtWidgets.QStyleFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleFactory</span></code></a> key (e.g., “macintosh”), we cannot compare it directly to the current style’s class name. We need to create a <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> object using the static <code class="xref py py-func docutils literal"><span class="pre">QStyleFactory.create()</span></code> function and compare the class name of the created <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> object with that of the current style. As soon as we are done with a <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a> candidate, we delete it.</p>
+<p>For all <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclasses that use the <code class="docutils literal"><span class="pre">Q_OBJECT</span></code> macro, the class name of an object is available through its <code class="xref py py-func docutils literal"><span class="pre">meta-object</span></code> .</p>
+<p>We can assume that the style is supported by <a class="reference internal" href="../PySide2/QtWidgets/QStyleFactory.html#PySide2.QtWidgets.QStyleFactory" title="PySide2.QtWidgets.QStyleFactory"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyleFactory</span></code></a> , but to be on the safe side we use the <code class="docutils literal"><span class="pre">Q_ASSERT()</span></code> macro to make sure that <code class="xref py py-func docutils literal"><span class="pre">QStyleFactory.create()</span></code> returned a valid pointer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">show</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMainWindow</span><span class="p">::</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">windowHandle</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">QWindow</span><span class="p">::</span><span class="n">screenChanged</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MainWindow</span><span class="p">::</span><span class="n">screenChanged</span><span class="p">);</span>
+    <span class="n">screenChanged</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We overload the show() function to set up the updating of the current screen in <code class="docutils literal"><span class="pre">screenChanged()</span></code> . After calling <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> , the <a class="reference internal" href="../PySide2/QtGui/QWindow.html#PySide2.QtGui.QWindow" title="PySide2.QtGui.QWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QWindow</span></code></a> associated with the <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> is created and we can connect to its <code class="xref py py-func docutils literal"><span class="pre">QWindow.screenChanged()</span></code> signal.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iconsizespinbox-class-definition">
+<span id="id9"></span><h2>IconSizeSpinBox Class Definition<a class="headerlink" href="#iconsizespinbox-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IconSizeSpinBox</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QSpinBox</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">IconSizeSpinBox</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">valueFromText</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">textFromValue</span><span class="p">(</span><span class="nb">int</span> <span class="n">value</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">IconSizeSpinBox</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> . A plain <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> can only handle integers. But since we want to display the spin box’s values in a more sophisticated way, we need to subclass <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> and reimplement the <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.textFromValue()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.valueFromText()</span></code> functions.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iconsizespinbox-class-implementation">
+<span id="id10"></span><h2>IconSizeSpinBox Class Implementation<a class="headerlink" href="#iconsizespinbox-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+    <span class="n">QSpinBox</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The constructor is trivial.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">textFromValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;%1 x %1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">QSpinBox.textFromValue()</span></code> is used by the spin box whenever it needs to display a value. The default implementation returns a base 10 representation of the <code class="docutils literal"><span class="pre">value</span></code> parameter.</p>
+<p>Our reimplementation returns a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> of the form “32 x 32”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">valueFromText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="n">regExp</span> <span class="o">=</span> <span class="n">QRegExp</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;(</span><span class="se">\\</span><span class="s2">d+)(</span><span class="se">\\</span><span class="s2">s*[xx]</span><span class="se">\\</span><span class="s2">s*</span><span class="se">\\</span><span class="s2">d+)?&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">regExp</span><span class="o">.</span><span class="n">exactMatch</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">regExp</span><span class="o">.</span><span class="n">cap</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.valueFromText()</span></code> function is used by the spin box whenever it needs to interpret text typed in by the user. Since we reimplement the <code class="docutils literal"><span class="pre">textFromValue()</span></code> function we also need to reimplement the <code class="docutils literal"><span class="pre">valueFromText()</span></code> function to interpret the parameter text and return the associated int value.</p>
+<p>We parse the text using a regular expression (a <a class="reference internal" href="../PySide2/QtCore/QRegularExpression.html#PySide2.QtCore.QRegularExpression" title="PySide2.QtCore.QRegularExpression"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegularExpression</span></code></a> ). We define an expression that matches one or several digits, optionally followed by whitespace, an “x” or the times symbol, whitespace and one or several digits again.</p>
+<p>The first digits of the regular expression are captured using parentheses. This enables us to use the <code class="xref py py-func docutils literal"><span class="pre">QRegularExpressionMatch.captured()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QRegularExpressionMatch.capturedTexts()</span></code> functions to extract the matched characters. If the first and second numbers of the spin box value differ (e.g., “16 x 24”), we use the first number.</p>
+<p>When the user presses Enter, <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> first calls <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.valueFromText()</span></code> to interpret the text typed by the user, then <code class="xref py py-func docutils literal"><span class="pre">QSpinBox.textFromValue()</span></code> to present it in a canonical format (e.g., “16 x 16”).</p>
+</div></blockquote>
+</div>
+<div class="section" id="imagedelegate-class-definition">
+<span id="id11"></span><h2>ImageDelegate Class Definition<a class="headerlink" href="#imagedelegate-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageDelegate</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QItemDelegate</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">ImageDelegate</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ImageDelegate</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> . The <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> class provides display and editing facilities for data items from a model. A single <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> object is responsible for all items displayed in a item view (in our case, a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> ).</p>
+<p>A <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> can be used to provide an editor for an item view class that is subclassed from <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemView.html#PySide2.QtWidgets.QAbstractItemView" title="PySide2.QtWidgets.QAbstractItemView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemView</span></code></a> . Using a delegate for this purpose allows the editing mechanism to be customized and developed independently from the model and view.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">createEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                      <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+<span class="n">void</span> <span class="n">setEditorData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span> <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+<span class="n">void</span> <span class="n">setModelData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span> <span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">model</span><span class="p">,</span>
+                  <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The default implementation of <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> creates a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> . Since we want the editor to be a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> , we need to subclass <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> and reimplement the <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.createEditor()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.setEditorData()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.setModelData()</span></code> functions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">emitCommitData</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">emitCommitData()</span></code> slot is used to emit the QImageDelegate::commitData() signal with the appropriate argument.</p>
+</div></blockquote>
+</div>
+<div class="section" id="imagedelegate-class-implementation">
+<span id="id12"></span><h2>ImageDelegate Class Implementation<a class="headerlink" href="#imagedelegate-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ImageDelegate</span><span class="p">::</span><span class="n">ImageDelegate</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QItemDelegate</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The constructor is trivial.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">ImageDelegate</span><span class="p">::</span><span class="n">createEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span>
+                                     <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span> <span class="o">/*</span> <span class="n">option</span> <span class="o">*/</span><span class="p">,</span>
+                                     <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">comboBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">comboBox</span><span class="o">-&gt;</span><span class="n">addItems</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconModeNames</span><span class="p">());</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">comboBox</span><span class="o">-&gt;</span><span class="n">addItems</span><span class="p">(</span><span class="n">IconPreviewArea</span><span class="p">::</span><span class="n">iconStateNames</span><span class="p">());</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">comboBox</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">activated</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageDelegate</span><span class="p">::</span><span class="n">emitCommitData</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">comboBox</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The default <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.createEditor()</span></code> implementation returns the widget used to edit the item specified by the model and item index for editing. The parent widget and style option are used to control the appearance of the editor widget.</p>
+<p>Our reimplementation creates and populates a combobox instead of the default line edit. The contents of the combobox depends on the column in the table for which the editor is requested. Column 1 contains the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> modes, whereas column 2 contains the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> states.</p>
+<p>In addition, we connect the combobox’s <code class="xref py py-func docutils literal"><span class="pre">QComboBox.activated()</span></code> signal to the <code class="docutils literal"><span class="pre">emitCommitData()</span></code> slot to emit the <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.commitData()</span></code> signal whenever the user chooses an item using the combobox. This ensures that the rest of the application notices the change and updates itself.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void ImageDelegate::setEditorData(QWidget *editor,
+                                  const QModelIndex &amp;index) const
+{
+    QComboBox *comboBox = qobject_cast&lt;QComboBox *&gt;(editor);
+    if (!comboBox)
+        return;
+
+    int pos = comboBox-&gt;findText(index.model()-&gt;data(index).toString(),
+                                 Qt::MatchExactly);
+    comboBox-&gt;setCurrentIndex(pos);
+}
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.setEditorData()</span></code> function is used by <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> to transfer data from a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidgetItem.html#PySide2.QtWidgets.QTableWidgetItem" title="PySide2.QtWidgets.QTableWidgetItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidgetItem</span></code></a> to the editor. The data is stored as a string; we use <code class="xref py py-func docutils literal"><span class="pre">QComboBox.findText()</span></code> to locate it in the combobox.</p>
+<p>Delegates work in terms of models, not items. This makes it possible to use them with any item view class (e.g., <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QListWidget.html#PySide2.QtWidgets.QListWidget" title="PySide2.QtWidgets.QListWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListWidget</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> , etc.). The transition between model and items is done implicitly by <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> ; we don’t need to worry about it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void ImageDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                 const QModelIndex &amp;index) const
+{
+    QComboBox *comboBox = qobject_cast&lt;QComboBox *&gt;(editor);
+    if (!comboBox)
+        return;
+
+    model-&gt;setData(index, comboBox-&gt;currentText());
+}
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QItemDelegate.setEditorData()</span></code> function is used by <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> to transfer data back from the editor to the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidgetItem.html#PySide2.QtWidgets.QTableWidgetItem" title="PySide2.QtWidgets.QTableWidgetItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidgetItem</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageDelegate</span><span class="p">::</span><span class="n">emitCommitData</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">emit</span> <span class="n">commitData</span><span class="p">(</span><span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QWidget</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">sender</span><span class="p">()));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">emitCommitData()</span></code> slot simply emit the <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.commitData()</span></code> signal for the editor that triggered the slot. This signal must be emitted when the editor widget has completed editing the data, and wants to write it back into the model.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-implementation-of-the-function-main">
+<span id="id13"></span><h2>The Implementation of the Function main()<a class="headerlink" href="#the-implementation-of-the-function-main" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span>int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QCoreApplication::setApplicationName(MainWindow::tr(&quot;Icons&quot;));
+    QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+    QCommandLineParser commandLineParser;
+    commandLineParser.setSingleDashWordOptionMode(QCommandLineParser::ParseAsLongOptions);
+    commandLineParser.addHelpOption();
+    commandLineParser.addVersionOption();
+    QCommandLineOption noHighDpiPixmapOption(&quot;no-highdpi-pixmaps&quot;,
+                                             &quot;Disable High DPI image loading (Qt::AA_UseHighDpiPixmaps)&quot;);
+    commandLineParser.addOption(noHighDpiPixmapOption);
+        commandLineParser.addPositionalArgument(MainWindow::tr(&quot;[file]&quot;), MainWindow::tr(&quot;Icon file(s) to open.&quot;));
+    commandLineParser.process(QCoreApplication::arguments());
+
+    if (!commandLineParser.isSet(noHighDpiPixmapOption))
+        QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+
+    MainWindow mainWin;
+    if (!commandLineParser.positionalArguments().isEmpty())
+        mainWin.loadImages(commandLineParser.positionalArguments());
+
+    const QRect availableGeometry = QApplication::desktop()-&gt;availableGeometry(&amp;mainWin);
+    mainWin.resize(availableGeometry.width() / 2, availableGeometry.height() * 2 / 3);
+    mainWin.move((availableGeometry.width() - mainWin.width()) / 2, (availableGeometry.height() - mainWin.height()) / 2);
+
+    mainWin.show();
+    return app.exec();
+}
+</pre></div>
+</div>
+<p>We use <a class="reference internal" href="../PySide2/QtCore/QCommandLineParser.html#PySide2.QtCore.QCommandLineParser" title="PySide2.QtCore.QCommandLineParser"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QCommandLineParser</span></code></a> to handle any command line options or parameters passed to the application. Then, we resize the main window according to the available screen geometry and show it.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="iconpreviewarea-cpp-example-file">
+<h1>iconpreviewarea.cpp Example File<a class="headerlink" href="#iconpreviewarea-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="iconpreviewarea-h-example-file">
+<h1>iconpreviewarea.h Example File<a class="headerlink" href="#iconpreviewarea-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="iconsizespinbox-cpp-example-file">
+<h1>iconsizespinbox.cpp Example File<a class="headerlink" href="#iconsizespinbox-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="iconsizespinbox-h-example-file">
+<h1>iconsizespinbox.h Example File<a class="headerlink" href="#iconsizespinbox-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagedelegate-cpp-example-file">
+<h1>imagedelegate.cpp Example File<a class="headerlink" href="#imagedelegate-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagedelegate-h-example-file">
+<h1>imagedelegate.h Example File<a class="headerlink" href="#imagedelegate-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="icons-pro-example-file">
+<h1>icons.pro Example File<a class="headerlink" href="#icons-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="designer-png-image-file">
+<h1>designer.png Image File<a class="headerlink" href="#designer-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="find-disabled-png-image-file">
+<h1>find_disabled.png Image File<a class="headerlink" href="#find-disabled-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="find-normal-png-image-file">
+<h1>find_normal.png Image File<a class="headerlink" href="#find-normal-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-off-128x128-png-image-file">
+<h1>monkey_off_128x128.png Image File<a class="headerlink" href="#monkey-off-128x128-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-off-16x16-png-image-file">
+<h1>monkey_off_16x16.png Image File<a class="headerlink" href="#monkey-off-16x16-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-off-32x32-png-image-file">
+<h1>monkey_off_32x32.png Image File<a class="headerlink" href="#monkey-off-32x32-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-off-64x64-png-image-file">
+<h1>monkey_off_64x64.png Image File<a class="headerlink" href="#monkey-off-64x64-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-on-128x128-png-image-file">
+<h1>monkey_on_128x128.png Image File<a class="headerlink" href="#monkey-on-128x128-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-on-16x16-png-image-file">
+<h1>monkey_on_16x16.png Image File<a class="headerlink" href="#monkey-on-16x16-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-on-32x32-png-image-file">
+<h1>monkey_on_32x32.png Image File<a class="headerlink" href="#monkey-on-32x32-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="monkey-on-64x64-png-image-file">
+<h1>monkey_on_64x64.png Image File<a class="headerlink" href="#monkey-on-64x64-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-extended-16x16-png-image-file">
+<h1>qt_extended_16x16.png Image File<a class="headerlink" href="#qt-extended-16x16-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-extended-32x32-png-image-file">
+<h1>qt_extended_32x32.png Image File<a class="headerlink" href="#qt-extended-32x32-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="qt-extended-48x48-png-image-file">
+<h1>qt_extended_48x48.png Image File<a class="headerlink" href="#qt-extended-48x48-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,471 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JSON Save Game Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JSON Save Game Example</a><ul>
+<li><a class="reference internal" href="#the-character-class">The Character Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#character-cpp-example-file">character.cpp Example File</a></li>
+<li><a class="reference internal" href="#character-h-example-file">character.h Example File</a></li>
+<li><a class="reference internal" href="#game-cpp-example-file">game.cpp Example File</a></li>
+<li><a class="reference internal" href="#game-h-example-file">game.h Example File</a></li>
+<li><a class="reference internal" href="#level-cpp-example-file">level.cpp Example File</a></li>
+<li><a class="reference internal" href="#level-h-example-file">level.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#savegame-pro-example-file">savegame.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="json-save-game-example">
+<span id="id1"></span><h1>JSON Save Game Example<a class="headerlink" href="#json-save-game-example" title="Permalink to this headline">¶</a></h1>
+<p>JSON Save Game example demonstrates how to save and load a small game using QJsonDocument, QJsonObject and QJsonArray</p>
+<blockquote>
+<div><p>The JSON Save Game example demonstrates how to save and load a small game using <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> , <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonObject</span></code> and <a class="reference internal" href="../PySide2/QtCore/QJsonArray.html#PySide2.QtCore.QJsonArray" title="PySide2.QtCore.QJsonArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonArray</span></code></a> .</p>
+<p>Many games provide save functionality, so that the player’s progress through the game can be saved and loaded at a later time. The process of saving a game generally involves serializing each game object’s member variables to a file. Many formats can be used for this purpose, one of which is JSON. With <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> , you also have the ability to serialize a document in a binary format, which is great if you don’t want the save file to be readable, or if you need to keep the file size down.</p>
+<p>In this example, we’ll demonstrate how to save and load a simple game to and from JSON and binary formats.</p>
+</div></blockquote>
+<div class="section" id="the-character-class">
+<span id="id2"></span><h2>The Character Class<a class="headerlink" href="#the-character-class" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Character class represents a non-player character (NPC) in our game, and stores the player’s name, level, and class type.</p>
+<p>It provides read() and write() functions to serialise its member variables.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Character</span>
+<span class="p">{</span>
+    <span class="n">Q_GADGET</span><span class="p">;</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">ClassType</span> <span class="p">{</span>
+        <span class="n">Warrior</span><span class="p">,</span> <span class="n">Mage</span><span class="p">,</span> <span class="n">Archer</span>
+    <span class="p">};</span>
+    <span class="n">Q_ENUM</span><span class="p">(</span><span class="n">ClassType</span><span class="p">)</span>
+
+    <span class="n">Character</span><span class="p">();</span>
+    <span class="n">Character</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">,</span> <span class="nb">int</span> <span class="n">level</span><span class="p">,</span> <span class="n">ClassType</span> <span class="n">classType</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">name</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setName</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">);</span>
+
+    <span class="nb">int</span> <span class="n">level</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setLevel</span><span class="p">(</span><span class="nb">int</span> <span class="n">level</span><span class="p">);</span>
+
+    <span class="n">ClassType</span> <span class="n">classType</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setClassType</span><span class="p">(</span><span class="n">ClassType</span> <span class="n">classType</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="nb">print</span><span class="p">(</span><span class="nb">int</span> <span class="n">indentation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">mName</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">mLevel</span><span class="p">;</span>
+    <span class="n">ClassType</span> <span class="n">mClassType</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Of particular interest to us are the read and write function implementations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Character</span><span class="p">::</span><span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isString</span><span class="p">())</span>
+        <span class="n">mName</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isDouble</span><span class="p">())</span>
+        <span class="n">mLevel</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toInt</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;classType&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;classType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isDouble</span><span class="p">())</span>
+        <span class="n">mClassType</span> <span class="o">=</span> <span class="n">ClassType</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">&quot;classType&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toInt</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the read() function, we assign Character’s members values from the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonObject</span></code> argument. You can use either <code class="xref py py-func docutils literal"><span class="pre">QJsonObject.operator[]()</span></code> or <code class="xref py py-func docutils literal"><span class="pre">QJsonObject.value()</span></code> to access values within the JSON object; both are const functions and return <code class="xref py py-attr docutils literal"><span class="pre">QJsonValue.Undefined</span></code> if the key is invalid. We check if the keys are valid before attempting to read them with <code class="xref py py-func docutils literal"><span class="pre">QJsonObject.contains()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Character</span><span class="p">::</span><span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mName</span><span class="p">;</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mLevel</span><span class="p">;</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;classType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mClassType</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the write() function, we do the reverse of the read() function; assign values from the Character object to the JSON object. As with accessing values, there are two ways to set values on a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonObject</span></code> : <code class="xref py py-func docutils literal"><span class="pre">QJsonObject.operator[]()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QJsonObject.insert()</span></code> . Both will override any existing value at the given key.</p>
+<p>Next up is the Level class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Level</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Level</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">Level</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">name</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">npcs</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setNpcs</span><span class="p">(</span><span class="n">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">npcs</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="nb">print</span><span class="p">(</span><span class="nb">int</span> <span class="n">indentation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">mName</span><span class="p">;</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">mNpcs</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We want to have several levels in our game, each with several NPCs, so we keep a <code class="xref py py-class docutils literal"><span class="pre">QVector</span></code> of Character objects. We also provide the familiar read() and write() functions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Level</span><span class="p">::</span><span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isString</span><span class="p">())</span>
+        <span class="n">mName</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;npcs&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;npcs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isArray</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QJsonArray</span> <span class="n">npcArray</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;npcs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toArray</span><span class="p">();</span>
+        <span class="n">mNpcs</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">mNpcs</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">npcArray</span><span class="o">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">npcIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">npcIndex</span> <span class="o">&lt;</span> <span class="n">npcArray</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">npcIndex</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">QJsonObject</span> <span class="n">npcObject</span> <span class="o">=</span> <span class="n">npcArray</span><span class="p">[</span><span class="n">npcIndex</span><span class="p">]</span><span class="o">.</span><span class="n">toObject</span><span class="p">();</span>
+            <span class="n">Character</span> <span class="n">npc</span><span class="p">;</span>
+            <span class="n">npc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">npcObject</span><span class="p">);</span>
+            <span class="n">mNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Containers can be written and read to and from JSON using <a class="reference internal" href="../PySide2/QtCore/QJsonArray.html#PySide2.QtCore.QJsonArray" title="PySide2.QtCore.QJsonArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonArray</span></code></a> . In our case, we construct a <a class="reference internal" href="../PySide2/QtCore/QJsonArray.html#PySide2.QtCore.QJsonArray" title="PySide2.QtCore.QJsonArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonArray</span></code></a> from the value associated with the key <code class="docutils literal"><span class="pre">&quot;npcs&quot;</span></code> . Then, for each <a class="reference internal" href="../PySide2/QtCore/QJsonValue.html#PySide2.QtCore.QJsonValue" title="PySide2.QtCore.QJsonValue"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonValue</span></code></a> element in the array, we call toObject() to get the Character’s JSON object. The Character object can then read their JSON and be appended to our NPC array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><span class="xref std std-ref">Associate containers</span> can be written by storing the key in each value object (if it’s not already). With this approach, the container is stored as a regular array of objects, but the index of each element is used as the key to construct the container when reading it back in.</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Level</span><span class="p">::</span><span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mName</span><span class="p">;</span>
+    <span class="n">QJsonArray</span> <span class="n">npcArray</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">Character</span> <span class="n">npc</span><span class="p">,</span> <span class="n">mNpcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QJsonObject</span> <span class="n">npcObject</span><span class="p">;</span>
+        <span class="n">npc</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">npcObject</span><span class="p">);</span>
+        <span class="n">npcArray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npcObject</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;npcs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">npcArray</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Again, the write() function is similar to the read() function, except reversed.</p>
+<p>Having established the Character and Level classes, we can move on to the Game class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Game</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">SaveFormat</span> <span class="p">{</span>
+        <span class="n">Json</span><span class="p">,</span> <span class="n">Binary</span>
+    <span class="p">};</span>
+
+    <span class="n">Character</span> <span class="n">player</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">levels</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">newGame</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">loadGame</span><span class="p">(</span><span class="n">SaveFormat</span> <span class="n">saveFormat</span><span class="p">);</span>
+    <span class="nb">bool</span> <span class="n">saveGame</span><span class="p">(</span><span class="n">SaveFormat</span> <span class="n">saveFormat</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="nb">print</span><span class="p">(</span><span class="nb">int</span> <span class="n">indentation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">Character</span> <span class="n">mPlayer</span><span class="p">;</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Level</span><span class="o">&gt;</span> <span class="n">mLevels</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>First of all, we define the <code class="docutils literal"><span class="pre">SaveFormat</span></code> enum. This will allow us to specify the format in which the game should be saved: <code class="docutils literal"><span class="pre">Json</span></code> or <code class="docutils literal"><span class="pre">Binary</span></code> .</p>
+<p>Next, we provide accessors for the player and levels. We then expose three functions: newGame(), saveGame() and loadGame().</p>
+<p>The read() and write() functions are used by saveGame() and loadGame().</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Game</span><span class="p">::</span><span class="n">newGame</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mPlayer</span> <span class="o">=</span> <span class="n">Character</span><span class="p">();</span>
+    <span class="n">mPlayer</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Hero&quot;</span><span class="p">));</span>
+    <span class="n">mPlayer</span><span class="o">.</span><span class="n">setClassType</span><span class="p">(</span><span class="n">Character</span><span class="p">::</span><span class="n">Archer</span><span class="p">);</span>
+    <span class="n">mPlayer</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">));</span>
+
+    <span class="n">mLevels</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">mLevels</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+    <span class="n">Level</span> <span class="n">village</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Village&quot;</span><span class="p">));</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">villageNpcs</span><span class="p">;</span>
+    <span class="n">villageNpcs</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">villageNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Character</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Barry the Blacksmith&quot;</span><span class="p">),</span>
+                                 <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+                                 <span class="n">Character</span><span class="p">::</span><span class="n">Warrior</span><span class="p">));</span>
+    <span class="n">villageNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Character</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Terry the Trader&quot;</span><span class="p">),</span>
+                                 <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+                                 <span class="n">Character</span><span class="p">::</span><span class="n">Warrior</span><span class="p">));</span>
+    <span class="n">village</span><span class="o">.</span><span class="n">setNpcs</span><span class="p">(</span><span class="n">villageNpcs</span><span class="p">);</span>
+    <span class="n">mLevels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">village</span><span class="p">);</span>
+
+    <span class="n">Level</span> <span class="n">dungeon</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Dungeon&quot;</span><span class="p">));</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">dungeonNpcs</span><span class="p">;</span>
+    <span class="n">dungeonNpcs</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">dungeonNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Character</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Eric the Evil&quot;</span><span class="p">),</span>
+                                 <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+                                 <span class="n">Character</span><span class="p">::</span><span class="n">Mage</span><span class="p">));</span>
+    <span class="n">dungeonNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Character</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Eric&#39;s Left Minion&quot;</span><span class="p">),</span>
+                                 <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+                                 <span class="n">Character</span><span class="p">::</span><span class="n">Warrior</span><span class="p">));</span>
+    <span class="n">dungeonNpcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Character</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s2">&quot;Eric&#39;s Right Minion&quot;</span><span class="p">),</span>
+                                 <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+                                 <span class="n">Character</span><span class="p">::</span><span class="n">Warrior</span><span class="p">));</span>
+    <span class="n">dungeon</span><span class="o">.</span><span class="n">setNpcs</span><span class="p">(</span><span class="n">dungeonNpcs</span><span class="p">);</span>
+    <span class="n">mLevels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dungeon</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To setup a new game, we create the player and populate the levels and their NPCs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Game</span><span class="p">::</span><span class="n">read</span><span class="p">(</span><span class="n">const</span> <span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;player&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isObject</span><span class="p">())</span>
+        <span class="n">mPlayer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toObject</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;levels&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;levels&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isArray</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QJsonArray</span> <span class="n">levelArray</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="s2">&quot;levels&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">toArray</span><span class="p">();</span>
+        <span class="n">mLevels</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">mLevels</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">levelArray</span><span class="o">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">levelIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">levelIndex</span> <span class="o">&lt;</span> <span class="n">levelArray</span><span class="o">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">levelIndex</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">QJsonObject</span> <span class="n">levelObject</span> <span class="o">=</span> <span class="n">levelArray</span><span class="p">[</span><span class="n">levelIndex</span><span class="p">]</span><span class="o">.</span><span class="n">toObject</span><span class="p">();</span>
+            <span class="n">Level</span> <span class="n">level</span><span class="p">;</span>
+            <span class="n">level</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">levelObject</span><span class="p">);</span>
+            <span class="n">mLevels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first thing we do in the read() function is tell the player to read itself. We then clear the level array so that calling loadGame() on the same Game object twice doesn’t result in old levels hanging around.</p>
+<p>We then populate the level array by reading each Level from a <a class="reference internal" href="../PySide2/QtCore/QJsonArray.html#PySide2.QtCore.QJsonArray" title="PySide2.QtCore.QJsonArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonArray</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Game</span><span class="p">::</span><span class="n">write</span><span class="p">(</span><span class="n">QJsonObject</span> <span class="o">&amp;</span><span class="n">json</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">QJsonObject</span> <span class="n">playerObject</span><span class="p">;</span>
+    <span class="n">mPlayer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">playerObject</span><span class="p">);</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playerObject</span><span class="p">;</span>
+
+    <span class="n">QJsonArray</span> <span class="n">levelArray</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">const</span> <span class="n">Level</span> <span class="n">level</span><span class="p">,</span> <span class="n">mLevels</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QJsonObject</span> <span class="n">levelObject</span><span class="p">;</span>
+        <span class="n">level</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">levelObject</span><span class="p">);</span>
+        <span class="n">levelArray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">levelObject</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">json</span><span class="p">[</span><span class="s2">&quot;levels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">levelArray</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We write the game to JSON similarly to how we write Level.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>bool Game::loadGame(Game::SaveFormat saveFormat)
+{
+    QFile loadFile(saveFormat == Json
+        ? QStringLiteral(&quot;save.json&quot;)
+        : QStringLiteral(&quot;save.dat&quot;));
+
+    if (!loadFile.open(QIODevice::ReadOnly)) {
+        qWarning(&quot;Couldn&#39;t open save file.&quot;);
+        return false;
+    }
+
+    QByteArray saveData = loadFile.readAll();
+
+    QJsonDocument loadDoc(saveFormat == Json
+        ? QJsonDocument::fromJson(saveData)
+        : QJsonDocument::fromBinaryData(saveData));
+
+    read(loadDoc.object());
+
+    QTextStream(stdout) &lt;&lt; &quot;Loaded save for &quot;
+                        &lt;&lt; loadDoc[&quot;player&quot;][&quot;name&quot;].toString()
+                        &lt;&lt; &quot; using &quot;
+                        &lt;&lt; (saveFormat != Json ? &quot;binary &quot; : &quot;&quot;) &lt;&lt; &quot;JSON...\n&quot;;
+    return true;
+}
+</pre></div>
+</div>
+<p>When loading a saved game in loadGame(), the first thing we do is open the save file based on which format it was saved to; <code class="docutils literal"><span class="pre">&quot;save.json&quot;</span></code> for JSON, and <code class="docutils literal"><span class="pre">&quot;save.dat&quot;</span></code> for binary. We print a warning and return <code class="docutils literal"><span class="pre">false</span></code> if the file couldn’t be opened.</p>
+<p>Since <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QJsonDocument.fromJson()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QJsonDocument.fromBinaryData()</span></code> functions both take a <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> , we can read the entire contents of the save file into one, regardless of the save format.</p>
+<p>After constructing the <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> , we instruct the Game object to read itself and then return <code class="docutils literal"><span class="pre">true</span></code> to indicate success.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>bool Game::saveGame(Game::SaveFormat saveFormat) const
+{
+    QFile saveFile(saveFormat == Json
+        ? QStringLiteral(&quot;save.json&quot;)
+        : QStringLiteral(&quot;save.dat&quot;));
+
+    if (!saveFile.open(QIODevice::WriteOnly)) {
+        qWarning(&quot;Couldn&#39;t open save file.&quot;);
+        return false;
+    }
+
+    QJsonObject gameObject;
+    write(gameObject);
+    QJsonDocument saveDoc(gameObject);
+    saveFile.write(saveFormat == Json
+        ? saveDoc.toJson()
+        : saveDoc.toBinaryData());
+
+    return true;
+}
+</pre></div>
+</div>
+<p>Not surprisingly, saveGame() looks very much like loadGame(). We determine the file extension based on the format, print a warning and return <code class="docutils literal"><span class="pre">false</span></code> if the opening of the file fails. We then write the Game object to a <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> , and call either <code class="xref py py-func docutils literal"><span class="pre">QJsonDocument.toJson()</span></code> or to <code class="xref py py-func docutils literal"><span class="pre">QJsonDocument.toBinaryData()</span></code> to save the game, depending on which format was specified.</p>
+<p>We are now ready to enter main():</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>int main(int argc, char *argv[])
+{
+    QCoreApplication app(argc, argv);
+    QStringList args = QCoreApplication::arguments();
+    bool newGame = true;
+    if (args.length() &gt; 1)
+        newGame = (args[1].toLower() != QStringLiteral(&quot;load&quot;));
+    bool json = true;
+    if (args.length() &gt; 2)
+        json = (args[2].toLower() != QStringLiteral(&quot;binary&quot;));
+
+    Game game;
+    if (newGame)
+        game.newGame();
+    else if (!game.loadGame(json ? Game::Json : Game::Binary))
+            return 1;
+    // Game is played; changes are made...
+</pre></div>
+</div>
+<p>Since we’re only interested in demonstrating <em>serialization</em> of a game with JSON, our game is not actually playable. Therefore, we only need <a class="reference internal" href="../PySide2/QtCore/QCoreApplication.html#PySide2.QtCore.QCoreApplication" title="PySide2.QtCore.QCoreApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QCoreApplication</span></code></a> and have no event loop. On application start-up we parse the command-line arguments to decide how to start the game. For the first argument the options “new” (default) and “load” are available. When “new” is specified a new game will be generated, and when “load” is specified a previously saved game will be loaded in. For the second argument “json” (default) and “binary” are available as options. This argument will decide which file is saved to and/or loaded from. We then move ahead and assume that the player had a great time and made lots of progress, altering the internal state of our Character, Level and Game objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    QTextStream(stdout) &lt;&lt; &quot;Game ended in the following state:\n&quot;;
+    game.print();
+    if (!game.saveGame(json ? Game::Json : Game::Binary))
+        return 1;
+
+    return 0;
+}
+</pre></div>
+</div>
+<p>When the player has finished, we save their game. For demonstration purposes, we can serialize to either JSON or binary. You can examine the contents of the files in the same directory as the executable (or re-run the example, making sure to also specify the “load” option), although the binary save file will contain some garbage characters (which is normal).</p>
+<p>That concludes our example. As you can see, serialization with Qt’s JSON classes is very simple and convenient. The advantages of using <a class="reference internal" href="../PySide2/QtCore/QJsonDocument.html#PySide2.QtCore.QJsonDocument" title="PySide2.QtCore.QJsonDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QJsonDocument</span></code></a> and friends over <a class="reference internal" href="../PySide2/QtCore/QDataStream.html#PySide2.QtCore.QDataStream" title="PySide2.QtCore.QDataStream"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDataStream</span></code></a> , for example, is that you not only get human-readable JSON files, but you also have the option to use a binary format if it’s required, <em>without</em> rewriting any code.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><span class="xref std std-ref">JSON Support in Qt</span>  <code class="xref py py-class docutils literal"><span class="pre">Data</span> <span class="pre">Storage</span></code></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="character-cpp-example-file">
+<h1>character.cpp Example File<a class="headerlink" href="#character-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="character-h-example-file">
+<h1>character.h Example File<a class="headerlink" href="#character-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="game-cpp-example-file">
+<h1>game.cpp Example File<a class="headerlink" href="#game-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="game-h-example-file">
+<h1>game.h Example File<a class="headerlink" href="#game-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="level-cpp-example-file">
+<h1>level.cpp Example File<a class="headerlink" href="#level-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="level-h-example-file">
+<h1>level.h Example File<a class="headerlink" href="#level-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="savegame-pro-example-file">
+<h1>savegame.pro Example File<a class="headerlink" href="#savegame-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

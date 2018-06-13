@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Places Backend &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Places Backend</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#implementing-inheriting-reply-objects">Implementing/Inheriting Reply Objects</a></li>
+<li><a class="reference internal" href="#icon-urls">Icon URLs</a></li>
+<li><a class="reference internal" href="#categories">Categories</a></li>
+<li><a class="reference internal" href="#saving-places-to-the-manager">Saving Places to the Manager</a></li>
+<li><a class="reference internal" href="#cross-referencing-places-between-managers">Cross-Referencing Places Between Managers</a></li>
+<li><a class="reference internal" href="#alternative-identifier-cross-referencing">Alternative Identifier Cross-Referencing</a></li>
+<li><a class="reference internal" href="#other-methods-of-linking">Other Methods of Linking</a></li>
+<li><a class="reference internal" href="#user-readable-vs-non-user-readable-extended-attributes">User Readable vs Non-User Readable Extended Attributes</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="places-backend">
+<span id="id1"></span><h1>Places Backend<a class="headerlink" href="#places-backend" title="Permalink to this headline">¶</a></h1>
+<p>Places backend is responsible for managing a places datastore whether it is located remotely or locally</p>
+<blockquote>
+<div>The Places backend is responsible for managing a places datastore whether it is located remotely or locally</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManager</span></code> interface, provided to clients to allow access to place information, depends directly on an implementation of <a class="reference internal" href="../PySide2/QtLocation/QPlaceManagerEngine.html#PySide2.QtLocation.QPlaceManagerEngine" title="PySide2.QtLocation.QPlaceManagerEngine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManagerEngine</span></code></a> . The engine provides the backend function implementations which are called by the manager.</p>
+<p>A places backend implementer needs to derive from <a class="reference internal" href="../PySide2/QtLocation/QPlaceManagerEngine.html#PySide2.QtLocation.QPlaceManagerEngine" title="PySide2.QtLocation.QPlaceManagerEngine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManagerEngine</span></code></a> and provide implementations for the virtual functions relevant for their backend. Most of these functions are asynchronous and so implementers will also need to derive the appropriate <a class="reference internal" href="location-places-cpp.html#places-c"><span class="std std-ref">reply classes</span></a> . The reply objects are responsible for managing an asynchronous request; they are used to notify when a request is complete and hold the results of that request. <a class="reference internal" href="../PySide2/QtLocation/QPlaceManagerEngine.html#PySide2.QtLocation.QPlaceManagerEngine" title="PySide2.QtLocation.QPlaceManagerEngine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManagerEngine</span></code></a> provides a default implementation for all virtual functions. The default implementations for the asynchronous functions return a reply that will emit the error() and finished() signals at the next iteration through the event loop.</p>
+</div></blockquote>
+</div>
+<div class="section" id="implementing-inheriting-reply-objects">
+<span id="id3"></span><h2>Implementing/Inheriting Reply Objects<a class="headerlink" href="#implementing-inheriting-reply-objects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A reply object would be inherited as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchReply</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QPlaceSearchReply</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">SearchReply</span><span class="p">(</span><span class="n">ManagerEngine</span> <span class="o">*</span><span class="n">engine</span><span class="p">)</span>
+        <span class="p">:</span> <span class="n">QPlaceSearchReply</span><span class="p">(</span><span class="n">engine</span><span class="p">),</span> <span class="n">m_engine</span><span class="p">(</span><span class="n">engine</span><span class="p">){}</span>
+
+    <span class="o">~</span><span class="n">SearchReply</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">setResults</span><span class="p">(</span><span class="n">const</span> <span class="n">QList</span><span class="o">&lt;</span><span class="n">QPlaceSearchResult</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">results</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setRequest</span><span class="p">(</span><span class="n">const</span> <span class="n">QPlaceSearchRequest</span> <span class="o">&amp;</span><span class="n">request</span><span class="p">);</span>
+    <span class="o">...</span>
+    <span class="n">void</span> <span class="n">triggerDone</span><span class="p">(</span><span class="n">QPlaceReply</span><span class="p">::</span><span class="n">Error</span> <span class="n">error</span> <span class="o">=</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">,</span>
+                     <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">errorString</span> <span class="o">=</span> <span class="n">QString</span><span class="p">());</span>
+
+    <span class="n">ManagerEngine</span> <span class="o">*</span><span class="n">m_engine</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The implementation of a <a class="reference internal" href="../PySide2/QtLocation/QPlaceManagerEngine.html#PySide2.QtLocation.QPlaceManagerEngine" title="PySide2.QtLocation.QPlaceManagerEngine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceManagerEngine</span></code></a> must ensure that any signals emitted by the reply objects are delayed until the request functions have returned and the application code has a chance to connect those signals to slots. The typical approach is to use <code class="xref py py-func docutils literal"><span class="pre">QMetaObject.invokeMethod()</span></code> with a <code class="xref py py-attr docutils literal"><span class="pre">Qt.QueuedConnection</span></code> to emit the signals.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SearchSuggestionReply</span><span class="p">::</span><span class="n">triggerDone</span><span class="p">(</span><span class="n">QPlaceReply</span><span class="p">::</span><span class="n">Error</span> <span class="n">error</span><span class="p">,</span>
+                         <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">errorString</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="n">QPlaceReply</span><span class="p">::</span><span class="n">NoError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">-&gt;</span><span class="n">setError</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">errorString</span><span class="p">);</span>
+        <span class="n">QMetaObject</span><span class="p">::</span><span class="n">invokeMethod</span><span class="p">(</span><span class="n">m_engine</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">QueuedConnection</span><span class="p">,</span>
+                                  <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QPlaceReply</span> <span class="o">*</span><span class="p">,</span><span class="n">this</span><span class="p">),</span>
+                                  <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QPlaceReply</span><span class="p">::</span><span class="n">Error</span><span class="p">,</span> <span class="n">error</span><span class="p">),</span>
+                                  <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QString</span><span class="p">,</span> <span class="n">errorString</span><span class="p">));</span>
+        <span class="n">QMetaObject</span><span class="p">::</span><span class="n">invokeMethod</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">QueuedConnection</span><span class="p">,</span>
+                                  <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QPlaceReply</span><span class="p">::</span><span class="n">Error</span><span class="p">,</span> <span class="n">error</span><span class="p">),</span>
+                                  <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QString</span><span class="p">,</span> <span class="n">errorString</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">this</span><span class="o">-&gt;</span><span class="n">setFinished</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">QMetaObject</span><span class="p">::</span><span class="n">invokeMethod</span><span class="p">(</span><span class="n">m_engine</span><span class="p">,</span> <span class="s2">&quot;finished&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">QueuedConnection</span><span class="p">,</span>
+                              <span class="n">Q_ARG</span><span class="p">(</span><span class="n">QPlaceReply</span> <span class="o">*</span><span class="p">,</span><span class="n">this</span><span class="p">));</span>
+    <span class="n">QMetaObject</span><span class="p">::</span><span class="n">invokeMethod</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s2">&quot;finished&quot;</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">QueuedConnection</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal"><span class="pre">finished</span></code> signals should always be emitted when a reply is complete, even if an error has been encountered, that is, if there is an error, both the <code class="docutils literal"><span class="pre">error</span></code> and <code class="docutils literal"><span class="pre">finished</span></code> signals should be emitted while if there is no error, only the <code class="docutils literal"><span class="pre">finished</span></code> signals are emitted.</p>
+<p>The protected functions of <code class="xref py py-func docutils literal"><span class="pre">QPlaceSearchReply.setResults()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceSearchReply.setRequest()</span></code> are made publicly accessible so the plugin can assign results and requests. Because these functions are not publicly exported, accessibility is not so much of an issue. An alternative would have been to declare a friend class in SearchReply.</p>
+<p>Typically the engine instance would be made the <code class="docutils literal"><span class="pre">parent</span></code> of the reply. If the developer fails to discard the replies when finished, the engine can clean those upon destruction. Commonly, the reply also has a pointer reference back to the engine, which may be used to emit the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManagerEngine.finished()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManagerEngine.error()</span></code> signals. This is just one of many ways the reply could be implemented.</p>
+</div></blockquote>
+</div>
+<div class="section" id="icon-urls">
+<span id="id4"></span><h2>Icon URLs<a class="headerlink" href="#icon-urls" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Icon URLs are provided through the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManagerEngine.constructIconUrl()</span></code> function. The expected behaviour is that the engine will use the <code class="xref py py-func docutils literal"><span class="pre">QPlaceIcon.parameters()</span></code> in order to construct an appropriate URL. When a <a class="reference internal" href="../PySide2/QtLocation/QPlace.html#PySide2.QtLocation.QPlace" title="PySide2.QtLocation.QPlace"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlace</span></code></a> object is returned from the manager either from a search or a query to get place details, it is expected the engine will correctly populate the parameters as necessary.</p>
+<p>The backend is free to choose what the parameter key and values are, however if a backend only ever has one URL per icon it is recommended that the <span class="xref std std-ref">QPlaceIcon::SingleUrl</span> be used as the key.</p>
+</div></blockquote>
+</div>
+<div class="section" id="categories">
+<span id="id5"></span><h2>Categories<a class="headerlink" href="#categories" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The categories of a manager engine are relatively static entities; for engines accessing remote place datastores it may be desirable to cache the category structure rather than querying a server every time <code class="xref py py-func docutils literal"><span class="pre">QPlaceManagerEngine.initializeCategories()</span></code> is called. Depending on how dynamic the categories are, always downloading the freshest set of categories may be more appropriate.</div></blockquote>
+</div>
+<div class="section" id="saving-places-to-the-manager">
+<span id="id6"></span><h2>Saving Places to the Manager<a class="headerlink" href="#saving-places-to-the-manager" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A place generally cannot be saved directly between managers as is because it contains manager specific data such as icons and categories. In order to facilitate saving to one’s own manager, engine implementers should implement the <code class="xref py py-func docutils literal"><span class="pre">QPlaceManagerEngine.compatiblePlace()</span></code> function. This function returns a copy of the input place with properties pruned or modified as necessary such that the copy can be saved into manager.</p>
+<p>Construction of a compatible place may involve ignoring certain properties from the original place, for example if contact details are not supported, these are left out of the compatible place. Other times it may involve modifying certain properties, for example modifying the icon parameters to facilitate copying or downloading of the original place’s icon to a location that the backend can access.</p>
+</div></blockquote>
+</div>
+<div class="section" id="cross-referencing-places-between-managers">
+<span id="id7"></span><h2>Cross-Referencing Places Between Managers<a class="headerlink" href="#cross-referencing-places-between-managers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Sometimes a situation may arise where we wish to cross-reference and match places between managers. Such a situation may arise where one manager provides read-only access to places (origin manager), while another second r/w manager (destination manager) is used to save selected favorites from the first. During a search of the origin manager, we may want to know which ones have been ‘favorited’ into the destination manager and perhaps display the customized favorite name rather than the original name.</div></blockquote>
+</div>
+<div class="section" id="alternative-identifier-cross-referencing">
+<span id="id8"></span><h2>Alternative Identifier Cross-Referencing<a class="headerlink" href="#alternative-identifier-cross-referencing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In order to accomplish cross-referencing, there needs to be a link between the original place and the favorited place and this is typically handled via an alternative identifier attribute. The favorited place contains an alternative identifier attribute which has the identifier of the original place.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">origin</span> <span class="n">R</span><span class="o">/</span><span class="n">O</span> <span class="n">manager</span><span class="p">(</span><span class="n">here</span><span class="p">)</span>       <span class="n">destination</span> <span class="n">R</span><span class="o">/</span><span class="n">W</span> <span class="n">manager</span> <span class="p">(</span><span class="n">places_jsondb</span><span class="p">)</span>
+                        <span class="n">Save</span>
+<span class="n">Place</span> <span class="nb">id</span><span class="p">:</span> <span class="n">ae246</span>         <span class="o">---&gt;</span>    <span class="n">Place</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">0001</span>
+<span class="n">Attribute</span> <span class="nb">type</span><span class="p">:</span> <span class="n">x_provider</span>      <span class="n">Attribute</span> <span class="nb">type</span><span class="p">:</span> <span class="n">x_id_here</span>
+<span class="n">Attribute</span> <span class="n">value</span><span class="p">:</span> <span class="n">here</span>           <span class="n">Attribute</span> <span class="n">text</span> <span class="n">value</span><span class="p">:</span> <span class="n">ae246</span>
+</pre></div>
+</div>
+<p>There are 3 prerequisites for implementing cross-referencing by alternative identifier. The first is that the origin manager must provide the x_provider attribute with the value being the name of the manager’s <a class="reference internal" href="../PySide2/QtLocation/QGeoServiceProvider.html#PySide2.QtLocation.QGeoServiceProvider" title="PySide2.QtLocation.QGeoServiceProvider"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QGeoServiceProvider</span></code></a> . The attribute label should be kept empty, indicating the attribute should not be displayed to users.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is generally expected that all managers should set the <code class="docutils literal"><span class="pre">x_provider</span></code> attribute.</p>
+</div>
+<p>The second is that <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.compatiblePlace()</span></code> of the destination manager use the <code class="docutils literal"><span class="pre">x_provider</span></code> attribute of the initial place and set an alternative identifier attribute of the place to be saved. The key of the alternative identifier attribute is <code class="docutils literal"><span class="pre">x_id_&lt;provider</span></code> name&gt; and the text value is the identifier of the initial place. The <code class="docutils literal"><span class="pre">x_provider</span></code> attribute should not be passed to the compatible place. When it is saved, the x_provider of the saved place is considered to be the destination manager.</p>
+<p>The third is that <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.matchingPlaces()</span></code> of the destination manager accept the <span class="xref std std-ref">QPlaceMatchRequest::AlternativeId</span> as a parameter key and the alternative identifier attribute key as the value, in this case <code class="docutils literal"><span class="pre">x_id_&lt;provider</span></code> name&gt; would be the expected value. This indicates that the identifiers of places in the <a class="reference internal" href="../PySide2/QtLocation/QPlaceMatchRequest.html#PySide2.QtLocation.QPlaceMatchRequest" title="PySide2.QtLocation.QPlaceMatchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceMatchRequest</span></code></a> should be matched against the <code class="docutils literal"><span class="pre">x_id_&lt;provider</span></code> name&gt; alternative identifier attributes.</p>
+<p>Note that if the destination manager is to facilitate saving and cross-referencing from any arbitrary manager, it internally must accommodate saving of arbitrary key value pairs since we cannot know the provider names before hand, nor can we know what structure the ids will be.</p>
+</div></blockquote>
+</div>
+<div class="section" id="other-methods-of-linking">
+<span id="id9"></span><h2>Other Methods of Linking<a class="headerlink" href="#other-methods-of-linking" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If an origin manager does not supply a place id, it may be necessary to provide some other means of cross-referencing/matching. One approach might be to do so via the place coordinates, if the coordinate of a place in the origin manager is identical or close to a place in the destination manager, there is a high likelihood that they are the same place. In this case, the manager might implement <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.matchingPlaces()</span></code> to accept a <a class="reference internal" href="../PySide2/QtLocation/QPlaceMatchRequest.html#PySide2.QtLocation.QPlaceMatchRequest" title="PySide2.QtLocation.QPlaceMatchRequest"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtLocation.QPlaceMatchRequest</span></code></a> with a parameter key of ‘proximity’ and a parameter value of the distance two places must be in order to detect a match. for example if an origin place and destination place are within 50m of each other, they can be considered the same place.</p>
+<p>Generally however it is recommended that cross referencing be implemented via alternative identifiers as mentioned above.</p>
+</div></blockquote>
+</div>
+<div class="section" id="user-readable-vs-non-user-readable-extended-attributes">
+<span id="id10"></span><h2>User Readable vs Non-User Readable Extended Attributes<a class="headerlink" href="#user-readable-vs-non-user-readable-extended-attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>If an attribute is not intended to be readable by end users, the label field should be kept empty as an indicator of this fact.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

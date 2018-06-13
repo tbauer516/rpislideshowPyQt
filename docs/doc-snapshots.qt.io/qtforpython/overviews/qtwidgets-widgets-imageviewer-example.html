@@ -1,0 +1,490 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Image Viewer Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Image Viewer Example</a><ul>
+<li><a class="reference internal" href="#imageviewer-class-definition">ImageViewer Class Definition</a></li>
+<li><a class="reference internal" href="#imageviewer-class-implementation">ImageViewer Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imageviewer-cpp-example-file">imageviewer.cpp Example File</a></li>
+<li><a class="reference internal" href="#imageviewer-h-example-file">imageviewer.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#imageviewer-pro-example-file">imageviewer.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="image-viewer-example">
+<span id="id1"></span><h1>Image Viewer Example<a class="headerlink" href="#image-viewer-example" title="Permalink to this headline">¶</a></h1>
+<p>Example shows how to combine QLabel and QScrollArea to display an image</p>
+<blockquote>
+<div><p>The example shows how to combine <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> to display an image.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> is typically used for displaying text, but it can also display an image. <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> provides a scrolling view around another widget. If the child widget exceeds the size of the frame, <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> automatically provides scroll bars.</p>
+<p>The example demonstrates how <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> ‘s ability to scale its contents ( <code class="xref py py-func docutils literal"><span class="pre">QLabel.scaledContents()</span></code> ), and <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> ‘s ability to automatically resize its contents ( <code class="xref py py-func docutils literal"><span class="pre">QScrollArea.widgetResizable()</span></code> ), can be used to implement zooming and scaling features. In addition the example shows how to use <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> to print an image.</p>
+<p>With the Image Viewer application, the users can view an image of their choice. The File menu gives the user the possibility to:</p>
+<ul class="simple">
+<li>Open… - Open an image file</li>
+<li>Print… - Print an image</li>
+<li>Exit - Exit the application</li>
+</ul>
+<p>Once an image is loaded, the View menu allows the users to:</p>
+<ul class="simple">
+<li>Zoom In - Scale the image up by 25%</li>
+<li>Zoom Out - Scale the image down by 25%</li>
+<li>Normal Size - Show the image at its original size</li>
+<li>Fit to Window - Stretch the image to occupy the entire window</li>
+</ul>
+<p>In addition the Help menu provides the users with information about the Image Viewer example in particular, and about Qt in general.</p>
+</div></blockquote>
+<div class="section" id="imageviewer-class-definition">
+<span id="id2"></span><h2>ImageViewer Class Definition<a class="headerlink" href="#imageviewer-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageViewer</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ImageViewer</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">loadFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">open</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">saveAs</span><span class="p">();</span>
+    <span class="n">void</span> <span class="nb">print</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">copy</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">paste</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">zoomIn</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">zoomOut</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">normalSize</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">fitToWindow</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createMenus</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">updateActions</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">saveFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setImage</span><span class="p">(</span><span class="n">const</span> <span class="n">QImage</span> <span class="o">&amp;</span><span class="n">newImage</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">scaleImage</span><span class="p">(</span><span class="n">double</span> <span class="n">factor</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">adjustScrollBar</span><span class="p">(</span><span class="n">QScrollBar</span> <span class="o">*</span><span class="n">scrollBar</span><span class="p">,</span> <span class="n">double</span> <span class="n">factor</span><span class="p">);</span>
+
+    <span class="n">QImage</span> <span class="n">image</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">imageLabel</span><span class="p">;</span>
+    <span class="n">QScrollArea</span> <span class="o">*</span><span class="n">scrollArea</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">scaleFactor</span><span class="p">;</span>
+
+<span class="c1">#ifndef QT_NO_PRINTER</span>
+    <span class="n">QPrinter</span> <span class="n">printer</span><span class="p">;</span>
+<span class="c1">#endif</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">saveAsAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">printAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">copyAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">zoomInAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">zoomOutAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">normalSizeAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">fitToWindowAct</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ImageViewer</span></code> class inherits from <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> . We reimplement the constructor, and create several private slots to facilitate the menu entries. In addition we create four private functions.</p>
+<p>We use <code class="docutils literal"><span class="pre">createActions()</span></code> and <code class="docutils literal"><span class="pre">createMenus()</span></code> when constructing the <code class="docutils literal"><span class="pre">ImageViewer</span></code> widget. We use the <code class="docutils literal"><span class="pre">updateActions()</span></code> function to update the menu entries when a new image is loaded, or when the Fit to Window option is toggled. The zoom slots use <code class="docutils literal"><span class="pre">scaleImage()</span></code> to perform the zooming. In turn, <code class="docutils literal"><span class="pre">scaleImage()</span></code> uses <code class="docutils literal"><span class="pre">adjustScrollBar()</span></code> to preserve the focal point after scaling an image.</p>
+</div></blockquote>
+</div>
+<div class="section" id="imageviewer-class-implementation">
+<span id="id3"></span><h2>ImageViewer Class Implementation<a class="headerlink" href="#imageviewer-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">ImageViewer</span><span class="p">()</span>
+   <span class="p">:</span> <span class="n">imageLabel</span><span class="p">(</span><span class="n">new</span> <span class="n">QLabel</span><span class="p">)</span>
+   <span class="p">,</span> <span class="n">scrollArea</span><span class="p">(</span><span class="n">new</span> <span class="n">QScrollArea</span><span class="p">)</span>
+   <span class="p">,</span> <span class="n">scaleFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">);</span>
+    <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Ignored</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Ignored</span><span class="p">);</span>
+    <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">setScaledContents</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Dark</span><span class="p">);</span>
+    <span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setWidget</span><span class="p">(</span><span class="n">imageLabel</span><span class="p">);</span>
+    <span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">scrollArea</span><span class="p">);</span>
+
+    <span class="n">createActions</span><span class="p">();</span>
+
+    <span class="n">resize</span><span class="p">(</span><span class="n">QGuiApplication</span><span class="p">::</span><span class="n">primaryScreen</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">availableSize</span><span class="p">()</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we first create the label and the scroll area.</p>
+<p>We set <code class="docutils literal"><span class="pre">imageLabel</span></code> ‘s size policy to <code class="xref py py-attr docutils literal"><span class="pre">ignored</span></code> , making the users able to scale the image to whatever size they want when the Fit to Window option is turned on. Otherwise, the default size polizy ( <code class="xref py py-attr docutils literal"><span class="pre">preferred</span></code> ) will make scroll bars appear when the scroll area becomes smaller than the label’s minimum size hint.</p>
+<p>We ensure that the label will scale its contents to fill all available space, to enable the image to scale properly when zooming. If we omitted to set the <code class="docutils literal"><span class="pre">imageLabel</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QLabel.scaledContents()</span></code> property, zooming in would enlarge the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> , but leave the pixmap at its original size, exposing the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> ‘s background.</p>
+<p>We make <code class="docutils literal"><span class="pre">imageLabel</span></code> the scroll area’s child widget, and we make <code class="docutils literal"><span class="pre">scrollArea</span></code> the central widget of the <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> . At the end we create the associated actions and menus, and customize the <code class="docutils literal"><span class="pre">ImageViewer</span></code> ‘s appearance.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>static void initializeImageFileDialog(QFileDialog &amp;dialog, QFileDialog::AcceptMode acceptMode)
+{
+    static bool firstDialog = true;
+
+    if (firstDialog) {
+        firstDialog = false;
+        const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+        dialog.setDirectory(picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last());
+    }
+
+    QStringList mimeTypeFilters;
+    const QByteArrayList supportedMimeTypes = acceptMode == QFileDialog::AcceptOpen
+        ? QImageReader::supportedMimeTypes() : QImageWriter::supportedMimeTypes();
+    foreach (const QByteArray &amp;mimeTypeName, supportedMimeTypes)
+        mimeTypeFilters.append(mimeTypeName);
+    mimeTypeFilters.sort();
+    dialog.setMimeTypeFilters(mimeTypeFilters);
+    dialog.selectMimeTypeFilter(&quot;image/jpeg&quot;);
+    if (acceptMode == QFileDialog::AcceptSave)
+        dialog.setDefaultSuffix(&quot;jpg&quot;);
+}
+
+void ImageViewer::open()
+{
+    QFileDialog dialog(this, tr(&quot;Open File&quot;));
+    initializeImageFileDialog(dialog, QFileDialog::AcceptOpen);
+
+    while (dialog.exec() == QDialog::Accepted &amp;&amp; !loadFile(dialog.selectedFiles().first())) {}
+}
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">open()</span></code> slot, we show a file dialog to the user. We compile a list of mime types for use as a filter by querying <a class="reference internal" href="../PySide2/QtGui/QImageReader.html#PySide2.QtGui.QImageReader" title="PySide2.QtGui.QImageReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImageReader</span></code></a> for the available mime type names.</p>
+<p>We show the file dialog until a valid file name is entered or the user cancels.</p>
+<p>The function <code class="docutils literal"><span class="pre">loadFile()</span></code> is used to load the image.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">loadFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">fileName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QImageReader</span> <span class="n">reader</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+    <span class="n">reader</span><span class="o">.</span><span class="n">setAutoTransform</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">const</span> <span class="n">QImage</span> <span class="n">newImage</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">newImage</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QMessageBox</span><span class="p">::</span><span class="n">information</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">QGuiApplication</span><span class="p">::</span><span class="n">applicationDisplayName</span><span class="p">(),</span>
+                                 <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Cannot load %1: %2&quot;</span><span class="p">)</span>
+                                 <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">QDir</span><span class="p">::</span><span class="n">toNativeSeparators</span><span class="p">(</span><span class="n">fileName</span><span class="p">),</span> <span class="n">reader</span><span class="o">.</span><span class="n">errorString</span><span class="p">()));</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">loadFile()</span></code> function, we instantiate a <a class="reference internal" href="../PySide2/QtGui/QImageReader.html#PySide2.QtGui.QImageReader" title="PySide2.QtGui.QImageReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImageReader</span></code></a> and enable automatic transformations by calling <code class="xref py py-func docutils literal"><span class="pre">QImageReader.setAutoTransform()</span></code> . For files in JPEG format, this ensures that portrait mode images of digital cameras are shown correctly by applying the appropriate orientation read from the EXIF meta data stored in the image file.</p>
+<p>We then load the image using <code class="xref py py-func docutils literal"><span class="pre">QImageReader.read()</span></code> . If this returns a null image, indicating that the file is not an image file, we use a <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> to alert the user.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> class provides a modal dialog with a short message, an icon, and some buttons. As with <a class="reference internal" href="../PySide2/QtWidgets/QFileDialog.html#PySide2.QtWidgets.QFileDialog" title="PySide2.QtWidgets.QFileDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileDialog</span></code></a> the easiest way to create a <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> is to use its static convenience functions. <a class="reference internal" href="../PySide2/QtWidgets/QMessageBox.html#PySide2.QtWidgets.QMessageBox" title="PySide2.QtWidgets.QMessageBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMessageBox</span></code></a> provides a range of different messages arranged along two axes: severity (question, information, warning and critical) and complexity (the number of necessary response buttons). In this particular example an information message with an OK button (the default) is sufficient, since the message is part of a normal operation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    scaleFactor = 1.0;
+
+    scrollArea-&gt;setVisible(true);
+    printAct-&gt;setEnabled(true);
+    fitToWindowAct-&gt;setEnabled(true);
+    updateActions();
+
+    if (!fitToWindowAct-&gt;isChecked())
+        imageLabel-&gt;adjustSize();
+}
+</pre></div>
+</div>
+<p>If the format is supported, we display the image in <code class="docutils literal"><span class="pre">imageLabel</span></code> by setting the label’s <code class="xref py py-func docutils literal"><span class="pre">QLabel.pixmap()</span></code> . Then we enable the Print and Fit to Window menu entries and update the rest of the view menu entries. The Open and Exit entries are enabled by default.</p>
+<p>If the Fit to Window option is turned off, the <code class="xref py py-func docutils literal"><span class="pre">QScrollArea.widgetResizable()</span></code> property is <code class="docutils literal"><span class="pre">false</span></code> and it is our responsibility (not <a class="reference internal" href="../PySide2/QtWidgets/QScrollArea.html#PySide2.QtWidgets.QScrollArea" title="PySide2.QtWidgets.QScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollArea</span></code></a> ‘s) to give the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> a reasonable size based on its contents. We call { <code class="xref py py-func docutils literal"><span class="pre">QWidget.adjustSize()</span></code> }{adjustSize()} to achieve this, which is essentially the same as</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">resize</span><span class="p">(</span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">print()</span></code> slot, we first make sure that an image has been loaded into the application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="nb">print</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">());</span>
+<span class="c1">#if QT_CONFIG(printdialog)</span>
+</pre></div>
+</div>
+<p>If the application is built in debug mode, the <code class="docutils literal"><span class="pre">Q_ASSERT()</span></code> macro will expand to</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!imageLabel-&gt;pixmap())
+    qFatal(&quot;ASSERT: &quot;imageLabel-&gt;pixmap()&quot; in file ...&quot;);
+</pre></div>
+</div>
+<p>In release mode, the macro simply disappear. The mode can be set in the application’s <code class="docutils literal"><span class="pre">.pro</span></code> file. One way to do so is to add an option to qmake when building the application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qmake</span> <span class="s2">&quot;CONFIG += debug&quot;</span> <span class="n">foo</span><span class="o">.</span><span class="n">pro</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qmake</span> <span class="s2">&quot;CONFIG += release&quot;</span> <span class="n">foo</span><span class="o">.</span><span class="n">pro</span>
+</pre></div>
+</div>
+<p>Another approach is to add this line directly to the <code class="docutils literal"><span class="pre">.pro</span></code> file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPrintDialog</span> <span class="n">dialog</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">exec</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">printer</span><span class="p">);</span>
+        <span class="n">QRect</span> <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">viewport</span><span class="p">();</span>
+        <span class="n">QSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">size</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">Qt</span><span class="p">::</span><span class="n">KeepAspectRatio</span><span class="p">);</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setViewport</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setWindow</span><span class="p">(</span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">rect</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="c1">#endif</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we present a print dialog allowing the user to choose a printer and to set a few options. We construct a painter with a <a class="reference internal" href="../PySide2/QtPrintSupport/QPrinter.html#PySide2.QtPrintSupport.QPrinter" title="PySide2.QtPrintSupport.QPrinter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtPrintSupport.QPrinter</span></code></a> as the paint device. We set the painter’s window and viewport in such a way that the image is as large as possible on the paper, but without altering its <code class="xref py py-attr docutils literal"><span class="pre">aspect</span> <span class="pre">ratio</span></code> .</p>
+<p>In the end we draw the pixmap at position (0, 0).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">zoomIn</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scaleImage</span><span class="p">(</span><span class="mf">1.25</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">zoomOut</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">scaleImage</span><span class="p">(</span><span class="mf">0.8</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We implement the zooming slots using the private <code class="docutils literal"><span class="pre">scaleImage()</span></code> function. We set the scaling factors to 1.25 and 0.8, respectively. These factor values ensure that a Zoom In action and a Zoom Out action will cancel each other (since 1.25 * 0.8 == 1), and in that way the normal image size can be restored using the zooming features.</p>
+<p>The screenshots below show an image in its normal size, and the same image after zooming in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">normalSize</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">adjustSize</span><span class="p">();</span>
+    <span class="n">scaleFactor</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When zooming, we use the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> ‘s ability to scale its contents. Such scaling doesn’t change the actual size hint of the contents. And since the <code class="xref py py-func docutils literal"><span class="pre">QLabel.adjustSize()</span></code> function use those size hint, the only thing we need to do to restore the normal size of the currently displayed image is to call <code class="docutils literal"><span class="pre">adjustSize()</span></code> and reset the scale factor to 1.0.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void ImageViewer::fitToWindow()
+{
+    bool fitToWindow = fitToWindowAct-&gt;isChecked();
+    scrollArea-&gt;setWidgetResizable(fitToWindow);
+    if (!fitToWindow)
+        normalSize();
+    updateActions();
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">fitToWindow()</span></code> slot is called each time the user toggled the Fit to Window option. If the slot is called to turn on the option, we tell the scroll area to resize its child widget with the <code class="xref py py-func docutils literal"><span class="pre">QScrollArea.setWidgetResizable()</span></code> function. Then we disable the Zoom In, Zoom Out and Normal Size menu entries using the private <code class="docutils literal"><span class="pre">updateActions()</span></code> function.</p>
+<p>If the <code class="xref py py-func docutils literal"><span class="pre">QScrollArea.widgetResizable()</span></code> property is set to <code class="docutils literal"><span class="pre">false</span></code> (the default), the scroll area honors the size of its child widget. If this property is set to <code class="docutils literal"><span class="pre">true</span></code> , the scroll area will automatically resize the widget in order to avoid scroll bars where they can be avoided, or to take advantage of extra space. But the scroll area will honor the minimum size hint of its child widget independent of the widget resizable property. So in this example we set <code class="docutils literal"><span class="pre">imageLabel</span></code> ‘s size policy to <code class="xref py py-attr docutils literal"><span class="pre">ignored</span></code> in the constructor, to avoid that scroll bars appear when the scroll area becomes smaller than the label’s minimum size hint.</p>
+<p>The screenshots below shows an image in its normal size, and the same image with the Fit to window option turned on. Enlarging the window will stretch the image further, as shown in the third screenshot.</p>
+<p>If the slot is called to turn off the option, the { <code class="xref py py-func docutils literal"><span class="pre">QScrollArea.setWidgetResizable()</span></code> } property is set to <code class="docutils literal"><span class="pre">false</span></code> . We also restore the image pixmap to its normal size by adjusting the label’s size to its content. And in the end we update the view menu entries.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">about</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">about</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About Image Viewer&quot;</span><span class="p">),</span>
+            <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;The &lt;b&gt;Image Viewer&lt;/b&gt; example shows how to combine QLabel &quot;</span>
+               <span class="s2">&quot;and QScrollArea to display an image. QLabel is typically used &quot;</span>
+               <span class="s2">&quot;for displaying a text, but it can also display an image. &quot;</span>
+               <span class="s2">&quot;QScrollArea provides a scrolling view around another widget. &quot;</span>
+               <span class="s2">&quot;If the child widget exceeds the size of the frame, QScrollArea &quot;</span>
+               <span class="s2">&quot;automatically provides scroll bars. &lt;/p&gt;&lt;p&gt;The example &quot;</span>
+               <span class="s2">&quot;demonstrates how QLabel&#39;s ability to scale its contents &quot;</span>
+               <span class="s2">&quot;(QLabel::scaledContents), and QScrollArea&#39;s ability to &quot;</span>
+               <span class="s2">&quot;automatically resize its contents &quot;</span>
+               <span class="s2">&quot;(QScrollArea::widgetResizable), can be used to implement &quot;</span>
+               <span class="s2">&quot;zooming and scaling features. &lt;/p&gt;&lt;p&gt;In addition the example &quot;</span>
+               <span class="s2">&quot;shows how to use QPainter to print an image.&lt;/p&gt;&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We implement the <code class="docutils literal"><span class="pre">about()</span></code> slot to create a message box describing what the example is designed to show.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">createActions</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">));</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">openAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Open...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="nb">open</span><span class="p">);</span>
+    <span class="n">openAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Open</span><span class="p">);</span>
+
+    <span class="n">saveAsAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Save As...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">saveAs</span><span class="p">);</span>
+    <span class="n">saveAsAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">printAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Print...&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="nb">print</span><span class="p">);</span>
+    <span class="n">printAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Print</span><span class="p">);</span>
+    <span class="n">printAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span> <span class="o">=</span> <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+    <span class="n">exitAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">));</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">editMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Edit&quot;</span><span class="p">));</span>
+
+    <span class="n">copyAct</span> <span class="o">=</span> <span class="n">editMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Copy&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">copy</span><span class="p">);</span>
+    <span class="n">copyAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Copy</span><span class="p">);</span>
+    <span class="n">copyAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">pasteAct</span> <span class="o">=</span> <span class="n">editMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Paste&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">paste</span><span class="p">);</span>
+    <span class="n">pasteAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">Paste</span><span class="p">);</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">viewMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;View&quot;</span><span class="p">));</span>
+
+    <span class="n">zoomInAct</span> <span class="o">=</span> <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Zoom &amp;In (25%)&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">zoomIn</span><span class="p">);</span>
+    <span class="n">zoomInAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">ZoomIn</span><span class="p">);</span>
+    <span class="n">zoomInAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">zoomOutAct</span> <span class="o">=</span> <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Zoom &amp;Out (25%)&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">zoomOut</span><span class="p">);</span>
+    <span class="n">zoomOutAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">QKeySequence</span><span class="p">::</span><span class="n">ZoomOut</span><span class="p">);</span>
+    <span class="n">zoomOutAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">normalSizeAct</span> <span class="o">=</span> <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Normal Size&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">normalSize</span><span class="p">);</span>
+    <span class="n">normalSizeAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+S&quot;</span><span class="p">));</span>
+    <span class="n">normalSizeAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+
+    <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addSeparator</span><span class="p">();</span>
+
+    <span class="n">fitToWindowAct</span> <span class="o">=</span> <span class="n">viewMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Fit to Window&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">fitToWindow</span><span class="p">);</span>
+    <span class="n">fitToWindowAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+    <span class="n">fitToWindowAct</span><span class="o">-&gt;</span><span class="n">setCheckable</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">fitToWindowAct</span><span class="o">-&gt;</span><span class="n">setShortcut</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ctrl+F&quot;</span><span class="p">));</span>
+
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">));</span>
+
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ImageViewer</span><span class="p">::</span><span class="n">about</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About &amp;Qt&quot;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">QApplication</span><span class="p">::</span><span class="n">aboutQt</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the private <code class="docutils literal"><span class="pre">createAction()</span></code> function, we create the actions providing the application features and populate a menu with them.</p>
+<p>We assign a short-cut key to each action and connect them to the appropriate slots. We only enable the <code class="docutils literal"><span class="pre">openAct</span></code> and <code class="docutils literal"><span class="pre">exitAct</span></code> at the time of creation, the others are updated once an image has been loaded into the application. In addition we make the <code class="docutils literal"><span class="pre">fitToWindowAct</span></code> <code class="xref py py-func docutils literal"><span class="pre">QAction.checkable()</span></code> .</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> class provides a menu widget for use in menu bars, context menus, and other popup menus. The <a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> class provides a horizontal menu bar that consists of a list of pull-down menu items. So we put the menus in the <code class="docutils literal"><span class="pre">ImageViewer</span></code> ‘s menu bar which we retrieve with the <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.menuBar()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void ImageViewer::updateActions()
+{
+    saveAsAct-&gt;setEnabled(!image.isNull());
+    copyAct-&gt;setEnabled(!image.isNull());
+    zoomInAct-&gt;setEnabled(!fitToWindowAct-&gt;isChecked());
+    zoomOutAct-&gt;setEnabled(!fitToWindowAct-&gt;isChecked());
+    normalSizeAct-&gt;setEnabled(!fitToWindowAct-&gt;isChecked());
+}
+</pre></div>
+</div>
+<p>The private <code class="docutils literal"><span class="pre">updateActions()</span></code> function enables or disables the Zoom In, Zoom Out and Normal Size menu entries depending on whether the Fit to Window option is turned on or off.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">scaleImage</span><span class="p">(</span><span class="n">double</span> <span class="n">factor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_ASSERT</span><span class="p">(</span><span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">());</span>
+    <span class="n">scaleFactor</span> <span class="o">*=</span> <span class="n">factor</span><span class="p">;</span>
+    <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">resize</span><span class="p">(</span><span class="n">scaleFactor</span> <span class="o">*</span> <span class="n">imageLabel</span><span class="o">-&gt;</span><span class="n">pixmap</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+
+    <span class="n">adjustScrollBar</span><span class="p">(</span><span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">horizontalScrollBar</span><span class="p">(),</span> <span class="n">factor</span><span class="p">);</span>
+    <span class="n">adjustScrollBar</span><span class="p">(</span><span class="n">scrollArea</span><span class="o">-&gt;</span><span class="n">verticalScrollBar</span><span class="p">(),</span> <span class="n">factor</span><span class="p">);</span>
+
+    <span class="n">zoomInAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">scaleFactor</span> <span class="o">&lt;</span> <span class="mf">3.0</span><span class="p">);</span>
+    <span class="n">zoomOutAct</span><span class="o">-&gt;</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">scaleFactor</span> <span class="o">&gt;</span> <span class="mf">0.333</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">scaleImage()</span></code> , we use the <code class="docutils literal"><span class="pre">factor</span></code> parameter to calculate the new scaling factor for the displayed image, and resize <code class="docutils literal"><span class="pre">imageLabel</span></code> . Since we set the <code class="xref py py-func docutils literal"><span class="pre">QLabel.scaledContents()</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> in the constructor, the call to <code class="xref py py-func docutils literal"><span class="pre">QWidget.resize()</span></code> will scale the image displayed in the label. We also adjust the scroll bars to preserve the focal point of the image.</p>
+<p>At the end, if the scale factor is less than 33.3% or greater than 300%, we disable the respective menu entry to prevent the image pixmap from becoming too large, consuming too much resources in the window system.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageViewer</span><span class="p">::</span><span class="n">adjustScrollBar</span><span class="p">(</span><span class="n">QScrollBar</span> <span class="o">*</span><span class="n">scrollBar</span><span class="p">,</span> <span class="n">double</span> <span class="n">factor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()</span>
+                            <span class="o">+</span> <span class="p">((</span><span class="n">factor</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">pageStep</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">)));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whenever we zoom in or out, we need to adjust the scroll bars in consequence. It would have been tempting to simply call</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">factor</span> <span class="o">*</span> <span class="n">scrollBar</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>but this would make the top-left corner the focal point, not the center. Therefore we need to take into account the scroll bar handle’s size (the <code class="xref py py-func docutils literal"><span class="pre">page</span> <span class="pre">step</span></code> ).</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="imageviewer-cpp-example-file">
+<h1>imageviewer.cpp Example File<a class="headerlink" href="#imageviewer-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageviewer-h-example-file">
+<h1>imageviewer.h Example File<a class="headerlink" href="#imageviewer-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageviewer-pro-example-file">
+<h1>imageviewer.pro Example File<a class="headerlink" href="#imageviewer-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

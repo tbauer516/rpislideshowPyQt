@@ -1,0 +1,220 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Chapter 2: Data Driven Testing &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 2: Data Driven Testing</a><ul>
+<li><a class="reference internal" href="#writing-the-data-function">Writing the Data Function</a></li>
+<li><a class="reference internal" href="#rewriting-the-test-function">Rewriting the Test Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testqstring-cpp-example-file">testqstring.cpp Example File</a></li>
+<li><a class="reference internal" href="#tutorial2-pro-example-file">tutorial2.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-2-data-driven-testing">
+<span id="id1"></span><h1>Chapter 2: Data Driven Testing<a class="headerlink" href="#chapter-2-data-driven-testing" title="Permalink to this headline">¶</a></h1>
+<p>How to create data driven tests</p>
+<blockquote>
+<div><p>How to create data driven tests.</p>
+<p>In this chapter we will demonstrate how to execute a test multiple times with different test data.</p>
+<p>So far, we have hard coded the data we wanted to test into our test function. If we add more test data, the function might look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCOMPARE</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">));</span>
+<span class="n">QCOMPARE</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">));</span>
+<span class="n">QCOMPARE</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HellO&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">));</span>
+<span class="n">QCOMPARE</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">QString</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>To prevent that the function ends up being cluttered by repetitive code, Qt Test supports adding test data to a test function. All we need is to add another private slot to our test class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestQString</span><span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">toUpper_data</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">toUpper</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="writing-the-data-function">
+<span id="id2"></span><h2>Writing the Data Function<a class="headerlink" href="#writing-the-data-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A test function’s associated data function carries the same name, appended by <code class="docutils literal"><span class="pre">_data</span></code> . Our data function looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">toUpper_data</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">addColumn</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">);</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">addColumn</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">);</span>
+
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;all lower&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;hello&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;HELLO&quot;</span><span class="p">;</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;mixed&quot;</span><span class="p">)</span>     <span class="o">&lt;&lt;</span> <span class="s2">&quot;Hello&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;HELLO&quot;</span><span class="p">;</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;all upper&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;HELLO&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;HELLO&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First, we define the two elements of our test table using the <code class="xref py py-func docutils literal"><span class="pre">QTest.addColumn()</span></code> function: a test string, and the expected result of applying the <code class="xref py py-func docutils literal"><span class="pre">QString.toUpper()</span></code> function to that string.</p>
+<p>Then we add some data to the table using the <code class="xref py py-func docutils literal"><span class="pre">QTest.newRow()</span></code> function. Each set of data will become a separate row in the test table.</p>
+<p><code class="xref py py-func docutils literal"><span class="pre">QTest.newRow()</span></code> takes one argument: a name that will be associated with the data set. If the test fails, the name will be used in the test log, referencing the failed data. Then we stream the data set into the new table row. First an arbitrary string, and then the expected result of applying the <code class="xref py py-func docutils literal"><span class="pre">QString.toUpper()</span></code> function to that string.</p>
+<p>You can think of the test data as a two-dimensional table. In our case, it has two columns called <code class="docutils literal"><span class="pre">string</span></code> and <code class="docutils literal"><span class="pre">result</span></code> and three rows. In addition a name as well as an index is associated with each row:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="33%" />
+<col width="26%" />
+<col width="22%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>index</td>
+<td>name</td>
+<td>string</td>
+<td>result</td>
+</tr>
+<tr class="row-even"><td>0</td>
+<td>all lower</td>
+<td>“hello”</td>
+<td>HELLO</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>mixed</td>
+<td>“Hello”</td>
+<td>HELLO</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>all upper</td>
+<td>“HELLO”</td>
+<td>HELLO</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="rewriting-the-test-function">
+<span id="id3"></span><h2>Rewriting the Test Function<a class="headerlink" href="#rewriting-the-test-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Our test function can now be rewritten:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TestQString</span><span class="p">::</span><span class="n">toUpper</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QFETCH</span><span class="p">(</span><span class="n">QString</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+    <span class="n">QFETCH</span><span class="p">(</span><span class="n">QString</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+
+    <span class="n">QCOMPARE</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">toUpper</span><span class="p">(),</span> <span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The TestQString::toUpper() function will be executed three times, once for each entry in the test table that we created in the associated TestQString::toUpper_data() function.</p>
+<p>First, we fetch the two elements of the data set using the <code class="xref py py-func docutils literal"><span class="pre">QFETCH()</span></code> macro. <code class="xref py py-func docutils literal"><span class="pre">QFETCH()</span></code> takes two arguments: The data type of the element and the element name. Then we perform the test using the <code class="xref py py-func docutils literal"><span class="pre">QCOMPARE()</span></code> macro.</p>
+<p>This approach makes it very easy to add new data to the test without modifying the test itself.</p>
+<p>And again, to make our test case a stand-alone executable, the following two lines are needed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTEST_MAIN</span><span class="p">(</span><span class="n">TestQString</span><span class="p">)</span>
+<span class="c1">#include &quot;testqstring.moc&quot;</span>
+</pre></div>
+</div>
+<p>As before, the <code class="xref py py-func docutils literal"><span class="pre">QTEST_MAIN()</span></code> macro expands to a simple main() method that runs all the test functions, and since both the declaration and the implementation of our test class are in a .cpp file, we also need to include the generated moc file to make Qt’s introspection work.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="testqstring-cpp-example-file">
+<h1>testqstring.cpp Example File<a class="headerlink" href="#testqstring-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tutorial2-pro-example-file">
+<h1>tutorial2.pro Example File<a class="headerlink" href="#tutorial2-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

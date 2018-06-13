@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Chapter 6: Skipping Tests with QSKIP &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Chapter 6: Skipping Tests with QSKIP</a><ul>
+<li><a class="reference internal" href="#in-a-test-function">) in a test function</a></li>
+<li><a class="reference internal" href="#using-qskip-in-a-data-function">Using QSKIP in a _data function</a></li>
+<li><a class="reference internal" href="#using-qskip-from-inittestcase-or-inittestcase-data">Using QSKIP from initTestCase() or initTestCase_data()</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="chapter-6-skipping-tests-with-qskip">
+<span id="id1"></span><h1>Chapter 6: Skipping Tests with QSKIP<a class="headerlink" href="#chapter-6-skipping-tests-with-qskip" title="Permalink to this headline">¶</a></h1>
+<p>How to skip tests in certain cases</p>
+<blockquote>
+<div>How to skip tests in certain cases.</div></blockquote>
+<p id="using-qskip-description-in-a-test-function">Using QSKIP(
+<code class="docutils literal"><span class="pre">description</span></code></p>
+<div class="section" id="in-a-test-function">
+<h2>) in a test function<a class="headerlink" href="#in-a-test-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If the <code class="xref py py-func docutils literal"><span class="pre">QSKIP()</span></code> macro is called from a test function, it stops the execution of the test without adding a failure to the test log. It can be used to skip tests that are certain to fail. The text in the QSKIP <code class="docutils literal"><span class="pre">description</span></code> parameter is appended to the test log, and explains why the test was not carried out.</p>
+<p>QSKIP can be used to skip testing when the implementation is not yet complete or not supported on a certain platform. When there are known failures, it is recommended to use <code class="xref py py-func docutils literal"><span class="pre">QEXPECT_FAIL()</span></code> , so that the test is always completely executed.</p>
+<p>Example of QSKIP in a test function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span> <span class="n">tst_Databases</span><span class="p">::</span><span class="n">getMySqlVersion</span><span class="p">(</span> <span class="n">db</span> <span class="p">)</span><span class="o">.</span><span class="n">section</span><span class="p">(</span> <span class="n">QChar</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span><span class="o">.</span><span class="n">toInt</span><span class="p">()</span><span class="o">&lt;</span><span class="mi">5</span> <span class="p">)</span>
+    <span class="n">QSKIP</span><span class="p">(</span> <span class="s2">&quot;Test requires MySQL &gt;= 5.0&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In a data-driven test, each call to <code class="xref py py-func docutils literal"><span class="pre">QSKIP()</span></code> skips only the current row of test data. If the data-driven test contains an unconditional call to QSKIP, it produces a skip message for each row of test data.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-qskip-in-a-data-function">
+<span id="id2"></span><h2>Using QSKIP in a _data function<a class="headerlink" href="#using-qskip-in-a-data-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If called from a <a class="reference internal" href="qtdatavisualization-qmlbars-example.html#qt-quick-2-bars-example"><span class="std std-ref">_data</span></a> function, the <code class="xref py py-func docutils literal"><span class="pre">QSKIP()</span></code> macro stops execution of the <a class="reference internal" href="qtdatavisualization-qmlbars-example.html#qt-quick-2-bars-example"><span class="std std-ref">_data</span></a> function. This prevents execution of the associated test function.</p>
+<p>See below for an example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">tst_Skip</span><span class="p">::</span><span class="n">test_data</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">addColumn</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">);</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;local 1&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">QTest</span><span class="p">::</span><span class="n">newRow</span><span class="p">(</span><span class="s2">&quot;local 2&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">true</span><span class="p">;</span>
+
+    <span class="n">QSKIP</span><span class="p">(</span><span class="s2">&quot;skipping all&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-qskip-from-inittestcase-or-inittestcase-data">
+<span id="id3"></span><h2>Using QSKIP from initTestCase() or initTestCase_data()<a class="headerlink" href="#using-qskip-from-inittestcase-or-inittestcase-data" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>If called from <code class="docutils literal"><span class="pre">initTestCase()</span></code> or <code class="docutils literal"><span class="pre">initTestCase_data()</span></code> , the <code class="xref py py-func docutils literal"><span class="pre">QSKIP()</span></code> macro will skip all test and <a class="reference internal" href="qtdatavisualization-qmlbars-example.html#qt-quick-2-bars-example"><span class="std std-ref">_data</span></a> functions.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

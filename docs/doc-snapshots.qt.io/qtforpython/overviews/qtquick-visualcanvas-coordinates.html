@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Concepts - Visual Coordinates in Qt Quick &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Concepts - Visual Coordinates in Qt Quick</a><ul>
+<li><a class="reference internal" href="#item-coordinates">Item Coordinates</a></li>
+<li><a class="reference internal" href="#scene-coordinates">Scene Coordinates</a></li>
+<li><a class="reference internal" href="#worked-example">Worked Example</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="concepts-visual-coordinates-in-qt-quick">
+<span id="id1"></span><h1>Concepts - Visual Coordinates in Qt Quick<a class="headerlink" href="#concepts-visual-coordinates-in-qt-quick" title="Permalink to this headline">¶</a></h1>
+<p>Description of the concept of visual coordinates in Qt Quick</p>
+<blockquote>
+<div>Description of the concept of visual coordinates in Qt Quick</div></blockquote>
+<div class="section" id="item-coordinates">
+<span id="id2"></span><h2>Item Coordinates<a class="headerlink" href="#item-coordinates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The default system of visual coordinates used in Qt Quick is item coordinates. This is a cartesian coordinate system with (0,0) at the top left corner of the item. The x-axis grows to the right and the y-axis grows downwards, so that the bottom right corner of the item is at coordinates (width, height).</p>
+<p>An individual item’s position is specified in terms of its parent’s coordinate system. This means that reading x,y values from non-sibling items may require conversion to convert them into the same coordinate system. Scene coordinates are often used as the intermediate coordinate system when this occurs.</p>
+</div></blockquote>
+</div>
+<div class="section" id="scene-coordinates">
+<span id="id3"></span><h2>Scene Coordinates<a class="headerlink" href="#scene-coordinates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Scene coordinates are the coordinates where (0,0) corresponds to the top left corner of the window the scene is currently being rendered. Scene coordinates are usually the same as the item coordinates of the root item in the window.</p>
+<p>You can convert from item to scene coordinates using the functions on the item whose coordinate system you are interested in. See <span class="xref std std-ref">Item::mapFromItem</span> and <span class="xref std std-ref">Item::mapToItem</span> for converting to scene coordinates, or another item’s coordinates.</p>
+</div></blockquote>
+</div>
+<div class="section" id="worked-example">
+<span id="id4"></span><h2>Worked Example<a class="headerlink" href="#worked-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The below QML code creates an arrangment of squares, with dots added for identification of points:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span>
+
+    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span>
+
+        <span class="n">Rectangle</span> <span class="p">{</span>
+            <span class="n">width</span><span class="p">:</span> <span class="mi">50</span>
+            <span class="n">height</span><span class="p">:</span> <span class="mi">50</span>
+            <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this image the black dot is positioned at (0,0) within the item coordinates of the red rectangle. If the red rectangle was the root item of the scene, then the black dot would also be positioned at (0,0) in scene coordinates.</p>
+<p>The blue rectangle is positioned at the white dot, (100,100), relative to the red rectangle’s top left corner.</p>
+<p>The green rectangle has no x,y specified, so its position defaults to (0,0). Because it is at (0,0) in the coordinates of its parent, the blue rectangle, it is positioned at the top left corner of that rectangle. This is the same point as the white dot at (100,100) in the coordinates of the red rectangle.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

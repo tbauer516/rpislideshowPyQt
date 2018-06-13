@@ -1,0 +1,313 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Recipes Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Recipes Example</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#the-user-interface">The User Interface</a></li>
+<li><a class="reference internal" href="#running-your-own-xqueries">Running your own XQueries</a></li>
+<li><a class="reference internal" href="#code-walk-through">Code Walk-Through</a></li>
+<li><a class="reference internal" href="#the-ui-class-querymainwindow">The UI Class: QueryMainWindow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#querymainwindow-cpp-example-file">querymainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#querymainwindow-h-example-file">querymainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#allrecipes-xq-example-file">allRecipes.xq Example File</a></li>
+<li><a class="reference internal" href="#cookbook-xml-example-file">cookbook.xml Example File</a></li>
+<li><a class="reference internal" href="#liquidingredientsinsoup-xq-example-file">liquidIngredientsInSoup.xq Example File</a></li>
+<li><a class="reference internal" href="#mushroomsoup-xq-example-file">mushroomSoup.xq Example File</a></li>
+<li><a class="reference internal" href="#preparationlessthan30-xq-example-file">preparationLessThan30.xq Example File</a></li>
+<li><a class="reference internal" href="#preparationtimes-xq-example-file">preparationTimes.xq Example File</a></li>
+<li><a class="reference internal" href="#querywidget-ui-example-file">querywidget.ui Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#recipes-pro-example-file">recipes.pro Example File</a></li>
+<li><a class="reference internal" href="#recipes-qrc-example-file">recipes.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="recipes-example">
+<span id="id1"></span><h1>Recipes Example<a class="headerlink" href="#recipes-example" title="Permalink to this headline">¶</a></h1>
+<p>Using Qt XML Patterns to query XML data loaded from a file</p>
+<blockquote>
+<div><p id="evaluate-function"><span id="displayquery-slot"></span>Using Qt XML Patterns to query XML data loaded from a file.</p>
+<p>The Recipes example shows how to use Qt XML Patterns to query XML data loaded from a file.</p>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="id2"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>In this case, the XML data represents a cookbook, <code class="docutils literal"><span class="pre">cookbook.xml</span></code> , which contains <code class="docutils literal"><span class="pre">&lt;cookbook&gt;</span></code> as its document element, which in turn contains a sequence of <code class="docutils literal"><span class="pre">&lt;recipe&gt;</span></code> elements. This XML data is searched using queries stored in <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files (<code class="docutils literal"><span class="pre">*.xq</span></code> ).</div></blockquote>
+</div>
+<div class="section" id="the-user-interface">
+<span id="id3"></span><h2>The User Interface<a class="headerlink" href="#the-user-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The UI for this example was created using Qt Designer:</p>
+<p>The UI consists of three <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">group</span> <span class="pre">boxes</span></code></a> arranged vertically. The top one contains a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">text</span> <span class="pre">viewer</span></code></a> that displays the XML text from the cookbook file. The middle group box contains a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">combo</span> <span class="pre">box</span></code></a> for choosing the <a class="reference internal" href="xquery-introduction.html#a-short-path-to-xquery"><span class="std std-ref">XQuery</span></a> to run and a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">text</span> <span class="pre">viewer</span></code></a> for displaying the text of the selected <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> . The <code class="docutils literal"><span class="pre">.xq</span></code> files in the file list above are shown in the combo box menu. Choosing an <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> loads, parses, and runs the selected <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> . The query result is shown in the bottom group box’s <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">text</span> <span class="pre">viewer</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="running-your-own-xqueries">
+<span id="id4"></span><h2>Running your own XQueries<a class="headerlink" href="#running-your-own-xqueries" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You can write your own <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files and run them in the example program. The file <code class="docutils literal"><span class="pre">xmlpatterns/recipes/recipes.qrc</span></code> is the <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">resource file</span></a> for this example. It is used in <code class="docutils literal"><span class="pre">main.cpp</span></code> (<code class="docutils literal"><span class="pre">Q_INIT_RESOURCE(recipes);</span></code> ). It lists the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files (<code class="docutils literal"><span class="pre">.xq</span></code> ) that can be selected in the combobox.</p>
+<p>To add your own queries to the example’s combobox, store your <code class="docutils literal"><span class="pre">.xq</span></code> files in the <code class="docutils literal"><span class="pre">examples/xmlpatterns/recipes/files</span></code> directory and add them to <code class="docutils literal"><span class="pre">recipes.qrc</span></code> as shown above.</p>
+</div></blockquote>
+</div>
+<div class="section" id="code-walk-through">
+<span id="id5"></span><h2>Code Walk-Through<a class="headerlink" href="#code-walk-through" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example’s main() function creates the standard instance of <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> . Then it creates an instance of the UI class, shows it, and starts the Qt event loop:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">recipes</span><span class="p">);</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">QueryMainWindow</span><span class="o">*</span> <span class="n">const</span> <span class="n">queryWindow</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QueryMainWindow</span><span class="p">;</span>
+    <span class="n">queryWindow</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-ui-class-querymainwindow">
+<span id="id6"></span><h2>The UI Class: QueryMainWindow<a class="headerlink" href="#the-ui-class-querymainwindow" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example’s UI is a conventional Qt GUI application inheriting <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> and the class generated by Qt Designer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QueryMainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span><span class="p">,</span>
+                        <span class="n">private</span> <span class="n">Ui</span><span class="p">::</span><span class="n">QueryWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">QueryMainWindow</span><span class="p">();</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">displayQuery</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">ui_defaultQueries</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">loadInputFile</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The constructor finds the window’s <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">combo</span> <span class="pre">box</span></code></a> child widget and connects its <code class="xref py py-func docutils literal"><span class="pre">QComboBox.currentIndexChanged()</span></code> signal to the window’s <code class="docutils literal"><span class="pre">displayQuery()</span></code> slot. It then calls <code class="docutils literal"><span class="pre">loadInputFile()</span></code> to load <code class="docutils literal"><span class="pre">cookbook.xml</span></code> and display its contents in the top group box’s <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">text</span> <span class="pre">viewer</span></code></a> . Finally, it finds the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> files (<code class="docutils literal"><span class="pre">.xq</span></code> ) and adds each one to the <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">combo</span> <span class="pre">box</span></code></a> menu.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QueryMainWindow</span><span class="p">::</span><span class="n">QueryMainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">setupUi</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="n">new</span> <span class="n">XmlSyntaxHighlighter</span><span class="p">(</span><span class="n">findChild</span><span class="o">&lt;</span><span class="n">QTextEdit</span><span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;inputTextEdit&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">());</span>
+    <span class="n">new</span> <span class="n">XmlSyntaxHighlighter</span><span class="p">(</span><span class="n">findChild</span><span class="o">&lt;</span><span class="n">QTextEdit</span><span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;outputTextEdit&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">());</span>
+
+    <span class="n">ui_defaultQueries</span> <span class="o">=</span> <span class="n">findChild</span><span class="o">&lt;</span><span class="n">QComboBox</span><span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;defaultQueries&quot;</span><span class="p">);</span>
+    <span class="n">QMetaObject</span><span class="p">::</span><span class="n">connectSlotsByName</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">ui_defaultQueries</span><span class="p">,</span> <span class="n">QOverload</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">::</span><span class="n">of</span><span class="p">(</span><span class="o">&amp;</span><span class="n">QComboBox</span><span class="p">::</span><span class="n">currentIndexChanged</span><span class="p">),</span>
+            <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QueryMainWindow</span><span class="p">::</span><span class="n">displayQuery</span><span class="p">);</span>
+
+    <span class="n">loadInputFile</span><span class="p">();</span>
+    <span class="n">const</span> <span class="n">QStringList</span> <span class="n">queries</span><span class="p">(</span><span class="n">QDir</span><span class="p">(</span><span class="s2">&quot;:/files/&quot;</span><span class="p">,</span> <span class="s2">&quot;*.xq&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">entryList</span><span class="p">());</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span> <span class="o">&amp;</span><span class="n">query</span> <span class="p">:</span> <span class="n">queries</span><span class="p">)</span>
+        <span class="n">ui_defaultQueries</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">queries</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">displayQuery</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The work is done in the <a class="reference internal" href="#recipes-example"><span class="std std-ref">displayQuery()</span></a> slot and the <a class="reference internal" href="#recipes-example"><span class="std std-ref">evaluate()</span></a> function it calls. <a class="reference internal" href="#recipes-example"><span class="std std-ref">displayQuery()</span></a> loads and displays the selected query file and passes the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> text to <a class="reference internal" href="#recipes-example"><span class="std std-ref">evaluate()</span></a> .</p>
+<div class="highlight-default" id="id7"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">QueryMainWindow</span><span class="p">::</span><span class="n">displayQuery</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QFile</span> <span class="n">queryFile</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s2">&quot;:files/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ui_defaultQueries</span><span class="o">-&gt;</span><span class="n">itemText</span><span class="p">(</span><span class="n">index</span><span class="p">));</span>
+    <span class="n">queryFile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="p">::</span><span class="n">ReadOnly</span><span class="p">);</span>
+    <span class="n">const</span> <span class="n">QString</span> <span class="n">query</span><span class="p">(</span><span class="n">QString</span><span class="p">::</span><span class="n">fromLatin1</span><span class="p">(</span><span class="n">queryFile</span><span class="o">.</span><span class="n">readAll</span><span class="p">()));</span>
+    <span class="n">findChild</span><span class="o">&lt;</span><span class="n">QTextEdit</span><span class="o">*&gt;</span><span class="p">(</span><span class="s2">&quot;queryTextEdit&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+
+    <span class="n">evaluate</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#recipes-example"><span class="std std-ref">evaluate()</span></a> demonstrates the standard Qt XML Patterns usage pattern. First, an instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlQuery.html#PySide2.QtXmlPatterns.QXmlQuery" title="PySide2.QtXmlPatterns.QXmlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlQuery</span></code></a> is created (<code class="docutils literal"><span class="pre">query</span></code> ). The <code class="docutils literal"><span class="pre">query's</span></code> <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> function is then called to bind the <code class="docutils literal"><span class="pre">cookbook.xml</span></code> file to the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> variable <code class="docutils literal"><span class="pre">inputDocument</span></code> . <em>After</em> the variable is bound, <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> is called to pass the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> text to the <code class="docutils literal"><span class="pre">query</span></code> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> must be called <em>after</em> <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.bindVariable()</span></code> .</p>
+</div>
+<p>Passing the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> to <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.setQuery()</span></code> causes Qt XML Patterns to parse the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> . <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.isValid()</span></code> is called to ensure that the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> was correctly parsed.</p>
+<div class="highlight-default" id="id8"><div class="highlight"><pre><span></span>void QueryMainWindow::evaluate(const QString &amp;str)
+{
+    QFile sourceDocument;
+    sourceDocument.setFileName(&quot;:/files/cookbook.xml&quot;);
+    sourceDocument.open(QIODevice::ReadOnly);
+
+    QByteArray outArray;
+    QBuffer buffer(&amp;outArray);
+    buffer.open(QIODevice::ReadWrite);
+
+    QXmlQuery query;
+    query.bindVariable(&quot;inputDocument&quot;, &amp;sourceDocument);
+    query.setQuery(str);
+    if (!query.isValid())
+        return;
+
+    QXmlFormatter formatter(query, &amp;buffer);
+    if (!query.evaluateTo(&amp;formatter))
+        return;
+
+    buffer.close();
+    findChild&lt;QTextEdit*&gt;(&quot;outputTextEdit&quot;)-&gt;setPlainText(QString::fromUtf8(outArray.constData()));
+
+}
+</pre></div>
+</div>
+<p>If the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> is valid, an instance of <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlFormatter.html#PySide2.QtXmlPatterns.QXmlFormatter" title="PySide2.QtXmlPatterns.QXmlFormatter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlFormatter</span></code></a> is created to format the query result as XML into a <a class="reference internal" href="../PySide2/QtCore/QBuffer.html#PySide2.QtCore.QBuffer" title="PySide2.QtCore.QBuffer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QBuffer</span></code></a> . To evaluate the <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> , an overload of <code class="xref py py-func docutils literal"><span class="pre">QXmlQuery.evaluateTo()</span></code> is called that takes a QAbstractXmlReceiver for its output ( <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlFormatter.html#PySide2.QtXmlPatterns.QXmlFormatter" title="PySide2.QtXmlPatterns.QXmlFormatter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlFormatter</span></code></a> inherits QAbstractXmlReceiver). Finally, the formatted XML result is displayed in the UI’s bottom text view.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each <a class="reference internal" href="xmlprocessing.html#xquery"><span class="std std-ref">XQuery</span></a> <code class="docutils literal"><span class="pre">.xq</span></code> file must declare the <code class="docutils literal"><span class="pre">$inputDocument</span></code> variable to represent the <code class="docutils literal"><span class="pre">cookbook.xml</span></code> document:</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>(: All ingredients for Mushroom Soup. :)
+declare variable $inputDocument external;
+
+doc($inputDocument)/cookbook/recipe[@xml:id = &quot;MushroomSoup&quot;]/ingredient/
+&lt;p&gt;{@name, @quantity}&lt;/p&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you add add your own query.xq files, you must declare the <code class="docutils literal"><span class="pre">$inputDocument</span></code> and use it as shown above.</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="querymainwindow-cpp-example-file">
+<h1>querymainwindow.cpp Example File<a class="headerlink" href="#querymainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="querymainwindow-h-example-file">
+<h1>querymainwindow.h Example File<a class="headerlink" href="#querymainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="allrecipes-xq-example-file">
+<h1>allRecipes.xq Example File<a class="headerlink" href="#allrecipes-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="cookbook-xml-example-file">
+<h1>cookbook.xml Example File<a class="headerlink" href="#cookbook-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="liquidingredientsinsoup-xq-example-file">
+<h1>liquidIngredientsInSoup.xq Example File<a class="headerlink" href="#liquidingredientsinsoup-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mushroomsoup-xq-example-file">
+<h1>mushroomSoup.xq Example File<a class="headerlink" href="#mushroomsoup-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="preparationlessthan30-xq-example-file">
+<h1>preparationLessThan30.xq Example File<a class="headerlink" href="#preparationlessthan30-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="preparationtimes-xq-example-file">
+<h1>preparationTimes.xq Example File<a class="headerlink" href="#preparationtimes-xq-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="querywidget-ui-example-file">
+<h1>querywidget.ui Example File<a class="headerlink" href="#querywidget-ui-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="recipes-pro-example-file">
+<h1>recipes.pro Example File<a class="headerlink" href="#recipes-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="recipes-qrc-example-file">
+<h1>recipes.qrc Example File<a class="headerlink" href="#recipes-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

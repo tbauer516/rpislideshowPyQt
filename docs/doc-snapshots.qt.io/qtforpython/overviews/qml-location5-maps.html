@@ -1,0 +1,353 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Maps &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Maps</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#position-on-map">Position on map</a></li>
+<li><a class="reference internal" href="#geocoding">Geocoding</a></li>
+<li><a class="reference internal" href="#navigation">Navigation</a></li>
+<li><a class="reference internal" href="#zoom-pinch-and-flickable">Zoom, Pinch and Flickable</a></li>
+<li><a class="reference internal" href="#qml-types">QML Types</a></li>
+<li><a class="reference internal" href="#maps">Maps</a></li>
+<li><a class="reference internal" href="#id9">Geocoding</a></li>
+<li><a class="reference internal" href="#routing">Routing</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-maps">
+<span id="id1"></span><h1>QML Maps<a class="headerlink" href="#qml-maps" title="Permalink to this headline">¶</a></h1>
+<p>Maps deals with maps, their contents and navigation</p>
+<blockquote>
+<div>Maps deals with maps, their contents and navigation.</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">Map</span> type allows the display of a map and placing objects within the map. Various points of interest can be defined and added to the map for display. Also the <span class="xref std std-ref">Map</span> has features to control how the map is displayed. With the Map item you can center the map, zoom, pinch and make the item flickable.</p>
+<p>The places to be added to the map are <a class="reference internal" href="location-maps-qml.html#maps-and-navigation-qml"><span class="std std-ref">MapItems</span></a> . The item’s position is defined by a <span class="xref std std-ref">coordinate</span> which includes latitude, longitude and altitude. The item is then displayed automatically after it is added to the <span class="xref std std-ref">Map</span> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="position-on-map">
+<span id="id3"></span><h2>Position on map<a class="headerlink" href="#position-on-map" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>All position APIs are part of the <span class="xref std std-ref">QtPositioning</span> module. The basic piece of position information is the <span class="xref std std-ref">coordinate</span> . A coordinate encapsulates data for the latitude, longitude and altitude of the location. Altitude is in meters. It also has a method to determine distance to another <span class="xref std std-ref">coordinate</span> . The <span class="xref std std-ref">coordinate</span> type may also be held within a <span class="xref std std-ref">Location</span> element, this will also have information on a bounding box size to determine sufficient proximity to the location and a location address.</p>
+<p>Here is an example of a client that uses a <span class="xref std std-ref">position source</span> to center a <span class="xref std std-ref">map</span> on the current position:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+
+    <span class="kn">import</span> <span class="nn">QtPositioning</span> <span class="mf">5.2</span>
+    <span class="kn">import</span> <span class="nn">QtLocation</span> <span class="mf">5.3</span>
+    <span class="o">...</span>
+
+    <span class="n">Map</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">map</span>
+        <span class="o">//</span> <span class="n">initialize</span> <span class="nb">map</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+
+    <span class="n">PositionSource</span> <span class="p">{</span>
+        <span class="n">onPositionChanged</span><span class="p">:</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">center</span> <span class="n">the</span> <span class="nb">map</span> <span class="n">on</span> <span class="n">the</span> <span class="n">current</span> <span class="n">position</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">coordinate</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="geocoding">
+<span id="id4"></span><h2>Geocoding<a class="headerlink" href="#geocoding" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Geocoding is the derivation of geographical coordinates (latitude and longitude) from other geographical references to the locations. For example, this can be a street address. Reverse geocoding is also possible with a street address being used to determine a geographical coordinate. Geocoding is performed by using the <span class="xref std std-ref">GeocodeModel</span> type.</p>
+<p>The following code examples are a small part of the <code class="docutils literal"><span class="pre">map</span></code> component in the <a class="reference internal" href="qtlocation-mapviewer-example.html#map-viewer-qml"><span class="std std-ref">Map Viewer (QML)</span></a> example. The snippets demonstrate the declaration of the <span class="xref std std-ref">GeocodeModel</span> component.</p>
+<p>In the snippet we see that the [QML]{ <span class="xref std std-ref">GeocodeModel</span> } contains the plugin and two signal handlers. One for changes in status <code class="docutils literal"><span class="pre">onStatusChanged</span></code> :ref:` &lt;qml-qtlocation-geocodemodel.html-status-prop&gt;` and the other to update the centering of the Map object <code class="docutils literal"><span class="pre">onLocationsChanged</span></code> :ref:` &lt;qml-qtlocation-geocodemodel.html-locationsChanged-signal&gt;` .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GeocodeModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">geocodeModel</span>
+    <span class="n">plugin</span><span class="p">:</span> <span class="nb">map</span><span class="o">.</span><span class="n">plugin</span>
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">status</span> <span class="o">==</span> <span class="n">GeocodeModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">GeocodeModel</span><span class="o">.</span><span class="n">Error</span><span class="p">))</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">geocodeFinished</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">onLocationsChanged</span><span class="p">:</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">latitude</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">coordinate</span><span class="o">.</span><span class="n">longitude</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">MapItemView</span> <span class="p">{</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">geocodeModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">pointDelegate</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The geocoding features are called from a higher level piece of code. In this snippet we see an <span class="xref std std-ref">Address</span> object filled with the desired parameters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Address</span> <span class="p">{</span>
+    <span class="nb">id</span> <span class="p">:</span><span class="n">fromAddress</span>
+    <span class="n">street</span><span class="p">:</span> <span class="s2">&quot;Sandakerveien 116&quot;</span>
+    <span class="n">city</span><span class="p">:</span> <span class="s2">&quot;Oslo&quot;</span>
+    <span class="n">country</span><span class="p">:</span> <span class="s2">&quot;Norway&quot;</span>
+    <span class="n">state</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">postalCode</span><span class="p">:</span> <span class="s2">&quot;0484&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <span class="xref std std-ref">Address</span> is later used in a query for the <span class="xref std std-ref">GeocodeModel</span> to process and determine the geographical <span class="xref std std-ref">coordinates</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">send</span> <span class="n">the</span> <span class="n">geocode</span> <span class="n">request</span>
+<span class="n">geocodeModel</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">fromAddress</span>
+<span class="n">geocodeModel</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="navigation">
+<span id="id5"></span><h2>Navigation<a class="headerlink" href="#navigation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A very important function of the <span class="xref std std-ref">Map</span> type is navigation from one place to a destination with possible waypoints along the route. The route will be divided up into a series of segments. At the end of each segment is a vertex called a <em>maneuver</em> . The <em>segments</em> contain information about the time and distance to the end of the segment. The <em>maneuvers</em> contain information about what to do next, how to get onto the next segment, if there is one. So a <em>maneuver</em> contains navigational information, for example “turn right now”.</p>
+<p>To find a suitable route we will need to use a <span class="xref std std-ref">RouteQuery</span> to define the selection criteria and adding any required waypoints. The <span class="xref std std-ref">RouteModel</span> should return a list of <span class="xref std std-ref">RouteSegment</span> s that defines the route to the destination complete with navigation advice at the joins between segments, called <span class="xref std std-ref">RouteManeuver</span> s</p>
+<p>There are many options that you can add to the query to narrow the criteria. The <span class="xref std std-ref">RouteQuery</span> properties can include</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="63%" />
+<col width="37%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="xref std std-ref">numberAlternativeRoutes</span></td>
+<td>The number of alternative routes</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">travelModes</span></td>
+<td>Travel modes</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">routeOptimizations</span></td>
+<td>Required route optimizations</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">segmentDetail</span></td>
+<td>Level of detail in segments</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">maneuverDetail</span></td>
+<td>Level of detail in maneuvers between segments</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">waypoints</span></td>
+<td>A list of waypoints</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">excludedAreas</span></td>
+<td>A list of excluded areas that the route must not cross</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">featureTypes</span></td>
+<td>Relevant map features, for example highway, ferry</td>
+</tr>
+</tbody>
+</table>
+<p>In the following example a default <span class="xref std std-ref">RouteQuery</span> is declared within <span class="xref std std-ref">RouteModel</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">RouteModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">routeModel</span>
+    <span class="n">plugin</span> <span class="p">:</span> <span class="nb">map</span><span class="o">.</span><span class="n">plugin</span>
+    <span class="n">query</span><span class="p">:</span>  <span class="n">RouteQuery</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">routeQuery</span>
+    <span class="p">}</span>
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">RouteModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">switch</span> <span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">case</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="o">//</span> <span class="n">technically</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">error</span>
+                <span class="nb">map</span><span class="o">.</span><span class="n">routeError</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">map</span><span class="o">.</span><span class="n">showRouteList</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">RouteModel</span><span class="o">.</span><span class="n">Error</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">map</span><span class="o">.</span><span class="n">routeError</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The user enters some information such as the starting point of the route, some waypoints and the destination. All of these locations are waypoints so the locations from start to finish will be entered as a sequence of waypoints. Then other query properties can be set that may be specific to this trip.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">clear</span> <span class="n">away</span> <span class="nb">any</span> <span class="n">old</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">query</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">clearWaypoints</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">add</span> <span class="n">the</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span> <span class="n">coords</span> <span class="k">as</span> <span class="n">waypoints</span> <span class="n">on</span> <span class="n">the</span> <span class="n">route</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">addWaypoint</span><span class="p">(</span><span class="n">startCoordinate</span><span class="p">)</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">addWaypoint</span><span class="p">(</span><span class="n">endCoordinate</span><span class="p">)</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">travelModes</span> <span class="o">=</span> <span class="n">RouteQuery</span><span class="o">.</span><span class="n">CarTravel</span>
+<span class="n">routeQuery</span><span class="o">.</span><span class="n">routeOptimizations</span> <span class="o">=</span> <span class="n">RouteQuery</span><span class="o">.</span><span class="n">FastestRoute</span>
+
+<span class="n">routeModel</span><span class="o">.</span><span class="n">update</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">routeInfoModel</span></code> <a class="reference internal" href="qtquick-modelviewsdata-modelview.html#models-and-views-in-qt-quick"><span class="std std-ref">ListModel</span></a> is used to grab the results of the query and construct a suitable list for display.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">interactive</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">ListModel</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="n">routeInfoModel</span> <span class="p">}</span>
+    <span class="n">header</span><span class="p">:</span> <span class="n">RouteListHeader</span> <span class="p">{}</span>
+    <span class="n">delegate</span><span class="p">:</span>  <span class="n">RouteListDelegate</span><span class="p">{</span>
+        <span class="n">routeIndex</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">routeInstruction</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">instruction</span>
+        <span class="n">routeDistance</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">distance</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="qtquick-modelviewsdata-modelview.html#models-and-views-in-qt-quick"><span class="std std-ref">ListModel</span></a> <code class="docutils literal"><span class="pre">routeInfoModel</span></code> can be filled with values using a code, that loops through the segments extracting the segment length, instruction text and distance to the next instruction. The extracted data is formatted for display as it is retrieved.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">routeInfoModel</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">routeModel</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">routeInfoModel</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;instruction&quot;</span><span class="p">:</span> <span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">maneuver</span><span class="o">.</span><span class="n">instructionText</span><span class="p">,</span>
+             <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="n">Helper</span><span class="o">.</span><span class="n">formatDistance</span><span class="p">(</span><span class="n">routeModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">maneuver</span><span class="o">.</span><span class="n">distanceToNextInstruction</span><span class="p">)</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more information on the example see the <a class="reference internal" href="qtlocation-mapviewer-example.html#map-viewer-qml"><span class="std std-ref">Map Viewer (QML)</span></a> example.</p>
+</div></blockquote>
+</div>
+<div class="section" id="zoom-pinch-and-flickable">
+<span id="id6"></span><h2>Zoom, Pinch and Flickable<a class="headerlink" href="#zoom-pinch-and-flickable" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">Map</span> item also supports user interface interactions with the map using tactile and mouse gestures. That is features such as swiping to pan, pinching to zoom.</p>
+<p>Enabling and configuring pinch and flickable is easy within the <span class="xref std std-ref">Map</span> type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Map</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">map</span>
+    <span class="o">//</span> <span class="n">Enable</span> <span class="n">pan</span><span class="p">,</span> <span class="n">flick</span><span class="p">,</span> <span class="ow">and</span> <span class="n">pinch</span> <span class="n">gestures</span> <span class="n">to</span> <span class="n">zoom</span> <span class="ow">in</span> <span class="ow">and</span> <span class="n">out</span>
+    <span class="n">gesture</span><span class="o">.</span><span class="n">acceptedGestures</span><span class="p">:</span> <span class="n">MapGestureArea</span><span class="o">.</span><span class="n">PanGesture</span> <span class="o">|</span> <span class="n">MapGestureArea</span><span class="o">.</span><span class="n">FlickGesture</span> <span class="o">|</span> <span class="n">MapGestureArea</span><span class="o">.</span><span class="n">PinchGesture</span> <span class="o">|</span> <span class="n">MapGestureArea</span><span class="o">.</span><span class="n">RotationGesture</span> <span class="o">|</span> <span class="n">MapGestureArea</span><span class="o">.</span><span class="n">TiltGesture</span>
+    <span class="n">gesture</span><span class="o">.</span><span class="n">flickDeceleration</span><span class="p">:</span> <span class="mi">3000</span>
+    <span class="n">gesture</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Zoom can also be controlled by other objects like sliders, with binding to the Map <span class="xref std std-ref">zoomLevel</span> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="qml-types">
+<span id="id7"></span><h2>QML Types<a class="headerlink" href="#qml-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="maps">
+<span id="id8"></span><h2>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="id9">
+<span id="id10"></span><h2>Geocoding<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="routing">
+<span id="id11"></span><h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="example">
+<span id="id12"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The above snippets are taken from the <a class="reference internal" href="qtlocation-mapviewer-example.html#map-viewer-qml"><span class="std std-ref">Map Viewer (QML)</span></a> example.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

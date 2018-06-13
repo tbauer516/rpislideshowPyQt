@@ -1,0 +1,1704 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Style Sheets Examples &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Style Sheets Examples</a><ul>
+<li><a class="reference internal" href="#style-sheet-usage">Style Sheet Usage</a></li>
+<li><a class="reference internal" href="#customizing-the-foreground-and-background-colors">Customizing the Foreground and Background Colors</a></li>
+<li><a class="reference internal" href="#customizing-using-dynamic-properties">Customizing Using Dynamic Properties</a></li>
+<li><a class="reference internal" href="#customizing-a-qpushbutton-using-the-box-model">Customizing a QPushButton Using the Box Model</a></li>
+<li><a class="reference internal" href="#customizing-the-qpushbutton-s-menu-indicator-sub-control">Customizing the QPushButton’s Menu Indicator Sub-Control</a></li>
+<li><a class="reference internal" href="#complex-selector-example">Complex Selector Example</a></li>
+<li><a class="reference internal" href="#customizing-specific-widgets">Customizing Specific Widgets</a></li>
+<li><a class="reference internal" href="#customizing-qabstractscrollarea">Customizing QAbstractScrollArea</a></li>
+<li><a class="reference internal" href="#customizing-qcheckbox">Customizing QCheckBox</a></li>
+<li><a class="reference internal" href="#customizing-qcombobox">Customizing QComboBox</a></li>
+<li><a class="reference internal" href="#customizing-qdockwidget">Customizing QDockWidget</a></li>
+<li><a class="reference internal" href="#customizing-qframe">Customizing QFrame</a></li>
+<li><a class="reference internal" href="#customizing-qgroupbox">Customizing QGroupBox</a></li>
+<li><a class="reference internal" href="#customizing-qheaderview">Customizing QHeaderView</a></li>
+<li><a class="reference internal" href="#customizing-qlineedit">Customizing QLineEdit</a></li>
+<li><a class="reference internal" href="#customizing-qlistview">Customizing QListView</a></li>
+<li><a class="reference internal" href="#customizing-qmainwindow">Customizing QMainWindow</a></li>
+<li><a class="reference internal" href="#customizing-qmenu">Customizing QMenu</a></li>
+<li><a class="reference internal" href="#customizing-qmenubar">Customizing QMenuBar</a></li>
+<li><a class="reference internal" href="#customizing-qprogressbar">Customizing QProgressBar</a></li>
+<li><a class="reference internal" href="#customizing-qpushbutton">Customizing QPushButton</a></li>
+<li><a class="reference internal" href="#customizing-qradiobutton">Customizing QRadioButton</a></li>
+<li><a class="reference internal" href="#customizing-qscrollbar">Customizing QScrollBar</a></li>
+<li><a class="reference internal" href="#customizing-qsizegrip">Customizing QSizeGrip</a></li>
+<li><a class="reference internal" href="#customizing-qslider">Customizing QSlider</a></li>
+<li><a class="reference internal" href="#customizing-qspinbox">Customizing QSpinBox</a></li>
+<li><a class="reference internal" href="#customizing-qsplitter">Customizing QSplitter</a></li>
+<li><a class="reference internal" href="#customizing-qstatusbar">Customizing QStatusBar</a></li>
+<li><a class="reference internal" href="#customizing-qtabwidget-and-qtabbar">Customizing QTabWidget and QTabBar</a></li>
+<li><a class="reference internal" href="#customizing-qtableview">Customizing QTableView</a></li>
+<li><a class="reference internal" href="#customizing-qtoolbar">Customizing QToolBar</a></li>
+<li><a class="reference internal" href="#customizing-qtoolbox">Customizing QToolBox</a></li>
+<li><a class="reference internal" href="#customizing-qtoolbutton">Customizing QToolButton</a></li>
+<li><a class="reference internal" href="#customizing-qtooltip">Customizing QToolTip</a></li>
+<li><a class="reference internal" href="#customizing-qtreeview">Customizing QTreeView</a></li>
+<li><a class="reference internal" href="#common-mistakes">Common Mistakes</a></li>
+<li><a class="reference internal" href="#qpushbutton-and-images">QPushButton and images</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-style-sheets-examples">
+<span id="id1"></span><h1>Qt Style Sheets Examples<a class="headerlink" href="#qt-style-sheets-examples" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div>We will now see a few examples to get started with using Qt Style Sheets.</div></blockquote>
+<div class="section" id="style-sheet-usage">
+<span id="id2"></span><h2>Style Sheet Usage<a class="headerlink" href="#style-sheet-usage" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="customizing-the-foreground-and-background-colors">
+<span id="id3"></span><h2>Customizing the Foreground and Background Colors<a class="headerlink" href="#customizing-the-foreground-and-background-colors" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s start by setting yellow as the background color of all <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> s in an application. This could be achieved like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QLineEdit { background-color: yellow }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If we want the property to apply only to the <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> s that are children (or grandchildren or grand-grandchildren) of a specific dialog, we would rather do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">myDialog</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QLineEdit { background-color: yellow }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If we want the property to apply only to one specific <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> , we can give it a name using <code class="xref py py-func docutils literal"><span class="pre">QObject.setObjectName()</span></code> and use an ID Selector to refer to it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">myDialog</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QLineEdit#nameEdit { background-color: yellow }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, we can set the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">background-color</span></a> property directly on the <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> , omitting the selector:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nameEdit</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: yellow&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To ensure a good contrast, we should also specify a suitable color for the text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nameEdit</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;color: blue; background-color: yellow&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It might be a good idea to change the colors used for selected text as well:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nameEdit</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;color: blue;&quot;</span>
+                        <span class="s2">&quot;background-color: yellow;&quot;</span>
+                        <span class="s2">&quot;selection-color: yellow;&quot;</span>
+                        <span class="s2">&quot;selection-background-color: blue;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-using-dynamic-properties">
+<span id="id4"></span><h2>Customizing Using Dynamic Properties<a class="headerlink" href="#customizing-using-dynamic-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>There are many situations where we need to present a form that has mandatory fields. To indicate to the user that the field is mandatory, one effective (albeit esthetically dubious) solution is to use yellow as the background color for those fields. It turns out this is very easy to implement using Qt Style Sheets. First, we would use the following application-wide style sheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*</span><span class="p">[</span><span class="n">mandatoryField</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">]</span> <span class="p">{</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">yellow</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>This means that every widget whose <code class="docutils literal"><span class="pre">mandatoryField</span></code> Qt property is set to true would have a yellow background.</p>
+<p>Then, for each mandatory field widget, we would simply create a <code class="docutils literal"><span class="pre">mandatoryField</span></code> property on the fly and set it to true. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="o">*</span><span class="n">nameEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">nameEdit</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;mandatoryField&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+
+<span class="n">QLineEdit</span> <span class="o">*</span><span class="n">emailEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">emailEdit</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;mandatoryField&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+
+<span class="n">QSpinBox</span> <span class="o">*</span><span class="n">ageSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+<span class="n">ageSpinBox</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;mandatoryField&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-a-qpushbutton-using-the-box-model">
+<span id="id5"></span><h2>Customizing a QPushButton Using the Box Model<a class="headerlink" href="#customizing-a-qpushbutton-using-the-box-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>This time, we will show how to create a red <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> . This <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> would presumably be connected to a very destructive piece of code.</p>
+<p>First, we are tempted to use this style sheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#evilButton { background-color: red }</span>
+</pre></div>
+</div>
+<p>However, the result is a boring, flat button with no borders:</p>
+<p>What happened is this:</p>
+<ul class="simple">
+<li>We have made a request that cannot be satisfied using the native styles alone (e.g., the Windows Vista theme engine doesn’t let us specify the background color of a button).</li>
+<li>Therefore, the button is rendered using style sheets.</li>
+<li>We haven’t specified any values for <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">border-width</span></a> and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">border-style</span></a> , so by default we obtain a 0-pixel wide border of style <code class="docutils literal"><span class="pre">none</span></code>.</li>
+</ul>
+<p>Let’s improve the situation by specifying a border:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#evilButton {</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">style</span><span class="p">:</span> <span class="n">outset</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">beige</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Things look already a lot better. But the button looks a bit cramped. Let’s specify some spacing between the border and the text using the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">padding</span></a> . Additionally, we will enforce a minimum width, round the corners, and specify a larger font to make the button look nicer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#evilButton {</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">style</span><span class="p">:</span> <span class="n">outset</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">beige</span><span class="p">;</span>
+    <span class="n">font</span><span class="p">:</span> <span class="n">bold</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">10</span><span class="n">em</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The only issue remaining is that the button doesn’t react when we press it. We can fix this by specifying a slightly different background color and use a different border style.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#evilButton {</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">style</span><span class="p">:</span> <span class="n">outset</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">beige</span><span class="p">;</span>
+    <span class="n">font</span><span class="p">:</span> <span class="n">bold</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">10</span><span class="n">em</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QPushButton</span><span class="c1">#evilButton:pressed {</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">style</span><span class="p">:</span> <span class="n">inset</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-the-qpushbutton-s-menu-indicator-sub-control">
+<span id="id6"></span><h2>Customizing the QPushButton’s Menu Indicator Sub-Control<a class="headerlink" href="#customizing-the-qpushbutton-s-menu-indicator-sub-control" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Subcontrols give access to the sub-elements of a widget. For example, a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> associated with a menu (using <code class="xref py py-func docutils literal"><span class="pre">QPushButton.setMenu()</span></code> ) has a menu indicator. Let’s customize the menu indicator for the red push button:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#evilButton::menu-indicator {</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">myindicator</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>By default, the menu indicator is located at the bottom-right corner of the padding rectangle. We can change this by specifying <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrol-position</span></a> and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrol-origin</span></a> to anchor the indicator differently. We can also use <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">top</span></a> and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">left</span></a> to move the indicator by a few pixels. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">myindicator</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">right</span> <span class="n">center</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">padding</span><span class="p">;</span>
+    <span class="n">left</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This positions the <code class="docutils literal"><span class="pre">myindicator.png</span></code> to the center right of the <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> ‘s <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">padding</span></a> rectangle (see <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrol-origin</span></a> for more information).</p>
+</div></blockquote>
+</div>
+<div class="section" id="complex-selector-example">
+<span id="id7"></span><h2>Complex Selector Example<a class="headerlink" href="#complex-selector-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Since red seems to be our favorite color, let’s make the text in <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> red by setting the following application-wide stylesheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>However, we would like to give a visual indication that a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> is read-only by making it appear gray:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QLineEdit</span><span class="p">[</span><span class="n">readOnly</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">]</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">gray</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>At some point, our design team comes with the requirement that all <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> s in the registration form (with the <code class="xref py py-func docutils literal"><span class="pre">object</span> <span class="pre">name</span></code> <code class="docutils literal"><span class="pre">registrationDialog</span></code> ) to be brown:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QLineEdit</span><span class="p">[</span><span class="n">readOnly</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">]</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">gray</span> <span class="p">}</span>
+<span class="c1">#registrationDialog QLineEdit { color: brown }</span>
+</pre></div>
+</div>
+<p>A few UI design meetings later, we decide that all our <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> s should have brown colored <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> s:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QLineEdit</span><span class="p">[</span><span class="n">readOnly</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">]</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">gray</span> <span class="p">}</span>
+<span class="n">QDialog</span> <span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">brown</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Quiz: What happens if we have a read-only <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> in a <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> ? [Hint: The <a class="reference internal" href="stylesheet-syntax.html#the-style-sheet-syntax"><span class="std std-ref">Conflict Resolution</span></a> section above explains what happens in cases like this.]</p>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-specific-widgets">
+<span id="id8"></span><h2>Customizing Specific Widgets<a class="headerlink" href="#customizing-specific-widgets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>This section provides examples to customize specific widgets using Style Sheets.</div></blockquote>
+</div>
+<div class="section" id="customizing-qabstractscrollarea">
+<span id="id9"></span><h2>Customizing QAbstractScrollArea<a class="headerlink" href="#customizing-qabstractscrollarea" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The background of any <a class="reference internal" href="../PySide2/QtWidgets/QAbstractScrollArea.html#PySide2.QtWidgets.QAbstractScrollArea" title="PySide2.QtWidgets.QAbstractScrollArea"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractScrollArea</span></code></a> (Item views, <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QTextBrowser.html#PySide2.QtWidgets.QTextBrowser" title="PySide2.QtWidgets.QTextBrowser"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextBrowser</span></code></a> ) can be set using the background properties. For example, to set a background-image that scrolls with the scroll bar:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextEdit</span><span class="p">,</span> <span class="n">QListView</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">draft</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">attachment</span><span class="p">:</span> <span class="n">scroll</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the background-image is to be fixed with the viewport:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextEdit</span><span class="p">,</span> <span class="n">QListView</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">draft</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">attachment</span><span class="p">:</span> <span class="n">fixed</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qcheckbox">
+<span id="id10"></span><h2>Customizing QCheckBox<a class="headerlink" href="#customizing-qcheckbox" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Styling of a <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> is almost identical to styling a <a class="reference internal" href="../PySide2/QtWidgets/QRadioButton.html#PySide2.QtWidgets.QRadioButton" title="PySide2.QtWidgets.QRadioButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QRadioButton</span></code></a> . The main difference is that a tristate <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> has an indeterminate state.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCheckBox</span> <span class="p">{</span>
+    <span class="n">spacing</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_checked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_checked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_checked_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">indeterminate</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_indeterminate_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QCheckBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">indeterminate</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_indeterminate_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qcombobox">
+<span id="id11"></span><h2>Customizing QComboBox<a class="headerlink" href="#customizing-qcombobox" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We will look at an example where the drop down button of a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> appears “merged” with the combo box frame.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QComboBox {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+}
+
+QComboBox:editable {
+    background: white;
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable {
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+}
+
+/* QComboBox gets the &quot;on&quot; state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+    image: url(/usr/share/icons/crystalsvg/16x16/actions/1downarrow.png);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+</pre></div>
+</div>
+<p>The pop-up of the <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> is a <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemView.html#PySide2.QtWidgets.QAbstractItemView" title="PySide2.QtWidgets.QAbstractItemView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemView</span></code></a> and is styled using the descendant selector:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QComboBox</span> <span class="n">QAbstractItemView</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">darkgray</span><span class="p">;</span>
+    <span class="n">selection</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">lightgray</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qdockwidget">
+<span id="id12"></span><h2>Customizing QDockWidget<a class="headerlink" href="#customizing-qdockwidget" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The title bar and the buttons of a <a class="reference internal" href="../PySide2/QtWidgets/QDockWidget.html#PySide2.QtWidgets.QDockWidget" title="PySide2.QtWidgets.QDockWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDockWidget</span></code></a> can be customized as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QDockWidget</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+    <span class="n">titlebar</span><span class="o">-</span><span class="n">close</span><span class="o">-</span><span class="n">icon</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">titlebar</span><span class="o">-</span><span class="n">normal</span><span class="o">-</span><span class="n">icon</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">undock</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">title</span> <span class="p">{</span>
+    <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span> <span class="n">left</span><span class="p">;</span> <span class="o">/*</span> <span class="n">align</span> <span class="n">the</span> <span class="n">text</span> <span class="n">to</span> <span class="n">the</span> <span class="n">left</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">lightgray</span><span class="p">;</span>
+    <span class="n">padding</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">darkgray</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">gray</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="o">-</span><span class="mi">1</span><span class="n">px</span> <span class="o">-</span><span class="mi">1</span><span class="n">px</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If one desires to move the dock widget buttons to the left, the following style sheet can be used:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QDockWidget</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+    <span class="n">titlebar</span><span class="o">-</span><span class="n">close</span><span class="o">-</span><span class="n">icon</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">titlebar</span><span class="o">-</span><span class="n">normal</span><span class="o">-</span><span class="n">icon</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="nb">float</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">title</span> <span class="p">{</span>
+    <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">lightgray</span><span class="p">;</span>
+    <span class="n">padding</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">35</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">darkgray</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">icon</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">maximum</span> <span class="n">icon</span> <span class="n">size</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">gray</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="o">-</span><span class="mi">1</span><span class="n">px</span> <span class="o">-</span><span class="mi">1</span><span class="n">px</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span> <span class="n">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QDockWidget</span><span class="p">::</span><span class="nb">float</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span> <span class="n">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To customize the separator (resize handle) of a <a class="reference internal" href="../PySide2/QtWidgets/QDockWidget.html#PySide2.QtWidgets.QDockWidget" title="PySide2.QtWidgets.QDockWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDockWidget</span></code></a> , use QMainWindow::separator.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qframe">
+<span id="id13"></span><h2>Customizing QFrame<a class="headerlink" href="#customizing-qframe" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtWidgets/QFrame.html#PySide2.QtWidgets.QFrame" title="PySide2.QtWidgets.QFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFrame</span></code></a> is styled using the <a class="reference internal" href="stylesheet-customizing.html#customizing-qt-widgets-using-style-sheets"><span class="std std-ref">The Box Model</span></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QFrame</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QToolTip</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">green</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">welcome</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qgroupbox">
+<span id="id14"></span><h2>Customizing QGroupBox<a class="headerlink" href="#customizing-qgroupbox" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let us look at an example that moves the <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> ‘s title to the center.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QGroupBox</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#E0E0E0, stop: 1 #FFFFFF);</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">1</span><span class="n">ex</span><span class="p">;</span> <span class="o">/*</span> <span class="n">leave</span> <span class="n">space</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span> <span class="k">for</span> <span class="n">the</span> <span class="n">title</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QGroupBox</span><span class="p">::</span><span class="n">title</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span> <span class="n">center</span><span class="p">;</span> <span class="o">/*</span> <span class="n">position</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span> <span class="n">center</span> <span class="o">*/</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#FF0ECE, stop: 1 #FFFFFF);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For a checkable <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> , use the {#indicator-sub}{::indicator} subcontrol and style it exactly like a <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> (i.e)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QGroupBox</span><span class="p">::</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QGroupBox</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">proceed</span> <span class="k">with</span> <span class="n">styling</span> <span class="n">just</span> <span class="n">like</span> <span class="n">QCheckBox</span> <span class="o">*/</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qheaderview">
+<span id="id15"></span><h2>Customizing QHeaderView<a class="headerlink" href="#customizing-qheaderview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QHeaderView.html#PySide2.QtWidgets.QHeaderView" title="PySide2.QtWidgets.QHeaderView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHeaderView</span></code></a> is customized as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHeaderView</span><span class="p">::</span><span class="n">section</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span><span class="mi">0</span> <span class="c1">#616161, stop: 0.5 #505050,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mf">0.6</span> <span class="c1">#434343, stop:1 #656565);</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="n">padding</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#6c6c6c;</span>
+<span class="p">}</span>
+
+<span class="n">QHeaderView</span><span class="p">::</span><span class="n">section</span><span class="p">:</span><span class="n">checked</span>
+<span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">style</span> <span class="n">the</span> <span class="n">sort</span> <span class="n">indicator</span> <span class="o">*/</span>
+<span class="n">QHeaderView</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">down_arrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QHeaderView</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">up_arrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qlineedit">
+<span id="id16"></span><h2>Customizing QLineEdit<a class="headerlink" href="#customizing-qlineedit" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The frame of a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> is styled using the <a class="reference internal" href="stylesheet-customizing.html#customizing-qt-widgets-using-style-sheets"><span class="std std-ref">The Box Model</span></a> . To create a line edit with rounded corners, we can set:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">8</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span>
+    <span class="n">selection</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">darkgray</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The password character of line edits that have <code class="xref py py-attr docutils literal"><span class="pre">QLineEdit.Password</span></code> echo mode can be set using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span><span class="p">[</span><span class="n">echoMode</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">]</span> <span class="p">{</span>
+    <span class="n">lineedit</span><span class="o">-</span><span class="n">password</span><span class="o">-</span><span class="n">character</span><span class="p">:</span> <span class="mi">9679</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The background of a read only <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> can be modified as below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLineEdit</span><span class="p">:</span><span class="n">read</span><span class="o">-</span><span class="n">only</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">lightblue</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qlistview">
+<span id="id17"></span><h2>Customizing QListView<a class="headerlink" href="#customizing-qlistview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The background color of alternating rows can be customized using the following style sheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QListView</span> <span class="p">{</span>
+    <span class="n">alternate</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To provide a special background when you hover over items, we can use the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::item</span></a> subcontrol. For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QListView {
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+}
+
+QListView::item:alternate {
+    background: #EEEEEE;
+}
+
+QListView::item:selected {
+    border: 1px solid #6a6ea9;
+}
+
+QListView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #ABAFE5, stop: 1 #8588B2);
+}
+
+QListView::item:selected:active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #6a6ea9, stop: 1 #888dd9);
+}
+
+QListView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #FAFBFE, stop: 1 #DCDEF1);
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qmainwindow">
+<span id="id18"></span><h2>Customizing QMainWindow<a class="headerlink" href="#customizing-qmainwindow" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The separator of a <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> can be styled as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMainWindow</span><span class="p">::</span><span class="n">separator</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">when</span> <span class="n">vertical</span> <span class="o">*/</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">when</span> <span class="n">horizontal</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QMainWindow</span><span class="p">::</span><span class="n">separator</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qmenu">
+<span id="id19"></span><h2>Customizing QMenu<a class="headerlink" href="#customizing-qmenu" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Individual items of a <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> are styled using the ‘item’ subcontrol as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMenu</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#ABABAB; /* sets background of the menu */</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">black</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">item</span> <span class="p">{</span>
+    <span class="o">/*</span> <span class="n">sets</span> <span class="n">background</span> <span class="n">of</span> <span class="n">menu</span> <span class="n">item</span><span class="o">.</span> <span class="nb">set</span> <span class="n">this</span> <span class="n">to</span> <span class="n">something</span> <span class="n">non</span><span class="o">-</span><span class="n">transparent</span>
+        <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">menu</span> <span class="n">color</span> <span class="ow">and</span> <span class="n">menu</span> <span class="n">item</span> <span class="n">color</span> <span class="n">to</span> <span class="n">be</span> <span class="n">different</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">item</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">when</span> <span class="n">user</span> <span class="n">selects</span> <span class="n">item</span> <span class="n">using</span> <span class="n">mouse</span> <span class="ow">or</span> <span class="n">keyboard</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#654321;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For a more advanced customization, use a style sheet as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMenu</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">some</span> <span class="n">spacing</span> <span class="n">around</span> <span class="n">the</span> <span class="n">menu</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">item</span> <span class="p">{</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="mi">25</span><span class="n">px</span> <span class="mi">2</span><span class="n">px</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">transparent</span><span class="p">;</span> <span class="o">/*</span> <span class="n">reserve</span> <span class="n">space</span> <span class="k">for</span> <span class="n">selection</span> <span class="n">border</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">item</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">darkblue</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">icon</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">appearance</span> <span class="n">of</span> <span class="n">a</span> <span class="s1">&#39;checked&#39;</span> <span class="n">icon</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">inset</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">right</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">bottom</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">left</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">separator</span> <span class="p">{</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">lightblue</span><span class="p">;</span>
+    <span class="n">margin</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">non</span><span class="o">-</span><span class="n">exclusive</span> <span class="n">indicator</span> <span class="o">=</span> <span class="n">check</span> <span class="n">box</span> <span class="n">style</span> <span class="n">indicator</span> <span class="p">(</span><span class="n">see</span> <span class="n">QActionGroup</span><span class="p">::</span><span class="n">setExclusive</span><span class="p">)</span> <span class="o">*/</span>
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">non</span><span class="o">-</span><span class="n">exclusive</span><span class="p">:</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">non</span><span class="o">-</span><span class="n">exclusive</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_unchecked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">non</span><span class="o">-</span><span class="n">exclusive</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_checked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">non</span><span class="o">-</span><span class="n">exclusive</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">checkbox_checked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">exclusive</span> <span class="n">indicator</span> <span class="o">=</span> <span class="n">radio</span> <span class="n">button</span> <span class="n">style</span> <span class="n">indicator</span> <span class="p">(</span><span class="n">see</span> <span class="n">QActionGroup</span><span class="p">::</span><span class="n">setExclusive</span><span class="p">)</span> <span class="o">*/</span>
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">exclusive</span><span class="p">:</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_unchecked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">exclusive</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_unchecked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">exclusive</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_checked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenu</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">exclusive</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_checked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qmenubar">
+<span id="id20"></span><h2>Customizing QMenuBar<a class="headerlink" href="#customizing-qmenubar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> is styled as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMenuBar</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span><span class="mi">0</span> <span class="n">lightgray</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span><span class="mi">1</span> <span class="n">darkgray</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QMenuBar</span><span class="p">::</span><span class="n">item</span> <span class="p">{</span>
+    <span class="n">spacing</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">spacing</span> <span class="n">between</span> <span class="n">menu</span> <span class="n">bar</span> <span class="n">items</span> <span class="o">*/</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">transparent</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QMenuBar</span><span class="p">::</span><span class="n">item</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">when</span> <span class="n">selected</span> <span class="n">using</span> <span class="n">mouse</span> <span class="ow">or</span> <span class="n">keyboard</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#a8a8a8;</span>
+<span class="p">}</span>
+
+<span class="n">QMenuBar</span><span class="p">::</span><span class="n">item</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#888888;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qprogressbar">
+<span id="id21"></span><h2>Customizing QProgressBar<a class="headerlink" href="#customizing-qprogressbar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtWidgets/QProgressBar.html#PySide2.QtWidgets.QProgressBar" title="PySide2.QtWidgets.QProgressBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QProgressBar</span></code></a> ‘s <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">border</span></a> , <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">chunk</span></a> , and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">text-align</span></a> can be customized using style sheets. However, if one property or sub-control is customized, all the other properties or sub-controls must be customized as well.</p>
+<p>For example, we change the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">border</span></a> to grey and the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">chunk</span></a> to cerulean.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QProgressBar</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QProgressBar</span><span class="p">::</span><span class="n">chunk</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#05B8CC;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This leaves the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">text-align</span></a> , which we customize by positioning the text in the center of the progress bar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QProgressBar</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">margin</span></a> can be included to obtain more visible chunks.</p>
+<p>In the screenshot above, we use a <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">margin</span></a> of 0.5 pixels.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QProgressBar</span><span class="p">::</span><span class="n">chunk</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#CD96CD;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mf">0.5</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qpushbutton">
+<span id="id22"></span><h2>Customizing QPushButton<a class="headerlink" href="#customizing-qpushbutton" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> is styled as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#8f8f91;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#f6f7fa, stop: 1 #dadbde);</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">80</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#dadbde, stop: 1 #f6f7fa);</span>
+<span class="p">}</span>
+
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">flat</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span> <span class="o">/*</span> <span class="n">no</span> <span class="n">border</span> <span class="k">for</span> <span class="n">a</span> <span class="n">flat</span> <span class="n">push</span> <span class="n">button</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">default</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">navy</span><span class="p">;</span> <span class="o">/*</span> <span class="n">make</span> <span class="n">the</span> <span class="n">default</span> <span class="n">button</span> <span class="n">prominent</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> with a menu, use the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::menu-indicator</span></a> subcontrol.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="nb">open</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">when</span> <span class="n">the</span> <span class="n">button</span> <span class="n">has</span> <span class="n">its</span> <span class="n">menu</span> <span class="nb">open</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#dadbde, stop: 1 #f6f7fa);</span>
+<span class="p">}</span>
+
+<span class="n">QPushButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">menu_indicator</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">padding</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">bottom</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QPushButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">indicator</span><span class="p">:</span><span class="n">pressed</span><span class="p">,</span> <span class="n">QPushButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">indicator</span><span class="p">:</span><span class="nb">open</span> <span class="p">{</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">relative</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">shift</span> <span class="n">the</span> <span class="n">arrow</span> <span class="n">by</span> <span class="mi">2</span> <span class="n">px</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Checkable <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> have the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">:checked</span></a> pseudo state set.</p>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qradiobutton">
+<span id="id23"></span><h2>Customizing QRadioButton<a class="headerlink" href="#customizing-qradiobutton" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The indicator of a <a class="reference internal" href="../PySide2/QtWidgets/QRadioButton.html#PySide2.QtWidgets.QRadioButton" title="PySide2.QtWidgets.QRadioButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QRadioButton</span></code></a> can be changed using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">13</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">::</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_unchecked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_unchecked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_unchecked_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">::</span><span class="n">checked</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_checked</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_checked_hover</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QRadioButton</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">checked</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">radiobutton_checked_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qscrollbar">
+<span id="id24"></span><h2>Customizing QScrollBar<a class="headerlink" href="#customizing-qscrollbar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> can be styled using its subcontrols like <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">handle</span></a> , <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">add-line</span></a> , <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">sub-line</span></a> , and so on. Note that if one property or sub-control is customized, all the other properties or sub-controls must be customized as well.</p>
+<p>The scroll bar above has been styled in aquamarine with a solid grey border.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QScrollBar</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">15</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span> <span class="mi">20</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">left-arrow</span></a> and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">right-arrow</span></a> have a solid grey border with a white background. As an alternative, you could also embed the image of an arrow.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QScrollBar</span><span class="p">:</span><span class="n">left</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">horizontal</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">right</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">horizontal</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want the scroll buttons of the scroll bar to be placed together (instead of the edges) like on <span class="xref std std-ref">macOS</span> , you can use the following stylesheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QScrollBar</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">green</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">cyan</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">15</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">0</span><span class="n">px</span> <span class="mi">40</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">0</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">blue</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">black</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">magenta</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span> <span class="n">right</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">black</span><span class="p">;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+    <span class="n">right</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">:</span><span class="n">left</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">horizontal</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">right</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">pink</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">horizontal</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The scroll bar using the above stylesheet looks like this:</p>
+<p>To customize a vertical scroll bar use a style sheet similar to the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QScrollBar</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">15</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">22</span><span class="n">px</span> <span class="mi">0</span> <span class="mi">22</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">height</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">bottom</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">line</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="c1">#32CC99;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">vertical</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QScrollBar</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">vertical</span><span class="p">,</span> <span class="n">QScrollBar</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">none</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qsizegrip">
+<span id="id25"></span><h2>Customizing QSizeGrip<a class="headerlink" href="#customizing-qsizegrip" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QSizeGrip.html#PySide2.QtWidgets.QSizeGrip" title="PySide2.QtWidgets.QSizeGrip"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSizeGrip</span></code></a> is usually styled by just setting an image.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSizeGrip</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">sizegrip</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qslider">
+<span id="id26"></span><h2>Customizing QSlider<a class="headerlink" href="#customizing-qslider" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>You can style horizontal slider as below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSlider</span><span class="p">::</span><span class="n">groove</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#999999;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">8</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">the</span> <span class="n">groove</span> <span class="n">expands</span> <span class="n">to</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="n">the</span> <span class="n">slider</span> <span class="n">by</span> <span class="n">default</span><span class="o">.</span> <span class="n">by</span> <span class="n">giving</span> <span class="n">it</span> <span class="n">a</span> <span class="n">height</span><span class="p">,</span> <span class="n">it</span> <span class="n">has</span> <span class="n">a</span> <span class="n">fixed</span> <span class="n">size</span> <span class="o">*/</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span><span class="mi">0</span> <span class="c1">#B1B1B1, stop:1 #c4c4c4);</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSlider</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="p">:</span><span class="mi">0</span> <span class="c1">#b4b4b4, stop:1 #8f8f8f);</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#5c5c5c;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">18</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="n">px</span> <span class="mi">0</span><span class="p">;</span> <span class="o">/*</span> <span class="n">handle</span> <span class="ow">is</span> <span class="n">placed</span> <span class="n">by</span> <span class="n">default</span> <span class="n">on</span> <span class="n">the</span> <span class="n">contents</span> <span class="n">rect</span> <span class="n">of</span> <span class="n">the</span> <span class="n">groove</span><span class="o">.</span> <span class="n">Expand</span> <span class="n">outside</span> <span class="n">the</span> <span class="n">groove</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to change the color of the slider parts before and after the handle, you can use the add-page and sub-page subcontrols. For example, for a vertical slider:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSlider</span><span class="p">::</span><span class="n">groove</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span> <span class="o">/*</span> <span class="n">absolutely</span> <span class="n">position</span> <span class="mi">4</span><span class="n">px</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">left</span> <span class="ow">and</span> <span class="n">right</span> <span class="n">of</span> <span class="n">the</span> <span class="n">widget</span><span class="o">.</span> <span class="n">setting</span> <span class="n">margins</span> <span class="n">on</span> <span class="n">the</span> <span class="n">widget</span> <span class="n">should</span> <span class="n">work</span> <span class="n">too</span><span class="o">...</span> <span class="o">*/</span>
+    <span class="n">left</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span> <span class="n">right</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSlider</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">green</span><span class="p">;</span>
+    <span class="n">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">4</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">expand</span> <span class="n">outside</span> <span class="n">the</span> <span class="n">groove</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QSlider</span><span class="p">::</span><span class="n">add</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSlider</span><span class="p">::</span><span class="n">sub</span><span class="o">-</span><span class="n">page</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">pink</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qspinbox">
+<span id="id27"></span><h2>Customizing QSpinBox<a class="headerlink" href="#customizing-qspinbox" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> can be completely customized as below (the style sheet has commentary inline):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSpinBox</span> <span class="p">{</span>
+    <span class="n">padding</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">15</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">make</span> <span class="n">room</span> <span class="k">for</span> <span class="n">the</span> <span class="n">arrows</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">frame</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">border</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">top</span> <span class="n">right</span><span class="p">;</span> <span class="o">/*</span> <span class="n">position</span> <span class="n">at</span> <span class="n">the</span> <span class="n">top</span> <span class="n">right</span> <span class="n">corner</span> <span class="o">*/</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="mi">16</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="mi">1</span><span class="n">px</span> <span class="n">border</span><span class="o">-</span><span class="n">width</span> <span class="o">=</span> <span class="mi">15</span><span class="n">px</span> <span class="n">padding</span> <span class="o">+</span> <span class="mi">3</span><span class="n">px</span> <span class="n">parent</span> <span class="n">border</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spinup</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spinup_hover</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spinup_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">up_arrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">7</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">7</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">disabled</span><span class="p">,</span> <span class="n">QSpinBox</span><span class="p">::</span><span class="n">up</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">off</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">off</span> <span class="n">state</span> <span class="n">when</span> <span class="n">value</span> <span class="ow">is</span> <span class="nb">max</span> <span class="o">*/</span>
+   <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">up_arrow_disabled</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">border</span><span class="p">;</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">bottom</span> <span class="n">right</span><span class="p">;</span> <span class="o">/*</span> <span class="n">position</span> <span class="n">at</span> <span class="n">bottom</span> <span class="n">right</span> <span class="n">corner</span> <span class="o">*/</span>
+
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spindown</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spindown_hover</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">spindown_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">down_arrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">7</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">7</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">disabled</span><span class="p">,</span>
+<span class="n">QSpinBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">off</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">off</span> <span class="n">state</span> <span class="n">when</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">min</span> <span class="o">*/</span>
+   <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(:</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">down_arrow_disabled</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qsplitter">
+<span id="id28"></span><h2>Customizing QSplitter<a class="headerlink" href="#customizing-qsplitter" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtWidgets/QSplitter.html#PySide2.QtWidgets.QSplitter" title="PySide2.QtWidgets.QSplitter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSplitter</span></code></a> derives from a <a class="reference internal" href="../PySide2/QtWidgets/QFrame.html#PySide2.QtWidgets.QFrame" title="PySide2.QtWidgets.QFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFrame</span></code></a> and hence can be styled like a <a class="reference internal" href="../PySide2/QtWidgets/QFrame.html#PySide2.QtWidgets.QFrame" title="PySide2.QtWidgets.QFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFrame</span></code></a> . The grip or the handle is customized using the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::handle</span></a> subcontrol.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSplitter</span><span class="p">::</span><span class="n">handle</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">splitter</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QSplitter</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">horizontal</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSplitter</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">vertical</span> <span class="p">{</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QSplitter</span><span class="p">::</span><span class="n">handle</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">url</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">splitter_pressed</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qstatusbar">
+<span id="id29"></span><h2>Customizing QStatusBar<a class="headerlink" href="#customizing-qstatusbar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We can provide a background for the status bar and a border for items inside the status bar as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStatusBar</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">brown</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QStatusBar</span><span class="p">::</span><span class="n">item</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that widgets that have been added to the <a class="reference internal" href="../PySide2/QtWidgets/QStatusBar.html#PySide2.QtWidgets.QStatusBar" title="PySide2.QtWidgets.QStatusBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStatusBar</span></code></a> can be styled using the descendant declaration (i.e)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStatusBar</span> <span class="n">QLabel</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span> <span class="n">solid</span> <span class="n">white</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtabwidget-and-qtabbar">
+<span id="id30"></span><h2>Customizing QTabWidget and QTabBar<a class="headerlink" href="#customizing-qtabwidget-and-qtabbar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For the screenshot above, we need a stylesheet as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #C2C7CB;
+}
+
+QTabWidget::tab-bar {
+    left: 5px; /* move to the right by 5px */
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+    border: 2px solid #C4C4C3;
+    border-bottom-color: #C2C7CB; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+
+QTabBar::tab:selected {
+    border-color: #9B9B9B;
+    border-bottom-color: #C2C7CB; /* same as pane color */
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px; /* make non-selected tabs look smaller */
+}
+</pre></div>
+</div>
+<p>Often we require the tabs to overlap to look like below:</p>
+<p>For a tab widget that looks like above, we make use of negative margins. The resulting stylesheet looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTabWidget::pane { /* The tab widget frame */
+    border-top: 2px solid #C2C7CB;
+}
+
+QTabWidget::tab-bar {
+    left: 5px; /* move to the right by 5px */
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+    border: 2px solid #C4C4C3;
+    border-bottom-color: #C2C7CB; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+
+QTabBar::tab:selected {
+    border-color: #9B9B9B;
+    border-bottom-color: #C2C7CB; /* same as pane color */
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px; /* make non-selected tabs look smaller */
+}
+
+/* make use of negative margins for overlapping tabs */
+QTabBar::tab:selected {
+    /* expand/overlap to the left and right by 4px */
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+QTabBar::tab:first:selected {
+    margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+}
+
+QTabBar::tab:last:selected {
+    margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+}
+
+QTabBar::tab:only-one {
+    margin: 0; /* if there is only one tab, we don&#39;t want overlapping margins */
+}
+</pre></div>
+</div>
+<p>To move the tab bar to the center (as below), we require the following stylesheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTabWidget</span><span class="p">::</span><span class="n">pane</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">The</span> <span class="n">tab</span> <span class="n">widget</span> <span class="n">frame</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#C2C7CB;</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="n">em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QTabWidget</span><span class="p">::</span><span class="n">tab</span><span class="o">-</span><span class="n">bar</span> <span class="p">{</span>
+    <span class="n">alignment</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">Style</span> <span class="n">the</span> <span class="n">tab</span> <span class="n">using</span> <span class="n">the</span> <span class="n">tab</span> <span class="n">sub</span><span class="o">-</span><span class="n">control</span><span class="o">.</span> <span class="n">Note</span> <span class="n">that</span>
+    <span class="n">it</span> <span class="n">reads</span> <span class="n">QTabBar</span> <span class="n">_not_</span> <span class="n">QTabWidget</span> <span class="o">*/</span>
+<span class="n">QTabBar</span><span class="p">::</span><span class="n">tab</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#E1E1E1, stop: 0.4 #DDDDDD,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mf">0.5</span> <span class="c1">#D8D8D8, stop: 1.0 #D3D3D3);</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#C4C4C3;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#C2C7CB; /* same as the pane color */</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">left</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">right</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">4</span><span class="n">px</span><span class="p">;</span>
+    <span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">8</span><span class="n">ex</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span><span class="p">::</span><span class="n">tab</span><span class="p">:</span><span class="n">selected</span><span class="p">,</span> <span class="n">QTabBar</span><span class="p">::</span><span class="n">tab</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#fafafa, stop: 0.4 #f4f4f4,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mf">0.5</span> <span class="c1">#e7e7e7, stop: 1.0 #fafafa);</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span><span class="p">::</span><span class="n">tab</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#9B9B9B;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#C2C7CB; /* same as pane color */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The tear indicator and the scroll buttons can be further customized as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTabBar</span><span class="p">::</span><span class="n">tear</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">tear_indicator</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span><span class="p">::</span><span class="n">scroller</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">the</span> <span class="n">width</span> <span class="n">of</span> <span class="n">the</span> <span class="n">scroll</span> <span class="n">buttons</span> <span class="o">*/</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span> <span class="n">QToolButton</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">the</span> <span class="n">scroll</span> <span class="n">buttons</span> <span class="n">are</span> <span class="n">tool</span> <span class="n">buttons</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">scrollbutton</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">width</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span> <span class="n">QToolButton</span><span class="p">::</span><span class="n">right</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">the</span> <span class="n">arrow</span> <span class="n">mark</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">tool</span> <span class="n">buttons</span> <span class="o">*/</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">rightarrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QTabBar</span> <span class="n">QToolButton</span><span class="p">::</span><span class="n">left</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">leftarrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since Qt 4.6 the close button can be customized as follow:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTabBar</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">close</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">position</span><span class="p">:</span> <span class="n">left</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QTabBar</span><span class="p">::</span><span class="n">close</span><span class="o">-</span><span class="n">button</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">close</span><span class="o">-</span><span class="n">hover</span><span class="o">.</span><span class="n">png</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtableview">
+<span id="id31"></span><h2>Customizing QTableView<a class="headerlink" href="#customizing-qtableview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Suppose we’d like our selected item in <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> to have bubblegum pink fade to white as its background.</p>
+<p>This is possible with the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">selection-background-color</span></a> property and the syntax required is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTableView</span> <span class="p">{</span>
+    <span class="n">selection</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#FF92BB, stop: 1 white);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The corner widget can be customized using the following style sheet</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTableView</span> <span class="n">QTableCornerButton</span><span class="p">::</span><span class="n">section</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">outset</span> <span class="n">red</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> ‘s checkbox indicator can also be customized. In the following snippet the indicator <code class="docutils literal"><span class="pre">background-color</span></code> in unchecked state is customized:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTableView</span><span class="p">::</span><span class="n">indicator</span><span class="p">:</span><span class="n">unchecked</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#d7d6d5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtoolbar">
+<span id="id32"></span><h2>Customizing QToolBar<a class="headerlink" href="#customizing-qtoolbar" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The background and the handle of a <a class="reference internal" href="../PySide2/QtWidgets/QToolBar.html#PySide2.QtWidgets.QToolBar" title="PySide2.QtWidgets.QToolBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBar</span></code></a> is customized as below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QToolBar</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span>
+    <span class="n">spacing</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">spacing</span> <span class="n">between</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">tool</span> <span class="n">bar</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QToolBar</span><span class="p">::</span><span class="n">handle</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">handle</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtoolbox">
+<span id="id33"></span><h2>Customizing QToolBox<a class="headerlink" href="#customizing-qtoolbox" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The tabs of the <a class="reference internal" href="../PySide2/QtWidgets/QToolBox.html#PySide2.QtWidgets.QToolBox" title="PySide2.QtWidgets.QToolBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolBox</span></code></a> are customized using the ‘tab’ subcontrol.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QToolBox</span><span class="p">::</span><span class="n">tab</span> <span class="p">{</span>
+    <span class="n">background</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#E1E1E1, stop: 0.4 #DDDDDD,</span>
+                                <span class="n">stop</span><span class="p">:</span> <span class="mf">0.5</span> <span class="c1">#D8D8D8, stop: 1.0 #D3D3D3);</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">darkgray</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QToolBox</span><span class="p">::</span><span class="n">tab</span><span class="p">:</span><span class="n">selected</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">italicize</span> <span class="n">selected</span> <span class="n">tabs</span> <span class="o">*/</span>
+    <span class="n">font</span><span class="p">:</span> <span class="n">italic</span><span class="p">;</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">white</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtoolbutton">
+<span id="id34"></span><h2>Customizing QToolButton<a class="headerlink" href="#customizing-qtoolbutton" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>There are three types of QToolButtons.</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> has no menu. In this case, the <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> is styled exactly like <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> . See <a class="reference internal" href="#qt-style-sheets-examples"><span class="std std-ref">Customizing QPushButton</span></a> for an example.</li>
+<li>The <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> has a menu and has the <code class="xref py py-func docutils literal"><span class="pre">QToolButton.popupMode()</span></code> set to <code class="xref py py-attr docutils literal"><span class="pre">QToolButton.DelayedPopup</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">QToolButton.InstantPopup</span></code> . In this case, the <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> is styled exactly like a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> with a menu. See <a class="reference internal" href="#qt-style-sheets-examples"><span class="std std-ref">Customizing QPushButton</span></a> for an example of the usage of the menu-indicator pseudo state.</li>
+<li>The <a class="reference internal" href="../PySide2/QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> has its <code class="xref py py-func docutils literal"><span class="pre">QToolButton.popupMode()</span></code> set to <code class="xref py py-attr docutils literal"><span class="pre">QToolButton.MenuButtonPopup</span></code> . In this case, we style it as follows:</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QToolButton</span> <span class="p">{</span> <span class="o">/*</span> <span class="nb">all</span> <span class="n">types</span> <span class="n">of</span> <span class="n">tool</span> <span class="n">button</span> <span class="o">*/</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="c1">#8f8f91;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#f6f7fa, stop: 1 #dadbde);</span>
+<span class="p">}</span>
+
+<span class="n">QToolButton</span><span class="p">[</span><span class="n">popupMode</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="p">{</span> <span class="o">/*</span> <span class="n">only</span> <span class="k">for</span> <span class="n">MenuButtonPopup</span> <span class="o">*/</span>
+    <span class="n">padding</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">make</span> <span class="n">way</span> <span class="k">for</span> <span class="n">the</span> <span class="n">popup</span> <span class="n">button</span> <span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="n">QToolButton</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">qlineargradient</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">stop</span><span class="p">:</span> <span class="mi">0</span> <span class="c1">#dadbde, stop: 1 #f6f7fa);</span>
+<span class="p">}</span>
+
+<span class="o">/*</span> <span class="n">the</span> <span class="n">subcontrols</span> <span class="n">below</span> <span class="n">are</span> <span class="n">used</span> <span class="n">only</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MenuButtonPopup</span> <span class="n">mode</span> <span class="o">*/</span>
+<span class="n">QToolButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">button</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">gray</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="o">-</span><span class="n">right</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="o">-</span><span class="n">right</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">6</span><span class="n">px</span><span class="p">;</span>
+    <span class="o">/*</span> <span class="mi">16</span><span class="n">px</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">4</span><span class="n">px</span> <span class="k">for</span> <span class="n">border</span> <span class="o">=</span> <span class="mi">20</span><span class="n">px</span> <span class="n">allocated</span> <span class="n">above</span> <span class="o">*/</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">16</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QToolButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">downarrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">QToolButton</span><span class="p">::</span><span class="n">menu</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="nb">open</span> <span class="p">{</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span> <span class="o">/*</span> <span class="n">shift</span> <span class="n">it</span> <span class="n">a</span> <span class="n">bit</span> <span class="o">*/</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtooltip">
+<span id="id35"></span><h2>Customizing QToolTip<a class="headerlink" href="#customizing-qtooltip" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolTip</span></code> is customized exactly like a <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> . In addition, for platforms that support it, the opacity property may be set to adjust the opacity.</p>
+<p>For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QToolTip</span> <span class="p">{</span>
+    <span class="n">border</span><span class="p">:</span> <span class="mi">2</span><span class="n">px</span> <span class="n">solid</span> <span class="n">darkkhaki</span><span class="p">;</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="mi">5</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span><span class="p">;</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="customizing-qtreeview">
+<span id="id36"></span><h2>Customizing QTreeView<a class="headerlink" href="#customizing-qtreeview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The background color of alternating rows can be customized using the following style sheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTreeView</span> <span class="p">{</span>
+    <span class="n">alternate</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">yellow</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To provide a special background when you hover over items, we can use the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::item</span></a> subcontrol. For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTreeView {
+    show-decoration-selected: 1;
+}
+
+QTreeView::item {
+     border: 1px solid #d9d9d9;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+QTreeView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+    border: 1px solid #bfcde4;
+}
+
+QTreeView::item:selected {
+    border: 1px solid #567dbc;
+}
+
+QTreeView::item:selected:active{
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
+}
+
+QTreeView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+}
+</pre></div>
+</div>
+<p>The branches of a <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> are styled using the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::branch</span></a> subcontrol. The following stylesheet color codes the various states when drawing a branch.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTreeView::branch {
+        background: palette(base);
+}
+
+QTreeView::branch:has-siblings:!adjoins-item {
+        background: cyan;
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+        background: red;
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+        background: blue;
+}
+
+QTreeView::branch:closed:has-children:has-siblings {
+        background: pink;
+}
+
+QTreeView::branch:has-children:!has-siblings:closed {
+        background: gray;
+}
+
+QTreeView::branch:open:has-children:has-siblings {
+        background: magenta;
+}
+
+QTreeView::branch:open:has-children:!has-siblings {
+        background: green;
+}
+</pre></div>
+</div>
+<p>Colorful, though it is, a more useful example can be made using the following images:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="21%" />
+<col width="20%" />
+<col width="24%" />
+<col width="21%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>vline.png</td>
+<td>branch-more.png</td>
+<td>branch-end.png</td>
+<td>branch-closed.png</td>
+<td>branch-open.png</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTreeView::branch:has-siblings:!adjoins-item {
+    border-image: url(vline.png) 0;
+}
+
+QTreeView::branch:has-siblings:adjoins-item {
+    border-image: url(branch-more.png) 0;
+}
+
+QTreeView::branch:!has-children:!has-siblings:adjoins-item {
+    border-image: url(branch-end.png) 0;
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+        border-image: none;
+        image: url(branch-closed.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+        border-image: none;
+        image: url(branch-open.png);
+}
+</pre></div>
+</div>
+<p>The resulting tree view looks like this:</p>
+</div></blockquote>
+</div>
+<div class="section" id="common-mistakes">
+<span id="id37"></span><h2>Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>This section lists some common mistakes when using stylesheets.</div></blockquote>
+</div>
+<div class="section" id="qpushbutton-and-images">
+<span id="id38"></span><h2>QPushButton and images<a class="headerlink" href="#qpushbutton-and-images" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When styling a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> , it is often desirable to use an image as the button graphic. It is common to try the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">background-image</span></a> property, but this has a number of drawbacks: For instance, the background will often appear hidden behind the button decoration, because it is not considered a background. In addition, if the button is resized, the entire background will be stretched or tiled, which does not always look good.</p>
+<p>It is better to use the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">border-image</span></a> property, as it will always display the image, regardless of the background (you can combine it with a background if it has alpha values in it), and it has special settings to deal with button resizing.</p>
+<p>Consider the following snippet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kamlie</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">button</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="mi">3</span> <span class="mi">10</span> <span class="mi">3</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span> <span class="n">transparent</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">bottom</span><span class="p">:</span> <span class="mi">3</span><span class="n">px</span> <span class="n">transparent</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span> <span class="n">transparent</span><span class="p">;</span>
+    <span class="n">border</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">10</span><span class="n">px</span> <span class="n">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will produce a button looking like this:</p>
+<p>The numbers after the url gives the top, right, bottom and left number of pixels, respectively. These numbers correspond to the border and should not stretch when the size changes. Whenever you resize the button, the middle part of the image will stretch in both directions, while the pixels specified in the stylesheet will not. This makes the borders of the button look more natural, like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+</tr>
+<tr class="row-even"><td>With borders</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Without borders</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="qtwidgets-widgets-stylesheet-example.html#style-sheet-example"><span class="std std-ref">Style Sheet Example</span></a>  <a class="reference internal" href="richtext-html-subset.html#supported-html-subset"><span class="std std-ref">Supported HTML Subset</span></a>  <a class="reference internal" href="../PySide2/QtWidgets/QStyle.html#PySide2.QtWidgets.QStyle" title="PySide2.QtWidgets.QStyle"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QStyle</span></code></a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

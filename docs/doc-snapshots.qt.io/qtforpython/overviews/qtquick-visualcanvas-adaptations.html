@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Scene Graph Adaptations &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scene Graph Adaptations</a><ul>
+<li><a class="reference internal" href="#scene-graph-adaptations-in-qt-quick">Scene Graph Adaptations in Qt Quick</a></li>
+<li><a class="reference internal" href="#switching-between-the-adaptation-used-by-the-application">Switching Between the Adaptation Used by the Application</a></li>
+<li><a class="reference internal" href="#opengl-es-2-0-and-opengl-2-0-adaptation">OpenGL ES 2.0 and OpenGL 2.0 Adaptation</a></li>
+<li><a class="reference internal" href="#software-adaptation">Software Adaptation</a></li>
+<li><a class="reference internal" href="#direct3d-12-experimental">Direct3D 12 (experimental)</a></li>
+<li><a class="reference internal" href="#openvg">OpenVG</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scene-graph-adaptations">
+<span id="id1"></span><h1>Scene Graph Adaptations<a class="headerlink" href="#scene-graph-adaptations" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div></div></blockquote>
+<div class="section" id="scene-graph-adaptations-in-qt-quick">
+<span id="id2"></span><h2>Scene Graph Adaptations in Qt Quick<a class="headerlink" href="#scene-graph-adaptations-in-qt-quick" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Originally Qt Quick always relied on OpenGL (OpenGL ES 2.0 or OpenGL 2.0) for parsing the scene graph and rendering the results to a render target. From Qt 5.8 onwards Qt Quick also supports rendering in software and with Direct3D 12.</div></blockquote>
+</div>
+<div class="section" id="switching-between-the-adaptation-used-by-the-application">
+<span id="id3"></span><h2>Switching Between the Adaptation Used by the Application<a class="headerlink" href="#switching-between-the-adaptation-used-by-the-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The default rendering backend is still OpenGL, or - in Qt builds with disabled OpenGL support - the software renderer. This can be overridden either by using an environment variable or a C++ API. The former consists of setting the <code class="docutils literal"><span class="pre">QT_QUICK_BACKEND</span></code> or the legacy <code class="docutils literal"><span class="pre">QMLSCENE_DEVICE</span></code> environment variable before launching applications. The latter is done by calling <code class="xref py py-func docutils literal"><span class="pre">QQuickWindow.setSceneGraphBackend()</span></code> early in the application’s main() function.</p>
+<p>The supported backends are the following</p>
+<ul class="simple">
+<li>OpenGL - Requested by the string <code class="docutils literal"><span class="pre">&quot;&quot;</span></code> or the enum value <code class="xref py py-attr docutils literal"><span class="pre">QSGRendererInterface.OpenGL</span></code> .</li>
+<li>Software - Requested by the string <code class="docutils literal"><span class="pre">&quot;software&quot;</span></code> or the enum value <code class="xref py py-attr docutils literal"><span class="pre">QSGRendererInterface.Software</span></code> .</li>
+<li>Direct3D 12 - Requested by the string <code class="docutils literal"><span class="pre">&quot;d3d12&quot;</span></code> or the enum value <code class="xref py py-attr docutils literal"><span class="pre">QSGRendererInterface.Direct3D12</span></code> .</li>
+<li><a class="reference internal" href="#scene-graph-adaptations"><span class="std std-ref">OpenVG</span></a> - Requested by the string <code class="docutils literal"><span class="pre">&quot;openvg&quot;</span></code> or the enum value <code class="xref py py-attr docutils literal"><span class="pre">QSGRendererInterface.OpenVG</span></code> .</li>
+</ul>
+<p>When in doubt which backend is in use, enable basic scenegraph information logging via the <code class="docutils literal"><span class="pre">QSG_INFO</span></code> environment variable or the <code class="docutils literal"><span class="pre">qt.scenegraph.general</span></code> logging category. This will result in printing some information during application startup onto the debug output.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Adaptations other than OpenGL will typically come with a set of limitations since they are unlikely to provide a feature set 100% compatible with OpenGL. However, they may provide their own specific advantages in certain areas. Refer to the sections below for more information on the various adaptations.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="opengl-es-2-0-and-opengl-2-0-adaptation">
+<span id="id4"></span><h2>OpenGL ES 2.0 and OpenGL 2.0 Adaptation<a class="headerlink" href="#opengl-es-2-0-and-opengl-2-0-adaptation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The default adaptation capable of providing the full Qt Quick 2 feature set is the OpenGL adaptation. All of the details of the OpenGL adaptation can are available here: <a class="reference internal" href="qtquick-visualcanvas-scenegraph-renderer.html#qt-quick-scene-graph-opengl-renderer"><span class="std std-ref">OpenGL Adaptation</span></a></div></blockquote>
+</div>
+<div class="section" id="software-adaptation">
+<span id="id5"></span><h2>Software Adaptation<a class="headerlink" href="#software-adaptation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The Software adaptation is an alternative renderer for <span class="xref std std-ref">Qt Quick</span> 2 that uses the raster paint engine to render the contents of the scene graph. The details for this adaptation are available here: <a class="reference internal" href="qtquick-visualcanvas-adaptations-software.html#qt-quick-software-adaptation"><span class="std std-ref">Software Adaptation</span></a></div></blockquote>
+</div>
+<div class="section" id="direct3d-12-experimental">
+<span id="id6"></span><h2>Direct3D 12 (experimental)<a class="headerlink" href="#direct3d-12-experimental" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The Direct3D 12 adaptation is an alternative renderer for <span class="xref std std-ref">Qt Quick</span> 2 when running on Windows 10, both for Win32 and UWP applications. The details for this adaptation are available here: <a class="reference internal" href="qtquick-visualcanvas-adaptations-d3d12.html#qt-quick-direct3d-12-adaptation"><span class="std std-ref">Direct3D 12 Adaptation</span></a></div></blockquote>
+</div>
+<div class="section" id="openvg">
+<span id="id7"></span><h2>OpenVG<a class="headerlink" href="#openvg" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The <a class="reference internal" href="#scene-graph-adaptations"><span class="std std-ref">OpenVG</span></a> adaptation is an alternative renderer for <span class="xref std std-ref">Qt Quick</span> 2 that will renderer the contents of the scene graph using <a class="reference internal" href="#scene-graph-adaptations"><span class="std std-ref">OpenVG</span></a> commands to provide hardware-acclerated 2D vector and raster graphics. The details for this adaptation are available here: <a class="reference internal" href="qtquick-visualcanvas-adaptations-openvg.html#qt-quick-openvg-adaptation"><span class="std std-ref">OpenVG Adaptation</span></a></div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

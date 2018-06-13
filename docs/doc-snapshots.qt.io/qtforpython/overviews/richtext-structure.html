@@ -1,0 +1,307 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Rich Text Document Structure &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Rich Text Document Structure</a><ul>
+<li><a class="reference internal" href="#rich-text-documents">Rich Text Documents</a></li>
+<li><a class="reference internal" href="#document-elements">Document Elements</a></li>
+<li><a class="reference internal" href="#text-blocks">Text Blocks</a></li>
+<li><a class="reference internal" href="#frames">Frames</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+<li><a class="reference internal" href="#images">Images</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rich-text-document-structure">
+<span id="id1"></span><h1>Rich Text Document Structure<a class="headerlink" href="#rich-text-document-structure" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Text documents are represented by the <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> class, which contains information about the document’s internal representation, its structure, and keeps track of modifications to provide undo/redo facilities.</p>
+<p>The structured representation of a text document presents its contents as a hierarchy of text blocks, frames, tables, and other objects. These provide a logical structure to the document and describe how their contents will be displayed. Generally, frames and tables are used to group other structures while text blocks contain the actual textual information.</p>
+<p>New elements are created and inserted into the document programmatically <a class="reference internal" href="richtext-cursor.html#the-qtextcursor-interface"><span class="std std-ref">with a QTextCursor</span></a> or by using an editor widget, such as <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> . Elements can be given a particular format when they are created; otherwise they take the cursor’s current format for the element.</p>
+<p>++————————————————————————————————————————————————————————————————————————+
+||**Basic structure**                                                                                                                                                                                                     |
+||                                                                                                                                                                                                                        |
+||    The “top level” of a document might be populated in the way shown. Each document always contains a root frame, and this always contains at least one text block.                                                    |
+||                                                                                                                                                                                                                        |
+||    For documents with some textual content, the root frame usually contains a sequence of blocks and other elements.                                                                                                   |
+||                                                                                                                                                                                                                        |
+||    Sequences of frames and tables are always separated by text blocks in a document, even if the text blocks contain no information. This ensures that new elements can always be inserted between existing structures.|
+++————————————————————————————————————————————————————————————————————————+</p>
+<p>In this chapter, we look at each of the structural elements used in a rich text document, outline their features and uses, and show how to examine their contents. Document editing is described in <a class="reference internal" href="richtext-cursor.html#the-qtextcursor-interface"><span class="std std-ref">The QTextCursor Interface</span></a> .</p>
+</div></blockquote>
+<div class="section" id="rich-text-documents">
+<span id="id2"></span><h2>Rich Text Documents<a class="headerlink" href="#rich-text-documents" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> objects contain all the information required to construct rich text documents. Text documents can be accessed in two complementary ways: as a linear buffer for editors to use, and as an object hierarchy that is useful to layout engines. In the hierarchical document model, objects generally correspond to visual elements such as frames, tables, and lists. At a lower level, these elements describe properties such as the text style and alignment. The linear representation of the document is used for editing and manipulation of the document’s contents.</p>
+<p>Although <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> makes it easy to display and edit rich text, documents can also be used independently of any editor widget, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">newDocument</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextDocument</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Alternatively, they can be extracted from an existing editor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextEdit</span> <span class="o">*</span><span class="n">editor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">;</span>
+<span class="n">QTextDocument</span> <span class="o">*</span><span class="n">editorDocument</span> <span class="o">=</span> <span class="n">editor</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This flexibility enables applications to handle multiple rich text documents without the overhead of multiple editor widgets, or requiring documents to be stored in some intermediate format.</p>
+<p>An empty document contains a root frame which itself contains a single empty text block. Frames provide logical separation between parts of the document, but also have properties that determine how they will appear when rendered. A table is a specialized type of frame that consists of a number of cells, arranged into rows and columns, each of which can contain further structure and text. Tables provide management and layout features that allow flexible configurations of cells to be created.</p>
+<p>Text blocks contain text fragments, each of which specifies text and character format information. Textual properties are defined both at the character level and at the block level. At the character level, properties such as font family, text color, and font weight can be specified. The block level properties control the higher level appearance and behavior of the text, such as the direction of text flow, alignment, and background color.</p>
+<p>The document structure is not manipulated directly. Editing is performed through a cursor-based interface. The <a class="reference internal" href="richtext-cursor.html#the-qtextcursor-interface"><span class="std std-ref">text cursor interface</span></a> automatically inserts new document elements into the root frame, and ensures that it is padded with empty blocks where necessary.</p>
+<p>We obtain the root frame in the following manner:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">textDocument</span><span class="p">;</span>
+<span class="n">QTextFrame</span> <span class="o">*</span><span class="n">root</span> <span class="o">=</span> <span class="n">textDocument</span><span class="o">-&gt;</span><span class="n">rootFrame</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When navigating the document structure, it is useful to begin at the root frame because it provides access to the entire document structure.</p>
+</div></blockquote>
+</div>
+<div class="section" id="document-elements">
+<span id="id3"></span><h2>Document Elements<a class="headerlink" href="#document-elements" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Rich text documents usually consist of common elements such as paragraphs, frames, tables, and lists. These are represented in a <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> by the <a class="reference internal" href="../PySide2/QtGui/QTextBlock.html#PySide2.QtGui.QTextBlock" title="PySide2.QtGui.QTextBlock"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlock</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QTextFrame.html#PySide2.QtGui.QTextFrame" title="PySide2.QtGui.QTextFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrame</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QTextTable.html#PySide2.QtGui.QTextTable" title="PySide2.QtGui.QTextTable"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextTable</span></code></a> , and <a class="reference internal" href="../PySide2/QtGui/QTextList.html#PySide2.QtGui.QTextList" title="PySide2.QtGui.QTextList"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextList</span></code></a> classes. Unlike the other elements in a document, images are represented by specially formatted text fragments. This enables them to be placed formatted inline with the surrounding text.</p>
+<p>The basic structural building blocks in documents are <a class="reference internal" href="../PySide2/QtGui/QTextBlock.html#PySide2.QtGui.QTextBlock" title="PySide2.QtGui.QTextBlock"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlock</span></code></a> and <a class="reference internal" href="../PySide2/QtGui/QTextFrame.html#PySide2.QtGui.QTextFrame" title="PySide2.QtGui.QTextFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrame</span></code></a> . Blocks themselves contain fragments of rich text ( <a class="reference internal" href="../PySide2/QtGui/QTextFragment.html#PySide2.QtGui.QTextFragment" title="PySide2.QtGui.QTextFragment"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFragment</span></code></a> ), but these do not directly influence the high level structure of a document.</p>
+<p>Elements which can group together other document elements are typically subclasses of <a class="reference internal" href="../PySide2/QtGui/QTextObject.html#PySide2.QtGui.QTextObject" title="PySide2.QtGui.QTextObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextObject</span></code></a> , and fall into two categories: Elements that group together text blocks are subclasses of <a class="reference internal" href="../PySide2/QtGui/QTextBlockGroup.html#PySide2.QtGui.QTextBlockGroup" title="PySide2.QtGui.QTextBlockGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlockGroup</span></code></a> , and those that group together frames and other elements are subclasses of <a class="reference internal" href="../PySide2/QtGui/QTextFrame.html#PySide2.QtGui.QTextFrame" title="PySide2.QtGui.QTextFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrame</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="text-blocks">
+<span id="id4"></span><h2>Text Blocks<a class="headerlink" href="#text-blocks" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Text blocks are provided by the <a class="reference internal" href="../PySide2/QtGui/QTextBlock.html#PySide2.QtGui.QTextBlock" title="PySide2.QtGui.QTextBlock"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlock</span></code></a> class.</p>
+<p>Text blocks group together fragments of text with different character formats, and are used to represent paragraphs in the document. Each block typically contains a number of text fragments with different styles. Fragments are created when text is inserted into the document, and more of them are added when the document is edited. The document splits, merges, and removes fragments to efficiently represent the different styles of text in the block.</p>
+<p>The fragments within a given block can be examined by using a <code class="xref py py-class docutils literal"><span class="pre">QTextBlock.iterator</span></code> to traverse the block’s internal structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTextBlock::iterator it;
+for (it = currentBlock.begin(); !(it.atEnd()); ++it) {
+    QTextFragment currentFragment = it.fragment();
+    if (currentFragment.isValid())
+        processFragment(currentFragment);
+    }
+
+}
+</pre></div>
+</div>
+<p>Blocks are also used to represent list items. As a result, blocks can define their own character formats which contain information about block-level decoration, such as the type of bullet points used for list items. The formatting for the block itself is described by the <a class="reference internal" href="../PySide2/QtGui/QTextBlockFormat.html#PySide2.QtGui.QTextBlockFormat" title="PySide2.QtGui.QTextBlockFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlockFormat</span></code></a> class, and describes properties such as text alignment, indentation, and background color.</p>
+<p>Although a given document may contain complex structures, once we have a reference to a valid block in the document, we can navigate between each of the text blocks in the order in which they were written:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTextBlock</span> <span class="n">currentBlock</span> <span class="o">=</span> <span class="n">textDocument</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">currentBlock</span><span class="o">.</span><span class="n">isValid</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">processBlock</span><span class="p">(</span><span class="n">currentBlock</span><span class="p">);</span>
+    <span class="n">currentBlock</span> <span class="o">=</span> <span class="n">currentBlock</span><span class="o">.</span><span class="n">next</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This method is useful for when you want to extract just the rich text from a document because it ignores frames, tables, and other types of structure.</p>
+<p><a class="reference internal" href="../PySide2/QtGui/QTextBlock.html#PySide2.QtGui.QTextBlock" title="PySide2.QtGui.QTextBlock"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlock</span></code></a> provides comparison operators that make it easier to manipulate blocks: <code class="xref py py-func docutils literal"><span class="pre">QTextBlock.operator==()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QTextBlock.operator!=()</span></code> are used to test whether two blocks are the same, and <code class="xref py py-func docutils literal"><span class="pre">QTextBlock.operator&lt;()</span></code> is used to determine which one occurs first in a document.</p>
+</div></blockquote>
+</div>
+<div class="section" id="frames">
+<span id="id5"></span><h2>Frames<a class="headerlink" href="#frames" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Frames are provided by the <a class="reference internal" href="../PySide2/QtGui/QTextFrame.html#PySide2.QtGui.QTextFrame" title="PySide2.QtGui.QTextFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrame</span></code></a> class.</p>
+<p>Text frames group together blocks of text and child frames, creating document structures that are larger than paragraphs. The format of a frame specifies how it is rendered and positioned on the page. Frames are either inserted into the text flow, or they float on the left or right hand side of the page. Each document contains a root frame that contains all the other document elements. As a result, all frames except the root frame have a parent frame.</p>
+<p>Since text blocks are used to separate other document elements, each frame will always contain at least one text block, and zero or more child frames. We can inspect the contents of a frame by using a <code class="xref py py-class docutils literal"><span class="pre">QTextFrame.iterator</span></code> to traverse the frame’s child elements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTextFrame::iterator it;
+for (it = frame-&gt;begin(); !(it.atEnd()); ++it) {
+
+    QTextFrame *childFrame = it.currentFrame();
+    QTextBlock childBlock = it.currentBlock();
+
+    if (childFrame)
+        processFrame(frameElement, childFrame);
+    else if (childBlock.isValid())
+        processBlock(frameElement, childBlock);
+}
+</pre></div>
+</div>
+<p>Note that the iterator selects both frames and blocks, so it is necessary to check which it is referring to. This allows us to navigate the document structure on a frame-by-frame basis yet still access text blocks if required. Both the <code class="xref py py-class docutils literal"><span class="pre">QTextBlock.iterator</span></code> and <code class="xref py py-class docutils literal"><span class="pre">QTextFrame.iterator</span></code> classes can be used in complementary ways to extract the required structure from a document.</p>
+</div></blockquote>
+</div>
+<div class="section" id="tables">
+<span id="id6"></span><h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Tables are provided by the <a class="reference internal" href="../PySide2/QtGui/QTextTable.html#PySide2.QtGui.QTextTable" title="PySide2.QtGui.QTextTable"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextTable</span></code></a> class.</p>
+<p>Tables are collections of cells that are arranged in rows and columns. Each table cell is a document element with its own character format, but it can also contain other elements, such as frames and text blocks. Table cells are automatically created when the table is constructed, or when extra rows or columns are added. They can also be moved between tables.</p>
+<p><a class="reference internal" href="../PySide2/QtGui/QTextTable.html#PySide2.QtGui.QTextTable" title="PySide2.QtGui.QTextTable"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextTable</span></code></a> is a subclass of <a class="reference internal" href="../PySide2/QtGui/QTextFrame.html#PySide2.QtGui.QTextFrame" title="PySide2.QtGui.QTextFrame"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextFrame</span></code></a> , so tables are treated like frames in the document structure. For each frame that we encounter in the document, we can test whether it represents a table, and deal with it in a different way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTextFrame::iterator it;
+for (it = frame-&gt;begin(); !(it.atEnd()); ++it) {
+
+    QTextFrame *childFrame = it.currentFrame();
+    QTextBlock childBlock = it.currentBlock();
+
+    if (childFrame) {
+        QTextTable *childTable = qobject_cast&lt;QTextTable*&gt;(childFrame);
+
+        if (childTable)
+            processTable(frameElement, childTable);
+        else
+            processFrame(frameElement, childFrame);
+
+    } else if (childBlock.isValid())
+        processBlock(frameElement, childBlock);
+}
+</pre></div>
+</div>
+<p>The cells within an existing table can be examined by iterating through the rows and columns.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">rows</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">()):</span>
+        <span class="n">tableCell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">cellAt</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+        <span class="n">processTableCell</span><span class="p">(</span><span class="n">tableCell</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="lists">
+<span id="id7"></span><h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Lists are provided by the <a class="reference internal" href="../PySide2/QtGui/QTextList.html#PySide2.QtGui.QTextList" title="PySide2.QtGui.QTextList"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextList</span></code></a> class.</p>
+<p>Lists are sequences of text blocks that are formatted in the usual way, but which also provide the standard list decorations such as bullet points and enumerated items. Lists can be nested, and will be indented if the list’s format specifies a non-zero indentation.</p>
+<p>We can refer to each list item by its index in the list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">list</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">();</span> <span class="o">++</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QTextBlock</span> <span class="n">listItem</span> <span class="o">=</span> <span class="nb">list</span><span class="o">-&gt;</span><span class="n">item</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="n">processListItem</span><span class="p">(</span><span class="n">listItem</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since <a class="reference internal" href="../PySide2/QtGui/QTextList.html#PySide2.QtGui.QTextList" title="PySide2.QtGui.QTextList"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextList</span></code></a> is a subclass of <a class="reference internal" href="../PySide2/QtGui/QTextBlockGroup.html#PySide2.QtGui.QTextBlockGroup" title="PySide2.QtGui.QTextBlockGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextBlockGroup</span></code></a> , it does not group the list items as child elements, but instead provides various functions for managing them. This means that any text block we find when traversing a document may actually be a list item. We can ensure that list items are correctly identified by using the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QTextFrame::iterator it;
+for (it = frame-&gt;begin(); !(it.atEnd()); ++it) {
+
+    QTextBlock block = it.currentBlock();
+
+    if (block.isValid()) {
+
+        QTextList *list = block.textList();
+
+        if (list) {
+            int index = list-&gt;itemNumber(block);
+            processListItem(list, index);
+        }
+    }
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="images">
+<span id="id8"></span><h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Images in <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> are represented by text fragments that reference external images via the resource mechanism. Images are created using the cursor interface, and can be modified later by changing the character format of the image’s text fragment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">fragment</span><span class="o">.</span><span class="n">isValid</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">QTextImageFormat</span> <span class="n">newImageFormat</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">charFormat</span><span class="p">()</span><span class="o">.</span><span class="n">toImageFormat</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">newImageFormat</span><span class="o">.</span><span class="n">isValid</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">newImageFormat</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s2">&quot;:/images/newimage.png&quot;</span><span class="p">);</span>
+        <span class="n">QTextCursor</span> <span class="n">helper</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">;</span>
+
+        <span class="n">helper</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">fragment</span><span class="o">.</span><span class="n">position</span><span class="p">());</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">fragment</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">+</span> <span class="n">fragment</span><span class="o">.</span><span class="n">length</span><span class="p">(),</span>
+                            <span class="n">QTextCursor</span><span class="p">::</span><span class="n">KeepAnchor</span><span class="p">);</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">setCharFormat</span><span class="p">(</span><span class="n">newImageFormat</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The fragment that represents the image can be found by iterating over the fragments in the text block that contains the image.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

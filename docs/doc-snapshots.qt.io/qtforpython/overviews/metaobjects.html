@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Meta-Object System &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-meta-object-system">
+<span id="id1"></span><h1>The Meta-Object System<a class="headerlink" href="#the-meta-object-system" title="Permalink to this headline">¶</a></h1>
+<p>An overview of Qt’s meta-object system and introspection capabilities</p>
+<blockquote>
+<div><p id="qobjectcast">An overview of Qt’s meta-object system and introspection capabilities.</p>
+<p>Qt’s meta-object system provides the signals and slots mechanism for inter-object communication, run-time type information, and the dynamic property system.</p>
+<p>The meta-object system is based on three things:</p>
+<ol class="arabic simple">
+<li>The <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> class provides a base class for objects that can take advantage of the meta-object system.</li>
+<li>The <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro inside the private section of the class declaration is used to enable meta-object features, such as dynamic properties, signals, and slots.</li>
+<li>The Meta-Object Compiler (<code class="docutils literal"><span class="pre">moc</span></code>) supplies each <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass with the necessary code to implement meta-object features.</li>
+</ol>
+<p>The <code class="docutils literal"><span class="pre">moc</span></code> tool reads a C++ source file. If it finds one or more class declarations that contain the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro, it produces another C++ source file which contains the meta-object code for each of those classes. This generated source file is either <code class="docutils literal"><span class="pre">#include</span></code> ‘d into the class’s source file or, more usually, compiled and linked with the class’s implementation.</p>
+<p>In addition to providing the <a class="reference internal" href="signalsandslots.html#signals-slots"><span class="std std-ref">signals and slots</span></a> mechanism for communication between objects (the main reason for introducing the system), the meta-object code provides the following additional features:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QObject.metaObject()</span></code> returns the associated <a class="reference internal" href="../PySide2/QtCore/QMetaObject.html#PySide2.QtCore.QMetaObject" title="PySide2.QtCore.QMetaObject"><code class="xref py py-class docutils literal"><span class="pre">meta-object</span></code></a> for the class.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QMetaObject.className()</span></code> returns the class name as a string at run-time, without requiring native run-time type information (RTTI) support through the C++ compiler.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QObject.inherits()</span></code> function returns whether an object is an instance of a class that inherits a specified class within the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> inheritance tree.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QObject.tr()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QObject.trUtf8()</span></code> translate strings for internationalization.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QObject.setProperty()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QObject.property()</span></code> dynamically set and get properties by name.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QMetaObject.newInstance()</span></code> constructs a new instance of the class.</li>
+</ul>
+<p id="id2">It is also possible to perform dynamic casts using <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> on <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> classes. The <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> function behaves similarly to the standard C++ <code class="docutils literal"><span class="pre">dynamic_cast()</span></code> , with the advantages that it doesn’t require RTTI support and it works across dynamic library boundaries. It attempts to cast its argument to the pointer type specified in angle-brackets, returning a non-zero pointer if the object is of the correct type (determined at run-time), or 0 if the object’s type is incompatible.</p>
+<p>For example, let’s assume <code class="docutils literal"><span class="pre">MyWidget</span></code> inherits from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and is declared with the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QObject</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyWidget</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">obj</span></code> variable, of type <code class="docutils literal"><span class="pre">QObject</span> <span class="pre">*</span></code> , actually refers to a <code class="docutils literal"><span class="pre">MyWidget</span></code> object, so we can cast it appropriately:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QWidget</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cast from <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> to <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> is successful, because the object is actually a <code class="docutils literal"><span class="pre">MyWidget</span></code> , which is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . Since we know that <code class="docutils literal"><span class="pre">obj</span></code> is a <code class="docutils literal"><span class="pre">MyWidget</span></code> , we can also cast it to <code class="docutils literal"><span class="pre">MyWidget</span> <span class="pre">*</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MyWidget</span> <span class="o">*</span><span class="n">myWidget</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">MyWidget</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cast to <code class="docutils literal"><span class="pre">MyWidget</span></code> is successful because <code class="xref py py-func docutils literal"><span class="pre">qobject_cast()</span></code> makes no distinction between built-in Qt types and custom types.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QLabel</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">label</span> <span class="ow">is</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The cast to <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> , on the other hand, fails. The pointer is then set to 0. This makes it possible to handle objects of different types differently at run-time, based on the type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QLabel</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Ping&quot;</span><span class="p">));</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">QPushButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">QPushButton</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Pong!&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While it is possible to use <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> as a base class without the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro and without meta-object code, neither signals and slots nor the other features described here will be available if the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro is not used. From the meta-object system’s point of view, a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> subclass without meta code is equivalent to its closest ancestor with meta-object code. This means for example, that <code class="xref py py-func docutils literal"><span class="pre">QMetaObject.className()</span></code> will not return the actual name of your class, but the class name of this ancestor.</p>
+<p>Therefore, we strongly recommend that all subclasses of <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> use the <code class="xref py py-func docutils literal"><span class="pre">Q_OBJECT()</span></code> macro regardless of whether or not they actually use signals, slots, and properties.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../PySide2/QtCore/QMetaObject.html#PySide2.QtCore.QMetaObject" title="PySide2.QtCore.QMetaObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMetaObject</span></code></a>  <a class="reference internal" href="properties.html#the-property-system"><span class="std std-ref">Qt’s Property System</span></a>  <a class="reference internal" href="signalsandslots.html#signals-slots"><span class="std std-ref">Signals and Slots</span></a></p>
+</div>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

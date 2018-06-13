@@ -1,0 +1,366 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Scene Graph - Simple Material &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scene Graph - Simple Material</a></li>
+<li><a class="reference internal" href="#main-qml-example-file">main.qml Example File</a></li>
+<li><a class="reference internal" href="#simplematerial-cpp-example-file">simplematerial.cpp Example File</a></li>
+<li><a class="reference internal" href="#simplematerial-pro-example-file">simplematerial.pro Example File</a></li>
+<li><a class="reference internal" href="#simplematerial-qrc-example-file">simplematerial.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scene-graph-simple-material">
+<span id="id1"></span><h1>Scene Graph - Simple Material<a class="headerlink" href="#scene-graph-simple-material" title="Permalink to this headline">¶</a></h1>
+<p>Shows how to define a scene graph material to fill a shape</p>
+<blockquote>
+<div><p>Shows how to define a scene graph material to fill a shape.</p>
+<p>In this example, we will make use of the <code class="xref py py-class docutils literal"><span class="pre">QSGSimpleMaterialShader</span></code> class to fill a shape in the scene graph. This is a convenience class intended to avoid a lot of the boilerplate code required when creating materials with the <code class="xref py py-class docutils literal"><span class="pre">QSGMaterial</span></code> , <code class="xref py py-class docutils literal"><span class="pre">QSGMaterialShader</span></code> and <a class="reference internal" href="../PySide2/QtQuick/QSGMaterialType.html#PySide2.QtQuick.QSGMaterialType" title="PySide2.QtQuick.QSGMaterialType"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGMaterialType</span></code></a> classes directly.</p>
+<p>A simple material consists of two parts: the material state and the material shader. The material shader has one instance per scene graph and contains the actual OpenGL shader program and information about which attributes and uniforms it uses. The material state is what we assign to each individual node; in this case to give them different colors.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">State</span>
+<span class="p">{</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">;</span>
+
+    <span class="nb">int</span> <span class="n">compare</span><span class="p">(</span><span class="n">const</span> <span class="n">State</span> <span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span>
+        <span class="n">uint</span> <span class="n">rgb</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgba</span><span class="p">();</span>
+        <span class="n">uint</span> <span class="n">otherRgb</span> <span class="o">=</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">color</span><span class="o">.</span><span class="n">rgba</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">rgb</span> <span class="o">==</span> <span class="n">otherRgb</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rgb</span> <span class="o">&lt;</span> <span class="n">otherRgb</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The first thing we do when creating custom materials with the simplified scheme is to create a state class. In this case the state class contains only one member, a <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> . It also defines a compare function which the scene graph can use to reorder the node rendering.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Shader</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QSGSimpleMaterialShader</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="n">QSG_DECLARE_SIMPLE_COMPARABLE_SHADER</span><span class="p">(</span><span class="n">Shader</span><span class="p">,</span> <span class="n">State</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next we define the material shader, by subclassing a template instantiation of <code class="xref py py-class docutils literal"><span class="pre">QSGSimpleMaterialShader</span></code> with our <code class="docutils literal"><span class="pre">State</span></code> .</p>
+<p>Then we use the macro <code class="xref py py-func docutils literal"><span class="pre">QSG_DECLARE_SIMPLE_COMPARABLE_SHADER()</span></code> which will generate some boilerplate code for us. Since our <code class="docutils literal"><span class="pre">State</span></code> class has a compare function, we declare that the states can be compared. It would have been possible to remove the <code class="docutils literal"><span class="pre">State::compare()</span></code> function and instead declare the shader with <code class="xref py py-func docutils literal"><span class="pre">QSG_DECLARE_SIMPLE_SHADER()</span></code> , but this could then reduce performance in certain use cases.</p>
+<p>The state struct is used as a template parameter to automatically generate a <a class="reference internal" href="../PySide2/QtQuick/QSGMaterialType.html#PySide2.QtQuick.QSGMaterialType" title="PySide2.QtQuick.QSGMaterialType"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGMaterialType</span></code></a> for us, so it is crucial that the pair of shader and state are made up of unique classes. Using the same <code class="docutils literal"><span class="pre">State</span></code> class in multiple shaders will will lead to undefined behavior.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">public</span><span class="p">:</span>
+
+    <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">vertexShader</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span> <span class="p">{</span>
+        <span class="k">return</span>
+                <span class="s2">&quot;attribute highp vec4 aVertex;                              </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;attribute highp vec2 aTexCoord;                            </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;uniform highp mat4 qt_Matrix;                              </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;varying highp vec2 texCoord;                               </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;void main() {                                              </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;    gl_Position = qt_Matrix * aVertex;                     </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;    texCoord = aTexCoord;                                  </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;}&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">fragmentShader</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span> <span class="p">{</span>
+        <span class="k">return</span>
+                <span class="s2">&quot;uniform lowp float qt_Opacity;                             </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;uniform lowp vec4 color;                                   </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;varying highp vec2 texCoord;                               </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;void main ()                                               </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;{                                                          </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;    gl_FragColor = texCoord.y * texCoord.x * color * qt_Opacity;  </span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;}&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Next comes the declaration of the shader source code, where we define a vertex and fragment shader. The simple material assumes the presence of <code class="docutils literal"><span class="pre">qt_Matrix</span></code> in the vertex shader and <code class="docutils literal"><span class="pre">qt_Opacity</span></code> in the fragment shader.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QList</span><span class="o">&lt;</span><span class="n">QByteArray</span><span class="o">&gt;</span> <span class="n">attributes</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QList</span><span class="o">&lt;</span><span class="n">QByteArray</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;aVertex&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;aTexCoord&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We reimplement the <code class="docutils literal"><span class="pre">attributes</span></code> function to return the name of the <code class="docutils literal"><span class="pre">aVertex</span></code> and <code class="docutils literal"><span class="pre">aTexCoord</span></code> attributes. These attributes will be mapped to attribute indices 0 and 1 in the node’s geometry.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">void</span> <span class="n">resolveUniforms</span><span class="p">()</span> <span class="n">override</span>
+    <span class="p">{</span>
+        <span class="n">id_color</span> <span class="o">=</span> <span class="n">program</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">uniformLocation</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">id_color</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Uniforms can be accessed either by name or by index, where index is faster than name. We reimplement the <code class="docutils literal"><span class="pre">resolveUniforms()</span></code> function to find the index of the <code class="docutils literal"><span class="pre">color</span></code> uniform. We do not have to worry about resolving <code class="docutils literal"><span class="pre">qt_Opacity</span></code> or <code class="docutils literal"><span class="pre">qt_Matrix</span></code> as these are handled by the baseclass.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">updateState</span><span class="p">(</span><span class="n">const</span> <span class="n">State</span> <span class="o">*</span><span class="n">state</span><span class="p">,</span> <span class="n">const</span> <span class="n">State</span> <span class="o">*</span><span class="p">)</span> <span class="n">override</span>
+<span class="p">{</span>
+    <span class="n">program</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setUniformValue</span><span class="p">(</span><span class="n">id_color</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">updateState()</span></code> function is called once for every unique state and we use it to update the shader program with the current color. The previous state is passed in as a second parameter so that the user can update only that which has changed. In our use case, where all the colors are different, the updateState() function will be called once for every node.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ColorNode</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QSGGeometryNode</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ColorNode</span><span class="p">()</span>
+        <span class="p">:</span> <span class="n">m_geometry</span><span class="p">(</span><span class="n">QSGGeometry</span><span class="p">::</span><span class="n">defaultAttributes_TexturedPoint2D</span><span class="p">(),</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setGeometry</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_geometry</span><span class="p">);</span>
+
+        <span class="n">QSGSimpleMaterial</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">material</span> <span class="o">=</span> <span class="n">Shader</span><span class="p">::</span><span class="n">createMaterial</span><span class="p">();</span>
+        <span class="n">material</span><span class="o">-&gt;</span><span class="n">setFlag</span><span class="p">(</span><span class="n">QSGMaterial</span><span class="p">::</span><span class="n">Blending</span><span class="p">);</span>
+        <span class="n">setMaterial</span><span class="p">(</span><span class="n">material</span><span class="p">);</span>
+        <span class="n">setFlag</span><span class="p">(</span><span class="n">OwnsMaterial</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">QSGGeometry</span> <span class="n">m_geometry</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ColorNode</span></code> class is supposed to draw something, so it needs to be a subclass of <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> .</p>
+<p>Since our shader expects both a position and a texture coordinate, we use the default attribute set <code class="xref py py-func docutils literal"><span class="pre">QSGGeometry.defaultAttributes_TexturedPoint2D()</span></code> and declare that the geometry consists of a total of four vertices. To avoid the allocation, we make the <a class="reference internal" href="../PySide2/QtQuick/QSGGeometry.html#PySide2.QtQuick.QSGGeometry" title="PySide2.QtQuick.QSGGeometry"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometry</span></code></a> a member of the <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> .</p>
+<p>When we used the macro <code class="xref py py-func docutils literal"><span class="pre">QSG_DECLARE_SIMPLE_COMPARABLE_SHADER()</span></code> above, it defined the <code class="docutils literal"><span class="pre">createMaterial()</span></code> function which we use to instantiate materials for our <code class="docutils literal"><span class="pre">State</span></code> struct.</p>
+<p>As we will be making use of opacity in our custom material, we need to set the <code class="xref py py-attr docutils literal"><span class="pre">QSGMaterial.Blending</span></code> flag. The scene graph may use this flag to either disable or enable <code class="docutils literal"><span class="pre">GL_BLEND</span></code> when drawing the node or to reorder the drawing of the node.</p>
+<p>Finally, we tell the node to take ownership of the material, so we do not have to explicitly memory-manage it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Item</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QQuickItem</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QColor</span> <span class="n">color</span> <span class="n">READ</span> <span class="n">color</span> <span class="n">WRITE</span> <span class="n">setColor</span> <span class="n">NOTIFY</span> <span class="n">colorChanged</span><span class="p">)</span>
+
+<span class="n">public</span><span class="p">:</span>
+
+    <span class="n">Item</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">setFlag</span><span class="p">(</span><span class="n">ItemHasContents</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">m_color</span> <span class="o">!=</span> <span class="n">color</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">m_color</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+            <span class="n">emit</span> <span class="n">colorChanged</span><span class="p">();</span>
+            <span class="n">update</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_color</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">colorChanged</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+  <span class="n">QColor</span> <span class="n">m_color</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Since the Item is providing its own graphics to the scene graph, we set the flag <code class="xref py py-attr docutils literal"><span class="pre">QQuickItem.ItemHasContents</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>public:
+    QSGNode *updatePaintNode(QSGNode *node, UpdatePaintNodeData *) override
+    {
+        ColorNode *n = static_cast&lt;ColorNode *&gt;(node);
+        if (!node)
+            n = new ColorNode();
+
+        QSGGeometry::updateTexturedRectGeometry(n-&gt;geometry(), boundingRect(), QRectF(0, 0, 1, 1));
+        static_cast&lt;QSGSimpleMaterial&lt;State&gt;*&gt;(n-&gt;material())-&gt;state()-&gt;color = m_color;
+
+        n-&gt;markDirty(QSGNode::DirtyGeometry | QSGNode::DirtyMaterial);
+
+        return n;
+    }
+};
+</pre></div>
+</div>
+<p>Whenever the Item has changed graphically, the <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> function is called.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The scene graph may be rendered in a different thread than the GUI thread and <code class="xref py py-func docutils literal"><span class="pre">QQuickItem.updatePaintNode()</span></code> is one of the few places where it is safe to access properties of the QML object. Any interaction with the scene graph from a custom <a class="reference internal" href="../PySide2/QtQuick/QQuickItem.html#PySide2.QtQuick.QQuickItem" title="PySide2.QtQuick.QQuickItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickItem</span></code></a> should be contained within this function. The function is called on the rendering thread while the GUI thread is blocked.</p>
+</div>
+<p>The first time this function is called for an <code class="docutils literal"><span class="pre">Item</span></code> instance, the node will be 0, and so we create a new one. For every consecutive call, the node will be what we returned previously. There are scenarios where the scene graph will be removed and rebuilt from scratch however, so one should always check the node and recreate it if required.</p>
+<p>Once we have a <code class="docutils literal"><span class="pre">ColorNode</span></code> , we update its geometry and material state. Finally, we notify the scene graph that the node has undergone changes to its geometry and material.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">qmlRegisterType</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;SimpleMaterial&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;SimpleMaterialItem&quot;</span><span class="p">);</span>
+
+    <span class="n">QQuickView</span> <span class="n">view</span><span class="p">;</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setResizeMode</span><span class="p">(</span><span class="n">QQuickView</span><span class="p">::</span><span class="n">SizeRootObjectToView</span><span class="p">);</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setSource</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s2">&quot;qrc:///scenegraph/simplematerial/main.qml&quot;</span><span class="p">));</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">#include &quot;simplematerial.moc&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">main()</span></code> function of the application adds the custom QML type using qmlRegisterType() and opens up a <a class="reference internal" href="../PySide2/QtQuick/QQuickView.html#PySide2.QtQuick.QQuickView" title="PySide2.QtQuick.QQuickView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QQuickView</span></code></a> with our QML file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+<span class="kn">import</span> <span class="nn">SimpleMaterial</span> <span class="mf">1.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">320</span>
+    <span class="n">height</span><span class="p">:</span> <span class="mi">480</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span>
+</pre></div>
+</div>
+<p>In the QML file, we import our custom type so we can instantiate it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Column</span> <span class="p">{</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+
+    <span class="n">SimpleMaterialItem</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span>
+        <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;steelblue&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">SimpleMaterialItem</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span>
+        <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;darkorchid&quot;</span>
+    <span class="p">}</span>
+
+     <span class="n">SimpleMaterialItem</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span><span class="p">;</span>
+        <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;springgreen&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we create a column containing three instances of our custom item, each with a different color.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="n">antialiasing</span><span class="p">:</span> <span class="n">true</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">width</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="n">border</span><span class="o">.</span><span class="n">color</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">label</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">margins</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span>
+    <span class="p">}</span>
+
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">label</span>
+        <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span>
+        <span class="n">wrapMode</span><span class="p">:</span> <span class="n">Text</span><span class="o">.</span><span class="n">WordWrap</span>
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;These three gradient boxes are colorized using a custom material.&quot;</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">right</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">right</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">left</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">bottom</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">margins</span><span class="p">:</span> <span class="mi">20</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And finally we overlay a short descriptive text.</p>
+</div></blockquote>
+</div>
+<div class="section" id="main-qml-example-file">
+<h1>main.qml Example File<a class="headerlink" href="#main-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="simplematerial-cpp-example-file">
+<h1>simplematerial.cpp Example File<a class="headerlink" href="#simplematerial-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="simplematerial-pro-example-file">
+<h1>simplematerial.pro Example File<a class="headerlink" href="#simplematerial-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="simplematerial-qrc-example-file">
+<h1>simplematerial.qrc Example File<a class="headerlink" href="#simplematerial-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

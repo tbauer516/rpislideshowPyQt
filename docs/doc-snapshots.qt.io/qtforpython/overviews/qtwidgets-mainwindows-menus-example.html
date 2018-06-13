@@ -1,0 +1,344 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Menus Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Menus Example</a><ul>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#menus-pro-example-file">menus.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="menus-example">
+<span id="id1"></span><h1>Menus Example<a class="headerlink" href="#menus-example" title="Permalink to this headline">¶</a></h1>
+<p>Menus example demonstrates how menus can be used in a main window application</p>
+<blockquote>
+<div><p>The Menus example demonstrates how menus can be used in a main window application.</p>
+<p>A menu widget can be either a pull-down menu in a menu bar or a standalone context menu. Pull-down menus are shown by the menu bar when the user clicks on the respective item or presses the specified shortcut key. Context menus are usually invoked by some special keyboard key or by right-clicking.</p>
+<p>A menu consists of a list of <em>action</em> items. In applications, many common commands can be invoked via menus, toolbar buttons as well as keyboard shortcuts. Since the user expects the commands to be performed in the same way, regardless of the user interface used, it is useful to represent each command as an action.</p>
+<p>The Menus example consists of one single class, <code class="docutils literal"><span class="pre">MainWindow</span></code> , derived from the <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> class. When choosing one of the action items in our application, it will display the item’s path in its central widget.</p>
+</div></blockquote>
+<div class="section" id="mainwindow-class-definition">
+<span id="id2"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> provides a main application window, with a menu bar, tool bars, dock widgets and a status bar around a large central widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+<span class="c1">#ifndef QT_NO_CONTEXTMENU</span>
+    <span class="n">void</span> <span class="n">contextMenuEvent</span><span class="p">(</span><span class="n">QContextMenuEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="c1">#endif // QT_NO_CONTEXTMENU</span>
+</pre></div>
+</div>
+<p>In this example, we will see how to implement pull-down menus as well as a context menu. In order to implement a custom context menu we must reimplement <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.contextMenuEvent()</span></code> function to receive the context menu events for our main window.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">newFile</span><span class="p">();</span>
+    <span class="n">void</span> <span class="nb">open</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">save</span><span class="p">();</span>
+    <span class="n">void</span> <span class="nb">print</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">undo</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">redo</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">cut</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">copy</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">paste</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">bold</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">italic</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">leftAlign</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">rightAlign</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">justify</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">center</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">setLineSpacing</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">setParagraphSpacing</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">aboutQt</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We must also implement a collection of private slots to respond to the user activating any of our menu entries. Note that these slots are left out of this documentation since they are trivial, i.e., most of them are only displaying the action’s path in the main window’s central widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createActions</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createMenus</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We have chosen to simplify the constructor by implementing two private convenience functions to create the various actions, to add them to menus and to insert the menus into our main window’s menu bar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QMenu</span> <span class="o">*</span><span class="n">fileMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">editMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">formatMenu</span><span class="p">;</span>
+    <span class="n">QMenu</span> <span class="o">*</span><span class="n">helpMenu</span><span class="p">;</span>
+    <span class="n">QActionGroup</span> <span class="o">*</span><span class="n">alignmentGroup</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">newAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">openAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">saveAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">printAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">undoAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">redoAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">cutAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">copyAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">pasteAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">boldAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">italicAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">leftAlignAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">rightAlignAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">justifyAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">centerAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">setLineSpacingAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">setParagraphSpacingAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutAct</span><span class="p">;</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutQtAct</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">infoLabel</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Finally, we declare the various menus and actions as well as a simple information label in the application wide scope.</p>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> class provides a menu widget for use in menu bars, context menus, and other popup menus while the <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> class provides an abstract user interface action that can be inserted into widgets.</p>
+<p>In some situations it is useful to group actions together, e.g., we have a Left Align action, a Right Align action, a Justify action, and a Center action, and we want only one of these actions to be active at any one time. One simple way of achieving this is to group the actions together in an action group using the <a class="reference internal" href="../PySide2/QtWidgets/QActionGroup.html#PySide2.QtWidgets.QActionGroup" title="PySide2.QtWidgets.QActionGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QActionGroup</span></code></a> class.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id3"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor, we start off by creating a regular <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and make it our main window’s central widget. Note that the main window takes ownership of the widget pointer and deletes it at the appropriate time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">Q__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="n">widget</span> <span class="o">=</span>  <span class="n">QWidget</span><span class="p">()</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+
+    <span class="n">topFiller</span> <span class="o">=</span>  <span class="n">QWidget</span><span class="p">()</span>
+    <span class="n">topFiller</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">)</span>
+
+    <span class="n">infoLabel</span> <span class="o">=</span>  <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&lt;i&gt;Choose a menu option, or right-click to &quot;</span>
+                              <span class="s2">&quot;invoke a context menu&lt;/i&gt;&quot;</span><span class="p">))</span>
+    <span class="n">infoLabel</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">StyledPanel</span> <span class="o">|</span> <span class="n">QFrame</span><span class="o">.</span><span class="n">Sunken</span><span class="p">)</span>
+    <span class="n">infoLabel</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+
+    <span class="n">bottomFiller</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
+    <span class="n">bottomFiller</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">)</span>
+
+    <span class="n">layout</span> <span class="o">=</span>  <span class="n">QVBoxLayout</span><span class="p">()</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">setMargin</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">topFiller</span><span class="p">)</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">infoLabel</span><span class="p">)</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">bottomFiller</span><span class="p">)</span>
+    <span class="n">widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we create the information label as well as a top and bottom filler that we add to a layout which we install on the central widget. <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> objects come with their own customized layout and setting a layout on a the actual main window, or creating a layout with a main window as a parent, is considered an error. You should always set your own layout on the central widget instead.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">createActions</span><span class="p">()</span>
+<span class="n">createMenus</span><span class="p">()</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;A context menu is available by right-clicking&quot;</span><span class="p">)</span>
+<span class="n">statusBar</span><span class="p">()</span><span class="o">.</span><span class="n">showMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Menus&quot;</span><span class="p">))</span>
+<span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+<span class="n">resize</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">320</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To create the actions and menus we call our two convenience functions: <code class="docutils literal"><span class="pre">createActions()</span></code> and <code class="docutils literal"><span class="pre">createMenus()</span></code> . We will get back to these shortly.</p>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QMainWindow.statusBar()</span></code> function returns the status bar for the main window (if the status bar does not exist, this function will create and return an empty status bar). We initialize the status bar and window title, resize the window to an appropriate size as well as ensure that the main window cannot be resized to a smaller size than the given one.</p>
+<p>Now, let’s take a closer look at the <code class="docutils literal"><span class="pre">createActions()</span></code> convenience function that creates the various actions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+    <span class="n">Act</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;New&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="n">Act</span><span class="o">.</span><span class="n">setShortcuts</span><span class="p">(</span><span class="n">QKeySequence</span><span class="o">.</span><span class="n">New</span><span class="p">)</span>
+    <span class="n">Act</span><span class="o">.</span><span class="n">setStatusTip</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Create a new file&quot;</span><span class="p">))</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">Act</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="s2">&quot;triggered()&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="s2">&quot;newFile()&quot;</span><span class="p">))</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> object may contain an icon, a text, a shortcut, a status tip, a “What’s This?” text, and a tooltip. Most of these can be set in the constructor, but they can also be set independently using the provided convenience functions.</p>
+<p>In the <code class="docutils literal"><span class="pre">createActions()</span></code> function, we first create a <code class="docutils literal"><span class="pre">newAct</span></code> action. We make Ctrl+N its shortcut using the <code class="xref py py-func docutils literal"><span class="pre">QAction.setShortcut()</span></code> function, and we set its status tip using the <code class="xref py py-func docutils literal"><span class="pre">QAction.setStatusTip()</span></code> function (the status tip is displayed on all status bars provided by the action’s top-level parent widget). We also connect its <code class="xref py py-func docutils literal"><span class="pre">QAction.triggered()</span></code> signal to the <code class="docutils literal"><span class="pre">newFile()</span></code> slot.</p>
+<p>The rest of the actions are created in a similar manner. Please see the source code for details.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alignmentGroup</span> <span class="o">=</span>  <span class="n">QActionGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="n">alignmentGroup</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">leftAlignAct</span><span class="p">)</span>
+<span class="n">alignmentGroup</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">rightAlignAct</span><span class="p">)</span>
+<span class="n">alignmentGroup</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">justifyAct</span><span class="p">)</span>
+<span class="n">alignmentGroup</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">centerAct</span><span class="p">)</span>
+<span class="n">leftAlignAct</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once we have created the Left Align, Right Align, Justify, and a Center actions, we can also create the previously mentioned action group.</p>
+<p>Each action is added to the group using <a class="reference internal" href="../PySide2/QtWidgets/QActionGroup.html#PySide2.QtWidgets.QActionGroup" title="PySide2.QtWidgets.QActionGroup"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QActionGroup</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QActionGroup.addAction()</span></code> function. Note that an action also can be added to a group by creating it with the group as its parent. Since an action group is exclusive by default, only one of the actions in the group is checked at any one time (this can be altered using the <code class="xref py py-func docutils literal"><span class="pre">QActionGroup.setExclusive()</span></code> function).</p>
+<p>When all the actions are created, we use the <code class="docutils literal"><span class="pre">createMenus()</span></code> function to add the actions to the menus and to insert the menus into the menu bar:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createMenus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+    <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">))</span>
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">Act</span><span class="p">)</span>
+
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">openAct</span><span class="p">)</span>
+
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">saveAct</span><span class="p">)</span>
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">printAct</span><span class="p">)</span>
+
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+
+    <span class="n">fileMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">exitAct</span><span class="p">)</span>
+
+    <span class="n">editMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Edit&quot;</span><span class="p">))</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">undoAct</span><span class="p">)</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">redoAct</span><span class="p">)</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">cutAct</span><span class="p">)</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">copyAct</span><span class="p">)</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">pasteAct</span><span class="p">)</span>
+    <span class="n">editMenu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+
+    <span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Help&quot;</span><span class="p">))</span>
+    <span class="n">helpMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutAct</span><span class="p">)</span>
+    <span class="n">helpMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../PySide2/QtWidgets/QMenuBar.html#PySide2.QtWidgets.QMenuBar" title="PySide2.QtWidgets.QMenuBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenuBar</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QMenuBar.addMenu()</span></code> function appends a new <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> with the given title, to the menu bar (note that the menu bar takes ownership of the menu). We use <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.addAction()</span></code> function to add each action to the corresponding menu.</p>
+<p>Alternatively, the <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> class provides several <code class="xref py py-func docutils literal"><span class="pre">QMenu.addAction()</span></code> convenience functions that create and add new actions from given texts and/or icons. You can also provide a member that will automatically connect to the new action’s <code class="xref py py-func docutils literal"><span class="pre">QAction.triggered()</span></code> signal, and a shortcut represented by a <a class="reference internal" href="../PySide2/QtGui/QKeySequence.html#PySide2.QtGui.QKeySequence" title="PySide2.QtGui.QKeySequence"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QKeySequence</span></code></a> instance.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QMenu.addSeparator()</span></code> function creates and returns a new separator action, i.e. an action for which <code class="xref py py-func docutils literal"><span class="pre">QAction.isSeparator()</span></code> returns true, and adds the new action to the menu’s list of actions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">formatMenu</span> <span class="o">=</span> <span class="n">editMenu</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Format&quot;</span><span class="p">))</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">boldAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">italicAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Alignment&quot;</span><span class="p">))</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">leftAlignAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">rightAlignAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">justifyAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">centerAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">setLineSpacingAct</span><span class="p">)</span>
+<span class="n">formatMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">setParagraphSpacingAct</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note the Format menu. First of all, it is added as a submenu to the Edit Menu using <a class="reference internal" href="../PySide2/QtWidgets/QMenu.html#PySide2.QtWidgets.QMenu" title="PySide2.QtWidgets.QMenu"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMenu</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QMenu.addMenu()</span></code> function. Secondly, take a look at the alignment actions: In the <code class="docutils literal"><span class="pre">createActions()</span></code> function we added the <code class="docutils literal"><span class="pre">leftAlignAct</span></code> , <code class="docutils literal"><span class="pre">rightAlignAct</span></code> , <code class="docutils literal"><span class="pre">justifyAct</span></code> and <code class="docutils literal"><span class="pre">centerAct</span></code> actions to an action group. Nevertheless, we must add each action to the menu separately while the action group does its magic behind the scene.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">contextMenuEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">QMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">cutAct</span><span class="p">)</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">copyAct</span><span class="p">)</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">pasteAct</span><span class="p">)</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">()</span><span class="s2">&quot;)</span>
+</pre></div>
+</div>
+<p>To provide a custom context menu, we must reimplement <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.contextMenuEvent()</span></code> function to receive the widget’s context menu events (note that the default implementation simply ignores these events).</p>
+<p>Whenever we receive such an event, we create a menu containing the Cut, Copy and Paste actions. Context menus can be executed either asynchronously using the <code class="xref py py-func docutils literal"><span class="pre">QMenu.popup()</span></code> function or synchronously using the <code class="xref py py-func docutils literal"><span class="pre">QMenu.exec()</span></code> function. In this example, we have chosen to show the menu using its <code class="xref py py-func docutils literal"><span class="pre">QMenu.exec()</span></code> function. By passing the event’s position as argument we ensure that the context menu appears at the expected position.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="menus-pro-example-file">
+<h1>menus.pro Example File<a class="headerlink" href="#menus-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

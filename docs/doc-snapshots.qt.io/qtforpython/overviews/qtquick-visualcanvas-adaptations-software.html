@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Quick Software Adaptation &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Quick Software Adaptation</a><ul>
+<li><a class="reference internal" href="#shader-effects">Shader Effects</a></li>
+<li><a class="reference internal" href="#qt-graphical-effects-module">Qt Graphical Effects Module</a></li>
+<li><a class="reference internal" href="#particle-effects">Particle Effects</a></li>
+<li><a class="reference internal" href="#rendering-text">Rendering Text</a></li>
+<li><a class="reference internal" href="#qt-multimedia-videooutput">Qt Multimedia VideoOutput</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-quick-software-adaptation">
+<span id="id1"></span><h1>Qt Quick Software Adaptation<a class="headerlink" href="#qt-quick-software-adaptation" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>The Software adaptation is an alternative renderer for <span class="xref std std-ref">Qt Quick</span> 2 that uses the Raster paint engine to render the contents of the scene graph instead of OpenGL. As a result of not using OpenGL to render the scene graph, some features and optimizations are no longer available. Most Qt Quick 2 applications will run without modification though any attempts to use unsupported features will be ignored. By using the Software adaptation it is possible to run Qt Quick 2 applications on hardware and platforms that do not have OpenGL support.</p>
+<p>The Software adaptation was previously known as the Qt Quick 2D Renderer. However, unlike the 2D Renderer, the new, integrated version supports partial updates. This means that the full update of the window or screen contents is now avoided, and only the changed areas get flushed. This can significantly improve performance for many applications.</p>
+</div></blockquote>
+<div class="section" id="shader-effects">
+<span id="id2"></span><h2>Shader Effects<a class="headerlink" href="#shader-effects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><span class="xref std std-ref">ShaderEffect</span> components in <span class="xref std std-ref">QtQuick</span> 2 can not be rendered by the Software adptation.</div></blockquote>
+</div>
+<div class="section" id="qt-graphical-effects-module">
+<span id="id3"></span><h2>Qt Graphical Effects Module<a class="headerlink" href="#qt-graphical-effects-module" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Qt Graphical Effects uses <span class="xref std std-ref">ShaderEffect</span> items to render effects. If you use graphical effects from this module, then you should not hide the source item so that the original item can still be rendered.</div></blockquote>
+</div>
+<div class="section" id="particle-effects">
+<span id="id4"></span><h2>Particle Effects<a class="headerlink" href="#particle-effects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>It is not possible to render particle effects with the Software adaptation. Whenever possible, remove particles completely from the scene. Otherwise they will still require some processing, even though they are not visible.</div></blockquote>
+</div>
+<div class="section" id="rendering-text">
+<span id="id5"></span><h2>Rendering Text<a class="headerlink" href="#rendering-text" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The text rendering with the Software adaptation is based on software rasterization and does not respond as well to transformations such as scaling as when using OpenGL. The quality is similar to choosing <span class="xref std std-ref">Text.NativeRendering</span> with <span class="xref std std-ref">Text</span> items.</div></blockquote>
+</div>
+<div class="section" id="qt-multimedia-videooutput">
+<span id="id6"></span><h2>Qt Multimedia VideoOutput<a class="headerlink" href="#qt-multimedia-videooutput" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The <span class="xref std std-ref">VideoOutput</span> item of the Qt Multimedia module is not supported with the software adaptation. This is because <span class="xref std std-ref">VideoOutput</span> uses the <a class="reference internal" href="../PySide2/QtMultimedia/QVideoRendererControl.html#PySide2.QtMultimedia.QVideoRendererControl" title="PySide2.QtMultimedia.QVideoRendererControl"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtMultimedia.QVideoRendererControl</span></code></a> item which requires custom <a class="reference internal" href="../PySide2/QtQuick/QSGGeometryNode.html#PySide2.QtQuick.QSGGeometryNode" title="PySide2.QtQuick.QSGGeometryNode"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtQuick.QSGGeometryNode</span></code></a> behavior that is only present in the default OpenGL adaptation.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

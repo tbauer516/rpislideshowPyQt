@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Widgets Tutorial - Nested Layouts &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Widgets Tutorial - Nested Layouts</a><ul>
+<li><a class="reference internal" href="#setting-up-the-model">Setting up the Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#nestedlayouts-pro-example-file">nestedlayouts.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="widgets-tutorial-nested-layouts">
+<span id="id1"></span><h1>Widgets Tutorial - Nested Layouts<a class="headerlink" href="#widgets-tutorial-nested-layouts" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Just as widgets can contain other widgets, layouts can be used to provide different levels of grouping for widgets. Here, we want to display a label alongside a line edit at the top of a window, above a table view showing the results of a query.</p>
+<p>We achieve this by creating two layouts: <code class="docutils literal"><span class="pre">queryLayout</span></code> is a <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> that contains <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> widgets placed side-by-side; <code class="docutils literal"><span class="pre">mainLayout</span></code> is a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> that contains <code class="docutils literal"><span class="pre">queryLayout</span></code> and a <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> arranged vertically.</p>
+<p>+—————————————————————————-++
+<a href="#id15"><span class="problematic" id="id16">|::                                                                          ||</span></a>
+|                                                                            ||
+|        #include &lt;QtWidgets&gt;                                                ||
+|                                                                            ||
+|        int main(int argc, char <a href="#id2"><span class="problematic" id="id3">*</span></a>argv[])                                    ||
+|        {                                                                   ||
+|            QApplication app(argc, argv);                                   ||
+|            QWidget window;                                                 ||
+|                                                                            ||
+|            QLabel <a href="#id4"><span class="problematic" id="id5">*</span></a>queryLabel = new QLabel(                                ||
+|                QApplication::translate(“nestedlayouts”, “Query:”));        ||
+|            QLineEdit <a href="#id6"><span class="problematic" id="id7">*</span></a>queryEdit = new QLineEdit();                         ||
+|            QTableView <a href="#id8"><span class="problematic" id="id9">*</span></a>resultView = new QTableView();                      ||
+|                                                                            ||
+|            QHBoxLayout <a href="#id10"><span class="problematic" id="id11">*</span></a>queryLayout = new QHBoxLayout();                   ||
+|            queryLayout-&gt;addWidget(queryLabel);                             ||
+|            queryLayout-&gt;addWidget(queryEdit);                              ||
+|                                                                            ||
+|            QVBoxLayout <a href="#id12"><span class="problematic" id="id13">*</span></a>mainLayout = new QVBoxLayout();                    ||
+|            mainLayout-&gt;addLayout(queryLayout);                             ||
+|            mainLayout-&gt;addWidget(resultView);                              ||
+|            window.setLayout(mainLayout);                                   ||
+|                                                                            ||
+|            // Set up the model and configure the view…                   ||
+|            window.setWindowTitle(                                          ||
+|                QApplication::translate(“nestedlayouts”, “Nested layouts”));||
+|            window.show();                                                  ||
+|            return app.exec();                                              ||
+|        }                                                                   ||
++—————————————————————————-++</p>
+<p>Note that we call the <code class="docutils literal"><span class="pre">mainLayout</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QBoxLayout.addLayout()</span></code> function to insert the <code class="docutils literal"><span class="pre">queryLayout</span></code> above the <code class="docutils literal"><span class="pre">resultView</span></code> table.</p>
+<p>We have omitted the code that sets up the model containing the data shown by the <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> widget, <code class="docutils literal"><span class="pre">resultView</span></code> . For completeness, we show this below.</p>
+<p>As well as <a class="reference internal" href="../PySide2/QtWidgets/QHBoxLayout.html#PySide2.QtWidgets.QHBoxLayout" title="PySide2.QtWidgets.QHBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QHBoxLayout</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> , Qt also provides <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QFormLayout.html#PySide2.QtWidgets.QFormLayout" title="PySide2.QtWidgets.QFormLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFormLayout</span></code></a> classes to help with more complex user interfaces. These can be seen if you run Qt Designer.</p>
+</div></blockquote>
+<div class="section" id="setting-up-the-model">
+<span id="id14"></span><h2>Setting up the Model<a class="headerlink" href="#setting-up-the-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the code above, we did not show where the table’s data came from because we wanted to concentrate on the use of layouts. Here, we see that the model holds a number of items corresponding to rows, each of which is set up to contain data for two columns.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStandardItemModel</span> <span class="n">model</span><span class="p">;</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">(</span>
+    <span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;nestedlayouts&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">)</span>
+                  <span class="o">&lt;&lt;</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;nestedlayouts&quot;</span><span class="p">,</span> <span class="s2">&quot;Office&quot;</span><span class="p">));</span>
+
+<span class="n">QList</span><span class="o">&lt;</span><span class="n">QStringList</span><span class="o">&gt;</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">QList</span><span class="o">&lt;</span><span class="n">QStringList</span><span class="o">&gt;</span><span class="p">()</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Verne Nilsen&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;123&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Carlos Tang&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;77&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Bronwyn Hawcroft&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;119&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Alessandro Hanssen&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;32&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Andrew John Bakken&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;54&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Vanessa Weatherley&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;85&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Rebecca Dickens&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;17&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;David Bradley&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;42&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Knut Walters&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;25&quot;</span><span class="p">)</span>
+    <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">QStringList</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Andrea Jones&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;34&quot;</span><span class="p">);</span>
+
+<span class="n">foreach</span> <span class="p">(</span><span class="n">QStringList</span> <span class="n">row</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">QStandardItem</span> <span class="o">*&gt;</span> <span class="n">items</span><span class="p">;</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">QString</span> <span class="n">text</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span> <span class="n">QStandardItem</span><span class="p">(</span><span class="n">text</span><span class="p">));</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">resultView</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">model</span><span class="p">);</span>
+<span class="n">resultView</span><span class="o">-&gt;</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+<span class="n">resultView</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setStretchLastSection</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The use of models and views is covered in the <span class="xref std std-ref">Item Views Examples</span> and in the <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model/View Programming</span></a> overview.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="nestedlayouts-pro-example-file">
+<h1>nestedlayouts.pro Example File<a class="headerlink" href="#nestedlayouts-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

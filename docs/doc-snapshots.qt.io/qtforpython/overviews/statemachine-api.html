@@ -1,0 +1,533 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The State Machine Framework &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The State Machine Framework</a><ul>
+<li><a class="reference internal" href="#classes-in-the-state-machine-framework">Classes in the State Machine Framework</a></li>
+<li><a class="reference internal" href="#a-simple-state-machine">A Simple State Machine</a></li>
+<li><a class="reference internal" href="#doing-useful-work-on-state-entry-and-exit">Doing Useful Work on State Entry and Exit</a></li>
+<li><a class="reference internal" href="#state-machines-that-finish">State Machines That Finish</a></li>
+<li><a class="reference internal" href="#sharing-transitions-by-grouping-states">Sharing Transitions By Grouping States</a></li>
+<li><a class="reference internal" href="#using-history-states-to-save-and-restore-the-current-state">Using History States to Save and Restore the Current State</a></li>
+<li><a class="reference internal" href="#using-parallel-states-to-avoid-a-combinatorial-explosion-of-states">Using Parallel States to Avoid a Combinatorial Explosion of States</a></li>
+<li><a class="reference internal" href="#detecting-that-a-composite-state-has-finished">Detecting that a Composite State has Finished</a></li>
+<li><a class="reference internal" href="#targetless-transitions">Targetless Transitions</a></li>
+<li><a class="reference internal" href="#events-transitions-and-guards">Events, Transitions and Guards</a></li>
+<li><a class="reference internal" href="#using-restore-policy-to-automatically-restore-properties">Using Restore Policy To Automatically Restore Properties</a></li>
+<li><a class="reference internal" href="#animating-property-assignments">Animating Property Assignments</a></li>
+<li><a class="reference internal" href="#detecting-that-all-properties-have-been-set-in-a-state">Detecting That All Properties Have Been Set In A State</a></li>
+<li><a class="reference internal" href="#what-happens-if-a-state-is-exited-before-the-animation-has-finished">What Happens If A State Is Exited Before The Animation Has Finished</a></li>
+<li><a class="reference internal" href="#default-animations">Default Animations</a></li>
+<li><a class="reference internal" href="#nesting-state-machines">Nesting State Machines</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-state-machine-framework">
+<span id="id1"></span><h1>The State Machine Framework<a class="headerlink" href="#the-state-machine-framework" title="Permalink to this headline">¶</a></h1>
+<p>An overview of the State Machine framework for constructing and executing state graphs</p>
+<blockquote>
+<div><p>An overview of the State Machine framework for constructing and executing state graphs.</p>
+<p>The State Machine framework provides classes for creating and executing state graphs. The concepts and notation are based on those from Harel’s Statecharts: A visual formalism for complex systems, which is also the basis of UML state diagrams. The semantics of state machine execution are based on State Chart XML (SCXML).</p>
+<p>Statecharts provide a graphical way of modeling how a system reacts to stimuli. This is done by defining the possible <em>states</em> that the system can be in, and how the system can move from one state to another (<em>transitions</em> between states). A key characteristic of event-driven systems (such as Qt applications) is that behavior often depends not only on the last or current event, but also the events that preceded it. With statecharts, this information is easy to express.</p>
+<p>The State Machine framework provides an API and execution model that can be used to effectively embed the elements and semantics of statecharts in Qt applications. The framework integrates tightly with Qt’s meta-object system; for example, transitions between states can be triggered by signals, and states can be configured to set properties and invoke methods on { <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> }s. Qt’s event system is used to drive the state machines.</p>
+<p>The state graph in the State Machine framework is hierarchical. States can be nested inside of other states, and the current configuration of the state machine consists of the set of states which are currently active. All the states in a valid configuration of the state machine will have a common ancestor.</p>
+</div></blockquote>
+<div class="section" id="classes-in-the-state-machine-framework">
+<span id="id2"></span><h2>Classes in the State Machine Framework<a class="headerlink" href="#classes-in-the-state-machine-framework" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>These classes are provided by qt for creating event-driven state machines.</div></blockquote>
+</div>
+<div class="section" id="a-simple-state-machine">
+<span id="id3"></span><h2>A Simple State Machine<a class="headerlink" href="#a-simple-state-machine" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To demonstrate the core functionality of the State Machine API, let’s look at a small example: A state machine with three states, <code class="docutils literal"><span class="pre">s1</span></code> , <code class="docutils literal"><span class="pre">s2</span></code> and <code class="docutils literal"><span class="pre">s3</span></code> . The state machine is controlled by a single <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> ; when the button is clicked, the machine transitions to another state. Initially, the state machine is in state <code class="docutils literal"><span class="pre">s1</span></code> . The statechart for this machine is as follows:</p>
+<p>The following snippet shows the code needed to create such a state machine. First, we create the state machine and states:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then, we create the transitions by using the <code class="xref py py-func docutils literal"><span class="pre">QState.addTransition()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s3</span><span class="p">);</span>
+<span class="n">s3</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next, we add the states to the machine and set the machine’s initial state:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, we start the state machine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">machine</span><span class="o">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The state machine executes asynchronously, i.e. it becomes part of your application’s event loop.</p>
+</div></blockquote>
+</div>
+<div class="section" id="doing-useful-work-on-state-entry-and-exit">
+<span id="id4"></span><h2>Doing Useful Work on State Entry and Exit<a class="headerlink" href="#doing-useful-work-on-state-entry-and-exit" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The above state machine merely transitions from one state to another, it doesn’t perform any operations. The <code class="xref py py-func docutils literal"><span class="pre">QState.assignProperty()</span></code> function can be used to have a state set a property of a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> when the state is entered. In the following snippet, the value that should be assigned to a <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> ‘s text property is specified for each state:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;In state s1&quot;</span><span class="p">);</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;In state s2&quot;</span><span class="p">);</span>
+<span class="n">s3</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;In state s3&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When any of the states is entered, the label’s text will be changed accordingly.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QState.entered()</span></code> signal is emitted when the state is entered, and the <code class="xref py py-func docutils literal"><span class="pre">QState.exited()</span></code> signal is emitted when the state is exited. In the following snippet, the button’s <code class="xref py py-func docutils literal"><span class="pre">QPushButton.showMaximized()</span></code> slot will be called when state <code class="docutils literal"><span class="pre">s3</span></code> is entered, and the button’s <code class="xref py py-func docutils literal"><span class="pre">QPushButton.showMinimized()</span></code> slot will be called when <code class="docutils literal"><span class="pre">s3</span></code> is exited:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">entered</span><span class="p">()),</span> <span class="n">button</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">showMaximized</span><span class="p">()));</span>
+<span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">exited</span><span class="p">()),</span> <span class="n">button</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">showMinimized</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>Custom states can reimplement <code class="xref py py-func docutils literal"><span class="pre">QAbstractState.onEntry()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractState.onExit()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="state-machines-that-finish">
+<span id="id5"></span><h2>State Machines That Finish<a class="headerlink" href="#state-machines-that-finish" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The state machine defined in the previous section never finishes. In order for a state machine to be able to finish, it needs to have a top-level <em>final</em> state ( <a class="reference internal" href="../PySide2/QtCore/QFinalState.html#PySide2.QtCore.QFinalState" title="PySide2.QtCore.QFinalState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFinalState</span></code></a> object). When the state machine enters a top-level final state, the machine will emit the <code class="xref py py-func docutils literal"><span class="pre">QStateMachine.finished()</span></code> signal and halt.</p>
+<p>All you need to do to introduce a final state in the graph is create a <a class="reference internal" href="../PySide2/QtCore/QFinalState.html#PySide2.QtCore.QFinalState" title="PySide2.QtCore.QFinalState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFinalState</span></code></a> object and use it as the target of one or more transitions.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sharing-transitions-by-grouping-states">
+<span id="id6"></span><h2>Sharing Transitions By Grouping States<a class="headerlink" href="#sharing-transitions-by-grouping-states" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Assume we wanted the user to be able to quit the application at any time by clicking a Quit button. In order to achieve this, we need to create a final state and make it the target of a transition associated with the Quit button’s <code class="xref py py-func docutils literal"><span class="pre">QPushButton.clicked()</span></code> signal. We could add a transition from each of <code class="docutils literal"><span class="pre">s1</span></code> , <code class="docutils literal"><span class="pre">s2</span></code> and <code class="docutils literal"><span class="pre">s3</span></code> ; however, this seems redundant, and one would also have to remember to add such a transition from every new state that is added in the future.</p>
+<p>We can achieve the same behavior (namely that clicking the Quit button quits the state machine, regardless of which state the state machine is in) by grouping states <code class="docutils literal"><span class="pre">s1</span></code> , <code class="docutils literal"><span class="pre">s2</span></code> and <code class="docutils literal"><span class="pre">s3</span></code> . This is done by creating a new top-level state and making the three original states children of the new state. The following diagram shows the new state machine.</p>
+<p>The three original states have been renamed <code class="docutils literal"><span class="pre">s11</span></code> , <code class="docutils literal"><span class="pre">s12</span></code> and <code class="docutils literal"><span class="pre">s13</span></code> to reflect that they are now children of the new top-level state, <code class="docutils literal"><span class="pre">s1</span></code> . Child states implicitly inherit the transitions of their parent state. This means it is now sufficient to add a single transition from <code class="docutils literal"><span class="pre">s1</span></code> to the final state <code class="docutils literal"><span class="pre">s2</span></code> . New states added to <code class="docutils literal"><span class="pre">s1</span></code> will also automatically inherit this transition.</p>
+<p>All that’s needed to group states is to specify the proper parent when the state is created. You also need to specify which of the child states is the initial one (i.e. which child state the state machine should enter when the parent state is the target of a transition).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s11</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s12</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s13</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s11</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">QFinalState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QFinalState</span><span class="p">();</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+
+<span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">machine</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">QApplication</span><span class="p">::</span><span class="n">instance</span><span class="p">(),</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">quit</span><span class="p">()));</span>
+</pre></div>
+</div>
+<p>In this case we want the application to quit when the state machine is finished, so the machine’s <code class="xref py py-func docutils literal"><span class="pre">QStateMachine.finished()</span></code> signal is connected to the application’s <code class="xref py py-func docutils literal"><span class="pre">QCoreApplication.quit()</span></code> slot.</p>
+<p>A child state can override an inherited transition. For example, the following code adds a transition that effectively causes the Quit button to be ignored when the state machine is in state <code class="docutils literal"><span class="pre">s12</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">s12</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s12</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A transition can have any state as its target, i.e. the target state does not have to be on the same level in the state hierarchy as the source state.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-history-states-to-save-and-restore-the-current-state">
+<span id="id7"></span><h2>Using History States to Save and Restore the Current State<a class="headerlink" href="#using-history-states-to-save-and-restore-the-current-state" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Imagine that we wanted to add an “interrupt” mechanism to the example discussed in the previous section; the user should be able to click a button to have the state machine perform some non-related task, after which the state machine should resume whatever it was doing before (i.e. return to the old state, which is one of <code class="docutils literal"><span class="pre">s11</span></code> , <code class="docutils literal"><span class="pre">s12</span></code> and <code class="docutils literal"><span class="pre">s13</span></code> in this case).</p>
+<p>Such behavior can easily be modeled using <em>history states</em> . A history state ( <a class="reference internal" href="../PySide2/QtCore/QHistoryState.html#PySide2.QtCore.QHistoryState" title="PySide2.QtCore.QHistoryState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QHistoryState</span></code></a> object) is a pseudo-state that represents the child state that the parent state was in the last time the parent state was exited.</p>
+<p>A history state is created as a child of the state for which we wish to record the current child state; when the state machine detects the presence of such a state at runtime, it automatically records the current (real) child state when the parent state is exited. A transition to the history state is in fact a transition to the child state that the state machine had previously saved; the state machine automatically “forwards” the transition to the real child state.</p>
+<p>The following diagram shows the state machine after the interrupt mechanism has been added.</p>
+<p>The following code shows how it can be implemented; in this example we simply display a message box when <code class="docutils literal"><span class="pre">s3</span></code> is entered, then immediately return to the previous child state of <code class="docutils literal"><span class="pre">s1</span></code> via the history state.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QHistoryState</span> <span class="o">*</span><span class="n">s1h</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHistoryState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">s3</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;In s3&quot;</span><span class="p">);</span>
+<span class="n">QMessageBox</span> <span class="o">*</span><span class="n">mbox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMessageBox</span><span class="p">(</span><span class="n">mainWindow</span><span class="p">);</span>
+<span class="n">mbox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Ok</span><span class="p">);</span>
+<span class="n">mbox</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Interrupted!&quot;</span><span class="p">);</span>
+<span class="n">mbox</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Information</span><span class="p">);</span>
+<span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">entered</span><span class="p">()),</span> <span class="n">mbox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">exec</span><span class="p">()));</span>
+<span class="n">s3</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">s1h</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">interruptButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-parallel-states-to-avoid-a-combinatorial-explosion-of-states">
+<span id="id8"></span><h2>Using Parallel States to Avoid a Combinatorial Explosion of States<a class="headerlink" href="#using-parallel-states-to-avoid-a-combinatorial-explosion-of-states" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Assume that you wanted to model a set of mutually exclusive properties of a car in a single state machine. Let’s say the properties we are interested in are Clean vs Dirty, and Moving vs Not moving. It would take four mutually exclusive states and eight transitions to be able to represent and freely move between all possible combinations.</p>
+<p>If we added a third property (say, Red vs Blue), the total number of states would double, to eight; and if we added a fourth property (say, Enclosed vs Convertible), the total number of states would double again, to 16.</p>
+<p>Using parallel states, the total number of states and transitions grows linearly as we add more properties, instead of exponentially. Furthermore, states can be added to or removed from the parallel state without affecting any of their sibling states.</p>
+<p>To create a parallel state group, pass <code class="xref py py-attr docutils literal"><span class="pre">QState.ParallelStates</span></code> to the <a class="reference internal" href="../PySide2/QtCore/QState.html#PySide2.QtCore.QState" title="PySide2.QtCore.QState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QState</span></code></a> constructor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">QState</span><span class="p">::</span><span class="n">ParallelStates</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">s11</span> <span class="ow">and</span> <span class="n">s12</span> <span class="n">will</span> <span class="n">be</span> <span class="n">entered</span> <span class="ow">in</span> <span class="n">parallel</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s11</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s12</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a parallel state group is entered, all its child states will be simultaneously entered. Transitions within the individual child states operate normally. However, any of the child states may take a transition which exits the parent state. When this happens, the parent state and all of its child states are exited.</p>
+<p>The parallelism in the State Machine framework follows an interleaved semantics. All parallel operations will be executed in a single, atomic step of the event processing, so no event can interrupt the parallel operations. However, events will still be processed sequentially, since the machine itself is single threaded. As an example: Consider the situation where there are two transitions that exit the same parallel state group, and their conditions become true simultaneously. In this case, the event that is processed last of the two will not have any effect, since the first event will already have caused the machine to exit from the parallel state.</p>
+</div></blockquote>
+</div>
+<div class="section" id="detecting-that-a-composite-state-has-finished">
+<span id="id9"></span><h2>Detecting that a Composite State has Finished<a class="headerlink" href="#detecting-that-a-composite-state-has-finished" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A child state can be final (a <a class="reference internal" href="../PySide2/QtCore/QFinalState.html#PySide2.QtCore.QFinalState" title="PySide2.QtCore.QFinalState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFinalState</span></code></a> object); when a final child state is entered, the parent state emits the <code class="xref py py-func docutils literal"><span class="pre">QState.finished()</span></code> signal. The following diagram shows a composite state <code class="docutils literal"><span class="pre">s1</span></code> which does some processing before entering a final state:</p>
+<p>When <code class="docutils literal"><span class="pre">s1</span></code> ‘s final state is entered, <code class="docutils literal"><span class="pre">s1</span></code> will automatically emit <code class="xref py py-func docutils literal"><span class="pre">QState.finished()</span></code> . We use a signal transition to cause this event to trigger a state change:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Using final states in composite states is useful when you want to hide the internal details of a composite state; i.e. the only thing the outside world should be able to do is enter the state, and get a notification when the state has completed its work. This is a very powerful abstraction and encapsulation mechanism when building complex (deeply nested) state machines. (In the above example, you could of course create a transition directly from <code class="docutils literal"><span class="pre">s1</span></code> ‘s <code class="docutils literal"><span class="pre">done</span></code> state rather than relying on <code class="docutils literal"><span class="pre">s1</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QState.finished()</span></code> signal, but with the consequence that implementation details of <code class="docutils literal"><span class="pre">s1</span></code> are exposed and depended on).</p>
+<p>For parallel state groups, the <code class="xref py py-func docutils literal"><span class="pre">QState.finished()</span></code> signal is emitted when <em>all</em> the child states have entered final states.</p>
+</div></blockquote>
+</div>
+<div class="section" id="targetless-transitions">
+<span id="id10"></span><h2>Targetless Transitions<a class="headerlink" href="#targetless-transitions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A transition need not have a target state. A transition without a target can be triggered the same way as any other transition; the difference is that when a targetless transition is triggered, it doesn’t cause any state changes. This allows you to react to a signal or event when your machine is in a certain state, without having to leave that state. Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="o">&amp;</span><span class="n">machine</span><span class="p">);</span>
+
+<span class="n">QPushButton</span> <span class="n">button</span><span class="p">;</span>
+<span class="n">QSignalTransition</span> <span class="o">*</span><span class="n">trans</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSignalTransition</span><span class="p">(</span><span class="o">&amp;</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()));</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">trans</span><span class="p">);</span>
+
+<span class="n">QMessageBox</span> <span class="n">msgBox</span><span class="p">;</span>
+<span class="n">msgBox</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;The button was clicked; carry on.&quot;</span><span class="p">);</span>
+<span class="n">QObject</span><span class="p">::</span><span class="n">connect</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="o">&amp;</span><span class="n">msgBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">exec</span><span class="p">()));</span>
+
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The message box will be displayed each time the button is clicked, but the state machine will remain in its current state (s1). If the target state were explicitly set to s1, however, s1 would be exited and re-entered each time (e.g. the <code class="xref py py-func docutils literal"><span class="pre">QAbstractState.entered()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractState.exited()</span></code> signals would be emitted).</p>
+</div></blockquote>
+</div>
+<div class="section" id="events-transitions-and-guards">
+<span id="id11"></span><h2>Events, Transitions and Guards<a class="headerlink" href="#events-transitions-and-guards" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A <a class="reference internal" href="../PySide2/QtCore/QStateMachine.html#PySide2.QtCore.QStateMachine" title="PySide2.QtCore.QStateMachine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStateMachine</span></code></a> runs its own event loop. For signal transitions ( <a class="reference internal" href="../PySide2/QtCore/QSignalTransition.html#PySide2.QtCore.QSignalTransition" title="PySide2.QtCore.QSignalTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSignalTransition</span></code></a> objects), <a class="reference internal" href="../PySide2/QtCore/QStateMachine.html#PySide2.QtCore.QStateMachine" title="PySide2.QtCore.QStateMachine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStateMachine</span></code></a> automatically posts a <code class="xref py py-class docutils literal"><span class="pre">QStateMachine.SignalEvent</span></code> to itself when it intercepts the corresponding signal; similarly, for <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> event transitions ( <a class="reference internal" href="../PySide2/QtCore/QEventTransition.html#PySide2.QtCore.QEventTransition" title="PySide2.QtCore.QEventTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QEventTransition</span></code></a> objects) a <code class="xref py py-class docutils literal"><span class="pre">QStateMachine.WrappedEvent</span></code> is posted.</p>
+<p>You can post your own events to the state machine using <code class="xref py py-func docutils literal"><span class="pre">QStateMachine.postEvent()</span></code> .</p>
+<p>When posting a custom event to the state machine, you typically also have one or more custom transitions that can be triggered from events of that type. To create such a transition, you subclass <a class="reference internal" href="../PySide2/QtCore/QAbstractTransition.html#PySide2.QtCore.QAbstractTransition" title="PySide2.QtCore.QAbstractTransition"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractTransition</span></code></a> and reimplement <code class="xref py py-func docutils literal"><span class="pre">QAbstractTransition.eventTest()</span></code> , where you check if an event matches your event type (and optionally other criteria, e.g. attributes of the event object).</p>
+<p>Here we define our own custom event type, <code class="docutils literal"><span class="pre">StringEvent</span></code> , for posting strings to the state machine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">StringEvent</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QEvent</span>
+<span class="p">{</span>
+    <span class="n">StringEvent</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QEvent</span><span class="p">(</span><span class="n">QEvent</span><span class="p">::</span><span class="n">Type</span><span class="p">(</span><span class="n">QEvent</span><span class="p">::</span><span class="n">User</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
+      <span class="n">value</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="n">QString</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Next, we define a transition that only triggers when the event’s string matches a particular string (a <em>guarded</em> transition):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StringTransition</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QAbstractTransition</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">StringTransition</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span>
+        <span class="p">:</span> <span class="n">m_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">virtual</span> <span class="nb">bool</span> <span class="n">eventTest</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">!=</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">Type</span><span class="p">(</span><span class="n">QEvent</span><span class="p">::</span><span class="n">User</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">//</span> <span class="n">StringEvent</span>
+            <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+        <span class="n">StringEvent</span> <span class="o">*</span><span class="n">se</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">StringEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">m_value</span> <span class="o">==</span> <span class="n">se</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">onTransition</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">m_value</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In the <code class="xref py py-func docutils literal"><span class="pre">QAbstractTransition.eventTest()</span></code> reimplementation, we first check if the event type is the desired one; if so, we cast the event to a <code class="docutils literal"><span class="pre">StringEvent</span></code> and perform the string comparison.</p>
+<p>The following is a statechart that uses the custom event and transition:</p>
+<p>Here’s what the implementation of the statechart looks like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QFinalState</span> <span class="o">*</span><span class="n">done</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QFinalState</span><span class="p">();</span>
+
+<span class="n">StringTransition</span> <span class="o">*</span><span class="n">t1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">StringTransition</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="n">t1</span><span class="o">-&gt;</span><span class="n">setTargetState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+<span class="n">StringTransition</span> <span class="o">*</span><span class="n">t2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">StringTransition</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">);</span>
+<span class="n">t2</span><span class="o">-&gt;</span><span class="n">setTargetState</span><span class="p">(</span><span class="n">done</span><span class="p">);</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">t2</span><span class="p">);</span>
+
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">done</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Once the machine is started, we can post events to it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">machine</span><span class="o">.</span><span class="n">postEvent</span><span class="p">(</span><span class="n">new</span> <span class="n">StringEvent</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">));</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">postEvent</span><span class="p">(</span><span class="n">new</span> <span class="n">StringEvent</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>An event that is not handled by any relevant transition will be silently consumed by the state machine. It can be useful to group states and provide a default handling of such events; for example, as illustrated in the following statechart:</p>
+<p>For deeply nested statecharts, you can add such “fallback” transitions at the level of granularity that’s most appropriate.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-restore-policy-to-automatically-restore-properties">
+<span id="id12"></span><h2>Using Restore Policy To Automatically Restore Properties<a class="headerlink" href="#using-restore-policy-to-automatically-restore-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In some state machines it can be useful to focus the attention on assigning properties in states, not on restoring them when the state is no longer active. If you know that a property should always be restored to its initial value when the machine enters a state that does not explicitly give the property a value, you can set the global restore policy to <code class="xref py py-attr docutils literal"><span class="pre">QStateMachine.RestoreProperties</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setGlobalRestorePolicy</span><span class="p">(</span><span class="n">QStateMachine</span><span class="p">::</span><span class="n">RestoreProperties</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When this restore policy is set, the machine will automatically restore all properties. If it enters a state where a given property is not set, it will first search the hierarchy of ancestors to see if the property is defined there. If it is, the property will be restored to the value defined by the closest ancestor. If not, it will be restored to its initial value (i.e. the value of the property before any property assignments in states were executed.)</p>
+<p>Take the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setGlobalRestorePolicy</span><span class="p">(</span><span class="n">QStateMachine</span><span class="p">::</span><span class="n">RestoreProperties</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s2">&quot;fooBar&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Lets say the property <code class="docutils literal"><span class="pre">fooBar</span></code> is 0.0 when the machine starts. When the machine is in state <code class="docutils literal"><span class="pre">s1</span></code> , the property will be 1.0, since the state explicitly assigns this value to it. When the machine is in state <code class="docutils literal"><span class="pre">s2</span></code> , no value is explicitly defined for the property, so it will implicitly be restored to 0.0.</p>
+<p>If we are using nested states, the parent defines a value for the property which is inherited by all descendants that do not explicitly assign a value to the property.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setGlobalRestorePolicy</span><span class="p">(</span><span class="n">QStateMachine</span><span class="p">::</span><span class="n">RestoreProperties</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s2">&quot;fooBar&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s2">&quot;fooBar&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal"><span class="pre">s1</span></code> has two children: <code class="docutils literal"><span class="pre">s2</span></code> and <code class="docutils literal"><span class="pre">s3</span></code> . When <code class="docutils literal"><span class="pre">s2</span></code> is entered, the property <code class="docutils literal"><span class="pre">fooBar</span></code> will have the value 2.0, since this is explicitly defined for the state. When the machine is in state <code class="docutils literal"><span class="pre">s3</span></code> , no value is defined for the state, but <code class="docutils literal"><span class="pre">s1</span></code> defines the property to be 1.0, so this is the value that will be assigned to <code class="docutils literal"><span class="pre">fooBar</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="animating-property-assignments">
+<span id="id13"></span><h2>Animating Property Assignments<a class="headerlink" href="#animating-property-assignments" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The State Machine API connects with the Animation API in Qt to allow automatically animating properties as they are assigned in states.</p>
+<p>Say we have the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here we define two states of a user interface. In <code class="docutils literal"><span class="pre">s1</span></code> the <code class="docutils literal"><span class="pre">button</span></code> is small, and in <code class="docutils literal"><span class="pre">s2</span></code> it is bigger. If we click the button to transition from <code class="docutils literal"><span class="pre">s1</span></code> to <code class="docutils literal"><span class="pre">s2</span></code> , the geometry of the button will be set immediately when a given state has been entered. If we want the transition to be smooth, however, all we need to do is make a <a class="reference internal" href="../PySide2/QtCore/QPropertyAnimation.html#PySide2.QtCore.QPropertyAnimation" title="PySide2.QtCore.QPropertyAnimation"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPropertyAnimation</span></code></a> and add this to the transition object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+
+<span class="n">QSignalTransition</span> <span class="o">*</span><span class="n">transition</span> <span class="o">=</span> <span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+<span class="n">transition</span><span class="o">-&gt;</span><span class="n">addAnimation</span><span class="p">(</span><span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Adding an animation for the property in question means that the property assignment will no longer take immediate effect when the state has been entered. Instead, the animation will start playing when the state has been entered and smoothly animate the property assignment. Since we do not set the start value or end value of the animation, these will be set implicitly. The start value of the animation will be the property’s current value when the animation starts, and the end value will be set based on the property assignments defined for the state.</p>
+<p>If the global restore policy of the state machine is set to <code class="xref py py-attr docutils literal"><span class="pre">QStateMachine.RestoreProperties</span></code> , it is possible to also add animations for the property restorations.</p>
+</div></blockquote>
+</div>
+<div class="section" id="detecting-that-all-properties-have-been-set-in-a-state">
+<span id="id14"></span><h2>Detecting That All Properties Have Been Set In A State<a class="headerlink" href="#detecting-that-all-properties-have-been-set-in-a-state" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>When animations are used to assign properties, a state no longer defines the exact values that a property will have when the machine is in the given state. While the animation is running, the property can potentially have any value, depending on the animation.</p>
+<p>In some cases, it can be useful to be able to detect when the property has actually been assigned the value defined by a state.</p>
+<p>Say we have the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMessageBox</span> <span class="o">*</span><span class="n">messageBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMessageBox</span><span class="p">(</span><span class="n">mainWindow</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Ok</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Button geometry has been set!&quot;</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Information</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">entered</span><span class="p">()),</span> <span class="n">messageBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">exec</span><span class="p">()));</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal"><span class="pre">button</span></code> is clicked, the machine will transition into state <code class="docutils literal"><span class="pre">s2</span></code> , which will set the geometry of the button, and then pop up a message box to alert the user that the geometry has been changed.</p>
+<p>In the normal case, where animations are not used, this will operate as expected. However, if an animation for the <code class="docutils literal"><span class="pre">geometry</span></code> of <code class="docutils literal"><span class="pre">button</span></code> is set on the transition between <code class="docutils literal"><span class="pre">s1</span></code> and <code class="docutils literal"><span class="pre">s2</span></code> , the animation will be started when <code class="docutils literal"><span class="pre">s2</span></code> is entered, but the <code class="docutils literal"><span class="pre">geometry</span></code> property will not actually reach its defined value before the animation is finished running. In this case, the message box will pop up before the geometry of the button has actually been set.</p>
+<p>To ensure that the message box does not pop up until the geometry actually reaches its final value, we can use the state’s <code class="xref py py-func docutils literal"><span class="pre">QState.propertiesAssigned()</span></code> signal. The <code class="xref py py-func docutils literal"><span class="pre">QState.propertiesAssigned()</span></code> signal will be emitted when the property is assigned its final value, whether this is done immediately or after the animation has finished playing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMessageBox</span> <span class="o">*</span><span class="n">messageBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QMessageBox</span><span class="p">(</span><span class="n">mainWindow</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Ok</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Button geometry has been set!&quot;</span><span class="p">);</span>
+<span class="n">messageBox</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QMessageBox</span><span class="p">::</span><span class="n">Information</span><span class="p">);</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+
+<span class="n">QState</span> <span class="o">*</span><span class="n">s3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">entered</span><span class="p">()),</span> <span class="n">messageBox</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">exec</span><span class="p">()));</span>
+
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">s2</span><span class="p">);</span>
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">propertiesAssigned</span><span class="p">()),</span> <span class="n">s3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, when <code class="docutils literal"><span class="pre">button</span></code> is clicked, the machine will enter <code class="docutils literal"><span class="pre">s2</span></code> . It will remain in state <code class="docutils literal"><span class="pre">s2</span></code> until the <code class="docutils literal"><span class="pre">geometry</span></code> property has been set to <code class="docutils literal"><span class="pre">QRect(0,</span> <span class="pre">0,</span> <span class="pre">50,</span> <span class="pre">50)</span></code> . Then it will transition into <code class="docutils literal"><span class="pre">s3</span></code> . When <code class="docutils literal"><span class="pre">s3</span></code> is entered, the message box will pop up. If the transition into <code class="docutils literal"><span class="pre">s2</span></code> has an animation for the <code class="docutils literal"><span class="pre">geometry</span></code> property, then the machine will stay in <code class="docutils literal"><span class="pre">s2</span></code> until the animation has finished playing. If there is no such animation, it will simply set the property and immediately enter state <code class="docutils literal"><span class="pre">s3</span></code> .</p>
+<p>Either way, when the machine is in state <code class="docutils literal"><span class="pre">s3</span></code> , you are guaranteed that the property <code class="docutils literal"><span class="pre">geometry</span></code> has been assigned the defined value.</p>
+<p>If the global restore policy is set to <code class="xref py py-attr docutils literal"><span class="pre">QStateMachine.RestoreProperties</span></code> , the state will not emit the <code class="xref py py-func docutils literal"><span class="pre">QState.propertiesAssigned()</span></code> signal until these have been executed as well.</p>
+</div></blockquote>
+</div>
+<div class="section" id="what-happens-if-a-state-is-exited-before-the-animation-has-finished">
+<span id="id15"></span><h2>What Happens If A State Is Exited Before The Animation Has Finished<a class="headerlink" href="#what-happens-if-a-state-is-exited-before-the-animation-has-finished" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If a state has property assignments, and the transition into the state has animations for the properties, the state can potentially be exited before the properties have been assigned to the values defines by the state. This is true in particular when there are transitions out from the state that do not depend on the <code class="xref py py-func docutils literal"><span class="pre">QState.propertiesAssigned()</span></code> signal, as described in the previous section.</p>
+<p>The State Machine API guarantees that a property assigned by the state machine either:</p>
+<ul class="simple">
+<li>Has a value explicitly assigned to the property.</li>
+<li>Is currently being animated into a value explicitly assigned to the property.</li>
+</ul>
+<p>When a state is exited prior to the animation finishing, the behavior of the state machine depends on the target state of the transition. If the target state explicitly assigns a value to the property, no additional action will be taken. The property will be assigned the value defined by the target state.</p>
+<p>If the target state does not assign any value to the property, there are two options: By default, the property will be assigned the value defined by the state it is leaving (the value it would have been assigned if the animation had been permitted to finish playing). If a global restore policy is set, however, this will take precedence, and the property will be restored as usual.</p>
+</div></blockquote>
+</div>
+<div class="section" id="default-animations">
+<span id="id16"></span><h2>Default Animations<a class="headerlink" href="#default-animations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As described earlier, you can add animations to transitions to make sure property assignments in the target state are animated. If you want a specific animation to be used for a given property regardless of which transition is taken, you can add it as a default animation to the state machine. This is in particular useful when the properties assigned (or restored) by specific states is not known when the machine is constructed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QState</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+<span class="n">QState</span> <span class="o">*</span><span class="n">s2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QState</span><span class="p">();</span>
+
+<span class="n">s2</span><span class="o">-&gt;</span><span class="n">assignProperty</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s2">&quot;fooBar&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+<span class="n">s1</span><span class="o">-&gt;</span><span class="n">addTransition</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+
+<span class="n">QStateMachine</span> <span class="n">machine</span><span class="p">;</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">setInitialState</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="n">machine</span><span class="o">.</span><span class="n">addDefaultAnimation</span><span class="p">(</span><span class="n">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s2">&quot;fooBar&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>When the machine is in state <code class="docutils literal"><span class="pre">s2</span></code> , the machine will play the default animation for the property <code class="docutils literal"><span class="pre">fooBar</span></code> since this property is assigned by <code class="docutils literal"><span class="pre">s2</span></code> .</p>
+<p>Note that animations explicitly set on transitions will take precedence over any default animation for the given property.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nesting-state-machines">
+<span id="id17"></span><h2>Nesting State Machines<a class="headerlink" href="#nesting-state-machines" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtCore/QStateMachine.html#PySide2.QtCore.QStateMachine" title="PySide2.QtCore.QStateMachine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStateMachine</span></code></a> is a subclass of <a class="reference internal" href="../PySide2/QtCore/QState.html#PySide2.QtCore.QState" title="PySide2.QtCore.QState"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QState</span></code></a> . This allows for a state machine to be a child state of another machine. <a class="reference internal" href="../PySide2/QtCore/QStateMachine.html#PySide2.QtCore.QStateMachine" title="PySide2.QtCore.QStateMachine"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStateMachine</span></code></a> reimplements <code class="xref py py-func docutils literal"><span class="pre">QState.onEntry()</span></code> and calls <code class="xref py py-func docutils literal"><span class="pre">QStateMachine.start()</span></code> , so that when the child state machine is entered, it will automatically start running.</p>
+<p>The parent state machine treats the child machine as an <em>atomic</em> state in the state machine algorithm. The child state machine is self-contained; it maintains its own event queue and configuration. In particular, note that the <code class="xref py py-func docutils literal"><span class="pre">QStateMachine.configuration()</span></code> of the child machine is not part of the parent machine’s configuration (only the child machine itself is).</p>
+<p>States of the child state machine cannot be specified as targets of transitions in the parent state machine; only the child state machine itself can. Conversely, states of the parent state machine cannot be specified as targets of transitions in the child state machine. The child state machine’s <code class="xref py py-func docutils literal"><span class="pre">QState.finished()</span></code> () signal can be used to trigger a transition in the parent machine.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">The</span> <span class="pre">Declarative</span> <span class="pre">State</span> <span class="pre">Machine</span> <span class="pre">Framework</span></code></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

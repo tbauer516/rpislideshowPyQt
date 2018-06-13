@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PySide2 import QtWidgets, QtCore, QtGui
 from .weather.current import Current
 from .weather.forecast import Forecast
 
@@ -37,7 +37,7 @@ def main():
     pic_layout = QtWidgets.QHBoxLayout()
     pic_widget = QtGui.QPixmap()
     # resize pic_widget to be 16:9 size
-    pic_layout.addWidget(pic_widget)
+    # pic_layout.addItem(pic_widget)
     pic_layout.addLayout(weather_col_layout)
 
     window.setLayout(pic_layout)

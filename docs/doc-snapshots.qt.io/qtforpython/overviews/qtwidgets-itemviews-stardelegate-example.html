@@ -1,0 +1,553 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Star Delegate Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Star Delegate Example</a><ul>
+<li><a class="reference internal" href="#stardelegate-class-definition">StarDelegate Class Definition</a></li>
+<li><a class="reference internal" href="#stardelegate-class-implementation">StarDelegate Class Implementation</a></li>
+<li><a class="reference internal" href="#stareditor-class-definition">StarEditor Class Definition</a></li>
+<li><a class="reference internal" href="#stareditor-class-implementation">StarEditor Class Implementation</a></li>
+<li><a class="reference internal" href="#starrating-class-definition">StarRating Class Definition</a></li>
+<li><a class="reference internal" href="#starrating-class-implementation">StarRating Class Implementation</a></li>
+<li><a class="reference internal" href="#function">Function</a></li>
+<li><a class="reference internal" href="#possible-extensions-and-suggestions">Possible Extensions and Suggestions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stardelegate-cpp-example-file">stardelegate.cpp Example File</a></li>
+<li><a class="reference internal" href="#stardelegate-h-example-file">stardelegate.h Example File</a></li>
+<li><a class="reference internal" href="#stareditor-cpp-example-file">stareditor.cpp Example File</a></li>
+<li><a class="reference internal" href="#stareditor-h-example-file">stareditor.h Example File</a></li>
+<li><a class="reference internal" href="#starrating-cpp-example-file">starrating.cpp Example File</a></li>
+<li><a class="reference internal" href="#starrating-h-example-file">starrating.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#stardelegate-pro-example-file">stardelegate.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="star-delegate-example">
+<span id="id1"></span><h1>Star Delegate Example<a class="headerlink" href="#star-delegate-example" title="Permalink to this headline">¶</a></h1>
+<p>Star Delegate example shows how to create a delegate that can paint itself and that supports editing</p>
+<blockquote>
+<div><p>The Star Delegate example shows how to create a delegate that can paint itself and that supports editing.</p>
+<p>When displaying data in a <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> , <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> , or <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> , the individual items are drawn by a <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">delegate</span></a> . Also, when the user starts editing an item (for example, by double-clicking the item), the delegate provides an editor widget that is placed on top of the item while editing takes place.</p>
+<p>Delegates are subclasses of <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> . Qt provides <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> , which inherits <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> and handles the most common data types (notably <code class="docutils literal"><span class="pre">int</span></code> and <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> ). If we need to support custom data types, or want to customize the rendering or the editing for existing data types, we can subclass <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> or <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> . See <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Delegate Classes</span></a> for more information about delegates, and <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model/View Programming</span></a> if you need a high-level introduction to Qt’s model/view architecture (including delegates).</p>
+<p>In this example, we will see how to implement a custom delegate to render and edit a “star rating” data type, which can store values such as “1 out of 5 stars”.</p>
+<p>The example consists of the following classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">StarRating</span></code> is the custom data type. It stores a rating expressed as stars, such as “2 out of 5 stars” or “5 out of 6 stars”.</li>
+<li><code class="docutils literal"><span class="pre">StarDelegate</span></code> inherits <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> and provides support for <code class="docutils literal"><span class="pre">StarRating</span></code> (in addition to the data types already handled by <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> ).</li>
+<li><code class="docutils literal"><span class="pre">StarEditor</span></code> inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and is used by <code class="docutils literal"><span class="pre">StarDelegate</span></code> to let the user edit a star rating using the mouse.</li>
+</ul>
+<p>To show the <code class="docutils literal"><span class="pre">StarDelegate</span></code> in action, we will fill a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> with some data and install the delegate on it.</p>
+</div></blockquote>
+<div class="section" id="stardelegate-class-definition">
+<span id="id2"></span><h2>StarDelegate Class Definition<a class="headerlink" href="#stardelegate-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here’s the definition of the <code class="docutils literal"><span class="pre">StarDelegate</span></code> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StarDelegate</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QStyledItemDelegate</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">StarDelegate</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span> <span class="n">QStyledItemDelegate</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+               <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">(</span><span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                   <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">createEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                          <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setEditorData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span> <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setModelData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span> <span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">model</span><span class="p">,</span>
+                      <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">commitAndCloseEditor</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>All public functions are reimplemented virtual functions from <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> to provide custom rendering and editing.</p>
+</div></blockquote>
+</div>
+<div class="section" id="stardelegate-class-implementation">
+<span id="id3"></span><h2>StarDelegate Class Implementation<a class="headerlink" href="#stardelegate-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.paint()</span></code> function is reimplemented from <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> and is called whenever the view needs to repaint an item:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarDelegate</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                         <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">StarRating</span> <span class="n">starRating</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">());</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">State_Selected</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">());</span>
+
+        <span class="n">starRating</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="p">,</span>
+                         <span class="n">StarRating</span><span class="p">::</span><span class="n">ReadOnly</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">QStyledItemDelegate</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The function is invoked once for each item, represented by a <a class="reference internal" href="../PySide2/QtCore/QModelIndex.html#PySide2.QtCore.QModelIndex" title="PySide2.QtCore.QModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QModelIndex</span></code></a> object from the model. If the data stored in the item is a <code class="docutils literal"><span class="pre">StarRating</span></code> , we paint it ourselves; otherwise, we let <a class="reference internal" href="../PySide2/QtWidgets/QItemDelegate.html#PySide2.QtWidgets.QItemDelegate" title="PySide2.QtWidgets.QItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QItemDelegate</span></code></a> paint it for us. This ensures that the <code class="docutils literal"><span class="pre">StarDelegate</span></code> can handle the most common data types.</p>
+<p>If the item is a <code class="docutils literal"><span class="pre">StarRating</span></code> , we draw the background if the item is selected, and we draw the item using <code class="docutils literal"><span class="pre">StarRating::paint()</span></code> , which we will review later.</p>
+<p><code class="docutils literal"><span class="pre">StartRating</span></code> s can be stored in a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> thanks to the <code class="xref py py-func docutils literal"><span class="pre">Q_DECLARE_METATYPE()</span></code> macro appearing in <code class="docutils literal"><span class="pre">starrating.h</span></code> . More on this later.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.createEditor()</span></code> function is called when the user starts editing an item:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWidget</span> <span class="o">*</span><span class="n">StarDelegate</span><span class="p">::</span><span class="n">createEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">StarEditor</span> <span class="o">*</span><span class="n">editor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">StarEditor</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
+        <span class="n">connect</span><span class="p">(</span><span class="n">editor</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">StarEditor</span><span class="p">::</span><span class="n">editingFinished</span><span class="p">,</span>
+                <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">StarDelegate</span><span class="p">::</span><span class="n">commitAndCloseEditor</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">editor</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">QStyledItemDelegate</span><span class="p">::</span><span class="n">createEditor</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the item is a <code class="docutils literal"><span class="pre">StarRating</span></code> , we create a <code class="docutils literal"><span class="pre">StarEditor</span></code> and connect its <code class="docutils literal"><span class="pre">editingFinished()</span></code> signal to our <code class="docutils literal"><span class="pre">commitAndCloseEditor()</span></code> slot, so we can update the model when the editor closes.</p>
+<p>Here’s the implementation of <code class="docutils literal"><span class="pre">commitAndCloseEditor()</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarDelegate</span><span class="p">::</span><span class="n">commitAndCloseEditor</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">StarEditor</span> <span class="o">*</span><span class="n">editor</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">StarEditor</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">sender</span><span class="p">());</span>
+    <span class="n">emit</span> <span class="n">commitData</span><span class="p">(</span><span class="n">editor</span><span class="p">);</span>
+    <span class="n">emit</span> <span class="n">closeEditor</span><span class="p">(</span><span class="n">editor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user is done editing, we emit <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.commitData()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.closeEditor()</span></code> (both declared in <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemDelegate.html#PySide2.QtWidgets.QAbstractItemDelegate" title="PySide2.QtWidgets.QAbstractItemDelegate"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemDelegate</span></code></a> ), to tell the model that there is edited data and to inform the view that the editor is no longer needed.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.setEditorData()</span></code> function is called when an editor is created to initialize it with data from the model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarDelegate</span><span class="p">::</span><span class="n">setEditorData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span>
+                                 <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">StarRating</span> <span class="n">starRating</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">());</span>
+        <span class="n">StarEditor</span> <span class="o">*</span><span class="n">starEditor</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">StarEditor</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">editor</span><span class="p">);</span>
+        <span class="n">starEditor</span><span class="o">-&gt;</span><span class="n">setStarRating</span><span class="p">(</span><span class="n">starRating</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">QStyledItemDelegate</span><span class="p">::</span><span class="n">setEditorData</span><span class="p">(</span><span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We simply call <code class="docutils literal"><span class="pre">setStarRating()</span></code> on the editor.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.setModelData()</span></code> function is called to commit data from the editor to the model when editing is finished:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarDelegate</span><span class="p">::</span><span class="n">setModelData</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">editor</span><span class="p">,</span> <span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">model</span><span class="p">,</span>
+                                <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">StarEditor</span> <span class="o">*</span><span class="n">starEditor</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">StarEditor</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">editor</span><span class="p">);</span>
+        <span class="n">model</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">starEditor</span><span class="o">-&gt;</span><span class="n">starRating</span><span class="p">()));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">QStyledItemDelegate</span><span class="p">::</span><span class="n">setModelData</span><span class="p">(</span><span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">sizeHint()</span></code> function returns an item’s preferred size:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSize</span> <span class="n">StarDelegate</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">(</span><span class="n">const</span> <span class="n">QStyleOptionViewItem</span> <span class="o">&amp;</span><span class="n">option</span><span class="p">,</span>
+                             <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">StarRating</span> <span class="n">starRating</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">StarRating</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">starRating</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">QStyledItemDelegate</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We simply forward the call to <code class="docutils literal"><span class="pre">StarRating</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="stareditor-class-definition">
+<span id="id4"></span><h2>StarEditor Class Definition<a class="headerlink" href="#stareditor-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">StarEditor</span></code> class was used when implementing <code class="docutils literal"><span class="pre">StarDelegate</span></code> . Here’s the class definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StarEditor</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">StarEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">setStarRating</span><span class="p">(</span><span class="n">const</span> <span class="n">StarRating</span> <span class="o">&amp;</span><span class="n">starRating</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">myStarRating</span> <span class="o">=</span> <span class="n">starRating</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">StarRating</span> <span class="n">starRating</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">myStarRating</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">editingFinished</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">starAtPosition</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">);</span>
+
+    <span class="n">StarRating</span> <span class="n">myStarRating</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The class lets the user edit a <code class="docutils literal"><span class="pre">StarRating</span></code> by moving the mouse over the editor. It emits the <code class="docutils literal"><span class="pre">editingFinished()</span></code> signal when the user clicks on the editor.</p>
+<p>The protected functions are reimplemented from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> to handle mouse and paint events. The private function <code class="docutils literal"><span class="pre">starAtPosition()</span></code> is a helper function that returns the number of the star under the mouse pointer.</p>
+</div></blockquote>
+</div>
+<div class="section" id="stareditor-class-implementation">
+<span id="id5"></span><h2>StarEditor Class Implementation<a class="headerlink" href="#stareditor-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s start with the constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">StarEditor</span><span class="p">::</span><span class="n">StarEditor</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setMouseTracking</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">setAutoFillBackground</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We enable <code class="xref py py-func docutils literal"><span class="pre">mouse</span> <span class="pre">tracking</span></code> on the widget so we can follow the cursor even when the user doesn’t hold down any mouse button. We also turn on <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">auto-fill</span> <span class="pre">background</span></code> feature to obtain an opaque background. (Without the call, the view’s background would shine through the editor.)</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.paintEvent()</span></code> function is reimplemented from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarEditor</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">myStarRating</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">(),</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">palette</span><span class="p">(),</span>
+                       <span class="n">StarRating</span><span class="p">::</span><span class="n">Editable</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We simply call <code class="docutils literal"><span class="pre">StarRating::paint()</span></code> to draw the stars, just like we did when implementing <code class="docutils literal"><span class="pre">StarDelegate</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarEditor</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">star</span> <span class="o">=</span> <span class="n">starAtPosition</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">());</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">star</span> <span class="o">!=</span> <span class="n">myStarRating</span><span class="o">.</span><span class="n">starCount</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">star</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">myStarRating</span><span class="o">.</span><span class="n">setStarCount</span><span class="p">(</span><span class="n">star</span><span class="p">);</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the mouse event handler, we call <code class="docutils literal"><span class="pre">setStarCount()</span></code> on the private data member <code class="docutils literal"><span class="pre">myStarRating</span></code> to reflect the current cursor position, and we call <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> to force a repaint.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarEditor</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">emit</span> <span class="n">editingFinished</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the user releases a mouse button, we simply emit the <code class="docutils literal"><span class="pre">editingFinished()</span></code> signal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">StarEditor</span><span class="p">::</span><span class="n">starAtPosition</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">star</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">myStarRating</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+                     <span class="o">/</span> <span class="n">myStarRating</span><span class="o">.</span><span class="n">maxStarCount</span><span class="p">()))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">star</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">star</span> <span class="o">&gt;</span> <span class="n">myStarRating</span><span class="o">.</span><span class="n">maxStarCount</span><span class="p">())</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">star</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">starAtPosition()</span></code> function uses basic linear algebra to find out which star is under the cursor.</p>
+</div></blockquote>
+</div>
+<div class="section" id="starrating-class-definition">
+<span id="id6"></span><h2>StarRating Class Definition<a class="headerlink" href="#starrating-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StarRating</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">EditMode</span> <span class="p">{</span> <span class="n">Editable</span><span class="p">,</span> <span class="n">ReadOnly</span> <span class="p">};</span>
+
+    <span class="n">explicit</span> <span class="n">StarRating</span><span class="p">(</span><span class="nb">int</span> <span class="n">starCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">maxStarCount</span> <span class="o">=</span> <span class="mi">5</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span>
+               <span class="n">const</span> <span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">,</span> <span class="n">EditMode</span> <span class="n">mode</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QSize</span> <span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">starCount</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">myStarCount</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nb">int</span> <span class="n">maxStarCount</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">myMaxStarCount</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">setStarCount</span><span class="p">(</span><span class="nb">int</span> <span class="n">starCount</span><span class="p">)</span> <span class="p">{</span> <span class="n">myStarCount</span> <span class="o">=</span> <span class="n">starCount</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">setMaxStarCount</span><span class="p">(</span><span class="nb">int</span> <span class="n">maxStarCount</span><span class="p">)</span> <span class="p">{</span> <span class="n">myMaxStarCount</span> <span class="o">=</span> <span class="n">maxStarCount</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QPolygonF</span> <span class="n">starPolygon</span><span class="p">;</span>
+    <span class="n">QPolygonF</span> <span class="n">diamondPolygon</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">myStarCount</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">myMaxStarCount</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">Q_DECLARE_METATYPE</span><span class="p">(</span><span class="n">StarRating</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">StarRating</span></code> class represents a rating as a number of stars. In addition to holding the data, it is also capable of painting the stars on a <a class="reference internal" href="../PySide2/QtGui/QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="PySide2.QtGui.QPaintDevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintDevice</span></code></a> , which in this example is either a view or an editor. The <code class="docutils literal"><span class="pre">myStarCount</span></code> member variable stores the current rating, and <code class="docutils literal"><span class="pre">myMaxStarCount</span></code> stores the highest possible rating (typically 5).</p>
+<p>The <code class="docutils literal"><span class="pre">Q_DECLARE_METATYPE()</span></code> macro makes the type <code class="docutils literal"><span class="pre">StarRating</span></code> known to <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> , making it possible to store <code class="docutils literal"><span class="pre">StarRating</span></code> values in <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="starrating-class-implementation">
+<span id="id7"></span><h2>StarRating Class Implementation<a class="headerlink" href="#starrating-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor initializes <code class="docutils literal"><span class="pre">myStarCount</span></code> and <code class="docutils literal"><span class="pre">myMaxStarCount</span></code> , and sets up the polygons used to draw stars and diamonds:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">StarRating</span><span class="p">::</span><span class="n">StarRating</span><span class="p">(</span><span class="nb">int</span> <span class="n">starCount</span><span class="p">,</span> <span class="nb">int</span> <span class="n">maxStarCount</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myStarCount</span> <span class="o">=</span> <span class="n">starCount</span><span class="p">;</span>
+    <span class="n">myMaxStarCount</span> <span class="o">=</span> <span class="n">maxStarCount</span><span class="p">;</span>
+
+    <span class="n">starPolygon</span> <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">starPolygon</span> <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">::</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">3.14</span><span class="p">),</span>
+                               <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">std</span><span class="p">::</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">3.14</span><span class="p">));</span>
+
+    <span class="n">diamondPolygon</span> <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+                   <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+                   <span class="o">&lt;&lt;</span> <span class="n">QPointF</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">paint()</span></code> function paints the stars in this <code class="docutils literal"><span class="pre">StarRating</span></code> object on a paint device:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">StarRating</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRect</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span>
+                       <span class="n">const</span> <span class="n">QPalette</span> <span class="o">&amp;</span><span class="n">palette</span><span class="p">,</span> <span class="n">EditMode</span> <span class="n">mode</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">();</span>
+
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">Editable</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">());</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">foreground</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="nb">int</span> <span class="n">yOffset</span> <span class="o">=</span> <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">PaintingScaleFactor</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">translate</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">yOffset</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">scale</span><span class="p">(</span><span class="n">PaintingScaleFactor</span><span class="p">,</span> <span class="n">PaintingScaleFactor</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myMaxStarCount</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">myStarCount</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">starPolygon</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindingFill</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">Editable</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">diamondPolygon</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindingFill</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">painter</span><span class="o">-&gt;</span><span class="n">translate</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">restore</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We first set the pen and brush we will use for painting. The <code class="docutils literal"><span class="pre">mode</span></code> parameter can be either <code class="docutils literal"><span class="pre">Editable</span></code> or <code class="docutils literal"><span class="pre">ReadOnly</span></code> . If <code class="docutils literal"><span class="pre">mode</span></code> is editable, we use the <code class="xref py py-attr docutils literal"><span class="pre">Highlight</span></code> color instead of the <code class="xref py py-attr docutils literal"><span class="pre">Foreground</span></code> color to draw the stars.</p>
+<p>Then we draw the stars. If we are in <code class="docutils literal"><span class="pre">Edit</span></code> mode, we paint diamonds in place of stars if the rating is less than the highest rating.</p>
+<p>The <code class="docutils literal"><span class="pre">sizeHint()</span></code> function returns the preferred size for an area to paint the stars on:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSize</span> <span class="n">StarRating</span><span class="p">::</span><span class="n">sizeHint</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">PaintingScaleFactor</span> <span class="o">*</span> <span class="n">QSize</span><span class="p">(</span><span class="n">myMaxStarCount</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The preferred size is just enough to paint the maximum number of stars. The function is called by both <code class="docutils literal"><span class="pre">StarDelegate::sizeHint()</span></code> and <code class="docutils literal"><span class="pre">StarEditor::sizeHint()</span></code> .</p>
+</div></blockquote>
+<p id="the-main-function">The
+<code class="docutils literal"><span class="pre">main()</span></code></p>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here’s the program’s <code class="docutils literal"><span class="pre">main()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">QTableWidget</span> <span class="n">tableWidget</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">setItemDelegate</span><span class="p">(</span><span class="n">new</span> <span class="n">StarDelegate</span><span class="p">);</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">setEditTriggers</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="p">::</span><span class="n">DoubleClicked</span>
+                                <span class="o">|</span> <span class="n">QAbstractItemView</span><span class="p">::</span><span class="n">SelectedClicked</span><span class="p">);</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="p">::</span><span class="n">SelectRows</span><span class="p">);</span>
+
+    <span class="n">QStringList</span> <span class="n">headerLabels</span><span class="p">;</span>
+    <span class="n">headerLabels</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Title&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Genre&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Artist&quot;</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Rating&quot;</span><span class="p">;</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">setHorizontalHeaderLabels</span><span class="p">(</span><span class="n">headerLabels</span><span class="p">);</span>
+
+    <span class="n">populateTableWidget</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tableWidget</span><span class="p">);</span>
+
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">resizeColumnsToContents</span><span class="p">();</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+    <span class="n">tableWidget</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">main()</span></code> function creates a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> and sets a <code class="docutils literal"><span class="pre">StarDelegate</span></code> on it. <code class="xref py py-attr docutils literal"><span class="pre">DoubleClicked</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">SelectedClicked</span></code> are set as <code class="xref py py-func docutils literal"><span class="pre">edit</span> <span class="pre">triggers</span></code> , so that the editor is opened with a single click when the star rating item is selected.</p>
+<p>The <code class="docutils literal"><span class="pre">populateTableWidget()</span></code> function fills the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> with data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">populateTableWidget</span><span class="p">(</span><span class="n">QTableWidget</span> <span class="o">*</span><span class="n">tableWidget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="n">const</span> <span class="n">struct</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">title</span><span class="p">;</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">genre</span><span class="p">;</span>
+        <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">artist</span><span class="p">;</span>
+        <span class="nb">int</span> <span class="n">rating</span><span class="p">;</span>
+    <span class="p">}</span> <span class="n">staticData</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span> <span class="s2">&quot;Mass in B-Minor&quot;</span><span class="p">,</span> <span class="s2">&quot;Baroque&quot;</span><span class="p">,</span> <span class="s2">&quot;J.S. Bach&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="p">},</span>
+    <span class="o">...</span>
+        <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">}</span>
+    <span class="p">};</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">staticData</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">title</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">item0</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">staticData</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">);</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">item1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">staticData</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">genre</span><span class="p">);</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">item2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">staticData</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">artist</span><span class="p">);</span>
+        <span class="n">QTableWidgetItem</span> <span class="o">*</span><span class="n">item3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidgetItem</span><span class="p">;</span>
+        <span class="n">item3</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+                       <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">StarRating</span><span class="p">(</span><span class="n">staticData</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">rating</span><span class="p">)));</span>
+
+        <span class="n">tableWidget</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">item0</span><span class="p">);</span>
+        <span class="n">tableWidget</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">item1</span><span class="p">);</span>
+        <span class="n">tableWidget</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">item2</span><span class="p">);</span>
+        <span class="n">tableWidget</span><span class="o">-&gt;</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">item3</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Notice the call to <code class="xref py py-func docutils literal"><span class="pre">qVariantFromValue()</span></code> to convert a <code class="docutils literal"><span class="pre">StarRating</span></code> to a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QVariant</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="possible-extensions-and-suggestions">
+<span id="id8"></span><h2>Possible Extensions and Suggestions<a class="headerlink" href="#possible-extensions-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>There are many ways to customize Qt’s <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">model/view framework</span></a> . The approach used in this example is appropriate for most custom delegates and editors. Examples of possibilities not used by the star delegate and star editor are:</p>
+<ul class="simple">
+<li>It is possible to open editors programmatically by calling <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.edit()</span></code> , instead of relying on edit triggers. This could be used to support other edit triggers than those offered by the <code class="xref py py-attr docutils literal"><span class="pre">QAbstractItemView.EditTrigger</span></code> enum. For example, in the Star Delegate example, hovering over an item with the mouse might make sense as a way to pop up an editor.</li>
+<li>By reimplementing <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemDelegate.editorEvent()</span></code> , it is possible to implement the editor directly in the delegate, instead of creating a separate <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> subclass.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="stardelegate-cpp-example-file">
+<h1>stardelegate.cpp Example File<a class="headerlink" href="#stardelegate-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="stardelegate-h-example-file">
+<h1>stardelegate.h Example File<a class="headerlink" href="#stardelegate-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="stareditor-cpp-example-file">
+<h1>stareditor.cpp Example File<a class="headerlink" href="#stareditor-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="stareditor-h-example-file">
+<h1>stareditor.h Example File<a class="headerlink" href="#stareditor-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="starrating-cpp-example-file">
+<h1>starrating.cpp Example File<a class="headerlink" href="#starrating-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="starrating-h-example-file">
+<h1>starrating.h Example File<a class="headerlink" href="#starrating-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="stardelegate-pro-example-file">
+<h1>stardelegate.pro Example File<a class="headerlink" href="#stardelegate-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

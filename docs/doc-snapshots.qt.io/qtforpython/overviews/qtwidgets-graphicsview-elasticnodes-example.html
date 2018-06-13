@@ -1,0 +1,745 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Elastic Nodes Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Elastic Nodes Example</a><ul>
+<li><a class="reference internal" href="#node-class-definition">Node Class Definition</a></li>
+<li><a class="reference internal" href="#edge-class-definition">Edge Class Definition</a></li>
+<li><a class="reference internal" href="#graphwidget-class-definition">GraphWidget Class Definition</a></li>
+<li><a class="reference internal" href="#the-main-function">The main() Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edge-cpp-example-file">edge.cpp Example File</a></li>
+<li><a class="reference internal" href="#edge-h-example-file">edge.h Example File</a></li>
+<li><a class="reference internal" href="#graphwidget-cpp-example-file">graphwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#graphwidget-h-example-file">graphwidget.h Example File</a></li>
+<li><a class="reference internal" href="#node-cpp-example-file">node.cpp Example File</a></li>
+<li><a class="reference internal" href="#node-h-example-file">node.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#elasticnodes-pro-example-file">elasticnodes.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="elastic-nodes-example">
+<span id="id1"></span><h1>Elastic Nodes Example<a class="headerlink" href="#elastic-nodes-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates how to interact with graphical items in a scene</p>
+<blockquote>
+<div><p>Demonstrates how to interact with graphical items in a scene</p>
+<p>The Elastic Nodes example shows how to implement edges between nodes in a graph, with basic interaction. You can click to drag a node around, and zoom in and out using the mouse wheel or the keyboard. Hitting the space bar will randomize the nodes. The example is also resolution independent; as you zoom in, the graphics remain crisp.</p>
+<p>Graphics View provides the <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsScene.html#PySide2.QtWidgets.QGraphicsScene" title="PySide2.QtWidgets.QGraphicsScene"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsScene</span></code></a> class for managing and interacting with a large number of custom-made 2D graphical items derived from the <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> class, and a <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> widget for visualizing the items, with support for zooming and rotation.</p>
+<p>This example consists of a <code class="docutils literal"><span class="pre">Node</span></code> class, an <code class="docutils literal"><span class="pre">Edge</span></code> class, a <code class="docutils literal"><span class="pre">GraphWidget</span></code> test, and a <code class="docutils literal"><span class="pre">main</span></code> function: the <code class="docutils literal"><span class="pre">Node</span></code> class represents draggable yellow nodes in a grid, the <code class="docutils literal"><span class="pre">Edge</span></code> class represents the lines between the nodes, the <code class="docutils literal"><span class="pre">GraphWidget</span></code> class represents the application window, and the <code class="docutils literal"><span class="pre">main()</span></code> function creates and shows this window, and runs the event loop.</p>
+</div></blockquote>
+<div class="section" id="node-class-definition">
+<span id="id2"></span><h2>Node Class Definition<a class="headerlink" href="#node-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Node</span></code> class serves three purposes:</p>
+<ul class="simple">
+<li>Painting a yellow gradient “ball” in two states: sunken and raised.</li>
+<li>Managing connections to other nodes.</li>
+<li>Calculating forces pulling and pushing the nodes in the grid.</li>
+</ul>
+<p>Let’s start by looking at the <code class="docutils literal"><span class="pre">Node</span></code> class declaration.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Node</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGraphicsItem</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Node</span><span class="p">(</span><span class="n">GraphWidget</span> <span class="o">*</span><span class="n">graphWidget</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">addEdge</span><span class="p">(</span><span class="n">Edge</span> <span class="o">*</span><span class="n">edge</span><span class="p">);</span>
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">Edge</span> <span class="o">*&gt;</span> <span class="n">edges</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">UserType</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">};</span>
+    <span class="nb">int</span> <span class="nb">type</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Type</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">void</span> <span class="n">calculateForces</span><span class="p">();</span>
+    <span class="nb">bool</span> <span class="n">advancePosition</span><span class="p">();</span>
+
+    <span class="n">QRectF</span> <span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">shape</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">QVariant</span> <span class="n">itemChange</span><span class="p">(</span><span class="n">GraphicsItemChange</span> <span class="n">change</span><span class="p">,</span> <span class="n">const</span> <span class="n">QVariant</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">Edge</span> <span class="o">*&gt;</span> <span class="n">edgeList</span><span class="p">;</span>
+    <span class="n">QPointF</span> <span class="n">newPos</span><span class="p">;</span>
+    <span class="n">GraphWidget</span> <span class="o">*</span><span class="n">graph</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Node</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> , and reimplements the two mandatory functions <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> to provide its visual appearance. It also reimplements <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.shape()</span></code> to ensure its hit area has an elliptic shape (as opposed to the default bounding rectangle).</p>
+<p>For edge management purposes, the node provides a simple API for adding edges to a node, and for listing all connected edges.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.advance()</span></code> reimplementation is called whenever the scene’s state advances by one step. The calculateForces() function is called to calculate the forces that push and pull on this node and its neighbors.</p>
+<p>The <code class="docutils literal"><span class="pre">Node</span></code> class also reimplements <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.itemChange()</span></code> to react to state changes (in this case, position changes), and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mousePressEvent()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mouseReleaseEvent()</span></code> to update the item’s visual appearance.</p>
+<p>We will start reviewing the <code class="docutils literal"><span class="pre">Node</span></code> implementation by looking at its constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Node</span><span class="p">::</span><span class="n">Node</span><span class="p">(</span><span class="n">GraphWidget</span> <span class="o">*</span><span class="n">graphWidget</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">graph</span><span class="p">(</span><span class="n">graphWidget</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setFlag</span><span class="p">(</span><span class="n">ItemIsMovable</span><span class="p">);</span>
+    <span class="n">setFlag</span><span class="p">(</span><span class="n">ItemSendsGeometryChanges</span><span class="p">);</span>
+    <span class="n">setCacheMode</span><span class="p">(</span><span class="n">DeviceCoordinateCache</span><span class="p">);</span>
+    <span class="n">setZValue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we set the <code class="xref py py-attr docutils literal"><span class="pre">ItemIsMovable</span></code> flag to allow the item to move in response to mouse dragging, and <code class="xref py py-attr docutils literal"><span class="pre">ItemSendsGeometryChanges</span></code> to enable <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.itemChange()</span></code> notifications for position and transformation changes. We also enable <code class="xref py py-attr docutils literal"><span class="pre">DeviceCoordinateCache</span></code> to speed up rendering performance. To ensure that the nodes are always stacked on top of edges, we finally set the item’s Z value to -1.</p>
+<p><code class="docutils literal"><span class="pre">Node</span></code> ‘s constructor takes a <code class="docutils literal"><span class="pre">GraphWidget</span></code> pointer and stores this as a member variable. We will revisit this pointer later on.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Node</span><span class="p">::</span><span class="n">addEdge</span><span class="p">(</span><span class="n">Edge</span> <span class="o">*</span><span class="n">edge</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">edgeList</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span><span class="p">;</span>
+    <span class="n">edge</span><span class="o">-&gt;</span><span class="n">adjust</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">QList</span><span class="o">&lt;</span><span class="n">Edge</span> <span class="o">*&gt;</span> <span class="n">Node</span><span class="p">::</span><span class="n">edges</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">edgeList</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The addEdge() function adds the input edge to a list of attached edges. The edge is then adjusted so that the end points for the edge match the positions of the source and destination nodes.</p>
+<p>The edges() function simply returns the list of attached edges.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Node::calculateForces()
+{
+    if (!scene() || scene()-&gt;mouseGrabberItem() == this) {
+        newPos = pos();
+        return;
+    }
+</pre></div>
+</div>
+<p>There are two ways to move a node. The <code class="docutils literal"><span class="pre">calculateForces()</span></code> function implements the elastic effect that pulls and pushes on nodes in the grid. In addition, the user can directly move one node around with the mouse. Because we do not want the two approaches to operate at the same time on the same node, we start <code class="docutils literal"><span class="pre">calculateForces()</span></code> by checking if this <code class="docutils literal"><span class="pre">Node</span></code> is the current mouse grabber item (i.e., <code class="xref py py-func docutils literal"><span class="pre">QGraphicsScene.mouseGrabberItem()</span></code> ). Because we need to find all neighboring (but not necessarily connected) nodes, we also make sure the item is part of a scene in the first place.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>// Sum up all forces pushing this item away
+qreal xvel = 0;
+qreal yvel = 0;
+foreach (QGraphicsItem *item, scene()-&gt;items()) {
+    Node *node = qgraphicsitem_cast&lt;Node *&gt;(item);
+    if (!node)
+        continue;
+
+    QPointF vec = mapToItem(node, 0, 0);
+    qreal dx = vec.x();
+    qreal dy = vec.y();
+    double l = 2.0 * (dx * dx + dy * dy);
+    if (l &gt; 0) {
+        xvel += (dx * 150.0) / l;
+        yvel += (dy * 150.0) / l;
+    }
+}
+</pre></div>
+</div>
+<p>The “elastic” effect comes from an algorithm that applies pushing and pulling forces. The effect is impressive, and surprisingly simple to implement.</p>
+<p>The algorithm has two steps: the first is to calculate the forces that push the nodes apart, and the second is to subtract the forces that pull the nodes together. First we need to find all the nodes in the graph. We call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsScene.items()</span></code> to find all items in the scene, and then use <code class="xref py py-func docutils literal"><span class="pre">qgraphicsitem_cast()</span></code> to look for <code class="docutils literal"><span class="pre">Node</span></code> instances.</p>
+<p>We make use of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.mapFromItem()</span></code> to create a temporary vector pointing from this node to each other node, in <a class="reference internal" href="graphicsview.html#graphics-view-framework"><span class="std std-ref">local coordinates</span></a> . We use the decomposed components of this vector to determine the direction and strength of force that should apply to the node. The forces accumulate for each node, and are then adjusted so that the closest nodes are given the strongest force, with rapid degradation when distance increases. The sum of all forces is stored in <code class="docutils literal"><span class="pre">xvel</span></code> (X-velocity) and <code class="docutils literal"><span class="pre">yvel</span></code> (Y-velocity).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Now</span> <span class="n">subtract</span> <span class="nb">all</span> <span class="n">forces</span> <span class="n">pulling</span> <span class="n">items</span> <span class="n">together</span>
+<span class="n">double</span> <span class="n">weight</span> <span class="o">=</span> <span class="p">(</span><span class="n">edgeList</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">foreach</span> <span class="p">(</span><span class="n">Edge</span> <span class="o">*</span><span class="n">edge</span><span class="p">,</span> <span class="n">edgeList</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">QPointF</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">edge</span><span class="o">-&gt;</span><span class="n">sourceNode</span><span class="p">()</span> <span class="o">==</span> <span class="n">this</span><span class="p">)</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">mapToItem</span><span class="p">(</span><span class="n">edge</span><span class="o">-&gt;</span><span class="n">destNode</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">mapToItem</span><span class="p">(</span><span class="n">edge</span><span class="o">-&gt;</span><span class="n">sourceNode</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">xvel</span> <span class="o">-=</span> <span class="n">vec</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">/</span> <span class="n">weight</span><span class="p">;</span>
+    <span class="n">yvel</span> <span class="o">-=</span> <span class="n">vec</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">/</span> <span class="n">weight</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The edges between the nodes represent forces that pull the nodes together. By visiting each edge that is connected to this node, we can use a similar approach as above to find the direction and strength of all pulling forces. These forces are subtracted from <code class="docutils literal"><span class="pre">xvel</span></code> and <code class="docutils literal"><span class="pre">yvel</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">qAbs</span><span class="p">(</span><span class="n">xvel</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="o">&amp;&amp;</span> <span class="n">qAbs</span><span class="p">(</span><span class="n">yvel</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">xvel</span> <span class="o">=</span> <span class="n">yvel</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In theory, the sum of pushing and pulling forces should stabilize to precisely 0. In practice, however, they never do. To circumvent errors in numerical precision, we simply force the sum of forces to be 0 when they are less than 0.1.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QRectF</span> <span class="n">sceneRect</span> <span class="o">=</span> <span class="n">scene</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">sceneRect</span><span class="p">();</span>
+    <span class="n">newPos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">()</span> <span class="o">+</span> <span class="n">QPointF</span><span class="p">(</span><span class="n">xvel</span><span class="p">,</span> <span class="n">yvel</span><span class="p">);</span>
+    <span class="n">newPos</span><span class="o">.</span><span class="n">setX</span><span class="p">(</span><span class="n">qMin</span><span class="p">(</span><span class="n">qMax</span><span class="p">(</span><span class="n">newPos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">));</span>
+    <span class="n">newPos</span><span class="o">.</span><span class="n">setY</span><span class="p">(</span><span class="n">qMin</span><span class="p">(</span><span class="n">qMax</span><span class="p">(</span><span class="n">newPos</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The final step of <code class="docutils literal"><span class="pre">calculateForces()</span></code> determines the node’s new position. We add the force to the node’s current position. We also make sure the new position stays inside of our defined boundaries. We don’t actually move the item in this function; that’s done in a separate step, from <code class="docutils literal"><span class="pre">advance()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">Node</span><span class="p">::</span><span class="n">advancePosition</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">newPos</span> <span class="o">==</span> <span class="n">pos</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+
+    <span class="n">setPos</span><span class="p">(</span><span class="n">newPos</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">advance()</span></code> function updates the item’s current position. It is called from <code class="docutils literal"><span class="pre">GraphWidget::timerEvent()</span></code> . If the node’s position changed, the function returns true; otherwise false is returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRectF</span> <span class="n">Node</span><span class="p">::</span><span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">qreal</span> <span class="n">adjust</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">QRectF</span><span class="p">(</span> <span class="o">-</span><span class="mi">10</span> <span class="o">-</span> <span class="n">adjust</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span> <span class="o">-</span> <span class="n">adjust</span><span class="p">,</span> <span class="mi">23</span> <span class="o">+</span> <span class="n">adjust</span><span class="p">,</span> <span class="mi">23</span> <span class="o">+</span> <span class="n">adjust</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Node</span></code> ‘s bounding rectangle is a 20x20 sized rectangle centered around its origin (0, 0), adjusted by 2 units in all directions to compensate for the node’s outline stroke, and by 3 units down and to the right to make room for a simple drop shadow.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainterPath</span> <span class="n">Node</span><span class="p">::</span><span class="n">shape</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">QPainterPath</span> <span class="n">path</span><span class="p">;</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">addEllipse</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The shape is a simple ellipse. This ensures that you must click inside the node’s elliptic shape in order to drag it around. You can test this effect by running the example, and zooming far in so that the nodes are very large. Without reimplementing <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.shape()</span></code> , the item’s hit area would be identical to its bounding rectangle (i.e., rectangular).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Node</span><span class="p">::</span><span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoPen</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">darkGray</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawEllipse</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
+    <span class="n">QRadialGradient</span> <span class="n">gradient</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">option</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">QStyle</span><span class="p">::</span><span class="n">State_Sunken</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setCenter</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setFocalPoint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">yellow</span><span class="p">)</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="mi">120</span><span class="p">));</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QColor</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">darkYellow</span><span class="p">)</span><span class="o">.</span><span class="n">light</span><span class="p">(</span><span class="mi">120</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">yellow</span><span class="p">);</span>
+        <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkYellow</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">gradient</span><span class="p">);</span>
+
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawEllipse</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This function implements the node’s painting. We start by drawing a simple dark gray elliptic drop shadow at (-7, -7), that is, (3, 3) units down and to the right from the top-left corner (-10, -10) of the ellipse.</p>
+<p>We then draw an ellipse with a radial gradient fill. This fill is either <code class="xref py py-attr docutils literal"><span class="pre">Qt.yellow</span></code> to <code class="xref py py-attr docutils literal"><span class="pre">Qt.darkYellow</span></code> when raised, or the opposite when sunken. In sunken state we also shift the center and focal point by (3, 3) to emphasize the impression that something has been pushed down.</p>
+<p>Drawing filled ellipses with gradients can be quite slow, especially when using complex gradients such as <a class="reference internal" href="../PySide2/QtGui/QRadialGradient.html#PySide2.QtGui.QRadialGradient" title="PySide2.QtGui.QRadialGradient"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRadialGradient</span></code></a> . This is why this example uses <code class="xref py py-attr docutils literal"><span class="pre">DeviceCoordinateCache</span></code> , a simple yet effective measure that prevents unnecessary redrawing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVariant</span> <span class="n">Node</span><span class="p">::</span><span class="n">itemChange</span><span class="p">(</span><span class="n">GraphicsItemChange</span> <span class="n">change</span><span class="p">,</span> <span class="n">const</span> <span class="n">QVariant</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">change</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">ItemPositionHasChanged</span><span class="p">:</span>
+        <span class="n">foreach</span> <span class="p">(</span><span class="n">Edge</span> <span class="o">*</span><span class="n">edge</span><span class="p">,</span> <span class="n">edgeList</span><span class="p">)</span>
+            <span class="n">edge</span><span class="o">-&gt;</span><span class="n">adjust</span><span class="p">();</span>
+        <span class="n">graph</span><span class="o">-&gt;</span><span class="n">itemMoved</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="n">QGraphicsItem</span><span class="p">::</span><span class="n">itemChange</span><span class="p">(</span><span class="n">change</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We reimplement <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.itemChange()</span></code> to adjust the position of all connected edges, and to notify the scene that an item has moved (i.e., “something has happened”). This will trigger new force calculations.</p>
+<p>This notification is the only reason why the nodes need to keep a pointer back to the <code class="docutils literal"><span class="pre">GraphWidget</span></code> . Another approach could be to provide such notification using a signal; in such case, <code class="docutils literal"><span class="pre">Node</span></code> would need to inherit from <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Node</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">update</span><span class="p">();</span>
+    <span class="n">QGraphicsItem</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">Node</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QGraphicsSceneMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">update</span><span class="p">();</span>
+    <span class="n">QGraphicsItem</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because we have set the <code class="xref py py-attr docutils literal"><span class="pre">ItemIsMovable</span></code> flag, we don’t need to implement the logic that moves the node according to mouse input; this is already provided for us. We still need to reimplement the mouse press and release handlers, though, to update the nodes’ visual appearance (i.e., sunken or raised).</p>
+</div></blockquote>
+</div>
+<div class="section" id="edge-class-definition">
+<span id="id3"></span><h2>Edge Class Definition<a class="headerlink" href="#edge-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Edge</span></code> class represents the arrow-lines between the nodes in this example. The class is very simple: it maintains a source- and destination node pointer, and provides an <code class="docutils literal"><span class="pre">adjust()</span></code> function that makes sure the line starts at the position of the source, and ends at the position of the destination. The edges are the only items that change continuously as forces pull and push on the nodes.</p>
+<p>Let’s take a look at the class declaration:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Edge</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGraphicsItem</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Edge</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">sourceNode</span><span class="p">,</span> <span class="n">Node</span> <span class="o">*</span><span class="n">destNode</span><span class="p">);</span>
+
+    <span class="n">Node</span> <span class="o">*</span><span class="n">sourceNode</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">destNode</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">adjust</span><span class="p">();</span>
+
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">Type</span> <span class="o">=</span> <span class="n">UserType</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">};</span>
+    <span class="nb">int</span> <span class="nb">type</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Type</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">QRectF</span> <span class="n">boundingRect</span><span class="p">()</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paint</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QStyleOptionGraphicsItem</span> <span class="o">*</span><span class="n">option</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">source</span><span class="p">,</span> <span class="o">*</span><span class="n">dest</span><span class="p">;</span>
+
+    <span class="n">QPointF</span> <span class="n">sourcePoint</span><span class="p">;</span>
+    <span class="n">QPointF</span> <span class="n">destPoint</span><span class="p">;</span>
+    <span class="n">qreal</span> <span class="n">arrowSize</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Edge</span></code> inherits from <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsItem.html#PySide2.QtWidgets.QGraphicsItem" title="PySide2.QtWidgets.QGraphicsItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsItem</span></code></a> , as it’s a simple class that has no use for signals, slots, and properties (compare to <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsObject.html#PySide2.QtWidgets.QGraphicsObject" title="PySide2.QtWidgets.QGraphicsObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsObject</span></code></a> ).</p>
+<p>The constructor takes two node pointers as input. Both pointers are mandatory in this example. We also provide get-functions for each node.</p>
+<p>The <code class="docutils literal"><span class="pre">adjust()</span></code> function repositions the edge, and the item also implements <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> .</p>
+<p>We will now review its implementation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Edge</span><span class="p">::</span><span class="n">Edge</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">sourceNode</span><span class="p">,</span> <span class="n">Node</span> <span class="o">*</span><span class="n">destNode</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">arrowSize</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setAcceptedMouseButtons</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">sourceNode</span><span class="p">;</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">destNode</span><span class="p">;</span>
+    <span class="n">source</span><span class="o">-&gt;</span><span class="n">addEdge</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">dest</span><span class="o">-&gt;</span><span class="n">addEdge</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">adjust</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">Edge</span></code> constructor initializes its <code class="docutils literal"><span class="pre">arrowSize</span></code> data member to 10 units; this determines the size of the arrow which is drawn in <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> .</p>
+<p>In the constructor body, we call <code class="xref py py-func docutils literal"><span class="pre">setAcceptedMouseButtons(0)</span></code> . This ensures that the edge items are not considered for mouse input at all (i.e., you cannot click the edges). Then, the source and destination pointers are updated, this edge is registered with each node, and we call <code class="docutils literal"><span class="pre">adjust()</span></code> to update this edge’s start end end position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Node</span> <span class="o">*</span><span class="n">Edge</span><span class="p">::</span><span class="n">sourceNode</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">source</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Node</span> <span class="o">*</span><span class="n">Edge</span><span class="p">::</span><span class="n">destNode</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">dest</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The source and destination get-functions simply return the respective pointers.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Edge::adjust()
+{
+    if (!source || !dest)
+        return;
+
+    QLineF line(mapFromItem(source, 0, 0), mapFromItem(dest, 0, 0));
+    qreal length = line.length();
+
+    prepareGeometryChange();
+
+    if (length &gt; qreal(20.)) {
+        QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
+        sourcePoint = line.p1() + edgeOffset;
+        destPoint = line.p2() - edgeOffset;
+    } else {
+        sourcePoint = destPoint = line.p1();
+    }
+}
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">adjust()</span></code> , we define two points: <code class="docutils literal"><span class="pre">sourcePoint</span></code> , and <code class="docutils literal"><span class="pre">destPoint</span></code> , pointing at the source and destination nodes’ origins respectively. Each point is calculated using <a class="reference internal" href="graphicsview.html#graphics-view-framework"><span class="std std-ref">local coordinates</span></a> .</p>
+<p>We want the tip of the edge’s arrows to point to the exact outline of the nodes, as opposed to the center of the nodes. To find this point, we first decompose the vector pointing from the center of the source to the center of the destination node into X and Y, and then normalize the components by dividing by the length of the vector. This gives us an X and Y unit delta that, when multiplied by the radius of the node (which is 10), gives us the offset that must be added to one point of the edge, and subtracted from the other.</p>
+<p>If the length of the vector is less than 20 (i.e., if two nodes overlap), then we fix the source and destination pointer at the center of the source node. In practice this case is very hard to reproduce manually, as the forces between the two nodes is then at its maximum.</p>
+<p>It’s important to notice that we call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.prepareGeometryChange()</span></code> in this function. The reason is that the variables <code class="docutils literal"><span class="pre">sourcePoint</span></code> and <code class="docutils literal"><span class="pre">destPoint</span></code> are used directly when painting, and they are returned from the <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> reimplementation. We must always call <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.prepareGeometryChange()</span></code> before changing what <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.boundingRect()</span></code> returns, and before these variables can be used by <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> , to keep Graphics View’s internal bookkeeping clean. It’s safest to call this function once, immediately before any such variable is modified.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QRectF Edge::boundingRect() const
+{
+    if (!source || !dest)
+        return QRectF();
+
+    qreal penWidth = 1;
+    qreal extra = (penWidth + arrowSize) / 2.0;
+
+    return QRectF(sourcePoint, QSizeF(destPoint.x() - sourcePoint.x(),
+                                      destPoint.y() - sourcePoint.y()))
+        .normalized()
+        .adjusted(-extra, -extra, extra, extra);
+}
+</pre></div>
+</div>
+<p>The edge’s bounding rectangle is defined as the smallest rectangle that includes both the start and the end point of the edge. Because we draw an arrow on each edge, we also need to compensate by adjusting with half the arrow size and half the pen width in all directions. The pen is used to draw the outline of the arrow, and we can assume that half of the outline can be drawn outside of the arrow’s area, and half will be drawn inside.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    if (!source || !dest)
+        return;
+
+    QLineF line(sourcePoint, destPoint);
+    if (qFuzzyCompare(line.length(), qreal(0.)))
+        return;
+</pre></div>
+</div>
+<p>We start the reimplementation of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsItem.paint()</span></code> by checking a few preconditions. Firstly, if either the source or destination node is not set, then we return immediately; there is nothing to draw.</p>
+<p>At the same time, we check if the length of the edge is approximately 0, and if it is, then we also return.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Draw</span> <span class="n">the</span> <span class="n">line</span> <span class="n">itself</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">QPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SolidLine</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RoundCap</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">RoundJoin</span><span class="p">));</span>
+<span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawLine</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We draw the line using a pen that has round joins and caps. If you run the example, zoom in and study the edge in detail, you will see that there are no sharp/square edges.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="o">//</span> <span class="n">Draw</span> <span class="n">the</span> <span class="n">arrows</span>
+    <span class="n">double</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">line</span><span class="o">.</span><span class="n">dy</span><span class="p">(),</span> <span class="n">line</span><span class="o">.</span><span class="n">dx</span><span class="p">());</span>
+
+    <span class="n">QPointF</span> <span class="n">sourceArrowP1</span> <span class="o">=</span> <span class="n">sourcePoint</span> <span class="o">+</span> <span class="n">QPointF</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">,</span>
+                                                  <span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">);</span>
+    <span class="n">QPointF</span> <span class="n">sourceArrowP2</span> <span class="o">=</span> <span class="n">sourcePoint</span> <span class="o">+</span> <span class="n">QPointF</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">,</span>
+                                                  <span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">);</span>
+    <span class="n">QPointF</span> <span class="n">destArrowP1</span> <span class="o">=</span> <span class="n">destPoint</span> <span class="o">+</span> <span class="n">QPointF</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">,</span>
+                                              <span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">);</span>
+    <span class="n">QPointF</span> <span class="n">destArrowP2</span> <span class="o">=</span> <span class="n">destPoint</span> <span class="o">+</span> <span class="n">QPointF</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">,</span>
+                                              <span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="n">M_PI</span> <span class="o">+</span> <span class="n">M_PI</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">arrowSize</span><span class="p">);</span>
+
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">QPolygonF</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">line</span><span class="o">.</span><span class="n">p1</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">sourceArrowP1</span> <span class="o">&lt;&lt;</span> <span class="n">sourceArrowP2</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">QPolygonF</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">line</span><span class="o">.</span><span class="n">p2</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">destArrowP1</span> <span class="o">&lt;&lt;</span> <span class="n">destArrowP2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We proceed to drawing one arrow at each end of the edge. Each arrow is drawn as a polygon with a black fill. The coordinates for the arrow are determined using simple trigonometry.</p>
+</div></blockquote>
+</div>
+<div class="section" id="graphwidget-class-definition">
+<span id="id4"></span><h2>GraphWidget Class Definition<a class="headerlink" href="#graphwidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">GraphWidget</span></code> is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> , which provides the main window with scrollbars.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GraphWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QGraphicsView</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">GraphWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">itemMoved</span><span class="p">();</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">shuffle</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">zoomIn</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">zoomOut</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">keyPressEvent</span><span class="p">(</span><span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">timerEvent</span><span class="p">(</span><span class="n">QTimerEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="c1">#if QT_CONFIG(wheelevent)</span>
+    <span class="n">void</span> <span class="n">wheelEvent</span><span class="p">(</span><span class="n">QWheelEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+<span class="c1">#endif</span>
+    <span class="n">void</span> <span class="n">drawBackground</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRectF</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+    <span class="n">void</span> <span class="n">scaleView</span><span class="p">(</span><span class="n">qreal</span> <span class="n">scaleFactor</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">timerId</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">centerNode</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The class provides a basic constructor that initializes the scene, an <code class="docutils literal"><span class="pre">itemMoved()</span></code> function to notify changes in the scene’s node graph, a few event handlers, a reimplementation of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsView.drawBackground()</span></code> , and a helper function for scaling the view by using the mouse wheel or keyboard.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GraphWidget</span><span class="p">::</span><span class="n">GraphWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QGraphicsView</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">timerId</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGraphicsScene</span> <span class="o">*</span><span class="n">scene</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGraphicsScene</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">setItemIndexMethod</span><span class="p">(</span><span class="n">QGraphicsScene</span><span class="p">::</span><span class="n">NoIndex</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">setSceneRect</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+    <span class="n">setScene</span><span class="p">(</span><span class="n">scene</span><span class="p">);</span>
+    <span class="n">setCacheMode</span><span class="p">(</span><span class="n">CacheBackground</span><span class="p">);</span>
+    <span class="n">setViewportUpdateMode</span><span class="p">(</span><span class="n">BoundingRectViewportUpdate</span><span class="p">);</span>
+    <span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+    <span class="n">setTransformationAnchor</span><span class="p">(</span><span class="n">AnchorUnderMouse</span><span class="p">);</span>
+    <span class="n">scale</span><span class="p">(</span><span class="n">qreal</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span> <span class="n">qreal</span><span class="p">(</span><span class="mf">0.8</span><span class="p">));</span>
+    <span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Elastic Nodes&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">GraphicsWidget</span></code> ‘s constructor creates the scene, and because most items move around most of the time, it sets <code class="xref py py-attr docutils literal"><span class="pre">QGraphicsScene.NoIndex</span></code> . The scene then gets a fixed <code class="xref py py-func docutils literal"><span class="pre">scene</span> <span class="pre">rectangle</span></code> , and is assigned to the <code class="docutils literal"><span class="pre">GraphWidget</span></code> view.</p>
+<p>The view enables <code class="xref py py-attr docutils literal"><span class="pre">QGraphicsView.CacheBackground</span></code> to cache rendering of its static, and somewhat complex, background. Because the graph renders a close collection of small items that all move around, it’s unnecessary for Graphics View to waste time finding accurate update regions, so we set the <code class="xref py py-attr docutils literal"><span class="pre">QGraphicsView.BoundingRectViewportUpdate</span></code> viewport update mode. The default would work fine, but this mode is noticably faster for this example.</p>
+<p>To improve rendering quality, we set <code class="xref py py-attr docutils literal"><span class="pre">QPainter.Antialiasing</span></code> .</p>
+<p>The transformation anchor decides how the view should scroll when you transform the view, or in our case, when we zoom in or out. We have chosen <code class="xref py py-attr docutils literal"><span class="pre">QGraphicsView.AnchorUnderMouse</span></code> , which centers the view on the point under the mouse cursor. This makes it easy to zoom towards a point in the scene by moving the mouse over it, and then rolling the mouse wheel.</p>
+<p>Finally we give the window a minimum size that matches the scene’s default size, and set a suitable window title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">Node</span> <span class="o">*</span><span class="n">node1</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node3</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node4</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">centerNode</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node6</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node7</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node8</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">node9</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node1</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node2</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node3</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node4</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">centerNode</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node6</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node7</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node8</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">node9</span><span class="p">);</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">node3</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node2</span><span class="p">,</span> <span class="n">centerNode</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node3</span><span class="p">,</span> <span class="n">node6</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node4</span><span class="p">,</span> <span class="n">node1</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node4</span><span class="p">,</span> <span class="n">centerNode</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">centerNode</span><span class="p">,</span> <span class="n">node6</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">centerNode</span><span class="p">,</span> <span class="n">node8</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node6</span><span class="p">,</span> <span class="n">node9</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node7</span><span class="p">,</span> <span class="n">node4</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node8</span><span class="p">,</span> <span class="n">node7</span><span class="p">));</span>
+    <span class="n">scene</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">new</span> <span class="n">Edge</span><span class="p">(</span><span class="n">node9</span><span class="p">,</span> <span class="n">node8</span><span class="p">));</span>
+
+    <span class="n">node1</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">node2</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">node3</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">node4</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">centerNode</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">node6</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">node7</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">node8</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">node9</span><span class="o">-&gt;</span><span class="n">setPos</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The last part of the constructor creates the grid of nodes and edges, and gives each node an initial position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void GraphWidget::itemMoved()
+{
+    if (!timerId)
+        timerId = startTimer(1000 / 25);
+}
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">GraphWidget</span></code> is notified of node movement through this <code class="docutils literal"><span class="pre">itemMoved()</span></code> function. Its job is simply to restart the main timer in case it’s not running already. The timer is designed to stop when the graph stabilizes, and start once it’s unstable again.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">GraphWidget</span><span class="p">::</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">QKeyEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Up</span><span class="p">:</span>
+        <span class="n">centerNode</span><span class="o">-&gt;</span><span class="n">moveBy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Down</span><span class="p">:</span>
+        <span class="n">centerNode</span><span class="o">-&gt;</span><span class="n">moveBy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Left</span><span class="p">:</span>
+        <span class="n">centerNode</span><span class="o">-&gt;</span><span class="n">moveBy</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Right</span><span class="p">:</span>
+        <span class="n">centerNode</span><span class="o">-&gt;</span><span class="n">moveBy</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Plus</span><span class="p">:</span>
+        <span class="n">zoomIn</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Minus</span><span class="p">:</span>
+        <span class="n">zoomOut</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Space</span><span class="p">:</span>
+    <span class="n">case</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Key_Enter</span><span class="p">:</span>
+        <span class="n">shuffle</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="n">default</span><span class="p">:</span>
+        <span class="n">QGraphicsView</span><span class="p">::</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This is <code class="docutils literal"><span class="pre">GraphWidget</span></code> ‘s key event handler. The arrow keys move the center node around, the ‘+’ and ‘-‘ keys zoom in and out by calling <code class="docutils literal"><span class="pre">scaleView()</span></code> , and the enter and space keys randomize the positions of the nodes. All other key events (e.g., page up and page down) are handled by <a class="reference internal" href="../PySide2/QtWidgets/QGraphicsView.html#PySide2.QtWidgets.QGraphicsView" title="PySide2.QtWidgets.QGraphicsView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGraphicsView</span></code></a> ‘s default implementation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void GraphWidget::timerEvent(QTimerEvent *event)
+{
+    Q_UNUSED(event);
+
+    QList&lt;Node *&gt; nodes;
+    foreach (QGraphicsItem *item, scene()-&gt;items()) {
+        if (Node *node = qgraphicsitem_cast&lt;Node *&gt;(item))
+            nodes &lt;&lt; node;
+    }
+
+    foreach (Node *node, nodes)
+        node-&gt;calculateForces();
+
+    bool itemsMoved = false;
+    foreach (Node *node, nodes) {
+        if (node-&gt;advancePosition())
+            itemsMoved = true;
+    }
+
+    if (!itemsMoved) {
+        killTimer(timerId);
+        timerId = 0;
+    }
+}
+</pre></div>
+</div>
+<p>The timer event handler’s job is to run the whole force calculation machinery as a smooth animation. Each time the timer is triggered, the handler will find all nodes in the scene, and call <code class="docutils literal"><span class="pre">Node::calculateForces()</span></code> on each node, one at a time. Then, in a final step it will call <code class="docutils literal"><span class="pre">Node::advance()</span></code> to move all nodes to their new positions. By checking the return value of <code class="docutils literal"><span class="pre">advance()</span></code> , we can decide if the grid stabilized (i.e., no nodes moved). If so, we can stop the timer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">GraphWidget</span><span class="p">::</span><span class="n">wheelEvent</span><span class="p">(</span><span class="n">QWheelEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">scaleView</span><span class="p">(</span><span class="nb">pow</span><span class="p">((</span><span class="n">double</span><span class="p">)</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">delta</span><span class="p">()</span> <span class="o">/</span> <span class="mf">240.0</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the wheel event handler, we convert the mouse wheel delta to a scale factor, and pass this factor to <code class="docutils literal"><span class="pre">scaleView()</span></code> . This approach takes into account the speed that the wheel is rolled. The faster you roll the mouse wheel, the faster the view will zoom.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">GraphWidget</span><span class="p">::</span><span class="n">drawBackground</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRectF</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">rect</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Shadow</span>
+    <span class="n">QRectF</span> <span class="n">sceneRect</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">sceneRect</span><span class="p">();</span>
+    <span class="n">QRectF</span> <span class="n">rightShadow</span><span class="p">(</span><span class="n">sceneRect</span><span class="o">.</span><span class="n">right</span><span class="p">(),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">height</span><span class="p">());</span>
+    <span class="n">QRectF</span> <span class="n">bottomShadow</span><span class="p">(</span><span class="n">sceneRect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">bottom</span><span class="p">(),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rightShadow</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="o">||</span> <span class="n">rightShadow</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">rect</span><span class="p">))</span>
+        <span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillRect</span><span class="p">(</span><span class="n">rightShadow</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkGray</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bottomShadow</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="o">||</span> <span class="n">bottomShadow</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">rect</span><span class="p">))</span>
+        <span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillRect</span><span class="p">(</span><span class="n">bottomShadow</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">darkGray</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Fill</span>
+    <span class="n">QLinearGradient</span> <span class="n">gradient</span><span class="p">(</span><span class="n">sceneRect</span><span class="o">.</span><span class="n">topLeft</span><span class="p">(),</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">bottomRight</span><span class="p">());</span>
+    <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">white</span><span class="p">);</span>
+    <span class="n">gradient</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">lightGray</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">fillRect</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">intersected</span><span class="p">(</span><span class="n">sceneRect</span><span class="p">),</span> <span class="n">gradient</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setBrush</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">NoBrush</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawRect</span><span class="p">(</span><span class="n">sceneRect</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Text</span>
+    <span class="n">QRectF</span> <span class="n">textRect</span><span class="p">(</span><span class="n">sceneRect</span><span class="o">.</span><span class="n">left</span><span class="p">()</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">top</span><span class="p">()</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+                    <span class="n">sceneRect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="n">sceneRect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">QString</span> <span class="n">message</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Click and drag the nodes around, and zoom with the mouse &quot;</span>
+                       <span class="s2">&quot;wheel or the &#39;+&#39; and &#39;-&#39; keys&quot;</span><span class="p">));</span>
+
+    <span class="n">QFont</span> <span class="n">font</span> <span class="o">=</span> <span class="n">painter</span><span class="o">-&gt;</span><span class="n">font</span><span class="p">();</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="mi">14</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">lightGray</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawText</span><span class="p">(</span><span class="n">textRect</span><span class="o">.</span><span class="n">translated</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">message</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">setPen</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">black</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawText</span><span class="p">(</span><span class="n">textRect</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The view’s background is rendered in a reimplementation of <code class="xref py py-func docutils literal"><span class="pre">QGraphicsView.drawBackground()</span></code> . We draw a large rectangle filled with a linear gradient, add a drop shadow, and then render text on top. The text is rendered twice for a simple drop-shadow effect.</p>
+<p>This background rendering is quite expensive; this is why the view enables <code class="xref py py-attr docutils literal"><span class="pre">QGraphicsView.CacheBackground</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">GraphWidget</span><span class="p">::</span><span class="n">scaleView</span><span class="p">(</span><span class="n">qreal</span> <span class="n">scaleFactor</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">qreal</span> <span class="n">factor</span> <span class="o">=</span> <span class="n">transform</span><span class="p">()</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scaleFactor</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="p">)</span><span class="o">.</span><span class="n">mapRect</span><span class="p">(</span><span class="n">QRectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">factor</span> <span class="o">&lt;</span> <span class="mf">0.07</span> <span class="o">||</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">scale</span><span class="p">(</span><span class="n">scaleFactor</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">scaleView()</span></code> helper function checks that the scale factor stays within certain limits (i.e., you cannot zoom too far in nor too far out), and then applies this scale to the view.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id5"></span><h2>The main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>In contrast to the complexity of the rest of this example, the <code class="docutils literal"><span class="pre">main()</span></code> function is very simple: We create a <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> instance, then create and show an instance of <code class="docutils literal"><span class="pre">GraphWidget</span></code> . Because all nodes in the grid are moved initially, the <code class="docutils literal"><span class="pre">GraphWidget</span></code> timer will start immediately after control has returned to the event loop.</div></blockquote>
+</div>
+</div>
+<div class="section" id="edge-cpp-example-file">
+<h1>edge.cpp Example File<a class="headerlink" href="#edge-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="edge-h-example-file">
+<h1>edge.h Example File<a class="headerlink" href="#edge-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="graphwidget-cpp-example-file">
+<h1>graphwidget.cpp Example File<a class="headerlink" href="#graphwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="graphwidget-h-example-file">
+<h1>graphwidget.h Example File<a class="headerlink" href="#graphwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="node-cpp-example-file">
+<h1>node.cpp Example File<a class="headerlink" href="#node-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="node-h-example-file">
+<h1>node.h Example File<a class="headerlink" href="#node-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="elasticnodes-pro-example-file">
+<h1>elasticnodes.pro Example File<a class="headerlink" href="#elasticnodes-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

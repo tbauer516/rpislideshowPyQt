@@ -1,0 +1,299 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Text Object Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Text Object Example</a><ul>
+<li><a class="reference internal" href="#svgtextobject-class-definition">SvgTextObject Class Definition</a></li>
+<li><a class="reference internal" href="#svgtextobject-class-implementation">SvgTextObject Class Implementation</a></li>
+<li><a class="reference internal" href="#window-class-definition">Window Class Definition</a></li>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#svgtextobject-cpp-example-file">svgtextobject.cpp Example File</a></li>
+<li><a class="reference internal" href="#svgtextobject-h-example-file">svgtextobject.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#heart-svg-example-file">heart.svg Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#resources-qrc-example-file">resources.qrc Example File</a></li>
+<li><a class="reference internal" href="#textobject-pro-example-file">textobject.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="text-object-example">
+<span id="id1"></span><h1>Text Object Example<a class="headerlink" href="#text-object-example" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>The Text Object example shows how to insert an SVG file into a <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> .</p>
+<p>A <a class="reference internal" href="../PySide2/QtGui/QTextDocument.html#PySide2.QtGui.QTextDocument" title="PySide2.QtGui.QTextDocument"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextDocument</span></code></a> consists of a hierarchy of elements, such as text blocks and frames. A text object describes the structure or format of one or more of these elements. For instance, images imported from HTML are implemented using text objects. Text objects are used by the document’s <a class="reference internal" href="../PySide2/QtGui/QAbstractTextDocumentLayout.html#PySide2.QtGui.QAbstractTextDocumentLayout" title="PySide2.QtGui.QAbstractTextDocumentLayout"><code class="xref py py-class docutils literal"><span class="pre">layout</span></code></a> to lay out and render (paint) the document. Each object knows how to paint the elements they govern, and calculates their size.</p>
+<p>To be able to insert an SVG image into a text document, we create a text object, and implement painting for that object. This object can then be <code class="xref py py-func docutils literal"><span class="pre">set</span></code> on a <a class="reference internal" href="../PySide2/QtGui/QTextCharFormat.html#PySide2.QtGui.QTextCharFormat" title="PySide2.QtGui.QTextCharFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCharFormat</span></code></a> . We also register the text object with the layout of the document, enabling it to draw <a class="reference internal" href="../PySide2/QtGui/QTextCharFormat.html#PySide2.QtGui.QTextCharFormat" title="PySide2.QtGui.QTextCharFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCharFormat</span></code></a> s governed by our text object. We can summarize the procedure with the following steps:</p>
+<ul class="simple">
+<li>Implement the text object.</li>
+<li>Register the text object with the layout of the text document.</li>
+<li>Set the text object on a <a class="reference internal" href="../PySide2/QtGui/QTextCharFormat.html#PySide2.QtGui.QTextCharFormat" title="PySide2.QtGui.QTextCharFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCharFormat</span></code></a> .</li>
+<li>Insert a <code class="xref py py-attr docutils literal"><span class="pre">QChar.ObjectReplacementCharacter</span></code> with that text char format into the document.</li>
+</ul>
+<p>The example consists of the following classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">SvgTextObject</span></code> implements the text object.</li>
+<li><code class="docutils literal"><span class="pre">Window</span></code> shows a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> into which SVG images can be inserted.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="svgtextobject-class-definition">
+<span id="id2"></span><h2>SvgTextObject Class Definition<a class="headerlink" href="#svgtextobject-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s take a look at the header file of <code class="docutils literal"><span class="pre">SvgTextObject</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SvgTextObject</span><span class="p">(</span><span class="n">QObject</span><span class="p">,</span> <span class="n">QTextObjectInterface</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">...</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SvgTextObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+        <span class="o">...</span>
+
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">QSizeF</span> <span class="n">intrinsicSize</span><span class="p">(</span><span class="n">QTextDocument</span> <span class="o">*</span><span class="n">doc</span><span class="p">,</span> <span class="nb">int</span> <span class="n">posInDocument</span><span class="p">,</span>
+                         <span class="n">const</span> <span class="n">QTextFormat</span> <span class="o">&amp;</span><span class="nb">format</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">drawObject</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRectF</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span> <span class="n">QTextDocument</span> <span class="o">*</span><span class="n">doc</span><span class="p">,</span>
+                    <span class="nb">int</span> <span class="n">posInDocument</span><span class="p">,</span> <span class="n">const</span> <span class="n">QTextFormat</span> <span class="o">&amp;</span><span class="nb">format</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>A text object is a <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> that implements <a class="reference internal" href="../PySide2/QtGui/QTextObjectInterface.html#PySide2.QtGui.QTextObjectInterface" title="PySide2.QtGui.QTextObjectInterface"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextObjectInterface</span></code></a> . Note that the first class inherited must be <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> , and that you must use <code class="xref py py-func docutils literal"><span class="pre">Q_INTERFACES()</span></code> to let Qt know that your class implements <a class="reference internal" href="../PySide2/QtGui/QTextObjectInterface.html#PySide2.QtGui.QTextObjectInterface" title="PySide2.QtGui.QTextObjectInterface"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextObjectInterface</span></code></a> .</p>
+<p>The document layout keeps a collection of text objects stored as <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> s, each of which has an associated object type. The layout casts the <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> for the associated object type into the <a class="reference internal" href="../PySide2/QtGui/QTextObjectInterface.html#PySide2.QtGui.QTextObjectInterface" title="PySide2.QtGui.QTextObjectInterface"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextObjectInterface</span></code></a> .</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QTextObjectInterface.intrinsicSize()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QTextObjectInterface.drawObject()</span></code> functions are then used to calculate the size of the text object and draw it.</p>
+</div></blockquote>
+</div>
+<div class="section" id="svgtextobject-class-implementation">
+<span id="id3"></span><h2>SvgTextObject Class Implementation<a class="headerlink" href="#svgtextobject-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We start of by taking a look at the <code class="xref py py-func docutils literal"><span class="pre">QTextObjectInterface.intrinsicSize()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QSizeF</span> <span class="n">SvgTextObject</span><span class="p">::</span><span class="n">intrinsicSize</span><span class="p">(</span><span class="n">QTextDocument</span> <span class="o">*</span> <span class="o">/*</span><span class="n">doc</span><span class="o">*/</span><span class="p">,</span> <span class="nb">int</span> <span class="o">/*</span><span class="n">posInDocument</span><span class="o">*/</span><span class="p">,</span>
+                                    <span class="n">const</span> <span class="n">QTextFormat</span> <span class="o">&amp;</span><span class="nb">format</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QImage</span> <span class="n">bufferedImage</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">QImage</span><span class="o">&gt;</span><span class="p">(</span><span class="nb">format</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="n">Window</span><span class="p">::</span><span class="n">SvgData</span><span class="p">));</span>
+    <span class="n">QSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">bufferedImage</span><span class="o">.</span><span class="n">size</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">*=</span> <span class="mf">25.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">double</span><span class="p">)</span> <span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="n">QSizeF</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">intrinsicSize()</span></code> is called by the layout to calculate the size of the text object. Notice that we have drawn the SVG image on a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . This is because SVG rendering is quite expensive. The example would lag seriously for large images if we drew them with a <a class="reference internal" href="../PySide2/QtSvg/QSvgRenderer.html#PySide2.QtSvg.QSvgRenderer" title="PySide2.QtSvg.QSvgRenderer"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSvg.QSvgRenderer</span></code></a> each time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SvgTextObject</span><span class="p">::</span><span class="n">drawObject</span><span class="p">(</span><span class="n">QPainter</span> <span class="o">*</span><span class="n">painter</span><span class="p">,</span> <span class="n">const</span> <span class="n">QRectF</span> <span class="o">&amp;</span><span class="n">rect</span><span class="p">,</span>
+                               <span class="n">QTextDocument</span> <span class="o">*</span> <span class="o">/*</span><span class="n">doc</span><span class="o">*/</span><span class="p">,</span> <span class="nb">int</span> <span class="o">/*</span><span class="n">posInDocument</span><span class="o">*/</span><span class="p">,</span>
+                               <span class="n">const</span> <span class="n">QTextFormat</span> <span class="o">&amp;</span><span class="nb">format</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QImage</span> <span class="n">bufferedImage</span> <span class="o">=</span> <span class="n">qvariant_cast</span><span class="o">&lt;</span><span class="n">QImage</span><span class="o">&gt;</span><span class="p">(</span><span class="nb">format</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="n">Window</span><span class="p">::</span><span class="n">SvgData</span><span class="p">));</span>
+
+    <span class="n">painter</span><span class="o">-&gt;</span><span class="n">drawImage</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">bufferedImage</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">drawObject()</span></code> , we paint the SVG image using the <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> provided by the layout.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-definition">
+<span id="id4"></span><h2>Window Class Definition<a class="headerlink" href="#window-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">Window</span></code> class is a self-contained window that has a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> in which SVG images can be inserted.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="p">{</span> <span class="n">SvgTextFormat</span> <span class="o">=</span> <span class="n">QTextFormat</span><span class="p">::</span><span class="n">UserObject</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">};</span>
+    <span class="n">enum</span> <span class="n">SvgProperties</span> <span class="p">{</span> <span class="n">SvgData</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">};</span>
+
+    <span class="n">Window</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">insertTextObject</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setupTextObject</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">setupGui</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QTextEdit</span> <span class="o">*</span><span class="n">textEdit</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">fileNameLabel</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">fileNameLineEdit</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">insertTextObjectButton</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">insertTextObject()</span></code> slot inserts an SVG image at the current cursor position, while <code class="docutils literal"><span class="pre">setupTextObject()</span></code> creates and registers the SvgTextObject with the layout of the text edit’s document.</p>
+<p>The constructor simply calls <code class="docutils literal"><span class="pre">setupTextObject()</span></code> and <code class="docutils literal"><span class="pre">setupGui()</span></code> , which creates and lays out the widgets of the <code class="docutils literal"><span class="pre">Window</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-implementation">
+<span id="id5"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>We will now take a closer look at the functions that are relevant to our text object, starting with the <code class="docutils literal"><span class="pre">setupTextObject()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">setupTextObject</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QObject</span> <span class="o">*</span><span class="n">svgInterface</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SvgTextObject</span><span class="p">;</span>
+    <span class="n">svgInterface</span><span class="o">-&gt;</span><span class="n">setParent</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">documentLayout</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">registerHandler</span><span class="p">(</span><span class="n">SvgTextFormat</span><span class="p">,</span> <span class="n">svgInterface</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">SvgTextFormat</span></code> ‘s value is the number of our object type. It is used to identify object types by the document layout.</p>
+<p>Note that we only create one SvgTextObject instance; it will be used for all <a class="reference internal" href="../PySide2/QtGui/QTextCharFormat.html#PySide2.QtGui.QTextCharFormat" title="PySide2.QtGui.QTextCharFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCharFormat</span></code></a> ‘s with the <code class="docutils literal"><span class="pre">SvgTextFormat</span></code> object type.</p>
+<p>Let’s move on to the <code class="docutils literal"><span class="pre">insertTextObject()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void Window::insertTextObject()
+{
+    QString fileName = fileNameLineEdit-&gt;text();
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, tr(&quot;Error Opening File&quot;),
+                             tr(&quot;Could not open &#39;%1&#39;&quot;).arg(fileName));
+    }
+
+    QByteArray svgData = file.readAll();
+</pre></div>
+</div>
+<p>First, the <code class="docutils literal"><span class="pre">.svg</span></code> file is opened and its contents are read into the <code class="docutils literal"><span class="pre">svgData</span></code> array.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QTextCharFormat</span> <span class="n">svgCharFormat</span><span class="p">;</span>
+    <span class="n">svgCharFormat</span><span class="o">.</span><span class="n">setObjectType</span><span class="p">(</span><span class="n">SvgTextFormat</span><span class="p">);</span>
+    <span class="n">QSvgRenderer</span> <span class="n">renderer</span><span class="p">(</span><span class="n">svgData</span><span class="p">);</span>
+
+    <span class="n">QImage</span> <span class="n">svgBufferImage</span><span class="p">(</span><span class="n">renderer</span><span class="o">.</span><span class="n">defaultSize</span><span class="p">(),</span> <span class="n">QImage</span><span class="p">::</span><span class="n">Format_ARGB32</span><span class="p">);</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">svgBufferImage</span><span class="p">);</span>
+    <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="o">&amp;</span><span class="n">painter</span><span class="p">,</span> <span class="n">svgBufferImage</span><span class="o">.</span><span class="n">rect</span><span class="p">());</span>
+
+    <span class="n">svgCharFormat</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">SvgData</span><span class="p">,</span> <span class="n">svgBufferImage</span><span class="p">);</span>
+
+    <span class="n">QTextCursor</span> <span class="n">cursor</span> <span class="o">=</span> <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">textCursor</span><span class="p">();</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="n">QChar</span><span class="p">::</span><span class="n">ObjectReplacementCharacter</span><span class="p">),</span> <span class="n">svgCharFormat</span><span class="p">);</span>
+    <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">setTextCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To speed things up, we buffer the SVG image in a <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . We use <code class="xref py py-func docutils literal"><span class="pre">QTextFormat.setProperty()</span></code> to store the <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> in the in the <a class="reference internal" href="../PySide2/QtGui/QTextCharFormat.html#PySide2.QtGui.QTextCharFormat" title="PySide2.QtGui.QTextCharFormat"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCharFormat</span></code></a> . We can retrieve it later with <code class="xref py py-func docutils literal"><span class="pre">QTextCharFormat.property()</span></code> .</p>
+<p>We insert the char format in the standard way - using a <a class="reference internal" href="../PySide2/QtGui/QTextCursor.html#PySide2.QtGui.QTextCursor" title="PySide2.QtGui.QTextCursor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTextCursor</span></code></a> . Notice that we use the special <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QChar</span></code> <code class="xref py py-attr docutils literal"><span class="pre">ObjectReplacementCharacter</span></code> .</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="svgtextobject-cpp-example-file">
+<h1>svgtextobject.cpp Example File<a class="headerlink" href="#svgtextobject-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="svgtextobject-h-example-file">
+<h1>svgtextobject.h Example File<a class="headerlink" href="#svgtextobject-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="heart-svg-example-file">
+<h1>heart.svg Example File<a class="headerlink" href="#heart-svg-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="resources-qrc-example-file">
+<h1>resources.qrc Example File<a class="headerlink" href="#resources-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="textobject-pro-example-file">
+<h1>textobject.pro Example File<a class="headerlink" href="#textobject-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,1406 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QPixmap &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QBitmap" href="QBitmap.html" />
+    <link rel="prev" title="QImage" href="QImage.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../../modules.html" >Qt for Python modules</a></li>
+                            <li><a href="index.html" accesskey="U">PySide2.QtGui</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QPixmap</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#static-functions">Static functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detailed-description">Detailed Description</a><ul>
+<li><a class="reference internal" href="#reading-and-writing-image-files">Reading and Writing Image Files</a></li>
+<li><a class="reference internal" href="#pixmap-information">Pixmap Information</a></li>
+<li><a class="reference internal" href="#pixmap-conversion">Pixmap Conversion</a></li>
+<li><a class="reference internal" href="#pixmap-transformations">Pixmap Transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="QImage.html"
+                        title="previous chapter">QImage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="QBitmap.html"
+                        title="next chapter">QBitmap</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-PySide2.QtGui"></span><div class="section" id="qpixmap">
+<span id="id1"></span><h1>QPixmap<a class="headerlink" href="#qpixmap" title="Permalink to this headline">¶</a></h1>
+<img src="../../_images/inheritance-713479026d6481c2e12c0e4d3df8d975a7b5ea1f.png" alt="Inheritance diagram of PySide2.QtGui.QPixmap" usemap="#inheritancebe8ad4fd19" class="inheritance"/>
+<map id="inheritancebe8ad4fd19" name="inheritancebe8ad4fd19">
+<area shape="rect" id="node1" href="#PySide2.QtGui.QPixmap" title="QtGui.QPixmap" alt="" coords="200,5,319,31"/>
+<area shape="rect" id="node2" href="QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="QtGui.QPaintDevice" alt="" coords="5,5,152,31"/>
+</map>
+<p><strong>Inherited by:</strong> <a class="reference internal" href="QBitmap.html#qbitmap"><span class="std std-ref">QBitmap</span></a></p>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey" title="PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey"><code class="xref py py-meth docutils literal"><span class="pre">cacheKey</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.convertFromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.convertFromImage"><code class="xref py py-meth docutils literal"><span class="pre">convertFromImage</span></code></a> (img[, flags=Qt.AutoColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.copy" title="PySide2.QtGui.PySide2.QtGui.QPixmap.copy"><code class="xref py py-meth docutils literal"><span class="pre">copy</span></code></a> ([rect=QRect()])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.copy" title="PySide2.QtGui.PySide2.QtGui.QPixmap.copy"><code class="xref py py-meth docutils literal"><span class="pre">copy</span></code></a> (x, y, width, height)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask"><code class="xref py py-meth docutils literal"><span class="pre">createHeuristicMask</span></code></a> ([clipTight=true])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor"><code class="xref py py-meth docutils literal"><span class="pre">createMaskFromColor</span></code></a> (maskColor[, mode=Qt.MaskInColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">fill</span></code></a> ([fillColor=Qt.white])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">fill</span></code></a> (device, ofs)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">fill</span></code></a> (device, xofs, yofs)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha"><code class="xref py py-meth docutils literal"><span class="pre">hasAlpha</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel"><code class="xref py py-meth docutils literal"><span class="pre">hasAlphaChannel</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">isNull</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap"><code class="xref py py-meth docutils literal"><span class="pre">isQBitmap</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.load" title="PySide2.QtGui.PySide2.QtGui.QPixmap.load"><code class="xref py py-meth docutils literal"><span class="pre">load</span></code></a> (fileName[, format=nullptr[, flags=Qt.AutoColor]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData" title="PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData"><code class="xref py py-meth docutils literal"><span class="pre">loadFromData</span></code></a> (buf[, format=nullptr[, flags=Qt.AutoColor]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData" title="PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData"><code class="xref py py-meth docutils literal"><span class="pre">loadFromData</span></code></a> (data[, format=nullptr[, flags=Qt.AutoColor]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.mask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.mask"><code class="xref py py-meth docutils literal"><span class="pre">mask</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.rect" title="PySide2.QtGui.PySide2.QtGui.QPixmap.rect"><code class="xref py py-meth docutils literal"><span class="pre">rect</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.save" title="PySide2.QtGui.PySide2.QtGui.QPixmap.save"><code class="xref py py-meth docutils literal"><span class="pre">save</span></code></a> (device[, format=nullptr[, quality=-1]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.save" title="PySide2.QtGui.PySide2.QtGui.QPixmap.save"><code class="xref py py-meth docutils literal"><span class="pre">save</span></code></a> (fileName[, format=nullptr[, quality=-1]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaled" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaled"><code class="xref py py-meth docutils literal"><span class="pre">scaled</span></code></a> (s[, aspectMode=Qt.IgnoreAspectRatio[, mode=Qt.FastTransformation]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaled" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaled"><code class="xref py py-meth docutils literal"><span class="pre">scaled</span></code></a> (w, h[, aspectMode=Qt.IgnoreAspectRatio[, mode=Qt.FastTransformation]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight"><code class="xref py py-meth docutils literal"><span class="pre">scaledToHeight</span></code></a> (h[, mode=Qt.FastTransformation])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth"><code class="xref py py-meth docutils literal"><span class="pre">scaledToWidth</span></code></a> (w[, mode=Qt.FastTransformation])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scroll" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scroll"><code class="xref py py-meth docutils literal"><span class="pre">scroll</span></code></a> (dx, dy, rect[, exposed=nullptr])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scroll" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scroll"><code class="xref py py-meth docutils literal"><span class="pre">scroll</span></code></a> (dx, dy, x, y, width, height[, exposed=nullptr])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setDevicePixelRatio" title="PySide2.QtGui.PySide2.QtGui.QPixmap.setDevicePixelRatio"><code class="xref py py-meth docutils literal"><span class="pre">setDevicePixelRatio</span></code></a> (scaleFactor)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.setMask"><code class="xref py py-meth docutils literal"><span class="pre">setMask</span></code></a> (arg__1)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.size" title="PySide2.QtGui.PySide2.QtGui.QPixmap.size"><code class="xref py py-meth docutils literal"><span class="pre">size</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.swap" title="PySide2.QtGui.PySide2.QtGui.QPixmap.swap"><code class="xref py py-meth docutils literal"><span class="pre">swap</span></code></a> (other)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.toImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.toImage"><code class="xref py py-meth docutils literal"><span class="pre">toImage</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">transformed</span></code></a> (arg__1[, mode=Qt.FastTransformation])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">transformed</span></code></a> (arg__1[, mode=Qt.FastTransformation])</li>
+</ul>
+</div>
+</div>
+<div class="section" id="static-functions">
+<h3>Static functions<a class="headerlink" href="#static-functions" title="Permalink to this headline">¶</a></h3>
+<div class="function-list docutils container">
+<ul class="simple">
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth" title="PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth"><code class="xref py py-meth docutils literal"><span class="pre">defaultDepth</span></code></a> ()</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">fromImage</span></code></a> (image[, flags=Qt.AutoColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">fromImage</span></code></a> (image[, flags=Qt.AutoColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageInPlace" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageInPlace"><code class="xref py py-meth docutils literal"><span class="pre">fromImageInPlace</span></code></a> (image[, flags=Qt.AutoColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader"><code class="xref py py-meth docutils literal"><span class="pre">fromImageReader</span></code></a> (imageReader[, flags=Qt.AutoColor])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget" title="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget"><code class="xref py py-meth docutils literal"><span class="pre">grabWidget</span></code></a> (widget, rect)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget" title="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget"><code class="xref py py-meth docutils literal"><span class="pre">grabWidget</span></code></a> (widget[, x=0[, y=0[, w=-1[, h=-1]]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWindow" title="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWindow"><code class="xref py py-meth docutils literal"><span class="pre">grabWindow</span></code></a> (arg__1[, x=0[, y=0[, w=-1[, h=-1]]]])</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix"><code class="xref py py-meth docutils literal"><span class="pre">trueMatrix</span></code></a> (m, w, h)</li>
+<li>def <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix"><code class="xref py py-meth docutils literal"><span class="pre">trueMatrix</span></code></a> (m, w, h)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> class is an off-screen image representation that can be used as a paint device.</p>
+<p>Qt provides four classes for handling image data: <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> , <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a> and <a class="reference internal" href="QPicture.html#PySide2.QtGui.QPicture" title="PySide2.QtGui.QPicture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPicture</span></code></a> . <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> is designed and optimized for I/O, and for direct pixel access and manipulation, while <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> is designed and optimized for showing images on screen. <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a> is only a convenience class that inherits <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> , ensuring a depth of 1. The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isQBitmap()</span></code></a> function returns <code class="docutils literal"><span class="pre">true</span></code> if a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> object is really a bitmap, otherwise returns <code class="docutils literal"><span class="pre">false</span></code> . Finally, the <a class="reference internal" href="QPicture.html#PySide2.QtGui.QPicture" title="PySide2.QtGui.QPicture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPicture</span></code></a> class is a paint device that records and replays <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> commands.</p>
+<p>A <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> can easily be displayed on the screen using <a class="reference internal" href="../QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> or one of <a class="reference internal" href="../QtWidgets/QAbstractButton.html#PySide2.QtWidgets.QAbstractButton" title="PySide2.QtWidgets.QAbstractButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractButton</span></code></a> ‘s subclasses (such as <a class="reference internal" href="../QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> and <a class="reference internal" href="../QtWidgets/QToolButton.html#PySide2.QtWidgets.QToolButton" title="PySide2.QtWidgets.QToolButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QToolButton</span></code></a> ). <a class="reference internal" href="../QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> has a pixmap property, whereas <a class="reference internal" href="../QtWidgets/QAbstractButton.html#PySide2.QtWidgets.QAbstractButton" title="PySide2.QtWidgets.QAbstractButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractButton</span></code></a> has an icon property.</p>
+<p><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> objects can be passed around by value since the <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> class uses implicit data sharing. For more information, see the <a class="reference internal" href="../../overviews/implicit-sharing.html#implicit-sharing"><span class="std std-ref">Implicit Data Sharing</span></a> documentation. <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> objects can also be streamed.</p>
+<p>Note that the pixel data in a pixmap is internal and is managed by the underlying window system. Because <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> is a <a class="reference internal" href="QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="PySide2.QtGui.QPaintDevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintDevice</span></code></a> subclass, <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> can be used to draw directly onto pixmaps. Pixels can only be accessed through <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> functions or by converting the <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> to a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . However, the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fill()</span></code></a> function is available for initializing the entire pixmap with a given color.</p>
+<p>There are functions to convert between <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> . Typically, the <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> class is used to load an image file, optionally manipulating the image data, before the <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> object is converted into a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> to be shown on screen. Alternatively, if no manipulation is desired, the image file can be loaded directly into a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> .</p>
+<p><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> provides a collection of functions that can be used to obtain a variety of information about the pixmap. In addition, there are several functions that enables transformation of the pixmap.</p>
+</div></blockquote>
+<div class="section" id="reading-and-writing-image-files">
+<span id="pyside2-qtgui-qpixmap-reading-and-writing-image-files"></span><h3>Reading and Writing Image Files<a class="headerlink" href="#reading-and-writing-image-files" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> provides several ways of reading an image file: The file can be loaded when constructing the <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> object, or by using the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.load" title="PySide2.QtGui.PySide2.QtGui.QPixmap.load"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.load()</span></code></a> or <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData" title="PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.loadFromData()</span></code></a> functions later on. When loading an image, the file name can either refer to an actual file on disk or to one of the application’s embedded resources. See <a class="reference internal" href="../../overviews/resources.html#the-qt-resource-system"><span class="std std-ref">The Qt Resource System</span></a> overview for details on how to embed images and other resource files in the application’s executable.</p>
+<p>Simply call the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.save" title="PySide2.QtGui.PySide2.QtGui.QPixmap.save"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.save()</span></code></a> function to save a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> object.</p>
+<p>The complete list of supported file formats are available through the <a class="reference internal" href="QImageReader.html#PySide2.QtGui.PySide2.QtGui.QImageReader.supportedImageFormats" title="PySide2.QtGui.PySide2.QtGui.QImageReader.supportedImageFormats"><code class="xref py py-meth docutils literal"><span class="pre">QImageReader.supportedImageFormats()</span></code></a> and <a class="reference internal" href="QImageWriter.html#PySide2.QtGui.PySide2.QtGui.QImageWriter.supportedImageFormats" title="PySide2.QtGui.PySide2.QtGui.QImageWriter.supportedImageFormats"><code class="xref py py-meth docutils literal"><span class="pre">QImageWriter.supportedImageFormats()</span></code></a> functions. New file formats can be added as plugins. By default, Qt supports the following formats:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="67%" />
+<col width="22%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Format</td>
+<td>Description</td>
+<td>Qt’s support</td>
+</tr>
+<tr class="row-even"><td>BMP</td>
+<td>Windows Bitmap</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-odd"><td>GIF</td>
+<td>Graphic Interchange Format (optional)</td>
+<td>Read</td>
+</tr>
+<tr class="row-even"><td>JPG</td>
+<td>Joint Photographic Experts Group</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-odd"><td>JPEG</td>
+<td>Joint Photographic Experts Group</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-even"><td>PNG</td>
+<td>Portable Network Graphics</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-odd"><td>PBM</td>
+<td>Portable Bitmap</td>
+<td>Read</td>
+</tr>
+<tr class="row-even"><td>PGM</td>
+<td>Portable Graymap</td>
+<td>Read</td>
+</tr>
+<tr class="row-odd"><td>PPM</td>
+<td>Portable Pixmap</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-even"><td>XBM</td>
+<td>X11 Bitmap</td>
+<td>Read/write</td>
+</tr>
+<tr class="row-odd"><td>XPM</td>
+<td>X11 Pixmap</td>
+<td>Read/write</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="pixmap-information">
+<span id="pyside2-qtgui-qpixmap-pixmap-information"></span><h3>Pixmap Information<a class="headerlink" href="#pixmap-information" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> provides a collection of functions that can be used to obtain a variety of information about the pixmap:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="96%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#160;</td>
+<td>Available Functions</td>
+</tr>
+<tr class="row-even"><td>Geometry</td>
+<td>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.size" title="PySide2.QtGui.PySide2.QtGui.QPixmap.size"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.size()</span></code></a> , <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.width()</span></code> and <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.height()</span></code> functions provide information about the pixmap’s size. The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.rect" title="PySide2.QtGui.PySide2.QtGui.QPixmap.rect"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.rect()</span></code></a> function returns the image’s enclosing rectangle.</td>
+</tr>
+<tr class="row-odd"><td>Alpha component</td>
+<td><p class="first">The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.hasAlphaChannel()</span></code></a> returns <code class="docutils literal"><span class="pre">true</span></code> if the pixmap has a format that respects the alpha channel, otherwise returns <code class="docutils literal"><span class="pre">false</span></code> . The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.hasAlpha()</span></code></a> , <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.setMask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.setMask()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.mask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.mask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.mask()</span></code></a> functions are legacy and should not be used. They are potentially very slow.</p>
+<blockquote class="last">
+<div>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.createHeuristicMask()</span></code></a> function creates and returns a 1-bpp heuristic mask (i.e. a <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a> ) for this pixmap. It works by selecting a color from one of the corners and then chipping away pixels of that color, starting at all the edges. The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.createMaskFromColor()</span></code></a> function creates and returns a mask (i.e. a <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a> ) for the pixmap based on a given color.</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td>Low-level information</td>
+<td><p class="first">The <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.depth()</span></code> function returns the depth of the pixmap. The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth" title="PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.defaultDepth()</span></code></a> function returns the default depth, i.e. the depth used by the application on the given screen.</p>
+<blockquote class="last">
+<div><p>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey" title="PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.cacheKey()</span></code></a> function returns a number that uniquely identifies the contents of the <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> object.</p>
+<p>The x11Info() function returns information about the configuration of the X display used by the screen to which the pixmap currently belongs. The x11PictureHandle() function returns the X11 Picture handle of the pixmap for XRender support. Note that the two latter functions are only available on x11.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="pixmap-conversion">
+<span id="pyside2-qtgui-qpixmap-pixmap-conversion"></span><h3>Pixmap Conversion<a class="headerlink" href="#pixmap-conversion" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> object can be converted into a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> using the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.toImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.toImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.toImage()</span></code></a> function. Likewise, a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> can be converted into a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> using the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImage()</span></code></a> . If this is too expensive an operation, you can use <code class="xref py py-meth docutils literal"><span class="pre">QBitmap.fromImage()</span></code> instead.</p>
+<p>To convert a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> to and from HICON you can use the QtWinExtras functions QtWin::toHICON() and QtWin::fromHICON() respectively.</p>
+</div></blockquote>
+</div>
+<div class="section" id="pixmap-transformations">
+<span id="pyside2-qtgui-qpixmap-pixmap-transformations"></span><h3>Pixmap Transformations<a class="headerlink" href="#pixmap-transformations" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> supports a number of functions for creating a new pixmap that is a transformed version of the original:</p>
+<p>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaled" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaled"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.scaled()</span></code></a> , <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.scaledToWidth()</span></code></a> and <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight" title="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.scaledToHeight()</span></code></a> functions return scaled copies of the pixmap, while the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.copy" title="PySide2.QtGui.PySide2.QtGui.QPixmap.copy"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.copy()</span></code></a> function creates a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> that is a plain copy of the original one.</p>
+<p>The <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.transformed()</span></code></a> function returns a copy of the pixmap that is transformed with the given transformation matrix and transformation mode: Internally, the transformation matrix is adjusted to compensate for unwanted translation, i.e. <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.transformed()</span></code></a> returns the smallest pixmap containing all transformed points of the original pixmap. The static <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.trueMatrix()</span></code></a> function returns the actual matrix used for transforming the pixmap.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using the native X11 graphics system, the pixmap becomes invalid when the <a class="reference internal" href="../QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> instance is destroyed.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a>  <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a>  <a class="reference internal" href="QImageReader.html#PySide2.QtGui.QImageReader" title="PySide2.QtGui.QImageReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImageReader</span></code></a>  <a class="reference internal" href="QImageWriter.html#PySide2.QtGui.QImageWriter" title="PySide2.QtGui.QImageWriter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImageWriter</span></code></a></p>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="PySide2.QtGui.QPixmap">
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><a class="headerlink" href="#PySide2.QtGui.QPixmap" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>image</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>fileName</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>xpm</em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">PySide2.QtGui.</code><code class="descname">QPixmap</code><span class="sig-paren">(</span><em>w</em>, <em>h</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>format</strong> – str</li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>arg__1</strong> – <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></li>
+<li><strong>xpm</strong> – <code class="xref py py-class docutils literal"><span class="pre">char[]</span></code></li>
+<li><strong>image</strong> – <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>fileName</strong> – unicode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs a null pixmap.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isNull()</span></code></a></p>
+</div>
+<p>Constructs a pixmap that is a copy of the given <code class="docutils literal"><span class="pre">pixmap</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.copy" title="PySide2.QtGui.PySide2.QtGui.QPixmap.copy"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.copy()</span></code></a></p>
+</div>
+<p>This is an overloaded function.</p>
+<p>Constructs a pixmap of the given <code class="docutils literal"><span class="pre">size</span></code> .</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This will create a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> with uninitialized data. Call <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fill()</span></code></a> to fill the pixmap with an appropriate color before drawing onto it with <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> .</p>
+</div>
+<p>Constructs a pixmap from the file with the given <code class="docutils literal"><span class="pre">fileName</span></code> . If the file does not exist or is of an unknown format, the pixmap becomes a null pixmap.</p>
+<p>The loader attempts to read the pixmap using the specified <code class="docutils literal"><span class="pre">format</span></code> . If the <code class="docutils literal"><span class="pre">format</span></code> is not specified (which is the default), the loader probes the file for a header to guess the file format.</p>
+<p>The file name can either refer to an actual file on disk or to one of the application’s embedded resources. See the <a class="reference internal" href="../../overviews/resources.html#the-qt-resource-system"><span class="std std-ref">Resource System</span></a> overview for details on how to embed images and other resource files in the application’s executable.</p>
+<p>If the image needs to be modified to fit in a lower-resolution result (e.g. converting from 32-bit to 8-bit), use the <code class="docutils literal"><span class="pre">flags</span></code> to control the conversion.</p>
+<p>The <code class="docutils literal"><span class="pre">fileName</span></code> , <code class="docutils literal"><span class="pre">format</span></code> and <code class="docutils literal"><span class="pre">flags</span></code> parameters are passed on to <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.load" title="PySide2.QtGui.PySide2.QtGui.QPixmap.load"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.load()</span></code></a> . This means that the data in <code class="docutils literal"><span class="pre">fileName</span></code> is not compiled into the binary. If <code class="docutils literal"><span class="pre">fileName</span></code> contains a relative path (e.g. the filename only) the relevant file must be found relative to the runtime working directory.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">Reading</span> <span class="pre">and</span> <span class="pre">Writing</span> <span class="pre">Image</span> <span class="pre">Files</span></code></p>
+</div>
+<p>Constructs a pixmap with the given <code class="docutils literal"><span class="pre">width</span></code> and <code class="docutils literal"><span class="pre">height</span></code> . If either <code class="docutils literal"><span class="pre">width</span></code> or <code class="docutils literal"><span class="pre">height</span></code> is zero, a null pixmap is constructed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This will create a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> with uninitialized data. Call <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fill"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fill()</span></code></a> to fill the pixmap with an appropriate color before drawing onto it with <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> .</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isNull()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">cacheKey</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.cacheKey" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qint64</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a number that identifies this <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> . Distinct <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> objects can only have the same cache key if they refer to the same contents.</p>
+<p>The will change when the pixmap is altered.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.convertFromImage">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">convertFromImage</code><span class="sig-paren">(</span><em>img</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.convertFromImage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img</strong> – <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Replaces this pixmap’s data with the given <code class="docutils literal"><span class="pre">image</span></code> using the specified <code class="docutils literal"><span class="pre">flags</span></code> to control the conversion. The <code class="docutils literal"><span class="pre">flags</span></code> argument is a bitwise-OR of the <code class="xref py py-class docutils literal"><span class="pre">Qt.ImageConversionFlags</span></code> . Passing 0 for <code class="docutils literal"><span class="pre">flags</span></code> sets all the default options. Returns <code class="docutils literal"><span class="pre">true</span></code> if the result is that this pixmap is not null.</p>
+<p>Note: this function was part of Qt 3 support in Qt 4.6 and earlier. It has been promoted to official API status in 4.7 to support updating the pixmap’s image without creating a new <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> as <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImage()</span></code></a> would.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImage()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.copy">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">copy</code><span class="sig-paren">(</span><span class="optional">[</span><em>rect=QRect()</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.copy" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rect</strong> – <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a deep copy of the subset of the pixmap that is specified by the given <code class="docutils literal"><span class="pre">rectangle</span></code> . For more information on deep copies, see the <a class="reference internal" href="../../overviews/implicit-sharing.html#implicit-sharing"><span class="std std-ref">Implicit Data Sharing</span></a> documentation.</p>
+<p>If the given <code class="docutils literal"><span class="pre">rectangle</span></code> is empty, the whole image is copied.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.operator=()</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.QPixmap()</span></code>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">copy</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>y</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>width</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>height</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Returns a deep copy of the subset of the pixmap that is specified by the rectangle <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> ( <code class="docutils literal"><span class="pre">x</span></code> , <code class="docutils literal"><span class="pre">y</span></code> , <code class="docutils literal"><span class="pre">width</span></code> , <code class="docutils literal"><span class="pre">height</span></code> ).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">createHeuristicMask</code><span class="sig-paren">(</span><span class="optional">[</span><em>clipTight=true</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clipTight</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Creates and returns a heuristic mask for this pixmap.</p>
+<p>The function works by selecting a color from one of the corners and then chipping away pixels of that color, starting at all the edges. If <code class="docutils literal"><span class="pre">clipTight</span></code> is true (the default) the mask is just large enough to cover the pixels; otherwise, the mask is larger than the data pixels.</p>
+<p>The mask may not be perfect but it should be reasonable, so you can do things such as the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">myPixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">()</span>
+<span class="n">myPixmap</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">myPixmap</span><span class="o">.</span><span class="n">createHeuristicMask</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This function is slow because it involves converting to/from a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , and non-trivial computations.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="QImage.html#PySide2.QtGui.PySide2.QtGui.QImage.createHeuristicMask" title="PySide2.QtGui.PySide2.QtGui.QImage.createHeuristicMask"><code class="xref py py-meth docutils literal"><span class="pre">QImage.createHeuristicMask()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.createMaskFromColor()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">createMaskFromColor</code><span class="sig-paren">(</span><em>maskColor</em><span class="optional">[</span>, <em>mode=Qt.MaskInColor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createMaskFromColor" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>maskColor</strong> – <a class="reference internal" href="QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.MaskMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates and returns a mask for this pixmap based on the given <code class="docutils literal"><span class="pre">maskColor</span></code> . If the <code class="docutils literal"><span class="pre">mode</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">Qt.MaskInColor</span></code> , all pixels matching the maskColor will be transparent. If <code class="docutils literal"><span class="pre">mode</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">Qt.MaskOutColor</span></code> , all pixels matching the maskColor will be opaque.</p>
+<p>This function is slow because it involves converting to/from a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.createHeuristicMask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.createHeuristicMask()</span></code></a>  <a class="reference internal" href="QImage.html#PySide2.QtGui.PySide2.QtGui.QImage.createMaskFromColor" title="PySide2.QtGui.PySide2.QtGui.QImage.createMaskFromColor"><code class="xref py py-meth docutils literal"><span class="pre">QImage.createMaskFromColor()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">defaultDepth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.defaultDepth" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the default pixmap depth used by the application.</p>
+<p>On all platforms the depth of the primary screen will be returned.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="QGuiApplication.html#PySide2.QtGui.QGuiApplication" title="PySide2.QtGui.QGuiApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QGuiApplication</span></code></a> must be created before calling this function.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.depth()</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">QColormap.depth()</span></code>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Information</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.fill">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fill</code><span class="sig-paren">(</span><em>device</em>, <em>xofs</em>, <em>yofs</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fill" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device</strong> – <a class="reference internal" href="QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="PySide2.QtGui.QPaintDevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintDevice</span></code></a></li>
+<li><strong>xofs</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>yofs</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Use <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> or the fill( <a class="reference internal" href="QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> ) overload instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fill</code><span class="sig-paren">(</span><em>device</em>, <em>ofs</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device</strong> – <a class="reference internal" href="QPaintDevice.html#PySide2.QtGui.QPaintDevice" title="PySide2.QtGui.QPaintDevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPaintDevice</span></code></a></li>
+<li><strong>ofs</strong> – <a class="reference internal" href="../QtCore/QPoint.html#PySide2.QtCore.QPoint" title="PySide2.QtCore.QPoint"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QPoint</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Use <a class="reference internal" href="QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> or the fill( <a class="reference internal" href="QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> ) overload instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fill</code><span class="sig-paren">(</span><span class="optional">[</span><em>fillColor=Qt.white</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fillColor</strong> – <a class="reference internal" href="QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Fills the pixmap with the given <code class="docutils literal"><span class="pre">color</span></code> .</p>
+<p>The effect of this function is undefined when the pixmap is being painted on.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fromImage</code><span class="sig-paren">(</span><em>image</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Converts the given <code class="docutils literal"><span class="pre">image</span></code> to a pixmap using the specified <code class="docutils literal"><span class="pre">flags</span></code> to control the conversion. The <code class="docutils literal"><span class="pre">flags</span></code> argument is a bitwise-OR of the <code class="xref py py-class docutils literal"><span class="pre">Qt.ImageConversionFlags</span></code> . Passing 0 for <code class="docutils literal"><span class="pre">flags</span></code> sets all the default options.</p>
+<p>In case of monochrome and 8-bit images, the image is first converted to a 32-bit pixmap and then filled with the colors in the color table. If this is too expensive an operation, you can use <code class="xref py py-meth docutils literal"><span class="pre">QBitmap.fromImage()</span></code> instead.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImageReader()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.toImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.toImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.toImage()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Conversion</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fromImage</code><span class="sig-paren">(</span><em>image</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Converts the given <code class="docutils literal"><span class="pre">image</span></code> to a pixmap without copying if possible.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageInPlace">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fromImageInPlace</code><span class="sig-paren">(</span><em>image</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageInPlace" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> – <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">fromImageReader</code><span class="sig-paren">(</span><em>imageReader</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImageReader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>imageReader</strong> – <a class="reference internal" href="QImageReader.html#PySide2.QtGui.QImageReader" title="PySide2.QtGui.QImageReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImageReader</span></code></a></li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Create a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> from an image read directly from an <code class="docutils literal"><span class="pre">imageReader</span></code> . The <code class="docutils literal"><span class="pre">flags</span></code> argument is a bitwise-OR of the <code class="xref py py-class docutils literal"><span class="pre">Qt.ImageConversionFlags</span></code> . Passing 0 for <code class="docutils literal"><span class="pre">flags</span></code> sets all the default options.</p>
+<p>On some systems, reading an image directly to <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> can use less memory than reading a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> to convert it to <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImage()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.toImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.toImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.toImage()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Conversion</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">grabWidget</code><span class="sig-paren">(</span><em>widget</em><span class="optional">[</span>, <em>x=0</em><span class="optional">[</span>, <em>y=0</em><span class="optional">[</span>, <em>w=-1</em><span class="optional">[</span>, <em>h=-1</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>widget</strong> – <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a></li>
+<li><strong>x</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>y</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code class="xref py py-meth docutils literal"><span class="pre">QWidget.grab()</span></code> instead.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">grabWidget</code><span class="sig-paren">(</span><em>widget</em>, <em>rect</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>widget</strong> – <a class="reference internal" href="../QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a></li>
+<li><strong>rect</strong> – <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code class="xref py py-meth docutils literal"><span class="pre">QWidget.grab()</span></code> instead.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWindow">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">grabWindow</code><span class="sig-paren">(</span><em>arg__1</em><span class="optional">[</span>, <em>x=0</em><span class="optional">[</span>, <em>y=0</em><span class="optional">[</span>, <em>w=-1</em><span class="optional">[</span>, <em>h=-1</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWindow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arg__1</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.WId</span></code></li>
+<li><strong>x</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>y</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates and returns a pixmap constructed by grabbing the contents of the given <code class="docutils literal"><span class="pre">window</span></code> restricted by <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> (<code class="docutils literal"><span class="pre">x</span></code> , <code class="docutils literal"><span class="pre">y</span></code> , <code class="docutils literal"><span class="pre">width</span></code> , <code class="docutils literal"><span class="pre">height</span></code> ).</p>
+<p>The arguments (<code class="docutils literal"><span class="pre">x</span></code> , <code class="docutils literal"><span class="pre">y</span></code> ) specify the offset in the window, whereas (<code class="docutils literal"><span class="pre">width</span></code> , <code class="docutils literal"><span class="pre">height</span></code> ) specify the area to be copied. If <code class="docutils literal"><span class="pre">width</span></code> is negative, the function copies everything to the right border of the window. If <code class="docutils literal"><span class="pre">height</span></code> is negative, the function copies everything to the bottom of the window.</p>
+<p>The window system identifier (<code class="docutils literal"><span class="pre">WId</span></code> ) can be retrieved using the <code class="xref py py-meth docutils literal"><span class="pre">QWidget.winId()</span></code> function. The rationale for using a window identifier and not a <a class="reference internal" href="../QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , is to enable grabbing of windows that are not part of the application, window system frames, and so on.</p>
+<p>The function grabs pixels from the screen, not from the window, i.e. if there is another window partially or entirely over the one you grab, you get pixels from the overlying window, too. The mouse cursor is generally not grabbed.</p>
+<p>Note on X11 that if the given <code class="docutils literal"><span class="pre">window</span></code> doesn’t have the same depth as the root window, and another window partially or entirely obscures the one you grab, you will <em>not</em> get pixels from the overlying window. The contents of the obscured areas in the pixmap will be undefined and uninitialized.</p>
+<p>On Windows Vista and above grabbing a layered window, which is created by setting the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_TranslucentBackground</span></code> attribute, will not work. Instead grabbing the desktop widget should work.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In general, grabbing an area outside the screen is not safe. This depends on the underlying window system.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The function is deprecated in Qt 5.0 since there might be platform plugins in which window system identifiers (<code class="docutils literal"><span class="pre">WId</span></code> ) are local to a screen. Use <a class="reference internal" href="QScreen.html#PySide2.QtGui.PySide2.QtGui.QScreen.grabWindow" title="PySide2.QtGui.PySide2.QtGui.QScreen.grabWindow"><code class="xref py py-meth docutils literal"><span class="pre">QScreen.grabWindow()</span></code></a> instead.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget" title="PySide2.QtGui.PySide2.QtGui.QPixmap.grabWidget"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.grabWidget()</span></code></a>  <a class="reference internal" href="../../overviews/qtwidgets-desktop-screenshot-example.html#screenshot-example"><span class="std std-ref">Screenshot Example</span></a>  <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QScreen</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">hasAlpha</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this pixmap has an alpha channel, <em>or</em> has a mask, otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.hasAlphaChannel()</span></code></a>  <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.mask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.mask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.mask()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">hasAlphaChannel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlphaChannel" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if the pixmap has a format that respects the alpha channel, otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha" title="PySide2.QtGui.PySide2.QtGui.QPixmap.hasAlpha"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.hasAlpha()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">isNull</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this is a null pixmap; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>A null pixmap has zero width, zero height and no contents. You cannot draw in a null pixmap.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">isQBitmap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isQBitmap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">true</span></code> if this is a <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a> ; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.load">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">load</code><span class="sig-paren">(</span><em>fileName</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.load" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fileName</strong> – unicode</li>
+<li><strong>format</strong> – str</li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Loads a pixmap from the file with the given <code class="docutils literal"><span class="pre">fileName</span></code> . Returns true if the pixmap was successfully loaded; otherwise invalidates the pixmap and returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>The loader attempts to read the pixmap using the specified <code class="docutils literal"><span class="pre">format</span></code> . If the <code class="docutils literal"><span class="pre">format</span></code> is not specified (which is the default), the loader probes the file for a header to guess the file format.</p>
+<p>The file name can either refer to an actual file on disk or to one of the application’s embedded resources. See the <a class="reference internal" href="../../overviews/resources.html#the-qt-resource-system"><span class="std std-ref">Resource System</span></a> overview for details on how to embed pixmaps and other resource files in the application’s executable.</p>
+<p>If the data needs to be modified to fit in a lower-resolution result (e.g. converting from 32-bit to 8-bit), use the <code class="docutils literal"><span class="pre">flags</span></code> to control the conversion.</p>
+<p>Note that QPixmaps are automatically added to the <a class="reference internal" href="QPixmapCache.html#PySide2.QtGui.QPixmapCache" title="PySide2.QtGui.QPixmapCache"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmapCache</span></code></a> when loaded from a file; the key used is internal and can not be acquired.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData" title="PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.loadFromData()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Reading</span> <span class="pre">and</span> <span class="pre">Writing</span> <span class="pre">Image</span> <span class="pre">Files</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">loadFromData</code><span class="sig-paren">(</span><em>buf</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.loadFromData" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>buf</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.uchar</span></code></li>
+<li><strong>format</strong> – str</li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Loads a pixmap from the <code class="docutils literal"><span class="pre">len</span></code> first bytes of the given binary <code class="docutils literal"><span class="pre">data</span></code> . Returns <code class="docutils literal"><span class="pre">true</span></code> if the pixmap was loaded successfully; otherwise invalidates the pixmap and returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>The loader attempts to read the pixmap using the specified <code class="docutils literal"><span class="pre">format</span></code> . If the <code class="docutils literal"><span class="pre">format</span></code> is not specified (which is the default), the loader probes the file for a header to guess the file format.</p>
+<p>If the data needs to be modified to fit in a lower-resolution result (e.g. converting from 32-bit to 8-bit), use the <code class="docutils literal"><span class="pre">flags</span></code> to control the conversion.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.load" title="PySide2.QtGui.PySide2.QtGui.QPixmap.load"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.load()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Reading</span> <span class="pre">and</span> <span class="pre">Writing</span> <span class="pre">Image</span> <span class="pre">Files</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">loadFromData</code><span class="sig-paren">(</span><em>data</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>flags=Qt.AutoColor</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> – <a class="reference internal" href="../QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a></li>
+<li><strong>format</strong> – str</li>
+<li><strong>flags</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.Qt.ImageConversionFlags</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Loads a pixmap from the binary <code class="docutils literal"><span class="pre">data</span></code> using the specified <code class="docutils literal"><span class="pre">format</span></code> and conversion <code class="docutils literal"><span class="pre">flags</span></code> .</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.mask">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.mask" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Extracts a bitmap mask from the pixmap’s alpha channel.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is potentially an expensive operation. The mask of the pixmap is extracted dynamically from the pixeldata.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setMask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.setMask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.setMask()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Information</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.rect">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">rect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.rect" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the pixmap’s enclosing rectangle.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Information</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.save">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">save</code><span class="sig-paren">(</span><em>fileName</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>quality=-1</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.save" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fileName</strong> – unicode</li>
+<li><strong>format</strong> – str</li>
+<li><strong>quality</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Saves the pixmap to the file with the given <code class="docutils literal"><span class="pre">fileName</span></code> using the specified image file <code class="docutils literal"><span class="pre">format</span></code> and <code class="docutils literal"><span class="pre">quality</span></code> factor. Returns <code class="docutils literal"><span class="pre">true</span></code> if successful; otherwise returns <code class="docutils literal"><span class="pre">false</span></code> .</p>
+<p>The <code class="docutils literal"><span class="pre">quality</span></code> factor must be in the range [0,100] or -1. Specify 0 to obtain small compressed files, 100 for large uncompressed files, and -1 to use the default settings.</p>
+<p>If <code class="docutils literal"><span class="pre">format</span></code> is 0, an image format will be chosen from <code class="docutils literal"><span class="pre">fileName</span></code> ‘s suffix.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">Reading</span> <span class="pre">and</span> <span class="pre">Writing</span> <span class="pre">Image</span> <span class="pre">Files</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">save</code><span class="sig-paren">(</span><em>device</em><span class="optional">[</span>, <em>format=nullptr</em><span class="optional">[</span>, <em>quality=-1</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device</strong> – <a class="reference internal" href="../QtCore/QIODevice.html#PySide2.QtCore.QIODevice" title="PySide2.QtCore.QIODevice"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QIODevice</span></code></a></li>
+<li><strong>format</strong> – str</li>
+<li><strong>quality</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.bool</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>This function writes a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> to the given <code class="docutils literal"><span class="pre">device</span></code> using the specified image file <code class="docutils literal"><span class="pre">format</span></code> and <code class="docutils literal"><span class="pre">quality</span></code> factor. This can be used, for example, to save a pixmap directly into a <a class="reference internal" href="../QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QByteArray</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">()</span>
+<span class="nb">bytes</span> <span class="o">=</span> <span class="n">QByteArray</span><span class="p">()</span>
+<span class="n">buffer</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)</span>
+<span class="n">buffer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="o">.</span><span class="n">WriteOnly</span><span class="p">)</span>
+<span class="n">pixmap</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">)</span> <span class="c1"># writes pixmap into bytes in PNG format</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.scaled">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scaled</code><span class="sig-paren">(</span><em>w</em>, <em>h</em><span class="optional">[</span>, <em>aspectMode=Qt.IgnoreAspectRatio</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaled" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>aspectMode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.AspectRatioMode</span></code></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>Returns a copy of the pixmap scaled to a rectangle with the given <code class="docutils literal"><span class="pre">width</span></code> and <code class="docutils literal"><span class="pre">height</span></code> according to the given <code class="docutils literal"><span class="pre">aspectRatioMode</span></code> and <code class="docutils literal"><span class="pre">transformMode</span></code> .</p>
+<p>If either the <code class="docutils literal"><span class="pre">width</span></code> or the <code class="docutils literal"><span class="pre">height</span></code> is zero or negative, this function returns a null pixmap.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scaled</code><span class="sig-paren">(</span><em>s</em><span class="optional">[</span>, <em>aspectMode=Qt.IgnoreAspectRatio</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>s</strong> – <a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a></li>
+<li><strong>aspectMode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.AspectRatioMode</span></code></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Scales the pixmap to the given <code class="docutils literal"><span class="pre">size</span></code> , using the aspect ratio and transformation modes specified by <code class="docutils literal"><span class="pre">aspectRatioMode</span></code> and <code class="docutils literal"><span class="pre">transformMode</span></code> .</p>
+<img alt="../../_images/qimage-scaling1.png" src="../../_images/qimage-scaling1.png" />
+<ul class="simple">
+<li>If <code class="docutils literal"><span class="pre">aspectRatioMode</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">Qt.IgnoreAspectRatio</span></code> , the pixmap is scaled to <code class="docutils literal"><span class="pre">size</span></code>.</li>
+<li>If <code class="docutils literal"><span class="pre">aspectRatioMode</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">Qt.KeepAspectRatio</span></code> , the pixmap is scaled to a rectangle as large as possible inside <code class="docutils literal"><span class="pre">size</span></code>, preserving the aspect ratio.</li>
+<li>If <code class="docutils literal"><span class="pre">aspectRatioMode</span></code> is <code class="xref py py-attr docutils literal"><span class="pre">Qt.KeepAspectRatioByExpanding</span></code> , the pixmap is scaled to a rectangle as small as possible outside <code class="docutils literal"><span class="pre">size</span></code>, preserving the aspect ratio.</li>
+</ul>
+<p>If the given <code class="docutils literal"><span class="pre">size</span></code> is empty, this function returns a null pixmap.</p>
+<p>In some cases it can be more beneficial to draw the pixmap to a painter with a scale set rather than scaling the pixmap. This is the case when the painter is for instance based on OpenGL or when the scale factor changes rapidly.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isNull()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scaledToHeight</code><span class="sig-paren">(</span><em>h</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToHeight" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a scaled copy of the image. The returned image is scaled to the given <code class="docutils literal"><span class="pre">height</span></code> using the specified transformation <code class="docutils literal"><span class="pre">mode</span></code> . The width of the pixmap is automatically calculated so that the aspect ratio of the pixmap is preserved.</p>
+<p>If <code class="docutils literal"><span class="pre">height</span></code> is 0 or negative, a null pixmap is returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isNull()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scaledToWidth</code><span class="sig-paren">(</span><em>w</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scaledToWidth" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a scaled copy of the image. The returned image is scaled to the given <code class="docutils literal"><span class="pre">width</span></code> using the specified transformation <code class="docutils literal"><span class="pre">mode</span></code> . The height of the pixmap is automatically calculated so that the aspect ratio of the pixmap is preserved.</p>
+<p>If <code class="docutils literal"><span class="pre">width</span></code> is 0 or negative, a null pixmap is returned.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.isNull" title="PySide2.QtGui.PySide2.QtGui.QPixmap.isNull"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.isNull()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.scroll">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scroll</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>rect</em><span class="optional">[</span>, <em>exposed=nullptr</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.scroll" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dx</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>dy</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>rect</strong> – <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a></li>
+<li><strong>exposed</strong> – <a class="reference internal" href="QRegion.html#PySide2.QtGui.QRegion" title="PySide2.QtGui.QRegion"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRegion</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Scrolls the area <code class="docutils literal"><span class="pre">rect</span></code> of this pixmap by (<code class="docutils literal"><span class="pre">dx</span></code> , <code class="docutils literal"><span class="pre">dy</span></code> ). The exposed region is left unchanged. You can optionally pass a pointer to an empty <a class="reference internal" href="QRegion.html#PySide2.QtGui.QRegion" title="PySide2.QtGui.QRegion"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRegion</span></code></a> to get the region that is <code class="docutils literal"><span class="pre">exposed</span></code> by the scroll operation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="p">(</span><span class="s2">&quot;background.png&quot;</span><span class="p">)</span>
+<span class="n">exposed</span> <span class="o">=</span> <span class="n">QRegion</span><span class="p">()</span>
+<span class="n">pixmap</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="n">exposed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You cannot scroll while there is an active painter on the pixmap.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">QWidget.scroll()</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">QGraphicsItem.scroll()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">scroll</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="optional">[</span>, <em>exposed=nullptr</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dx</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>dy</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>x</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>y</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>width</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>height</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>exposed</strong> – <a class="reference internal" href="QRegion.html#PySide2.QtGui.QRegion" title="PySide2.QtGui.QRegion"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QRegion</span></code></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This convenience function is equivalent to calling (<code class="docutils literal"><span class="pre">dx</span></code> , <code class="docutils literal"><span class="pre">dy</span></code> , <a class="reference internal" href="../QtCore/QRect.html#PySide2.QtCore.QRect" title="PySide2.QtCore.QRect"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRect</span></code></a> (<code class="docutils literal"><span class="pre">x</span></code> , <code class="docutils literal"><span class="pre">y</span></code> , <code class="docutils literal"><span class="pre">width</span></code> , <code class="docutils literal"><span class="pre">height</span></code> ), <code class="docutils literal"><span class="pre">exposed</span></code> ).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">QWidget.scroll()</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">QGraphicsItem.scroll()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.setDevicePixelRatio">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">setDevicePixelRatio</code><span class="sig-paren">(</span><em>scaleFactor</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setDevicePixelRatio" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scaleFactor</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.qreal</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Sets the device pixel ratio for the pixmap. This is the ratio between image pixels and device-independent pixels.</p>
+<p>The default <code class="docutils literal"><span class="pre">scaleFactor</span></code> is 1.0. Setting it to something else has two effects:</p>
+<p>QPainters that are opened on the pixmap will be scaled. For example, painting on a 200x200 image if with a ratio of 2.0 will result in effective (device-independent) painting bounds of 100x100.</p>
+<p>Code paths in Qt that calculate layout geometry based on the pixmap size will take the ratio into account: <a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a> layoutSize = pixmap. <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.size" title="PySide2.QtGui.PySide2.QtGui.QPixmap.size"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.size()</span></code></a> / pixmap. <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.devicePixelRatio()</span></code> The net effect of this is that the pixmap is displayed as high-DPI pixmap rather than a large pixmap (see <code class="xref py py-class docutils literal"><span class="pre">Drawing</span> <span class="pre">High</span> <span class="pre">Resolution</span> <span class="pre">Versions</span> <span class="pre">of</span> <span class="pre">Pixmaps</span> <span class="pre">and</span> <span class="pre">Images</span></code> ).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.devicePixelRatio()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.setMask">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">setMask</code><span class="sig-paren">(</span><em>arg__1</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.setMask" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg__1</strong> – <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Sets a mask bitmap.</p>
+<p>This function merges the <code class="docutils literal"><span class="pre">mask</span></code> with the pixmap’s alpha channel. A pixel value of 1 on the mask means the pixmap’s pixel is unchanged; a value of 0 means the pixel is transparent. The mask must have the same size as this pixmap.</p>
+<p>Setting a null mask resets the mask, leaving the previously transparent pixels black. The effect of this function is undefined when the pixmap is being painted on.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is potentially an expensive operation.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.mask" title="PySide2.QtGui.PySide2.QtGui.QPixmap.mask"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.mask()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code>  <a class="reference internal" href="QBitmap.html#PySide2.QtGui.QBitmap" title="PySide2.QtGui.QBitmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBitmap</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.size">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.size" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../QtCore/QSize.html#PySide2.QtCore.QSize" title="PySide2.QtCore.QSize"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSize</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the size of the pixmap.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.width()</span></code>  <code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.height()</span></code>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Information</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.swap">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">swap</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.swap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>other</strong> – <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Swaps pixmap <code class="docutils literal"><span class="pre">other</span></code> with this pixmap. This operation is very fast and never fails.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.toImage">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">toImage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.toImage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Converts the pixmap to a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> . Returns a null image if the conversion fails.</p>
+<p>If the pixmap has 1-bit depth, the returned image will also be 1 bit deep. Images with more bits will be returned in a format closely represents the underlying system. Usually this will be <code class="xref py py-attr docutils literal"><span class="pre">QImage.Format_ARGB32_Premultiplied</span></code> for pixmaps with an alpha and <code class="xref py py-attr docutils literal"><span class="pre">QImage.Format_RGB32</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">QImage.Format_RGB16</span></code> for pixmaps without alpha.</p>
+<p>Note that for the moment, alpha masks on monochrome images are ignored.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage" title="PySide2.QtGui.PySide2.QtGui.QPixmap.fromImage"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.fromImage()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Image</span> <span class="pre">Formats</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed">
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">transformed</code><span class="sig-paren">(</span><em>arg__1</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arg__1</strong> – <a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a copy of the pixmap that is transformed using the given transformation <code class="docutils literal"><span class="pre">transform</span></code> and transformation <code class="docutils literal"><span class="pre">mode</span></code> . The original pixmap is not changed.</p>
+<p>The transformation <code class="docutils literal"><span class="pre">transform</span></code> is internally adjusted to compensate for unwanted translation; i.e. the pixmap produced is the smallest pixmap that contains all the transformed points of the original pixmap. Use the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.trueMatrix()</span></code></a> function to retrieve the actual matrix used for transforming the pixmap.</p>
+<p>This function is slow because it involves transformation to a <a class="reference internal" href="QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , non-trivial computations and a transformation back to a <a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> .</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.trueMatrix()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">transformed</code><span class="sig-paren">(</span><em>arg__1</em><span class="optional">[</span>, <em>mode=Qt.FastTransformation</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arg__1</strong> – <a class="reference internal" href="QMatrix.html#PySide2.QtGui.QMatrix" title="PySide2.QtGui.QMatrix"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMatrix</span></code></a></li>
+<li><strong>mode</strong> – <code class="xref py py-attr docutils literal"><span class="pre">PySide2.QtCore.Qt.TransformationMode</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>This convenience function loads the <code class="docutils literal"><span class="pre">matrix</span></code> into a <a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a> and calls the overloaded function.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix">
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">trueMatrix</code><span class="sig-paren">(</span><em>m</em>, <em>w</em>, <em>h</em><span class="sig-paren">)</span><a class="headerlink" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.trueMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m</strong> – <a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a></li>
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the actual matrix used for transforming a pixmap with the given <code class="docutils literal"><span class="pre">width</span></code> , <code class="docutils literal"><span class="pre">height</span></code> and <code class="docutils literal"><span class="pre">matrix</span></code> .</p>
+<p>When transforming a pixmap using the <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.transformed()</span></code></a> function, the transformation matrix is internally adjusted to compensate for unwanted translation, i.e. <a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.transformed()</span></code></a> returns the smallest pixmap containing all transformed points of the original pixmap. This function returns the modified matrix, which maps points correctly from the original pixmap into the new pixmap.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#PySide2.QtGui.PySide2.QtGui.QPixmap.transformed" title="PySide2.QtGui.PySide2.QtGui.QPixmap.transformed"><code class="xref py py-meth docutils literal"><span class="pre">PySide2.QtGui.QPixmap.transformed()</span></code></a>  <code class="xref py py-class docutils literal"><span class="pre">Pixmap</span> <span class="pre">Transformations</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descclassname">PySide2.QtGui.QPixmap.</code><code class="descname">trueMatrix</code><span class="sig-paren">(</span><em>m</em>, <em>w</em>, <em>h</em><span class="sig-paren">)</span></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m</strong> – <a class="reference internal" href="QMatrix.html#PySide2.QtGui.QMatrix" title="PySide2.QtGui.QMatrix"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMatrix</span></code></a></li>
+<li><strong>w</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+<li><strong>h</strong> – <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.int</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="QMatrix.html#PySide2.QtGui.QMatrix" title="PySide2.QtGui.QMatrix"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QMatrix</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This is an overloaded function.</p>
+<p>This convenience function loads the matrix <code class="docutils literal"><span class="pre">m</span></code> into a <a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a> and calls the overloaded function with the <a class="reference internal" href="QTransform.html#PySide2.QtGui.QTransform" title="PySide2.QtGui.QTransform"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QTransform</span></code></a> and the width <code class="docutils literal"><span class="pre">w</span></code> and the height <code class="docutils literal"><span class="pre">h</span></code> .</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

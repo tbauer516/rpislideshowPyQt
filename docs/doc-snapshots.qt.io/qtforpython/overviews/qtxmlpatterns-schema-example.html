@@ -1,0 +1,389 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XML Schema Validation Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">XML Schema Validation Example</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#the-user-interface">The User Interface</a></li>
+<li><a class="reference internal" href="#validating-xml-instance-documents">Validating XML Instance Documents</a></li>
+<li><a class="reference internal" href="#code-walk-through">Code Walk-Through</a></li>
+<li><a class="reference internal" href="#the-ui-class-mainwindow">The UI Class: MainWindow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#schema-ui-example-file">schema.ui Example File</a></li>
+<li><a class="reference internal" href="#invalid-contact-xml-example-file">invalid_contact.xml Example File</a></li>
+<li><a class="reference internal" href="#invalid-order-xml-example-file">invalid_order.xml Example File</a></li>
+<li><a class="reference internal" href="#invalid-recipe-xml-example-file">invalid_recipe.xml Example File</a></li>
+<li><a class="reference internal" href="#valid-contact-xml-example-file">valid_contact.xml Example File</a></li>
+<li><a class="reference internal" href="#valid-order-xml-example-file">valid_order.xml Example File</a></li>
+<li><a class="reference internal" href="#valid-recipe-xml-example-file">valid_recipe.xml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#schema-pro-example-file">schema.pro Example File</a></li>
+<li><a class="reference internal" href="#schema-qrc-example-file">schema.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="xml-schema-validation-example">
+<span id="id1"></span><h1>XML Schema Validation Example<a class="headerlink" href="#xml-schema-validation-example" title="Permalink to this headline">¶</a></h1>
+<p>Using Qt XML Patterns to validate XML with a W3C XML Schema</p>
+<blockquote>
+<div><p>Using Qt XML Patterns to validate XML with a W3C XML Schema.</p>
+<p>The XML Schema Validation example shows how to use Qt XML Patterns to validate XML with a W3C XML Schema.</p>
+</div></blockquote>
+<div class="section" id="introduction">
+<span id="id2"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The example application shows different XML schema definitions and for every definition two XML instance documents, one that is valid according to the schema and one that is not. The user can select the valid or invalid instance document, change it and validate it again.</div></blockquote>
+</div>
+<div class="section" id="the-user-interface">
+<span id="id3"></span><h2>The User Interface<a class="headerlink" href="#the-user-interface" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The UI for this example was created using Qt Designer:</p>
+<p>The UI consists of three parts, at the top the XML schema <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">selection</span></code></a> and the schema <a class="reference internal" href="../PySide2/QtWidgets/QTextBrowser.html#PySide2.QtWidgets.QTextBrowser" title="PySide2.QtWidgets.QTextBrowser"><code class="xref py py-class docutils literal"><span class="pre">viewer</span></code></a> , below the XML instance <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">selection</span></code></a> and the instance <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">editor</span></code></a> and at the bottom the validation status <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">label</span></code></a> next to the validation <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">button</span></code></a> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="validating-xml-instance-documents">
+<span id="id4"></span><h2>Validating XML Instance Documents<a class="headerlink" href="#validating-xml-instance-documents" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>You can select one of the three predefined XML schemas and for each schema an valid or invalid instance document. A click on the ‘Validate’ button will validate the content of the XML instance editor against the schema from the XML schema viewer. As you can modify the content of the instance editor, different instances can be tested and validation error messages analysed.</div></blockquote>
+</div>
+<div class="section" id="code-walk-through">
+<span id="id5"></span><h2>Code Walk-Through<a class="headerlink" href="#code-walk-through" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example’s main() function creates the standard instance of <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> . Then it creates an instance of the mainwindow class, shows it, and starts the Qt event loop:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">schema</span><span class="p">);</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">MainWindow</span><span class="o">*</span> <span class="n">const</span> <span class="n">window</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MainWindow</span><span class="p">;</span>
+    <span class="n">window</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-ui-class-mainwindow">
+<span id="id6"></span><h2>The UI Class: MainWindow<a class="headerlink" href="#the-ui-class-mainwindow" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The example’s UI is a conventional Qt GUI application inheriting <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> and the class generated by Qt Designer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span><span class="p">,</span>
+                   <span class="n">private</span> <span class="n">Ui</span><span class="p">::</span><span class="n">SchemaMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">Q_SLOTS</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">schemaSelected</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">instanceSelected</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">validate</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">textChanged</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">moveCursor</span><span class="p">(</span><span class="nb">int</span> <span class="n">line</span><span class="p">,</span> <span class="nb">int</span> <span class="n">column</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The constructor fills the schema and instance <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> selections with the predefined schemas and instances and connects their <code class="xref py py-func docutils literal"><span class="pre">QComboBox.currentIndexChanged()</span></code> signals to the window’s <code class="docutils literal"><span class="pre">schemaSelected()</span></code> resp. <code class="docutils literal"><span class="pre">instanceSelected()</span></code> slot. Furthermore the signal-slot connections for the validation <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">button</span></code></a> and the instance <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">editor</span></code></a> are set up.</p>
+<p>The call to <code class="docutils literal"><span class="pre">schemaSelected(0)</span></code> and <code class="docutils literal"><span class="pre">instanceSelected(0)</span></code> will trigger the validation of the initial Contact Schema example.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">setupUi</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="n">new</span> <span class="n">XmlSyntaxHighlighter</span><span class="p">(</span><span class="n">schemaView</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">());</span>
+    <span class="n">new</span> <span class="n">XmlSyntaxHighlighter</span><span class="p">(</span><span class="n">instanceEdit</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">());</span>
+
+    <span class="n">schemaSelection</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Contact Schema&quot;</span><span class="p">));</span>
+    <span class="n">schemaSelection</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Recipe Schema&quot;</span><span class="p">));</span>
+    <span class="n">schemaSelection</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Order Schema&quot;</span><span class="p">));</span>
+
+    <span class="n">instanceSelection</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Valid Contact Instance&quot;</span><span class="p">));</span>
+    <span class="n">instanceSelection</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Invalid Contact Instance&quot;</span><span class="p">));</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">schemaSelection</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">currentIndexChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">schemaSelected</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">instanceSelection</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">currentIndexChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">instanceSelected</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">validateButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">validate</span><span class="p">()));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">instanceEdit</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">textChanged</span><span class="p">()),</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">textChanged</span><span class="p">()));</span>
+
+    <span class="n">validationStatus</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span> <span class="o">|</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AlignVCenter</span><span class="p">);</span>
+
+    <span class="n">schemaSelected</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">instanceSelected</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">schemaSelected()</span></code> slot the content of the instance <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">selection</span></code></a> is adapted to the selected schema and the corresponding schema is loaded from the <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">resource file</span></a> and displayed in the schema <a class="reference internal" href="../PySide2/QtWidgets/QTextBrowser.html#PySide2.QtWidgets.QTextBrowser" title="PySide2.QtWidgets.QTextBrowser"><code class="xref py py-class docutils literal"><span class="pre">viewer</span></code></a> . At the end of the method a revalidation is triggered.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::schemaSelected(int index)
+{
+    instanceSelection-&gt;clear();
+    if (index == 0) {
+        instanceSelection-&gt;addItem(tr(&quot;Valid Contact Instance&quot;));
+        instanceSelection-&gt;addItem(tr(&quot;Invalid Contact Instance&quot;));
+    } else if (index == 1) {
+        instanceSelection-&gt;addItem(tr(&quot;Valid Recipe Instance&quot;));
+        instanceSelection-&gt;addItem(tr(&quot;Invalid Recipe Instance&quot;));
+    } else if (index == 2) {
+        instanceSelection-&gt;addItem(tr(&quot;Valid Order Instance&quot;));
+        instanceSelection-&gt;addItem(tr(&quot;Invalid Order Instance&quot;));
+    }
+    textChanged();
+
+    const QString fileName = QStringLiteral(&quot;:/schema_&quot;)
+        + QString::number(index) + QStringLiteral(&quot;.xsd&quot;);
+    QFile schemaFile(fileName);
+    if (!schemaFile.open(QIODevice::ReadOnly)) {
+        qWarning() &lt;&lt; &quot;Cannot open&quot; &lt;&lt; QDir::toNativeSeparators(fileName)
+            &lt;&lt; &#39;:&#39; &lt;&lt; schemaFile.errorString();
+        return;
+    }
+
+    const QString schemaText(QString::fromUtf8(schemaFile.readAll()));
+    schemaView-&gt;setPlainText(schemaText);
+
+    validate();
+}
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">instanceSelected()</span></code> slot the selected instance is loaded from the <a class="reference internal" href="resources.html#the-qt-resource-system"><span class="std std-ref">resource file</span></a> and loaded into the instance <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">editor</span></code></a> an the revalidation is triggered again.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::instanceSelected(int index)
+{
+    if (index &lt; 0) {
+        instanceEdit-&gt;setPlainText(QString());
+        return;
+    }
+    const QString fileName = QStringLiteral(&quot;:/instance_&quot;)
+        + QString::number(2 * schemaSelection-&gt;currentIndex() + index)
+        + QStringLiteral(&quot;.xml&quot;);
+    QFile instanceFile(fileName);
+    if (!instanceFile.open(QIODevice::ReadOnly)) {
+        qWarning() &lt;&lt; &quot;Cannot open&quot; &lt;&lt; QDir::toNativeSeparators(fileName)
+            &lt;&lt; &#39;:&#39; &lt;&lt; instanceFile.errorString();
+        return;
+    }
+    const QString instanceText(QString::fromUtf8(instanceFile.readAll()));
+    instanceEdit-&gt;setPlainText(instanceText);
+
+    validate();
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">validate()</span></code> slot does the actual work in this example. At first it stores the content of the schema <a class="reference internal" href="../PySide2/QtWidgets/QTextBrowser.html#PySide2.QtWidgets.QTextBrowser" title="PySide2.QtWidgets.QTextBrowser"><code class="xref py py-class docutils literal"><span class="pre">viewer</span></code></a> and the <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">editor</span></code></a> into temporary <a class="reference internal" href="../PySide2/QtCore/QByteArray.html#PySide2.QtCore.QByteArray" title="PySide2.QtCore.QByteArray"><code class="xref py py-class docutils literal"><span class="pre">variables</span></code></a> . Then it instanciates a <code class="docutils literal"><span class="pre">MessageHandler</span></code> object which inherits from <a class="reference internal" href="../PySide2/QtXmlPatterns/QAbstractMessageHandler.html#PySide2.QtXmlPatterns.QAbstractMessageHandler" title="PySide2.QtXmlPatterns.QAbstractMessageHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QAbstractMessageHandler</span></code></a> and is a convenience class to store error messages from the XmlPatterns system.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MessageHandler</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QAbstractMessageHandler</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MessageHandler</span><span class="p">()</span>
+        <span class="p">:</span> <span class="n">QAbstractMessageHandler</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="n">QString</span> <span class="n">statusMessage</span><span class="p">()</span> <span class="n">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_description</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nb">int</span> <span class="n">line</span><span class="p">()</span> <span class="n">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_sourceLocation</span><span class="o">.</span><span class="n">line</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nb">int</span> <span class="n">column</span><span class="p">()</span> <span class="n">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">m_sourceLocation</span><span class="o">.</span><span class="n">column</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">handleMessage</span><span class="p">(</span><span class="n">QtMsgType</span> <span class="nb">type</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">description</span><span class="p">,</span>
+                               <span class="n">const</span> <span class="n">QUrl</span> <span class="o">&amp;</span><span class="n">identifier</span><span class="p">,</span> <span class="n">const</span> <span class="n">QSourceLocation</span> <span class="o">&amp;</span><span class="n">sourceLocation</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Q_UNUSED</span><span class="p">(</span><span class="nb">type</span><span class="p">);</span>
+        <span class="n">Q_UNUSED</span><span class="p">(</span><span class="n">identifier</span><span class="p">);</span>
+
+        <span class="n">m_description</span> <span class="o">=</span> <span class="n">description</span><span class="p">;</span>
+        <span class="n">m_sourceLocation</span> <span class="o">=</span> <span class="n">sourceLocation</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QString</span> <span class="n">m_description</span><span class="p">;</span>
+    <span class="n">QSourceLocation</span> <span class="n">m_sourceLocation</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>After the <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSchema.html#PySide2.QtXmlPatterns.QXmlSchema" title="PySide2.QtXmlPatterns.QXmlSchema"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlSchema</span></code></a> is instanciated and the message handler set on it, the <code class="xref py py-func docutils literal"><span class="pre">QXmlSchema.load()</span></code> method is called with the schema data as argument. If the schema is invalid or a parsing error has occurred, <code class="xref py py-func docutils literal"><span class="pre">QXmlSchema.isValid()</span></code> returns <code class="docutils literal"><span class="pre">false</span></code> and the error is flagged in <code class="docutils literal"><span class="pre">errorOccurred</span></code> . If the loading was successful, a <a class="reference internal" href="../PySide2/QtXmlPatterns/QXmlSchemaValidator.html#PySide2.QtXmlPatterns.QXmlSchemaValidator" title="PySide2.QtXmlPatterns.QXmlSchemaValidator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXmlPatterns.QXmlSchemaValidator</span></code></a> is instanciated and the schema passed in the constructor. A call to <code class="xref py py-func docutils literal"><span class="pre">QXmlSchemaValidator.validate()</span></code> will validate the passed XML instance data against the XML schema. The return value of that method signals whether the validation was successful. Depending on the success the status <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">label</span></code></a> is set to ‘validation successful’ or the error message stored in the <code class="docutils literal"><span class="pre">MessageHandler</span></code></p>
+<p>The rest of the code does only some fancy coloring and eyecandy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>void MainWindow::validate()
+{
+    const QByteArray schemaData = schemaView-&gt;toPlainText().toUtf8();
+    const QByteArray instanceData = instanceEdit-&gt;toPlainText().toUtf8();
+
+    MessageHandler messageHandler;
+
+    QXmlSchema schema;
+    schema.setMessageHandler(&amp;messageHandler);
+
+    schema.load(schemaData);
+
+    bool errorOccurred = false;
+    if (!schema.isValid()) {
+        errorOccurred = true;
+    } else {
+        QXmlSchemaValidator validator(schema);
+        if (!validator.validate(instanceData))
+            errorOccurred = true;
+    }
+
+    if (errorOccurred) {
+        validationStatus-&gt;setText(messageHandler.statusMessage());
+        moveCursor(messageHandler.line(), messageHandler.column());
+    } else {
+        validationStatus-&gt;setText(tr(&quot;validation successful&quot;));
+    }
+
+    const QString styleSheet = QString(&quot;QLabel {background: %1; padding: 3px}&quot;)
+                                      .arg(errorOccurred ? QColor(Qt::red).lighter(160).name() :
+                                                           QColor(Qt::green).lighter(160).name());
+    validationStatus-&gt;setStyleSheet(styleSheet);
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="schema-ui-example-file">
+<h1>schema.ui Example File<a class="headerlink" href="#schema-ui-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="invalid-contact-xml-example-file">
+<h1>invalid_contact.xml Example File<a class="headerlink" href="#invalid-contact-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="invalid-order-xml-example-file">
+<h1>invalid_order.xml Example File<a class="headerlink" href="#invalid-order-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="invalid-recipe-xml-example-file">
+<h1>invalid_recipe.xml Example File<a class="headerlink" href="#invalid-recipe-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="valid-contact-xml-example-file">
+<h1>valid_contact.xml Example File<a class="headerlink" href="#valid-contact-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="valid-order-xml-example-file">
+<h1>valid_order.xml Example File<a class="headerlink" href="#valid-order-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="valid-recipe-xml-example-file">
+<h1>valid_recipe.xml Example File<a class="headerlink" href="#valid-recipe-xml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="schema-pro-example-file">
+<h1>schema.pro Example File<a class="headerlink" href="#schema-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="schema-qrc-example-file">
+<h1>schema.qrc Example File<a class="headerlink" href="#schema-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

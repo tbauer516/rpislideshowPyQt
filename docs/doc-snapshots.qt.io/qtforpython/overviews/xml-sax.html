@@ -1,0 +1,289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The SAX interface &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The SAX interface</a><ul>
+<li><a class="reference internal" href="#introduction-to-sax2">Introduction to SAX2</a></li>
+<li><a class="reference internal" href="#sax2-features">SAX2 Features</a></li>
+<li><a class="reference internal" href="#namespace-support-via-features">Namespace Support via Features</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-sax-interface">
+<span id="id1"></span><h1>The SAX interface<a class="headerlink" href="#the-sax-interface" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>SAX is an event-based standard interface for XML parsers. The Qt interface follows the design of the SAX2 Java implementation. Its naming scheme was adapted to fit the Qt naming conventions. Details on SAX2 can be found at <a class="reference external" href="http://www.saxproject.org">http://www.saxproject.org</a>.</p>
+<p>Support for SAX2 filters and the reader factory are under development. The Qt implementation does not include the SAX1 compatibility classes present in the Java interface.</p>
+</div></blockquote>
+<div class="section" id="introduction-to-sax2">
+<span id="id2"></span><h2>Introduction to SAX2<a class="headerlink" href="#introduction-to-sax2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The SAX2 interface is an event-driven mechanism to provide the user with document information. An “event” in this context means something reported by the parser, for example, it has encountered a start tag, or an end tag, etc.</p>
+<p>To make it less abstract consider the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">quote</span><span class="o">&gt;</span><span class="n">A</span> <span class="n">quotation</span><span class="o">.&lt;/</span><span class="n">quote</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Whilst reading (a SAX2 parser is usually referred to as “reader”) the above document three events would be triggered:</p>
+<ol class="arabic simple">
+<li>A start tag occurs (<code class="docutils literal"><span class="pre">&lt;quote&gt;</span></code>).</li>
+<li>Character data (i.e. text) is found, “A quotation.”.</li>
+<li>An end tag is parsed (<code class="docutils literal"><span class="pre">&lt;/quote&gt;</span></code>).</li>
+</ol>
+<p>Each time such an event occurs the parser reports it; you can set up event handlers to respond to these events.</p>
+<p>Whilst this is a fast and simple approach to read XML documents, manipulation is difficult because data is not stored, simply handled and discarded serially. The <a class="reference internal" href="xml-dom-tml.html#working-with-the-dom-tree"><span class="std std-ref">DOM interface</span></a> reads in and stores the whole document in a tree structure; this takes more memory, but makes it easier to manipulate the document’s structure.</p>
+<p>The Qt XML module provides an abstract class, <a class="reference internal" href="../PySide2/QtXml/QXmlReader.html#PySide2.QtXml.QXmlReader" title="PySide2.QtXml.QXmlReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlReader</span></code></a> , that defines the interface for potential SAX2 readers. Qt includes a reader implementation, <a class="reference internal" href="../PySide2/QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> , that is easy to adapt through subclassing.</p>
+<p>The reader reports parsing events through special handler classes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Handler class</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtXml/QXmlContentHandler.html#PySide2.QtXml.QXmlContentHandler" title="PySide2.QtXml.QXmlContentHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlContentHandler</span></code></a></td>
+<td>Reports events related to the content of a document (e.g. the start tag or characters).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtXml/QXmlDTDHandler.html#PySide2.QtXml.QXmlDTDHandler" title="PySide2.QtXml.QXmlDTDHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlDTDHandler</span></code></a></td>
+<td>Reports events related to the DTD (e.g. notation declarations).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtXml/QXmlErrorHandler.html#PySide2.QtXml.QXmlErrorHandler" title="PySide2.QtXml.QXmlErrorHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlErrorHandler</span></code></a></td>
+<td>Reports errors or warnings that occurred during parsing.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtXml/QXmlEntityResolver.html#PySide2.QtXml.QXmlEntityResolver" title="PySide2.QtXml.QXmlEntityResolver"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlEntityResolver</span></code></a></td>
+<td>Reports external entities during parsing and allows users to resolve external entities themselves instead of leaving it to the reader.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtXml/QXmlDeclHandler.html#PySide2.QtXml.QXmlDeclHandler" title="PySide2.QtXml.QXmlDeclHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlDeclHandler</span></code></a></td>
+<td>Reports further DTD related events (e.g. attribute declarations).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtXml/QXmlLexicalHandler.html#PySide2.QtXml.QXmlLexicalHandler" title="PySide2.QtXml.QXmlLexicalHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlLexicalHandler</span></code></a></td>
+<td>Reports events related to the lexical structure of the document (the beginning of the DTD, comments etc.).</td>
+</tr>
+</tbody>
+</table>
+<p>These classes are abstract classes describing the interface. The <a class="reference internal" href="../PySide2/QtXml/QXmlDefaultHandler.html#PySide2.QtXml.QXmlDefaultHandler" title="PySide2.QtXml.QXmlDefaultHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlDefaultHandler</span></code></a> class provides a “do nothing” default implementation for all of them. Therefore users only need to overload the <a class="reference internal" href="../PySide2/QtXml/QXmlDefaultHandler.html#PySide2.QtXml.QXmlDefaultHandler" title="PySide2.QtXml.QXmlDefaultHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlDefaultHandler</span></code></a> functions they are interested in.</p>
+<p>To read input XML data a special class <a class="reference internal" href="../PySide2/QtXml/QXmlInputSource.html#PySide2.QtXml.QXmlInputSource" title="PySide2.QtXml.QXmlInputSource"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlInputSource</span></code></a> is used.</p>
+<p>Apart from those already mentioned, the following SAX2 support classes provide additional useful functionality:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Class</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtXml/QXmlAttributes.html#PySide2.QtXml.QXmlAttributes" title="PySide2.QtXml.QXmlAttributes"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlAttributes</span></code></a></td>
+<td>Used to pass attributes in a start element event.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../PySide2/QtXml/QXmlLocator.html#PySide2.QtXml.QXmlLocator" title="PySide2.QtXml.QXmlLocator"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlLocator</span></code></a></td>
+<td>Used to obtain the actual parsing position of an event.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../PySide2/QtXml/QXmlNamespaceSupport.html#PySide2.QtXml.QXmlNamespaceSupport" title="PySide2.QtXml.QXmlNamespaceSupport"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlNamespaceSupport</span></code></a></td>
+<td>Used to implement namespace support for a reader. Note that namespaces do not change the parsing behavior. They are only reported through the handler.</td>
+</tr>
+</tbody>
+</table>
+<p>The <a class="reference internal" href="qtxml-saxbookmarks-example.html#sax-bookmarks-example"><span class="std std-ref">SAX Bookmarks example</span></a> illustrates how to subclass <a class="reference internal" href="../PySide2/QtXml/QXmlDefaultHandler.html#PySide2.QtXml.QXmlDefaultHandler" title="PySide2.QtXml.QXmlDefaultHandler"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlDefaultHandler</span></code></a> to read an XML bookmark file (XBEL) and how to generate XML by hand.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sax2-features">
+<span id="id3"></span><h2>SAX2 Features<a class="headerlink" href="#sax2-features" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The behavior of an XML reader depends on its support for certain optional features. For example, a reader may have the feature “report attributes used for namespace declarations and prefixes along with the local name of a tag”. Like every other feature this has a unique name represented by a URI: it is called <em>http://xml.org/sax/features/namespace-prefixes</em> .</p>
+<p>The Qt SAX2 implementation can report whether the reader has particular functionality using the <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.hasFeature()</span></code> function. Available features can be tested with <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.feature()</span></code> , and switched on or off using <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.setFeature()</span></code> .</p>
+<p>Consider the example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">document</span> <span class="n">xmlns</span><span class="p">:</span><span class="n">book</span> <span class="o">=</span> <span class="s1">&#39;http://example.com/fnord/book/&#39;</span>
+          <span class="n">xmlns</span>      <span class="o">=</span> <span class="s1">&#39;http://example.com/fnord/&#39;</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>A reader that does not support the <em>http://xml.org/sax/features/namespace-prefixes</em> feature would report the element name <em>document</em> but not its attributes <em>xmlns:book</em> and <em>xmlns</em> with their values. A reader with the feature <em>http://xml.org/sax/features/namespace-prefixes</em> reports the namespace attributes if the <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.feature()</span></code> is switched on.</p>
+<p>Other features include <em>http://xml.org/sax/features/namespace</em> (namespace processing, implies <em>http://xml.org/sax/features/namespace-prefixes</em> ) and <em>http://xml.org/sax/features/validation</em> (the ability to report validation errors).</p>
+<p>Whilst SAX2 leaves it to the user to define and implement whatever features are required, support for <em>http://xml.org/sax/features/namespace</em> (and thus <em>http://xml.org/sax/features/namespace-prefixes</em> ) is mandantory. The <a class="reference internal" href="../PySide2/QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> implementation of <a class="reference internal" href="../PySide2/QtXml/QXmlReader.html#PySide2.QtXml.QXmlReader" title="PySide2.QtXml.QXmlReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlReader</span></code></a> , supports them, and can do namespace processing.</p>
+<p><a class="reference internal" href="../PySide2/QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> is not validating, so it does not support <em>http://xml.org/sax/features/validation</em> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="namespace-support-via-features">
+<span id="id4"></span><h2>Namespace Support via Features<a class="headerlink" href="#namespace-support-via-features" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As we have seen in the previous section, we can configure the behavior of the reader when it comes to namespace processing. This is done by setting and unsetting the <em>http://xml.org/sax/features/namespaces</em> and <em>http://xml.org/sax/features/namespace-prefixes</em> features.</p>
+<p>They influence the reporting behavior in the following way:</p>
+<ol class="arabic simple">
+<li>Namespace prefixes and local parts of elements and attributes can be reported.</li>
+<li>The qualified names of elements and attributes are reported.</li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QXmlContentHandler.startPrefixMapping()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QXmlContentHandler.endPrefixMapping()</span></code> are called by the reader.</li>
+<li>Attributes that declare namespaces (i.e. the attribute <em>xmlns</em> and attributes starting with <em>xmlns:</em>) are reported.</li>
+</ol>
+<p>Consider the following element:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">author</span> <span class="n">xmlns</span><span class="p">:</span><span class="n">fnord</span> <span class="o">=</span> <span class="s1">&#39;http://example.com/fnord/&#39;</span>
+             <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Ms&quot;</span>
+             <span class="n">fnord</span><span class="p">:</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Goddess&quot;</span>
+             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Eris Kallisti&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>With <em>http://xml.org/sax/features/namespace-prefixes</em> set to true the reader will report four attributes; but with the <em>namespace-prefixes</em> feature set to false only three, with the <em>xmlns:fnord</em> attribute defining a namespace being “invisible” to the reader.</p>
+<p>The <em>http://xml.org/sax/features/namespaces</em> feature is responsible for reporting local names, namespace prefixes and URIs. With <em>http://xml.org/sax/features/namespaces</em> set to true the parser will report <em>title</em> as the local name of the <em>fnord:title</em> attribute, <em>fnord</em> being the namespace prefix and <em>http://example.com/fnord/</em> as the namespace URI. When <em>http://xml.org/sax/features/namespaces</em> is false none of them are reported.</p>
+<p>In the current implementation the Qt XML classes follow the definition that the prefix <em>xmlns</em> itself isn’t associated with any namespace at all (see <a class="reference external" href="http://www.w3.org/TR/1999/REC-xml-names-19990114/#ns-using">http://www.w3.org/TR/1999/REC-xml-names-19990114/#ns-using</a>). Therefore even with <em>http://xml.org/sax/features/namespaces</em> and <em>http://xml.org/sax/features/namespace-prefixes</em> both set to true the reader won’t return either a local name, a namespace prefix or a namespace URI for <em>xmlns:fnord</em> .</p>
+<p>This might be changed in the future following the W3C suggestion <a class="reference external" href="http://www.w3.org/2000/xmlns/">http://www.w3.org/2000/xmlns/</a> to associate <em>xmlns</em> with the namespace <em>http://www.w3.org/2000/xmlns</em> .</p>
+<p>As the SAX2 standard suggests, <a class="reference internal" href="../PySide2/QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> defaults to having <em>http://xml.org/sax/features/namespaces</em> set to true and <em>http://xml.org/sax/features/namespace-prefixes</em> set to false. When changing this behavior using <code class="xref py py-func docutils literal"><span class="pre">QXmlSimpleReader.setFeature()</span></code> note that the combination of both features set to false is illegal.</p>
+</div></blockquote>
+</div>
+<div class="section" id="summary">
+<span id="id5"></span><h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><a class="reference internal" href="../PySide2/QtXml/QXmlSimpleReader.html#PySide2.QtXml.QXmlSimpleReader" title="PySide2.QtXml.QXmlSimpleReader"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtXml.QXmlSimpleReader</span></code></a> implements the following behavior:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="29%" />
+<col width="14%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>(namespaces, namespace-prefixes)</td>
+<td>Namespace prefix and local part</td>
+<td>Qualified names</td>
+<td>Prefix mapping</td>
+<td>xmlns attributes</td>
+</tr>
+<tr class="row-even"><td>(true, false)</td>
+<td>Yes</td>
+<td>Yes*</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>(true, true)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>(false, true)</td>
+<td>No*</td>
+<td>Yes</td>
+<td>No*</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>(false, false)</td>
+<td colspan="4">Illegal</td>
+</tr>
+</tbody>
+</table>
+<p>The behavior of the entries marked with an asterisk (*) is not specified by SAX.</p>
+</div></blockquote>
+</div>
+<div class="section" id="properties">
+<span id="id6"></span><h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Properties are a more general concept. They have a unique name, represented as an URI, but their value is <code class="docutils literal"><span class="pre">void*</span></code> . Thus nearly anything can be used as a property value. This concept involves some danger, though: there is no means of ensuring type-safety; the user must take care that they pass the right type. Properties are useful if a reader supports special handler classes.</p>
+<p>The URIs used for features and properties often look like URLs, e.g. <code class="docutils literal"><span class="pre">http://xml.org/sax/features/namespace</span></code> . This does not mean that the data required is at this address. It is simply a way of defining unique names.</p>
+<p>Anyone can define and use new SAX2 properties for their readers. Property support is not mandatory.</p>
+<p>To set or query properties the following functions are provided: <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.setProperty()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.property()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QXmlReader.hasProperty()</span></code> .</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

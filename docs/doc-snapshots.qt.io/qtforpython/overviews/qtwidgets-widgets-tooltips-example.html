@@ -1,0 +1,580 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tool Tips Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tool Tips Example</a><ul>
+<li><a class="reference internal" href="#sortingbox-class-definition">SortingBox Class Definition</a></li>
+<li><a class="reference internal" href="#sortingbox-class-implementation">SortingBox Class Implementation</a></li>
+<li><a class="reference internal" href="#shapeitem-class-definition">ShapeItem Class Definition</a></li>
+<li><a class="reference internal" href="#shapeitem-class-implementation">ShapeItem Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shapeitem-cpp-example-file">shapeitem.cpp Example File</a></li>
+<li><a class="reference internal" href="#shapeitem-h-example-file">shapeitem.h Example File</a></li>
+<li><a class="reference internal" href="#sortingbox-cpp-example-file">sortingbox.cpp Example File</a></li>
+<li><a class="reference internal" href="#sortingbox-h-example-file">sortingbox.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#tooltips-pro-example-file">tooltips.pro Example File</a></li>
+<li><a class="reference internal" href="#tooltips-qrc-example-file">tooltips.qrc Example File</a></li>
+<li><a class="reference internal" href="#circle-png-image-file">circle.png Image File</a></li>
+<li><a class="reference internal" href="#square-png-image-file">square.png Image File</a></li>
+<li><a class="reference internal" href="#triangle-png-image-file">triangle.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tool-tips-example">
+<span id="id1"></span><h1>Tool Tips Example<a class="headerlink" href="#tool-tips-example" title="Permalink to this headline">¶</a></h1>
+<p>Tool Tips example shows how to provide static and dynamic tool tips for an application’s widgets</p>
+<blockquote>
+<div><p>The Tool Tips example shows how to provide static and dynamic tool tips for an application’s widgets.</p>
+<p>The simplest and most common way to set a widget’s tool tip is by calling its <code class="xref py py-func docutils literal"><span class="pre">QWidget.setToolTip()</span></code> function (static tool tips). Then the tool tip is shown whenever the cursor points at the widget. We show how to do this with our application’s tool buttons. But it is also possible to show different tool tips depending on the cursor’s position (dynamic tooltips). This approach uses mouse tracking and event handling to determine what widgets are located under the cursor at any point in time, and displays their tool tips. The tool tips for the shape items in our application are implemented using the latter approach.</p>
+<p>With the <code class="docutils literal"><span class="pre">Tooltips</span></code> application the user can create new shape items with the provided tool buttons, and move the items around using the mouse. Tooltips are provided whenever the cursor is pointing to a shape item or one of the buttons.</p>
+<p>The Tooltips example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ShapeItem</span></code> is a custom widget representing one single shape item.</li>
+<li><code class="docutils literal"><span class="pre">SortingBox</span></code> inherits from <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> and is the application’s main widget.</li>
+</ul>
+<p>First we will review the <code class="docutils literal"><span class="pre">SortingBox</span></code> class, then we will take a look at the <code class="docutils literal"><span class="pre">ShapeItem</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="sortingbox-class-definition">
+<span id="id2"></span><h2>SortingBox Class Definition<a class="headerlink" href="#sortingbox-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SortingBox</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">SortingBox</span><span class="p">();</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createNewCircle</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createNewSquare</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createNewTriangle</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">SortingBox</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , and it is the Tooltips application’s main widget. We reimplement several of the event handlers.</p>
+<p>The <code class="docutils literal"><span class="pre">event()</span></code> function provides tooltips, the <code class="docutils literal"><span class="pre">resize()</span></code> function makes sure the application appears consistently when the user resizes the main widget, and the <code class="docutils literal"><span class="pre">paintEvent()</span></code> function displays the shape items within the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget. The mouse event handlers are reimplemented to make the user able to move the items around.</p>
+<p>In addition we need three private slots to make the user able to create new shape items.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span><span class="p">:</span>
+    <span class="nb">int</span> <span class="n">updateButtonGeometry</span><span class="p">(</span><span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span><span class="p">,</span> <span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">createShapeItem</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">,</span>
+                         <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">,</span> <span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">itemAt</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">moveItemTo</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">);</span>
+    <span class="n">QPoint</span> <span class="n">initialItemPosition</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+    <span class="n">QPoint</span> <span class="n">randomItemPosition</span><span class="p">();</span>
+    <span class="n">QColor</span> <span class="n">initialItemColor</span><span class="p">();</span>
+    <span class="n">QColor</span> <span class="n">randomItemColor</span><span class="p">();</span>
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">createToolButton</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">,</span> <span class="n">const</span> <span class="n">QIcon</span> <span class="o">&amp;</span><span class="n">icon</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>We also create several private functions: We use the <code class="docutils literal"><span class="pre">initialItemPosition()</span></code> , <code class="docutils literal"><span class="pre">initialItemColor()</span></code> and <code class="docutils literal"><span class="pre">createToolButton()</span></code> functions when we are constructing the widget, and we use the <code class="docutils literal"><span class="pre">updateButtonGeometry()</span></code> function whenever the user is resizing the application’s main widget.</p>
+<p>The <code class="docutils literal"><span class="pre">itemAt()</span></code> function determines if there is a shape item at a particular position, and the <code class="docutils literal"><span class="pre">moveItemTo()</span></code> function moves an item to a new position. We use the <code class="docutils literal"><span class="pre">createShapeItem()</span></code> , <code class="docutils literal"><span class="pre">randomItemPosition()</span></code> and <code class="docutils literal"><span class="pre">randomItemColor()</span></code> functions to create new shape items.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QList</span><span class="o">&lt;</span><span class="n">ShapeItem</span><span class="o">&gt;</span> <span class="n">shapeItems</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">circlePath</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">squarePath</span><span class="p">;</span>
+    <span class="n">QPainterPath</span> <span class="n">trianglePath</span><span class="p">;</span>
+
+    <span class="n">QPoint</span> <span class="n">previousPosition</span><span class="p">;</span>
+    <span class="n">ShapeItem</span> <span class="o">*</span><span class="n">itemInMotion</span><span class="p">;</span>
+
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">newCircleButton</span><span class="p">;</span>
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">newSquareButton</span><span class="p">;</span>
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">newTriangleButton</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We keep all the shape items in a <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> , and we keep three <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> objects holding the shapes of a circle, a square and a triangle. We also need to have a pointer to an item when it is moving, and we need to know its previous position.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sortingbox-class-implementation">
+<span id="id3"></span><h2>SortingBox Class Implementation<a class="headerlink" href="#sortingbox-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SortingBox</span><span class="p">::</span><span class="n">SortingBox</span><span class="p">()</span>
+<span class="p">{</span>
+</pre></div>
+</div>
+<p>In the constructor, we first set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.WA_StaticContents</span></code> attribute on the widget. This attribute indicates that the widget contents are north-west aligned and static. On resize, such a widget will receive paint events only for the newly visible part of itself.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setMouseTracking</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To be able to show the appropriate tooltips while the user is moving the cursor around, we need to enable mouse tracking for the widget.</p>
+<p>If mouse tracking is disabled (the default), the widget only receives mouse move events when at least one mouse button is pressed while the mouse is being moved. If mouse tracking is enabled, the widget receives mouse move events even if no buttons are pressed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setBackgroundRole</span><span class="p">(</span><span class="n">QPalette</span><span class="p">::</span><span class="n">Base</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A widget’s background role defines the brush from the widget’s palette that is used to render the background, and <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Base</span></code> is typically white.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">newCircleButton</span> <span class="o">=</span> <span class="n">createToolButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;New Circle&quot;</span><span class="p">),</span>
+                                   <span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/circle.png&quot;</span><span class="p">),</span>
+                                   <span class="n">SLOT</span><span class="p">(</span><span class="n">createNewCircle</span><span class="p">()));</span>
+
+<span class="n">newSquareButton</span> <span class="o">=</span> <span class="n">createToolButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;New Square&quot;</span><span class="p">),</span>
+                                   <span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/square.png&quot;</span><span class="p">),</span>
+                                   <span class="n">SLOT</span><span class="p">(</span><span class="n">createNewSquare</span><span class="p">()));</span>
+
+<span class="n">newTriangleButton</span> <span class="o">=</span> <span class="n">createToolButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;New Triangle&quot;</span><span class="p">),</span>
+                                     <span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/triangle.png&quot;</span><span class="p">),</span>
+                                     <span class="n">SLOT</span><span class="p">(</span><span class="n">createNewTriangle</span><span class="p">()));</span>
+
+<span class="n">circlePath</span><span class="o">.</span><span class="n">addEllipse</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+<span class="n">squarePath</span><span class="o">.</span><span class="n">addRect</span><span class="p">(</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+
+<span class="n">qreal</span> <span class="n">x</span> <span class="o">=</span> <span class="n">trianglePath</span><span class="o">.</span><span class="n">currentPosition</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">();</span>
+<span class="n">qreal</span> <span class="n">y</span> <span class="o">=</span> <span class="n">trianglePath</span><span class="o">.</span><span class="n">currentPosition</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">();</span>
+<span class="n">trianglePath</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">120</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">trianglePath</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">trianglePath</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="n">trianglePath</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">120</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>After creating the application’s tool buttons using the private <code class="docutils literal"><span class="pre">createToolButton()</span></code> function, we construct the shapes of a circle, a square and a triangle using <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> .</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QPainterPath.html#PySide2.QtGui.QPainterPath" title="PySide2.QtGui.QPainterPath"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainterPath</span></code></a> class provides a container for painting operations, enabling graphical shapes to be constructed and reused. The main advantage of painter paths over normal drawing operations is that complex shapes only need to be created once, but they can be drawn many times using only calls to <code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPath()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Tool Tips&quot;</span><span class="p">));</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>
+
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">circlePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Circle&quot;</span><span class="p">),</span> <span class="n">initialItemPosition</span><span class="p">(</span><span class="n">circlePath</span><span class="p">),</span>
+                    <span class="n">initialItemColor</span><span class="p">());</span>
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">squarePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Square&quot;</span><span class="p">),</span> <span class="n">initialItemPosition</span><span class="p">(</span><span class="n">squarePath</span><span class="p">),</span>
+                    <span class="n">initialItemColor</span><span class="p">());</span>
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">trianglePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Triangle&quot;</span><span class="p">),</span>
+                    <span class="n">initialItemPosition</span><span class="p">(</span><span class="n">trianglePath</span><span class="p">),</span> <span class="n">initialItemColor</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we set the window title, resize the widget to a suitable size, and finally create three initial shape items using the private <code class="docutils literal"><span class="pre">createShapeItem()</span></code> , <code class="docutils literal"><span class="pre">initialItemPosition()</span></code> and <code class="docutils literal"><span class="pre">initialItemColor()</span></code> functions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> is the main event handler and receives all the widget’s events. Normally, we recommend reimplementing one of the specialized event handlers instead of this function. But here we want to catch the <code class="xref py py-attr docutils literal"><span class="pre">QEvent.ToolTip</span></code> events, and since these are rather rare, there exists no specific event handler. For that reason we reimplement the main event handler, and the first thing we need to do is to determine the event’s type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">ToolTip</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QHelpEvent</span> <span class="o">*</span><span class="n">helpEvent</span> <span class="o">=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QHelpEvent</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+        <span class="nb">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">itemAt</span><span class="p">(</span><span class="n">helpEvent</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">QToolTip</span><span class="p">::</span><span class="n">showText</span><span class="p">(</span><span class="n">helpEvent</span><span class="o">-&gt;</span><span class="n">globalPos</span><span class="p">(),</span> <span class="n">shapeItems</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">toolTip</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">QToolTip</span><span class="p">::</span><span class="n">hideText</span><span class="p">();</span>
+            <span class="n">event</span><span class="o">-&gt;</span><span class="n">ignore</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">QWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the type is <code class="xref py py-attr docutils literal"><span class="pre">QEvent.ToolTip</span></code> , we cast the event to a <a class="reference internal" href="../PySide2/QtGui/QHelpEvent.html#PySide2.QtGui.QHelpEvent" title="PySide2.QtGui.QHelpEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QHelpEvent</span></code></a> , otherwise we propagate the event using the <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> function.</p>
+<p>The <a class="reference internal" href="../PySide2/QtGui/QHelpEvent.html#PySide2.QtGui.QHelpEvent" title="PySide2.QtGui.QHelpEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QHelpEvent</span></code></a> class provides an event that is used to request helpful information about a particular point in a widget.</p>
+<p>For example, the <code class="xref py py-func docutils literal"><span class="pre">QHelpEvent.pos()</span></code> function returns the event’s position relative to the widget to which the event is dispatched. Here we use this information to determine if the position of the event is contained within the area of any of the shape items. If it is, we display the shape item’s tooltip at the position of the event. If not, we hide the tooltip and explicitly ignore the event. This makes sure that the calling code does not start any tooltip specific modes as a result of the event. Note that the <code class="xref py py-func docutils literal"><span class="pre">QToolTip.showText()</span></code> function needs the event’s position in global coordinates provided by <code class="xref py py-func docutils literal"><span class="pre">QHelpEvent.globalPos()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">margin</span> <span class="o">=</span> <span class="n">style</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PM_DefaultTopLevelMargin</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">margin</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">margin</span><span class="p">;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">updateButtonGeometry</span><span class="p">(</span><span class="n">newCircleButton</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">updateButtonGeometry</span><span class="p">(</span><span class="n">newSquareButton</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">updateButtonGeometry</span><span class="p">(</span><span class="n">newTriangleButton</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">resizeEvent()</span></code> function is reimplemented to receive the resize events dispatched to the widget. It makes sure that the tool buttons keep their position relative to the main widget when the widget is resized. We want the buttons to always be vertically aligned in the application’s bottom right corner, so each time the main widget is resized we update the buttons geometry.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span> <span class="o">/*</span> <span class="n">event</span> <span class="o">*/</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">painter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QPainter</span><span class="p">::</span><span class="n">Antialiasing</span><span class="p">);</span>
+    <span class="n">foreach</span> <span class="p">(</span><span class="n">ShapeItem</span> <span class="n">shapeItem</span><span class="p">,</span> <span class="n">shapeItems</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">paintEvent()</span></code> function is reimplemented to receive paint events for the widget. We create a <a class="reference internal" href="../PySide2/QtGui/QPainter.html#PySide2.QtGui.QPainter" title="PySide2.QtGui.QPainter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPainter</span></code></a> for the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget, and run through the list of created shape items, drawing each item at its defined position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">shapeItem</span><span class="o">.</span><span class="n">position</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The painter will by default draw all the shape items at position (0,0) in the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget. The <code class="xref py py-func docutils literal"><span class="pre">QPainter.translate()</span></code> function translates the coordinate system by the given offset, making each shape item appear at its defined position. But remember to translate the coordinate system back when the item is drawn, otherwise the next shape item will appear at a position relative to the item we drawed last.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">shapeItem</span><span class="o">.</span><span class="n">color</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">shapeItem</span><span class="o">.</span><span class="n">path</span><span class="p">());</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">shapeItem</span><span class="o">.</span><span class="n">position</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QPainter.setBrush()</span></code> function sets the current brush used by the painter. When the provided argument is a <a class="reference internal" href="../PySide2/QtGui/QColor.html#PySide2.QtGui.QColor" title="PySide2.QtGui.QColor"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QColor</span></code></a> , the function calls the appropriate <a class="reference internal" href="../PySide2/QtGui/QBrush.html#PySide2.QtGui.QBrush" title="PySide2.QtGui.QBrush"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QBrush</span></code></a> constructor which creates a brush with the specified color and <code class="xref py py-attr docutils literal"><span class="pre">Qt.SolidPattern</span></code> style. The <code class="xref py py-func docutils literal"><span class="pre">QPainter.drawPath()</span></code> function draws the given path using the current pen for outline and the current brush for filling.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">itemAt</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">itemInMotion</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">shapeItems</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+            <span class="n">previousPosition</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+            <span class="n">shapeItems</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">shapeItems</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="n">update</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">mousePressEvent()</span></code> function is reimplemented to receive the mouse press events dispatched to the widget. It determines if an event’s position is contained within the area of any of the shape items, using the private <code class="docutils literal"><span class="pre">itemAt()</span></code> function.</p>
+<p>If an item covers the position, we store a pointer to that item and the event’s position. If several of the shape items cover the position, we store the pointer to the uppermost item. Finally, we move the shape item to the end of the list, and make a call to the <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> function to make the item appear on top.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> function does not cause an immediate repaint; instead it schedules a paint event for processing when Qt returns to the main event loop.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">itemInMotion</span><span class="p">)</span>
+        <span class="n">moveItemTo</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">mouseMoveEvent()</span></code> function is reimplemented to receive mouse move events for the widget. If the left mouse button is pressed and there exists a shape item in motion, we use the private <code class="docutils literal"><span class="pre">moveItemTo()</span></code> function to move the item with an offset corresponding to the offset between the positions of the current mouse event and the previous one.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">LeftButton</span> <span class="o">&amp;&amp;</span> <span class="n">itemInMotion</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">moveItemTo</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">());</span>
+        <span class="n">itemInMotion</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">mouseReleaseEvent()</span></code> function is reimplemented to receive the mouse release events dispatched to the widget. If the left mouse button is pressed and there exists a shape item in motion, we use the private <code class="docutils literal"><span class="pre">moveItemTo()</span></code> function to move the item like we did in <code class="docutils literal"><span class="pre">mouseMoveEvent()</span></code> . But then we remove the pointer to the item in motion, making the shape item’s position final for now. To move the item further, the user will need to press the left mouse button again.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">createNewCircle</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">circlePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Circle &lt;%1&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="o">++</span><span class="n">count</span><span class="p">),</span>
+                    <span class="n">randomItemPosition</span><span class="p">(),</span> <span class="n">randomItemColor</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">createNewSquare</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">squarePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Square &lt;%1&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="o">++</span><span class="n">count</span><span class="p">),</span>
+                    <span class="n">randomItemPosition</span><span class="p">(),</span> <span class="n">randomItemColor</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">createNewTriangle</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">static</span> <span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">createShapeItem</span><span class="p">(</span><span class="n">trianglePath</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Triangle &lt;%1&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="o">++</span><span class="n">count</span><span class="p">),</span>
+                    <span class="n">randomItemPosition</span><span class="p">(),</span> <span class="n">randomItemColor</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createNewCircle()</span></code> , <code class="docutils literal"><span class="pre">createNewSquare()</span></code> and <code class="docutils literal"><span class="pre">createNewTriangle()</span></code> slots simply create new shape items, using the private <code class="docutils literal"><span class="pre">createShapeItem()</span></code> , <code class="docutils literal"><span class="pre">randomItemPosition()</span></code> and <code class="docutils literal"><span class="pre">randomItemColor()</span></code> functions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">itemAt</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">shapeItems</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="n">ShapeItem</span> <span class="o">&amp;</span><span class="n">item</span> <span class="o">=</span> <span class="n">shapeItems</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">path</span><span class="p">()</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">item</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">itemAt()</span></code> function, we run through the list of created shape items to check if the given position is contained within the area of any of the shape items.</p>
+<p>For each shape item we use the <code class="xref py py-func docutils literal"><span class="pre">QPainterPath.contains()</span></code> function to find out if the item’s painter path contains the position. If it does we return the index of the item, otherwise we return -1. We run through the list backwards to get the index of the uppermost shape item in case several items cover the position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">moveItemTo</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPoint</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">-</span> <span class="n">previousPosition</span><span class="p">;</span>
+    <span class="n">itemInMotion</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">itemInMotion</span><span class="o">-&gt;</span><span class="n">position</span><span class="p">()</span> <span class="o">+</span> <span class="n">offset</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">moveItemTo()</span></code> function moves the shape item in motion, and the parameter <code class="docutils literal"><span class="pre">pos</span></code> is the position of a mouse event. First we calculate the offset between the parameter <code class="docutils literal"><span class="pre">pos</span></code> and the previous mouse event position. Then we add the offset to the current position of the item in motion.</p>
+<p>It is tempting to simply set the position of the item to be the parameter <code class="docutils literal"><span class="pre">pos</span></code> . But an item’s position defines the top left corner of the item’s bounding rectangle, and the parameter <code class="docutils literal"><span class="pre">pos</span></code> can be any point; The suggested shortcut would cause the item to jump to a position where the cursor is pointing to the bounding rectangle’s top left corner, regardless of the item’s previous position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">previousPosition</span> <span class="o">=</span> <span class="n">pos</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we update the previous mouse event position, and make a call to the <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> function to make the item appear at its new position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">updateButtonGeometry</span><span class="p">(</span><span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span><span class="p">,</span> <span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QSize</span> <span class="n">size</span> <span class="o">=</span> <span class="n">button</span><span class="o">-&gt;</span><span class="n">sizeHint</span><span class="p">();</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">size</span><span class="o">.</span><span class="n">rwidth</span><span class="p">(),</span> <span class="n">y</span> <span class="o">-</span> <span class="n">size</span><span class="o">.</span><span class="n">rheight</span><span class="p">(),</span>
+                        <span class="n">size</span><span class="o">.</span><span class="n">rwidth</span><span class="p">(),</span> <span class="n">size</span><span class="o">.</span><span class="n">rheight</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="n">y</span> <span class="o">-</span> <span class="n">size</span><span class="o">.</span><span class="n">rheight</span><span class="p">()</span>
+           <span class="o">-</span> <span class="n">style</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">QStyle</span><span class="p">::</span><span class="n">PM_DefaultLayoutSpacing</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">updateButtonGeometry()</span></code> function we set the geometry for the given button. The parameter coordinates define the bottom right corner of the button. We use these coordinates and the button’s size hint to determine the position of the upper left corner. This position, and the button’s width and height, are the arguments required by the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setGeometry()</span></code> function.</p>
+<p>In the end, we calculate and return the y-coordinate of the bottom right corner of the next button. We use the <code class="xref py py-func docutils literal"><span class="pre">QWidget.style()</span></code> function to retrieve the widget’s GUI style, and then <code class="xref py py-func docutils literal"><span class="pre">QStyle.pixelMetric()</span></code> to determine the widget’s preferred default spacing between its child widgets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">createShapeItem</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">,</span>
+                                 <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">,</span> <span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">,</span>
+                                 <span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ShapeItem</span> <span class="n">shapeItem</span><span class="p">;</span>
+    <span class="n">shapeItem</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+    <span class="n">shapeItem</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">toolTip</span><span class="p">);</span>
+    <span class="n">shapeItem</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+    <span class="n">shapeItem</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+    <span class="n">shapeItems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shapeItem</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createShapeItem()</span></code> function creates a single shape item. It sets the path, tooltip, position and color, using the item’s own functions. In the end, the function appends the new item to the list of shape items, and calls the <code class="xref py py-func docutils literal"><span class="pre">QWidget.update()</span></code> function to make it appear with the other items within the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QToolButton</span> <span class="o">*</span><span class="n">SortingBox</span><span class="p">::</span><span class="n">createToolButton</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">,</span>
+                                          <span class="n">const</span> <span class="n">QIcon</span> <span class="o">&amp;</span><span class="n">icon</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">member</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QToolButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QToolButton</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">toolTip</span><span class="p">);</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">);</span>
+    <span class="n">button</span><span class="o">-&gt;</span><span class="n">setIconSize</span><span class="p">(</span><span class="n">QSize</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">member</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">button</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createToolButton()</span></code> function is called from the <code class="docutils literal"><span class="pre">SortingBox</span></code> constructor. We create a tool button with the given tooltip and icon. The button’s parent is the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget, and its size is 32 x 32 pixels. Before we return the button, we connect it to the given slot.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPoint</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">initialItemPosition</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">path</span><span class="o">.</span><span class="n">controlPointRect</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">shapeItems</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="mi">3</span> <span class="o">*</span> <span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">path</span><span class="o">.</span><span class="n">controlPointRect</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="n">shapeItems</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+             <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">path</span><span class="o">.</span><span class="n">controlPointRect</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">initialItemPosition()</span></code> function is also called from the constructor. We want the three first items to initially be centered in the middle of the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget, and we use this function to calculate their positions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPoint</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">randomItemPosition</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QPoint</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">120</span><span class="p">),</span> <span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">120</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Whenever the user creates a new shape item, we want the new item to appear at a random position, and we use the <code class="docutils literal"><span class="pre">randomItemPosition()</span></code> function to calculate such a position. We make sure that the item appears within the visible area of the <code class="docutils literal"><span class="pre">SortingBox</span></code> widget, using the widget’s current width and height when calculating the random coordinates.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QColor</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">initialItemColor</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QColor</span><span class="p">::</span><span class="n">fromHsv</span><span class="p">(((</span><span class="n">shapeItems</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">85</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">190</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As with <code class="docutils literal"><span class="pre">initialItemPosition()</span></code> , the <code class="docutils literal"><span class="pre">initialItemColor()</span></code> function is called from the constructor. The purposes of both functions are purely cosmetic: We want to control the initial position and color of the three first items.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QColor</span> <span class="n">SortingBox</span><span class="p">::</span><span class="n">randomItemColor</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">QColor</span><span class="p">::</span><span class="n">fromHsv</span><span class="p">(</span><span class="n">QRandomGenerator</span><span class="p">::</span><span class="k">global</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">bounded</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">190</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally the <code class="docutils literal"><span class="pre">randomItemColor()</span></code> function is implemented to give the shape items the user creates, a random color.</p>
+</div></blockquote>
+</div>
+<div class="section" id="shapeitem-class-definition">
+<span id="id4"></span><h2>ShapeItem Class Definition<a class="headerlink" href="#shapeitem-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ShapeItem</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">setPath</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setToolTip</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setPosition</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">position</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">);</span>
+
+    <span class="n">QPainterPath</span> <span class="n">path</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">position</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QColor</span> <span class="n">color</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">toolTip</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QPainterPath</span> <span class="n">myPath</span><span class="p">;</span>
+    <span class="n">QPoint</span> <span class="n">myPosition</span><span class="p">;</span>
+    <span class="n">QColor</span> <span class="n">myColor</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">myToolTip</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ShapeItem</span></code> class is a custom widget representing one single shape item. The widget has a path, a position, a color and a tooltip. We need functions to set or modify these objects, as well as functions that return them. We make the latter functions <code class="docutils literal"><span class="pre">const</span></code> to prohibit any modifications of the objects, i.e. prohibiting unauthorized manipulation of the shape items appearance.</p>
+</div></blockquote>
+</div>
+<div class="section" id="shapeitem-class-implementation">
+<span id="id5"></span><h2>ShapeItem Class Implementation<a class="headerlink" href="#shapeitem-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPainterPath</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">path</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">myPath</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QPoint</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">position</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">myPosition</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QColor</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">color</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">myColor</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QString</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">toolTip</span><span class="p">()</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">myToolTip</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This first group of functions simply return the objects that are requested. The objects are returned as constants, i.e. they cannot be modified.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">setPath</span><span class="p">(</span><span class="n">const</span> <span class="n">QPainterPath</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myPath</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">toolTip</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myToolTip</span> <span class="o">=</span> <span class="n">toolTip</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">setPosition</span><span class="p">(</span><span class="n">const</span> <span class="n">QPoint</span> <span class="o">&amp;</span><span class="n">position</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myPosition</span> <span class="o">=</span> <span class="n">position</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">void</span> <span class="n">ShapeItem</span><span class="p">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">const</span> <span class="n">QColor</span> <span class="o">&amp;</span><span class="n">color</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">myColor</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The last group of functions set or modify the shape item’s path, position, color and tooltip, respectively.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="shapeitem-cpp-example-file">
+<h1>shapeitem.cpp Example File<a class="headerlink" href="#shapeitem-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="shapeitem-h-example-file">
+<h1>shapeitem.h Example File<a class="headerlink" href="#shapeitem-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sortingbox-cpp-example-file">
+<h1>sortingbox.cpp Example File<a class="headerlink" href="#sortingbox-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="sortingbox-h-example-file">
+<h1>sortingbox.h Example File<a class="headerlink" href="#sortingbox-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tooltips-pro-example-file">
+<h1>tooltips.pro Example File<a class="headerlink" href="#tooltips-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tooltips-qrc-example-file">
+<h1>tooltips.qrc Example File<a class="headerlink" href="#tooltips-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="circle-png-image-file">
+<h1>circle.png Image File<a class="headerlink" href="#circle-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="square-png-image-file">
+<h1>square.png Image File<a class="headerlink" href="#square-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="triangle-png-image-file">
+<h1>triangle.png Image File<a class="headerlink" href="#triangle-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

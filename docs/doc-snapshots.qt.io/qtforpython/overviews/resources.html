@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Qt Resource System &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Qt Resource System</a><ul>
+<li><a class="reference internal" href="#id2">)</a></li>
+<li><a class="reference internal" href="#external-binary-resources">External Binary Resources</a></li>
+<li><a class="reference internal" href="#compiled-in-resources">Compiled-In Resources</a></li>
+<li><a class="reference internal" href="#compression">Compression</a></li>
+<li><a class="reference internal" href="#using-resources-in-the-application">Using Resources in the Application</a></li>
+<li><a class="reference internal" href="#using-resources-in-a-library">Using Resources in a Library</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-qt-resource-system">
+<span id="id1"></span><h1>The Qt Resource System<a class="headerlink" href="#the-qt-resource-system" title="Permalink to this headline">¶</a></h1>
+<p>A platform-independent mechanism for storing binary files in an application</p>
+<blockquote>
+<div><p>A platform-independent mechanism for storing binary files in an application.</p>
+<p>The Qt resource system is a platform-independent mechanism for storing binary files in the application’s executable. This is useful if your application always needs a certain set of files (icons, translation files, etc.) and you don’t want to run the risk of losing the files.</p>
+<p>The resource system is based on tight cooperation between qmake, rcc (Qt’s resource compiler), and <a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> .</p>
+</div></blockquote>
+<p id="resource-collection-files-op-op-qrc">Resource Collection Files (
+<code class="docutils literal"><span class="pre">.qrc</span></code></p>
+<div class="section" id="id2">
+<h2>)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The resources associated with an application are specified in a <code class="docutils literal"><span class="pre">.qrc</span></code> file, an XML-based file format that lists files on the disk and optionally assigns them a resource name that the application must use to access the resource.</p>
+<p>Here’s an example <code class="docutils literal"><span class="pre">.qrc</span></code> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/resource-system/application.qrc&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The resource files listed in the <code class="docutils literal"><span class="pre">.qrc</span></code> file are files that are part of the application’s source tree. The specified paths are relative to the directory containing the <code class="docutils literal"><span class="pre">.qrc</span></code> file. Note that the listed resource files must be located in the same directory as the <code class="docutils literal"><span class="pre">.qrc</span></code> file, or one of its subdirectories.</p>
+<p>Resource data can either be compiled into the binary and thus accessed immediately in application code, or a binary resource can be created and at a later point in application code registered with the resource system.</p>
+<p>By default, resources are accessible in the application under the same file name as they have in the source tree, with a <code class="docutils literal"><span class="pre">:/</span></code> prefix, or by a <a class="reference internal" href="../PySide2/QtCore/QUrl.html#PySide2.QtCore.QUrl" title="PySide2.QtCore.QUrl"><code class="xref py py-class docutils literal"><span class="pre">URL</span></code></a> with a <code class="docutils literal"><span class="pre">qrc</span></code> scheme.</p>
+<p>For example, the file path <code class="docutils literal"><span class="pre">:/images/cut.png</span></code> or the URL <code class="docutils literal"><span class="pre">qrc:///images/cut.png</span></code> would give access to the <code class="docutils literal"><span class="pre">cut.png</span></code> file, whose location in the application’s source tree is <code class="docutils literal"><span class="pre">images/cut.png</span></code> . This can be changed using the <code class="docutils literal"><span class="pre">file</span></code> tag’s <code class="docutils literal"><span class="pre">alias</span></code> attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">file</span> <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;cut-img.png&quot;</span><span class="o">&gt;</span><span class="n">images</span><span class="o">/</span><span class="n">cut</span><span class="o">.</span><span class="n">png</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The file is then accessible as <code class="docutils literal"><span class="pre">:/cut-img.png</span></code> from the application. It is also possible to specify a path prefix for all files in the <code class="docutils literal"><span class="pre">.qrc</span></code> file using the <code class="docutils literal"><span class="pre">qresource</span></code> tag’s <code class="docutils literal"><span class="pre">prefix</span></code> attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">qresource</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/myresources&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">file</span> <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;cut-img.png&quot;</span><span class="o">&gt;</span><span class="n">images</span><span class="o">/</span><span class="n">cut</span><span class="o">.</span><span class="n">png</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">qresource</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In this case, the file is accessible as <code class="docutils literal"><span class="pre">:/myresources/cut-img.png</span></code> .</p>
+<p>Some resources need to change based on the user’s locale, such as translation files or icons. This is done by adding a <code class="docutils literal"><span class="pre">lang</span></code> attribute to the <code class="docutils literal"><span class="pre">qresource</span></code> tag, specifying a suitable locale string. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">qresource</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;</span><span class="n">cut</span><span class="o">.</span><span class="n">jpg</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">qresource</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">qresource</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;fr&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">file</span> <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;cut.jpg&quot;</span><span class="o">&gt;</span><span class="n">cut_fr</span><span class="o">.</span><span class="n">jpg</span><span class="o">&lt;/</span><span class="n">file</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">qresource</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If the user’s locale is French (i.e., <code class="xref py py-func docutils literal"><span class="pre">QLocale.system()</span></code> .name() returns “fr_FR”), <code class="docutils literal"><span class="pre">:/cut.jpg</span></code> becomes a reference to the <code class="docutils literal"><span class="pre">cut_fr.jpg</span></code> image. For other locales, <code class="docutils literal"><span class="pre">cut.jpg</span></code> is used.</p>
+<p>See the <a class="reference internal" href="../PySide2/QtCore/QLocale.html#PySide2.QtCore.QLocale" title="PySide2.QtCore.QLocale"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QLocale</span></code></a> documentation for a description of the format to use for locale strings.</p>
+</div></blockquote>
+</div>
+<div class="section" id="external-binary-resources">
+<span id="id3"></span><h2>External Binary Resources<a class="headerlink" href="#external-binary-resources" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For an external binary resource to be created you must create the resource data (commonly given the <code class="docutils literal"><span class="pre">.rcc</span></code> extension) by passing the -binary switch to rcc. Once the binary resource is created you can register the resource with the <a class="reference internal" href="../PySide2/QtCore/QResource.html#PySide2.QtCore.QResource" title="PySide2.QtCore.QResource"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QResource</span></code></a> API.</p>
+<p>For example, a set of resource data specified in a <code class="docutils literal"><span class="pre">.qrc</span></code> file can be compiled in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rcc</span> <span class="o">-</span><span class="n">binary</span> <span class="n">myresource</span><span class="o">.</span><span class="n">qrc</span> <span class="o">-</span><span class="n">o</span> <span class="n">myresource</span><span class="o">.</span><span class="n">rcc</span>
+</pre></div>
+</div>
+<p>In the application, this resource would be registered with code like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QResource</span><span class="p">::</span><span class="n">registerResource</span><span class="p">(</span><span class="s2">&quot;/path/to/myresource.rcc&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="compiled-in-resources">
+<span id="id4"></span><h2>Compiled-In Resources<a class="headerlink" href="#compiled-in-resources" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For a resource to be compiled into the binary the <code class="docutils literal"><span class="pre">.qrc</span></code> file must be mentioned in the application’s <code class="docutils literal"><span class="pre">.pro</span></code> file so that <code class="docutils literal"><span class="pre">qmake</span></code> knows about it. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;resource-system/application.pro:0&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">qmake</span></code> will produce make rules to generate a file called <code class="docutils literal"><span class="pre">qrc_application.cpp</span></code> that is linked into the application. This file contains all the data for the images and other resources as static C++ arrays of compressed binary data. The <code class="docutils literal"><span class="pre">qrc_application.cpp</span></code> file is automatically regenerated whenever the <code class="docutils literal"><span class="pre">.qrc</span></code> file changes or one of the files that it refers to changes. If you don’t use <code class="docutils literal"><span class="pre">.pro</span></code> files, you can either invoke <code class="docutils literal"><span class="pre">rcc</span></code> manually or add build rules to your build system.</p>
+<p>Currently, Qt always stores the data directly in the executable, even on Windows, <span class="xref std std-ref">macOS</span> , and iOS, where the operating system provides native support for resources. This might change in a future Qt release.</p>
+</div></blockquote>
+</div>
+<div class="section" id="compression">
+<span id="id5"></span><h2>Compression<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Resources are compressed by default (in the <code class="docutils literal"><span class="pre">ZIP</span></code> format). It is possible to turn off compression. This can be useful if your resources already contain a compressed format, such as <code class="docutils literal"><span class="pre">.png</span></code> files. You do this by giving the <code class="docutils literal"><span class="pre">-no-compress</span></code> command line argument.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rcc</span> <span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">compress</span> <span class="n">myresources</span><span class="o">.</span><span class="n">qrc</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">rcc</span></code> also gives you some control over the compression. You can specify the compression level and the threshold level to consider while compressing files, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rcc</span> <span class="o">-</span><span class="n">compress</span> <span class="mi">2</span> <span class="o">-</span><span class="n">threshold</span> <span class="mi">3</span> <span class="n">myresources</span><span class="o">.</span><span class="n">qrc</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-resources-in-the-application">
+<span id="id6"></span><h2>Using Resources in the Application<a class="headerlink" href="#using-resources-in-the-application" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the application, resource paths can be used in most places instead of ordinary file system paths. In particular, you can pass a resource path instead of a file name to the <a class="reference internal" href="../PySide2/QtGui/QIcon.html#PySide2.QtGui.QIcon" title="PySide2.QtGui.QIcon"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QIcon</span></code></a> , <a class="reference internal" href="../PySide2/QtGui/QImage.html#PySide2.QtGui.QImage" title="PySide2.QtGui.QImage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QImage</span></code></a> , or <a class="reference internal" href="../PySide2/QtGui/QPixmap.html#PySide2.QtGui.QPixmap" title="PySide2.QtGui.QPixmap"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QPixmap</span></code></a> constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cutAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">QIcon</span><span class="p">(</span><span class="s2">&quot;:/images/cut.png&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Cu&amp;t&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="qtwidgets-mainwindows-application-example.html#application-example"><span class="std std-ref">Application</span></a> example for an actual application that uses Qt’s resource system to store its icons.</p>
+<p>In memory, resources are represented by a tree of resource objects. The tree is automatically built at startup and used by <a class="reference internal" href="../PySide2/QtCore/QFile.html#PySide2.QtCore.QFile" title="PySide2.QtCore.QFile"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QFile</span></code></a> for resolving paths to resources. You can use a <a class="reference internal" href="../PySide2/QtCore/QDir.html#PySide2.QtCore.QDir" title="PySide2.QtCore.QDir"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDir</span></code></a> initialized with “:/” to navigate through the resource tree from the root.</p>
+<p>Qt’s resources support the concept of a search path list. If you then refer to a resource with <code class="docutils literal"><span class="pre">:</span></code> instead of <code class="docutils literal"><span class="pre">:/</span></code> as the prefix, the resource will be looked up using the search path list. The search path list is empty at startup; call <code class="xref py py-func docutils literal"><span class="pre">QDir.addSearchPath()</span></code> to add paths to it.</p>
+</div></blockquote>
+</div>
+<div class="section" id="using-resources-in-a-library">
+<span id="id7"></span><h2>Using Resources in a Library<a class="headerlink" href="#using-resources-in-a-library" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>If you have resources in a library, you need to force initialization of your resources by calling <code class="xref py py-func docutils literal"><span class="pre">Q_INIT_RESOURCE()</span></code> with the base name of the <code class="docutils literal"><span class="pre">.qrc</span></code> file. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MyClass</span><span class="p">::</span><span class="n">MyClass</span><span class="p">()</span> <span class="p">:</span> <span class="n">BaseClass</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">resources</span><span class="p">);</span>
+
+    <span class="n">QFile</span> <span class="n">file</span><span class="p">(</span><span class="s2">&quot;:/myfile.dat&quot;</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This ensures that the resources are linked into the final application binary in the case of static linking. You should put the initialization code close to where the resources are used in your library, so that clients of your library will only link in the resources if they use the feature of the library that depends on them.</p>
+<p>Note: As the resource initializers generated by rcc are declared in the global namespace, your calls to <code class="xref py py-func docutils literal"><span class="pre">Q_INIT_RESOURCE()</span></code> also need to be done outside of any namespace.</p>
+<p>If the library includes resources that are not used internally, but instead exposed to clients of the library, the initialization needs to happen in the application code. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">graphlib</span><span class="p">);</span>
+
+    <span class="n">QFile</span> <span class="n">file</span><span class="p">(</span><span class="s2">&quot;:/graph.png&quot;</span><span class="p">);</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As before, this ensures that the resources are linked into the final application binary in the case of static linking, but also triggers loading of the library in the case of dynamic linking, such as plugins.</p>
+<p>Similarly, if you must unload a set of resources explicitly (because a plugin is being unloaded or the resources are not valid any longer), you can force removal of your resources by calling <code class="xref py py-func docutils literal"><span class="pre">Q_CLEANUP_RESOURCE()</span></code> with the same base name as above.</p>
+<p>Note: The use of <code class="xref py py-func docutils literal"><span class="pre">Q_INIT_RESOURCE()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">Q_CLEANUP_RESOURCE()</span></code> is not necessary when the resource is built as part of the application.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

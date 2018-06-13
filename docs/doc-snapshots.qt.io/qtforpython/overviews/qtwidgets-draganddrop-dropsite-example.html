@@ -1,0 +1,361 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Drop Site Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Drop Site Example</a><ul>
+<li><a class="reference internal" href="#droparea-class-definition">DropArea Class Definition</a></li>
+<li><a class="reference internal" href="#droparea-class-implementation">DropArea Class Implementation</a></li>
+<li><a class="reference internal" href="#dropsitewindow-class-definition">DropSiteWindow Class Definition</a></li>
+<li><a class="reference internal" href="#dropsitewindow-class-implementation">DropSiteWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#the-main-function">The main() Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#droparea-cpp-example-file">droparea.cpp Example File</a></li>
+<li><a class="reference internal" href="#droparea-h-example-file">droparea.h Example File</a></li>
+<li><a class="reference internal" href="#dropsitewindow-cpp-example-file">dropsitewindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#dropsitewindow-h-example-file">dropsitewindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#dropsite-pro-example-file">dropsite.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drop-site-example">
+<span id="id1"></span><h1>Drop Site Example<a class="headerlink" href="#drop-site-example" title="Permalink to this headline">¶</a></h1>
+<p>Example shows how to distinguish the various MIME formats available in a drag and drop operation</p>
+<blockquote>
+<div><p>The example shows how to distinguish the various MIME formats available in a drag and drop operation.</p>
+<p>The Drop Site example accepts drops from other applications, and displays the MIME formats provided by the drag object.</p>
+<p>There are two classes, <code class="docutils literal"><span class="pre">DropArea</span></code> and <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> , and a <code class="docutils literal"><span class="pre">main()</span></code> function in this example. A <code class="docutils literal"><span class="pre">DropArea</span></code> object is instantiated in <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> ; a <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> object is then invoked in the <code class="docutils literal"><span class="pre">main()</span></code> function.</p>
+</div></blockquote>
+<div class="section" id="droparea-class-definition">
+<span id="id2"></span><h2>DropArea Class Definition<a class="headerlink" href="#droparea-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">DropArea</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> with a public slot, <code class="docutils literal"><span class="pre">clear()</span></code> , and a <code class="docutils literal"><span class="pre">changed()</span></code> signal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DropArea</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QLabel</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">DropArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">clear</span><span class="p">();</span>
+
+<span class="n">signals</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">changed</span><span class="p">(</span><span class="n">const</span> <span class="n">QMimeData</span> <span class="o">*</span><span class="n">mimeData</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In addition, <code class="docutils literal"><span class="pre">DropArea</span></code> also contains a private instance of <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> and reimplementations of four <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> event handlers:</p>
+<ol class="arabic simple">
+<li><code class="xref py py-func docutils literal"><span class="pre">QWidget.dragEnterEvent()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QWidget.dragMoveEvent()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QWidget.dragLeaveEvent()</span></code></li>
+<li><code class="xref py py-func docutils literal"><span class="pre">QWidget.dropEvent()</span></code></li>
+</ol>
+<p>These event handlers are further explained in the implementation of the <code class="docutils literal"><span class="pre">DropArea</span></code> class.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">protected</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">dragEnterEvent</span><span class="p">(</span><span class="n">QDragEnterEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dragMoveEvent</span><span class="p">(</span><span class="n">QDragMoveEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dragLeaveEvent</span><span class="p">(</span><span class="n">QDragLeaveEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">dropEvent</span><span class="p">(</span><span class="n">QDropEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="droparea-class-implementation">
+<span id="id3"></span><h2>DropArea Class Implementation<a class="headerlink" href="#droparea-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the <code class="docutils literal"><span class="pre">DropArea</span></code> constructor, we set the <code class="xref py py-func docutils literal"><span class="pre">minimum</span> <span class="pre">size</span></code> to 200x200 pixels, the <code class="xref py py-func docutils literal"><span class="pre">frame</span> <span class="pre">style</span></code> to both <code class="xref py py-attr docutils literal"><span class="pre">QFrame.Sunken</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">QFrame.StyledPanel</span></code> , and we align its contents to the center.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DropArea</span><span class="p">::</span><span class="n">DropArea</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QFrame</span><span class="p">::</span><span class="n">Sunken</span> <span class="o">|</span> <span class="n">QFrame</span><span class="p">::</span><span class="n">StyledPanel</span><span class="p">);</span>
+    <span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">AlignCenter</span><span class="p">);</span>
+    <span class="n">setAcceptDrops</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">setAutoFillBackground</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also, we enable drop events in <code class="docutils literal"><span class="pre">DropArea</span></code> by setting the <code class="xref py py-func docutils literal"><span class="pre">QWidget.acceptDrops()</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> . Then, we enable the <code class="xref py py-func docutils literal"><span class="pre">QWidget.autoFillBackground()</span></code> property and invoke the <code class="docutils literal"><span class="pre">clear()</span></code> function.</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragEnterEvent()</span></code> event handler is called when a drag is in progress and the mouse enters the <code class="docutils literal"><span class="pre">DropArea</span></code> object. For the <code class="docutils literal"><span class="pre">DropSite</span></code> example, when the mouse enters <code class="docutils literal"><span class="pre">DropArea</span></code> , we set its text to “&lt;drop content&gt;” and highlight its background.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dragEnterEvent() function&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Then, we invoke <code class="xref py py-func docutils literal"><span class="pre">QDropEvent.acceptProposedAction()</span></code> on <code class="docutils literal"><span class="pre">event</span></code> , setting the drop action to the one proposed. Lastly, we emit the <code class="docutils literal"><span class="pre">changed()</span></code> signal, with the data that was dropped and its MIME type information as a parameter.</p>
+<p>For <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragMoveEvent()</span></code> , we just accept the proposed <a class="reference internal" href="../PySide2/QtGui/QDragMoveEvent.html#PySide2.QtGui.QDragMoveEvent" title="PySide2.QtGui.QDragMoveEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QDragMoveEvent</span></code></a> object, <code class="docutils literal"><span class="pre">event</span></code> , with <code class="xref py py-func docutils literal"><span class="pre">QDropEvent.acceptProposedAction()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dragMoveEvent() function&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">DropArea</span></code> class’s implementation of <code class="xref py py-func docutils literal"><span class="pre">QWidget.dropEvent()</span></code> extracts the <code class="docutils literal"><span class="pre">event</span></code> ‘s mime data and displays it accordingly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dropEvent() function part1&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">mimeData</span></code> object can contain one of the following objects: an image, HTML text, plain text, or a list of URLs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dropEvent() function part2&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>If <code class="docutils literal"><span class="pre">mimeData</span></code> contains an image, we display it in <code class="docutils literal"><span class="pre">DropArea</span></code> with <code class="xref py py-func docutils literal"><span class="pre">QLabel.setPixmap()</span></code> .</li>
+<li>If <code class="docutils literal"><span class="pre">mimeData</span></code> contains HTML, we display it with <code class="xref py py-func docutils literal"><span class="pre">QLabel.setText()</span></code> and set <code class="docutils literal"><span class="pre">DropArea</span></code>’s text format as <code class="xref py py-attr docutils literal"><span class="pre">Qt.RichText</span></code> .</li>
+<li>If <code class="docutils literal"><span class="pre">mimeData</span></code> contains plain text, we display it with <code class="xref py py-func docutils literal"><span class="pre">QLabel.setText()</span></code> and set <code class="docutils literal"><span class="pre">DropArea</span></code>’s text format as <code class="xref py py-attr docutils literal"><span class="pre">Qt.PlainText</span></code> . In the event that <code class="docutils literal"><span class="pre">mimeData</span></code> contains URLs, we iterate through the list of URLs to display them on individual lines.</li>
+<li>If <code class="docutils literal"><span class="pre">mimeData</span></code> contains other types of objects, we set <code class="docutils literal"><span class="pre">DropArea</span></code>’s text, with <code class="xref py py-func docutils literal"><span class="pre">QLabel.setText()</span></code> to “Cannot display data” to inform the user.</li>
+</ul>
+<p>We then set <code class="docutils literal"><span class="pre">DropArea</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QWidget.backgroundRole()</span></code> to <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Dark</span></code> and we accept <code class="docutils literal"><span class="pre">event</span></code> ‘s proposed action.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dropEvent() function part3&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QWidget.dragLeaveEvent()</span></code> event handler is called when a drag is in progress and the mouse leaves the widget.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:dragLeaveEvent() function&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal"><span class="pre">DropArea</span></code> ‘s implementation, we clear invoke <code class="docutils literal"><span class="pre">clear()</span></code> and then accept the proposed event.</p>
+<p>The <code class="docutils literal"><span class="pre">clear()</span></code> function sets the text in <code class="docutils literal"><span class="pre">DropArea</span></code> to “&lt;drop content&gt;” and sets the <code class="xref py py-func docutils literal"><span class="pre">QWidget.backgroundRole()</span></code> to <code class="xref py py-attr docutils literal"><span class="pre">QPalette.Dark</span></code> . Lastly, it emits the <code class="docutils literal"><span class="pre">changed()</span></code> signal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/droparea.cpp:clear() function&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="dropsitewindow-class-definition">
+<span id="id4"></span><h2>DropSiteWindow Class Definition<a class="headerlink" href="#dropsitewindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> class contains a constructor and a public slot, <code class="docutils literal"><span class="pre">updateFormatsTable()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DropSiteWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">DropSiteWindow</span><span class="p">();</span>
+
+<span class="n">public</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">updateFormatsTable</span><span class="p">(</span><span class="n">const</span> <span class="n">QMimeData</span> <span class="o">*</span><span class="n">mimeData</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">DropArea</span> <span class="o">*</span><span class="n">dropArea</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">abstractLabel</span><span class="p">;</span>
+    <span class="n">QTableWidget</span> <span class="o">*</span><span class="n">formatsTable</span><span class="p">;</span>
+
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">clearButton</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">quitButton</span><span class="p">;</span>
+    <span class="n">QDialogButtonBox</span> <span class="o">*</span><span class="n">buttonBox</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The class also contains a private instance of <code class="docutils literal"><span class="pre">DropArea</span></code> , <code class="docutils literal"><span class="pre">dropArea</span></code> , <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> , <code class="docutils literal"><span class="pre">abstractLabel</span></code> , <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> , <code class="docutils literal"><span class="pre">formatsTable</span></code> , <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> , <code class="docutils literal"><span class="pre">buttonBox</span></code> , and two <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> objects, <code class="docutils literal"><span class="pre">clearButton</span></code> and <code class="docutils literal"><span class="pre">quitButton</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="dropsitewindow-class-implementation">
+<span id="id5"></span><h2>DropSiteWindow Class Implementation<a class="headerlink" href="#dropsitewindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the constructor of <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> , we instantiate <code class="docutils literal"><span class="pre">abstractLabel</span></code> and set its <code class="xref py py-func docutils literal"><span class="pre">wordWrap</span></code> property to <code class="docutils literal"><span class="pre">true</span></code> . We also call the <code class="xref py py-func docutils literal"><span class="pre">QLabel.adjustSize()</span></code> function to adjust <code class="docutils literal"><span class="pre">abstractLabel</span></code> ‘s size according to its contents.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DropSiteWindow</span><span class="p">::</span><span class="n">DropSiteWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">abstractLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This example accepts drags from other &quot;</span>
+                                  <span class="s2">&quot;applications and displays the MIME types &quot;</span>
+                                  <span class="s2">&quot;provided by the drag object.&quot;</span><span class="p">));</span>
+    <span class="n">abstractLabel</span><span class="o">-&gt;</span><span class="n">setWordWrap</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">abstractLabel</span><span class="o">-&gt;</span><span class="n">adjustSize</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then we instantiate <code class="docutils literal"><span class="pre">dropArea</span></code> and connect its <code class="docutils literal"><span class="pre">changed()</span></code> signal to <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> ‘s <code class="docutils literal"><span class="pre">updateFormatsTable()</span></code> slot.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dropArea</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DropArea</span><span class="p">;</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">dropArea</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">DropArea</span><span class="p">::</span><span class="n">changed</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">DropSiteWindow</span><span class="p">::</span><span class="n">updateFormatsTable</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We now set up the <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> object, <code class="docutils literal"><span class="pre">formatsTable</span></code> . Its horizontal header is set using a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> object, <code class="docutils literal"><span class="pre">labels</span></code> . The number of columms are set to two and the table is not editable. Also, the <code class="docutils literal"><span class="pre">formatTable</span></code> ‘s horizontal header is formatted to ensure that its second column stretches to occupy additional space available.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">labels</span><span class="p">;</span>
+<span class="n">labels</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Format&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Content&quot;</span><span class="p">);</span>
+
+<span class="n">formatsTable</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableWidget</span><span class="p">;</span>
+<span class="n">formatsTable</span><span class="o">-&gt;</span><span class="n">setColumnCount</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">formatsTable</span><span class="o">-&gt;</span><span class="n">setEditTriggers</span><span class="p">(</span><span class="n">QAbstractItemView</span><span class="p">::</span><span class="n">NoEditTriggers</span><span class="p">);</span>
+<span class="n">formatsTable</span><span class="o">-&gt;</span><span class="n">setHorizontalHeaderLabels</span><span class="p">(</span><span class="n">labels</span><span class="p">);</span>
+<span class="n">formatsTable</span><span class="o">-&gt;</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setStretchLastSection</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Two <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> objects, <code class="docutils literal"><span class="pre">clearButton</span></code> and <code class="docutils literal"><span class="pre">quitButton</span></code> , are instantiated and added to <code class="docutils literal"><span class="pre">buttonBox</span></code> - a <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> object. We use <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> here to ensure that the push buttons are presented in a layout that conforms to the platform’s style.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clearButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Clear&quot;</span><span class="p">));</span>
+<span class="n">quitButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">));</span>
+
+<span class="n">buttonBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDialogButtonBox</span><span class="p">;</span>
+<span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">clearButton</span><span class="p">,</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">ActionRole</span><span class="p">);</span>
+<span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">RejectRole</span><span class="p">);</span>
+
+<span class="n">connect</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QWidget</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">clearButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAbstractButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">dropArea</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">DropArea</span><span class="p">::</span><span class="n">clear</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QPushButton.clicked()</span></code> signals for <code class="docutils literal"><span class="pre">quitButton</span></code> and <code class="docutils literal"><span class="pre">clearButton</span></code> are connected to <code class="xref py py-func docutils literal"><span class="pre">QWidget.close()</span></code> and <code class="docutils literal"><span class="pre">clear()</span></code> , respectively.</p>
+<p>For the layout, we use a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> , <code class="docutils literal"><span class="pre">mainLayout</span></code> , to arrange our widgets vertically. We also set the window title to “Drop Site” and the minimum size to 350x500 pixels.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">abstractLabel</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">dropArea</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">formatsTable</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Drop Site&quot;</span><span class="p">));</span>
+    <span class="n">setMinimumSize</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We move on to the <code class="docutils literal"><span class="pre">updateFormatsTable()</span></code> function. This function updates the <code class="docutils literal"><span class="pre">formatsTable</span></code> , displaying the MIME formats of the object dropped onto the <code class="docutils literal"><span class="pre">DropArea</span></code> object. First, we set <a class="reference internal" href="../PySide2/QtWidgets/QTableWidget.html#PySide2.QtWidgets.QTableWidget" title="PySide2.QtWidgets.QTableWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidget</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">rowCount</span></code> property to 0. Then, we validate to ensure that the <a class="reference internal" href="../PySide2/QtCore/QMimeData.html#PySide2.QtCore.QMimeData" title="PySide2.QtCore.QMimeData"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QMimeData</span></code></a> object passed in is a valid object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/dropsitewindow.cpp:updateFormatsTable() part1&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Once we are sure that <code class="docutils literal"><span class="pre">mimeData</span></code> is valid, we iterate through its supported formats using the <span class="xref std std-ref">foreach keyword</span> . This keyword has the following format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">foreach</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">container</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In our example, <code class="docutils literal"><span class="pre">format</span></code> is the <code class="docutils literal"><span class="pre">variable</span></code> and the <code class="docutils literal"><span class="pre">container</span></code> is a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> , obtained from <code class="docutils literal"><span class="pre">mimeData-&gt;formats()</span></code> .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="xref py py-func docutils literal"><span class="pre">QMimeData.formats()</span></code> function returns a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> object, containing all the formats supported by the <code class="docutils literal"><span class="pre">mimeData</span></code> .</p>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/dropsitewindow.cpp:updateFormatsTable() part2&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Within each iteration, we create a <a class="reference internal" href="../PySide2/QtWidgets/QTableWidgetItem.html#PySide2.QtWidgets.QTableWidgetItem" title="PySide2.QtWidgets.QTableWidgetItem"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableWidgetItem</span></code></a> , <code class="docutils literal"><span class="pre">formatItem</span></code> and we set its <code class="xref py py-func docutils literal"><span class="pre">flags</span></code> to <code class="xref py py-attr docutils literal"><span class="pre">Qt.ItemIsEnabled</span></code> , and its <code class="xref py py-func docutils literal"><span class="pre">text</span> <span class="pre">alignment</span></code> to <code class="xref py py-attr docutils literal"><span class="pre">Qt.AlignTop</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">Qt.AlignLeft</span></code> .</p>
+<p>A <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> object, <code class="docutils literal"><span class="pre">text</span></code> , is customized to display data according to the contents of <code class="docutils literal"><span class="pre">format</span></code> . We invoke <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QString.simplified()</span></code> function on <code class="docutils literal"><span class="pre">text</span></code> , to obtain a string that has no additional space before, after or in between words.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/dropsitewindow.cpp:updateFormatsTable() part3&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">format</span></code> contains a list of URLs, we iterate through them, using spaces to separate them. On the other hand, if <code class="docutils literal"><span class="pre">format</span></code> contains an image, we display the data by converting the text to hexadecimal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/dropsitewindow.cpp:updateFormatsTable() part4&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Once <code class="docutils literal"><span class="pre">text</span></code> has been customized to contain the appropriate data, we insert both <code class="docutils literal"><span class="pre">format</span></code> and <code class="docutils literal"><span class="pre">text</span></code> into <code class="docutils literal"><span class="pre">formatsTable</span></code> with <code class="xref py py-func docutils literal"><span class="pre">QTableWidget.setItem()</span></code> . Lastly, we invoke <code class="xref py py-func docutils literal"><span class="pre">QTableView.resizeColumnToContents()</span></code> on <code class="docutils literal"><span class="pre">formatsTable</span></code> ‘s first column.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id6"></span><h2>The main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Within the <code class="docutils literal"><span class="pre">main()</span></code> function, we instantiate <code class="docutils literal"><span class="pre">DropSiteWindow</span></code> and invoke its <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;draganddrop/dropsite/main.cpp:main() function&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="droparea-cpp-example-file">
+<h1>droparea.cpp Example File<a class="headerlink" href="#droparea-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="droparea-h-example-file">
+<h1>droparea.h Example File<a class="headerlink" href="#droparea-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dropsitewindow-cpp-example-file">
+<h1>dropsitewindow.cpp Example File<a class="headerlink" href="#dropsitewindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dropsitewindow-h-example-file">
+<h1>dropsitewindow.h Example File<a class="headerlink" href="#dropsitewindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="dropsite-pro-example-file">
+<h1>dropsite.pro Example File<a class="headerlink" href="#dropsite-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

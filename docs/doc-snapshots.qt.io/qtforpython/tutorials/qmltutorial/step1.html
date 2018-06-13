@@ -1,0 +1,194 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Tutorial 1 - Basic Types &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QML Tutorial 2 - QML Components" href="step2.html" />
+    <link rel="prev" title="QML Tutorial" href="index.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" >PySide examples and tutorials</a></li>
+                            <li><a href="index.html" accesskey="U">QML Tutorial</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Tutorial 1 - Basic Types</a><ul>
+<li><a class="reference internal" href="#walkthrough">Walkthrough</a><ul>
+<li><a class="reference internal" href="#import">Import</a></li>
+<li><a class="reference internal" href="#rectangle-element">Rectangle element</a></li>
+<li><a class="reference internal" href="#text-element">Text element</a></li>
+<li><a class="reference internal" href="#viewing-the-example">Viewing the example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">QML Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="step2.html"
+                        title="next chapter">QML Tutorial 2 - QML Components</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-tutorial-1-basic-types">
+<span id="qmlbasictypes"></span><h1>QML Tutorial 1 - Basic Types<a class="headerlink" href="#qml-tutorial-1-basic-types" title="Permalink to this headline">¶</a></h1>
+<p>This first program is a very simple “Hello world” example that introduces some basic QML concepts.
+The following image is a screenshot of this program.</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-tutorial1.png" src="../../_images/declarative-tutorial1.png" />
+</div>
+<p>Here is the QML code for the application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+
+<span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">page</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">500</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightgray&quot;</span>
+
+    <span class="n">Text</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">helloText</span>
+        <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Hello world!&quot;</span>
+        <span class="n">y</span><span class="p">:</span> <span class="mi">30</span>
+        <span class="n">anchors</span><span class="o">.</span><span class="n">horizontalCenter</span><span class="p">:</span> <span class="n">page</span><span class="o">.</span><span class="n">horizontalCenter</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">:</span> <span class="mi">24</span><span class="p">;</span> <span class="n">font</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span> <span class="n">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="walkthrough">
+<h2>Walkthrough<a class="headerlink" href="#walkthrough" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="import">
+<h3>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h3>
+<p>First, you need to import the types that are required for this example. Most QML files import the built-in QML
+types (like Rectangle, Image, …) that come with Qt, using the following statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">QtQuick</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rectangle-element">
+<h3>Rectangle element<a class="headerlink" href="#rectangle-element" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Rectangle</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">page</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">500</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">200</span>
+    <span class="n">color</span><span class="p">:</span> <span class="s2">&quot;lightgray&quot;</span>
+</pre></div>
+</div>
+<p>Declare a root element using the Rectangle type, which is one of the basic building blocks to create an application in QML.
+Give it an <code class="docutils literal"><span class="pre">id</span></code> so that you can refer to it later. For example, call it “page”, and also set its <code class="docutils literal"><span class="pre">width</span></code>,
+<code class="docutils literal"><span class="pre">height</span></code>, and <code class="docutils literal"><span class="pre">color</span></code> properties.</p>
+</div>
+<div class="section" id="text-element">
+<h3>Text element<a class="headerlink" href="#text-element" title="Permalink to this headline">¶</a></h3>
+<p>Add a Text element as the child of the Rectangle element to display the text, ‘Hello world!’.</p>
+<p>Use its <code class="docutils literal"><span class="pre">y</span></code> property to position it at 30 pixels from the top of its parent.</p>
+<p>The <code class="docutils literal"><span class="pre">anchors.horizontalCenter</span></code> property refers to the horizontal center of an element.
+In this case, specify that the text element must be horizontally centered in the <em>page</em> element.</p>
+<p>The <code class="docutils literal"><span class="pre">font.pointSize</span></code> and <code class="docutils literal"><span class="pre">font.bold</span> <span class="pre">properties</span></code> are related to fonts and use the dot notation.</p>
+</div>
+<div class="section" id="viewing-the-example">
+<h3>Viewing the example<a class="headerlink" href="#viewing-the-example" title="Permalink to this headline">¶</a></h3>
+<p>To view what you have created, run the <code class="docutils literal"><span class="pre">qmlscene</span></code> tool (located in the <code class="docutils literal"><span class="pre">bin</span> <span class="pre">directory</span></code> of your Qt installation) with your
+QML filename as the first argument. For example, to run the Tutorial 1 example from the install
+location, you would type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="p">[</span><span class="n">QT_INSTALL_DIR</span><span class="p">]</span>\<span class="nb">bin</span>\<span class="n">qmlscene</span> <span class="n">tutorial1</span><span class="o">.</span><span class="n">qml</span>
+</pre></div>
+</div>
+<p>[Previous <a class="reference internal" href="index.html#qmltutorial"><span class="std std-ref">QML Tutorial</span></a>][Next <a class="reference internal" href="step2.html#qmlcomponents"><span class="std std-ref">QML Tutorial 2 - QML Components</span></a>]</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

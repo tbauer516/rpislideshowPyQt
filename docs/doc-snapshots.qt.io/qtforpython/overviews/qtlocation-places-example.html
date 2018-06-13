@@ -1,0 +1,627 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Places (QML) &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Places (QML)</a><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#displaying-categories">Displaying Categories</a></li>
+<li><a class="reference internal" href="#id6">Presenting Search Suggestions</a></li>
+<li><a class="reference internal" href="#searching-for-places">Searching for Places</a></li>
+<li><a class="reference internal" href="#displaying-place-content">Displaying Place Content</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helper-js-example-file">helper.js Example File</a></li>
+<li><a class="reference internal" href="#places-qml-example-file">places.qml Example File</a></li>
+<li><a class="reference internal" href="#message-qml-example-file">Message.qml Example File</a></li>
+<li><a class="reference internal" href="#messageform-ui-qml-example-file">MessageForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#placedetails-qml-example-file">PlaceDetails.qml Example File</a></li>
+<li><a class="reference internal" href="#placedetailsform-ui-qml-example-file">PlaceDetailsForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#searchboundingbox-qml-example-file">SearchBoundingBox.qml Example File</a></li>
+<li><a class="reference internal" href="#searchboundingboxform-ui-qml-example-file">SearchBoundingBoxForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#searchboundingcircle-qml-example-file">SearchBoundingCircle.qml Example File</a></li>
+<li><a class="reference internal" href="#searchboundingcircleform-ui-qml-example-file">SearchBoundingCircleForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#searchcenter-qml-example-file">SearchCenter.qml Example File</a></li>
+<li><a class="reference internal" href="#searchcenterform-ui-qml-example-file">SearchCenterForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#searchoptions-qml-example-file">SearchOptions.qml Example File</a></li>
+<li><a class="reference internal" href="#searchoptionsform-ui-qml-example-file">SearchOptionsForm.ui.qml Example File</a></li>
+<li><a class="reference internal" href="#mainmenu-qml-example-file">MainMenu.qml Example File</a></li>
+<li><a class="reference internal" href="#mapcomponent-qml-example-file">MapComponent.qml Example File</a></li>
+<li><a class="reference internal" href="#searchbar-qml-example-file">SearchBar.qml Example File</a></li>
+<li><a class="reference internal" href="#categorydelegate-qml-example-file">CategoryDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#categoryview-qml-example-file">CategoryView.qml Example File</a></li>
+<li><a class="reference internal" href="#editorialdelegate-qml-example-file">EditorialDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#editorialpage-qml-example-file">EditorialPage.qml Example File</a></li>
+<li><a class="reference internal" href="#editorialview-qml-example-file">EditorialView.qml Example File</a></li>
+<li><a class="reference internal" href="#imageview-qml-example-file">ImageView.qml Example File</a></li>
+<li><a class="reference internal" href="#ratingview-qml-example-file">RatingView.qml Example File</a></li>
+<li><a class="reference internal" href="#reviewdelegate-qml-example-file">ReviewDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#reviewpage-qml-example-file">ReviewPage.qml Example File</a></li>
+<li><a class="reference internal" href="#reviewview-qml-example-file">ReviewView.qml Example File</a></li>
+<li><a class="reference internal" href="#searchresultdelegate-qml-example-file">SearchResultDelegate.qml Example File</a></li>
+<li><a class="reference internal" href="#searchresultview-qml-example-file">SearchResultView.qml Example File</a></li>
+<li><a class="reference internal" href="#suggestionview-qml-example-file">SuggestionView.qml Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#places-pro-example-file">places.pro Example File</a></li>
+<li><a class="reference internal" href="#places-qrc-example-file">places.qrc Example File</a></li>
+<li><a class="reference internal" href="#categories-png-image-file">categories.png Image File</a></li>
+<li><a class="reference internal" href="#left-png-image-file">left.png Image File</a></li>
+<li><a class="reference internal" href="#marker-png-image-file">marker.png Image File</a></li>
+<li><a class="reference internal" href="#right-png-image-file">right.png Image File</a></li>
+<li><a class="reference internal" href="#scale-png-image-file">scale.png Image File</a></li>
+<li><a class="reference internal" href="#scale-end-png-image-file">scale_end.png Image File</a></li>
+<li><a class="reference internal" href="#search-png-image-file">search.png Image File</a></li>
+<li><a class="reference internal" href="#star-png-image-file">star.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="places-qml">
+<span id="id1"></span><h1>Places (QML)<a class="headerlink" href="#places-qml" title="Permalink to this headline">¶</a></h1>
+<p>Places example demonstrates how to search for Places and access related content</p>
+<blockquote>
+<div><p id="presenting-search-suggestions">The Places example demonstrates how to search for Places and access related content.</p>
+<p>The Places example demonstrates how to search for Places. In particular it shows how further information such as reviews, images and related content can be retrieved.</p>
+</div></blockquote>
+<div class="section" id="running-the-example">
+<span id="id2"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>To run the example from Qt Creator, open the <strong>Welcome</strong> mode and select the example from <strong>Examples</strong> . For more information, visit Building and Running an Example.</p>
+<p>The example can work with any of the available geo services plugins. However, some plugins may require additional <span class="xref std std-ref">plugin parameters</span> in order to function correctly. <span class="xref std std-ref">Plugin parameters</span> can be passed on the command line using the <code class="docutils literal"><span class="pre">--plugin</span></code> argument, which takes the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">plugin</span><span class="o">.&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Refer to the documentation for each of the geo services plugins for details on what plugin parameters they support. The default plugin used by this example is <a class="reference internal" href="location-plugin-osm.html#qt-location-open-street-map-plugin"><span class="std std-ref">Qt Location Open Street Map Plugin</span></a> , which does not require any parameters.</p>
+</div></blockquote>
+</div>
+<div class="section" id="overview">
+<span id="id3"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Places example presents an application window displaying a map. At the top of the window is a search box, which is used to enter a place search query. To search for a place enter a search term into the text box and click the magnifying glass icon. To search for a place by category, click the category icon to display the list of available categories and select the desired category. The place search query will be for places that are near the current location shown on the map.</p>
+<p>For some plugins like <a class="reference internal" href="location-plugin-here.html#qt-location-here-plugin"><span class="std std-ref">Qt Location HERE Plugin</span></a> the search box provides search term suggestions when three or more characters are entered. Selecting one of the suggestions will cause a place search to be performed with the selected search text.</p>
+<p>Clicking on a search result will display details about the place. If a places has rich content (editorials, reviews and images), these can be accessed by the buttons on the details page. To find similar places click the “Find similar” button.</p>
+<p>The geo service provider can be changed by accessing the “Provider” menu.</p>
+</div></blockquote>
+</div>
+<div class="section" id="displaying-categories">
+<span id="id4"></span><h2>Displaying Categories<a class="headerlink" href="#displaying-categories" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Before search by category can be performed, the list of available categories needs to be retrieved. This is achieved by creating a <span class="xref std std-ref">CategoryModel</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CategoryModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">categoryModel</span>
+    <span class="n">hierarchical</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <span class="xref std std-ref">CategoryModel</span> type provides a model of the available categories. It can provide either a flat list or a hierarchical tree model. In this example, we use a hierarchical tree model, by setting the <span class="xref std std-ref">hierarchical</span> property to <em>true</em> . The <span class="xref std std-ref">plugin</span> property is set during example intalization.</p>
+<p>Next we create a <span class="xref std std-ref">ListView</span> to display the category model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">root</span>
+    <span class="nb">property</span> <span class="n">variant</span> <span class="n">categoryModel</span>
+    <span class="nb">property</span> <span class="n">variant</span> <span class="n">rootIndex</span>
+
+    <span class="n">signal</span> <span class="n">searchCategory</span><span class="p">(</span><span class="n">variant</span> <span class="n">category</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="n">showSubcategories</span><span class="p">(</span><span class="n">variant</span> <span class="n">index</span><span class="p">)</span>
+
+    <span class="n">snapMode</span><span class="p">:</span> <span class="n">ListView</span><span class="o">.</span><span class="n">SnapToItem</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">DelegateModel</span> <span class="p">{</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">delegeteDataModel</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">categoryModel</span>
+        <span class="n">rootIndex</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">rootIndex</span>
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">CategoryDelegate</span> <span class="p">{</span>
+            <span class="n">onSearchCategory</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">searchCategory</span><span class="p">(</span><span class="n">category</span><span class="p">);</span>
+            <span class="n">onShowSubcategories</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">showSubcategories</span><span class="p">(</span><span class="n">delegeteDataModel</span><span class="o">.</span><span class="n">modelIndex</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Because a hierarchical model is being used, a DelegateModel is needed to provide navigation functionality. If flat list model was being used the view could use the <span class="xref std std-ref">CategoryModel</span> directly.</p>
+<p>The <em>rootIndex</em> property sets the root index of the DelegateModel. Categories are displayed by the <em>CategoryDelegate</em> , which provides two signals. The <em>onShowSubcategories</em> emits the <strong>showSubcategories()</strong> signal with root index to the current index causing the sub categories of the selected category to be displayed. The <em>onSearchCategory</em> handler emits the <strong>searchCategory()</strong> signal with a category parameter indicating which specific category has been chosen.</p>
+<p>The <em>CategoryDelegate</em> displays the category name and emits the <strong>searchCategory()</strong> signal when the Label is clicked:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Label</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">labelItem</span>
+    <span class="n">text</span><span class="p">:</span> <span class="n">category</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">icon</span><span class="o">.</span><span class="n">right</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">right</span><span class="p">:</span> <span class="n">arrow</span><span class="o">.</span><span class="n">left</span>
+<span class="p">}</span>
+
+<span class="n">MouseArea</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">mouse</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+    <span class="n">onClicked</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">searchCategory</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <em>CategoryDelegate</em> also displays <em>arrow</em> ToolButton when <em>hasModelChildren</em> property is set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ToolButton</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">arrow</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">right</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">right</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">rightMargin</span><span class="p">:</span> <span class="mi">15</span>
+    <span class="n">visible</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">hasModelChildren</span>
+    <span class="n">iconSource</span><span class="p">:</span> <span class="s2">&quot;../../resources/right.png&quot;</span>
+    <span class="n">onClicked</span><span class="p">:</span> <span class="n">root</span><span class="o">.</span><span class="n">showSubcategories</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<span id="id7"></span><h2>Presenting Search Suggestions<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">PlaceSearchSuggestionModel</span> type is used to fetch suggested search terms based on a partially entered search term.</p>
+<p>A new suggestion search is triggered whenever the entered search term is changed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SearchBar</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">searchBar</span>
+    <span class="n">onSearchTextChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">searchText</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">suggestionModel</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">suggestionModel</span><span class="o">.</span><span class="n">searchTerm</span> <span class="o">=</span> <span class="n">searchText</span><span class="p">;</span>
+            <span class="n">suggestionModel</span><span class="o">.</span><span class="n">update</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Suggestions are only queried if the length of the search term is three or more characters.</p>
+<p>When the status of the <span class="xref std std-ref">PlaceSearchSuggestionModel</span> changes, search suggestions are displayed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PlaceSearchSuggestionModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">suggestionModel</span>
+    <span class="n">searchArea</span><span class="p">:</span> <span class="n">searchRegion</span>
+
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PlaceSearchSuggestionModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span>
+            <span class="n">stackView</span><span class="o">.</span><span class="n">showSuggestions</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The main object in the “SuggestionsShown” state is the <span class="xref std std-ref">ListView</span> showing the search suggestions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">suggestionView</span>
+    <span class="nb">property</span> <span class="n">variant</span> <span class="n">suggestionModel</span>
+    <span class="n">signal</span> <span class="n">suggestionSelected</span><span class="p">(</span><span class="n">string</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">suggestionModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Item</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">height</span><span class="p">:</span> <span class="n">label</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="mf">1.5</span>
+        <span class="n">Label</span> <span class="p">{</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="n">label</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">suggestion</span>
+        <span class="p">}</span>
+        <span class="n">MouseArea</span> <span class="p">{</span>
+            <span class="n">anchors</span><span class="o">.</span><span class="n">fill</span><span class="p">:</span> <span class="n">parent</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">suggestionSelected</span><span class="p">(</span><span class="n">suggestion</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A Label object is used as the delegate to display the suggestion text. Clicking on the suggested search term updates the search term and triggers a place search using the search suggestion.</p>
+</div></blockquote>
+</div>
+<div class="section" id="searching-for-places">
+<span id="id8"></span><h2>Searching for Places<a class="headerlink" href="#searching-for-places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <span class="xref std std-ref">PlaceSearchModel</span> type is used to search for places.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PlaceSearchModel</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">placeSearchModel</span>
+    <span class="n">searchArea</span><span class="p">:</span> <span class="n">searchRegion</span>
+
+    <span class="n">function</span> <span class="n">searchForCategory</span><span class="p">(</span><span class="n">category</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="n">category</span><span class="p">;</span>
+        <span class="n">recommendationId</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">searchArea</span> <span class="o">=</span> <span class="n">searchRegion</span>
+        <span class="n">limit</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">function</span> <span class="n">searchForText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">searchTerm</span> <span class="o">=</span> <span class="n">text</span><span class="p">;</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">recommendationId</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">searchArea</span> <span class="o">=</span> <span class="n">searchRegion</span>
+        <span class="n">limit</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">function</span> <span class="n">searchForRecommendations</span><span class="p">(</span><span class="n">placeId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">searchTerm</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">recommendationId</span> <span class="o">=</span> <span class="n">placeId</span><span class="p">;</span>
+        <span class="n">searchArea</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">limit</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">onStatusChanged</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">switch</span> <span class="p">(</span><span class="n">status</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">case</span> <span class="n">PlaceSearchModel</span><span class="o">.</span><span class="n">Ready</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">stackView</span><span class="o">.</span><span class="n">showPlaces</span><span class="p">()</span>
+            <span class="k">else</span>
+                <span class="n">stackView</span><span class="o">.</span><span class="n">showMessage</span><span class="p">(</span><span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Search Place Error&quot;</span><span class="p">),</span><span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Place not found !&quot;</span><span class="p">))</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">case</span> <span class="n">PlaceSearchModel</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span>
+            <span class="n">stackView</span><span class="o">.</span><span class="n">showMessage</span><span class="p">(</span><span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Search Place Error&quot;</span><span class="p">),</span><span class="n">errorString</span><span class="p">())</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>First some of the model’s properties are set, which will be used to form the search request. The <span class="xref std std-ref">searchArea</span> property is set to the <em>searchRegion</em> object which is a <span class="xref std std-ref">geocircle</span> with a center that is linked to the current location displayed on the <span class="xref std std-ref">Map</span> .</p>
+<p>Finally, we define three helper functions <strong>searchForCategory()</strong> , <strong>searchForText()</strong> and <strong>searchForRecommendations()</strong> which set either the <span class="xref std std-ref">categories</span> or <span class="xref std std-ref">searchTerm</span> or <span class="xref std std-ref">recommendationId</span> properties and invokes the <span class="xref std std-ref">update()</span> method to start the place search. The search results are displayed in a <span class="xref std std-ref">ListView</span> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">searchView</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span>
+
+    <span class="nb">property</span> <span class="n">variant</span> <span class="n">placeSearchModel</span>
+    <span class="n">signal</span> <span class="n">showPlaceDetails</span><span class="p">(</span><span class="n">variant</span> <span class="n">place</span><span class="p">,</span> <span class="n">variant</span> <span class="n">distance</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="n">showMap</span><span class="p">()</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">placeSearchModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">SearchResultDelegate</span> <span class="p">{</span>
+        <span class="n">onShowPlaceDetails</span><span class="p">:</span> <span class="n">searchView</span><span class="o">.</span><span class="n">showPlaceDetails</span><span class="p">(</span><span class="n">place</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="n">onSearchFor</span><span class="p">:</span> <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">searchForText</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">footer</span><span class="p">:</span>
+
+        <span class="n">RowLayout</span> <span class="p">{</span>
+        <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+
+        <span class="n">Button</span> <span class="p">{</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Previous&quot;</span><span class="p">)</span>
+            <span class="n">enabled</span><span class="p">:</span> <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">previousPagesAvailable</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">previousPage</span><span class="p">()</span>
+            <span class="n">Layout</span><span class="o">.</span><span class="n">alignment</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span>
+        <span class="p">}</span>
+
+        <span class="n">Button</span> <span class="p">{</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Clear&quot;</span><span class="p">)</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+                <span class="n">showMap</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">Layout</span><span class="o">.</span><span class="n">alignment</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span>
+        <span class="p">}</span>
+
+        <span class="n">Button</span> <span class="p">{</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s2">&quot;Next&quot;</span><span class="p">)</span>
+            <span class="n">enabled</span><span class="p">:</span> <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">nextPagesAvailable</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">placeSearchModel</span><span class="o">.</span><span class="n">nextPage</span><span class="p">()</span>
+            <span class="n">Layout</span><span class="o">.</span><span class="n">alignment</span><span class="p">:</span> <span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The delegate used in the <span class="xref std std-ref">ListView</span> , <em>SearchResultDelegate</em> , is designed to handle multiple search result types via a <span class="xref std std-ref">Loader</span> object. For results of type <em>PlaceResult</em> the delegate is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Component {
+    id: placeComponent
+    Item {
+        id: placeRoot
+        width: root.width
+        height: Math.max(icon.height, 3 * placeName.height)
+
+        Rectangle {
+            anchors.fill: parent
+            color: &quot;#44ffffff&quot;
+            visible: mouse.pressed
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: &quot;#dbffde&quot;
+            visible: model.sponsored !== undefined ? model.sponsored : false
+
+            Label {
+                text: qsTr(&quot;Sponsored result&quot;)
+                horizontalAlignment: Text.AlignRight
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                font.pixelSize: 8
+                visible: model.sponsored !== undefined ? model.sponsored : false
+            }
+        }
+
+        GridLayout {
+            rows: 2
+            columns: 2
+            anchors.fill: parent
+            anchors.leftMargin: 30
+            flow: GridLayout.TopToBottom
+
+            Image {
+                // anchors.verticalCenter: parent.verticalCenter
+                id:icon
+                source: place.favorite ? &quot;../../resources/star.png&quot; : place.icon.url()
+                Layout.rowSpan: 2
+            }
+
+            Label {
+                id: placeName
+                text: place.favorite ? place.favorite.name : place.name
+                Layout.fillWidth: true
+            }
+
+            Label {
+                id: distanceText
+                font.italic: true
+                text: Helper.formatDistance(distance)
+                Layout.fillWidth: true
+            }
+        }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.margins: 15
+            height: 1
+            color: &quot;#46a2da&quot;
+        }
+
+        MouseArea {
+            id: mouse
+            anchors.fill: parent
+            onClicked: {
+                if (model.type === undefined || type === PlaceSearchModel.PlaceResult) {
+                    if (!place.detailsFetched)
+                        place.getDetails();
+                    root.showPlaceDetails(model.place, model.distance);
+                }
+            }
+        }
+    }
+}
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="displaying-place-content">
+<span id="id9"></span><h2>Displaying Place Content<a class="headerlink" href="#displaying-place-content" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Places can have additional rich content, including editorials, reviews and images. Rich content is accessed via a set of models. Content models are generally not created directly by the application developer, instead models are obtained from the <span class="xref std std-ref">editorialModel</span> , <span class="xref std std-ref">reviewModel</span> and <span class="xref std std-ref">imageModel</span> properties of the <span class="xref std std-ref">Place</span> type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="nb">id</span><span class="p">:</span><span class="n">view</span>
+    <span class="nb">property</span> <span class="n">Place</span> <span class="n">place</span>
+    <span class="n">signal</span> <span class="n">showEditorial</span><span class="p">(</span><span class="n">variant</span> <span class="n">editorial</span><span class="p">)</span>
+    <span class="n">width</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">height</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">height</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">place</span><span class="o">.</span><span class="n">editorialModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">EditorialDelegate</span> <span class="p">{</span>
+        <span class="n">onShowEditorial</span><span class="p">:</span> <span class="n">view</span><span class="o">.</span><span class="n">showEditorial</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="helper-js-example-file">
+<h1>helper.js Example File<a class="headerlink" href="#helper-js-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="places-qml-example-file">
+<h1>places.qml Example File<a class="headerlink" href="#places-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="message-qml-example-file">
+<h1>Message.qml Example File<a class="headerlink" href="#message-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="messageform-ui-qml-example-file">
+<h1>MessageForm.ui.qml Example File<a class="headerlink" href="#messageform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="placedetails-qml-example-file">
+<h1>PlaceDetails.qml Example File<a class="headerlink" href="#placedetails-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="placedetailsform-ui-qml-example-file">
+<h1>PlaceDetailsForm.ui.qml Example File<a class="headerlink" href="#placedetailsform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchboundingbox-qml-example-file">
+<h1>SearchBoundingBox.qml Example File<a class="headerlink" href="#searchboundingbox-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchboundingboxform-ui-qml-example-file">
+<h1>SearchBoundingBoxForm.ui.qml Example File<a class="headerlink" href="#searchboundingboxform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchboundingcircle-qml-example-file">
+<h1>SearchBoundingCircle.qml Example File<a class="headerlink" href="#searchboundingcircle-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchboundingcircleform-ui-qml-example-file">
+<h1>SearchBoundingCircleForm.ui.qml Example File<a class="headerlink" href="#searchboundingcircleform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchcenter-qml-example-file">
+<h1>SearchCenter.qml Example File<a class="headerlink" href="#searchcenter-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchcenterform-ui-qml-example-file">
+<h1>SearchCenterForm.ui.qml Example File<a class="headerlink" href="#searchcenterform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchoptions-qml-example-file">
+<h1>SearchOptions.qml Example File<a class="headerlink" href="#searchoptions-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchoptionsform-ui-qml-example-file">
+<h1>SearchOptionsForm.ui.qml Example File<a class="headerlink" href="#searchoptionsform-ui-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainmenu-qml-example-file">
+<h1>MainMenu.qml Example File<a class="headerlink" href="#mainmenu-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mapcomponent-qml-example-file">
+<h1>MapComponent.qml Example File<a class="headerlink" href="#mapcomponent-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchbar-qml-example-file">
+<h1>SearchBar.qml Example File<a class="headerlink" href="#searchbar-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="categorydelegate-qml-example-file">
+<h1>CategoryDelegate.qml Example File<a class="headerlink" href="#categorydelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="categoryview-qml-example-file">
+<h1>CategoryView.qml Example File<a class="headerlink" href="#categoryview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="editorialdelegate-qml-example-file">
+<h1>EditorialDelegate.qml Example File<a class="headerlink" href="#editorialdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="editorialpage-qml-example-file">
+<h1>EditorialPage.qml Example File<a class="headerlink" href="#editorialpage-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="editorialview-qml-example-file">
+<h1>EditorialView.qml Example File<a class="headerlink" href="#editorialview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imageview-qml-example-file">
+<h1>ImageView.qml Example File<a class="headerlink" href="#imageview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="ratingview-qml-example-file">
+<h1>RatingView.qml Example File<a class="headerlink" href="#ratingview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="reviewdelegate-qml-example-file">
+<h1>ReviewDelegate.qml Example File<a class="headerlink" href="#reviewdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="reviewpage-qml-example-file">
+<h1>ReviewPage.qml Example File<a class="headerlink" href="#reviewpage-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="reviewview-qml-example-file">
+<h1>ReviewView.qml Example File<a class="headerlink" href="#reviewview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchresultdelegate-qml-example-file">
+<h1>SearchResultDelegate.qml Example File<a class="headerlink" href="#searchresultdelegate-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="searchresultview-qml-example-file">
+<h1>SearchResultView.qml Example File<a class="headerlink" href="#searchresultview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="suggestionview-qml-example-file">
+<h1>SuggestionView.qml Example File<a class="headerlink" href="#suggestionview-qml-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="places-pro-example-file">
+<h1>places.pro Example File<a class="headerlink" href="#places-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="places-qrc-example-file">
+<h1>places.qrc Example File<a class="headerlink" href="#places-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="categories-png-image-file">
+<h1>categories.png Image File<a class="headerlink" href="#categories-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="left-png-image-file">
+<h1>left.png Image File<a class="headerlink" href="#left-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="marker-png-image-file">
+<h1>marker.png Image File<a class="headerlink" href="#marker-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="right-png-image-file">
+<h1>right.png Image File<a class="headerlink" href="#right-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scale-png-image-file">
+<h1>scale.png Image File<a class="headerlink" href="#scale-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="scale-end-png-image-file">
+<h1>scale_end.png Image File<a class="headerlink" href="#scale-end-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="search-png-image-file">
+<h1>search.png Image File<a class="headerlink" href="#search-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="star-png-image-file">
+<h1>star.png Image File<a class="headerlink" href="#star-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,431 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Custom Sort/Filter Model Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Custom Sort/Filter Model Example</a><ul>
+<li><a class="reference internal" href="#mysortfilterproxymodel-class-definition">MySortFilterProxyModel Class Definition</a></li>
+<li><a class="reference internal" href="#mysortfilterproxymodel-class-implementation">MySortFilterProxyModel Class Implementation</a></li>
+<li><a class="reference internal" href="#window-class-definition">Window Class Definition</a></li>
+<li><a class="reference internal" href="#window-class-implementation">Window Class Implementation</a></li>
+<li><a class="reference internal" href="#the-main-function">The Main() Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filterwidget-cpp-example-file">filterwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#filterwidget-h-example-file">filterwidget.h Example File</a></li>
+<li><a class="reference internal" href="#mysortfilterproxymodel-cpp-example-file">mysortfilterproxymodel.cpp Example File</a></li>
+<li><a class="reference internal" href="#mysortfilterproxymodel-h-example-file">mysortfilterproxymodel.h Example File</a></li>
+<li><a class="reference internal" href="#window-cpp-example-file">window.cpp Example File</a></li>
+<li><a class="reference internal" href="#window-h-example-file">window.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#customsortfiltermodel-pro-example-file">customsortfiltermodel.pro Example File</a></li>
+<li><a class="reference internal" href="#customsortfiltermodel-qrc-example-file">customsortfiltermodel.qrc Example File</a></li>
+<li><a class="reference internal" href="#find-png-image-file">find.png Image File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="custom-sort-filter-model-example">
+<span id="id1"></span><h1>Custom Sort/Filter Model Example<a class="headerlink" href="#custom-sort-filter-model-example" title="Permalink to this headline">¶</a></h1>
+<p>Custom Sort/Filter Model example illustrates how to subclass QSortFilterProxyModel to perform advanced sorting and filtering</p>
+<blockquote>
+<div><p>The Custom Sort/Filter Model example illustrates how to subclass <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> to perform advanced sorting and filtering.</p>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> class provides support for sorting and filtering data passed between another model and a view.</p>
+<p>The model transforms the structure of a source model by mapping the model indexes it supplies to new indexes, corresponding to different locations, for views to use. This approach allows a given source model to be restructured as far as views are concerned, without requiring any transformations on the underlying data and without duplicating the data in memory.</p>
+<p>The Custom Sort/Filter Model example consists of two classes:</p>
+<ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">MySortFilterProxyModel</span></code> class provides a custom proxy model.</li>
+<li>The <code class="docutils literal"><span class="pre">Window</span></code> class provides the main application window, using the custom proxy model to sort and filter a standard item model.</li>
+</ul>
+<p>We will first take a look at the <code class="docutils literal"><span class="pre">MySortFilterProxyModel</span></code> class to see how the custom proxy model is implemented, then we will take a look at the <code class="docutils literal"><span class="pre">Window</span></code> class to see how the model is used. Finally we will take a quick look at the <code class="docutils literal"><span class="pre">main()</span></code> function.</p>
+</div></blockquote>
+<div class="section" id="mysortfilterproxymodel-class-definition">
+<span id="id2"></span><h2>MySortFilterProxyModel Class Definition<a class="headerlink" href="#mysortfilterproxymodel-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MySortFilterProxyModel</span></code> class inherits the <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> class.</p>
+<p>Since <a class="reference internal" href="../PySide2/QtCore/QAbstractProxyModel.html#PySide2.QtCore.QAbstractProxyModel" title="PySide2.QtCore.QAbstractProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractProxyModel</span></code></a> and its subclasses are derived from <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> , much of the same advice about subclassing normal models also applies to proxy models.</p>
+<p>On the other hand, it is worth noting that many of <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> ‘s default implementations of functions are written so that they call the equivalent functions in the relevant source model. This simple proxying mechanism may need to be overridden for source models with more complex behavior. In this example we derive from the <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> class to ensure that our filter can recognize a valid range of dates, and to control the sorting behavior.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySortFilterProxyModel</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QSortFilterProxyModel</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MySortFilterProxyModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QDate</span> <span class="n">filterMinimumDate</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">minDate</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">setFilterMinimumDate</span><span class="p">(</span><span class="n">const</span> <span class="n">QDate</span> <span class="o">&amp;</span><span class="n">date</span><span class="p">);</span>
+
+    <span class="n">QDate</span> <span class="n">filterMaximumDate</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">maxDate</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="n">setFilterMaximumDate</span><span class="p">(</span><span class="n">const</span> <span class="n">QDate</span> <span class="o">&amp;</span><span class="n">date</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">filterAcceptsRow</span><span class="p">(</span><span class="nb">int</span> <span class="n">sourceRow</span><span class="p">,</span> <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">sourceParent</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">lessThan</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">left</span><span class="p">,</span> <span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">right</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">dateInRange</span><span class="p">(</span><span class="n">const</span> <span class="n">QDate</span> <span class="o">&amp;</span><span class="n">date</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+
+    <span class="n">QDate</span> <span class="n">minDate</span><span class="p">;</span>
+    <span class="n">QDate</span> <span class="n">maxDate</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We want to be able to filter our data by specifying a given period of time. For that reason, we implement the custom <code class="docutils literal"><span class="pre">setFilterMinimumDate()</span></code> and <code class="docutils literal"><span class="pre">setFilterMaximumDate()</span></code> functions as well as the corresponding <code class="docutils literal"><span class="pre">filterMinimumDate()</span></code> and <code class="docutils literal"><span class="pre">filterMaximumDate()</span></code> functions. We reimplement <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.filterAcceptsRow()</span></code> function to only accept rows with valid dates, and <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.lessThan()</span></code> to be able to sort the senders by their email addresses. Finally, we implement a <code class="docutils literal"><span class="pre">dateInRange()</span></code> convenience function that we will use to determine if a date is valid.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mysortfilterproxymodel-class-implementation">
+<span id="id3"></span><h2>MySortFilterProxyModel Class Implementation<a class="headerlink" href="#mysortfilterproxymodel-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MySortFilterProxyModel</span></code> constructor is trivial, passing the parent parameter on to the base class constructor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+    <span class="n">QSortFilterProxyModel</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The most interesting parts of the <code class="docutils literal"><span class="pre">MySortFilterProxyModel</span></code> implementation are the reimplementations of <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.filterAcceptsRow()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.lessThan()</span></code> functions. Let’s first take a look at our customized <code class="docutils literal"><span class="pre">lessThan()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lessThan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">):</span>
+    <span class="n">leftData</span> <span class="o">=</span> <span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+    <span class="n">rightData</span> <span class="o">=</span> <span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We want to sort the senders by their email addresses. The <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.lessThan()</span></code> function is used as the &lt; operator when sorting. The default implementation handles a collection of types including <a class="reference internal" href="../PySide2/QtCore/QDateTime.html#PySide2.QtCore.QDateTime" title="PySide2.QtCore.QDateTime"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QDateTime</span></code></a> and String, but in order to be able to sort the senders by their email addresses we must first identify the address within the given string:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">leftData</span><span class="p">,</span> <span class="n">QDateTime</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">leftData</span> <span class="o">&lt;</span> <span class="n">rightData</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">emailPattern</span> <span class="o">=</span> <span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;([</span><span class="se">\\</span><span class="s2">w</span><span class="se">\\</span><span class="s2">.]*@[</span><span class="se">\\</span><span class="s2">w</span><span class="se">\\</span><span class="s2">.]*)&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">left</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">emailPattern</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">leftData</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">leftData</span> <span class="o">=</span> <span class="n">emailPattern</span><span class="o">.</span><span class="n">cap</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">right</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">emailPattern</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">rightData</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">rightData</span> <span class="o">=</span> <span class="n">emailPattern</span><span class="o">.</span><span class="n">cap</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">leftString</span> <span class="o">&lt;</span> <span class="n">rightString</span>
+</pre></div>
+</div>
+<p>We use <a class="reference internal" href="../PySide2/QtCore/QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> to define a pattern for the addresses we are looking for. The <code class="xref py py-func docutils literal"><span class="pre">QRegExp.indexIn()</span></code> function attempts to find a match in the given string and returns the position of the first match, or -1 if there was no match. If the given string contains the pattern, we use <a class="reference internal" href="../PySide2/QtCore/QRegExp.html#PySide2.QtCore.QRegExp" title="PySide2.QtCore.QRegExp"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QRegExp</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QRegExp.cap()</span></code> function to retrieve the actual address. The <code class="xref py py-func docutils literal"><span class="pre">QRegExp.cap()</span></code> function returns the text captured by the <em>nth</em> subexpression. The entire match has index 0 and the parenthesized subexpressions have indexes starting from 1 (excluding non-capturing parentheses).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sourceRow</span><span class="p">,</span> <span class="n">sourceParent</span><span class="p">):</span>
+    <span class="n">index0</span> <span class="o">=</span> <span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sourceRow</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sourceParent</span><span class="p">)</span>
+    <span class="n">index1</span> <span class="o">=</span> <span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sourceRow</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sourceParent</span><span class="p">)</span>
+    <span class="n">index2</span> <span class="o">=</span> <span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sourceRow</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sourceParent</span><span class="p">)</span>
+
+    <span class="n">regex</span> <span class="o">=</span> <span class="n">filterRegExp</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">regex</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">index0</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="ow">or</span> <span class="n">regex</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">index1</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+           <span class="ow">and</span> <span class="n">dateInRange</span><span class="p">(</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">index2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.filterAcceptsRow()</span></code> function, on the other hand, is expected to return true if the given row should be included in the model. In our example, a row is accepted if either the subject or the sender contains the given regular expression, and the date is valid.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>def dateInRange(self, date):
+    return (!minDate.isValid() || date &gt; minDate)
+           &amp;&amp; (!maxDate.isValid() || date &lt; maxDate)
+</pre></div>
+</div>
+<p>We use our custom <code class="docutils literal"><span class="pre">dateInRange()</span></code> function to determine if a date is valid.</p>
+<p>To be able to filter our data by specifying a given period of time, we also implement functions for getting and setting the minimum and maximum dates:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setFilterMinimumDate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">minDate</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">setFilterMaximumDate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">maxDate</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The get functions, <code class="docutils literal"><span class="pre">filterMinimumDate()</span></code> and <code class="docutils literal"><span class="pre">filterMaximumDate()</span></code> , are trivial and implemented as inline function in the header file.</p>
+<p>This completes our custom proxy model. Let’s see how we can use it in an application.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-definition">
+<span id="id4"></span><h2>Window Class Definition<a class="headerlink" href="#window-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">CustomFilter</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> , and provides this example’s main application window:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Window</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Window</span><span class="p">();</span>
+
+    <span class="n">void</span> <span class="n">setSourceModel</span><span class="p">(</span><span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">model</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">textFilterChanged</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">dateFilterChanged</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">MySortFilterProxyModel</span> <span class="o">*</span><span class="n">proxyModel</span><span class="p">;</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">sourceGroupBox</span><span class="p">;</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">proxyGroupBox</span><span class="p">;</span>
+    <span class="n">QTreeView</span> <span class="o">*</span><span class="n">sourceView</span><span class="p">;</span>
+    <span class="n">QTreeView</span> <span class="o">*</span><span class="n">proxyView</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">filterPatternLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">fromLabel</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">toLabel</span><span class="p">;</span>
+    <span class="n">FilterWidget</span> <span class="o">*</span><span class="n">filterWidget</span><span class="p">;</span>
+    <span class="n">QDateEdit</span> <span class="o">*</span><span class="n">fromDateEdit</span><span class="p">;</span>
+    <span class="n">QDateEdit</span> <span class="o">*</span><span class="n">toDateEdit</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We implement two private slots, <code class="docutils literal"><span class="pre">textFilterChanged()</span></code> and <code class="docutils literal"><span class="pre">dateFilterChanged()</span></code> , to respond to the user changing the filter pattern, case sensitivity, or any of the dates. In addition, we implement a public <code class="docutils literal"><span class="pre">setSourceModel()</span></code> convenience function to set up the model/ view relation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="window-class-implementation">
+<span id="id5"></span><h2>Window Class Implementation<a class="headerlink" href="#window-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In this example, we have chosen to create and set the source model in the <code class="docutils literal"><span class="pre">main</span></code> () function (which we will come back to later). So when constructing the main application window, we assume that a source model already exists and start by creating an instance of our custom proxy model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Window</span><span class="p">::</span><span class="n">Window</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">proxyModel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MySortFilterProxyModel</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We set the <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.dynamicSortFilter()</span></code> property that holds whether the proxy model is dynamically sorted and filtered. By setting this property to true, we ensure that the model is sorted and filtered whenever the contents of the source model change.</p>
+<p>The main application window shows views of both the source model and the proxy model. The source view is quite simple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sourceView</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTreeView</span><span class="p">;</span>
+<span class="n">sourceView</span><span class="o">-&gt;</span><span class="n">setRootIsDecorated</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+<span class="n">sourceView</span><span class="o">-&gt;</span><span class="n">setAlternatingRowColors</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> class provides a default model/view implementation of a tree view. Our view implements a tree representation of items in the application’s source model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sourceLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sourceView</span><span class="p">);</span>
+<span class="n">sourceGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Original Model&quot;</span><span class="p">));</span>
+<span class="n">sourceGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">sourceLayout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> class provides a default model/view implementation of a tree view; our view implements a tree representation of items in the application’s source model. We add our view widget to a layout that we install on a corresponding group box.</p>
+<p>The proxy model view, on the other hand, contains several widgets controlling the various aspects of transforming the source model’s data structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">filterWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FilterWidget</span><span class="p">;</span>
+<span class="n">filterWidget</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Grace|Sports&quot;</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">filterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">FilterWidget</span><span class="p">::</span><span class="n">filterChanged</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">textFilterChanged</span><span class="p">);</span>
+
+<span class="n">filterPatternLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Filter pattern:&quot;</span><span class="p">));</span>
+<span class="n">filterPatternLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">filterWidget</span><span class="p">);</span>
+
+<span class="n">fromDateEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDateEdit</span><span class="p">;</span>
+<span class="n">fromDateEdit</span><span class="o">-&gt;</span><span class="n">setDate</span><span class="p">(</span><span class="n">QDate</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">01</span><span class="p">,</span> <span class="mi">01</span><span class="p">));</span>
+<span class="n">fromLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;F&amp;rom:&quot;</span><span class="p">));</span>
+<span class="n">fromLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">fromDateEdit</span><span class="p">);</span>
+
+<span class="n">toDateEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDateEdit</span><span class="p">;</span>
+<span class="n">toDateEdit</span><span class="o">-&gt;</span><span class="n">setDate</span><span class="p">(</span><span class="n">QDate</span><span class="p">(</span><span class="mi">2099</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">));</span>
+<span class="n">toLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;To:&quot;</span><span class="p">));</span>
+<span class="n">toLabel</span><span class="o">-&gt;</span><span class="n">setBuddy</span><span class="p">(</span><span class="n">toDateEdit</span><span class="p">);</span>
+
+<span class="n">connect</span><span class="p">(</span><span class="n">filterWidget</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QLineEdit</span><span class="p">::</span><span class="n">textChanged</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">textFilterChanged</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">fromDateEdit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QDateTimeEdit</span><span class="p">::</span><span class="n">dateChanged</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">dateFilterChanged</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">toDateEdit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QDateTimeEdit</span><span class="p">::</span><span class="n">dateChanged</span><span class="p">,</span>
+        <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Window</span><span class="p">::</span><span class="n">dateFilterChanged</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that whenever the user changes one of the filtering options, we must explicitly reapply the filter. This is done by connecting the various editors to functions that update the proxy model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">proxyView</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTreeView</span><span class="p">;</span>
+<span class="n">proxyView</span><span class="o">-&gt;</span><span class="n">setRootIsDecorated</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+<span class="n">proxyView</span><span class="o">-&gt;</span><span class="n">setAlternatingRowColors</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="n">proxyView</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyModel</span><span class="p">);</span>
+<span class="n">proxyView</span><span class="o">-&gt;</span><span class="n">setSortingEnabled</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="n">proxyView</span><span class="o">-&gt;</span><span class="n">sortByColumn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">AscendingOrder</span><span class="p">);</span>
+
+<span class="n">QGridLayout</span> <span class="o">*</span><span class="n">proxyLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">proxyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">filterPatternLabel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">filterWidget</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fromLabel</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fromDateEdit</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">toLabel</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">proxyLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">toDateEdit</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="n">proxyGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Sorted/Filtered Model&quot;</span><span class="p">));</span>
+<span class="n">proxyGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">proxyLayout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The sorting will be handled by the view. All we have to do is to enable sorting for our proxy view by setting the <code class="xref py py-func docutils literal"><span class="pre">QTreeView.sortingEnabled()</span></code> property (which is false by default). Then we add all the filtering widgets and the proxy view to a layout that we install on a corresponding group box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sourceGroupBox</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">proxyGroupBox</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Custom Sort/Filter Model&quot;</span><span class="p">));</span>
+    <span class="n">resize</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">450</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, after putting our two group boxes into another layout that we install on our main application widget, we customize the application window.</p>
+<p>As mentioned above, we create the source model in the <code class="docutils literal"><span class="pre">main</span></code> () function, calling the <code class="docutils literal"><span class="pre">Window::setSourceModel()</span></code> function to make the application use it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">model</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">proxyModel</span><span class="o">-&gt;</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+    <span class="n">sourceView</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.setSourceModel()</span></code> function makes the proxy model process the data in the given model, in this case out mail model. The <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.setModel()</span></code> that the view widget inherits from the <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> class, sets the model for the view to present. Note that the latter function will also create and set a new selection model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">textFilterChanged</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QRegExp</span> <span class="n">regExp</span><span class="p">(</span><span class="n">filterWidget</span><span class="o">-&gt;</span><span class="n">text</span><span class="p">(),</span>
+                   <span class="n">filterWidget</span><span class="o">-&gt;</span><span class="n">caseSensitivity</span><span class="p">(),</span>
+                   <span class="n">filterWidget</span><span class="o">-&gt;</span><span class="n">patternSyntax</span><span class="p">());</span>
+    <span class="n">proxyModel</span><span class="o">-&gt;</span><span class="n">setFilterRegExp</span><span class="p">(</span><span class="n">regExp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">textFilterChanged()</span></code> function is called whenever the user changes the filter pattern or the case sensitivity.</p>
+<p>We first retrieve the preferred syntax (the <code class="xref py py-attr docutils literal"><span class="pre">QRegExp.PatternSyntax</span></code> enum is used to interpret the meaning of the given pattern), then we determine the preferred case sensitivity. Based on these preferences and the current filter pattern, we set the proxy model’s <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.filterRegExp()</span></code> property. The <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.filterRegExp()</span></code> property holds the regular expression used to filter the contents of the source model. Note that calling <a class="reference internal" href="../PySide2/QtCore/QSortFilterProxyModel.html#PySide2.QtCore.QSortFilterProxyModel" title="PySide2.QtCore.QSortFilterProxyModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QSortFilterProxyModel</span></code></a> ‘s <code class="xref py py-func docutils literal"><span class="pre">QSortFilterProxyModel.setFilterRegExp()</span></code> function also updates the model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Window</span><span class="p">::</span><span class="n">dateFilterChanged</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">proxyModel</span><span class="o">-&gt;</span><span class="n">setFilterMinimumDate</span><span class="p">(</span><span class="n">fromDateEdit</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">());</span>
+    <span class="n">proxyModel</span><span class="o">-&gt;</span><span class="n">setFilterMaximumDate</span><span class="p">(</span><span class="n">toDateEdit</span><span class="o">-&gt;</span><span class="n">date</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">dateFilterChanged()</span></code> function is called whenever the user modifies the range of valid dates. We retrieve the new dates from the user interface, and call the corresponding functions (provided by our custom proxy model) to set the proxy model’s minimum and maximum dates. As we explained above, calling these functions also updates the model.</p>
+</div></blockquote>
+</div>
+<div class="section" id="the-main-function">
+<span id="id6"></span><h2>The Main() Function<a class="headerlink" href="#the-main-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In this example, we have separated the application from the source model by creating the model in the <code class="docutils literal"><span class="pre">main</span></code> () function. First we create the application, then we create the source model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">Window</span> <span class="n">window</span><span class="p">;</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">createMailModel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">window</span><span class="p">));</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createMailModel()</span></code> function is a convenience function provided to simplify the constructor. All it does is to create and return a model describing a collection of emails. The model is an instance of the <a class="reference internal" href="../PySide2/QtGui/QStandardItemModel.html#PySide2.QtGui.QStandardItemModel" title="PySide2.QtGui.QStandardItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QStandardItemModel</span></code></a> class, i.e., a generic model for storing custom data typically used as a repository for standard Qt data types. Each mail description is added to the model using <code class="docutils literal"><span class="pre">addMail()</span></code> , another convenience function. See <span class="xref std std-ref">main.cpp</span> for details.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="filterwidget-cpp-example-file">
+<h1>filterwidget.cpp Example File<a class="headerlink" href="#filterwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="filterwidget-h-example-file">
+<h1>filterwidget.h Example File<a class="headerlink" href="#filterwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mysortfilterproxymodel-cpp-example-file">
+<h1>mysortfilterproxymodel.cpp Example File<a class="headerlink" href="#mysortfilterproxymodel-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mysortfilterproxymodel-h-example-file">
+<h1>mysortfilterproxymodel.h Example File<a class="headerlink" href="#mysortfilterproxymodel-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-cpp-example-file">
+<h1>window.cpp Example File<a class="headerlink" href="#window-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="window-h-example-file">
+<h1>window.h Example File<a class="headerlink" href="#window-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="customsortfiltermodel-pro-example-file">
+<h1>customsortfiltermodel.pro Example File<a class="headerlink" href="#customsortfiltermodel-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="customsortfiltermodel-qrc-example-file">
+<h1>customsortfiltermodel.qrc Example File<a class="headerlink" href="#customsortfiltermodel-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="find-png-image-file">
+<h1>find.png Image File<a class="headerlink" href="#find-png-image-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

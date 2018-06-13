@@ -1,0 +1,412 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Using C++ Models with Qt Quick Views &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using C++ Models with Qt Quick Views</a><ul>
+<li><a class="reference internal" href="#data-provided-in-a-custom-c-model">Data Provided In A Custom C++ Model</a></li>
+<li><a class="reference internal" href="#qstringlist-based-model">QStringList-based Model</a></li>
+<li><a class="reference internal" href="#qvariantlist-based-model">QVariantList-based Model</a></li>
+<li><a class="reference internal" href="#qobjectlist-based-model">QObjectList-based Model</a></li>
+<li><a class="reference internal" href="#qabstractitemmodel-subclass">QAbstractItemModel Subclass</a></li>
+<li><a class="reference internal" href="#sql-models">SQL Models</a></li>
+<li><a class="reference internal" href="#read-only-data-model">Read-only Data Model</a></li>
+<li><a class="reference internal" href="#editable-data-model">Editable Data Model</a></li>
+<li><a class="reference internal" href="#exposing-c-data-models-to-qml">Exposing C++ Data Models to QML</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-c-models-with-qt-quick-views">
+<span id="id1"></span><h1>Using C++ Models with Qt Quick Views<a class="headerlink" href="#using-c-models-with-qt-quick-views" title="Permalink to this headline">¶</a></h1>
+<p>Using Qt Quick views with models defined in C++</p>
+<blockquote>
+<div>using Qt Quick views with models defined in C++</div></blockquote>
+<div class="section" id="data-provided-in-a-custom-c-model">
+<span id="id2"></span><h2>Data Provided In A Custom C++ Model<a class="headerlink" href="#data-provided-in-a-custom-c-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Models can be defined in C++ and then made available to QML. This is useful for exposing existing C++ data models or otherwise complex datasets to QML.</p>
+<p>A C++ model class can be defined as a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> , a <code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code> , a <code class="xref py py-class docutils literal"><span class="pre">QObjectList</span></code> or a <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> . The first three are useful for exposing simpler datasets, while <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> provides a more flexible solution for more complex models.</p>
+<p>For a video tutorial that takes you through the whole process of exposing a C++ model to QML, see the Using C++ Models in QML Tutorial.</p>
+</div></blockquote>
+</div>
+<div class="section" id="qstringlist-based-model">
+<span id="id3"></span><h2>QStringList-based Model<a class="headerlink" href="#qstringlist-based-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A model may be a simple <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> , which provides the contents of the list via the <em>modelData</em> role.</p>
+<p>Here is a <span class="xref std std-ref">ListView</span> with a delegate that references its model item’s value using the <code class="docutils literal"><span class="pre">modelData</span></code> role:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">myModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">25</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="n">modelData</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A Qt application can load this QML document and set the value of <code class="docutils literal"><span class="pre">myModel</span></code> to a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStringList</span> <span class="n">dataList</span><span class="p">;</span>
+<span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Item 1&quot;</span><span class="p">);</span>
+<span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Item 2&quot;</span><span class="p">);</span>
+<span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Item 3&quot;</span><span class="p">);</span>
+<span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Item 4&quot;</span><span class="p">);</span>
+
+<span class="n">QQuickView</span> <span class="n">view</span><span class="p">;</span>
+<span class="n">QQmlContext</span> <span class="o">*</span><span class="n">ctxt</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">rootContext</span><span class="p">();</span>
+<span class="n">ctxt</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s2">&quot;myModel&quot;</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">dataList</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The complete source code for this example is available in <span class="xref std std-ref">examples/quick/models/stringlistmodel</span> within the Qt install directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no way for the view to know that the contents of a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> have changed. If the <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> changes, it will be necessary to reset the model by calling QQmlContext::setContextProperty() again.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="qvariantlist-based-model">
+<span id="id4"></span><h2>QVariantList-based Model<a class="headerlink" href="#qvariantlist-based-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A model may be a single <code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code> , which provides the contents of the list via the <em>modelData</em> role.</p>
+<p>The API works just like with <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> , as shown in the previous section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no way for the view to know that the contents of a <code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code> have changed. If the <code class="xref py py-class docutils literal"><span class="pre">QVariantList</span></code> changes, it will be necessary to reset the model.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="qobjectlist-based-model">
+<span id="id5"></span><h2>QObjectList-based Model<a class="headerlink" href="#qobjectlist-based-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A list of <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> * values can also be used as a model. A <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> &lt; <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> *&gt; provides the properties of the objects in the list as roles.</p>
+<p>The following application creates a <code class="docutils literal"><span class="pre">DataObject</span></code> class with <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> values that will be accessible as named roles when a <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> &lt;DataObject*&gt; is exposed to QML:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DataObject</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span> <span class="n">READ</span> <span class="n">name</span> <span class="n">WRITE</span> <span class="n">setName</span> <span class="n">NOTIFY</span> <span class="n">nameChanged</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">QString</span> <span class="n">color</span> <span class="n">READ</span> <span class="n">color</span> <span class="n">WRITE</span> <span class="n">setColor</span> <span class="n">NOTIFY</span> <span class="n">colorChanged</span><span class="p">)</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">QList</span><span class="o">&lt;</span><span class="n">QObject</span><span class="o">*&gt;</span> <span class="n">dataList</span><span class="p">;</span>
+    <span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span> <span class="n">DataObject</span><span class="p">(</span><span class="s2">&quot;Item 1&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">));</span>
+    <span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span> <span class="n">DataObject</span><span class="p">(</span><span class="s2">&quot;Item 2&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">));</span>
+    <span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span> <span class="n">DataObject</span><span class="p">(</span><span class="s2">&quot;Item 3&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">));</span>
+    <span class="n">dataList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span> <span class="n">DataObject</span><span class="p">(</span><span class="s2">&quot;Item 4&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">));</span>
+
+    <span class="n">QQuickView</span> <span class="n">view</span><span class="p">;</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setResizeMode</span><span class="p">(</span><span class="n">QQuickView</span><span class="p">::</span><span class="n">SizeRootObjectToView</span><span class="p">);</span>
+    <span class="n">QQmlContext</span> <span class="o">*</span><span class="n">ctxt</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">rootContext</span><span class="p">();</span>
+    <span class="n">ctxt</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s2">&quot;myModel&quot;</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">dataList</span><span class="p">));</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtCore/QObject.html#PySide2.QtCore.QObject" title="PySide2.QtCore.QObject"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QObject</span></code></a> * is available as the <code class="docutils literal"><span class="pre">modelData</span></code> property. As a convenience, the properties of the object are also made available directly in the delegate’s context. Here, <code class="docutils literal"><span class="pre">view.qml</span></code> references the <code class="docutils literal"><span class="pre">DataModel</span></code> properties in the <span class="xref std std-ref">ListView</span> delegate:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">100</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">myModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Rectangle</span> <span class="p">{</span>
+        <span class="n">height</span><span class="p">:</span> <span class="mi">25</span>
+        <span class="n">width</span><span class="p">:</span> <span class="mi">100</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">modelData</span><span class="o">.</span><span class="n">color</span>
+        <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="n">name</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note the use of <code class="docutils literal"><span class="pre">color</span></code> property with qualifier. The properties of the object are not replicated in the <code class="docutils literal"><span class="pre">model</span></code> object, as they are easily available via the <code class="docutils literal"><span class="pre">modelData</span></code> object.</p>
+<p>The complete source code for this example is available in <span class="xref std std-ref">examples/quick/models/objectlistmodel</span> within the Qt install directory.</p>
+<p>Note: There is no way for the view to know that the contents of a <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> has changed. If the <code class="xref py py-class docutils literal"><span class="pre">QList</span></code> changes, it is necessary to reset the model by calling QQmlContext::setContextProperty() again.</p>
+</div></blockquote>
+</div>
+<div class="section" id="qabstractitemmodel-subclass">
+<span id="id6"></span><h2>QAbstractItemModel Subclass<a class="headerlink" href="#qabstractitemmodel-subclass" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>A model can be defined by subclassing <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> . This is the best approach if you have a more complex model that cannot be supported by the other approaches. A <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> can also automatically notify a QML view when the model data changes.</p>
+<p>The roles of a <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> subclass can be exposed to QML by reimplementing <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.roleNames()</span></code> .</p>
+<p>Here is an application with a <a class="reference internal" href="../PySide2/QtCore/QAbstractListModel.html#PySide2.QtCore.QAbstractListModel" title="PySide2.QtCore.QAbstractListModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractListModel</span></code></a> subclass named <code class="docutils literal"><span class="pre">AnimalModel</span></code> , which exposes the <em>type</em> and <em>sizes</em> roles. It reimplements <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.roleNames()</span></code> to expose the role names, so that they can be accessed via QML:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">Animal</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="nb">type</span><span class="p">,</span> <span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">AnimalModel</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QAbstractListModel</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">enum</span> <span class="n">AnimalRoles</span> <span class="p">{</span>
+        <span class="n">TypeRole</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">UserRole</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">SizeRole</span>
+    <span class="p">};</span>
+
+    <span class="n">AnimalModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+
+<span class="n">QHash</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="n">QByteArray</span><span class="o">&gt;</span> <span class="n">AnimalModel</span><span class="p">::</span><span class="n">roleNames</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span>
+    <span class="n">QHash</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="n">QByteArray</span><span class="o">&gt;</span> <span class="n">roles</span><span class="p">;</span>
+    <span class="n">roles</span><span class="p">[</span><span class="n">TypeRole</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;type&quot;</span><span class="p">;</span>
+    <span class="n">roles</span><span class="p">[</span><span class="n">SizeRole</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;size&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">roles</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QGuiApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+
+    <span class="n">AnimalModel</span> <span class="n">model</span><span class="p">;</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Wolf&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">));</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Polar bear&quot;</span><span class="p">,</span> <span class="s2">&quot;Large&quot;</span><span class="p">));</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Quoll&quot;</span><span class="p">,</span> <span class="s2">&quot;Small&quot;</span><span class="p">));</span>
+
+    <span class="n">QQuickView</span> <span class="n">view</span><span class="p">;</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">setResizeMode</span><span class="p">(</span><span class="n">QQuickView</span><span class="p">::</span><span class="n">SizeRootObjectToView</span><span class="p">);</span>
+    <span class="n">QQmlContext</span> <span class="o">*</span><span class="n">ctxt</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">rootContext</span><span class="p">();</span>
+    <span class="n">ctxt</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s2">&quot;myModel&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">model</span><span class="p">);</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>This model is displayed by a <span class="xref std std-ref">ListView</span> delegate that accesses the <em>type</em> and <em>size</em> roles:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ListView</span> <span class="p">{</span>
+    <span class="n">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">;</span> <span class="n">height</span><span class="p">:</span> <span class="mi">250</span>
+
+    <span class="n">model</span><span class="p">:</span> <span class="n">myModel</span>
+    <span class="n">delegate</span><span class="p">:</span> <span class="n">Text</span> <span class="p">{</span> <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Animal: &quot;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">size</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>QML views are automatically updated when the model changes. Remember the model must follow the standard rules for model changes and notify the view when the model has changed by using <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.dataChanged()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.beginInsertRows()</span></code> , and so on. See the <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model subclassing reference</span></a> for more information.</p>
+<p>The complete source code for this example is available in <span class="xref std std-ref">examples/quick/models/abstractitemmodel</span> within the Qt install directory.</p>
+<p><a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> presents a hierarchy of tables, but the views currently provided by QML can only display list data. In order to display the child lists of a hierarchical model, use the DelegateModel QML type, which provides the following properties and functions to be used with list models of <a class="reference internal" href="../PySide2/QtCore/QAbstractItemModel.html#PySide2.QtCore.QAbstractItemModel" title="PySide2.QtCore.QAbstractItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QAbstractItemModel</span></code></a> type:</p>
+<ul class="simple">
+<li><em>hasModelChildren</em> role property to determine whether a node has child nodes.</li>
+<li>DelegateModel::rootIndex allows the root node to be specified</li>
+<li>DelegateModel::modelIndex() returns a <a class="reference internal" href="../PySide2/QtCore/QModelIndex.html#PySide2.QtCore.QModelIndex" title="PySide2.QtCore.QModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QModelIndex</span></code></a> which can be assigned to DelegateModel::rootIndex</li>
+<li>DelegateModel::parentModelIndex() returns a <a class="reference internal" href="../PySide2/QtCore/QModelIndex.html#PySide2.QtCore.QModelIndex" title="PySide2.QtCore.QModelIndex"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QModelIndex</span></code></a> which can be assigned to DelegateModel::rootIndex</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sql-models">
+<span id="id7"></span><h2>SQL Models<a class="headerlink" href="#sql-models" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Qt provides C++ classes that support SQL data models. These classes work transparently on the underlying SQL data, reducing the need to run SQL queries for basic SQL operations such as create, insert, or update. For more details about these classes, see <a class="reference internal" href="sql-model.html#using-the-sql-model-classes"><span class="std std-ref">Using the SQL Model Classes</span></a> .</p>
+<p>Although the C++ classes provide complete feature sets to operate on SQL data, they do not provide data access to QML. So you must implement a C++ custom data model as a subclass of one of these classes, and expose it to QML either as a type or context property.</p>
+</div></blockquote>
+</div>
+<div class="section" id="read-only-data-model">
+<span id="id8"></span><h2>Read-only Data Model<a class="headerlink" href="#read-only-data-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The custom model must reimplement the following methods to enable read-only access to the data from QML:</p>
+<ul>
+<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.roleNames()</span></code> () to expose the role names to the QML frontend. For example, the following version returns the selected table’s field names as role names:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">QHash</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="n">QByteArray</span><span class="o">&gt;</span> <span class="n">SqlQueryModel</span><span class="p">::</span><span class="n">roleNames</span><span class="p">()</span> <span class="n">const</span>
+ <span class="p">{</span>
+    <span class="n">QHash</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="n">QByteArray</span><span class="o">&gt;</span> <span class="n">roles</span><span class="p">;</span>
+    <span class="o">//</span> <span class="n">record</span><span class="p">()</span> <span class="n">returns</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">QSqlRecord</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">record</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">();</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">roles</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">UserRole</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">record</span><span class="p">()</span><span class="o">.</span><span class="n">fieldName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">toUtf8</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">roles</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.data()</span></code> () to expose SQL data to the QML frontend. For example, the following implementation returns data for the given model index:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVariant</span> <span class="n">SqlQueryModel</span><span class="p">::</span><span class="n">data</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="n">QVariant</span> <span class="n">value</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">&lt;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">UserRole</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">QSqlQueryModel</span><span class="p">::</span><span class="n">data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nb">int</span> <span class="n">columnIdx</span> <span class="o">=</span> <span class="n">role</span> <span class="o">-</span> <span class="n">Qt</span><span class="p">::</span><span class="n">UserRole</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">QModelIndex</span> <span class="n">modelIndex</span> <span class="o">=</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">(),</span> <span class="n">columnIdx</span><span class="p">);</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">QSqlQueryModel</span><span class="p">::</span><span class="n">data</span><span class="p">(</span><span class="n">modelIndex</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DisplayRole</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The <a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> class is good enough to implement a custom read-only model that represents data in an SQL database. The chat tutorial example demonstrates this very well by implementing a custom model to fetch the contact details from an SQLite database.</p>
+</div></blockquote>
+</div>
+<div class="section" id="editable-data-model">
+<span id="id9"></span><h2>Editable Data Model<a class="headerlink" href="#editable-data-model" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Besides the <code class="docutils literal"><span class="pre">roleNames()</span></code> and <code class="docutils literal"><span class="pre">data()</span></code> , the editable models must reimplement the <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.setData()</span></code> method to save changes to existing SQL data. The following version of the method checks if the given model index is valid and the <code class="docutils literal"><span class="pre">role</span></code> is equal to <code class="xref py py-attr docutils literal"><span class="pre">Qt.EditRole</span></code> , before calling the parent class version:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">SqlEditableModel</span><span class="p">::</span><span class="n">setData</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">,</span> <span class="n">const</span> <span class="n">QVariant</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">role</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">EditRole</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QSqlTableModel</span><span class="p">::</span><span class="n">setData</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span><span class="n">role</span><span class="p">);</span>
+        <span class="n">emit</span> <span class="n">dataChanged</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is important to emit the <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemModel.dataChanged()</span></code> () signal after saving the changes.</p>
+</div>
+<p>Unlike the C++ item views such as <a class="reference internal" href="../PySide2/QtWidgets/QListView.html#PySide2.QtWidgets.QListView" title="PySide2.QtWidgets.QListView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QListView</span></code></a> or <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> , the <code class="docutils literal"><span class="pre">setData()</span></code> method must be explicitly invoked from QML whenever appropriate. For example, on the editingFinished() or accepted() signal of TextField. Depending on the <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.EditStrategy</span></code> used by the model, the changes are either queued for submission later or submitted immediately.</p>
+<p>You can also insert new data into the model by calling <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.insertRecord()</span></code> (). In the following example snippet, a <a class="reference internal" href="../PySide2/QtSql/QSqlRecord.html#PySide2.QtSql.QSqlRecord" title="PySide2.QtSql.QSqlRecord"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlRecord</span></code></a> is populated with book details and appended to the model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">QSqlRecord</span> <span class="n">newRecord</span> <span class="o">=</span> <span class="n">record</span><span class="p">();</span>
+<span class="n">newRecord</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="s2">&quot;John Grisham&quot;</span><span class="p">);</span>
+<span class="n">newRecord</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;booktitle&quot;</span><span class="p">,</span> <span class="s2">&quot;The Litigators&quot;</span><span class="p">);</span>
+<span class="n">insertRecord</span><span class="p">(</span><span class="n">rowCount</span><span class="p">(),</span> <span class="n">newRecord</span><span class="p">);</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="exposing-c-data-models-to-qml">
+<span id="id10"></span><h2>Exposing C++ Data Models to QML<a class="headerlink" href="#exposing-c-data-models-to-qml" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The above examples use QQmlContext::setContextProperty() to set model values directly in QML components. An alternative to this is to register the C++ model class as a QML type (either directly from a C++ entry-point, or within the initialization function of a QML C++ plugin, as shown below). This would allow the model classes to be created directly as types within QML:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="97%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>C++</td>
+<td><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModelPlugin</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QQmlExtensionPlugin</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s2">&quot;org.qt-project.QmlExtension.MyModel&quot;</span> <span class="n">FILE</span> <span class="s2">&quot;mymodel.json&quot;</span><span class="p">)</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">registerTypes</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">qmlRegisterType</span><span class="o">&lt;</span><span class="n">MyModel</span><span class="o">&gt;</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;MyModel&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>QML</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>See Writing QML Extensions with C++ for details on writing QML C++ plugins.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

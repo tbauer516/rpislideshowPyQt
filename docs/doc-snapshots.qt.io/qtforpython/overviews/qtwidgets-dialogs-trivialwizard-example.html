@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Trivial Wizard Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Trivial Wizard Example</a><ul>
+<li><a class="reference internal" href="#introduction-page">Introduction Page</a></li>
+<li><a class="reference internal" href="#registration-page">Registration Page</a></li>
+<li><a class="reference internal" href="#conclusion-page">Conclusion Page</a></li>
+<li><a class="reference internal" href="#function">Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trivialwizard-cpp-example-file">trivialwizard.cpp Example File</a></li>
+<li><a class="reference internal" href="#trivialwizard-pro-example-file">trivialwizard.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="trivial-wizard-example">
+<span id="id1"></span><h1>Trivial Wizard Example<a class="headerlink" href="#trivial-wizard-example" title="Permalink to this headline">¶</a></h1>
+<p>Trivial Wizard example illustrates how to create a linear three-page registration wizard using three instances of QWizardPage and one instance of QWizard</p>
+<blockquote>
+<div>The Trivial Wizard example illustrates how to create a linear three-page registration wizard using three instances of <a class="reference internal" href="../PySide2/QtWidgets/QWizardPage.html#PySide2.QtWidgets.QWizardPage" title="PySide2.QtWidgets.QWizardPage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizardPage</span></code></a> and one instance of <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> .</div></blockquote>
+<div class="section" id="introduction-page">
+<span id="id2"></span><h2>Introduction Page<a class="headerlink" href="#introduction-page" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The introduction page is created with the <code class="docutils literal"><span class="pre">createIntroPage()</span></code> function where a <a class="reference internal" href="../PySide2/QtWidgets/QWizardPage.html#PySide2.QtWidgets.QWizardPage" title="PySide2.QtWidgets.QWizardPage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizardPage</span></code></a> is created and its title is set to “Introduction”. A <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> is used to hold the description of <code class="docutils literal"><span class="pre">page</span></code> . A <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> is used to hold the <code class="docutils literal"><span class="pre">label</span></code> . This <code class="docutils literal"><span class="pre">page</span></code> is returned when the <code class="docutils literal"><span class="pre">createIntroPage()</span></code> function is called.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createIntroPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">QWizardPage</span><span class="p">()</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Introduction&quot;</span><span class="p">)</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;This wizard will help you register your copy of Super Product Two.&quot;</span><span class="p">)</span>
+    <span class="n">label</span><span class="o">.</span><span class="n">setWordWrap</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">page</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="registration-page">
+<span id="id3"></span><h2>Registration Page<a class="headerlink" href="#registration-page" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The registration page is created with the <code class="docutils literal"><span class="pre">createRegistrationPage()</span></code> function. <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> objects are used to allow the user to input a name and an e-mail address. A <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> is used to hold the <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QWizardPage</span> <span class="o">*</span><span class="n">createRegistrationPage</span><span class="p">()</span>
+
+
+
+    <span class="n">QWizardPage</span> <span class="o">*</span><span class="n">page</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QWizardPage</span><span class="p">;</span>
+    <span class="n">page</span><span class="o">-&gt;</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Registration&quot;</span><span class="p">);</span>
+    <span class="n">page</span><span class="o">-&gt;</span><span class="n">setSubTitle</span><span class="p">(</span><span class="s2">&quot;Please fill both fields.&quot;</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">nameLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Name:&quot;</span><span class="p">);</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">nameLineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">emailLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;Email address:&quot;</span><span class="p">);</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">emailLineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">nameLabel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">nameLineEdit</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">emailLabel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">emailLineEdit</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">page</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">page</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="conclusion-page">
+<span id="id4"></span><h2>Conclusion Page<a class="headerlink" href="#conclusion-page" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The conclusion page is created in the <code class="docutils literal"><span class="pre">createConclusionPage()</span></code> function. This function’s content is similar to <code class="docutils literal"><span class="pre">createIntroPage()</span></code> . A <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> is used to inform the user that the registration process has completed successfully.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">createConclusionPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+
+    <span class="n">QWizardPage</span> <span class="o">*</span><span class="n">page</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QWizardPage</span><span class="p">;</span>
+    <span class="n">page</span><span class="o">-&gt;</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Conclusion&quot;</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;You are now successfully registered. Have a &quot;</span>
+                               <span class="s2">&quot;nice day!&quot;</span><span class="p">);</span>
+    <span class="n">label</span><span class="o">-&gt;</span><span class="n">setWordWrap</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+    <span class="n">page</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">page</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p id="main-function"><code class="docutils literal"><span class="pre">main()</span></code></p>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">main()</span></code> function instantiates a <a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a> object, <code class="docutils literal"><span class="pre">wizard</span></code> , and adds all three <a class="reference internal" href="../PySide2/QtWidgets/QWizardPage.html#PySide2.QtWidgets.QWizardPage" title="PySide2.QtWidgets.QWizardPage"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizardPage</span></code></a> objects to it. The <code class="docutils literal"><span class="pre">wizard</span></code> window title is set to “Trivial Wizard” and its <code class="docutils literal"><span class="pre">show()</span></code> function is invoked to display it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">translatorFileName</span> <span class="o">=</span> <span class="s2">&quot;qt_&quot;</span>
+    <span class="n">translatorFileName</span> <span class="o">+=</span> <span class="n">QLocale</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+    <span class="n">translator</span> <span class="o">=</span> <span class="n">QTranslator</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">translator</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">translatorFileName</span><span class="p">,</span> <span class="n">QLibraryInfo</span><span class="o">.</span><span class="n">location</span><span class="p">(</span><span class="n">QLibraryInfo</span><span class="o">.</span><span class="n">TranslationsPath</span><span class="p">)):</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">installTranslator</span><span class="p">(</span><span class="n">translator</span><span class="p">)</span>
+
+    <span class="n">wizard</span> <span class="o">=</span> <span class="n">QWizard</span><span class="p">()</span>
+    <span class="n">wizard</span><span class="o">.</span><span class="n">addPage</span><span class="p">(</span><span class="n">createIntroPage</span><span class="p">())</span>
+    <span class="n">wizard</span><span class="o">.</span><span class="n">addPage</span><span class="p">(</span><span class="n">createRegistrationPage</span><span class="p">())</span>
+    <span class="n">wizard</span><span class="o">.</span><span class="n">addPage</span><span class="p">(</span><span class="n">createConclusionPage</span><span class="p">())</span>
+
+    <span class="n">wizard</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;Trivial Wizard&quot;</span><span class="p">)</span>
+    <span class="n">wizard</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../PySide2/QtWidgets/QWizard.html#PySide2.QtWidgets.QWizard" title="PySide2.QtWidgets.QWizard"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWizard</span></code></a>  <a class="reference internal" href="qtwidgets-dialogs-classwizard-example.html#class-wizard-example"><span class="std std-ref">Class Wizard Example</span></a>  <a class="reference internal" href="qtwidgets-dialogs-licensewizard-example.html#license-wizard-example"><span class="std std-ref">License Wizard Example</span></a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="trivialwizard-cpp-example-file">
+<h1>trivialwizard.cpp Example File<a class="headerlink" href="#trivialwizard-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="trivialwizard-pro-example-file">
+<h1>trivialwizard.pro Example File<a class="headerlink" href="#trivialwizard-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

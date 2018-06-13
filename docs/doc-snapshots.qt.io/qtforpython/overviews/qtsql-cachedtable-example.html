@@ -1,0 +1,338 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Cached Table Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cached Table Example</a><ul>
+<li><a class="reference internal" href="#tableeditor-class-definition">TableEditor Class Definition</a></li>
+<li><a class="reference internal" href="#tableeditor-class-implementation">TableEditor Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tableeditor-cpp-example-file">tableeditor.cpp Example File</a></li>
+<li><a class="reference internal" href="#tableeditor-h-example-file">tableeditor.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#cachedtable-pro-example-file">cachedtable.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cached-table-example">
+<span id="id1"></span><h1>Cached Table Example<a class="headerlink" href="#cached-table-example" title="Permalink to this headline">¶</a></h1>
+<p>Cached Table example shows how a table view can be used to access a database, caching any changes to the data until the user explicitly submits them using a push button</p>
+<blockquote>
+<div><p>The Cached Table example shows how a table view can be used to access a database, caching any changes to the data until the user explicitly submits them using a push button.</p>
+<p>The example consists of a single class, <code class="docutils literal"><span class="pre">TableEditor</span></code> , which is a custom dialog widget that allows the user to modify data stored in a database. We will first review the class definiton and how to use the class, then we will take a look at the implementation.</p>
+</div></blockquote>
+<div class="section" id="tableeditor-class-definition">
+<span id="id2"></span><h2>TableEditor Class Definition<a class="headerlink" href="#tableeditor-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">TableEditor</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> making the table editor widget a top-level dialog window.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TableEditor</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">explicit</span> <span class="n">TableEditor</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">tableName</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">submit</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">submitButton</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">revertButton</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">quitButton</span><span class="p">;</span>
+    <span class="n">QDialogButtonBox</span> <span class="o">*</span><span class="n">buttonBox</span><span class="p">;</span>
+    <span class="n">QSqlTableModel</span> <span class="o">*</span><span class="n">model</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">TableEditor</span></code> constructor takes two arguments: The first is a pointer to the parent widget and is passed on to the base class constructor. The other is a reference to the database table the <code class="docutils literal"><span class="pre">TableEditor</span></code> object will operate on.</p>
+<p>Note the <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> variable declaration: As we will see in this example, the <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> class can be used to provide data to view classes such as <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> . The <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> class provides an editable data model making it possible to read and write database records from a single table. It is build on top of the lower-level <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> class which provides means of executing and manipulating SQL statements.</p>
+<p>We are also going to show how a table view can be used to cache any changes to the data until the user explicitly requests to submit them. For that reason we need to declare a <code class="docutils literal"><span class="pre">submit()</span></code> slot in additon to the model and the editor’s buttons.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Connecting to a Database</td>
+</tr>
+<tr class="row-even"><td><p class="first">Before we can use the <code class="docutils literal"><span class="pre">TableEditor</span></code> class, we must create a connection to the database containing the table we want to edit:</p>
+<blockquote class="last">
+<div><div class="highlight-default"><div class="highlight"><pre><span></span>int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    if (!createConnection())
+        return 1;
+
+    TableEditor editor(&quot;person&quot;);
+    editor.show();
+    return app.exec();
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createConnection()</span></code> function is a helper function provided for convenience. It is defined in the <code class="docutils literal"><span class="pre">connection.h</span></code> file which is located in the <code class="docutils literal"><span class="pre">sql</span></code> example directory (all the examples in the <code class="docutils literal"><span class="pre">sql</span></code> directory use this function to connect to a database).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>static bool createConnection()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase(&quot;QSQLITE&quot;);
+    db.setDatabaseName(&quot;:memory:&quot;);
+    if (!db.open()) {
+        QMessageBox::critical(nullptr, QObject::tr(&quot;Cannot open database&quot;),
+            QObject::tr(&quot;Unable to establish a database connection.\n&quot;
+                        &quot;This example needs SQLite support. Please read &quot;
+                        &quot;the Qt SQL driver documentation for information how &quot;
+                        &quot;to build it.\n\n&quot;
+                        &quot;Click Cancel to exit.&quot;), QMessageBox::Cancel);
+        return false;
+    }
+
+    QSqlQuery query;
+    query.exec(&quot;create table person (id int primary key, &quot;
+               &quot;firstname varchar(20), lastname varchar(20))&quot;);
+    query.exec(&quot;insert into person values(101, &#39;Danny&#39;, &#39;Young&#39;)&quot;);
+    query.exec(&quot;insert into person values(102, &#39;Christine&#39;, &#39;Holand&#39;)&quot;);
+    query.exec(&quot;insert into person values(103, &#39;Lars&#39;, &#39;Gordon&#39;)&quot;);
+    query.exec(&quot;insert into person values(104, &#39;Roberto&#39;, &#39;Robitaille&#39;)&quot;);
+    query.exec(&quot;insert into person values(105, &#39;Maria&#39;, &#39;Papadopoulos&#39;)&quot;);
+
+    query.exec(&quot;create table items (id int primary key,&quot;
+                                             &quot;imagefile int,&quot;
+                                             &quot;itemtype varchar(20),&quot;
+                                             &quot;description varchar(100))&quot;);
+    query.exec(&quot;insert into items &quot;
+               &quot;values(0, 0, &#39;Qt&#39;,&quot;
+               &quot;&#39;Qt is a full development framework with tools designed to &quot;
+               &quot;streamline the creation of stunning applications and  &quot;
+               &quot;amazing user interfaces for desktop, embedded and mobile &quot;
+               &quot;platforms.&#39;)&quot;);
+    query.exec(&quot;insert into items &quot;
+               &quot;values(1, 1, &#39;Qt Quick&#39;,&quot;
+               &quot;&#39;Qt Quick is a collection of techniques designed to help &quot;
+               &quot;developers create intuitive, modern-looking, and fluid &quot;
+               &quot;user interfaces using a CSS &amp; JavaScript like language.&#39;)&quot;);
+    query.exec(&quot;insert into items &quot;
+               &quot;values(2, 2, &#39;Qt Creator&#39;,&quot;
+               &quot;&#39;Qt Creator is a powerful cross-platform integrated &quot;
+               &quot;development environment (IDE), including UI design tools &quot;
+               &quot;and on-device debugging.&#39;)&quot;);
+    query.exec(&quot;insert into items &quot;
+               &quot;values(3, 3, &#39;Qt Project&#39;,&quot;
+               &quot;&#39;The Qt Project governs the open source development of Qt, &quot;
+               &quot;allowing anyone wanting to contribute to join the effort &quot;
+               &quot;through a meritocratic structure of approvers and &quot;
+               &quot;maintainers.&#39;)&quot;);
+
+    query.exec(&quot;create table images (itemid int, file varchar(20))&quot;);
+    query.exec(&quot;insert into images values(0, &#39;images/qt-logo.png&#39;)&quot;);
+    query.exec(&quot;insert into images values(1, &#39;images/qt-quick.png&#39;)&quot;);
+    query.exec(&quot;insert into images values(2, &#39;images/qt-creator.png&#39;)&quot;);
+    query.exec(&quot;insert into images values(3, &#39;images/qt-project.png&#39;)&quot;);
+
+    return true;
+}
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createConnection</span></code> function opens a connection to an in-memory SQLITE database and creates a test table. If you want to use another database, simply modify this function’s code.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="tableeditor-class-implementation">
+<span id="id3"></span><h2>TableEditor Class Implementation<a class="headerlink" href="#tableeditor-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The class implementation consists of only two functions, the constructor and the <code class="docutils literal"><span class="pre">submit()</span></code> slot. In the constructor we create and customize the data model and the various window elements:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">TableEditor</span><span class="p">::</span><span class="n">TableEditor</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">tableName</span><span class="p">,</span> <span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSqlTableModel</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">setTable</span><span class="p">(</span><span class="n">tableName</span><span class="p">);</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">setEditStrategy</span><span class="p">(</span><span class="n">QSqlTableModel</span><span class="p">::</span><span class="n">OnManualSubmit</span><span class="p">);</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">();</span>
+
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;ID&quot;</span><span class="p">));</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;First name&quot;</span><span class="p">));</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">setHeaderData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Horizontal</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Last name&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>First we create the data model and set the SQL database table we want the model to operate on. Note that the <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.setTable()</span></code> function does not select data from the table; it only fetches its field information. For that reason we call the <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.select()</span></code> function later on, populating the model with data from the table. The selection can be customized by specifying filters and sort conditions (see the <a class="reference internal" href="../PySide2/QtSql/QSqlTableModel.html#PySide2.QtSql.QSqlTableModel" title="PySide2.QtSql.QSqlTableModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlTableModel</span></code></a> class documentation for more details).</p>
+<p>We also set the model’s edit strategy. The edit strategy dictates when the changes done by the user in the view, are actually applied to the database. Since we want to cache the changes in the table view (i.e. in the model) until the user explicitly submits them, we choose the <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnManualSubmit</span></code> strategy. The alternatives are <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnFieldChange</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">QSqlTableModel.OnRowChange</span></code> .</p>
+<p>Finally, we set up the labels displayed in the view header using the <code class="xref py py-func docutils literal"><span class="pre">QSqlQueryModel.setHeaderData()</span></code> function that the model inherits from the <a class="reference internal" href="../PySide2/QtSql/QSqlQueryModel.html#PySide2.QtSql.QSqlQueryModel" title="PySide2.QtSql.QSqlQueryModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQueryModel</span></code></a> class.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QTableView</span> <span class="o">*</span><span class="n">view</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTableView</span><span class="p">;</span>
+<span class="n">view</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="n">view</span><span class="o">-&gt;</span><span class="n">resizeColumnsToContents</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then we create a table view. The <a class="reference internal" href="../PySide2/QtWidgets/QTableView.html#PySide2.QtWidgets.QTableView" title="PySide2.QtWidgets.QTableView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTableView</span></code></a> class provides a default model/view implementation of a table view, i.e. it implements a table view that displays items from a model. It also allows the user to edit the items, storing the changes in the model. To create a read only view, set the proper flag using the <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.editTriggers()</span></code> property the view inherits from the <a class="reference internal" href="../PySide2/QtWidgets/QAbstractItemView.html#PySide2.QtWidgets.QAbstractItemView" title="PySide2.QtWidgets.QAbstractItemView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractItemView</span></code></a> class.</p>
+<p>To make the view present our data, we pass our model to the view using the <code class="xref py py-func docutils literal"><span class="pre">QAbstractItemView.setModel()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">submitButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Submit&quot;</span><span class="p">));</span>
+<span class="n">submitButton</span><span class="o">-&gt;</span><span class="n">setDefault</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+<span class="n">revertButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Revert&quot;</span><span class="p">));</span>
+<span class="n">quitButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Quit&quot;</span><span class="p">));</span>
+
+<span class="n">buttonBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QDialogButtonBox</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">Vertical</span><span class="p">);</span>
+<span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">submitButton</span><span class="p">,</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">ActionRole</span><span class="p">);</span>
+<span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">revertButton</span><span class="p">,</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">ActionRole</span><span class="p">);</span>
+<span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">addButton</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="n">QDialogButtonBox</span><span class="p">::</span><span class="n">RejectRole</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">TableEditor</span></code> ‘s buttons are regular <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> objects. We add them to a button box to ensure that the buttons are presented in a layout that is appropriate to the current widget style. The rationale for this is that dialogs and message boxes typically present buttons in a layout that conforms to the interface guidelines for that platform. Invariably, different platforms have different layouts for their dialogs. <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> allows a developer to add buttons to it and will automatically use the appropriate layout for the user’s desktop environment.</p>
+<p>Most buttons for a dialog follow certain roles. When adding a button to a button box using the <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">addButton()</span></code></a> function, the button’s role must be specified using the <code class="xref py py-attr docutils literal"><span class="pre">QDialogButtonBox.ButtonRole</span></code> enum. Alternatively, <a class="reference internal" href="../PySide2/QtWidgets/QDialogButtonBox.html#PySide2.QtWidgets.QDialogButtonBox" title="PySide2.QtWidgets.QDialogButtonBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialogButtonBox</span></code></a> provides several standard buttons (e.g. OK, Cancel, Save) that you can use. They exist as flags so you can OR them together in the constructor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">submitButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TableEditor</span><span class="p">::</span><span class="n">submit</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">revertButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span>  <span class="n">model</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QSqlTableModel</span><span class="p">::</span><span class="n">revertAll</span><span class="p">);</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="p">::</span><span class="n">clicked</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TableEditor</span><span class="p">::</span><span class="n">close</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We connect the Quit button to the table editor’s <code class="xref py py-func docutils literal"><span class="pre">QWidget.close()</span></code> slot, and the Submit button to our private <code class="docutils literal"><span class="pre">submit()</span></code> slot. The latter slot will take care of the data transactions. Finally, we connect the Revert button to our model’s <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.revertAll()</span></code> slot, reverting all pending changes (i.e., restoring the original data).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">view</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">buttonBox</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Cached Table&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the end we add the button box and the table view to a layout, install the layout on the table editor widget, and set the editor’s window title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">TableEditor</span><span class="p">::</span><span class="n">submit</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">model</span><span class="o">-&gt;</span><span class="n">database</span><span class="p">()</span><span class="o">.</span><span class="n">transaction</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">model</span><span class="o">-&gt;</span><span class="n">submitAll</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">model</span><span class="o">-&gt;</span><span class="n">database</span><span class="p">()</span><span class="o">.</span><span class="n">commit</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">model</span><span class="o">-&gt;</span><span class="n">database</span><span class="p">()</span><span class="o">.</span><span class="n">rollback</span><span class="p">();</span>
+        <span class="n">QMessageBox</span><span class="p">::</span><span class="n">warning</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Cached Table&quot;</span><span class="p">),</span>
+                             <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;The database reported an error: %1&quot;</span><span class="p">)</span>
+                             <span class="o">.</span><span class="n">arg</span><span class="p">(</span><span class="n">model</span><span class="o">-&gt;</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">()));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">submit()</span></code> slot is called whenever the users hit the Submit button to save their changes.</p>
+<p>First, we begin a transaction on the database using the <code class="xref py py-func docutils literal"><span class="pre">QSqlDatabase.transaction()</span></code> function. A database transaction is a unit of interaction with a database management system or similar system that is treated in a coherent and reliable way independent of other transactions. A pointer to the used database can be obtained using the <code class="xref py py-func docutils literal"><span class="pre">QSqlTableModel.database()</span></code> function.</p>
+<p>Then, we try to submit all the pending changes, i.e. the model’s modified items. If no error occurs, we commit the transaction to the database using the <code class="xref py py-func docutils literal"><span class="pre">QSqlDatabase.commit()</span></code> function (note that on some databases, this function will not work if there is an active <a class="reference internal" href="../PySide2/QtSql/QSqlQuery.html#PySide2.QtSql.QSqlQuery" title="PySide2.QtSql.QSqlQuery"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtSql.QSqlQuery</span></code></a> on the database). Otherwise we perform a rollback of the transaction using the <code class="xref py py-func docutils literal"><span class="pre">QSqlDatabase.rollback()</span></code> function and post a warning to the user.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><p class="first"><strong>See also:</strong></p>
+<blockquote class="last">
+<div>A complete list of Qt’s SQL <a class="reference internal" href="sql-programming.html#sql-programming"><span class="std std-ref">Database Classes</span></a> , and the <a class="reference internal" href="model-view-programming.html#model-view-programming"><span class="std std-ref">Model/View Programming</span></a> documentation.</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="tableeditor-cpp-example-file">
+<h1>tableeditor.cpp Example File<a class="headerlink" href="#tableeditor-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="tableeditor-h-example-file">
+<h1>tableeditor.h Example File<a class="headerlink" href="#tableeditor-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="cachedtable-pro-example-file">
+<h1>cachedtable.pro Example File<a class="headerlink" href="#cachedtable-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

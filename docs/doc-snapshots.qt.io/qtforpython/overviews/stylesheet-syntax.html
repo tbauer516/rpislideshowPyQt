@@ -1,0 +1,416 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The Style Sheet Syntax &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Style Sheet Syntax</a><ul>
+<li><a class="reference internal" href="#style-rules">Style Rules</a></li>
+<li><a class="reference internal" href="#selector-types">Selector Types</a></li>
+<li><a class="reference internal" href="#sub-controls">Sub-Controls</a></li>
+<li><a class="reference internal" href="#pseudo-states">Pseudo-States</a></li>
+<li><a class="reference internal" href="#conflict-resolution">Conflict Resolution</a></li>
+<li><a class="reference internal" href="#cascading">Cascading</a></li>
+<li><a class="reference internal" href="#inheritance">Inheritance</a></li>
+<li><a class="reference internal" href="#widgets-inside-c-namespaces">Widgets Inside C++ Namespaces</a></li>
+<li><a class="reference internal" href="#setting-qobject-properties">Setting QObject Properties</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-style-sheet-syntax">
+<span id="id1"></span><h1>The Style Sheet Syntax<a class="headerlink" href="#the-style-sheet-syntax" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p id="id-selector">Qt Style Sheet terminology and syntactic rules are almost identical to those of HTML CSS. If you already know CSS, you can probably skim quickly through this section.</p>
+</div></blockquote>
+<div class="section" id="style-rules">
+<span id="id2"></span><h2>Style Rules<a class="headerlink" href="#style-rules" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Style sheets consist of a sequence of style rules. A <em>style rule</em> is made up of a selector and a declaration. The <em>selector</em> specifies which widgets are affected by the rule; the <em>declaration</em> specifies which properties should be set on the widget. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>In the above style rule, <code class="docutils literal"><span class="pre">QPushButton</span></code> is the selector and <code class="docutils literal"><span class="pre">{</span> <span class="pre">color:</span> <span class="pre">red</span> <span class="pre">}</span></code> is the declaration. The rule specifies that <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> and its subclasses (e.g., <code class="docutils literal"><span class="pre">MyPushButton</span></code> ) should use red as their foreground color.</p>
+<p>Qt Style Sheet is generally case insensitive (i.e., <code class="docutils literal"><span class="pre">color</span></code> , <code class="docutils literal"><span class="pre">Color</span></code> , <code class="docutils literal"><span class="pre">COLOR</span></code> , and <code class="docutils literal"><span class="pre">cOloR</span></code> refer to the same property). The only exceptions are class names, <code class="xref py py-func docutils literal"><span class="pre">object</span> <span class="pre">names</span></code> , and Qt property names, which are case sensitive.</p>
+<p>Several selectors can be specified for the same declaration, using commas (<code class="docutils literal"><span class="pre">,</span></code> ) to separate the selectors. For example, the rule</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">,</span> <span class="n">QLineEdit</span><span class="p">,</span> <span class="n">QComboBox</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>is equivalent to this sequence of three rules:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QLineEdit</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QComboBox</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The declaration part of a style rule is a list of <code class="docutils literal"><span class="pre">*property*:*value*</span></code> pairs, enclosed in braces (<code class="docutils literal"><span class="pre">{}</span></code> ) and separated with semicolons. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span><span class="p">;</span> <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">List of Properties</span></a> section below for the list of properties provided by Qt widgets.</p>
+</div></blockquote>
+</div>
+<div class="section" id="selector-types">
+<span id="id3"></span><h2>Selector Types<a class="headerlink" href="#selector-types" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>All the examples so far used the simplest type of selector, the Type Selector. Qt Style Sheets support all the selectors defined in CSS2. The table below summarizes the most useful types of selectors.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="7%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Selector</td>
+<td>Example</td>
+<td>Explanation</td>
+</tr>
+<tr class="row-even"><td>Universal Selector</td>
+<td><code class="docutils literal"><span class="pre">*</span></code></td>
+<td>Matches all widgets.</td>
+</tr>
+<tr class="row-odd"><td>Type Selector</td>
+<td><code class="docutils literal"><span class="pre">QPushButton</span></code></td>
+<td>Matches instances of <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> and of its subclasses.</td>
+</tr>
+<tr class="row-even"><td>Property Selector</td>
+<td><code class="docutils literal"><span class="pre">QPushButton[flat=&quot;false&quot;]</span></code></td>
+<td><p class="first">Matches instances of <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> that are not <code class="xref py py-func docutils literal"><span class="pre">QPushButton.flat()</span></code> . You may use this selector to test for any Qt <a class="reference internal" href="properties.html#the-property-system"><span class="std std-ref">property</span></a> that supports <code class="xref py py-func docutils literal"><span class="pre">QVariant.toString()</span></code> (see the <code class="xref py py-func docutils literal"><span class="pre">QVariant.toString()</span></code> function documentation for details). In addition, the special <code class="docutils literal"><span class="pre">class</span></code> property is supported, for the name of the class.</p>
+<blockquote class="last">
+<div><p>This selector may also be used to test dynamic properties. For more information on customization using dynamic properties, refer to <a class="reference internal" href="stylesheet-examples.html#qt-style-sheets-examples"><span class="std std-ref">Customizing Using Dynamic Properties</span></a> .</p>
+<p>Instead of <code class="docutils literal"><span class="pre">=</span></code> , you can also use <code class="docutils literal"><span class="pre">~=</span></code> to test whether a Qt property of type <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> contains a given <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QString</span></code> .</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the value of the Qt property changes after the style sheet has been set, it might be necessary to force a style sheet recomputation. One way to achieve this is to unset the style sheet and set it again.</p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td>Class Selector</td>
+<td><code class="docutils literal"><span class="pre">.QPushButton</span></code></td>
+<td><p class="first">Matches instances of <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> , but not of its subclasses.</p>
+<blockquote class="last">
+<div>This is equivalent to <code class="docutils literal"><span class="pre">*[class~=&quot;QPushButton&quot;]</span></code> .</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td>ID .. _id-selector: Selector</td>
+<td><code class="docutils literal"><span class="pre">QPushButton#okButton</span></code></td>
+<td>Matches all <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> instances whose <code class="xref py py-func docutils literal"><span class="pre">object</span> <span class="pre">name</span></code> is <code class="docutils literal"><span class="pre">okButton</span></code> .</td>
+</tr>
+<tr class="row-odd"><td>Descendant Selector</td>
+<td><code class="docutils literal"><span class="pre">QDialog</span> <span class="pre">QPushButton</span></code></td>
+<td>Matches all instances of <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> that are descendants (children, grandchildren, etc.) of a <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> .</td>
+</tr>
+<tr class="row-even"><td>Child Selector</td>
+<td><code class="docutils literal"><span class="pre">QDialog</span> <span class="pre">&gt;</span> <span class="pre">QPushButton</span></code></td>
+<td>Matches all instances of <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> that are direct children of a <a class="reference internal" href="../PySide2/QtWidgets/QDialog.html#PySide2.QtWidgets.QDialog" title="PySide2.QtWidgets.QDialog"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QDialog</span></code></a> .</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="sub-controls">
+<span id="id4"></span><h2>Sub-Controls<a class="headerlink" href="#sub-controls" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>For styling complex widgets, it is necessary to access subcontrols of the widget, such as the drop-down button of a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> or the up and down arrows of a <a class="reference internal" href="../PySide2/QtWidgets/QSpinBox.html#PySide2.QtWidgets.QSpinBox" title="PySide2.QtWidgets.QSpinBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QSpinBox</span></code></a> . Selectors may contain <em>subcontrols</em> that make it possible to restrict the application of a rule to specific widget subcontrols. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QComboBox</span><span class="p">::</span><span class="n">drop</span><span class="o">-</span><span class="n">down</span> <span class="p">{</span> <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">dropdown</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The above rule styles the drop-down button of all <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> es. Although the double-colon (<code class="docutils literal"><span class="pre">::</span></code> ) syntax is reminiscent of CSS3 Pseudo-Elements, Qt Sub-Controls differ conceptually from these and have different cascading semantics.</p>
+<p>Sub-controls are always positioned with respect to another element - a reference element. This reference element could be the widget or another Sub-control. For example, the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::drop-down</span></a> of a <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> is placed, by default, in the top right corner of the Padding rectangle of the <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> . The <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::drop-down</span></a> is placed, by default, in the Center of the Contents rectangle of the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">::drop-down</span></a> Sub-control. See the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">List of Stylable Widgets</span></a> below for the Sub-controls to use to style a widget and their default positions.</p>
+<p>The origin rectangle to be used can be changed using the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrol-origin</span></a> property. For example, if we want to place the drop-down in the margin rectangle of the <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> instead of the default Padding rectangle, we can specify:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QComboBox</span> <span class="p">{</span>
+    <span class="n">margin</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">QComboBox</span><span class="p">::</span><span class="n">drop</span><span class="o">-</span><span class="n">down</span> <span class="p">{</span>
+    <span class="n">subcontrol</span><span class="o">-</span><span class="n">origin</span><span class="p">:</span> <span class="n">margin</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The alignment of the drop-down within the Margin rectangle is changed using <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrol-position</span></a> property.</p>
+<p>The <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">width</span></a> and <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">height</span></a> properties can be used to control the size of the Sub-control. Note that setting a <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">image</span></a> implicitly sets the size of a Sub-control.</p>
+<p>The relative positioning scheme ( <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">position</span></a> : relative), allows the position of the Sub-Control to be offset from its initial position. For example, when the <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> ‘s drop-down button is pressed, we might like the arrow inside to be offset to give a “pressed” effect. To achieve this, we can specify:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QComboBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span> <span class="p">{</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">down_arrow</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">QComboBox</span><span class="p">::</span><span class="n">down</span><span class="o">-</span><span class="n">arrow</span><span class="p">:</span><span class="n">pressed</span> <span class="p">{</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">relative</span><span class="p">;</span>
+    <span class="n">top</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span> <span class="n">left</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The absolute positioning scheme ( <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">position</span></a> : absolute), allows the position and size of the Sub-control to be changed with respect to the reference element.</p>
+<p>Once positioned, they are treated the same as widgets and can be styled using the <a class="reference internal" href="stylesheet-customizing.html#customizing-qt-widgets-using-style-sheets"><span class="std std-ref">box model</span></a> .</p>
+<p>See the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">List of Sub-Controls</span></a> below for a list of supported sub-controls, and <a class="reference internal" href="stylesheet-examples.html#qt-style-sheets-examples"><span class="std std-ref">Customizing the QPushButton’s Menu Indicator Sub-Control</span></a> for a realistic example.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With complex widgets such as <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> and <a class="reference internal" href="../PySide2/QtWidgets/QScrollBar.html#PySide2.QtWidgets.QScrollBar" title="PySide2.QtWidgets.QScrollBar"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QScrollBar</span></code></a> , if one property or sub-control is customized, <strong>all</strong> the other properties or sub-controls must be customized as well.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="pseudo-states">
+<span id="id5"></span><h2>Pseudo-States<a class="headerlink" href="#pseudo-states" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Selectors may contain <em>pseudo-states</em> that denote that restrict the application of the rule based on the widget’s state. Pseudo-states appear at the end of the selector, with a colon (<code class="docutils literal"><span class="pre">:</span></code> ) in between. For example, the following rule applies when the mouse hovers over a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Pseudo-states can be negated using the exclamation operator. For example, the following rule applies when the mouse does not hover over a <a class="reference internal" href="../PySide2/QtWidgets/QRadioButton.html#PySide2.QtWidgets.QRadioButton" title="PySide2.QtWidgets.QRadioButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QRadioButton</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QRadioButton:!hover { color: red }
+</pre></div>
+</div>
+<p>Pseudo-states can be chained, in which case a logical AND is implied. For example, the following rule applies to when the mouse hovers over a checked <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCheckBox</span><span class="p">:</span><span class="n">hover</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Negated Pseudo-states may appear in Pseudo-state chains. For example, the following rule applies when the mouse hovers over a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> that is not pressed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QPushButton:hover:!pressed { color: blue; }
+</pre></div>
+</div>
+<p>If needed, logical OR can be expressed using the comma operator:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCheckBox</span><span class="p">:</span><span class="n">hover</span><span class="p">,</span> <span class="n">QCheckBox</span><span class="p">:</span><span class="n">checked</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Pseudo-states can appear in combination with subcontrols. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QComboBox</span><span class="p">::</span><span class="n">drop</span><span class="o">-</span><span class="n">down</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span> <span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">dropdown_bright</span><span class="o">.</span><span class="n">png</span><span class="p">)</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>See the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">List of Pseudo-States</span></a> section below for the list of pseudo-states provided by Qt widgets.</p>
+</div></blockquote>
+</div>
+<div class="section" id="conflict-resolution">
+<span id="id6"></span><h2>Conflict Resolution<a class="headerlink" href="#conflict-resolution" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Conflicts arise when several style rules specify the same properties with different values. Consider the following style sheet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="c1">#okButton { color: gray }</span>
+<span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Both rules match <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> instances called <code class="docutils literal"><span class="pre">okButton</span></code> and there is a conflict for the <code class="docutils literal"><span class="pre">color</span></code> property. To resolve this conflict, we must take into account the <em>specificity</em> of the selectors. In the above example, <code class="docutils literal"><span class="pre">QPushButton#okButton</span></code> is considered more specific than <code class="docutils literal"><span class="pre">QPushButton</span></code> , because it (usually) refers to a single object, not to all instances of a class.</p>
+<p>Similarly, selectors with pseudo-states are more specific than ones that do not specify pseudo-states. Thus, the following style sheet specifies that a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> should have white text when the mouse is hovering over it, otherwise red text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+<span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Here’s a tricky one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">enabled</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, both selectors have the same specificity, so if the mouse hovers over the button while it is enabled, the second rule takes precedence. If we want the text to be white in that case, we can reorder the rules like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="n">enabled</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">hover</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively, we can make the first rule more specific:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span><span class="p">:</span><span class="n">hover</span><span class="p">:</span><span class="n">enabled</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">white</span> <span class="p">}</span>
+<span class="n">QPushButton</span><span class="p">:</span><span class="n">enabled</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>A similar issue arises in conjunction with Type Selectors. Consider the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QPushButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">red</span> <span class="p">}</span>
+<span class="n">QAbstractButton</span> <span class="p">{</span> <span class="n">color</span><span class="p">:</span> <span class="n">gray</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Both rules apply to <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> instances (since <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> inherits <a class="reference internal" href="../PySide2/QtWidgets/QAbstractButton.html#PySide2.QtWidgets.QAbstractButton" title="PySide2.QtWidgets.QAbstractButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractButton</span></code></a> ) and there is a conflict for the <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">color</span></a> property. Because <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> inherits <a class="reference internal" href="../PySide2/QtWidgets/QAbstractButton.html#PySide2.QtWidgets.QAbstractButton" title="PySide2.QtWidgets.QAbstractButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractButton</span></code></a> , it might be tempting to assume that <code class="docutils literal"><span class="pre">QPushButton</span></code> is more specific than <code class="docutils literal"><span class="pre">QAbstractButton</span></code> . However, for style sheet computations, all Type Selectors have the same specificity, and the rule that appears last takes precedence. In other words, <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">color</span></a> is set to <code class="docutils literal"><span class="pre">gray</span></code> for all <a class="reference internal" href="../PySide2/QtWidgets/QAbstractButton.html#PySide2.QtWidgets.QAbstractButton" title="PySide2.QtWidgets.QAbstractButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAbstractButton</span></code></a> s, including <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> s. If we really want <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> s to have red text, we can always reorder the rules.</p>
+<p>For determining the specificity of a rule, Qt Style Sheets follow the CSS2 Specification:</p>
+<p><em>A selector’s specificity is calculated as follows:</em></p>
+<ul class="simple">
+<li><em>count the number of ID attributes in the selector (= a)</em></li>
+<li><em>count the number of other attributes and pseudo-classes in the selector (= b)</em></li>
+<li><em>count the number of element names in the selector (= c)</em></li>
+<li><em>ignore pseudo-elements [i.e.,</em> <a class="reference internal" href="stylesheet-reference.html#qt-style-sheets-reference"><span class="std std-ref">subcontrols</span></a> <em>].</em></li>
+</ul>
+<p><em>Concatenating the three numbers a-b-c (in a number system with a large base) gives the specificity.</em></p>
+<p><em>Some examples:</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*</span>             <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>   <span class="mi">0</span> <span class="o">*/</span>
+<span class="n">LI</span>            <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>   <span class="mi">1</span> <span class="o">*/</span>
+<span class="n">UL</span> <span class="n">LI</span>         <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>   <span class="mi">2</span> <span class="o">*/</span>
+<span class="n">UL</span> <span class="n">OL</span><span class="o">+</span><span class="n">LI</span>      <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>   <span class="mi">3</span> <span class="o">*/</span>
+<span class="n">H1</span> <span class="o">+</span> <span class="o">*</span><span class="p">[</span><span class="n">REL</span><span class="o">=</span><span class="n">up</span><span class="p">]{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>  <span class="mi">11</span> <span class="o">*/</span>
+<span class="n">UL</span> <span class="n">OL</span> <span class="n">LI</span><span class="o">.</span><span class="n">red</span>  <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>  <span class="mi">13</span> <span class="o">*/</span>
+<span class="n">LI</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">level</span>  <span class="p">{}</span>  <span class="o">/*</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">specificity</span> <span class="o">=</span>  <span class="mi">21</span> <span class="o">*/</span>
+<span class="c1">#x34y         {}  /* a=1 b=0 c=0 -&gt; specificity = 100 */</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="cascading">
+<span id="id7"></span><h2>Cascading<a class="headerlink" href="#cascading" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Style sheets can be set on the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> , on parent widgets, and on child widgets. An arbitrary widget’s effective style sheet is obtained by merging the style sheets set on the widget’s ancestors (parent, grandparent, etc.), as well as any style sheet set on the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> .</p>
+<p>When conflicts arise, the widget’s own style sheet is always preferred to any inherited style sheet, irrespective of the specificity of the conflicting rules. Likewise, the parent widget’s style sheet is preferred to the grandparent’s, etc.</p>
+<p>One consequence of this is that setting a style rule on a widget automatically gives it precedence over other rules specified in the ancestor widgets’ style sheets or the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> style sheet. Consider the following example. First, we set a style sheet on the <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QPushButton { color: white }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then we set a style sheet on a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">myPushButton</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;* { color: blue }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The style sheet on the <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> forces the <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> (and any child widget) to have blue text, in spite of the more specific rule set provided by the application-wide style sheet.</p>
+<p>The result would have been the same if we had written</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">myPushButton</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;color: blue&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>except that if the <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> had children (which is unlikely), the style sheet would have no impact on them.</p>
+<p>Style sheet cascading is a complex topic. Refer to the CSS2 Specification for the gory details. Be aware that Qt currently doesn’t implement <code class="docutils literal"><span class="pre">!important</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="inheritance">
+<span id="id8"></span><h2>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In classic CSS, when font and color of an item is not explicitly set, it gets automatically inherited from the parent. By default, when using Qt Style Sheets, a widget does <strong>not</strong> automatically inherit its font and color setting from its parent widget.</p>
+<p>For example, consider a <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> inside a <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QGroupBox { color: red; } &quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QPushButton.html#PySide2.QtWidgets.QPushButton" title="PySide2.QtWidgets.QPushButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPushButton</span></code></a> does not have an explicit color set. Hence, instead of inheriting color of its parent <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> , it has the system color. If we want to set the color on a <a class="reference internal" href="../PySide2/QtWidgets/QGroupBox.html#PySide2.QtWidgets.QGroupBox" title="PySide2.QtWidgets.QGroupBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGroupBox</span></code></a> and its children, we can write:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;QGroupBox, QGroupBox * { color: red; }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In contrast, setting a font and palette using <code class="xref py py-func docutils literal"><span class="pre">QWidget.setFont()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.setPalette()</span></code> propagates to child widgets.</p>
+<p>If you would prefer that the font and palette propagate to child widgets, you can set the <code class="xref py py-attr docutils literal"><span class="pre">Qt.AA_UseStyleSheetPropagationInWidgetStyles</span></code> flag, like this:</p>
+<p>Usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCoreApplication</span><span class="p">::</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">AA_UseStyleSheetPropagationInWidgetStyles</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When the widget-style font and palette propagation is enabled, font and palette changes made through Qt Style Sheets will behave as though the user had manually called the corresponding <code class="xref py py-func docutils literal"><span class="pre">QWidget.setPalette()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QWidget.setFont()</span></code> methods on all of the QWidgets targeted by the style sheet. If this would have caused propagation in C++, it will cause propagation in style sheets and visa versa.</p>
+</div></blockquote>
+</div>
+<div class="section" id="widgets-inside-c-namespaces">
+<span id="id9"></span><h2>Widgets Inside C++ Namespaces<a class="headerlink" href="#widgets-inside-c-namespaces" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Type Selector can be used to style widgets of a particular type. For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPushButton</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QPushButton</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="o">...</span>
+<span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;MyPushButton { background: yellow; }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Qt Style Sheet uses QObject::className() of the widget to determine when to apply the Type Selector. When custom widgets are inside namespaces, the QObject::className() returns &lt;namespace&gt;::&lt;classname&gt;. This conflicts with the syntax for <a class="reference internal" href="#the-style-sheet-syntax"><span class="std std-ref">Sub-Controls</span></a> . To overcome this problem, when using the Type Selector for widgets inside namespaces, we must replace the “::” with “–”. For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ns</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">MyPushButton</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QPushButton</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="o">...</span>
+<span class="n">qApp</span><span class="o">-&gt;</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;ns--MyPushButton { background: yellow; }&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="setting-qobject-properties">
+<span id="id10"></span><h2>Setting QObject Properties<a class="headerlink" href="#setting-qobject-properties" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>From 4.3 and above, any designable <code class="xref py py-func docutils literal"><span class="pre">Q_PROPERTY()</span></code> can be set using the qproperty-&lt;property name&gt; syntax.</p>
+<p>For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MyLabel</span> <span class="p">{</span> <span class="n">qproperty</span><span class="o">-</span><span class="n">pixmap</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">png</span><span class="p">);</span> <span class="p">}</span>
+<span class="n">MyGroupBox</span> <span class="p">{</span> <span class="n">qproperty</span><span class="o">-</span><span class="n">titleColor</span><span class="p">:</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="p">}</span>
+<span class="n">QPushButton</span> <span class="p">{</span> <span class="n">qproperty</span><span class="o">-</span><span class="n">iconSize</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>If the property references an enum declared with <code class="xref py py-func docutils literal"><span class="pre">Q_ENUMS()</span></code> , you should reference its constants by name, i.e., not their numeric value.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

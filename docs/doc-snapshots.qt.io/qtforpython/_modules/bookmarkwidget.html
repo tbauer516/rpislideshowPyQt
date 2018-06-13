@@ -1,0 +1,372 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bookmarkwidget &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="index.html" accesskey="U">Module code</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for bookmarkwidget</h1><div class="highlight"><pre>
+<span></span><span class="c1">#############################################################################</span>
+<span class="c1">##</span>
+<span class="c1">## Copyright (C) 2018 The Qt Company Ltd.</span>
+<span class="c1">## Contact: http://www.qt.io/licensing/</span>
+<span class="c1">##</span>
+<span class="c1">## This file is part of the Qt for Python examples of the Qt Toolkit.</span>
+<span class="c1">##</span>
+<span class="c1">## $QT_BEGIN_LICENSE:BSD$</span>
+<span class="c1">## You may use this file under the terms of the BSD license as follows:</span>
+<span class="c1">##</span>
+<span class="c1">## &quot;Redistribution and use in source and binary forms, with or without</span>
+<span class="c1">## modification, are permitted provided that the following conditions are</span>
+<span class="c1">## met:</span>
+<span class="c1">##   * Redistributions of source code must retain the above copyright</span>
+<span class="c1">##     notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">##   * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">##     notice, this list of conditions and the following disclaimer in</span>
+<span class="c1">##     the documentation and/or other materials provided with the</span>
+<span class="c1">##     distribution.</span>
+<span class="c1">##   * Neither the name of The Qt Company Ltd nor the names of its</span>
+<span class="c1">##     contributors may be used to endorse or promote products derived</span>
+<span class="c1">##     from this software without specific prior written permission.</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1">## &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1">## LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span>
+<span class="c1">## A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span>
+<span class="c1">## OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
+<span class="c1">## SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span>
+<span class="c1">## LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span>
+<span class="c1">## DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span>
+<span class="c1">## THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c1">## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1">## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;</span>
+<span class="c1">##</span>
+<span class="c1">## $QT_END_LICENSE$</span>
+<span class="c1">##</span>
+<span class="c1">#############################################################################</span>
+
+<span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">PySide2</span> <span class="k">import</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtCore</span> <span class="k">import</span> <span class="p">(</span><span class="n">QDir</span><span class="p">,</span> <span class="n">QFileInfo</span><span class="p">,</span> <span class="n">QModelIndex</span><span class="p">,</span> <span class="n">QStandardPaths</span><span class="p">,</span> <span class="n">Qt</span><span class="p">,</span>
+    <span class="n">QUrl</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtGui</span> <span class="k">import</span> <span class="n">QIcon</span><span class="p">,</span> <span class="n">QPixmap</span><span class="p">,</span> <span class="n">QStandardItem</span><span class="p">,</span> <span class="n">QStandardItemModel</span>
+<span class="kn">from</span> <span class="nn">PySide2.QtWidgets</span> <span class="k">import</span> <span class="p">(</span><span class="n">QAction</span><span class="p">,</span> <span class="n">QDockWidget</span><span class="p">,</span> <span class="n">QMenu</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="p">,</span>
+    <span class="n">QToolBar</span><span class="p">,</span> <span class="n">QTreeView</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">)</span>
+
+<span class="n">_url_role</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">UserRole</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Default bookmarks as an array of arrays which is the form</span>
+<span class="c1"># used to read from/write to a .json bookmarks file</span>
+<span class="n">_default_bookmarks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;Tool Bar&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;http://qt.io&#39;</span><span class="p">,</span> <span class="s1">&#39;Qt&#39;</span><span class="p">,</span> <span class="s1">&#39;:/qt-project.org/qmessagebox/images/qtlogo-64.png&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;https://download.qt.io/snapshots/ci/pyside/&#39;</span><span class="p">,</span> <span class="s1">&#39;Downloads&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;https://doc-snapshots.qt.io/qtforpython/&#39;</span><span class="p">,</span> <span class="s1">&#39;Documentation&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;https://bugreports.qt.io/projects/PYSIDE/&#39;</span><span class="p">,</span> <span class="s1">&#39;Bug Reports&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;https://www.python.org/&#39;</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;https://wiki.qt.io/PySide2&#39;</span><span class="p">,</span> <span class="s1">&#39;Qt for Python&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Other Bookmarks&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_config_dir</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/QtForPythonBrowser&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">QStandardPaths</span><span class="o">.</span><span class="n">writableLocation</span><span class="p">(</span><span class="n">QStandardPaths</span><span class="o">.</span><span class="n">ConfigLocation</span><span class="p">))</span>
+
+<span class="n">_bookmark_file</span> <span class="o">=</span> <span class="s1">&#39;bookmarks.json&#39;</span>
+
+<span class="k">def</span> <span class="nf">_create_folder_item</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">QStandardItem</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEnabled</span> <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsSelectable</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">_create_item</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">QStandardItem</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEnabled</span> <span class="o">|</span> <span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsSelectable</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">_url_role</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Create the model from an array of arrays</span>
+<span class="k">def</span> <span class="nf">_create_model</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">serialized_bookmarks</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">QStandardItemModel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+    <span class="n">last_folder_item</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">serialized_bookmarks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">last_folder_item</span> <span class="o">=</span> <span class="n">_create_folder_item</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">last_folder_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">QUrl</span><span class="o">.</span><span class="n">fromUserInput</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">QIcon</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">entry</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">last_folder_item</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">_create_item</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Serialize model into an array of arrays, writing out the icons</span>
+<span class="c1"># into .png files under directory in the process</span>
+<span class="k">def</span> <span class="nf">_serialize_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">directory</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">folder_count</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">folder_count</span><span class="p">):</span>
+        <span class="n">folder_item</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">folder_item</span><span class="o">.</span><span class="n">text</span><span class="p">()])</span>
+        <span class="n">item_count</span> <span class="o">=</span> <span class="n">folder_item</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">item_count</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">folder_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">_url_role</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">()]</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
+                <span class="n">icon_sizes</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">availableSizes</span><span class="p">()</span>
+                <span class="n">largest_size</span> <span class="o">=</span> <span class="n">icon_sizes</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">icon_sizes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">icon_file_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/icon</span><span class="si">{:02}</span><span class="s1">_</span><span class="si">{:02}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.png&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span>
+                               <span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">largest_size</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
+                <span class="n">icon</span><span class="o">.</span><span class="n">pixmap</span><span class="p">(</span><span class="n">largest_size</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">icon_file_name</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">)</span>
+                <span class="n">entry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">icon_file_name</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Bookmarks as a tree view to be used in a dock widget with</span>
+<span class="c1"># functionality to persist and populate tool bars and menus.</span>
+<div class="viewcode-block" id="BookmarkWidget"><a class="viewcode-back" href="../tutorials/examples/tabbedbrowser.html#bookmarkwidget.BookmarkWidget">[docs]</a><span class="k">class</span> <span class="nc">BookmarkWidget</span><span class="p">(</span><span class="n">QTreeView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides a tree view to manage the bookmarks.&quot;&quot;&quot;</span>
+
+    <span class="n">open_bookmark</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">QUrl</span><span class="p">)</span>
+    <span class="n">open_bookmark_in_new_tab</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">QUrl</span><span class="p">)</span>
+    <span class="n">changed</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BookmarkWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setRootIsDecorated</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUniformRowHeights</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHeaderHidden</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">_create_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_bookmarks</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expandAll</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_activated</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">rowsInserted</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">rowsRemoved</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_changed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modified</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_modified</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_activated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">itemFromIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_bookmark</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">_url_role</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_action_activated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open_bookmark</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_tool_bar_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_other_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_bookmark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_other_item</span><span class="p">()</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">_create_item</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">add_tool_bar_bookmark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_bar_item</span><span class="p">()</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">_create_item</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">))</span>
+
+    <span class="c1"># Synchronize the bookmarks under parent_item to a target_object</span>
+    <span class="c1"># like QMenu/QToolBar, which has a list of actions. Update</span>
+    <span class="c1"># the existing actions, append new ones if needed or hide</span>
+    <span class="c1"># superfluous ones</span>
+    <span class="k">def</span> <span class="nf">_populate_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_item</span><span class="p">,</span> <span class="n">target_object</span><span class="p">,</span> <span class="n">first_action</span><span class="p">):</span>
+        <span class="n">existing_actions</span> <span class="o">=</span> <span class="n">target_object</span><span class="o">.</span><span class="n">actions</span><span class="p">()</span>
+        <span class="n">existing_action_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">existing_actions</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">first_action</span>
+        <span class="n">row_count</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row_count</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">_url_role</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">existing_action_count</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">existing_actions</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">title</span> <span class="o">!=</span> <span class="n">action</span><span class="o">.</span><span class="n">toolTip</span><span class="p">()):</span>
+                    <span class="n">action</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">BookmarkWidget</span><span class="o">.</span><span class="n">short_title</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+                    <span class="n">action</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+                    <span class="n">action</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+                    <span class="n">action</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                    <span class="n">action</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">target_object</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">BookmarkWidget</span><span class="o">.</span><span class="n">short_title</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+                <span class="n">action</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+                <span class="n">action</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                <span class="n">action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_action_activated</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">existing_action_count</span><span class="p">:</span>
+            <span class="n">existing_actions</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">populate_tool_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_bar</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_populate_actions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tool_bar_item</span><span class="p">(),</span> <span class="n">tool_bar</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">populate_other</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">menu</span><span class="p">,</span> <span class="n">first_action</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_populate_actions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_other_item</span><span class="p">(),</span> <span class="n">menu</span><span class="p">,</span> <span class="n">first_action</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_current_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">itemFromIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">parent</span><span class="p">():</span> <span class="c1"># exclude top level items</span>
+                <span class="k">return</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">context_menu_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">context_menu</span> <span class="o">=</span> <span class="n">QMenu</span><span class="p">()</span>
+        <span class="n">open_in_new_tab_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Open in New Tab&quot;</span><span class="p">)</span>
+        <span class="n">remove_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;Remove...&quot;</span><span class="p">)</span>
+        <span class="n">current_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">()</span>
+        <span class="n">open_in_new_tab_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">current_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">remove_action</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">current_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">chosen_action</span> <span class="o">=</span> <span class="n">context_menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">open_in_new_tab_action</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open_bookmarkInNewTab</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">current_item</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">_url_role</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">chosen_action</span> <span class="o">==</span> <span class="n">remove_action</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_item</span><span class="p">(</span><span class="n">current_item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;Remove&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Would you like to remove </span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">()),</span>
+            <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">No</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">removeRow</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">write_bookmarks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modified</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">dir_path</span> <span class="o">=</span> <span class="n">_config_dir</span><span class="p">()</span>
+        <span class="n">native_dir_path</span> <span class="o">=</span> <span class="n">QDir</span><span class="o">.</span><span class="n">toNativeSeparators</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">QFileInfo</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">dir</span><span class="o">.</span><span class="n">isDir</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Creating </span><span class="si">{}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">native_dir_path</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">QDir</span><span class="p">(</span><span class="nb">dir</span><span class="o">.</span><span class="n">absolutePath</span><span class="p">())</span><span class="o">.</span><span class="n">mkpath</span><span class="p">(</span><span class="nb">dir</span><span class="o">.</span><span class="n">fileName</span><span class="p">()):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Cannot create </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">native_dir_path</span><span class="p">),</span>
+                              <span class="ne">RuntimeWarning</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="n">serialized_model</span> <span class="o">=</span> <span class="n">_serialize_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">,</span> <span class="n">dir_path</span><span class="p">)</span>
+        <span class="n">bookmark_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">native_dir_path</span><span class="p">,</span> <span class="n">_bookmark_file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Writing </span><span class="si">{}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bookmark_file_name</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bookmark_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bookmark_file</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">serialized_model</span><span class="p">,</span> <span class="n">bookmark_file</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_read_bookmarks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bookmark_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">QDir</span><span class="o">.</span><span class="n">toNativeSeparators</span><span class="p">(</span><span class="n">_config_dir</span><span class="p">()),</span>
+                                        <span class="n">_bookmark_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bookmark_file_name</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reading </span><span class="si">{}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bookmark_file_name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">bookmark_file_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_default_bookmarks</span>
+
+    <span class="c1"># Return a short title for a bookmark action,</span>
+    <span class="c1"># &quot;Qt | Cross Platform..&quot; -&gt; &quot;Qt&quot;</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">short_title</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39; | &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39; - &#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">t</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

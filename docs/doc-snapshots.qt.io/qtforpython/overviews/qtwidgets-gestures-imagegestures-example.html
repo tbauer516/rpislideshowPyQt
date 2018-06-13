@@ -1,0 +1,267 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Image Gestures Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Image Gestures Example</a><ul>
+<li><a class="reference internal" href="#imagewidget-class-definition">ImageWidget Class Definition</a></li>
+<li><a class="reference internal" href="#imagewidget-class-implementation">ImageWidget Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imagewidget-cpp-example-file">imagewidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagewidget-h-example-file">imagewidget.h Example File</a></li>
+<li><a class="reference internal" href="#mainwidget-cpp-example-file">mainwidget.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwidget-h-example-file">mainwidget.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#imagegestures-pro-example-file">imagegestures.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="image-gestures-example">
+<span id="id1"></span><h1>Image Gestures Example<a class="headerlink" href="#image-gestures-example" title="Permalink to this headline">¶</a></h1>
+<p>Demonstrates the use of simple gestures in a widget</p>
+<blockquote>
+<div><p>Demonstrates the use of simple gestures in a widget</p>
+<p>This example shows how to enable gestures for a widget and use gesture input to perform actions.</p>
+<p>We use two classes to create the user interface for the application: <code class="docutils literal"><span class="pre">MainWidget</span></code> and <code class="docutils literal"><span class="pre">ImageWidget</span></code> . The <code class="docutils literal"><span class="pre">MainWidget</span></code> class is simply used as a container for the <code class="docutils literal"><span class="pre">ImageWidget</span></code> class, which we will configure to accept gesture input. Since we are interested in the way gestures are used, we will concentrate on the implementation of the <code class="docutils literal"><span class="pre">ImageWidget</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="imagewidget-class-definition">
+<span id="id2"></span><h2>ImageWidget Class Definition<a class="headerlink" href="#imagewidget-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">ImageWidget</span></code> class is a simple <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> subclass that reimplements the general <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> handler function in addition to several more specific event handlers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageWidget</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ImageWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">openDirectory</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">path</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">grabGestures</span><span class="p">(</span><span class="n">const</span> <span class="n">QList</span><span class="o">&lt;</span><span class="n">Qt</span><span class="p">::</span><span class="n">GestureType</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">gestures</span><span class="p">);</span>
+
+<span class="n">protected</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">resizeEvent</span><span class="p">(</span><span class="n">QResizeEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+    <span class="n">void</span> <span class="n">mouseDoubleClickEvent</span><span class="p">(</span><span class="n">QMouseEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span> <span class="n">override</span><span class="p">;</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="nb">bool</span> <span class="n">gestureEvent</span><span class="p">(</span><span class="n">QGestureEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">panTriggered</span><span class="p">(</span><span class="n">QPanGesture</span><span class="o">*</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">pinchTriggered</span><span class="p">(</span><span class="n">QPinchGesture</span><span class="o">*</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">swipeTriggered</span><span class="p">(</span><span class="n">QSwipeGesture</span><span class="o">*</span><span class="p">);</span>
+    <span class="o">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We also implement a private helper function, <code class="docutils literal"><span class="pre">gestureEvent()</span></code> , to help manage gesture events delivered to the widget, and three functions to perform actions based on gestures: <code class="docutils literal"><span class="pre">panTriggered()</span></code> , <code class="docutils literal"><span class="pre">pinchTriggered()</span></code> and <code class="docutils literal"><span class="pre">swipeTriggered()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="imagewidget-class-implementation">
+<span id="id3"></span><h2>ImageWidget Class Implementation<a class="headerlink" href="#imagewidget-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>In the widget’s constructor, we begin by setting up various parameters that will be used to control the way images are displayed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ImageWidget</span><span class="p">::</span><span class="n">ImageWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span>
+    <span class="n">position</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">horizontalOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">verticalOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">rotationAngle</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">scaleFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">currentStepScaleFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="p">{</span>
+    <span class="n">setMinimumSize</span><span class="p">(</span><span class="n">QSize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We enable three of the standard gestures for the widget by calling <code class="xref py py-func docutils literal"><span class="pre">QWidget.grabGesture()</span></code> with the types of gesture we need. These will be recognized by the application’s default gesture recognizer, and events will be delivered to our widget.</p>
+<p>Since <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> does not define a specific event handler for gestures, the widget needs to reimplement the general <code class="xref py py-func docutils literal"><span class="pre">QWidget.event()</span></code> to receive gesture events.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="nb">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="p">::</span><span class="n">Gesture</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gestureEvent</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QGestureEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">QWidget</span><span class="p">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We implement the event handler to delegate gesture events to a private function specifically written for the task, and pass all other events to <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> ‘s implementation.</p>
+<p>The <code class="docutils literal"><span class="pre">gestureHandler()</span></code> function examines the gestures supplied by the newly-delivered <a class="reference internal" href="../PySide2/QtWidgets/QGestureEvent.html#PySide2.QtWidgets.QGestureEvent" title="PySide2.QtWidgets.QGestureEvent"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGestureEvent</span></code></a> . Since only one gesture of a given type can be used on a widget at any particular time, we can check for each gesture type using the <code class="xref py py-func docutils literal"><span class="pre">QGestureEvent.gesture()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">gestureEvent</span><span class="p">(</span><span class="n">QGestureEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;gestureEvent():&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">event</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">swipe</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">SwipeGesture</span><span class="p">))</span>
+        <span class="n">swipeTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QSwipeGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">swipe</span><span class="p">));</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pan</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PanGesture</span><span class="p">))</span>
+        <span class="n">panTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QPanGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pan</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pinch</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">PinchGesture</span><span class="p">))</span>
+        <span class="n">pinchTriggered</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="n">QPinchGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinch</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If a <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> object is supplied for a certain type of gesture, we call a special purpose function to deal with it, casting the gesture object to the appropriate <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> subclass.</p>
+<p>To illustrate how a standard gesture can be interpreted by an application, we show the implementation of the <code class="docutils literal"><span class="pre">pinchTriggered()</span></code> function, which handles the pinch gesture when the user moves two fingers around on the display or input device:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">pinchTriggered</span><span class="p">(</span><span class="n">QPinchGesture</span> <span class="o">*</span><span class="n">gesture</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPinchGesture</span><span class="p">::</span><span class="n">ChangeFlags</span> <span class="n">changeFlags</span> <span class="o">=</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">changeFlags</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">changeFlags</span> <span class="o">&amp;</span> <span class="n">QPinchGesture</span><span class="p">::</span><span class="n">RotationAngleChanged</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">qreal</span> <span class="n">rotationDelta</span> <span class="o">=</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">rotationAngle</span><span class="p">()</span> <span class="o">-</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">lastRotationAngle</span><span class="p">();</span>
+        <span class="n">rotationAngle</span> <span class="o">+=</span> <span class="n">rotationDelta</span><span class="p">;</span>
+        <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;pinchTriggered(): rotate by&quot;</span> <span class="o">&lt;&lt;</span>
+            <span class="n">rotationDelta</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;-&gt;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">rotationAngle</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">changeFlags</span> <span class="o">&amp;</span> <span class="n">QPinchGesture</span><span class="p">::</span><span class="n">ScaleFactorChanged</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">currentStepScaleFactor</span> <span class="o">=</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">totalScaleFactor</span><span class="p">();</span>
+        <span class="n">qCDebug</span><span class="p">(</span><span class="n">lcExample</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;pinchTriggered(): zoom by&quot;</span> <span class="o">&lt;&lt;</span>
+            <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">scaleFactor</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;-&gt;&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">currentStepScaleFactor</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">GestureFinished</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">scaleFactor</span> <span class="o">*=</span> <span class="n">currentStepScaleFactor</span><span class="p">;</span>
+        <span class="n">currentStepScaleFactor</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">update</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../PySide2/QtWidgets/QPinchGesture.html#PySide2.QtWidgets.QPinchGesture" title="PySide2.QtWidgets.QPinchGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QPinchGesture</span></code></a> class provides properties to interpret the changing distance between the two touch points as a zoom factor, and the angle delta as a rotation to be applied to the image. The center point between the touch points could be used to drag the image, but in this example we use the pan gesture for that purpose.</p>
+<p>The <code class="docutils literal"><span class="pre">scaleFactor()</span></code> is a relative value representing how much the zoom should change from one event to the next, whereas <code class="docutils literal"><span class="pre">totalScaleFactor()</span></code> provides the amount of zoom that has been expressed since the gesture began. When the touch points are released and another gesture begins, <code class="docutils literal"><span class="pre">totalScaleFactor()</span></code> will begin again at 1.0. In this case we store <code class="docutils literal"><span class="pre">totalScaleFactor()</span></code> into the <code class="docutils literal"><span class="pre">currentStepScaleFactor</span></code> variable so that it can be used in <code class="docutils literal"><span class="pre">paintEvent()</span></code> to scale the image. Alternatively it would be possible to simply multiply the stored total scale factor by <code class="docutils literal"><span class="pre">scaleFactor()</span></code> here in the pinch handler.</p>
+<p>In contrast, <code class="docutils literal"><span class="pre">rotationAngle()</span></code> represents the amount of rotation since the pinch gesture began, while <code class="docutils literal"><span class="pre">lastRotationAngle()</span></code> provides the previous value. So it is necessary to subtract in order to get an incremental delta. When the user begins a new pinch gesture, <code class="docutils literal"><span class="pre">rotationAngle()</span></code> will start from zero, and we want the image to begin to rotate from its current angle. This is achieved by adding the delta to the stored <code class="docutils literal"><span class="pre">rotationAngle</span></code> (which will be applied in <code class="docutils literal"><span class="pre">paintEvent()</span></code> ). If we simply assigned <code class="docutils literal"><span class="pre">totalRotationAngle()</span></code> to the stored <code class="docutils literal"><span class="pre">rotationAngle</span></code> , a new gesture would cause the image to reset to a right-side-up orientation before beginning to rotate again. But it would be possible to store the rotation angle since the gesture began and add it to <code class="docutils literal"><span class="pre">rotationAngle</span></code> in <code class="docutils literal"><span class="pre">paintEvent()</span></code> , just as we store the amount of zoom since the gesture began.</p>
+<p>The pan and swipe gestures in this example are also handled in separate functions, and use the values of properties from the <a class="reference internal" href="../PySide2/QtWidgets/QGesture.html#PySide2.QtWidgets.QGesture" title="PySide2.QtWidgets.QGesture"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGesture</span></code></a> objects passed to them.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ImageWidget</span><span class="p">::</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">QPaintEvent</span><span class="o">*</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QPainter</span> <span class="n">p</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="n">const</span> <span class="n">qreal</span> <span class="n">iw</span> <span class="o">=</span> <span class="n">currentImage</span><span class="o">.</span><span class="n">width</span><span class="p">();</span>
+    <span class="n">const</span> <span class="n">qreal</span> <span class="n">ih</span> <span class="o">=</span> <span class="n">currentImage</span><span class="o">.</span><span class="n">height</span><span class="p">();</span>
+    <span class="n">const</span> <span class="n">qreal</span> <span class="n">wh</span> <span class="o">=</span> <span class="n">height</span><span class="p">();</span>
+    <span class="n">const</span> <span class="n">qreal</span> <span class="n">ww</span> <span class="o">=</span> <span class="n">width</span><span class="p">();</span>
+
+    <span class="n">p</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">ww</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">wh</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">horizontalOffset</span><span class="p">,</span> <span class="n">verticalOffset</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotationAngle</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">currentStepScaleFactor</span> <span class="o">*</span> <span class="n">scaleFactor</span><span class="p">,</span> <span class="n">currentStepScaleFactor</span> <span class="o">*</span> <span class="n">scaleFactor</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">iw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">ih</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">currentImage</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">paintEvent()</span></code> , scaleFactor represents the zoom level before the pinch gesture began, while currentStepScaleFactor represents the additional zoom factor while a pinch gesture is in progress. But for rotation, only the current rotationAngle is stored. The horizontal and vertical offsets represent the distance that the image has been dragged by the pan gesture.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="imagewidget-cpp-example-file">
+<h1>imagewidget.cpp Example File<a class="headerlink" href="#imagewidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagewidget-h-example-file">
+<h1>imagewidget.h Example File<a class="headerlink" href="#imagewidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwidget-cpp-example-file">
+<h1>mainwidget.cpp Example File<a class="headerlink" href="#mainwidget-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwidget-h-example-file">
+<h1>mainwidget.h Example File<a class="headerlink" href="#mainwidget-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="imagegestures-pro-example-file">
+<h1>imagegestures.pro Example File<a class="headerlink" href="#imagegestures-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

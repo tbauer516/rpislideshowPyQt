@@ -1,0 +1,507 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Window Flags Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Window Flags Example</a><ul>
+<li><a class="reference internal" href="#controllerwindow-class-definition">ControllerWindow Class Definition</a></li>
+<li><a class="reference internal" href="#controllerwindow-class-implementation">ControllerWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#previewwindow-class-definition">PreviewWindow Class Definition</a></li>
+<li><a class="reference internal" href="#previewwindow-class-implementation">PreviewWindow Class Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controllerwindow-cpp-example-file">controllerwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#controllerwindow-h-example-file">controllerwindow.h Example File</a></li>
+<li><a class="reference internal" href="#previewwindow-cpp-example-file">previewwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#previewwindow-h-example-file">previewwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#windowflags-pro-example-file">windowflags.pro Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="window-flags-example">
+<span id="id1"></span><h1>Window Flags Example<a class="headerlink" href="#window-flags-example" title="Permalink to this headline">¶</a></h1>
+<p>Window Flags example shows how to use the window flags available in Qt</p>
+<blockquote>
+<div><p>The Window Flags example shows how to use the window flags available in Qt.</p>
+<p>A window flag is either a type or a hint. A type is used to specify various window-system properties for the widget. A widget can only have one type, and the default is <code class="xref py py-attr docutils literal"><span class="pre">Qt.Widget</span></code> . However, a widget can have zero or more hints. The hints are used to customize the appearance of top-level windows.</p>
+<p>A widget’s flags are stored in a <code class="xref py py-class docutils literal"><span class="pre">Qt.WindowFlags</span></code> type which stores an OR combination of the flags.</p>
+<p>The example consists of two classes:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ControllerWindow</span></code> is the main application widget that allows the user to choose among the available window flags, and displays the effect on a separate preview window.</li>
+<li><code class="docutils literal"><span class="pre">PreviewWindow</span></code> is a custom widget displaying the name of its currently set window flags in a read-only text editor.</li>
+</ul>
+<p>We will start by reviewing the <code class="docutils literal"><span class="pre">ControllerWindow</span></code> class, then we will take a look at the <code class="docutils literal"><span class="pre">PreviewWindow</span></code> class.</p>
+</div></blockquote>
+<div class="section" id="controllerwindow-class-definition">
+<span id="id2"></span><h2>ControllerWindow Class Definition<a class="headerlink" href="#controllerwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ControllerWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">ControllerWindow</span><span class="p">();</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">updatePreview</span><span class="p">();</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createTypeGroupBox</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">createHintsGroupBox</span><span class="p">();</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">createCheckBox</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">createRadioButton</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">);</span>
+
+    <span class="n">PreviewWindow</span> <span class="o">*</span><span class="n">previewWindow</span><span class="p">;</span>
+
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">typeGroupBox</span><span class="p">;</span>
+    <span class="n">QGroupBox</span> <span class="o">*</span><span class="n">hintsGroupBox</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">quitButton</span><span class="p">;</span>
+
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">windowRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">dialogRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">sheetRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">drawerRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">popupRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">toolRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">toolTipRadioButton</span><span class="p">;</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">splashScreenRadioButton</span><span class="p">;</span>
+
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">msWindowsFixedSizeDialogCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">x11BypassWindowManagerCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">framelessWindowCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowNoShadowCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowTitleCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowSystemMenuCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowMinimizeButtonCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowMaximizeButtonCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowCloseButtonCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowContextHelpButtonCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowShadeButtonCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowStaysOnTopCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">windowStaysOnBottomCheckBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">customizeWindowHintCheckBox</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">ControllerWindow</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . The widget allows the user to choose among the available window flags, and displays the effect on a separate preview window.</p>
+<p>We declare a private <code class="docutils literal"><span class="pre">updatePreview()</span></code> slot to refresh the preview window whenever the user changes the window flags.</p>
+<p>We also declare several private functions to simplify the constructor: We call the <code class="docutils literal"><span class="pre">createTypeGroupBox()</span></code> function to create a radio button for each available window type, using the private <code class="docutils literal"><span class="pre">createButton()</span></code> function, and gather them within a group box. In a similar way we use the <code class="docutils literal"><span class="pre">createHintsGroupBox()</span></code> function to create a check box for each available hint, using the private <code class="docutils literal"><span class="pre">createCheckBox()</span></code> function.</p>
+<p>In addition to the various radio buttons and checkboxes, we need an associated <code class="docutils literal"><span class="pre">PreviewWindow</span></code> to show the effect of the currently chosen window flags.</p>
+</div></blockquote>
+</div>
+<div class="section" id="controllerwindow-class-implementation">
+<span id="id3"></span><h2>ControllerWindow Class Implementation<a class="headerlink" href="#controllerwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ControllerWindow</span><span class="p">::</span><span class="n">ControllerWindow</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">previewWindow</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PreviewWindow</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+
+    <span class="n">createTypeGroupBox</span><span class="p">();</span>
+    <span class="n">createHintsGroupBox</span><span class="p">();</span>
+
+    <span class="n">quitButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Quit&quot;</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">quitButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">qApp</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">quit</span><span class="p">()));</span>
+
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">bottomLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">bottomLayout</span><span class="o">-&gt;</span><span class="n">addStretch</span><span class="p">();</span>
+    <span class="n">bottomLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">quitButton</span><span class="p">);</span>
+
+    <span class="n">QHBoxLayout</span> <span class="o">*</span><span class="n">mainLayout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QHBoxLayout</span><span class="p">;</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">typeGroupBox</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">hintsGroupBox</span><span class="p">);</span>
+    <span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">bottomLayout</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window Flags&quot;</span><span class="p">));</span>
+    <span class="n">updatePreview</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor we first create the preview window. Then we create the group boxes containing the available window flags using the private <code class="docutils literal"><span class="pre">createTypeGroupBox()</span></code> and <code class="docutils literal"><span class="pre">createHintsGroupBox()</span></code> functions. In addition we create a Quit button. We put the button and a stretchable space in a separate layout to make the button appear in the <code class="docutils literal"><span class="pre">WindowFlag</span></code> widget’s right bottom corner.</p>
+<p>Finally, we add the button’s layout and the two goup boxes to a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> , set the window title and refresh the preview window using the <code class="docutils literal"><span class="pre">updatePreview()</span></code> slot.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ControllerWindow</span><span class="p">::</span><span class="n">updatePreview</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Qt</span><span class="p">::</span><span class="n">WindowFlags</span> <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">windowRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Window</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">dialogRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Dialog</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">sheetRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Sheet</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">drawerRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Drawer</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">popupRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Popup</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">toolRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Tool</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">toolTipRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">ToolTip</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">splashScreenRadioButton</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SplashScreen</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">updatePreview()</span></code> slot is called whenever the user changes any of the window flags. First we create an empty <code class="xref py py-class docutils literal"><span class="pre">Qt.WindowFlags</span></code> <code class="docutils literal"><span class="pre">flags</span></code> , then we determine which one of the types that is checked and add it to <code class="docutils literal"><span class="pre">flags</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">msWindowsFixedSizeDialogCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">MSWindowsFixedSizeDialogHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">x11BypassWindowManagerCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">X11BypassWindowManagerHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">framelessWindowCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">FramelessWindowHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowNoShadowCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">NoDropShadowWindowHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowTitleCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowTitleHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowSystemMenuCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowSystemMenuHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowMinimizeButtonCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowMinimizeButtonHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowMaximizeButtonCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowMaximizeButtonHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowCloseButtonCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowCloseButtonHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowContextHelpButtonCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowContextHelpButtonHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowShadeButtonCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowShadeButtonHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowStaysOnTopCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowStaysOnTopHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">windowStaysOnBottomCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowStaysOnBottomHint</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">customizeWindowHintCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">())</span>
+    <span class="n">flags</span> <span class="o">|=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CustomizeWindowHint</span><span class="p">;</span>
+
+<span class="n">previewWindow</span><span class="o">-&gt;</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">flags</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We also determine which of the hints that are checked, and add them to <code class="docutils literal"><span class="pre">flags</span></code> using an OR operator. We use <code class="docutils literal"><span class="pre">flags</span></code> to set the window flags for the preview window.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">QPoint</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">previewWindow</span><span class="o">-&gt;</span><span class="n">pos</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pos</span><span class="o">.</span><span class="n">setX</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pos</span><span class="o">.</span><span class="n">setY</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">previewWindow</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+    <span class="n">previewWindow</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We adjust the position of the preview window. The reason we do that, is that playing around with the window’s frame may on some platforms cause the window’s position to be changed behind our back. If a window is located in the upper left corner of the screen, parts of the window may not be visible. So we adjust the widget’s position to make sure that, if this happens, the window is moved within the screen’s boundaries. Finally, we call <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> to make sure the preview window is visible.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ControllerWindow</span><span class="p">::</span><span class="n">createTypeGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">typeGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Type&quot;</span><span class="p">));</span>
+
+    <span class="n">windowRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window&quot;</span><span class="p">));</span>
+    <span class="n">dialogRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Dialog&quot;</span><span class="p">));</span>
+    <span class="n">sheetRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Sheet&quot;</span><span class="p">));</span>
+    <span class="n">drawerRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Drawer&quot;</span><span class="p">));</span>
+    <span class="n">popupRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Popup&quot;</span><span class="p">));</span>
+    <span class="n">toolRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Tool&quot;</span><span class="p">));</span>
+    <span class="n">toolTipRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Tooltip&quot;</span><span class="p">));</span>
+    <span class="n">splashScreenRadioButton</span> <span class="o">=</span> <span class="n">createRadioButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Splash screen&quot;</span><span class="p">));</span>
+    <span class="n">windowRadioButton</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowRadioButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">dialogRadioButton</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">sheetRadioButton</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">drawerRadioButton</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">popupRadioButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">toolRadioButton</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">toolTipRadioButton</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">splashScreenRadioButton</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">typeGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The private <code class="docutils literal"><span class="pre">createTypeGroupBox()</span></code> function is called from the constructor.</p>
+<p>First we create a group box, and then we create a radio button (using the private <code class="docutils literal"><span class="pre">createRadioButton()</span></code> function) for each of the available types among the window flags. We make <code class="xref py py-attr docutils literal"><span class="pre">Qt.Window</span></code> the initially applied type. We put the radio buttons into a <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> and install the layout on the group box.</p>
+<p>We do not include the default <code class="xref py py-attr docutils literal"><span class="pre">Qt.Widget</span></code> type. The reason is that it behaves somewhat different than the other types. If the type is not specified for a widget, and it has no parent, the widget is a window. However, if it has a parent, it is a standard child widget. The other types are all top-level windows, and since the hints only affect top-level windows, we abandon the <code class="xref py py-attr docutils literal"><span class="pre">Qt.Widget</span></code> type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ControllerWindow</span><span class="p">::</span><span class="n">createHintsGroupBox</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">hintsGroupBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Hints&quot;</span><span class="p">));</span>
+
+    <span class="n">msWindowsFixedSizeDialogCheckBox</span> <span class="o">=</span>
+            <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;MS Windows fixed size dialog&quot;</span><span class="p">));</span>
+    <span class="n">x11BypassWindowManagerCheckBox</span> <span class="o">=</span>
+            <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;X11 bypass window manager&quot;</span><span class="p">));</span>
+    <span class="n">framelessWindowCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Frameless window&quot;</span><span class="p">));</span>
+    <span class="n">windowNoShadowCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;No drop shadow&quot;</span><span class="p">));</span>
+    <span class="n">windowTitleCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window title&quot;</span><span class="p">));</span>
+    <span class="n">windowSystemMenuCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window system menu&quot;</span><span class="p">));</span>
+    <span class="n">windowMinimizeButtonCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window minimize button&quot;</span><span class="p">));</span>
+    <span class="n">windowMaximizeButtonCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window maximize button&quot;</span><span class="p">));</span>
+    <span class="n">windowCloseButtonCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window close button&quot;</span><span class="p">));</span>
+    <span class="n">windowContextHelpButtonCheckBox</span> <span class="o">=</span>
+            <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window context help button&quot;</span><span class="p">));</span>
+    <span class="n">windowShadeButtonCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window shade button&quot;</span><span class="p">));</span>
+    <span class="n">windowStaysOnTopCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window stays on top&quot;</span><span class="p">));</span>
+    <span class="n">windowStaysOnBottomCheckBox</span> <span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Window stays on bottom&quot;</span><span class="p">));</span>
+    <span class="n">customizeWindowHintCheckBox</span><span class="o">=</span> <span class="n">createCheckBox</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Customize window&quot;</span><span class="p">));</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">msWindowsFixedSizeDialogCheckBox</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">x11BypassWindowManagerCheckBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">framelessWindowCheckBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowNoShadowCheckBox</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowTitleCheckBox</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowSystemMenuCheckBox</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">customizeWindowHintCheckBox</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowMinimizeButtonCheckBox</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowMaximizeButtonCheckBox</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowCloseButtonCheckBox</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowContextHelpButtonCheckBox</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowShadeButtonCheckBox</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowStaysOnTopCheckBox</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">windowStaysOnBottomCheckBox</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">hintsGroupBox</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The private <code class="docutils literal"><span class="pre">createHintsGroupBox()</span></code> function is also called from the constructor.</p>
+<p>Again, the first thing we do is to create a group box. Then we create a checkbox, using the private <code class="docutils literal"><span class="pre">createCheckBox()</span></code> function, for each of the available hints among the window flags. We put the checkboxes into a <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> and install the layout on the group box.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QCheckBox</span> <span class="o">*</span><span class="n">ControllerWindow</span><span class="p">::</span><span class="n">createCheckBox</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">checkBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">checkBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">updatePreview</span><span class="p">()));</span>
+    <span class="k">return</span> <span class="n">checkBox</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The private <code class="docutils literal"><span class="pre">createCheckBox()</span></code> function is called from <code class="docutils literal"><span class="pre">createHintsGroupBox()</span></code> .</p>
+<p>We simply create a <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> with the provided text, connect it to the private <code class="docutils literal"><span class="pre">updatePreview()</span></code> slot, and return a pointer to the checkbox.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QRadioButton</span> <span class="o">*</span><span class="n">ControllerWindow</span><span class="p">::</span><span class="n">createRadioButton</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">text</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QRadioButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">updatePreview</span><span class="p">()));</span>
+    <span class="k">return</span> <span class="n">button</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the private <code class="docutils literal"><span class="pre">createRadioButton()</span></code> function it is a <a class="reference internal" href="../PySide2/QtWidgets/QRadioButton.html#PySide2.QtWidgets.QRadioButton" title="PySide2.QtWidgets.QRadioButton"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QRadioButton</span></code></a> we create with the provided text, and connect to the private <code class="docutils literal"><span class="pre">updatePreview()</span></code> slot. The function is called from <code class="docutils literal"><span class="pre">createTypeGroupBox()</span></code> , and returns a pointer to the button.</p>
+</div></blockquote>
+</div>
+<div class="section" id="previewwindow-class-definition">
+<span id="id4"></span><h2>PreviewWindow Class Definition<a class="headerlink" href="#previewwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PreviewWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">PreviewWindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">void</span> <span class="n">setWindowFlags</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WindowFlags</span> <span class="n">flags</span><span class="p">);</span>
+
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">QTextEdit</span> <span class="o">*</span><span class="n">textEdit</span><span class="p">;</span>
+    <span class="n">QPushButton</span> <span class="o">*</span><span class="n">closeButton</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">PreviewWindow</span></code> class inherits <a class="reference internal" href="../PySide2/QtWidgets/QWidget.html#PySide2.QtWidgets.QWidget" title="PySide2.QtWidgets.QWidget"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QWidget</span></code></a> . It is a custom widget that displays the names of its currently set window flags in a read-only text editor. It is also provided with a QPushbutton that closes the window.</p>
+<p>We reimplement the constructor to create the Close button and the text editor, and the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setWindowFlags()</span></code> function to display the names of the window flags.</p>
+</div></blockquote>
+</div>
+<div class="section" id="previewwindow-class-implementation">
+<span id="id5"></span><h2>PreviewWindow Class Implementation<a class="headerlink" href="#previewwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PreviewWindow</span><span class="p">::</span><span class="n">PreviewWindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">textEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTextEdit</span><span class="p">;</span>
+    <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">setReadOnly</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">setLineWrapMode</span><span class="p">(</span><span class="n">QTextEdit</span><span class="p">::</span><span class="n">NoWrap</span><span class="p">);</span>
+
+    <span class="n">closeButton</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QPushButton</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;&amp;Close&quot;</span><span class="p">));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">closeButton</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">close</span><span class="p">()));</span>
+
+    <span class="n">QVBoxLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QVBoxLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">textEdit</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">closeButton</span><span class="p">);</span>
+    <span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Preview&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the constructor, we first create a <a class="reference internal" href="../PySide2/QtWidgets/QTextEdit.html#PySide2.QtWidgets.QTextEdit" title="PySide2.QtWidgets.QTextEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTextEdit</span></code></a> and make sure that it is read-only.</p>
+<p>We also prohibit any line wrapping in the text editor using the <code class="xref py py-func docutils literal"><span class="pre">QTextEdit.setLineWrapMode()</span></code> function. The result is that a horizontal scrollbar appears when a window flag’s name exceeds the width of the editor. This is a reasonable solution since we construct the displayed text with built-in line breaks. If no line breaks were guaranteed, using another <code class="xref py py-attr docutils literal"><span class="pre">QTextEdit.LineWrapMode</span></code> would perhaps make more sense.</p>
+<p>Then we create the Close button, and put both the widgets into a <a class="reference internal" href="../PySide2/QtWidgets/QVBoxLayout.html#PySide2.QtWidgets.QVBoxLayout" title="PySide2.QtWidgets.QVBoxLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QVBoxLayout</span></code></a> before we set the window title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">PreviewWindow</span><span class="p">::</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">Qt</span><span class="p">::</span><span class="n">WindowFlags</span> <span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QWidget</span><span class="p">::</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">flags</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">text</span><span class="p">;</span>
+
+    <span class="n">Qt</span><span class="p">::</span><span class="n">WindowFlags</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowType_Mask</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Window</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Window&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Dialog</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Dialog&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Sheet</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Sheet&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Drawer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Drawer&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Popup</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Popup&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">Tool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::Tool&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">ToolTip</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::ToolTip&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">SplashScreen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Qt::SplashScreen&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">MSWindowsFixedSizeDialogHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::MSWindowsFixedSizeDialogHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">X11BypassWindowManagerHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::X11BypassWindowManagerHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">FramelessWindowHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::FramelessWindowHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">NoDropShadowWindowHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::NoDropShadowWindowHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowTitleHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowTitleHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowSystemMenuHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowSystemMenuHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowMinimizeButtonHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowMinimizeButtonHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowMaximizeButtonHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowMaximizeButtonHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowCloseButtonHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowCloseButtonHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowContextHelpButtonHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowContextHelpButtonHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowShadeButtonHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowShadeButtonHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">WindowStaysOnTopHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::WindowStaysOnTopHint&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">Qt</span><span class="p">::</span><span class="n">CustomizeWindowHint</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">| Qt::CustomizeWindowHint&quot;</span><span class="p">;</span>
+
+    <span class="n">textEdit</span><span class="o">-&gt;</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In our reimplementation of the <code class="docutils literal"><span class="pre">setWindowFlags()</span></code> function, we first set the widgets flags using the <code class="xref py py-func docutils literal"><span class="pre">QWidget.setWindowFlags()</span></code> function. Then we run through the available window flags, creating a text that contains the names of the flags that matches the <code class="docutils literal"><span class="pre">flags</span></code> parameter. Finally, we display the text in the widgets text editor.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="controllerwindow-cpp-example-file">
+<h1>controllerwindow.cpp Example File<a class="headerlink" href="#controllerwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="controllerwindow-h-example-file">
+<h1>controllerwindow.h Example File<a class="headerlink" href="#controllerwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="previewwindow-cpp-example-file">
+<h1>previewwindow.cpp Example File<a class="headerlink" href="#previewwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="previewwindow-h-example-file">
+<h1>previewwindow.h Example File<a class="headerlink" href="#previewwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="windowflags-pro-example-file">
+<h1>windowflags.pro Example File<a class="headerlink" href="#windowflags-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

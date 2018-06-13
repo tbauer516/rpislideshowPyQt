@@ -1,0 +1,512 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Completer Example &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Completer Example</a><ul>
+<li><a class="reference internal" href="#the-resource-file">The Resource File</a></li>
+<li><a class="reference internal" href="#filesystemmodel-class-definition">FileSystemModel Class Definition</a></li>
+<li><a class="reference internal" href="#filesystemmodel-class-implementation">FileSystemModel Class Implementation</a></li>
+<li><a class="reference internal" href="#mainwindow-class-definition">MainWindow Class Definition</a></li>
+<li><a class="reference internal" href="#mainwindow-class-implementation">MainWindow Class Implementation</a></li>
+<li><a class="reference internal" href="#function">Function</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fsmodel-cpp-example-file">fsmodel.cpp Example File</a></li>
+<li><a class="reference internal" href="#fsmodel-h-example-file">fsmodel.h Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-cpp-example-file">mainwindow.cpp Example File</a></li>
+<li><a class="reference internal" href="#mainwindow-h-example-file">mainwindow.h Example File</a></li>
+<li><a class="reference internal" href="#main-cpp-example-file">main.cpp Example File</a></li>
+<li><a class="reference internal" href="#completer-pro-example-file">completer.pro Example File</a></li>
+<li><a class="reference internal" href="#completer-qrc-example-file">completer.qrc Example File</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="completer-example">
+<span id="id1"></span><h1>Completer Example<a class="headerlink" href="#completer-example" title="Permalink to this headline">¶</a></h1>
+<p>Completer example shows how to provide string-completion facilities for an input widget based on data provided by a model</p>
+<blockquote>
+<div><p>The Completer example shows how to provide string-completion facilities for an input widget based on data provided by a model.</p>
+<p>This example uses a custom item model, <code class="docutils literal"><span class="pre">FileSystemModel</span></code> , and a <a class="reference internal" href="../PySide2/QtWidgets/QCompleter.html#PySide2.QtWidgets.QCompleter" title="PySide2.QtWidgets.QCompleter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCompleter</span></code></a> object. <a class="reference internal" href="../PySide2/QtWidgets/QCompleter.html#PySide2.QtWidgets.QCompleter" title="PySide2.QtWidgets.QCompleter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCompleter</span></code></a> is a class that provides completions based on an item model. The type of model, the completion mode, and the case sensitivity can be selected using combo boxes.</p>
+</div></blockquote>
+<div class="section" id="the-resource-file">
+<span id="id2"></span><h2>The Resource File<a class="headerlink" href="#the-resource-file" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The Completer example requires a resource file in order to store the <em>countries.txt</em> and <em>words.txt</em> . The resource file contains the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Code</span> <span class="n">snippet</span> <span class="s2">&quot;/tmp/qt-doc-test-511/_qt5/qtbase/tools/completer/completer.qrc&quot;</span> <span class="ow">not</span> <span class="n">found</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="filesystemmodel-class-definition">
+<span id="id3"></span><h2>FileSystemModel Class Definition<a class="headerlink" href="#filesystemmodel-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">FileSystemModel</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> , which provides a data model for the local filesystem.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FileSystemModel</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QFileSystemModel</span>
+<span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">FileSystemModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">QVariant</span> <span class="n">data</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span> <span class="o">=</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DisplayRole</span><span class="p">)</span> <span class="n">const</span> <span class="n">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>This class only has a constructor and a <code class="docutils literal"><span class="pre">data()</span></code> function as it is only created to enable <code class="docutils literal"><span class="pre">data()</span></code> to return the entire file path for the display role, unlike <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> ‘s <code class="docutils literal"><span class="pre">data()</span></code> function that only returns the folder and not the drive label. This is further explained in <code class="docutils literal"><span class="pre">FileSystemModel</span></code> ‘s implementation.</p>
+</div></blockquote>
+</div>
+<div class="section" id="filesystemmodel-class-implementation">
+<span id="id4"></span><h2>FileSystemModel Class Implementation<a class="headerlink" href="#filesystemmodel-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor for the <code class="docutils literal"><span class="pre">FileSystemModel</span></code> class is used to pass <code class="docutils literal"><span class="pre">parent</span></code> to <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FileSystemModel</span><span class="p">::</span><span class="n">FileSystemModel</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QFileSystemModel</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As mentioned earlier, the <code class="docutils literal"><span class="pre">data()</span></code> function is reimplemented in order to get it to return the entire file parth for the display role. For example, with a <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> , you will see “Program Files” in the view. However, with <code class="docutils literal"><span class="pre">FileSystemModel</span></code> , you will see “C:\Program Files”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QVariant</span> <span class="n">FileSystemModel</span><span class="p">::</span><span class="n">data</span><span class="p">(</span><span class="n">const</span> <span class="n">QModelIndex</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span> <span class="n">role</span><span class="p">)</span> <span class="n">const</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="n">Qt</span><span class="p">::</span><span class="n">DisplayRole</span> <span class="o">&amp;&amp;</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QString</span> <span class="n">path</span>  <span class="o">=</span> <span class="n">QDir</span><span class="p">::</span><span class="n">toNativeSeparators</span><span class="p">(</span><span class="n">filePath</span><span class="p">(</span><span class="n">index</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">endsWith</span><span class="p">(</span><span class="n">QDir</span><span class="p">::</span><span class="n">separator</span><span class="p">()))</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">chop</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">QFileSystemModel</span><span class="p">::</span><span class="n">data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The screenshots below illustrate this difference:</p>
+<p>The <code class="xref py py-attr docutils literal"><span class="pre">Qt.EditRole</span></code> , which <a class="reference internal" href="../PySide2/QtWidgets/QCompleter.html#PySide2.QtWidgets.QCompleter" title="PySide2.QtWidgets.QCompleter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCompleter</span></code></a> uses to look for matches, is left unchanged.</p>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-definition">
+<span id="id5"></span><h2>MainWindow Class Definition<a class="headerlink" href="#mainwindow-class-definition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">MainWindow</span></code> class is a subclass of <a class="reference internal" href="../PySide2/QtWidgets/QMainWindow.html#PySide2.QtWidgets.QMainWindow" title="PySide2.QtWidgets.QMainWindow"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QMainWindow</span></code></a> and implements five private slots - <code class="docutils literal"><span class="pre">about()</span></code> , <code class="docutils literal"><span class="pre">changeCase()</span></code> , <code class="docutils literal"><span class="pre">changeMode()</span></code> , <code class="docutils literal"><span class="pre">changeModel()</span></code> , and <code class="docutils literal"><span class="pre">changeMaxVisible()</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">public</span> <span class="n">QMainWindow</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MainWindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="n">private</span> <span class="n">slots</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">about</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">changeCase</span><span class="p">(</span><span class="nb">int</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">changeMode</span><span class="p">(</span><span class="nb">int</span><span class="p">);</span>
+    <span class="n">void</span> <span class="n">changeModel</span><span class="p">();</span>
+    <span class="n">void</span> <span class="n">changeMaxVisible</span><span class="p">(</span><span class="nb">int</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Within the <code class="docutils literal"><span class="pre">MainWindow</span></code> class, we have two private functions: <code class="docutils literal"><span class="pre">createMenu()</span></code> and <code class="docutils literal"><span class="pre">modelFromFile()</span></code> . We also declare the private widgets needed - three <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> objects, a <a class="reference internal" href="../PySide2/QtWidgets/QCheckBox.html#PySide2.QtWidgets.QCheckBox" title="PySide2.QtWidgets.QCheckBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCheckBox</span></code></a> , a <a class="reference internal" href="../PySide2/QtWidgets/QCompleter.html#PySide2.QtWidgets.QCompleter" title="PySide2.QtWidgets.QCompleter"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QCompleter</span></code></a> , a <a class="reference internal" href="../PySide2/QtWidgets/QLabel.html#PySide2.QtWidgets.QLabel" title="PySide2.QtWidgets.QLabel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLabel</span></code></a> , and a <a class="reference internal" href="../PySide2/QtWidgets/QLineEdit.html#PySide2.QtWidgets.QLineEdit" title="PySide2.QtWidgets.QLineEdit"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QLineEdit</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">private</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">createMenu</span><span class="p">();</span>
+    <span class="n">QAbstractItemModel</span> <span class="o">*</span><span class="n">modelFromFile</span><span class="p">(</span><span class="n">const</span> <span class="n">QString</span><span class="o">&amp;</span> <span class="n">fileName</span><span class="p">);</span>
+
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">caseCombo</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">modeCombo</span><span class="p">;</span>
+    <span class="n">QComboBox</span> <span class="o">*</span><span class="n">modelCombo</span><span class="p">;</span>
+    <span class="n">QSpinBox</span> <span class="o">*</span><span class="n">maxVisibleSpinBox</span><span class="p">;</span>
+    <span class="n">QCheckBox</span> <span class="o">*</span><span class="n">wrapCheckBox</span><span class="p">;</span>
+    <span class="n">QCompleter</span> <span class="o">*</span><span class="n">completer</span><span class="p">;</span>
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">contentsLabel</span><span class="p">;</span>
+    <span class="n">QLineEdit</span> <span class="o">*</span><span class="n">lineEdit</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mainwindow-class-implementation">
+<span id="id6"></span><h2>MainWindow Class Implementation<a class="headerlink" href="#mainwindow-class-implementation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The constructor of <code class="docutils literal"><span class="pre">MainWindow</span></code> constructs a <code class="docutils literal"><span class="pre">MainWindow</span></code> with a parent widget and initializes the private members. The <code class="docutils literal"><span class="pre">createMenu()</span></code> function is then invoked.</p>
+<p>We set up three <a class="reference internal" href="../PySide2/QtWidgets/QComboBox.html#PySide2.QtWidgets.QComboBox" title="PySide2.QtWidgets.QComboBox"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QComboBox</span></code></a> objects, <code class="docutils literal"><span class="pre">modelComb</span></code> , <code class="docutils literal"><span class="pre">modeCombo</span></code> and <code class="docutils literal"><span class="pre">caseCombo</span></code> . By default, the <code class="docutils literal"><span class="pre">modelCombo</span></code> is set to <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> , the <code class="docutils literal"><span class="pre">modeCombo</span></code> is set to “Filtered Popup” and the <code class="docutils literal"><span class="pre">caseCombo</span></code> is set to “Case Insensitive”.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MainWindow</span><span class="p">::</span><span class="n">MainWindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">completer</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">lineEdit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">createMenu</span><span class="p">();</span>
+
+    <span class="n">QWidget</span> <span class="o">*</span><span class="n">centralWidget</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QWidget</span><span class="p">;</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">modelLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+    <span class="n">modelLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Model&quot;</span><span class="p">));</span>
+
+    <span class="n">modelCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;QFileSytemModel&quot;</span><span class="p">));</span>
+    <span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;QFileSytemModel that shows full path&quot;</span><span class="p">));</span>
+    <span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Country list&quot;</span><span class="p">));</span>
+    <span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Word list&quot;</span><span class="p">));</span>
+    <span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">modeLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+    <span class="n">modeLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Completion Mode&quot;</span><span class="p">));</span>
+    <span class="n">modeCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">modeCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Inline&quot;</span><span class="p">));</span>
+    <span class="n">modeCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Filtered Popup&quot;</span><span class="p">));</span>
+    <span class="n">modeCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Unfiltered Popup&quot;</span><span class="p">));</span>
+    <span class="n">modeCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">QLabel</span> <span class="o">*</span><span class="n">caseLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+    <span class="n">caseLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Case Sensitivity&quot;</span><span class="p">));</span>
+    <span class="n">caseCombo</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QComboBox</span><span class="p">;</span>
+    <span class="n">caseCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Case Insensitive&quot;</span><span class="p">));</span>
+    <span class="n">caseCombo</span><span class="o">-&gt;</span><span class="n">addItem</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Case Sensitive&quot;</span><span class="p">));</span>
+    <span class="n">caseCombo</span><span class="o">-&gt;</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">maxVisibleSpinBox</span></code> is created and determines the number of visible item in the completer</p>
+<p>The <code class="docutils literal"><span class="pre">wrapCheckBox</span></code> is then set up. This <code class="docutils literal"><span class="pre">checkBox</span></code> determines if the <code class="docutils literal"><span class="pre">completer</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QCompleter.setWrapAround()</span></code> property is enabled or disabled.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QLabel</span> <span class="o">*</span><span class="n">maxVisibleLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+<span class="n">maxVisibleLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Max Visible Items&quot;</span><span class="p">));</span>
+<span class="n">maxVisibleSpinBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QSpinBox</span><span class="p">;</span>
+<span class="n">maxVisibleSpinBox</span><span class="o">-&gt;</span><span class="n">setRange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">25</span><span class="p">);</span>
+<span class="n">maxVisibleSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">wrapCheckBox</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCheckBox</span><span class="p">;</span>
+<span class="n">wrapCheckBox</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Wrap around completions&quot;</span><span class="p">));</span>
+<span class="n">wrapCheckBox</span><span class="o">-&gt;</span><span class="n">setChecked</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We instantiate <code class="docutils literal"><span class="pre">contentsLabel</span></code> and set its size policy to <code class="xref py py-attr docutils literal"><span class="pre">fixed</span></code> . The combo boxes’ <code class="xref py py-func docutils literal"><span class="pre">QComboBox.activated()</span></code> signals are then connected to their respective slots.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">contentsLabel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLabel</span><span class="p">;</span>
+<span class="n">contentsLabel</span><span class="o">-&gt;</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Fixed</span><span class="p">,</span> <span class="n">QSizePolicy</span><span class="p">::</span><span class="n">Fixed</span><span class="p">);</span>
+
+<span class="n">connect</span><span class="p">(</span><span class="n">modelCombo</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changeModel</span><span class="p">()));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">modeCombo</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changeMode</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">caseCombo</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">activated</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changeCase</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">maxVisibleSpinBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">valueChanged</span><span class="p">(</span><span class="nb">int</span><span class="p">)),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">changeMaxVisible</span><span class="p">(</span><span class="nb">int</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">lineEdit</span></code> is set up and then we arrange all the widgets using a <a class="reference internal" href="../PySide2/QtWidgets/QGridLayout.html#PySide2.QtWidgets.QGridLayout" title="PySide2.QtWidgets.QGridLayout"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QGridLayout</span></code></a> . The <code class="docutils literal"><span class="pre">changeModel()</span></code> function is called, to initialize the <code class="docutils literal"><span class="pre">completer</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">lineEdit</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QLineEdit</span><span class="p">;</span>
+
+    <span class="n">QGridLayout</span> <span class="o">*</span><span class="n">layout</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGridLayout</span><span class="p">;</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">modelLabel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">modelCombo</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">modeLabel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>  <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">modeCombo</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">caseLabel</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>  <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">caseCombo</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">maxVisibleLabel</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">maxVisibleSpinBox</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">wrapCheckBox</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">contentsLabel</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">layout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">lineEdit</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">centralWidget</span><span class="o">-&gt;</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span>
+    <span class="n">setCentralWidget</span><span class="p">(</span><span class="n">centralWidget</span><span class="p">);</span>
+
+    <span class="n">changeModel</span><span class="p">();</span>
+
+    <span class="n">setWindowTitle</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Completer&quot;</span><span class="p">));</span>
+    <span class="n">lineEdit</span><span class="o">-&gt;</span><span class="n">setFocus</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">createMenu()</span></code> function is used to instantiate the <a class="reference internal" href="../PySide2/QtWidgets/QAction.html#PySide2.QtWidgets.QAction" title="PySide2.QtWidgets.QAction"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QAction</span></code></a> objects needed to fill the <code class="docutils literal"><span class="pre">fileMenu</span></code> and <code class="docutils literal"><span class="pre">helpMenu</span></code> . The actions’ <code class="xref py py-func docutils literal"><span class="pre">QAction.triggered()</span></code> signals are connected to their respective slots.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">createMenu</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">exitAction</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Exit&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+    <span class="n">QAction</span> <span class="o">*</span><span class="n">aboutQtAct</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QAction</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About Qt&quot;</span><span class="p">),</span> <span class="n">this</span><span class="p">);</span>
+
+    <span class="n">connect</span><span class="p">(</span><span class="n">exitAction</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">qApp</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">quit</span><span class="p">()));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">aboutAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">about</span><span class="p">()));</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">triggered</span><span class="p">()),</span> <span class="n">qApp</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">aboutQt</span><span class="p">()));</span>
+
+    <span class="n">QMenu</span><span class="o">*</span> <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;File&quot;</span><span class="p">));</span>
+    <span class="n">fileMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">exitAction</span><span class="p">);</span>
+
+    <span class="n">QMenu</span><span class="o">*</span> <span class="n">helpMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addMenu</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">));</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutAct</span><span class="p">);</span>
+    <span class="n">helpMenu</span><span class="o">-&gt;</span><span class="n">addAction</span><span class="p">(</span><span class="n">aboutQtAct</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">modelFromFile()</span></code> function accepts the <code class="docutils literal"><span class="pre">fileName</span></code> of a file and processes it depending on its contents.</p>
+<p>We first validate the <code class="docutils literal"><span class="pre">file</span></code> to ensure that it can be opened in <code class="xref py py-attr docutils literal"><span class="pre">QFile.ReadOnly</span></code> mode. If this is unsuccessful, the function returns an empty <a class="reference internal" href="../PySide2/QtCore/QStringListModel.html#PySide2.QtCore.QStringListModel" title="PySide2.QtCore.QStringListModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringListModel</span></code></a> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>QAbstractItemModel *MainWindow::modelFromFile(const QString&amp; fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly))
+        return new QStringListModel(completer);
+</pre></div>
+</div>
+<p>The mouse cursor is then overridden with <code class="xref py py-attr docutils literal"><span class="pre">Qt.WaitCursor</span></code> before we fill a <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> object, <code class="docutils literal"><span class="pre">words</span></code> , with the contents of <code class="docutils literal"><span class="pre">file</span></code> . Once this is done, we restore the mouse cursor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#ifndef QT_NO_CURSOR
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+#endif
+    QStringList words;
+
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine();
+        if (!line.isEmpty())
+            words &lt;&lt; line.trimmed();
+    }
+
+#ifndef QT_NO_CURSOR
+    QApplication::restoreOverrideCursor();
+#endif
+</pre></div>
+</div>
+<p>As mentioned earlier, the resources file contains two files - <em>countries.txt</em> and <em>words.txt</em> . If the <code class="docutils literal"><span class="pre">file</span></code> read is <em>words.txt</em> , we return a <a class="reference internal" href="../PySide2/QtCore/QStringListModel.html#PySide2.QtCore.QStringListModel" title="PySide2.QtCore.QStringListModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringListModel</span></code></a> with <code class="docutils literal"><span class="pre">words</span></code> as its <code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringList</span></code> and <code class="docutils literal"><span class="pre">completer</span></code> as its parent.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!fileName.contains(QLatin1String(&quot;countries.txt&quot;)))
+    return new QStringListModel(words, completer);
+</pre></div>
+</div>
+<p>If the <code class="docutils literal"><span class="pre">file</span></code> read is <em>countries.txt</em> , then we require a <a class="reference internal" href="../PySide2/QtGui/QStandardItemModel.html#PySide2.QtGui.QStandardItemModel" title="PySide2.QtGui.QStandardItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QStandardItemModel</span></code></a> with <code class="docutils literal"><span class="pre">words.count()</span></code> rows, 2 columns, and <code class="docutils literal"><span class="pre">completer</span></code> as its parent.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QStandardItemModel</span> <span class="o">*</span><span class="n">m</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QStandardItemModel</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">completer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A standard line in <em>countries.txt</em> is:</p>
+<p>Norway NO</p>
+<p>Hence, to populate the <a class="reference internal" href="../PySide2/QtGui/QStandardItemModel.html#PySide2.QtGui.QStandardItemModel" title="PySide2.QtGui.QStandardItemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtGui.QStandardItemModel</span></code></a> object, <code class="docutils literal"><span class="pre">m</span></code> , we have to split the country name and its symbol. Once this is done, we return <code class="docutils literal"><span class="pre">m</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">words</span><span class="o">.</span><span class="n">count</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">QModelIndex</span> <span class="n">countryIdx</span> <span class="o">=</span> <span class="n">m</span><span class="o">-&gt;</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">QModelIndex</span> <span class="n">symbolIdx</span> <span class="o">=</span> <span class="n">m</span><span class="o">-&gt;</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">QString</span> <span class="n">country</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">trimmed</span><span class="p">();</span>
+        <span class="n">QString</span> <span class="n">symbol</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+        <span class="n">m</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">countryIdx</span><span class="p">,</span> <span class="n">country</span><span class="p">);</span>
+        <span class="n">m</span><span class="o">-&gt;</span><span class="n">setData</span><span class="p">(</span><span class="n">symbolIdx</span><span class="p">,</span> <span class="n">symbol</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">changeMode()</span></code> function sets the <code class="docutils literal"><span class="pre">completer</span></code> ‘s mode, depending on the value of <code class="docutils literal"><span class="pre">index</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">changeMode</span><span class="p">(</span><span class="nb">int</span> <span class="n">index</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">QCompleter</span><span class="p">::</span><span class="n">CompletionMode</span> <span class="n">mode</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QCompleter</span><span class="p">::</span><span class="n">InlineCompletion</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QCompleter</span><span class="p">::</span><span class="n">PopupCompletion</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">QCompleter</span><span class="p">::</span><span class="n">UnfilteredPopupCompletion</span><span class="p">;</span>
+
+    <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setCompletionMode</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">changeModel()</span></code> function changes the item model used based on the model selected by the user.</p>
+<p>A <code class="docutils literal"><span class="pre">switch</span></code> statement is used to change the item model based on the index of <code class="docutils literal"><span class="pre">modelCombo</span></code> . If <code class="docutils literal"><span class="pre">case</span></code> is 0, we use an unsorted <a class="reference internal" href="../PySide2/QtWidgets/QFileSystemModel.html#PySide2.QtWidgets.QFileSystemModel" title="PySide2.QtWidgets.QFileSystemModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QFileSystemModel</span></code></a> , providing us with a file path excluding the drive label.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">changeModel</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">delete</span> <span class="n">completer</span><span class="p">;</span>
+    <span class="n">completer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QCompleter</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+    <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setMaxVisibleItems</span><span class="p">(</span><span class="n">maxVisibleSpinBox</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">());</span>
+
+    <span class="n">switch</span> <span class="p">(</span><span class="n">modelCombo</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">default</span><span class="p">:</span>
+    <span class="n">case</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="p">{</span> <span class="o">//</span> <span class="n">Unsorted</span> <span class="n">QFileSystemModel</span>
+            <span class="n">QFileSystemModel</span> <span class="o">*</span><span class="n">fsModel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QFileSystemModel</span><span class="p">(</span><span class="n">completer</span><span class="p">);</span>
+            <span class="n">fsModel</span><span class="o">-&gt;</span><span class="n">setRootPath</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+            <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">fsModel</span><span class="p">);</span>
+            <span class="n">contentsLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Enter file path&quot;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Note that we create the model with <code class="docutils literal"><span class="pre">completer</span></code> as the parent as this allows us to replace the model with a new model. The <code class="docutils literal"><span class="pre">completer</span></code> will ensure that the old one is deleted the moment a new model is assigned to it.</p>
+<p>If <code class="docutils literal"><span class="pre">case</span></code> is 1, we use the <code class="docutils literal"><span class="pre">DirModel</span></code> we defined earlier, resulting in full paths for the files.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">case</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="p">{</span>   <span class="o">//</span> <span class="n">FileSystemModel</span> <span class="n">that</span> <span class="n">shows</span> <span class="n">full</span> <span class="n">paths</span>
+        <span class="n">FileSystemModel</span> <span class="o">*</span><span class="n">fsModel</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FileSystemModel</span><span class="p">(</span><span class="n">completer</span><span class="p">);</span>
+        <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">fsModel</span><span class="p">);</span>
+        <span class="n">fsModel</span><span class="o">-&gt;</span><span class="n">setRootPath</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+        <span class="n">contentsLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Enter file path&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">break</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal"><span class="pre">case</span></code> is 2, we attempt to complete names of countries. This requires a <a class="reference internal" href="../PySide2/QtWidgets/QTreeView.html#PySide2.QtWidgets.QTreeView" title="PySide2.QtWidgets.QTreeView"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QTreeView</span></code></a> object, <code class="docutils literal"><span class="pre">treeView</span></code> . The country names are extracted from <em>countries.txt</em> and set the popup used to display completions to <code class="docutils literal"><span class="pre">treeView</span></code> .</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">case</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="p">{</span> <span class="o">//</span> <span class="n">Country</span> <span class="n">List</span>
+        <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">modelFromFile</span><span class="p">(</span><span class="s2">&quot;:/resources/countries.txt&quot;</span><span class="p">));</span>
+        <span class="n">QTreeView</span> <span class="o">*</span><span class="n">treeView</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QTreeView</span><span class="p">;</span>
+        <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setPopup</span><span class="p">(</span><span class="n">treeView</span><span class="p">);</span>
+        <span class="n">treeView</span><span class="o">-&gt;</span><span class="n">setRootIsDecorated</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+        <span class="n">treeView</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">hide</span><span class="p">();</span>
+        <span class="n">treeView</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setStretchLastSection</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+        <span class="n">treeView</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">QHeaderView</span><span class="p">::</span><span class="n">Stretch</span><span class="p">);</span>
+        <span class="n">treeView</span><span class="o">-&gt;</span><span class="n">header</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">QHeaderView</span><span class="p">::</span><span class="n">ResizeToContents</span><span class="p">);</span>
+        <span class="n">contentsLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Enter name of your country&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">break</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The screenshot below shows the Completer with the country list model.</p>
+<p>If <code class="docutils literal"><span class="pre">case</span></code> is 3, we attempt to complete words. This is done using a <a class="reference internal" href="../PySide2/QtCore/QStringListModel.html#PySide2.QtCore.QStringListModel" title="PySide2.QtCore.QStringListModel"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtCore.QStringListModel</span></code></a> that contains data extracted from <em>words.txt</em> . The model is sorted <code class="xref py py-attr docutils literal"><span class="pre">case</span> <span class="pre">insensitively</span></code> .</p>
+<p>The screenshot below shows the Completer with the word list model.</p>
+<p>Once the model type is selected, we call the <code class="docutils literal"><span class="pre">changeMode()</span></code> function and the <code class="docutils literal"><span class="pre">changeCase()</span></code> function and set the wrap option accordingly. The <code class="docutils literal"><span class="pre">wrapCheckBox</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QCheckBox.clicked()</span></code> signal is connected to the <code class="docutils literal"><span class="pre">completer</span></code> ‘s <code class="xref py py-func docutils literal"><span class="pre">QCompleter.setWrapAround()</span></code> slot.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="n">case</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="p">{</span> <span class="o">//</span> <span class="n">Word</span> <span class="nb">list</span>
+            <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setModel</span><span class="p">(</span><span class="n">modelFromFile</span><span class="p">(</span><span class="s2">&quot;:/resources/wordlist.txt&quot;</span><span class="p">));</span>
+            <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setModelSorting</span><span class="p">(</span><span class="n">QCompleter</span><span class="p">::</span><span class="n">CaseInsensitivelySortedModel</span><span class="p">);</span>
+            <span class="n">contentsLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;Enter a word&quot;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">changeMode</span><span class="p">(</span><span class="n">modeCombo</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">());</span>
+    <span class="n">changeCase</span><span class="p">(</span><span class="n">caseCombo</span><span class="o">-&gt;</span><span class="n">currentIndex</span><span class="p">());</span>
+    <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setWrapAround</span><span class="p">(</span><span class="n">wrapCheckBox</span><span class="o">-&gt;</span><span class="n">isChecked</span><span class="p">());</span>
+    <span class="n">lineEdit</span><span class="o">-&gt;</span><span class="n">setCompleter</span><span class="p">(</span><span class="n">completer</span><span class="p">);</span>
+    <span class="n">connect</span><span class="p">(</span><span class="n">wrapCheckBox</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">clicked</span><span class="p">(</span><span class="nb">bool</span><span class="p">)),</span> <span class="n">completer</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">setWrapAround</span><span class="p">(</span><span class="nb">bool</span><span class="p">)));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">changeMaxVisible()</span></code> update the maximum number of visible items in the completer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">changeMaxVisible</span><span class="p">(</span><span class="nb">int</span> <span class="nb">max</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">completer</span><span class="o">-&gt;</span><span class="n">setMaxVisibleItems</span><span class="p">(</span><span class="nb">max</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">about()</span></code> function provides a brief description about the example.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">MainWindow</span><span class="p">::</span><span class="n">about</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QMessageBox</span><span class="p">::</span><span class="n">about</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="p">(</span><span class="s2">&quot;This example demonstrates the &quot;</span>
+        <span class="s2">&quot;different features of the QCompleter class.&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p id="main-function"><code class="docutils literal"><span class="pre">main()</span></code></p>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The <code class="docutils literal"><span class="pre">main()</span></code> function instantiates <a class="reference internal" href="../PySide2/QtWidgets/QApplication.html#PySide2.QtWidgets.QApplication" title="PySide2.QtWidgets.QApplication"><code class="xref py py-class docutils literal"><span class="pre">PySide2.QtWidgets.QApplication</span></code></a> and <code class="docutils literal"><span class="pre">MainWindow</span></code> and invokes the <code class="xref py py-func docutils literal"><span class="pre">QWidget.show()</span></code> function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="nb">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">Q_INIT_RESOURCE</span><span class="p">(</span><span class="n">completer</span><span class="p">);</span>
+
+    <span class="n">QApplication</span> <span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">MainWindow</span> <span class="n">window</span><span class="p">;</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="fsmodel-cpp-example-file">
+<h1>fsmodel.cpp Example File<a class="headerlink" href="#fsmodel-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fsmodel-h-example-file">
+<h1>fsmodel.h Example File<a class="headerlink" href="#fsmodel-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-cpp-example-file">
+<h1>mainwindow.cpp Example File<a class="headerlink" href="#mainwindow-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="mainwindow-h-example-file">
+<h1>mainwindow.h Example File<a class="headerlink" href="#mainwindow-h-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="main-cpp-example-file">
+<h1>main.cpp Example File<a class="headerlink" href="#main-cpp-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="completer-pro-example-file">
+<h1>completer.pro Example File<a class="headerlink" href="#completer-pro-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="completer-qrc-example-file">
+<h1>completer.qrc Example File<a class="headerlink" href="#completer-qrc-example-file" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

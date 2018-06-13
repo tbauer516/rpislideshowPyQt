@@ -1,0 +1,431 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Qt Location HERE Plugin &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../index.html">Qt for Python (Technology Preview)</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Qt Location HERE Plugin</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#mandatory-parameters">Mandatory parameters</a></li>
+<li><a class="reference internal" href="#optional-parameters">Optional parameters</a></li>
+<li><a class="reference internal" href="#parameter-usage-example">Parameter Usage Example</a></li>
+<li><a class="reference internal" href="#qml">QML</a></li>
+<li><a class="reference internal" href="#c">C++</a></li>
+<li><a class="reference internal" href="#places">Places</a></li>
+<li><a class="reference internal" href="#capabilities">Capabilities</a></li>
+<li><a class="reference internal" href="#plugin-specific-behaviors-and-limitations">Plugin Specific Behaviors and Limitations.</a></li>
+<li><a class="reference internal" href="#search">Search</a></li>
+<li><a class="reference internal" href="#searching-for-places">Searching for Places</a></li>
+<li><a class="reference internal" href="#search-term-and-categories">Search Term and Categories</a></li>
+<li><a class="reference internal" href="#search-area">Search Area</a></li>
+<li><a class="reference internal" href="#relevancy-hints">Relevancy Hints</a></li>
+<li><a class="reference internal" href="#search-term-suggestions">Search Term suggestions</a></li>
+<li><a class="reference internal" href="#recommendations">Recommendations</a></li>
+<li><a class="reference internal" href="#extended-attributes">Extended Attributes</a></li>
+<li><a class="reference internal" href="#restrictions-of-usage-extendedattributes-and-content">Restrictions of Usage - ExtendedAttributes and Content</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qt-location-here-plugin">
+<span id="id1"></span><h1>Qt Location HERE Plugin<a class="headerlink" href="#qt-location-here-plugin" title="Permalink to this headline">¶</a></h1>
+<p>Uses the relevant services provided by HERE</p>
+<blockquote>
+<div>Uses the relevant services provided by HERE.</div></blockquote>
+<div class="section" id="overview">
+<span id="id2"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Included with Qt Location is a geo services plugin which accesses the relevant HERE services provided by HERE/Nokia. The use of these services is governed by the terms and conditions available at <a class="reference external" href="https://developer.here.com/terms-conditions">https://developer.here.com/terms-conditions</a>.</p>
+<p>Note that accepting the terms and conditions only applies those terms and conditions to the use of the HERE geo services plugin and does not limit the use of the other geo services plugins that may be included with Qt.</p>
+<p>The HERE geo services plugin can be loaded by using the plugin key “here”.</p>
+<p>The online plugin uses the tiled map classes, which caches tile data in heap memory and texture memory.</p>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<span id="id3"></span><h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="mandatory-parameters">
+<span id="id4"></span><h2>Mandatory parameters<a class="headerlink" href="#mandatory-parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following table lists mandatory parameters that <em>must</em> be passed to the HERE plugin.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Parameter</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>here.app_id</td>
+<td>Client <em>app_id</em> part of the app_id/token pair used for authentication by all managers.</td>
+</tr>
+<tr class="row-odd"><td>here.token</td>
+<td>Client <em>token</em> part of the app_id/token pair for the service used for authentication by all managers.</td>
+</tr>
+</tbody>
+</table>
+<p>The HERE geo services plugin requires an application id and token pair to authenticate the application with the HERE services. To obtain an application id and token pair visit <a class="reference external" href="https://developer.here.com/">https://developer.here.com/</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="optional-parameters">
+<span id="id5"></span><h2>Optional parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following table lists optional parameters that can be passed to the HERE plugin.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since Qt 5.5 all parameters below must be prefixed with <code class="docutils literal"><span class="pre">here</span></code> . Previous versions did not require a prefix.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Parameter</td>
+<td>Description</td>
+</tr>
+<tr class="row-even"><td>here.proxy</td>
+<td><p class="first">Proxy server URL used by all managers. For usage of the system proxy just pass “system” as value.</p>
+<blockquote class="last">
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">See the notes in <code class="xref py py-func docutils literal"><span class="pre">QNetworkProxyFactory.systemProxyForQuery()</span></code> for further information.</p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.host</td>
+<td>Base map tile service URL used by mapping manager.</td>
+</tr>
+<tr class="row-even"><td>here.mapping.host.aerial</td>
+<td>Aerial map tile service URL used by mapping manager. For all satellite, hybrid and terrain schemes.</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.cache.directory</td>
+<td><p class="first">Absolute path to map tile cache directory used as network disk cache.</p>
+<blockquote class="last">
+<div>The default place for the cache is the <code class="docutils literal"><span class="pre">QtLocation/here</span></code> subdirectory in the location returned by <code class="xref py py-func docutils literal"><span class="pre">QStandardPaths.writableLocation()</span></code> , called with <code class="xref py py-attr docutils literal"><span class="pre">QStandardPaths.GenericCacheLocation</span></code> as a parameter. On systems that have no concept of a shared cache, the application-specific <code class="xref py py-attr docutils literal"><span class="pre">QStandardPaths.CacheLocation</span></code> is used instead.</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td>here.mapping.cache.disk.cost_strategy</td>
+<td>The cost strategy to use to cache map tiles on disk. Valid values are <strong>bytesize</strong> and <strong>unitary</strong> . Using <strong>bytesize</strong> , the related size parameter (<strong>here.mapping.cache.disk.size</strong> ) will be interpreted as bytes. Using <strong>unitary</strong> , they will be interpreted as number of tiles. The default value for this parameter is <strong>bytesize</strong> .</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.cache.disk.size</td>
+<td>Disk cache size for map tiles. The default size of the cache is 50 MiB when <strong>bytesize</strong> is the cost strategy for this cache, or 1000 tiles, when <strong>unitary</strong> is the cost strategy.</td>
+</tr>
+<tr class="row-even"><td>here.mapping.cache.memory.cost_strategy</td>
+<td>The cost strategy to use to cache map tiles in memory. Valid values are <strong>bytesize</strong> and <strong>unitary</strong> . Using <strong>bytesize</strong> , the related size parameter (<strong>here.mapping.cache.memory.size</strong> ) will be interpreted as bytes. Using <strong>unitary</strong> , they will be interpreted as number of tiles. The default value for this parameter is <strong>bytesize</strong> .</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.cache.memory.size</td>
+<td>Memory cache size for map tiles. The default size of the cache is 3 MiB when <strong>bytesize</strong> is the cost strategy for this cache, or 100 tiles, when <strong>unitary</strong> is the cost strategy.</td>
+</tr>
+<tr class="row-even"><td>here.mapping.cache.texture.cost_strategy</td>
+<td>The cost strategy to use to cache decompressed map tiles in memory. Valid values are <strong>bytesize</strong> and <strong>unitary</strong> . Using <strong>bytesize</strong> , the related size parameter (<strong>here.mapping.cache.texture.size</strong> ) will be interpreted as bytes. Using <strong>unitary</strong> , they will be interpreted as number of tiles. The default value for this parameter is <strong>bytesize</strong> .</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.cache.texture.size</td>
+<td>Texture cache size for map tiles. The default size of the cache is 6 MiB when <strong>bytesize</strong> is the cost strategy for this cache, or 30 tiles, when <strong>unitary</strong> is the cost strategy. Note that the texture cache has a hard minimum size which depends on the size of the map viewport (it must contain enough data to display the tiles currently visible on the display). This value is the amount of cache to be used in addition to the bare minimum.</td>
+</tr>
+<tr class="row-even"><td>here.mapping.prefetching_style</td>
+<td>This parameter allows to provide a hint how tile prefetching is to be performed by the engine. The default value, <code class="docutils literal"><span class="pre">TwoNeighbourLayers</span></code> , makes the engine prefetch tiles for the layer above and the one below the current tile layer, providing ready tiles when zooming in or out from the current zoom level. <code class="docutils literal"><span class="pre">OneNeighbourLayer</span></code> only prefetches the one layer closest to the current zoom level. Finally, <code class="docutils literal"><span class="pre">NoPrefetching</span></code> allows to disable the prefetching, so only tiles that are visible will be fetched. Note that, depending on the active map type, this hint might be ignored.</td>
+</tr>
+<tr class="row-odd"><td>here.mapping.highdpi_tiles</td>
+<td>Whether or not to request high dpi tiles. Valid values are <strong>true</strong> and <strong>false</strong> . The default value is <strong>false</strong> .</td>
+</tr>
+<tr class="row-even"><td>here.geocoding.host</td>
+<td>Geocoding service URL used by geocoding manager.</td>
+</tr>
+<tr class="row-odd"><td>here.routing.host</td>
+<td>Routing service URL used by routing manager.</td>
+</tr>
+<tr class="row-even"><td>here.places.host</td>
+<td>Search service URL used by search manager.</td>
+</tr>
+<tr class="row-odd"><td>here.places.api_version</td>
+<td>Version of the REST API used by the places manager. Currently versions 1 and 2 are supported. The version 1 is deprecated and will not be part of the final Qt release. The default is version 2.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="parameter-usage-example">
+<span id="id6"></span><h2>Parameter Usage Example<a class="headerlink" href="#parameter-usage-example" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The following two examples show how to create a HERE plugin instance with parameters supplied for an application id and token, which is required for authentication.</div></blockquote>
+</div>
+<div class="section" id="qml">
+<span id="id7"></span><h2>QML<a class="headerlink" href="#qml" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Plugin</span> <span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;here&quot;</span>
+    <span class="n">PluginParameter</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;here.app_id&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;myapp&quot;</span> <span class="p">}</span>
+    <span class="n">PluginParameter</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;here.token&quot;</span><span class="p">;</span> <span class="n">value</span><span class="p">:</span> <span class="s2">&quot;abcdefg12345&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="c">
+<span id="id8"></span><h2>C++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span><span class="n">QVariant</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">;</span>
+<span class="n">params</span><span class="p">[</span><span class="s2">&quot;here.app_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;myapp&quot;</span><span class="p">;</span>
+<span class="n">params</span><span class="p">[</span><span class="s2">&quot;here.token&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;abcdefg12345&quot;</span><span class="p">;</span>
+
+<span class="n">QGeoServiceProvider</span> <span class="o">*</span><span class="n">gsp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">QGeoServiceProvider</span><span class="p">(</span><span class="s2">&quot;here&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="places">
+<span id="id9"></span><h2>Places<a class="headerlink" href="#places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The HERE provider remotely accesses places (read-only) from a REST based server. The specific capabilities and behaviours are outlined below:</div></blockquote>
+</div>
+<div class="section" id="capabilities">
+<span id="id10"></span><h2>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="80%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Storage</td>
+<td>remote</td>
+</tr>
+<tr class="row-even"><td>Read/Write</td>
+<td>read-only</td>
+</tr>
+<tr class="row-odd"><td>Icons</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Search term suggestions</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Recommendations</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Category structure</td>
+<td>Hierarchical</td>
+</tr>
+<tr class="row-odd"><td>(Rich) Content images</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>(Rich) Content reviews</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>(Rich) Content editorials</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>All details fetched during search</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>Paging offset index</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>Paging limit</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Distance relevance hint</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>Lexical name relevance hint</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>Extended Attributes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Notifications for added/removed places/categories</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>visibility scopes</td>
+<td>public</td>
+</tr>
+<tr class="row-even"><td>favorites matching/(usable as favoritesPlugin)</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="plugin-specific-behaviors-and-limitations">
+<span id="id11"></span><h2>Plugin Specific Behaviors and Limitations.<a class="headerlink" href="#plugin-specific-behaviors-and-limitations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="search">
+<span id="id12"></span><h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The following list shows what core place data is returned during a place search:</p>
+<ul class="simple">
+<li>name</li>
+<li>location</li>
+<li>contact information</li>
+<li>attribution</li>
+<li>categories</li>
+<li>rating</li>
+<li>visibility</li>
+</ul>
+<p>The following list shows further details that may be retrieved via QPlaceManager::getDetails()</p>
+<ul class="simple">
+<li>supplier</li>
+<li>extended attributes</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="searching-for-places">
+<span id="id13"></span><h2>Searching for Places<a class="headerlink" href="#searching-for-places" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+</div>
+<div class="section" id="search-term-and-categories">
+<span id="id14"></span><h2>Search Term and Categories<a class="headerlink" href="#search-term-and-categories" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The HERE plugin supports searching with a <em>search term</em> and <em>category or categories</em> , however both are not supported simultaneously.</p>
+<ul class="simple">
+<li>Valid usage: <em>search term</em> + <em>search center</em></li>
+<li>Valid usage: <em>category</em> + <em>search center</em></li>
+<li>Invalid usage: <em>search term</em> + <em>category</em> + <em>search center</em></li>
+</ul>
+<p>This limitation applies when using the HERE plugin with <span class="xref std std-ref">PlaceSearchModel</span> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.search()</span></code> .</p>
+</div></blockquote>
+</div>
+<div class="section" id="search-area">
+<span id="id15"></span><h2>Search Area<a class="headerlink" href="#search-area" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The HERE plugin only supports provision of a <em>search center</em> when searching for places via <span class="xref std std-ref">PlaceSearchModel</span> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.search()</span></code> . A search center can be provided via a bounding circle, however the radius should be kept at the default value of -1. Typically a developer should not have to set the radius at all. If a developer sets a radius, it is ignored by the plugin and the boundaries are not honored.</p>
+<p>In a similar manner only the center of a bounding box is taken into consideration when searching. The boundaries of the box are not honored.</p>
+<p>A search center <em>must</em> be provided for all searches.</p>
+</div></blockquote>
+</div>
+<div class="section" id="relevancy-hints">
+<span id="id16"></span><h2>Relevancy Hints<a class="headerlink" href="#relevancy-hints" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The HERE plugin does not support relevancy hints. Any relevancy hints supplied to a search request are consequently ignored.</div></blockquote>
+</div>
+<div class="section" id="search-term-suggestions">
+<span id="id17"></span><h2>Search Term suggestions<a class="headerlink" href="#search-term-suggestions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Only a partial <em>search term</em> and <em>search center</em> is supported when retrieving suggestions. This limitation applies when using the HERE plugin with the <span class="xref std std-ref">PlaceSearchSuggestionModel</span> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.searchSuggestions()</span></code> .</p>
+<p>Both search term and search center <em>must</em> be provided when retrieving search term suggestions.</p>
+</div></blockquote>
+</div>
+<div class="section" id="recommendations">
+<span id="id18"></span><h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Only a given <em>place identifier</em> is supported as a parameter for a recommendations. No other parameters such as limit, offset, and search area are supported. This limitation applies when using the HERE plugin with <span class="xref std std-ref">PlaceSearchModel</span> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.search()</span></code> .</div></blockquote>
+</div>
+<div class="section" id="extended-attributes">
+<span id="id19"></span><h2>Extended Attributes<a class="headerlink" href="#extended-attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The supported set of attributes provided by the HERE plugin are not fixed and may grow over time. Also the attributes provided may vary according to a place by place basis, e.g one place may provide opening hours while another does not. At the time of writing, it is known that some places provide <code class="docutils literal"><span class="pre">openingHours</span></code> ( <span class="xref std std-ref">QPlaceAttribute::OpeningHours</span> ) and <code class="docutils literal"><span class="pre">payment</span></code> ( <span class="xref std std-ref">QPlaceAttribute::Payment</span> ) methods but other attributes may be made available by the backend server. All places provided by the plugin will have the <code class="docutils literal"><span class="pre">x_provider</span></code> ( <span class="xref std std-ref">QPlaceAttribute::Provider</span> ) attribute set to <code class="docutils literal"><span class="pre">here</span></code> .</div></blockquote>
+</div>
+<div class="section" id="restrictions-of-usage-extendedattributes-and-content">
+<span id="id20"></span><h2>Restrictions of Usage - ExtendedAttributes and Content<a class="headerlink" href="#restrictions-of-usage-extendedattributes-and-content" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>The extended attributes and rich content of places are not permitted to be saved. For QML this is related to <span class="xref std std-ref">Place::extendedAttributes</span> , <span class="xref std std-ref">ImageModel</span> , <span class="xref std std-ref">ReviewModel</span> , and <span class="xref std std-ref">EditorialModel</span> . For C++ this relates to <code class="xref py py-func docutils literal"><span class="pre">QPlace.extendedAttribute()</span></code> , <code class="xref py py-func docutils literal"><span class="pre">QPlace.content()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">QPlaceManager.getPlaceContent()</span></code> .</p>
+<p>(Note that the HERE plugin is a read-only source of places and does not support saving functionality at all.)</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QML Advanced Tutorial 2 - Populating the Game Canvas &#8212; Qt for Python (Technology Preview)</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5.11.0~a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QML Advanced Tutorial 3 - Implementing the Game Logic" href="samegame3.html" />
+    <link rel="prev" title="QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks" href="samegame1.html" />
+  <link rel="stylesheet" type="text/css" href="/style/pyside.css" />
+  <link rel="icon" type="image/png" href="/style/pyside-32px.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/style/pyside-16px.png" sizes="16x16" />
+  <script type="text/javascript"> wpThemeFolder = 'http://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/extras.js"></script>
+  <script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54043535-2', 'qt.io');
+    ga('set', 'forceSSL', true);
+    ga('send', 'pageview');
+  </script>
+
+  </head>
+  <body>
+<div id="container">
+    <div class="header">
+        <div class="header_container">
+            <header id="navbar">
+            </header>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-rounded">
+            <div class="navigationbar">
+                <ul class="sub-navigation">
+                    <li><a href="http://wiki.qt.io/">Wiki</a></li>
+                    <li><a href="https://doc.qt.io/">Documentation</a></li>
+                    <li><a href="http://forum.qt.io/">Forum</a></li>
+                    <li><a href="https://bugreports.qt.io/">Bug Reports</a></li>
+                    <li><a href="https://codereview.qt-project.org/">Code Review</a></li>
+                </ul>
+                <div id="main_title_bar"><h1>Qt Documentation</h1></div>
+                <div class="related">
+                    <ul>
+                        <li><a href="../../index.html">Qt for Python (Technology Preview)</a></li>
+                            <li><a href="../../contents.html" >Qt for Python Documentation</a></li>
+                            <li><a href="../index.html" >PySide examples and tutorials</a></li>
+                            <li><a href="index.html" accesskey="U">QML Advanced Tutorial</a></li> 
+                    </ul>
+                </div>
+            </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">QML Advanced Tutorial 2 - Populating the Game Canvas</a><ul>
+<li><a class="reference internal" href="#generating-the-blocks-in-javascript">Generating the blocks in JavaScript</a></li>
+<li><a class="reference internal" href="#connecting-javascript-components-to-qml">Connecting JavaScript components to QML</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="samegame1.html"
+                        title="previous chapter">QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="samegame3.html"
+                        title="next chapter">QML Advanced Tutorial 3 - Implementing the Game Logic</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" id="q" size="18" />
+      <input type="submit" value="Go" id="search_button" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qml-advanced-tutorial-2-populating-the-game-canvas">
+<span id="samegame2"></span><h1>QML Advanced Tutorial 2 - Populating the Game Canvas<a class="headerlink" href="#qml-advanced-tutorial-2-populating-the-game-canvas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generating-the-blocks-in-javascript">
+<h2>Generating the blocks in JavaScript<a class="headerlink" href="#generating-the-blocks-in-javascript" title="Permalink to this headline">¶</a></h2>
+<p>Now that the basic elements are in place, start writing the game.</p>
+<p>The first task is to generate the game blocks. Each time the New Game button
+is clicked, the game canvas is populated with a new, random set of
+blocks that are generated dynamically. You can achieve this by creating
+the blocks using JavaScript intead of a Repeater.</p>
+<p>Here is the JavaScript code for generating the blocks, contained in a new
+file, <code class="docutils literal"><span class="pre">samegame.js</span></code>. The code is explained below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">maxColumn</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">maxRow</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">maxIndex</span> <span class="o">=</span> <span class="n">maxColumn</span> <span class="o">*</span> <span class="n">maxRow</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">board</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Array</span><span class="p">(</span><span class="n">maxIndex</span><span class="p">);</span>
+<span class="n">var</span> <span class="n">component</span><span class="p">;</span>
+
+<span class="o">//</span><span class="n">Index</span> <span class="n">function</span> <span class="n">used</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">a</span> <span class="mi">2</span><span class="n">D</span> <span class="n">array</span>
+<span class="n">function</span> <span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">column</span> <span class="o">+</span> <span class="p">(</span><span class="n">row</span> <span class="o">*</span> <span class="n">maxColumn</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">function</span> <span class="n">startNewGame</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span><span class="n">Delete</span> <span class="n">blocks</span> <span class="kn">from</span> <span class="nn">previous</span> <span class="n">game</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxIndex</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+            <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">destroy</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span><span class="n">Calculate</span> <span class="n">board</span> <span class="n">size</span>
+    <span class="n">maxColumn</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">background</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">blockSize</span><span class="p">);</span>
+    <span class="n">maxRow</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">background</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">blockSize</span><span class="p">);</span>
+    <span class="n">maxIndex</span> <span class="o">=</span> <span class="n">maxRow</span> <span class="o">*</span> <span class="n">maxColumn</span><span class="p">;</span>
+
+    <span class="o">//</span><span class="n">Initialize</span> <span class="n">Board</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Array</span><span class="p">(</span><span class="n">maxIndex</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">column</span> <span class="o">&lt;</span> <span class="n">maxColumn</span><span class="p">;</span> <span class="n">column</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">maxRow</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">board</span><span class="p">[</span><span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)]</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+            <span class="n">createBlock</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">function</span> <span class="n">createBlock</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">component</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">.</span><span class="n">createComponent</span><span class="p">(</span><span class="s2">&quot;Block.qml&quot;</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Note</span> <span class="n">that</span> <span class="k">if</span> <span class="n">Block</span><span class="o">.</span><span class="n">qml</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">local</span> <span class="n">file</span><span class="p">,</span> <span class="n">component</span><span class="o">.</span><span class="n">status</span> <span class="n">would</span> <span class="n">be</span>
+    <span class="o">//</span> <span class="n">Loading</span> <span class="ow">and</span> <span class="n">we</span> <span class="n">should</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">the</span> <span class="n">component</span><span class="s1">&#39;s statusChanged() signal to</span>
+    <span class="o">//</span> <span class="n">know</span> <span class="n">when</span> <span class="n">the</span> <span class="n">file</span> <span class="ow">is</span> <span class="n">downloaded</span> <span class="ow">and</span> <span class="n">ready</span> <span class="n">before</span> <span class="n">calling</span> <span class="n">createObject</span><span class="p">()</span><span class="o">.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">Component</span><span class="o">.</span><span class="n">Ready</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">var</span> <span class="n">dynamicObject</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">createObject</span><span class="p">(</span><span class="n">background</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dynamicObject</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;error creating block&quot;</span><span class="p">);</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">errorString</span><span class="p">());</span>
+            <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">dynamicObject</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">column</span> <span class="o">*</span> <span class="n">blockSize</span><span class="p">;</span>
+        <span class="n">dynamicObject</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="n">blockSize</span><span class="p">;</span>
+        <span class="n">dynamicObject</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
+        <span class="n">dynamicObject</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dynamicObject</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;error loading block component&quot;</span><span class="p">);</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">errorString</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">startNewGame()</span></code> function deletes the blocks created in the previous game and
+calculates the number of rows and columns of blocks required to fill the game window for the new game.
+Then, it creates an array to store all the game
+blocks, and calls <code class="docutils literal"><span class="pre">createBlock()</span></code> to create enough blocks to fill the game window.</p>
+<p>The <code class="docutils literal"><span class="pre">createBlock()</span></code> function creates a block from the <code class="docutils literal"><span class="pre">Block.qml</span></code> file
+and moves the new block to its position on the game canvas. This involves several steps:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Qt.createComponent()</span></code> is called to
+generate an instance of <code class="docutils literal"><span class="pre">Block.qml</span></code>.  If the component is ready,
+we can call <code class="docutils literal"><span class="pre">createObject()</span></code> to create an instance of the <code class="docutils literal"><span class="pre">Block</span></code>
+item.</li>
+<li>If <code class="docutils literal"><span class="pre">createObject()</span></code> returned null (that is, if there was an error
+while loading the object), print the error information.</li>
+<li>Place the block in its position on the board and set its width and
+height.  Also, store it in the blocks array for future reference.</li>
+<li>Finally, print error information to the console if the component
+could not be loaded for some reason (for example, if the file is
+missing).</li>
+</ul>
+</div>
+<div class="section" id="connecting-javascript-components-to-qml">
+<h2>Connecting JavaScript components to QML<a class="headerlink" href="#connecting-javascript-components-to-qml" title="Permalink to this headline">¶</a></h2>
+<p>Now, call the JavaScript code in <code class="docutils literal"><span class="pre">samegame.js</span></code> from your QML files.
+To do this, add the following line to <code class="docutils literal"><span class="pre">samegame.qml</span></code> to import
+the JavaScript file as a module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="s2">&quot;samegame.js&quot;</span> <span class="k">as</span> <span class="n">SameGame</span>
+</pre></div>
+</div>
+<p>This lets you to refer to any functions within <code class="docutils literal"><span class="pre">samegame.js</span></code> using “SameGame”
+as a prefix: for example, <code class="docutils literal"><span class="pre">SameGame.startNewGame()</span></code> or <code class="docutils literal"><span class="pre">SameGame.createBlock()</span></code>.
+This means you can now connect the New Game button’s <code class="docutils literal"><span class="pre">onClicked</span></code> handler to the <code class="docutils literal"><span class="pre">startNewGame()</span></code>
+function, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">Button</span> <span class="p">{</span>
+            <span class="n">anchors</span> <span class="p">{</span> <span class="n">left</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">left</span><span class="p">;</span> <span class="n">verticalCenter</span><span class="p">:</span> <span class="n">parent</span><span class="o">.</span><span class="n">verticalCenter</span> <span class="p">}</span>
+            <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;New Game&quot;</span>
+            <span class="n">onClicked</span><span class="p">:</span> <span class="n">SameGame</span><span class="o">.</span><span class="n">startNewGame</span><span class="p">()</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>So, when you click the New Game button, <code class="docutils literal"><span class="pre">startNewGame()</span></code> is called to generate a field of blocks, like this:</p>
+<div class="figure align-center">
+<img alt="../../_images/declarative-adv-tutorial2.png" src="../../_images/declarative-adv-tutorial2.png" />
+</div>
+<p>Now that the screen of blocks is ready, you can start adding the game mechanics.</p>
+<p>[Previous <a class="reference internal" href="samegame1.html#samegame1"><span class="std std-ref">QML Advanced Tutorial 1 - Creating the Game Canvas and Blocks</span></a>] [Next <a class="reference internal" href="samegame3.html#samegame3"><span class="std std-ref">QML Advanced Tutorial 3 - Implementing the Game Logic</span></a>]</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <p>© 2018 The Qt Company Ltd. Documentation contributions included herein are the copyrights of their respective owners. The documentation provided herein is licensed under the terms of the <a href="http://www.gnu.org/license/fdl.html">GNU Free Documentation License version 1.3</a> as published by the Free Software Foundation. Qt and respective logos are trademarks of The Qt Company Ltd. in Finland and/or other countries worldwide. All other trademarks are property of their respective owners.</p>
+    </div></div>
+    <div id="footer" class="footer">
+    </div>
+</div>
+  </body>
+</html>
