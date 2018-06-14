@@ -1,10 +1,14 @@
-from PySide2.QtWidgets import QGridLayout, QLabel
+from PySide2.QtWidgets import QGridLayout, QLabel, QFrame
 from PySide2.QtSvg import QSvgWidget
 
 class Forecast:
 
     def __init__(self):
         self.layout = QGridLayout()
+        self.wrapper = QFrame()
+        self.wrapper.setLayout(self.layout)
+        self.layout.setSpacing(0)
+        self.layout.setContentsMargins(0,0,0,0)
 
         self.icon = QSvgWidget()
         self.day = QLabel()
